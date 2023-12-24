@@ -1,0 +1,30 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>Base Skill</th>
+      <th>GKP Skill</th>
+      <th>Def Skill</th>
+      <th>Mid Skill</th>
+      <th>Att Skill</th>
+      <th>Total Skill</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @players.each do |player| %>
+      <tr>
+        <td><%= player.name %></td>
+        <td><%= player.age %></td>
+        <td><%= player.pos %></td>
+        <td><%= player.calculate_base_skill %></td>
+        <td><%= player.calculate_gkp_skill %></td>
+        <td><%= player.calculate_def_skill %></td>
+        <td><%= player.calculate_mid_skill %></td>
+        <td><%= player.calculate_att_skill %></td>
+        <td><%= player.calculate_total_skill %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

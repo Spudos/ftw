@@ -1,5 +1,3 @@
 class WelcomeController < ApplicationController
-  def index
-    @players = Player.all
-  end
+  def index; end
 end
