@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_24_113024) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_24_151926) do
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.integer "age"
@@ -30,6 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_24_113024) do
     t.integer "fit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "club"
+    t.integer "cons"
   end
 
 end

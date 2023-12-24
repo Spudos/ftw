@@ -3,8 +3,8 @@
     <tr>
       <th>Name</th>
       <th>Age</th>
-      <th>Club</th>
       <th>Position</th>
+      <th>Club</th>
       <th>Base Skill</th>
       <th>GKP Skill</th>
       <th>Def Skill</th>
@@ -14,12 +14,23 @@
     </tr>
   </thead>
   <tbody>
-    <% @players.each do |player| %>
+    <tr>
+      <td colspan="10">
+        <label for="club-select">Select Club:</label>
+        <select id="club-select" onchange="location = this.value;">
+          <option value="/team/load_team">Select</option>
+          <% Player.distinct.pluck(:club).each do |club| %>
+            <option value="/team/load_team?club=<%= club %>"><%= club %></option>
+          <% end %>
+        </select>
+      </td>
+    </tr>
+    <% @team.each do |player| %>
       <tr>
         <td><%= player.name %></td>
         <td><%= player.age %></td>
-        <td><%= player.club %></td>
         <td><%= player.pos %></td>
+        <td><%= player.club %></td>
         <td><%= player.base_skill %></td>
         <td><%= player.gkp_skill %></td>
         <td><%= player.def_skill %></td>
@@ -30,3 +41,6 @@
     <% end %>
   </tbody>
 </table>
+<p> Def <%= @def_total %> </p>
+<p> Mid <%= @mid_total %> </p>
+<p> Att <%= @att_total %> </p>
