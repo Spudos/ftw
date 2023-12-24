@@ -1,4 +1,17 @@
 class Player < ApplicationRecord
+
+  def total_skill
+    if pos == 'gkp'
+      base_skill + gkp_skill
+    elsif pos == 'def'
+      base_skill + def_skill
+    elsif pos == 'mid'
+      base_skill + mid_skill
+    else
+      base_skill + att_skill
+    end
+  end
+
   def base_skill
     pa + co + ta + ru + sh + dr + df + of + fl + st + cr
   end
@@ -19,16 +32,20 @@ class Player < ApplicationRecord
     co + ru + sh + dr + of + fl
   end
 
-  def total_skill
-    if pos == 'gkp'
-      base_skill + gkp_skill
-    elsif pos == 'def'
-      base_skill + def_skill
-    elsif pos == 'mid'
-      base_skill + mid_skill
+  def match_perf(player)
+    if player.pos == 'gkp'
+      (player.gkp_skill * player.fit / 100) + player.calc_pl_perf_ran(player)
+    elsif player.pos == 'def'
+      (player.def_skill * player.fit / 100) + player.calc_pl_perf_ran(player)
+    elsif player.pos == 'mid'
+      (player.mid_skill * player.fit / 100) + player.calc_pl_perf_ran(player)
     else
-      base_skill + att_skill
+      (player.att_skill * player.fit / 100) + player.calc_pl_perf_ran(player)
     end
   end
-end
 
+  def calc_pl_perf_ran(player)
+    cons = player.cons
+    random_number = rand(-cons..cons)
+  end
+end

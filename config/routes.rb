@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
+  resources :teams, only: [:index, :create]
   root 'welcome#index'
-  get 'index', to: 'players#index'
-  get 'load_team', to: 'team#load_team'
-  get '/team/load_team', to: 'team#load_team'
+  get :players, to: 'players#index'
 end

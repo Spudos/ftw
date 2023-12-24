@@ -1,0 +1,45 @@
+<script>
+  function submitForm() {
+    document.getElementById("team-form").submit();
+  }
+</script>
+
+<form id="team-form" action="/teams" method="get">
+  <select name="club" onchange="submitForm()">
+    <% @clubs.each do |club| %>
+      <option value="<%= club %>" <%= 'selected' if club == @selected_club %>><%= club %></option>
+    <% end %>
+  </select>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Club</th>
+      <th>Name</th>
+      <th>Pos</th>
+      <th>Base Skl</th>
+      <th>Pos Skl</th>
+      <th>Total Skl</th>
+      <th>Match Perf</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @squad_pl.each do |player| %>
+      <tr>
+        <td><%= player[:club] %></td>
+        <td><%= player[:name] %></td>
+        <td><%= player[:pos] %></td>
+        <td><%= player[:base_skl] %></td>
+        <td><%= player[:pos_skl] %></td>
+        <td><%= player[:total_skill] %></td>
+        <td><%= player[:match_perf] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+Def <%= @def %><br>
+Mid <%= @mid %><br>
+Att <%= @att %><br>
+</form>
