@@ -30,6 +30,11 @@
       <td><%= @dfc + @mid + @att %></td>
       <td>450</td>
     </tr>
+    <tr>
+      <td>Team_mod</td>
+      <td><%= @team_mod %></td>
+      <td>250</td>
+    </tr>
   </tbody>
 </table>
 
@@ -50,14 +55,29 @@
     <% end %>
   </tbody>
 </table>
-
+<br>
+when 0.48..0.52
+      @test = 'none'
+    when 0.52..0.55
+      @test = 'low_home'
+    when 0.55..0.60
+      @test = 'med_home'
+    when 0.60..Float::INFINITY
+      @test = 'high_home'
+    when 0.45..0.48
+      @test = 'low_away'
+    when 0.4..0.45
+      @test = 'med_away'
+    else
+      @test = 'high_away'
+<br>
 <br>
 <table>
   <thead>
     <tr>
       <th>Number</th>
       <th>MID</th>
-      <th>Mid_Mod</th>
+      <th>team_Mod</th>
       <th>CHA</th>
       <th>Test</th>
     </tr>
@@ -67,7 +87,7 @@
       <tr>
         <td><%= result[:number] %></td>
         <td><%= result[:mid] %></td>
-        <td><%= result[:mid_mod] %></td>
+        <td><%= result[:team_mod] %></td>
         <td><%= result[:cha] %></td>
         <td><%= result[:test] %></td>
       </tr>

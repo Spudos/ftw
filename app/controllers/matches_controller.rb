@@ -11,13 +11,12 @@ class MatchesController < ApplicationController
 
     @results = []
     90.times do |i|
-      initialize_cha_rand(@mid)
+      initialize_cha_rand(@dfc, @mid, @att)
       initialize_cha
       initialize_cha_test
-      initialize_build_results(i, @mid_mod, @cha, @test)
+      initialize_build_results(i, @team_mod, @cha, @test)
     end
   end
-  
 
   private
 
@@ -33,22 +32,22 @@ class MatchesController < ApplicationController
     @dfc, @mid, @att = team_totals(@squad_pl)
   end
 
-  def initialize_cha_rand(mid)
-    @mid_mod = mid + rand(-20..20)
+  def initialize_cha_rand(dfc, mid, att)
+    @team_mod = ((dfc * 0.25) + mid + (att * 0.50)) + rand(-20..20)
   end
 
   def initialize_cha
-    @cha = cha_to_who(@mid_mod)
+    @cha = cha_to_who(@team_mod)
   end
 
   def initialize_cha_test
     cha?(@cha)
   end
 
-  def initialize_build_results(i, mid_mod, cha, test)
-    if test != 'none'
-      @results << { number: i + 1, mid: @mid, mid_mod: mid_mod, cha: cha, test: test }
-    end
+  def initialize_build_results(i, team_mod, cha, test)
+    # if test != 'none'
+      @results << { number: i + 1, mid: @mid, team_mod: team_mod, cha: cha, test: test }
+    # end
   end
 
   def summarize_results
@@ -109,12 +108,12 @@ class MatchesController < ApplicationController
     end
   end
 
-  def cha_to_who(mid)
+  def cha_to_who(team)
     aw_dfc = 200
     aw_mid = 150
     aw_att = 100
 
-    mid / (aw_mid + mid.to_f)
+    team / ((aw_dfc * 0.25) + aw_mid + (aw_att * 0.50) + team.to_f)
   end
 
   def cha?(cha)
