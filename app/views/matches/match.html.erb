@@ -1,0 +1,75 @@
+<%= link_to 'Run Match', match_path, method: :get, class: 'btn btn-primary' %>
+<br>
+<br>
+<table>
+  <thead>
+    <tr>
+      <td>pos</td>
+      <td>home</td>
+      <td>away</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>dfc</td>
+      <td><%= @dfc %></td>
+      <td>200</td>
+    </tr>
+    <tr>
+      <td>mid</td>
+      <td><%= @mid %></td>
+      <td>150</td>
+    </tr>
+    <tr>
+      <td>att</td>
+      <td><%= @att %></td>
+      <td>100</td>
+    </tr>    
+    <tr>
+      <td>Total</td>
+      <td><%= @dfc + @mid + @att %></td>
+      <td>450</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Test</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% summarize_results.each do |test, count| %>
+      <tr>
+        <td><%= test %></td>
+        <td><%= count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>MID</th>
+      <th>CHA</th>
+      <th>Test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @results.each do |result| %>
+      <tr>
+        <td><%= result[:number] %></td>
+        <td><%= result[:mid] %></td>
+        <td><%= result[:cha] %></td>
+        <td><%= result[:test] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

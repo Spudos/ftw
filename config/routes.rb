@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :teams, only: [:index, :create]
+  resources :players
+  get '/matches', to: 'matches#match', as: 'match'
   root 'welcome#index'
-  get :players, to: 'players#index'
 end
