@@ -47,7 +47,7 @@ class MatchesController < ApplicationController
 
   def initialize_build_results(i, mid_mod, cha, test)
     if test != 'none'
-      @results << { number: i + 1, mid: mid_mod, cha: cha, test: test }
+      @results << { number: i + 1, mid: @mid, mid_mod: mid_mod, cha: cha, test: test }
     end
   end
 
