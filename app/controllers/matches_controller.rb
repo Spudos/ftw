@@ -5,63 +5,60 @@ class MatchesController < ApplicationController
   def show; end
 
   def match
-    initialize_squad
-    initialize_squad_pl
-    initialize_team_totals
+    @cha_on_tar_home = 0
+    @cha_on_tar_away = 0
 
-    @results = []
+    initialize_squad # output @squad including all alv players
+    initialize_squad_pl(@sqd) # output @squad_pl which is a hash of players with match perf
+    initialize_team_totals(@sqd_pl) # output @dfc, @mid, @att using player match_perf
+    add_rand_cha
+
+    @res = []
     90.times do |i|
-      initialize_cha_rand(@dfc, @mid, @att)
-      initialize_cha
-      initialize_cha_test
-      initialize_build_results(i, @team_mod, @cha, @test)
+      initialize_team_cha_val(@mid, @att) # output @home_mod, @away_mod
+      cha?(@hm_mod, @aw_mod) # output @cha_res
+      cha_on_tar(@att, @cha_res) # ouput cha_on_tar
+      initialize_build_results(i, @hm_mod, @aw_mod, @cha, @cha_res, @cha_on_tar) # output @results
     end
   end
 
   private
 
   def initialize_squad
-    @squad = Player.where(club: 'alv')
+    @sqd = Player.where(club: 'alv')
   end
 
-  def initialize_squad_pl
-    @squad_pl = squad_pl
+  def initialize_squad_pl(sqd)
+    @sqd_pl = squad_pl(sqd)
   end
 
-  def initialize_team_totals
-    @dfc, @mid, @att = team_totals(@squad_pl)
+  def initialize_team_totals(sqd_pl)
+    @dfc, @mid, @att = team_totals(sqd_pl)
   end
 
-  def initialize_cha_rand(dfc, mid, att)
-    @team_mod = ((dfc * 0.25) + mid + (att * 0.50)) + rand(-20..20)
+  def initialize_team_cha_val(mid, att)
+    @aw_mod = (150 + (100 * 0.50)) + rand(-20..20)
+    @hm_mod = (mid + (att * 0.50)) + rand(-20..20)
   end
 
-  def initialize_cha
-    @cha = cha_to_who(@team_mod)
-  end
-
-  def initialize_cha_test
-    cha?(@cha)
-  end
-
-  def initialize_build_results(i, team_mod, cha, test)
-    # if test != 'none'
-      @results << { number: i + 1, mid: @mid, team_mod: team_mod, cha: cha, test: test }
-    # end
+  def initialize_build_results(i, hm_mod, aw_mod, cha, cha_res, cha_on_tar)
+    if cha_res != 'none'
+      @res << { number: i + 1, hm_mod:, aw_mod:, cha:, cha_res:, cha_on_tar:}
+    end
   end
 
   def summarize_results
     test_counts = Hash.new(0)
-  
-    @results.each do |result|
-      test_counts[result[:test]] += 1
+
+    @res.each do |res|
+      test_counts[res[:cha_res]] += 1
     end
-  
+
     test_counts
   end
 
-  def squad_pl
-    @squad.map do |player|
+  def squad_pl(sqd)
+    sqd.map do |player|
       pos_skl = pos_skl(player)
 
       {
@@ -69,19 +66,19 @@ class MatchesController < ApplicationController
         name: player.name,
         pos: player.pos,
         base_skl: player.base_skill,
-        pos_skl: pos_skl,
+        pos_skl:,
         total_skill: player.total_skill,
         match_perf: player.match_perf(player)
       }
     end
   end
 
-  def team_totals(squad_pl)
+  def team_totals(sqd_pl)
     dfc = 0
     mid = 0
     att = 0
 
-    squad_pl.each do |player|
+    sqd_pl.each do |player|
       case player[:pos]
       when 'gkp', 'dfc'
         dfc += player[:match_perf]
@@ -108,30 +105,40 @@ class MatchesController < ApplicationController
     end
   end
 
-  def cha_to_who(team)
-    aw_dfc = 200
-    aw_mid = 150
-    aw_att = 100
-
-    team / ((aw_dfc * 0.25) + aw_mid + (aw_att * 0.50) + team.to_f)
+  def cha?(hm_mod, aw_mod)
+    cha = hm_mod - aw_mod
+    if cha >= 0 && rand(0..100) < 16
+      @cha_res = 'home'
+    elsif cha.negative? && rand(0..100) < 16
+      @cha_res = 'away'
+    else
+      @cha_res = add_rand_cha
+    end
   end
 
-  def cha?(cha)
-    case cha
-    when 0.48..0.52
-      @test = 'none'
-    when 0.52..0.55
-      @test = 'low_home'
-    when 0.55..0.60
-      @test = 'med_home'
-    when 0.60..Float::INFINITY
-      @test = 'high_home'
-    when 0.45..0.48
-      @test = 'low_away'
-    when 0.4..0.45
-      @test = 'med_away'
+  def add_rand_cha
+    random_number = rand(1..100)
+
+    if random_number <= 10
+      @cha_res = 'home'
+    elsif random_number > 10 && random_number <= 20
+      @cha_res = 'away'
     else
-      @test = 'high_away'
+      @cha_res = 'none'
+    end
+  end
+
+  def cha_on_tar(att, cha_res)
+
+
+    if cha_res == 'home' && att / 2 > rand(0..100)
+      @cha_on_tar = true
+      @cha_on_tar_home += 1
+    elsif cha_res == 'away' && 100 / 2 > rand(0..100)
+      @cha_on_tar = true
+      @cha_on_tar_away += 1
+    else
+      @cha_on_tar = false
     end
   end
 end
