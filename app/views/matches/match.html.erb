@@ -72,6 +72,23 @@
 <br>
 
 <table>
+  <h2>Goals</h2>
+  <thead>
+    <tr>
+      <th>home</th>
+      <th>away</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @goal_home %></td>
+        <td><%= @goal_away %></td>
+      </tr>
+  </tbody>
+</table>
+<br>
+
+<table>
  <h2>Minute by Minute Detail</h2>
   <thead>
     <tr>
@@ -79,7 +96,10 @@
       <th>home_mod</th>
       <th>away_mod</th>
       <th>cha_res</th>
-      <th>cha_on_tar</th>
+      <th>cha_on_tar?</th>
+      <th>scored?</th>
+      <th>assist</th>
+      <th>scorer</th>
     </tr>
   </thead>
   <tbody>
@@ -90,6 +110,9 @@
         <td><%= result[:aw_mod] %></td>
         <td><%= result[:cha_res] %></td>
         <td><%= result[:cha_on_tar] %></td>
+        <td><%= result[:goal_scored?]%></td>
+        <td><%= result[:assist] %></td>
+        <td><%= result[:scorer] %></td>
       </tr>
     <% end %>
   </tbody>

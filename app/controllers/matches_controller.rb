@@ -5,37 +5,52 @@ class MatchesController < ApplicationController
   def show; end
 
   def match
-    @cha_on_tar_home = 0
-    @cha_on_tar_away = 0
-
-    initialize_squad # output @squad including all alv players
-    initialize_squad_pl # output @squad_pl which is a hash of players with match perf
-    initialize_team_totals # output @dfc, @mid, @att using player match_perf
-
-    @res = []
-    rand(90..98).times do |i|
-      initialize_team_cha_val # output @home_mod, @away_mod
-      initialize_cha? # output @cha_res
-      initialize_cha_on_tar # ouput cha_on_tar
-      initialize_build_results(i, @hm_mod, @aw_mod, @cha, @cha_res, @cha_on_tar) # output @results
-    end
+    initialize_sqd_setup
+    initialize_min_by_min
   end
 
   private
 
-  def initialize_squad
+  # match sections
+  #----------------------------------------------------------------
+  def initialize_sqd_setup
+    @cha_on_tar_home = 0
+    @cha_on_tar_away = 0
+    @goal_home = 0
+    @goal_away = 0
+
+    initialize_sqd # output @squad including all alv players
+    initialize_sqd_pl # output @squad_pl which is a hash of players with match perf
+    initialize_tm_tot # output @dfc, @mid, @att using player match_perf
+  end
+
+  def initialize_min_by_min
+    @res = []
+    rand(90..98).times do |i|
+      initialize_tm_cha_val # output @home_mod, @away_mod
+      initialize_cha? # output @cha_res
+      initialize_cha_on_tar # ouput cha_on_tar
+      initialize_assist_and_scorer
+      initialize_goal_scored?
+      initialize_build_results(i) # output @results
+    end
+  end
+
+  # initializers
+  #----------------------------------------------------------------
+  def initialize_sqd
     @sqd = Player.where(club: 'alv')
   end
 
-  def initialize_squad_pl
-    @sqd_pl = squad_pl(@sqd)
+  def initialize_sqd_pl
+    @sqd_pl = sqd_pl
   end
 
-  def initialize_team_totals
-    @dfc, @mid, @att = team_totals(@sqd_pl)
+  def initialize_tm_tot
+    @dfc, @mid, @att = tm_tot
   end
 
-  def initialize_team_cha_val
+  def initialize_tm_cha_val
     @aw_mod = (150 + (100 * 0.50)) + rand(-20..20)
     @hm_mod = (@mid + (@att * 0.50)) + rand(-20..20)
   end
@@ -48,12 +63,31 @@ class MatchesController < ApplicationController
     cha_on_tar
   end
 
-  def initialize_build_results(i, hm_mod, aw_mod, cha, cha_res, cha_on_tar)
-    if cha_res != 'none'
-      @res << { number: i + 1, hm_mod:, aw_mod:, cha:, cha_res:, cha_on_tar:}
-    end
+  def initialize_assist_and_scorer
+    assist_and_scorer
   end
 
+  def initialize_goal_scored?
+    goal_scored?
+  end
+
+  def initialize_build_results(i)
+    @res <<
+      {
+        number: i + 1,
+        hm_mod: @hm_mod,
+        aw_mod: @aw_mod,
+        cha: @cha,
+        cha_res: @cha_res,
+        cha_on_tar: @cha_on_tar,
+        goal_scored?: @goal_scored,
+        assist: @goal[:assist], # Insert the assist value from the @goal hash
+        scorer: @goal[:scorer]  # Insert the scorer value from the @goal hash
+      }
+  end
+
+  # helper methods
+  #----------------------------------------------------------------
   def summarize_results
     test_counts = Hash.new(0)
 
@@ -64,8 +98,10 @@ class MatchesController < ApplicationController
     test_counts
   end
 
-  def squad_pl(sqd)
-    sqd.map do |player|
+  # squad setup
+  #----------------------------------------------------------------
+  def sqd_pl
+    @sqd.map do |player|
       pos_skl = pos_skl(player)
 
       {
@@ -80,12 +116,12 @@ class MatchesController < ApplicationController
     end
   end
 
-  def team_totals(sqd_pl)
+  def tm_tot
     dfc = 0
     mid = 0
     att = 0
 
-    sqd_pl.each do |player|
+    @sqd_pl.each do |player|
       case player[:pos]
       when 'gkp', 'dfc'
         dfc += player[:match_perf]
@@ -112,6 +148,8 @@ class MatchesController < ApplicationController
     end
   end
 
+  # min by min
+  #----------------------------------------------------------------
   def cha?
     cha = @hm_mod - @aw_mod
     if cha >= 0 && rand(0..100) < 16
@@ -137,20 +175,30 @@ class MatchesController < ApplicationController
 
   def cha_on_tar
     if @cha_res == 'home' && @att / 2 > rand(0..100)
-      @cha_on_tar = true
+      @cha_on_tar = 'home'
       @cha_on_tar_home += 1
-      goal_scored('home')
     elsif @cha_res == 'away' && 100 / 2 > rand(0..100)
-      @cha_on_tar = true
+      @cha_on_tar = 'away'
       @cha_on_tar_away += 1
-      goal_scored('away')
     else
-      @cha_on_tar = false
+      @cha_on_tar = 'none'
     end
   end
 
-  def select_top_players(sqd_pl)
-    top_players = sqd_pl.sort_by { |player| -player[:match_perf] }
+  def goal_scored?
+    if @cha_on_tar == 'home' && @att / 2 > rand(0..100)
+      @goal_scored = 'home goal'
+      @goal_home += 1
+    elsif @cha_on_tar == 'away' && 100 / 2 > rand(0..100)
+      @goal_scored = 'away goal'
+      @goal_away += 1
+    else
+      @goal_scored = 'no'
+    end
+  end
+
+  def assist_and_scorer
+    top_players = @sqd_pl.sort_by { |player| -player[:match_perf] }
                         .first(5)
                         .map { |player| player[:name] }
     selected_players = top_players.sample(2)
@@ -159,10 +207,6 @@ class MatchesController < ApplicationController
     while scorer == assist
       assist = top_players.sample
     end
-    @goal = { scorer:, assist: }
-  end
-
-  def goal_scored(who)
-    select_top_players(@sqd_pl)
+    @goal = { scorer: scorer, assist: assist }
   end
 end
