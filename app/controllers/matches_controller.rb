@@ -14,6 +14,8 @@ class MatchesController < ApplicationController
   # match sections
   #----------------------------------------------------------------
   def initialize_sqd_setup
+    @cha_home = 0
+    @cha_away = 0
     @cha_on_tar_home = 0
     @cha_on_tar_away = 0
     @goal_home = 0
@@ -154,8 +156,10 @@ class MatchesController < ApplicationController
     cha = @hm_mod - @aw_mod
     if cha >= 0 && rand(0..100) < 16
       @cha_res = 'home'
+      
     elsif cha.negative? && rand(0..100) < 16
       @cha_res = 'away'
+      
     else
       @cha_res = add_rand_cha
     end
@@ -166,8 +170,10 @@ class MatchesController < ApplicationController
 
     if random_number <= 5
       @cha_res = 'home'
+      
     elsif random_number > 5 && random_number <= 10
       @cha_res = 'away'
+      
     else
       @cha_res = 'none'
     end

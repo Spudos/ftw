@@ -35,54 +35,41 @@
 </table>
 <br>
 
-<table>
-  <h2>Minute by Minute Chances</h2>
-  <thead>
-    <tr>
-      <th>cha_res</th>
-      <th>Count</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% summarize_results.each do |cha_res, count| %>
-      <tr>
-        <td><%= cha_res %></td>
-        <td><%= count %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
 
 <table>
-  <h2>Chances on target</h2>
+  <h2>Stats</h2>
   <thead>
     <tr>
+      <th>stat</th>
       <th>home</th>
       <th>away</th>
     </tr>
   </thead>
   <tbody>
       <tr>
+        <td>possesion</td>
+        <td><%=  %></td>
+        <td><%=  %></td>
+      </tr>
+      <tr>
+        <td>Chances</td>
+        <td><%= @cha_home %></td>
+        <td><%= @cha_away %></td>
+      </tr>
+      <tr>
+        <td>On target</td>
         <td><%= @cha_on_tar_home %></td>
         <td><%= @cha_on_tar_away %></td>
       </tr>
-  </tbody>
-</table>
-<br>
-
-<table>
-  <h2>Goals</h2>
-  <thead>
-    <tr>
-      <th>home</th>
-      <th>away</th>
-    </tr>
-  </thead>
-  <tbody>
       <tr>
+        <td>Goals</td>
         <td><%= @goal_home %></td>
         <td><%= @goal_away %></td>
+      </tr>
+      <tr>
+        <td>motm</td>
+        <td><%=  %></td>
+        <td><%=  %></td>
       </tr>
   </tbody>
 </table>
