@@ -186,10 +186,10 @@ class MatchesController < ApplicationController
   end
 
   def goal_scored?
-    if @cha_on_tar == 'home' && @att / 2 > rand(0..100)
+    if @cha_on_tar == 'home' && @att / 3 > rand(0..100)
       @goal_scored = 'home goal'
       @goal_home += 1
-    elsif @cha_on_tar == 'away' && 100 / 2 > rand(0..100)
+    elsif @cha_on_tar == 'away' && 100 / 3 > rand(0..100)
       @goal_scored = 'away goal'
       @goal_away += 1
     else
