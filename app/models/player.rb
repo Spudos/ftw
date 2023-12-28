@@ -33,7 +33,7 @@ class Player < ApplicationRecord
   end
 
   def match_perf(player)
-    mod = 10
+    mod = 0
 
     if player.pos == 'gkp'
       (player.gkp_skill * player.fit / 100) + player.calc_pl_perf_ran(player) + mod
