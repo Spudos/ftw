@@ -1,0 +1,51 @@
+<form action="/fixtures" method="get">
+  <label for="week-number">Week Number:</label>
+  <select id="week-number" name="week_number">
+    <option value="">All</option>
+    <% Fixtures.distinct.pluck(:week_number).each do |week_number| %>
+      <option value="<%= week_number %>"><%= week_number %></option>
+    <% end %>
+  </select>
+
+  <label for="competition">Competition:</label>
+  <select id="competition" name="competition">
+    <option value="">All</option>
+    <% Fixtures.distinct.pluck(:comp).each do |comp| %>
+      <option value="<%= comp %>"><%= comp %></option>
+    <% end %>
+  </select>
+
+  <button type="submit">Show Fixtures</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Match ID</th>
+      <th>Home</th>
+      <th>Away</th>
+      <th>Competition</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @fixtures.each do |fixture| %>
+      <tr>
+        <td><%= fixture.match_id %></td>
+        <td><%= fixture.home %></td>
+        <td><%= fixture.away %></td>
+        <td><%= fixture.comp %></td>
+        <td>
+          <form action="/matches/match" method="post">
+            <input type="hidden" name="match_id" value="<%= fixture.match_id %>">
+            <input type="hidden" name="club_hm" value="<%= fixture.home %>">
+            <input type="hidden" name="club_aw" value="<%= fixture.away %>">
+            <button type="submit">Run Game</button>
+          </form>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

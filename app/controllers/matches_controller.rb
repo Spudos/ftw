@@ -1,13 +1,23 @@
 class MatchesController < ApplicationController
 
-  def index; end
+  def index
+    @sqd_pl_hm = []
+    @sqd_pl_aw = []
+    @dfc_hm = 0
+    @mid_hm = 0
+    @att_hm = 0
+    @dfc_aw = 0
+    @mid_aw = 0
+    @att_aw = 0
+    @res = []
+  end
 
   def show; end
 
   def match
     initialize_sqd_setup
     initialize_min_by_min
-    initialize_end_of_game
+    save
   end
 
   private
@@ -44,13 +54,17 @@ class MatchesController < ApplicationController
   def initialize_end_of_game
     initialize_possession
     initialize_motm
+    
   end
 
   # initializers
   #----------------------------------------------------------------
   def initialize_sqd
-    @sqd_hm = Player.where(club: 'alv')
-    @sqd_aw = Player.where(club: 'liv')
+    club_hm = params[:club_hm]
+    club_aw = params[:club_aw]
+
+    @sqd_hm = Player.where(club: club_hm)
+    @sqd_aw = Player.where(club: club_aw)
   end
 
   def initialize_sqd_pl
@@ -247,5 +261,29 @@ class MatchesController < ApplicationController
 
   def select_motm(sqd_pl)
     motm = sqd_pl.max_by { |player| player[:match_perf] }[:name]
+  end
+
+  def save
+    match = Matches.new(
+      match_id: 1,
+      hm_team: 'liv',
+      aw_team: 'alv',
+      hm_poss: @hm_poss,
+      aw_poss: @aw_poss,
+      hm_cha: @hm_cha,
+      aw_cha: @aw_cha,
+      hm_cha_on_tar: @hm_cha_on_tar,
+      aw_cha_on_tar: @aw_cha_on_tar,
+      hm_motm: @hm_motm,
+      aw_motm: @aw_motm
+    )
+    
+    if match.save
+      # Successfully saved the match data
+      redirect_to matches_path, notice: "Match data saved successfully."
+    else
+      # Failed to save the match data
+      redirect_to matches_path, alert: "Failed to save match data."
+    end
   end
 end
