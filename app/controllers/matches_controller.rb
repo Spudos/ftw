@@ -25,7 +25,7 @@ class MatchesController < ApplicationController
     @aw_poss = 0
 
     initialize_sqd
-    initialize_sqd_pl 
+    initialize_sqd_pl
     initialize_tm_tot
   end
 
@@ -50,6 +50,7 @@ class MatchesController < ApplicationController
   # initializers
   #----------------------------------------------------------------
   def initialize_sqd
+    @match_id = params[:match_id]
     @club_hm = params[:club_hm]
     @club_aw = params[:club_aw]
 
@@ -118,19 +119,25 @@ class MatchesController < ApplicationController
   #----------------------------------------------------------------
   def sqd_pl(sqd)
     sqd.map do |player|
-      pos_skl = pos_skl(player)
+
+      pl_match = PlMatch.create(
+        player_id: player.id,
+        match_id: @match_id,
+        match_perf: player.match_perf(player)
+      )
 
       {
+        id: player.id,
         club: player.club,
         name: player.name,
         pos: player.pos,
-        base_skl: player.base_skill,
-        pos_skl:,
         total_skill: player.total_skill,
-        match_perf: player.match_perf(player)
+        match_perf: player.match_perf(player),
+        match_id: @match_id
       }
     end
   end
+  
 
   def tm_tot(sqd_pl)
     dfc = 0
@@ -229,7 +236,7 @@ class MatchesController < ApplicationController
 
     top_players = filtered_players.sort_by { |player| -player[:match_perf] }
                                   .first(5)
-                                  .map { |player| player[:name] }
+                                  .map { |player| player[:id] }
 
     selected_players = top_players.sample(2)
     scorer = selected_players[0]
@@ -250,23 +257,25 @@ class MatchesController < ApplicationController
   end
 
   def select_motm(sqd_pl)
-    motm = sqd_pl.max_by { |player| player[:match_perf] }[:name]
+    motm = sqd_pl.max_by { |player| player[:match_perf] }[:id]
   end
 
   def initalize_save
 
     match = Matches.new(
-      match_id: 1,
+      match_id: @match_id,
       hm_team: @club_hm,
       aw_team: @club_aw,
       hm_poss: @hm_poss,
       aw_poss: @aw_poss,
       hm_cha: @cha_count_hm,
       aw_cha: @cha_count_aw,
-      hm_cha_on_tar: @hm_cha_on_tar,
-      aw_cha_on_tar: @aw_cha_on_tar,
-      hm_motm: @hm_motm,
-      aw_motm: @aw_motm
+      hm_cha_on_tar: @cha_on_tar_hm,
+      aw_cha_on_tar: @cha_on_tar_aw,
+      hm_goal: @goal_hm,
+      aw_goal: @goal_aw,
+      hm_motm: @motm_hm,
+      aw_motm: @motm_aw
     )
 
     if match.save

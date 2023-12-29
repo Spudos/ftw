@@ -1,4 +1,6 @@
 class Player < ApplicationRecord
+  has_one :pl_stat
+  has_many :pl_match
 
   def total_skill
     if pos == 'gkp'

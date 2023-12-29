@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_28_172733) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_29_094640) do
   create_table "fixtures", force: :cascade do |t|
     t.integer "match_id"
     t.integer "week_number"
@@ -33,6 +33,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_172733) do
     t.integer "aw_cha_on_tar"
     t.string "hm_motm"
     t.string "aw_motm"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "hm_goal"
+    t.integer "aw_goal"
+  end
+
+  create_table "pl_matches", force: :cascade do |t|
+    t.integer "match_id"
+    t.integer "player_id"
+    t.integer "match_perf"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pl_stats", force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "goals"
+    t.integer "assists"
+    t.integer "motm"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -60,4 +79,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_172733) do
     t.integer "cons"
   end
 
+  add_foreign_key "pl_matches", "players"
+  add_foreign_key "pl_stats", "players"
 end
