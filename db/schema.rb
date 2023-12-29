@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_29_094640) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_29_125334) do
+  create_table "clubs", force: :cascade do |t|
+    t.string "name"
+    t.string "abbreviation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "fixtures", force: :cascade do |t|
     t.integer "match_id"
     t.integer "week_number"
@@ -49,11 +56,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_29_094640) do
 
   create_table "pl_stats", force: :cascade do |t|
     t.integer "player_id"
-    t.integer "goals"
-    t.integer "assists"
     t.integer "motm"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "match_id"
+    t.boolean "goal"
+    t.boolean "assist"
   end
 
   create_table "players", force: :cascade do |t|
@@ -77,6 +85,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_29_094640) do
     t.datetime "updated_at", null: false
     t.string "club"
     t.integer "cons"
+  end
+
+  create_table "selections", force: :cascade do |t|
+    t.string "club"
+    t.integer "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "pl_matches", "players"

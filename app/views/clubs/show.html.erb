@@ -1,0 +1,87 @@
+<% club = Club.find_by(abbreviation: params[:id]) %>
+<h3>Squad for <%= @club.name %></h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Nationality</th>
+      <th>Position</th>
+      <th>PA</th>
+      <th>CO</th>
+      <th>TA</th>
+      <th>RU</th>
+      <th>SH</th>
+      <th>DR</th>
+      <th>DF</th>
+      <th>OF</th>
+      <th>FL</th>
+      <th>ST</th>
+      <th>CR</th>
+      <th>Fit</th>
+      <th>Club</th>
+      <th>Cons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Player.where(club: params[:id]).each do |player| %>
+      <tr>
+        <td><%= player.name %></td>
+        <td><%= player.age %></td>
+        <td><%= player.nationality %></td>
+        <td><%= player.pos %></td>
+        <td><%= player.pa %></td>
+        <td><%= player.co %></td>
+        <td><%= player.ta %></td>
+        <td><%= player.ru %></td>
+        <td><%= player.sh %></td>
+        <td><%= player.dr %></td>
+        <td><%= player.df %></td>
+        <td><%= player.of %></td>
+        <td><%= player.fl %></td>
+        <td><%= player.st %></td>
+        <td><%= player.cr %></td>
+        <td><%= player.fit %></td>
+        <td><%= player.club %></td>
+        <td><%= player.cons %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<br>
+<h3>Select a new team <%= @club.name %></h3>
+<div id="form-container">
+  <%= form_tag selections_path(club: params[:id]), method: :post do %>
+    <% Player.where(club: params[:id]).each do |player| %>
+      <div>
+        <%= check_box_tag "player_ids[]", player.id %>
+        <%= player.name %>
+        <%= player.pos %>
+      </div>
+    <% end %>
+    <%= submit_tag "Save Selection" %>
+  <% end %>
+</div>
+<br>
+<br>
+<h3>Current Selected Players for <%= @club.name %></h3>
+<table>
+  <thead>
+    <tr>
+      <th>Player ID</th>
+      <th>Player Name</th>
+      <th>Player Pos</th>
+    </tr>
+  </thead>
+<tbody>
+  <% @selection.each do |player| %>
+    <tr>
+      <td><%= player.player_id %></td>
+      <td><%= @players.find { |pl_m| pl_m.id == player.player_id }&.name %></td>
+      <td><%= @players.find { |pl_m| pl_m.id == player.player_id }&.pos %></td>
+    </tr>
+  <% end %>
+</tbody>
+
+</table>

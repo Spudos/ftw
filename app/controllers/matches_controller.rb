@@ -1,8 +1,17 @@
 class MatchesController < ApplicationController
-
   def index; end
 
-  def show; end
+  def show
+    @match = Matches.find_by(match_id: params[:id])
+    @pl_match = PlMatch.where(match_id: params[:id])
+    @pl_stats = PlStat.where(match_id: params[:id])
+
+    @players = []
+    @pl_match.each do |pl_match|
+      player = Player.find_by(id: pl_match.player_id)
+      @players << player if player
+    end
+  end
 
   def match
     initialize_sqd_setup
@@ -54,8 +63,11 @@ class MatchesController < ApplicationController
     @club_hm = params[:club_hm]
     @club_aw = params[:club_aw]
 
-    @sqd_hm = Player.where(club: @club_hm)
-    @sqd_aw = Player.where(club: @club_aw)
+    player_ids_hm = Selection.where(club: @club_hm).pluck(:player_id)
+    player_ids_aw = Selection.where(club: @club_aw).pluck(:player_id)
+
+    @sqd_hm = Player.where(id: player_ids_hm)
+    @sqd_aw = Player.where(id: player_ids_aw)
   end
 
   def initialize_sqd_pl
@@ -101,8 +113,8 @@ class MatchesController < ApplicationController
         cha_count_aw: @cha_count_aw,
         cha_on_tar: @cha_on_tar,
         goal_scored?: @goal_scored,
-        assist: @goal[:assist], # Insert the assist value from the @goal hash
-        scorer: @goal[:scorer]  # Insert the scorer value from the @goal hash
+        assist: @goal[:assist],
+        scorer: @goal[:scorer]
       }
   end
 
@@ -119,7 +131,6 @@ class MatchesController < ApplicationController
   #----------------------------------------------------------------
   def sqd_pl(sqd)
     sqd.map do |player|
-
       pl_match = PlMatch.create(
         player_id: player.id,
         match_id: @match_id,
@@ -127,6 +138,7 @@ class MatchesController < ApplicationController
       )
 
       {
+        match_id: @match_id,
         id: player.id,
         club: player.club,
         name: player.name,
@@ -137,7 +149,6 @@ class MatchesController < ApplicationController
       }
     end
   end
-  
 
   def tm_tot(sqd_pl)
     dfc = 0
@@ -232,6 +243,8 @@ class MatchesController < ApplicationController
   end
 
   def assist_and_scorer(sqd_pl)
+    match_id = sqd_pl.first[:match_id]
+
     filtered_players = sqd_pl.reject { |player| player[:pos] == 'gkp' }
 
     top_players = filtered_players.sort_by { |player| -player[:match_perf] }
@@ -246,7 +259,23 @@ class MatchesController < ApplicationController
       assist = top_players.sample
     end
 
-    @goal = { scorer:, assist: }
+    goal = { scorer: scorer, assist: assist }
+
+    player_stats = {}
+    sqd_pl.each do |player|
+      player_stats[player[:id]] = { goals: 0, assists: 0, match_id: match_id }
+    end
+
+    player_stats[scorer][:goals] += 1
+    player_stats[assist][:assists] += 1
+
+    player_stats.each do |player_id, stats|
+      if stats[:goals] > 0 || stats[:assists] > 0
+        PlStat.create(player_id: player_id, match_id: stats[:match_id], goal: stats[:goals] > 0, assist: stats[:assists] > 0)
+      end
+    end
+
+    { goal: goal, player_stats: player_stats }
   end
 
   # end of game
@@ -257,11 +286,10 @@ class MatchesController < ApplicationController
   end
 
   def select_motm(sqd_pl)
-    motm = sqd_pl.max_by { |player| player[:match_perf] }[:id]
+    sqd_pl.max_by { |player| player[:match_perf] }[:id]
   end
 
   def initalize_save
-
     match = Matches.new(
       match_id: @match_id,
       hm_team: @club_hm,
@@ -279,10 +307,8 @@ class MatchesController < ApplicationController
     )
 
     if match.save
-      # Successfully saved the match data
       puts "Match data saved successfully."
     else
-      # Failed to save the match data
       puts "Failed to save match data."
     end
   end

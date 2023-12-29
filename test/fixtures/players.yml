@@ -1,4 +1,29 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# == Schema Information
+#
+# Table name: players
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  age         :integer
+#  nationality :string
+#  pos         :string
+#  pa          :integer
+#  co          :integer
+#  ta          :integer
+#  ru          :integer
+#  sh          :integer
+#  dr          :integer
+#  df          :integer
+#  of          :integer
+#  fl          :integer
+#  st          :integer
+#  cr          :integer
+#  fit         :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  club        :string
+#  cons        :integer
+#
 
 one:
   name: MyString
