@@ -10,9 +10,9 @@ def generate_random_code
 end
 
 positions = ['gkp', 'dfc', 'mid', 'att']
-position_counts = [1, 4, 4, 2]
+position_counts = [3, 6, 6, 5]
 
-codes = (1..20).map { generate_random_code }
+codes = (1..500).map { generate_random_code }
 
 codes.each do |code|
   position_counts.each_with_index do |count, index|
