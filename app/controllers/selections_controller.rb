@@ -21,21 +21,23 @@ class SelectionsController < ApplicationController
 
   # POST /selections or /selections.json
   def create
-   
     club = Club.find_by(abbreviation: params[:club])
     player_ids = params[:player_ids].map(&:to_i)
-    
-    # Delete previous entries for the selected club
-    Selection.where(club: club.abbreviation).delete_all
-    
-    # Save the new selection
-    player_ids.each do |player_id|
-      Selection.create(club: club.abbreviation, player_id: player_id)
+
+    if player_ids.length == 11
+      # Delete previous entries for the selected club
+      Selection.where(club: club.abbreviation).delete_all
+
+      # Save the new selection
+      player_ids.each do |player_id|
+        Selection.create(club: club.abbreviation, player_id: player_id)
+      end
+
+      redirect_to clubs_path, notice: "Selection saved successfully."
+    else
+      render club
     end
-    
-    redirect_to clubs_path, notice: "Selection saved successfully."
   end
-  
 
   # PATCH/PUT /selections/1 or /selections/1.json
   def update

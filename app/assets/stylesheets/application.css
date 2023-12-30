@@ -18,3 +18,24 @@
   margin: auto;
   height: 1500px;
 }
+
+th {
+  width: 150px;
+}
+
+.header {
+  padding: 20px;
+  margin: auto;
+  text-align: center;
+}
+
+#match {
+  display: flex;
+  border-radius: 10px;
+  background-color: whitesmoke;
+  padding: 10px;
+}
+
+#match_details {
+  margin-right: 20px;
+}

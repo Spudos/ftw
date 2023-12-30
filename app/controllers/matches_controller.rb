@@ -17,6 +17,8 @@ class MatchesController < ApplicationController
     initialize_sqd_setup
     initialize_min_by_min
     initialize_end_of_game
+
+    redirect_to show_match_path(@match_id)
   end
 
   private
@@ -32,10 +34,10 @@ class MatchesController < ApplicationController
     @goal_aw = 0
     @hm_poss = 0
     @aw_poss = 0
-
-    initialize_sqd
-    initialize_sqd_pl
-    initialize_tm_tot
+  
+      initialize_sqd
+      initialize_sqd_pl
+      initialize_tm_tot
   end
 
   def initialize_min_by_min
@@ -45,7 +47,7 @@ class MatchesController < ApplicationController
       initialize_cha?
       initialize_cha_count
       initialize_cha_on_tar
-      initialize_goal_scored?
+      initialize_goal_scored?(i)
       initialize_build_results(i)
     end
   end
@@ -62,12 +64,18 @@ class MatchesController < ApplicationController
     @match_id = params[:match_id]
     @club_hm = params[:club_hm]
     @club_aw = params[:club_aw]
-
+  
     player_ids_hm = Selection.where(club: @club_hm).pluck(:player_id)
     player_ids_aw = Selection.where(club: @club_aw).pluck(:player_id)
 
-    @sqd_hm = Player.where(id: player_ids_hm)
-    @sqd_aw = Player.where(id: player_ids_aw)
+    if player_ids_hm.empty?
+      redirect_to club_path(@club_hm), notice: "Selections do not exist for the home team."
+    elsif player_ids_aw.empty?
+      redirect_to club_path(@club_aw), notice: "Selections do not exist for the away team."
+    else
+      @sqd_hm = Player.where(id: player_ids_hm)
+      @sqd_aw = Player.where(id: player_ids_aw)
+    end
   end
 
   def initialize_sqd_pl
@@ -97,8 +105,8 @@ class MatchesController < ApplicationController
     cha_on_tar(@att_hm, @att_aw)
   end
 
-  def initialize_goal_scored?
-    goal_scored?(@att_hm, @att_aw)
+  def initialize_goal_scored?(i)
+    goal_scored?(@att_hm, @att_aw, i)
   end
 
   def initialize_build_results(i)
@@ -113,8 +121,8 @@ class MatchesController < ApplicationController
         cha_count_aw: @cha_count_aw,
         cha_on_tar: @cha_on_tar,
         goal_scored?: @goal_scored,
-        assist: @goal[:assist],
-        scorer: @goal[:scorer]
+        assist: @goal.empty? ? nil : @goal[:assist],
+        scorer: @goal.empty? ? nil : @goal[:scorer]
       }
   end
 
@@ -131,10 +139,12 @@ class MatchesController < ApplicationController
   #----------------------------------------------------------------
   def sqd_pl(sqd)
     sqd.map do |player|
+      @pl_match_perf = player.match_perf(player)
+
       pl_match = PlMatch.create(
         player_id: player.id,
         match_id: @match_id,
-        match_perf: player.match_perf(player)
+        match_perf: @pl_match_perf
       )
 
       {
@@ -144,8 +154,7 @@ class MatchesController < ApplicationController
         name: player.name,
         pos: player.pos,
         total_skill: player.total_skill,
-        match_perf: player.match_perf(player),
-        match_id: @match_id
+        match_perf: @pl_match_perf
       }
     end
   end
@@ -227,22 +236,23 @@ class MatchesController < ApplicationController
     end
   end
 
-  def goal_scored?(att_hm, att_aw)
+  def goal_scored?(att_hm, att_aw, i)
     if @cha_on_tar == 'home' && att_hm / 3 > rand(0..100)
       @goal_scored = 'home goal'
       @goal_hm += 1
-      assist_and_scorer(@sqd_pl_hm)
+      assist_and_scorer(@sqd_pl_hm, i)
     elsif @cha_on_tar == 'away' && att_aw / 3 > rand(0..100)
       @goal_scored = 'away goal'
       @goal_aw += 1
-      assist_and_scorer(@sqd_pl_aw)
+      assist_and_scorer(@sqd_pl_aw, i)
     else
       @goal_scored = 'no'
       @goal = { scorer: 'none', assist: 'none' }
     end
   end
 
-  def assist_and_scorer(sqd_pl)
+  def assist_and_scorer(sqd_pl, i)
+    
     match_id = sqd_pl.first[:match_id]
 
     filtered_players = sqd_pl.reject { |player| player[:pos] == 'gkp' }
@@ -259,11 +269,11 @@ class MatchesController < ApplicationController
       assist = top_players.sample
     end
 
-    goal = { scorer: scorer, assist: assist }
+    goal = { scorer: scorer, assist: assist , time: i}
 
     player_stats = {}
     sqd_pl.each do |player|
-      player_stats[player[:id]] = { goals: 0, assists: 0, match_id: match_id }
+      player_stats[player[:id]] = { goals: 0, assists: 0, time: i, match_id: match_id }
     end
 
     player_stats[scorer][:goals] += 1
@@ -271,7 +281,7 @@ class MatchesController < ApplicationController
 
     player_stats.each do |player_id, stats|
       if stats[:goals] > 0 || stats[:assists] > 0
-        PlStat.create(player_id: player_id, match_id: stats[:match_id], goal: stats[:goals] > 0, assist: stats[:assists] > 0)
+        PlStat.create(player_id: player_id, match_id: stats[:match_id], time: stats[:time], goal: stats[:goals] > 0, assist: stats[:assists] > 0)
       end
     end
 
@@ -303,7 +313,7 @@ class MatchesController < ApplicationController
       hm_goal: @goal_hm,
       aw_goal: @goal_aw,
       hm_motm: @motm_hm,
-      aw_motm: @motm_aw
+      aw_motm: @motm_aw,
     )
 
     if match.save

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_29_125334) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_30_004739) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_29_125334) do
     t.integer "match_id"
     t.boolean "goal"
     t.boolean "assist"
+    t.integer "time"
   end
 
   create_table "players", force: :cascade do |t|

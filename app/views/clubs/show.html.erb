@@ -53,16 +53,34 @@
 <h3>Select a new team <%= @club.name %></h3>
 <div id="form-container">
   <%= form_tag selections_path(club: params[:id]), method: :post do %>
-    <% Player.where(club: params[:id]).each do |player| %>
-      <div>
-        <%= check_box_tag "player_ids[]", player.id %>
-        <%= player.name %>
-        <%= player.pos %>
-      </div>
-    <% end %>
+    <table>
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Name</th>
+          <th>Position</th>
+          <th>Age</th>
+          <th>Total Skill</th>
+          <th>Fitness</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Player.where(club: params[:id]).each do |player| %>
+          <tr>
+            <td><%= check_box_tag "player_ids[]", player.id %></td>
+            <td><%= player.name %></td>
+            <td><%= player.pos %></td>
+            <td><%= player.age %></td>
+            <td><%= player.total_skill %></td>
+            <td><%= player.fit %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
     <%= submit_tag "Save Selection" %>
   <% end %>
 </div>
+
 <br>
 <br>
 <h3>Current Selected Players for <%= @club.name %></h3>

@@ -1,14 +1,29 @@
 <p style="color: green"><%= notice %></p>
-
 <h1>Clubs</h1>
-
+<br>
+<br>
+<%= link_to "Click here a create a new club", new_club_path %>
+<br>
+<br>
 <div id="clubs">
-  <% @clubs.each do |club| %>
-    <%= render club %>
-    <p>
-      <%= link_to "Show this club", club_path(club.abbreviation) %>
-    </p>
-  <% end %>
+  
+    <table>
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Abbreviation</th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <% @clubs.each do |club| %>
+            <%= render club %>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+
 </div>
 
-<%= link_to "New club", new_club_path %>
+
