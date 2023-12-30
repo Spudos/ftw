@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :matches
   resources :fixtures
   resources :clubs, param: :abbreviation
+  resources :leagues
   post '/matches/match', to: 'matches#match'
   get '/matches/outcome', to: 'matches#outcome'
   post '/matches/save', to: 'matches#save', as: 'save_match'

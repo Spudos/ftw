@@ -1,0 +1,27 @@
+<h1>League Table</h1>
+
+<table>
+  <tr>
+    <th>Team</th>
+    <th>Played</th>
+    <th>Won</th>
+    <th>Drawn</th>    
+    <th>Lost</th>
+    <th>Goals Scored</th>
+    <th>Goals Conceded</th>
+    <th>Points</th>
+  </tr>
+  <% @team_stats.sort_by { |team, stats| [-stats[:points], stats[:goals_scored] - stats[:goals_conceded], -stats[:goals_scored]] }.each do |team, stats| %>
+    <tr>
+      <td><%= team %></td>
+      <td><%= stats[:played] %></td>
+      <td><%= stats[:won] %></td>
+      <td><%= stats[:drawn] %></td>
+      <td><%= stats[:lost] %></td>
+      <td><%= stats[:goals_scored] %></td>
+      <td><%= stats[:goals_conceded] %></td>
+      <td><%= stats[:points] %></td>
+    </tr>
+  <% end %>
+</table>
+
