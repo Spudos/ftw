@@ -38,3 +38,11 @@ th {
 #match_details {
   margin-right: 20px;
 }
+
+#exists {
+  background-color: green;
+}
+
+#not_exists {
+  background-color: red;
+}
