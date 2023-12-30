@@ -14,9 +14,8 @@
  *= require_self
  */
 .main {
-  width: 70%;
+  width: 80%;
   margin: auto;
-  height: 1500px;
 }
 
 th {
