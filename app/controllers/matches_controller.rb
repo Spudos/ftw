@@ -14,18 +14,49 @@ class MatchesController < ApplicationController
   end
 
   def match
-    initialize_sqd_setup
+      fixture = {
+        match_id: params[:match_id],
+        club_hm: params[:club_hm],
+        club_aw: params[:club_aw]
+      }
+
+    initialize_sqd_setup(fixture)
     initialize_min_by_min
     initialize_end_of_game
 
     redirect_to show_match_path(@match_id)
   end
 
+  def match_multiple
+    fixtures = Fixtures.where(week_number: params[:selected_week])
+
+    fixture_list = []
+    fixtures.each do |fixture|
+      fixture_list << {
+        match_id: fixture.match_id,
+        club_hm: fixture.home,
+        club_aw: fixture.away
+      }
+    end
+
+    match_week(fixture_list)
+  end
+
+  def match_week(fixture_list)
+    fixture_list.each do |fixture|
+      initialize_sqd_setup(fixture)
+      initialize_min_by_min
+      initialize_end_of_game
+    end
+
+    redirect_to leagues_path
+  end
+
   private
 
   # match sections
   #----------------------------------------------------------------
-  def initialize_sqd_setup
+  def initialize_sqd_setup(fixture)
     @cha_count_hm = 0
     @cha_count_aw = 0
     @cha_on_tar_hm = 0
@@ -34,10 +65,10 @@ class MatchesController < ApplicationController
     @goal_aw = 0
     @hm_poss = 0
     @aw_poss = 0
-  
-      initialize_sqd
-      initialize_sqd_pl
-      initialize_tm_tot
+
+    initialize_sqd(fixture)
+    initialize_sqd_pl
+    initialize_tm_tot
   end
 
   def initialize_min_by_min
@@ -60,22 +91,17 @@ class MatchesController < ApplicationController
 
   # initializers
   #----------------------------------------------------------------
-  def initialize_sqd
-    @match_id = params[:match_id]
-    @club_hm = params[:club_hm]
-    @club_aw = params[:club_aw]
-  
+  def initialize_sqd(fixture)
+    
+    @match_id = fixture[:match_id].to_i
+    @club_hm = fixture[:club_hm]
+    @club_aw = fixture[:club_aw]
+    
     player_ids_hm = Selection.where(club: @club_hm).pluck(:player_id)
     player_ids_aw = Selection.where(club: @club_aw).pluck(:player_id)
 
-    if player_ids_hm.empty?
-      redirect_to club_path(@club_hm), notice: "Selections do not exist for the home team."
-    elsif player_ids_aw.empty?
-      redirect_to club_path(@club_aw), notice: "Selections do not exist for the away team."
-    else
-      @sqd_hm = Player.where(id: player_ids_hm)
-      @sqd_aw = Player.where(id: player_ids_aw)
-    end
+    @sqd_hm = Player.where(id: player_ids_hm)
+    @sqd_aw = Player.where(id: player_ids_aw)
   end
 
   def initialize_sqd_pl
@@ -252,7 +278,7 @@ class MatchesController < ApplicationController
   end
 
   def assist_and_scorer(sqd_pl, i)
-    
+
     match_id = sqd_pl.first[:match_id]
 
     filtered_players = sqd_pl.reject { |player| player[:pos] == 'gkp' }

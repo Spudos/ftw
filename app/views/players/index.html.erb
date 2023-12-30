@@ -1,1 +1,34 @@
-players
+<h1>Players</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Nationality</th>
+      <th>Position</th>
+      <th>Total Skill</th>
+      <th>Played</th>
+      <th>Total Goals</th>
+      <th>Total Assists</th>
+      <th>Average Perf</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @players.each do |player| %>
+      <tr>
+        <td><%= player.name %></td>
+        <td><%= player.age %></td>
+        <td><%= player.nationality %></td>
+        <td><%= player.pos %></td>
+        <td><%= player.total_skill %></td>
+        <td><%= PlMatch.where(player_id: player.id).count(:match_perf) %></td>
+        <td><%= PlStat.where(player_id: player.id, goal: true).count %></td>
+        <td><%= PlStat.where(player_id: player.id, assist: true).count %></td>
+        <td><%= PlMatch.where(player_id: player.id).average(:match_perf).to_i %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
