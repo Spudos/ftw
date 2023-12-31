@@ -46,3 +46,16 @@ th {
 #not_exists {
   background-color: red;
 }
+
+body {
+  height: 100vh;
+}
+
+footer {
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+  font-weight: bolder;
+  text-align: center;
+  background-color: whitesmoke;
+}

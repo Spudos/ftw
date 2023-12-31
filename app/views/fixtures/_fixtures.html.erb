@@ -48,7 +48,7 @@
               <input type="hidden" name="match_id" value="<%= fixture.match_id %>">
               <input type="hidden" name="club_hm" value="<%= fixture.home %>">
               <input type="hidden" name="club_aw" value="<%= fixture.away %>">
-              <button type="submit" <%= 'disabled' if match_exists %>>Run Game</button>
+              <button type="submit" class="btn btn-primary btn-sm" <%= 'disabled' if match_exists %>>Run Game</button>
             </form>
           </td>
           <td>
@@ -63,6 +63,6 @@
 
 <form action="/matches/match_multiple" method="post">
   <input type="hidden" name="selected_week" value="<%= params[:week_number] %>">
-  <button type="submit">Run All Games</button>
+  <button type="submit" class="btn btn-danger">Run All Games</button>
 </form>
 
