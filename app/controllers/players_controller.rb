@@ -2,6 +2,7 @@ class PlayersController < ApplicationController
   def index
     @clubs = Player.distinct.pluck(:club)
     @players = Player.all
+    @p_players = Player.paginate(page: params[:page], per_page: 100)
   end
 
   def total_goals(player_id)

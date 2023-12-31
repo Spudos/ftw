@@ -1,3 +1,5 @@
+<%= will_paginate @p_players %>
+
 <h1>Players</h1>
 
 <table class="table table-striped">
@@ -15,7 +17,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @players.each do |player| %>
+    <% @p_players.each do |player| %>
       <tr scope="row">
         <td><%= player.name %></td>
         <td><%= player.age %></td>

@@ -5,7 +5,8 @@ ruby "3.1.2"
 
 gem 'faker'
 gem 'pry-rails', group: :development
-
+gem 'will_paginate', '~> 4.0'
+gem 'sassc-rails', '~> 2.1'
 gem 'annotate_models'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
