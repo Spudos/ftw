@@ -14,11 +14,12 @@ class MatchesController < ApplicationController
   end
 
   def match
-      fixture = {
-        match_id: params[:match_id],
-        club_hm: params[:club_hm],
-        club_aw: params[:club_aw]
-      }
+    fixture = {
+      match_id: params[:match_id],
+      club_hm: params[:club_hm],
+      club_aw: params[:club_aw],
+      week_number: Fixtures.find_by(match_id: params[:match_id])&.week_number
+    }
 
     initialize_sqd_setup(fixture)
     initialize_min_by_min
@@ -35,7 +36,8 @@ class MatchesController < ApplicationController
       fixture_list << {
         match_id: fixture.match_id,
         club_hm: fixture.home,
-        club_aw: fixture.away
+        club_aw: fixture.away,
+        week_number: fixture.week_number
       }
     end
 
@@ -92,11 +94,12 @@ class MatchesController < ApplicationController
   # initializers
   #----------------------------------------------------------------
   def initialize_sqd(fixture)
-    
+
     @match_id = fixture[:match_id].to_i
+    @week_number = fixture[:week_number].to_i
     @club_hm = fixture[:club_hm]
     @club_aw = fixture[:club_aw]
-    
+
     player_ids_hm = Selection.where(club: @club_hm).pluck(:player_id)
     player_ids_aw = Selection.where(club: @club_aw).pluck(:player_id)
 
@@ -328,6 +331,7 @@ class MatchesController < ApplicationController
   def initalize_save
     match = Matches.new(
       match_id: @match_id,
+      week_number: @week_number,
       hm_team: @club_hm,
       aw_team: @club_aw,
       hm_poss: @hm_poss,

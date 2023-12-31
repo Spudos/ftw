@@ -1,0 +1,29 @@
+<h3>Results</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Match ID</th>
+      <th scope="col">Home</th>
+      <th scope="col">Away</th>
+      <th scope="col">Home Poss</th>
+      <th scope="col">Away Poss</th>
+      <th scope="col">Home Goals</th>
+      <th scope="col">Away Goals</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Matches.where(week_number: params[:week_number]).each do |match| %>
+      <tr scope="row">
+        <td><%= match.match_id %></td>
+        <td><%= Club.find_by(abbreviation: match.hm_team)&.name %></td>
+        <td><%= Club.find_by(abbreviation: match.aw_team)&.name %></td>
+        <td><%= match.hm_poss %></td>
+        <td><%= match.aw_poss %></td>
+        <td><%= match.hm_goal %></td>
+        <td><%= match.aw_goal %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<br>

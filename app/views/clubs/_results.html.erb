@@ -20,8 +20,8 @@
     <% @club_matches.each do |match| %>
       <tr scope="row">
         <td><%= match.match_id %></td>
-        <td><%= match.hm_team %></td>
-        <td><%= match.aw_team %></td>
+        <td><%= Club.find_by(abbreviation: match.hm_team)&.name %></td>
+        <td><%= Club.find_by(abbreviation: match.aw_team)&.name %></td>
         <td><%= match.hm_poss %></td>
         <td><%= match.aw_poss %></td>
         <td><%= match.hm_cha %></td>

@@ -1,42 +1,25 @@
-# Define a method to generate a random number between min and max (inclusive)
-def random_number(min, max)
-  rand(min..max)
-end
+#load Rails.root.join('db', 'seeds', 'fixture_seeds.rb')
 
-uk_countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales', 'Nothern Ireland', 'Republic of Ireland']
+teams = [
+  "alv", "clt", "ema", "fnp", "gcm", "hfk", "imj", "ioz", "kih", "liv",
+  "pbh", "qsj", "rct", "slw", "wol", "xwr", "yju", "zep", "zka", "zxn"
+]
 
-def generate_random_code
-  ('aaa'..'zzz').to_a.sample
-end
+match_id = 1
+week_number = 1
 
-positions = ['gkp', 'dfc', 'mid', 'att']
-position_counts = [3, 6, 6, 5]
+teams.each do |home_team|
+  teams.each do |away_team|
+    next if home_team == away_team
 
-codes = (1..500).map { generate_random_code }
-
-codes.each do |code|
-  position_counts.each_with_index do |count, index|
-    count.times do
-      Player.create(
-        name: Faker::Name.last_name,
-        age: random_number(18, 35),
-        nationality: uk_countries.sample,
-        pos: positions[index],
-        pa: random_number(3, 9),
-        co: random_number(3, 8),
-        ta: random_number(3, 6),
-        ru: random_number(3, 9),
-        sh: random_number(3, 9),
-        dr: random_number(3, 9),
-        df: random_number(3, 9),
-        of: random_number(3, 9),
-        fl: random_number(3, 9),
-        st: random_number(3, 9),
-        cr: random_number(3, 9),
-        fit: 100,
-        club: code,
-        cons: 20
-      )
-    end
+    Fixtures.create!(
+      match_id: match_id,
+      week_number: week_number,
+      home: home_team,
+      away: away_team,
+      comp: "league"
+    )
+    match_id += 1
   end
+  week_number += 1
 end
