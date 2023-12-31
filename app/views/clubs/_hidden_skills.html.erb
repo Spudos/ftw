@@ -1,0 +1,25 @@
+<h3>Hidden Skills</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Nationality</th>
+      <th>Position</th>
+      <th>Cons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Player.where(club: params[:id]).each do |player| %>
+      <tr>
+        <td><%= player.name %></td>
+        <td><%= player.age %></td>
+        <td><%= player.nationality %></td>
+        <td><%= player.pos %></td>
+        <td><%= player.cons %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<br>

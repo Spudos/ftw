@@ -1,0 +1,47 @@
+<h3>Skills</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Nationality</th>
+      <th>Position</th>
+      <th>PA</th>
+      <th>CO</th>
+      <th>TA</th>
+      <th>RU</th>
+      <th>SH</th>
+      <th>DR</th>
+      <th>DF</th>
+      <th>OF</th>
+      <th>FL</th>
+      <th>ST</th>
+      <th>CR</th>
+      <th">Fit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Player.where(club: params[:id]).each do |player| %>
+      <tr>
+        <td><%= player.name %></td>
+        <td><%= player.age %></td>
+        <td><%= player.nationality %></td>
+        <td><%= player.pos %></td>
+        <td><%= player.pa %></td>
+        <td><%= player.co %></td>
+        <td><%= player.ta %></td>
+        <td><%= player.ru %></td>
+        <td><%= player.sh %></td>
+        <td><%= player.dr %></td>
+        <td><%= player.df %></td>
+        <td><%= player.of %></td>
+        <td><%= player.fl %></td>
+        <td><%= player.st %></td>
+        <td><%= player.cr %></td>
+        <td><%= player.fit %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<br>

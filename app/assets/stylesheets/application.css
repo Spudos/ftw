@@ -19,7 +19,7 @@
 }
 
 th {
-  width: 150px;
+  width: fit-content;
 }
 
 .header {
