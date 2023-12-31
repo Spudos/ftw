@@ -1,26 +1,36 @@
-<h3>Select a new team <%= @club.name %></h3>
+<h3>Team Stats and Selection <%= @club.name %></h3>
 <div id="form-container">
   <%= form_tag selections_path(club: params[:id]), method: :post do %>
-    <table>
+    <table class="table table-striped">
       <thead>
         <tr>
-          <th>Select</th>
-          <th>Name</th>
-          <th>Position</th>
-          <th>Age</th>
-          <th>Total Skill</th>
-          <th>Fitness</th>
+          <th scope="col">Name</th>
+          <th scope="col">Position</th>
+          <th scope="col">Age</th>
+          <th scope="col">Total Skill</th>
+          <th scope="col">Fitness</th>
+          <th scope="col">Played</th>
+          <th scope="col">Goals</th>
+          <th scope="col">Assists</th>
+          <th scope="col">Av. Perf</th>
+          <th scope="col">Currently Selected</th>
+          <th scope="col">Select</th>
         </tr>
       </thead>
       <tbody>
         <% Player.where(club: params[:id]).each do |player| %>
-          <tr>
-            <td><%= check_box_tag "player_ids[]", player.id %></td>
+          <tr scope="row">
             <td><%= player.name %></td>
             <td><%= player.pos %></td>
             <td><%= player.age %></td>
             <td><%= player.total_skill %></td>
             <td><%= player.fit %></td>
+            <td><%= PlMatch.where(player_id: player.id).count(:match_perf) %></td>
+            <td><%= PlStat.where(player_id: player.id, goal: true).count %></td>
+            <td><%= PlStat.where(player_id: player.id, assist: true).count %></td>
+            <td><%= PlMatch.where(player_id: player.id).average(:match_perf).to_i %></td>
+            <td><strong><%= Selection.exists?(player_id: player.id) ? 'Yes' : 'No' %></strong></td>
+            <td><%= check_box_tag "player_ids[]", player.id %></td>
           </tr>
         <% end %>
       </tbody>
@@ -28,26 +38,3 @@
     <%= submit_tag "Save Selection" %>
   <% end %>
 </div>
-
-<br>
-<br>
-<h3>Current Selected Players for <%= @club.name %></h3>
-<table>
-  <thead>
-    <tr>
-      <th>Player ID</th>
-      <th>Player Name</th>
-      <th>Player Pos</th>
-    </tr>
-  </thead>
-<tbody>
-  <% @selection.each do |player| %>
-    <tr>
-      <td><%= player.player_id %></td>
-      <td><%= @players.find { |pl_m| pl_m.id == player.player_id }&.name %></td>
-      <td><%= @players.find { |pl_m| pl_m.id == player.player_id }&.pos %></td>
-    </tr>
-  <% end %>
-</tbody>
-
-</table>

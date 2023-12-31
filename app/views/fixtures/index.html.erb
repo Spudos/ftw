@@ -11,15 +11,15 @@
 </form>
 <br>
 <br>
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Match ID</th>
-      <th>Week Number</th>
-      <th>Home</th>
-      <th>Away</th>
-      <th>Competition</th>
-      <th>Actions</th>
+      <th scope="col">Match ID</th>
+      <th scope="col">Week Number</th>
+      <th scope="col">Home</th>
+      <th scope="col">Away</th>
+      <th scope="col">Competition</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -28,7 +28,7 @@
       <% home_selection_exists = Selection.exists?(club: fixture.home) %>
       <% away_selection_exists = Selection.exists?(club: fixture.away) %>
       <% if fixture.week_number.to_s == params[:week_number] %>
-        <tr>
+        <tr scope="row">
           <td><%= fixture.match_id %></td>
           <td><%= fixture.week_number %></td>
           <td>

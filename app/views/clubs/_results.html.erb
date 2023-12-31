@@ -1,0 +1,57 @@
+<h3>Results</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Match ID</th>
+      <th scope="col">Home</th>
+      <th scope="col">Away</th>
+      <th scope="col">Home Poss</th>
+      <th scope="col">Away Poss</th>
+      <th scope="col">Home Chances</th>
+      <th scope="col">Away Cances</th>
+      <th scope="col">Home On Tar</th>
+      <th scope="col">Away On Tar</th>
+      <th scope="col">Home Goals</th>
+      <th scope="col">Away Goals</th>
+      <th scope="col">Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @club_matches.each do |match| %>
+      <tr scope="row">
+        <td><%= match.match_id %></td>
+        <td><%= match.hm_team %></td>
+        <td><%= match.aw_team %></td>
+        <td><%= match.hm_poss %></td>
+        <td><%= match.aw_poss %></td>
+        <td><%= match.hm_cha %></td>
+        <td><%= match.aw_cha %></td>
+        <td><%= match.hm_cha_on_tar %></td>
+        <td><%= match.aw_cha_on_tar %></td>
+        <td><%= match.hm_goal %></td>
+        <td><%= match.aw_goal %></td>
+        <td>
+          <% if match.hm_team == params[:id] %>
+            <% if match.hm_goal > match.aw_goal %>
+              <%= 'Win' %>
+            <% elsif match.hm_goal == match.aw_goal %>
+              <%= 'Draw' %>
+            <% else %>
+              <%= 'Loss' %>
+            <% end %>
+          <% else %>
+            <% if match.hm_goal < match.aw_goal %>
+              <%= 'Win' %>
+            <% elsif match.hm_goal == match.aw_goal %>
+              <%= 'Draw' %>
+            <% else %>
+              <%= 'Loss' %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<br>

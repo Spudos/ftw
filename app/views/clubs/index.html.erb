@@ -7,14 +7,14 @@
 <br>
 <div id="clubs">
   
-    <table>
+    <table class="table table-striped">
     <tbody>
       <tr>
-        <th>Name</th>
-        <th>Abbreviation</th>
-        <th>Action</th>
+        <th scope="col">Name</th>
+        <th scope="col">Abbreviation</th>
+        <th scope="col">Action</th>
       </tr>
-      <tr>
+      <tr scope="row">
         <% @clubs.each do |club| %>
             <%= render club %>
         <% end %>

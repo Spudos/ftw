@@ -1,18 +1,18 @@
 <h1>League Table</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
-    <th>Team</th>
-    <th>Played</th>
-    <th>Won</th>
-    <th>Drawn</th>    
-    <th>Lost</th>
-    <th>Goals Scored</th>
-    <th>Goals Conceded</th>
-    <th>Points</th>
+    <th scope="col">Team</th>
+    <th scope="col">Played</th>
+    <th scope="col">Won</th>
+    <th scope="col">Drawn</th>    
+    <th scope="col">Lost</th>
+    <th scope="col">Goals Scored</th>
+    <th scope="col">Goals Conceded</th>
+    <th scope="col">Points</th>
   </tr>
   <% @team_stats.sort_by { |team, stats| [-stats[:points], stats[:goals_scored] - stats[:goals_conceded], -stats[:goals_scored]] }.each do |team, stats| %>
-    <tr>
+    <tr scope="row">
       <td><%= team %></td>
       <td><%= stats[:played] %></td>
       <td><%= stats[:won] %></td>

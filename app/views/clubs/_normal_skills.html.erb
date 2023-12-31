@@ -1,28 +1,28 @@
 <h3>Skills</h3>
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Age</th>
-      <th>Nationality</th>
-      <th>Position</th>
-      <th>PA</th>
-      <th>CO</th>
-      <th>TA</th>
-      <th>RU</th>
-      <th>SH</th>
-      <th>DR</th>
-      <th>DF</th>
-      <th>OF</th>
-      <th>FL</th>
-      <th>ST</th>
-      <th>CR</th>
-      <th">Fit</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Nationality</th>
+      <th scope="col">Position</th>
+      <th scope="col">PA</th>
+      <th scope="col">CO</th>
+      <th scope="col">TA</th>
+      <th scope="col">RU</th>
+      <th scope="col">SH</th>
+      <th scope="col">DR</th>
+      <th scope="col">DF</th>
+      <th scope="col">OF</th>
+      <th scope="col">FL</th>
+      <th scope="col">ST</th>
+      <th scope="col">CR</th>
+      <th scope="col">Fit</th>
     </tr>
   </thead>
   <tbody>
     <% Player.where(club: params[:id]).each do |player| %>
-      <tr>
+      <tr scope="row">
         <td><%= player.name %></td>
         <td><%= player.age %></td>
         <td><%= player.nationality %></td>

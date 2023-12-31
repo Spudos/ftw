@@ -10,6 +10,7 @@ class ClubsController < ApplicationController
   def show
     @selection = Selection.where(club: params[:id])
     @players = Player.where(club: params[:id])
+    @club_matches = Matches.where('hm_team = ? OR aw_team = ?', params[:id], params[:id])
   end
 
   # GET /clubs/new
