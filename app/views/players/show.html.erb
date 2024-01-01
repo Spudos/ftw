@@ -22,3 +22,38 @@
   <input type="text" id="sort_criteria" name="sort_criteria">
   <button type="submit" class="btn btn-primary btn-sm">Sort</button>
 </form>
+<br>
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Club</th>
+      <th scope="col">Nat</th>
+      <th scope="col">Pos</th>
+      <th scope="col">TS</th>
+      <th scope="col">P</th>
+      <th scope="col">Gls</th>
+      <th scope="col">Ast</th>
+      <th scope="col">Perf</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <% @sorted.each do |player| %>
+      <tr scope="row">
+        <td><%= player[:name] %></td>
+        <td><%= player[:age] %></td>
+        <td><%= player[:club] %></td>
+        <td><%= player[:nationality] %></td>
+        <td><%= player[:position] %></td>
+        <td><%= player[:total_skill] %></td>
+        <td><%= player[:match_performance_count] %></td>
+        <td><%= player[:goal_count] %></td>
+        <td><%= player[:assist_count] %></td>
+        <td><%= player[:average_match_performance] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get '/players/total_goals', to: 'players#total_goals'
   get '/players/total_assists', to: 'players#total_assists'
+  post '/players/sort_players', to: 'players#sort_players', as: 'sort_players'
 end
