@@ -1,0 +1,45 @@
+<h3>The Stadium</h3>
+<table class="table table-hover">
+  <tr>
+    <td scope="col">Stand</td>
+    <td scope="col">Stand Name</td>
+    <td scope="col">Stand Condition</td>
+    <td scope="col">Stand Capacity</td>
+  </tr>
+  <tr scope="row">
+    <td>North Stand</td>
+    <td><%= @club.stand_n_name %></td>  
+    <td><%= @club.stand_n_condition %></td> 
+    <td><%= @club.stand_n_capacity %></td> 
+  </tr>       
+  <tr scope="row">
+    <td>South Stand</td>
+    <td><%= @club.stand_s_name %></td>  
+    <td><%= @club.stand_s_condition %></td> 
+    <td><%= @club.stand_s_capacity %></td> 
+  </tr>
+  <tr scope="row">
+    <td>East Stand</td>
+    <td><%= @club.stand_e_name %></td>  
+    <td><%= @club.stand_e_condition %></td> 
+    <td><%= @club.stand_e_capacity %></td> 
+  <tr scope="row">
+    </tr>
+    <td>West Stand</td>
+    <td><%= @club.stand_w_name %></td>  
+    <td><%= @club.stand_w_condition %></td> 
+    <td><%= @club.stand_w_capacity %></td>  
+  </tr>
+  <tr scope="row">
+    <td>Pitch Condition</td>
+    <td><%= @club.pitch %></td>   
+  </tr>
+  <tr scope="row">
+    <td>Hospitality</td>
+    <td><%= @club.hospitality %></td> 
+  </tr>
+  <tr scope="row">
+    <td>Facilities</td>
+    <td><%= @club.facilities %></td> 
+  </tr>
+  </table>

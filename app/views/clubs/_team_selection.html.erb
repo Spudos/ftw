@@ -1,4 +1,4 @@
-<h3>Team Stats and Selection <%= @club.name %></h3>
+<h3 class="text-center">Team Stats and Selection <%= @club.name %></h3>
 <div id="form-container">
   <%= form_tag selections_path(club: params[:id]), method: :post do %>
     <table class="table table-hover">

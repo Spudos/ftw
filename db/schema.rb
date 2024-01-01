@@ -10,12 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_31_154057) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_01_222151) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ground_name"
+    t.string "stand_n_name"
+    t.integer "stand_n_condition"
+    t.integer "stand_n_capacity"
+    t.string "stand_s_name"
+    t.integer "stand_s_condition"
+    t.integer "stand_s_capacity"
+    t.string "stand_e_name"
+    t.integer "stand_e_condition"
+    t.integer "stand_e_capacity"
+    t.string "stand_w_name"
+    t.integer "stand_w_condition"
+    t.integer "stand_w_capacity"
+    t.string "pitch"
+    t.integer "hospitality"
+    t.integer "facilities"
+    t.integer "staff_fitness"
+    t.integer "staff_gkp"
+    t.integer "staff_dfc"
+    t.integer "staff_mid"
+    t.integer "staff_att"
+    t.integer "staff_scouts"
+    t.string "color_primary"
+    t.string "color_secondary"
   end
 
   create_table "fixtures", force: :cascade do |t|

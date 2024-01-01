@@ -1,7 +1,25 @@
 <% club = Club.find_by(abbreviation: params[:id]) %>
+
 <br>
-<h2><%= @club.name %></h2>
-<br>
+<div class="container align-items-start text-center">
+  <div class="row">
+    <div class="col-md-12">
+      <h2><%= @club.name %></h2>
+      <h5>Primary Club Color: <%= @club.color_primary %></h5>             
+      <h5>Secondary Club Color: <%= @club.color_secondary %></h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= render "stadium" %>
+    </div>
+    <div class="col-md-6">
+      <%= render "staff" %>
+    </div>
+  </div>
+</div>
+
+
 <%= render "normal_skills" %>
 
 <%= render "hidden_skills" %>
