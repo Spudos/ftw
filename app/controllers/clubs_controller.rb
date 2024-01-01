@@ -1,5 +1,5 @@
 class ClubsController < ApplicationController
-  before_action :set_club, only: %i[ show edit update destroy ]
+  before_action :set_club, only: [:show, :edit, :update, :destroy]
 
   # GET /clubs or /clubs.json
   def index
@@ -39,9 +39,10 @@ class ClubsController < ApplicationController
 
   # PATCH/PUT /clubs/1 or /clubs/1.json
   def update
+    @club = Club.find_by(abbreviation: params[:club][:abbreviation])
     respond_to do |format|
       if @club.update(club_params)
-        format.html { redirect_to club_url(@club), notice: "Club was successfully updated." }
+        format.html { redirect_to clubs_url, notice: "Club was successfully updated." }
         format.json { render :show, status: :ok, location: @club }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,6 +66,7 @@ class ClubsController < ApplicationController
     def set_club
       @club = Club.find_by(abbreviation: params[:id])
     end
+    
 
     # Only allow a list of trusted parameters through.
     def club_params
