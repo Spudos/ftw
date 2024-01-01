@@ -1,4 +1,9 @@
 <h3>Fixtures</h3>
+<form action="/matches/match_multiple" method="post">
+  <input type="hidden" name="selected_week" value="<%= params[:week_number] %>">
+  <button type="submit" class="btn btn-danger">Run All Games</button>
+</form>
+<br>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -60,9 +65,3 @@
   </tbody>
 </table>
 <br>
-
-<form action="/matches/match_multiple" method="post">
-  <input type="hidden" name="selected_week" value="<%= params[:week_number] %>">
-  <button type="submit" class="btn btn-danger">Run All Games</button>
-</form>
-

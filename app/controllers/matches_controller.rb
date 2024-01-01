@@ -51,7 +51,7 @@ class MatchesController < ApplicationController
       initialize_end_of_game
     end
 
-    redirect_to leagues_path
+    redirect_to fixtures_path
   end
 
   private

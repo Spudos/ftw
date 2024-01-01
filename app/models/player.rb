@@ -79,3 +79,32 @@ class Player < ApplicationRecord
     random_number = rand(-cons..cons)
   end
 end
+
+#------------------------------------------------------------------------------
+# Player
+#
+# Name        SQL Type             Null    Primary Default
+# ----------- -------------------- ------- ------- ----------
+# id          INTEGER              false   true              
+# name        varchar              true    false             
+# age         INTEGER              true    false             
+# nationality varchar              true    false             
+# pos         varchar              true    false             
+# pa          INTEGER              true    false             
+# co          INTEGER              true    false             
+# ta          INTEGER              true    false             
+# ru          INTEGER              true    false             
+# sh          INTEGER              true    false             
+# dr          INTEGER              true    false             
+# df          INTEGER              true    false             
+# of          INTEGER              true    false             
+# fl          INTEGER              true    false             
+# st          INTEGER              true    false             
+# cr          INTEGER              true    false             
+# fit         INTEGER              true    false             
+# created_at  datetime(6)          false   false             
+# updated_at  datetime(6)          false   false             
+# club        varchar              true    false             
+# cons        INTEGER              true    false             
+#
+#------------------------------------------------------------------------------

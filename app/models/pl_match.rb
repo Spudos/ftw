@@ -12,3 +12,17 @@
 class PlMatch < ApplicationRecord
   belongs_to :player
 end
+
+#------------------------------------------------------------------------------
+# PlMatch
+#
+# Name       SQL Type             Null    Primary Default
+# ---------- -------------------- ------- ------- ----------
+# id         INTEGER              false   true              
+# match_id   INTEGER              true    false             
+# player_id  INTEGER              true    false             
+# match_perf INTEGER              true    false             
+# created_at datetime(6)          false   false             
+# updated_at datetime(6)          false   false             
+#
+#------------------------------------------------------------------------------

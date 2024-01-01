@@ -11,3 +11,16 @@
 class Club < ApplicationRecord
   
 end
+
+#------------------------------------------------------------------------------
+# Club
+#
+# Name         SQL Type             Null    Primary Default
+# ------------ -------------------- ------- ------- ----------
+# id           INTEGER              false   true              
+# name         varchar              true    false             
+# abbreviation varchar              true    false             
+# created_at   datetime(6)          false   false             
+# updated_at   datetime(6)          false   false             
+#
+#------------------------------------------------------------------------------

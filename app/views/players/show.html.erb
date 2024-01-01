@@ -1,3 +1,4 @@
+<p style="color: green"><%= notice %></p>
 <br>
 <br>
 <form action="/players/sort_players" method="get">
@@ -37,6 +38,7 @@
       <th scope="col">Gls</th>
       <th scope="col">Ast</th>
       <th scope="col">Perf</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -53,6 +55,7 @@
         <td><%= player[:goal_count] %></td>
         <td><%= player[:assist_count] %></td>
         <td><%= player[:average_match_performance] %></td>
+        <td><%= link_to "Edit", edit_player_path(player[:id]) %></td>
       </tr>
     <% end %>
   </tbody>

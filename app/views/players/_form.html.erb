@@ -1,0 +1,97 @@
+<%= form_with(model: player) do |form| %>
+  <% if player.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(player.errors.count, "error") %> prohibited this player from being saved:</h2>
+
+      <ul>
+        <% player.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<br>
+<br>
+<table class="table table-hover">
+    <tr>
+      <th scope="col">Attribute</th>
+      <th scope="col">Value</th>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :name, style: "display: block" %></td>
+      <td><%= form.text_field :name %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :age, style: "display: block" %></td>
+      <td><%= form.text_field :age %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :nationality, style: "display: block" %></td>
+      <td><%= form.text_field :nationality %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :pos, style: "display: block" %></td>
+      <td><%= form.text_field :pos %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :pa, style: "display: block" %></td>
+      <td><%= form.text_field :pa %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :co, style: "display: block" %></td>
+      <td><%= form.text_field :co %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :ta, style: "display: block" %></td>
+      <td><%= form.text_field :ta %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :ru, style: "display: block" %></td>
+      <td><%= form.text_field :ru %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :sh, style: "display: block" %></td>
+      <td><%= form.text_field :sh %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :dr, style: "display: block" %></td>
+      <td><%= form.text_field :dr %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :df, style: "display: block" %></td>
+      <td><%= form.text_field :df %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :of, style: "display: block" %></td>
+      <td><%= form.text_field :of %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :fl, style: "display: block" %></td>
+      <td><%= form.text_field :fl %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :st, style: "display: block" %></td>
+      <td><%= form.text_field :st %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :cr, style: "display: block" %></td>
+      <td><%= form.text_field :cr %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :fit, style: "display: block" %></td>
+      <td><%= form.text_field :fit %></td>
+    </tr>        
+    <tr scope="row">
+      <td><%= form.label :club, style: "display: block" %></td>
+      <td><%= form.text_field :club %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :cons, style: "display: block" %></td>
+      <td><%= form.text_field :cons %></td>
+    </tr>
+  </tbody>
+</table>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

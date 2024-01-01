@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   include PlayersHelper
-
+  before_action :set_player
   def index
     @clubs = Player.distinct.pluck(:club)
     @players = Player.all
@@ -21,12 +21,13 @@ class PlayersController < ApplicationController
     direction = params[:sort_direction]
     criteria = params[:sort_criteria]
 
-    @players = Player.all
+    #@players = Player.all
+    @players = Player.where(nationality: 'England')
 
     @sort1 = player_view.sort_by! { |player| player[column.to_sym] }
     @sort2 = direction == 'desc' ? @sort1.reverse! : @sort1
 
-    if criteria.nil?
+    if criteria == ""
       @sorted = @sort2
     else
       @sorted = @sort2.select do |record|
@@ -39,13 +40,64 @@ class PlayersController < ApplicationController
     end
   end
 
+  def new
+    @player = Player.new
+  end
+
+  def edit
+  end
+
+  def create
+    @player = Player.new(player_params)
+
+    respond_to do |format|
+      if @player.save
+        format.html { redirect_to players_url(@player), notice: "Player was successfully created." }
+        format.json { render :show, status: :created, location: @player }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @player.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @player.update(player_params)
+        format.html { redirect_to players_url, notice: "Player was successfully updated." }
+        format.json { render :show, status: :ok, location: @player }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @player.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @player.destroy
+
+    respond_to do |format|
+      format.html { redirect_to players_url, notice: "Player was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
   private
+
+  def set_player
+    @player = Player.find_by(id: params[:id])
+  end
+
+  def player_params
+    params.require(:player).permit(:name, :age, :nationality, :pos, :pa, :co, :ta, :ru, :dr, :df, :of, :fl, :st, :cr, :cons, :fit, :club)
+  end
 
   def player_view
     players_data = []
 
     @players.each do |player|
       player_data = {
+      id: player.id,
       name: player.name,
       age: player.age,
       club: player.club,
