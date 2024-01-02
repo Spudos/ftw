@@ -60,23 +60,22 @@ class TurnsController < ApplicationController
   def process_turn
     stadium_upgrades(1)
     increment_upgrades
-    perform_completed_upgrades
   end
 
   def stadium_upgrades(week)
     turns = Turn.where("var1 LIKE ?", 'stand%').where(week: week)
-  hash = {}
+    hash = {}
 
-  turns.each do |turn|
-    hash[turn.id] = {
-      action_id: turn.week.to_s + turn.club + turn.id.to_s,
-      week: turn.week,
-      club: turn.club,
-      var1: turn.var1,
-      var2: turn.var2,
-      var3: turn.var3,
-      Actioned: turn.date_completed
-    }
+    turns.each do |turn|
+      hash[turn.id] = {
+        action_id: turn.week.to_s + turn.club + turn.id.to_s,
+        week: turn.week,
+        club: turn.club,
+        var1: turn.var1,
+        var2: turn.var2,
+        var3: turn.var3,
+        Actioned: turn.date_completed
+      }
   end
 
     hash.each do |key, value|
@@ -109,16 +108,23 @@ class TurnsController < ApplicationController
   def increment_upgrades
     to_complete = Upgrades.all
 
-    for item in to_complete do
-      item.var3 +=1
+    to_complete.each do |item|
+      item.var3 += 1
       item.save
-    end
 
-    # post a message to club messages if the upgrade is not yet complete ie < 6
+      if item.var3 == 6
+        perform_completed_upgrades(item)
+      end
+    end
   end
 
-  def perform_completed_upgrades
-    # if upgrade to complete == 6 then change the club actual value and post to club message
+  def perform_completed_upgrades(item)
+    club_full = Club.find_by(abbreviation: item.club)
+    
+    new_cap = club_full[item.var1] + item.var2.to_i
+    club_full.update(item.var1 => new_cap)
+
+    Messages.create(action_id: item.action_id, week: item.week, club: item.club, var1: item.var1, var2: 'complete')
   end
 
   private
