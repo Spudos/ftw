@@ -69,6 +69,7 @@ class TurnsController < ApplicationController
 
   turns.each do |turn|
     hash[turn.id] = {
+      action_id: turn.week.to_s + turn.club + turn.id.to_s,
       week: turn.week,
       club: turn.club,
       var1: turn.var1,
@@ -77,35 +78,39 @@ class TurnsController < ApplicationController
       Actioned: turn.date_completed
     }
   end
-
-    bank_adjustment(1, 'alv', 'stand upgrade', 500000)
-    add_to_upgrades(1, 'alv', 'north', 2000)
+    bank_adjustment('1avl1', 1, 'alv', 'stand upgrade', 500000)
+    add_to_upgrades('1avl1', 1, 'alv', 'stand_n_capacity', 2000)
   end
 
-  def bank_adjustment(week, club, reason, amount)
+  def bank_adjustment(action_id, week, club, reason, amount)
     club_full = Club.find_by(abbreviation: club)
 
     new_bal = club_full.bank_bal.to_i - amount
     club_full.update(bank_bal: new_bal)
 
-    Messages.create(week:, club:, var1: reason, var2: amount)
+    existing_message = Messages.find_by(action_id: action_id)
+
+    if existing_message.nil?
+      Messages.create(action_id:, week:, club:, var1: reason, var2: amount)
+    end
   end
 
-  def add_to_upgrades(week, club, stand, seats)
-    # add the upgrade to the upgrades table with a to complete of 0
-    @upgrade = Upgrades.new
-    
-    if @upgrade.save
-      # Handle successful save
-      redirect_to @upgrade, notice: 'Upgrade was successfully created.'
-    else
-      # Handle save failure
-      render :new
+  def add_to_upgrades(action_id, week, club, stand, seats)
+    existing_upgrade = Upgrades.find_by(action_id: action_id)
+
+    if existing_upgrade.nil?
+    Upgrades.create(action_id:, week:, club:, var1: stand, var2: seats, var3: 0)
     end
   end
 
   def increment_upgrades
-    # increment all items by 1
+    to_complete = Upgrades.all
+
+    for item in to_complete do
+      item.var3 +=1
+      item.save
+    end
+
     # post a message to club messages if the upgrade is not yet complete ie < 6
   end
 
