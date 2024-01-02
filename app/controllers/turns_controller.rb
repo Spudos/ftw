@@ -58,7 +58,7 @@ class TurnsController < ApplicationController
   end
 
   def process_turn
-    stadium_upgrades(1)
+    stadium_upgrades(params[:week])
     increment_upgrades
   end
 
@@ -85,14 +85,14 @@ class TurnsController < ApplicationController
   end
 
   def bank_adjustment(action_id, week, club, reason, amount)
-    club_full = Club.find_by(abbreviation: club)
-
-    new_bal = club_full.bank_bal.to_i - amount.to_i
-    club_full.update(bank_bal: new_bal)
-
     existing_message = Messages.find_by(action_id: action_id)
 
     if existing_message.nil?
+      club_full = Club.find_by(abbreviation: club)
+
+      new_bal = club_full.bank_bal.to_i - amount.to_i
+      club_full.update(bank_bal: new_bal)
+
       Messages.create(action_id:, week:, club:, var1: reason, var2: amount)
     end
   end
