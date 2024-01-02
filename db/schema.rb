@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_01_222151) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_02_115648) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -111,6 +111,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_01_222151) do
     t.datetime "updated_at", null: false
     t.string "club"
     t.integer "cons"
+    t.integer "pot_pa"
+    t.integer "pot_co"
+    t.integer "pot_ta"
+    t.integer "pot_ru"
+    t.integer "pot_sh"
+    t.integer "pot_dr"
+    t.integer "pot_df"
+    t.integer "pot_of"
+    t.integer "pot_fl"
+    t.integer "pot_st"
+    t.integer "pot_cr"
   end
 
   create_table "selections", force: :cascade do |t|

@@ -31,6 +31,12 @@
     <td><%= @club.stand_w_capacity %></td>  
   </tr>
   <tr scope="row">
+    <td>Total Capacity</td>
+    <td></td>
+    <td></td>
+    <td><%= @club.stand_n_capacity + @club.stand_s_capacity + @club.stand_e_capacity + @club.stand_w_capacity %></td>  
+  </tr>
+  <tr scope="row">
     <td>Pitch Condition</td>
     <td><%= @club.pitch %></td>   
   </tr>

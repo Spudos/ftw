@@ -46,7 +46,7 @@ class Player < ApplicationRecord
 
   def gkp_skill
     pa + co + ta + sh + of + st
-  end
+  end 
 
   def dfc_skill
     co + ta + ru + df + st + cr
@@ -77,6 +77,86 @@ class Player < ApplicationRecord
   def calc_pl_perf_ran(player)
     cons = player.cons
     random_number = rand(-cons..cons)
+  end
+end
+
+def self.update_pot_for_gkp
+  players = Player.where(pos: 'gkp')
+  players.each do |player|
+    updates = {
+      pot_pa: player.pa + rand(1..10),
+      pot_co: player.co + rand(1..10),
+      pot_ta: player.ta + rand(1..10),
+      pot_ru: player.ru + rand(1..5),
+      pot_sh: player.sh + rand(1..10),
+      pot_dr: player.dr + rand(1..5),
+      pot_df: player.df + rand(1..5),
+      pot_of: player.of + rand(1..10),
+      pot_fl: player.fl + rand(1..5),
+      pot_st: player.st + rand(1..10),
+      pot_cr: player.cr + rand(1..5)
+    }
+    player.update(updates)
+  end
+end
+
+def self.update_pot_for_dfc
+  players = Player.where(pos: 'dfc')
+  players.each do |player|
+    updates = {
+      pot_pa: player.pa + rand(1..5),
+      pot_co: player.co + rand(1..10),
+      pot_ta: player.ta + rand(1..10),
+      pot_ru: player.ru + rand(1..10),
+      pot_sh: player.sh + rand(1..3),
+      pot_dr: player.dr + rand(1..2),
+      pot_df: player.df + rand(1..10),
+      pot_of: player.of + rand(1..5),
+      pot_fl: player.fl + rand(1..2),
+      pot_st: player.st + rand(1..10),
+      pot_cr: player.cr + rand(1..10)
+    }
+    player.update(updates)
+  end
+end
+
+def self.update_pot_for_mid
+  players = Player.where(pos: 'mid')
+  players.each do |player|
+    updates = {
+      pot_pa: player.pa + rand(1..10),
+      pot_co: player.co + rand(1..10),
+      pot_ta: player.ta + rand(1..3),
+      pot_ru: player.ru + rand(1..5),
+      pot_sh: player.sh + rand(1..10),
+      pot_dr: player.dr + rand(1..10),
+      pot_df: player.df + rand(1..3),
+      pot_of: player.of + rand(1..3),
+      pot_fl: player.fl + rand(1..10),
+      pot_st: player.st + rand(1..5),
+      pot_cr: player.cr + rand(1..10)
+    }
+    player.update(updates)
+  end
+end
+
+def self.update_pot_for_att
+  players = Player.where(pos: 'att')
+  players.each do |player|
+    updates = {
+      pot_pa: player.pa + rand(1..5),
+      pot_co: player.co + rand(1..10),
+      pot_ta: player.ta + rand(1..3),
+      pot_ru: player.ru + rand(1..10),
+      pot_sh: player.sh + rand(1..10),
+      pot_dr: player.dr + rand(1..10),
+      pot_df: player.df + rand(1..3),
+      pot_of: player.of + rand(1..10),
+      pot_fl: player.fl + rand(1..10),
+      pot_st: player.st + rand(1..5),
+      pot_cr: player.cr + rand(1..5)
+    }
+    player.update(updates)
   end
 end
 
