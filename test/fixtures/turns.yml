@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  week: 1
+  club: MyString
+  var1: MyString
+  var2: MyString
+  var3: MyString
+
+two:
+  week: 1
+  club: MyString
+  var1: MyString
+  var2: MyString
+  var3: MyString

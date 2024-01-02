@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_02_115648) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_02_173209) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_02_115648) do
     t.integer "staff_scouts"
     t.string "color_primary"
     t.string "color_secondary"
+    t.integer "bank_bal"
   end
 
   create_table "fixtures", force: :cascade do |t|
@@ -69,6 +70,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_02_115648) do
     t.integer "hm_goal"
     t.integer "aw_goal"
     t.integer "week_number"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "week"
+    t.string "club"
+    t.string "var1"
+    t.string "var2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pl_matches", force: :cascade do |t|
@@ -127,6 +137,26 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_02_115648) do
   create_table "selections", force: :cascade do |t|
     t.string "club"
     t.integer "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "turns", force: :cascade do |t|
+    t.integer "week"
+    t.string "club"
+    t.string "var1"
+    t.string "var2"
+    t.string "var3"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "date_completed"
+  end
+
+  create_table "upgrades", force: :cascade do |t|
+    t.integer "week"
+    t.string "club"
+    t.string "var1"
+    t.string "var2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
