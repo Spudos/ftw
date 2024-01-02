@@ -78,14 +78,17 @@ class TurnsController < ApplicationController
       Actioned: turn.date_completed
     }
   end
-    bank_adjustment('1avl1', 1, 'alv', 'stand upgrade', 500000)
-    add_to_upgrades('1avl1', 1, 'alv', 'stand_n_capacity', 2000)
+
+    hash.each do |key, value|
+      bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], value[:var3])
+      add_to_upgrades(value[:action_id], value[:week], value[:club], value[:var1], value[:var2])
+    end
   end
 
   def bank_adjustment(action_id, week, club, reason, amount)
     club_full = Club.find_by(abbreviation: club)
 
-    new_bal = club_full.bank_bal.to_i - amount
+    new_bal = club_full.bank_bal.to_i - amount.to_i
     club_full.update(bank_bal: new_bal)
 
     existing_message = Messages.find_by(action_id: action_id)
