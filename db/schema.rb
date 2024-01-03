@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_02_201515) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_03_154216) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -151,6 +151,36 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_02_201515) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date_completed"
+  end
+
+  create_table "turnsheets", force: :cascade do |t|
+    t.integer "week"
+    t.string "club"
+    t.string "manager"
+    t.string "email"
+    t.string "player_1"
+    t.string "player_2"
+    t.string "player_3"
+    t.string "player_4"
+    t.string "player_5"
+    t.string "player_6"
+    t.string "player_7"
+    t.string "player_8"
+    t.string "player_9"
+    t.string "player_10"
+    t.string "player_11"
+    t.string "stad_upg"
+    t.string "coach_upg"
+    t.string "train_gkp"
+    t.string "train_gkp_skill"
+    t.string "train_dfc"
+    t.string "train_dfc_skill"
+    t.string "train_mid"
+    t.string "train_mid_skill"
+    t.string "train_att"
+    t.string "train_att_skill"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "upgrades", force: :cascade do |t|

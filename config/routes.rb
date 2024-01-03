@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :turnsheets
   resources :turns
   resources :selections
   resources :clubs

@@ -1,0 +1,131 @@
+<%= form_with(model: turnsheet) do |form| %>
+  <% if turnsheet.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(turnsheet.errors.count, "error") %> prohibited this turnsheet from being saved:</h2>
+
+      <ul>
+      <% turnsheet.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div id="header_info">
+  <div>
+    <%= form.label :week, style: "display: inline-block" %>
+    <%= form.number_field :week %>
+  </div>
+
+  <div>
+    <%= form.label :club, style: "display: inline-block" %>
+    <%= form.text_field :club %>
+  </div>
+
+  <div>
+    <%= form.label :manager, style: "display: inline-block" %>
+    <%= form.text_field :manager %>
+  </div>
+
+  <div>
+    <%= form.label :email, style: "display: inline-block" %>
+    <%= form.text_field :email %>
+  </div>
+</div>
+
+<div id="main_content" style="display: flex;">
+  <div id="team_selection" style="flex: 1;">
+    <div>
+      <%= form.label :player_1, style: "display: inline-block" %>
+      <%= form.text_field :player_1 %>
+    </div>
+
+    <div>
+      <%= form.label :player_2, style: "display: inline-block" %>
+      <%= form.text_field :player_2 %>
+    </div>
+
+      <div>
+      <%= form.label :player_3, style: "display: inline-block" %>
+      <%= form.text_field :player_3 %>
+    </div>
+
+      <div>
+      <%= form.label :player_4, style: "display: inline-block" %>
+      <%= form.text_field :player_4 %>
+    </div>
+
+      <div>
+      <%= form.label :player_5, style: "display: inline-block" %>
+      <%= form.text_field :player_5 %>
+    </div>
+
+      <div>
+      <%= form.label :player_6, style: "display: inline-block" %>
+      <%= form.text_field :player_6 %>
+    </div>
+
+      <div>
+      <%= form.label :player_7, style: "display: inline-block" %>
+      <%= form.text_field :player_7 %>
+    </div>
+
+      <div>
+      <%= form.label :player_8, style: "display: inline-block" %>
+      <%= form.text_field :player_8 %>
+    </div>
+
+      <div>
+      <%= form.label :player_9, style: "display: inline-block" %>
+      <%= form.text_field :player_9 %>
+    </div>
+
+      <div>
+      <%= form.label :player_10, style: "display: inline-block" %>
+      <%= form.text_field :player_10 %>
+    </div>
+
+    <div>
+      <%= form.label :player_11, style: "display: inline-block" %>
+      <%= form.text_field :player_11 %>
+    </div>
+  </div>
+  <div id="coach_and_upg"  style="flex: 1;">
+    <div>
+      <%= form.label :Goalkeeper_Training, style: "display: inline-block" %>
+      <%= form.text_field :player_11 %>
+      <%= form.text_field :player_11 %>
+    </div>
+
+      <div>
+      <%= form.label :player_11, style: "display: inline-block" %>
+      <%= form.text_field :player_11 %>
+    </div>
+
+      <div>
+      <%= form.label :player_11, style: "display: inline-block" %>
+      <%= form.text_field :player_11 %>
+    </div>
+
+      <div>
+      <%= form.label :player_11, style: "display: inline-block" %>
+      <%= form.text_field :player_11 %>
+    </div>
+
+      <div>
+      <%= form.label :player_11, style: "display: inline-block" %>
+      <%= form.text_field :player_11 %>
+    </div>
+
+      <div>
+      <%= form.label :player_11, style: "display: inline-block" %>
+      <%= form.text_field :player_11 %>
+    </div>
+  </div>
+</div>
+
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
