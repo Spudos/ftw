@@ -1,0 +1,29 @@
+<div>
+  <h3 class="text-center">New Messages</h3>
+  <div id="messages">
+    <% if @message.present? %>
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <th scope="col">Week</th>
+            <th scope="col">Message</th>
+          </tr>
+          <% highest_week = @message.max_by { |message| message.week.to_i }.week %>
+          <% @message.each do |message| %>
+            <% if message.week == highest_week %>
+              <tr scope="row">
+                <td><%= message.week %></td>
+                <td><%= message.var1 %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No messages found.</p>
+    <% end %>
+    <br>
+    <br>
+    <br>
+  </div>
+</div>

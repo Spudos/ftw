@@ -10,27 +10,30 @@
       <br>
       <h5>The clubs bank balance is currently: £<%= @club.bank_bal %></h5>
       <br>
+
     </div>
   </div>
 
+<div class="text-left">
+    <%= render "messages_new" %>
+    <div class="row text-left">
+      <div class="col-md-6">
+        <%= render "stadium" %>
+      </div>
+      <div class="col-md-6">
+        <%= render "staff" %>
+      </div>
+    </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <%= render "stadium" %>
-    </div>
-    <div class="col-md-6">
-      <%= render "staff" %>
-    </div>
+    <%= render "normal_skills" %>
+
+    <%= render "hidden_skills" %>
+
+    <%= render "team_selection" %>
+    <br>
+    <br>
+    <%= render "results" %>
+
+    <%= render "messages" %>
   </div>
-
-  <%= render "normal_skills" %>
-
-  <%= render "hidden_skills" %>
-
-  <%= render "team_selection" %>
-  <br>
-  <br>
-  <%= render "results" %>
-
-  <%= render "messages" %>
 </div>
