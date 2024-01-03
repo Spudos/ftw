@@ -1,2 +1,0 @@
-class Turn < ApplicationRecord
-end

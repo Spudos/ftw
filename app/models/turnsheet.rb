@@ -1,2 +1,0 @@
-class Turnsheet < ApplicationRecord
-end
