@@ -1,0 +1,24 @@
+<br>
+<div>
+  <h3 class="text-center">Messages</h3>
+  <div id="messages">
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <th scope="col">Week</th>
+          <th scope="col">Message</th>
+        </tr>
+        <tr scope="row">
+          <% @message.each do |message| %>
+              <tr scope="row">
+                <td><%= message.week %></td>
+                <td><%= message.var1 %></td>
+              </tr>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+</div>

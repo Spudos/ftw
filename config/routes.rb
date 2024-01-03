@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :clubs, param: :abbreviation
   resources :leagues
   resources :admin
+  resources :messages
   post '/turns/process_turn', to: 'turns#process_turn'
   post '/players/pot_update', to: 'players#pot_update'
   post '/matches/match', to: 'matches#match'

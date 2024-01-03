@@ -9,6 +9,8 @@ class ClubsController < ApplicationController
     @selection = Selection.where(club: params[:id])
     @players = Player.where(club: params[:id])
     @club_matches = Matches.where('hm_team = ? OR aw_team = ?', params[:id], params[:id])
+    @message = Messages.where(club: params[:id])
+
   end
 
   def new
