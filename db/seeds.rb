@@ -1,0 +1,1 @@
+load Rails.root.join('db', 'seeds', 'player_seeds.rb')

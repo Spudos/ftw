@@ -1,0 +1,197 @@
+<%= form_with(model: turnsheet) do |form| %>
+  <% if turnsheet.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(turnsheet.errors.count, "error") %> prohibited this turnsheet from being saved:</h2>
+      <ul>
+      <% turnsheet.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 align-top d-flex align-items-center justify-content-center">        
+        <div>
+          <%= form.label :week, style: "display: inline-block" %>
+          <%= form.number_field :week %>
+        </div>
+        <div>
+          <%= form.label :club, style: "display: inline-block" %>
+          <%= form.text_field :club %>
+        </div>
+        <div>
+          <%= form.label :manager, style: "display: inline-block" %>
+          <%= form.text_field :manager %>
+        </div>
+        <div>
+          <%= form.label :email, style: "display: inline-block" %>
+          <%= form.text_field :email %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
+          <table class="table table-hover">
+            <th><h4>Stadium Upgrades</h4></th>
+            <tr>
+              <th scope="col">Seating</th>
+              <th scope="col">Stand</th>
+              <th scope="col">Amount</th>
+            <tr scope="row">
+              <td>Stand</td>
+              <td>
+                <%= form.label :stand, style: "display: none" %>
+                <%= form.text_field :stand %>
+              </td>
+              <td>
+                <%= form.label :seats, style: "display: none" %>
+                <%= form.text_field :seats_skill %>
+                </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 align-top"> 
+          <h4>Team Selection</h4>
+            <table class="table table-hover">
+              <tr>
+                <th scope="col">Shirt</th>
+                <th scope="col">Player</th>
+              <tr scope="row">
+                <td>Player 1</td>
+                <td>
+                  <%= form.label :plyer_1, style: "display: none" %>
+                  <%= form.text_field :player_1 %>
+                </td>
+              </tr>
+            <tr scope="row">
+              <td>Player 2</td>
+              <td>
+                <%= form.label :player_2, style: "display: none" %>
+                <%= form.text_field :player_2 %>
+              </td>
+            </tr>
+            <tr scope="row">
+              <td>Player 3</td>
+              <td>
+                <%= form.label :player_3, style: "display: none" %>
+                <%= form.text_field :player_3 %>
+              </td>
+            </tr>
+            <tr scope="row">
+              <td>Player 4</td>
+              <td>
+                <%= form.label :player_4, style: "display: none" %>
+                <%= form.text_field :player_4 %>
+              </td>
+            </tr>
+            <td>Player 5</td>
+              <td>
+                <%= form.label :player_5, style: "display: none" %>
+                <%= form.text_field :player_5 %>
+              </td>
+            </tr>
+            <td>Player 6</td>
+              <td>
+                <%= form.label :player_6, style: "display: none" %>
+                <%= form.text_field :player_6 %>
+              </td>
+            </tr>
+            <td>Player 7</td>
+              <td>
+                <%= form.label :player_7, style: "display: none" %>
+                <%= form.text_field :player_7 %>
+              </td>
+            </tr>
+            <td>Player 8</td>
+              <td>
+                <%= form.label :player_8, style: "display: none" %>
+                <%= form.text_field :player_8 %>
+              </td>
+            </tr>
+            <td>Player 9</td>
+              <td>
+                <%= form.label :player_9, style: "display: none" %>
+                <%= form.text_field :player_9 %>
+              </td>
+            </tr>
+            <td>Player 10</td>
+              <td>
+                <%= form.label :player_10, style: "display: none" %>
+                <%= form.text_field :player_10 %>
+              </td>
+            </tr>
+            <td>Player 11</td>
+              <td>
+                <%= form.label :player_11, style: "display: none" %>
+                <%= form.text_field :player_11 %>
+              </td>
+            </tr>
+          </table>
+      </div>
+
+      <div class="col-md-6 align-top"> 
+        <h4>Player Training</h4>
+        <table class="table table-hover">
+          <tr>
+            <th scope="col">Position</th>
+            <th scope="col">Player</th>
+            <th scope="col">skill</th>
+          </tr>
+          <tr scope="row">
+            <td>Goalkeeper</td>
+            <td>
+              <%= form.label :gkp_tr, style: "display: none" %>
+              <%= form.text_field :gkp_tr %>
+            </td>
+            <td>
+              <%= form.label :gkp_tr, style: "display: none" %>
+              <%= form.text_field :gkp_tr_skill %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td>Defender</td>
+            <td>
+              <%= form.label :dfc_tr, style: "display: none" %>
+              <%= form.text_field :dfc_tr %>
+            </td>
+            <td>
+              <%= form.label :dfc_tr_skill, style: "display: none" %>
+              <%= form.text_field :dfc_tr_skill %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td>Midfield</td>
+            <td>
+              <%= form.label :mid_tr, style: "display: none" %>
+              <%= form.text_field :mid_tr %>
+            </td>
+            <td>
+              <%= form.label :mid_tr_skill, style: "display: none" %>
+              <%= form.text_field :mid_tr_skill %>
+              </td>
+          </tr>
+          <tr scope="row">
+            <td>Attack</td>
+            <td>
+              <%= form.label :att_tr, style: "display: none" %>
+              <%= form.text_field :att_tr %>
+            </td>
+            <td>
+              <%= form.label :att_tr_skill, style: "display: none" %>
+              <%= form.text_field :att_tr_skill %>
+            </td>
+          </tr>
+        </table>
+      </div>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

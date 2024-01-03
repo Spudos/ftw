@@ -1,0 +1,25 @@
+<p style="color: green"><%= notice %></p>
+<br>
+<br>
+<form action="/players/sort_players" method="get">
+  <label for="sort_column">Sort by:</label>
+  <select id="sort_column" name="sort_column">
+    <option value="name">Name</option>
+    <option value="age">Age</option>
+    <option value="club">Club</option>
+    <option value="nationality">Nat</option>
+    <option value="position">Pos</option>
+    <option value="total_skill">TS</option>
+    <option value="match_performance_count">Played</option>
+    <option value="goal_count">Goal</option>
+    <option value="assist_count">Assist</option>
+    <option value="average_match_performance">Perf</option>
+  </select>
+  <label for="sort_direction">Sort by:</label>
+  <select id="sort_direction" name="sort_direction">
+    <option value="asc">Ascending</option>
+    <option value="desc">Descending</option>
+  </select>
+  <input type="text" id="sort_criteria" name="sort_criteria">
+  <button type="submit" class="btn btn-primary btn-sm">Sort</button>
+</form>

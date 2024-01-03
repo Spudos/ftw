@@ -1,0 +1,12 @@
+<div id="<%= dom_id turn %>">
+  <tr scope="row">
+    <td><%= turn.week %></td>
+    <td><%= turn.club %></td>
+    <td><%= turn.var1 %></td>
+    <td><%= turn.var2 %></td>
+    <td><%= turn.var3 %></td>
+    <td><%= turn.date_completed %></td>
+    <td><%= link_to "Show", turn_path(turn.id) %></td>
+    <td><%= link_to "Edit", edit_turn_path(turn.id) %></td>
+  </tr>
+</div>

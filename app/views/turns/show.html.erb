@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @turn %>
+
+<div>
+  <%= link_to "Edit this action", edit_turn_path(@turn) %> |
+  <%= link_to "Back to actions", turns_path %>
+
+  <%= button_to "Destroy this action", @turn, method: :delete %>
+</div>

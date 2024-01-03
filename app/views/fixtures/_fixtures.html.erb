@@ -1,0 +1,67 @@
+<h3>Fixtures</h3>
+<form action="/matches/match_multiple" method="post">
+  <input type="hidden" name="selected_week" value="<%= params[:week_number] %>">
+  <button type="submit" class="btn btn-danger">Run All Games</button>
+</form>
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Week</th>
+      <th scope="col">HM Abbr</th>
+      <th scope="col">Home</th>
+      <th scope="col">AW Abbr</th>
+      <th scope="col">Away</th>
+      <th scope="col">Comp</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @fixtures.each do |fixture| %>
+      <% match_exists = Matches.exists?(match_id: fixture.match_id) %>
+      <% home_selection_exists = Selection.exists?(club: fixture.home) %>
+      <% away_selection_exists = Selection.exists?(club: fixture.away) %>
+      <% if fixture.week_number.to_s == params[:week_number] %>
+        <tr scope="row">
+          <td><%= fixture.match_id %></td>
+          <td><%= fixture.week_number %></td>
+          <td><%= fixture.home %></td>
+          <td>
+            <% if home_selection_exists %>
+              <span id="exists"><%= Club.find_by(abbreviation: fixture.home)&.name %></span>
+              <%= link_to 'Show', club_path(fixture.home) %>
+            <% else %>
+              <span id="not_exists"><%= Club.find_by(abbreviation: fixture.home)&.name %></span>
+              <%= link_to 'Show', club_path(fixture.home) %>
+            <% end %>
+          </td>
+          <td><%= fixture.away %></td>
+          <td>
+            <% if away_selection_exists %>
+              <span id="exists"><%= Club.find_by(abbreviation: fixture.away)&.name %></span>
+              <%= link_to 'Show', club_path(fixture.away) %>
+            <% else %>
+              <span id="not_exists"><%= Club.find_by(abbreviation: fixture.away)&.name %></span>
+              <%= link_to 'Show', club_path(fixture.away) %>
+            <% end %>
+          </td>
+          <td><%= fixture.comp %></td>
+          <td>
+            <form action="/matches/match" method="post">
+              <input type="hidden" name="match_id" value="<%= fixture.match_id %>">
+              <input type="hidden" name="club_hm" value="<%= fixture.home %>">
+              <input type="hidden" name="club_aw" value="<%= fixture.away %>">
+              <button type="submit" class="btn btn-primary btn-sm" <%= 'disabled' if match_exists %>>Run Game</button>
+            </form>
+          </td>
+          <td>
+            <%= link_to 'Show Result', show_match_path(fixture.match_id) %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<br>

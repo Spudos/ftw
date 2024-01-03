@@ -1,0 +1,18 @@
+<br>
+<br>
+<form action="/fixtures" method="get">
+  <label for="week_number">Select Week Number:</label>
+  <select name="week_number" id="week_number">
+    <% @fixtures.map(&:week_number).uniq.each do |week_number| %>
+      <option value="<%= week_number %>">Week <%= week_number %></option>
+    <% end %>
+  </select>
+  <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+</form>
+<br>
+<br>
+<h3>Week <%= params[:week_number]%></h3>
+
+<%= render 'fixtures/results'%>
+
+<%= render 'fixtures/fixtures'%>

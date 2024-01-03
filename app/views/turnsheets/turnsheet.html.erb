@@ -1,0 +1,32 @@
+
+    <div id="content">
+      <h2>Your Feedback</h2>
+      <form id="feedbackForm" onsubmit="return validateForm()">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name">
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email">
+        </div>
+        <p>What would you like to contact us about</p>
+        <div class="radio-group">
+          <input type="radio" id="game" name="feedbackType" value="game">
+          <label for="game">Game</label>
+          <input type="radio" id="quiz" name="feedbackType" value="quiz">
+          <label for="quiz">Quiz</label>
+          <input type="radio" id="general" name="feedbackType" value="general">
+          <label for="general">General</label>
+        </div>
+        <div>
+          <label for="comments">Comments:</label>
+          <textarea id="comments" name="comments" rows="4" cols="40"></textarea>
+        </div>
+        <div>
+          <input id="ffsubmit" type="submit" value="Submit">
+        </div>
+      </form>
+    </div>
+
+  <script src="assets/js/feedback.js"></script>

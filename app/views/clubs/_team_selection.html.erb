@@ -1,0 +1,40 @@
+<h3 class="text-center">Team Stats and Selection <%= @club.name %></h3>
+<div id="form-container">
+  <%= form_tag selections_path(club: params[:id]), method: :post do %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Position</th>
+          <th scope="col">Age</th>
+          <th scope="col">Total Skill</th>
+          <th scope="col">Fitness</th>
+          <th scope="col">Played</th>
+          <th scope="col">Goals</th>
+          <th scope="col">Assists</th>
+          <th scope="col">Av. Perf</th>
+          <th scope="col">Currently Selected</th>
+          <th scope="col">Select</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Player.where(club: params[:id]).order(Arel.sql("CASE pos WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
+          <tr scope="row">
+            <td><%= player.name %></td>
+            <td><%= player.pos %></td>
+            <td><%= player.age %></td>
+            <td><%= player.total_skill %></td>
+            <td><%= player.fit %></td>
+            <td><%= PlMatch.where(player_id: player.id).count(:match_perf) %></td>
+            <td><%= PlStat.where(player_id: player.id, goal: true).count %></td>
+            <td><%= PlStat.where(player_id: player.id, assist: true).count %></td>
+            <td><%= PlMatch.where(player_id: player.id).average(:match_perf).to_i %></td>
+            <td><strong><%= Selection.exists?(player_id: player.id) ? 'Yes' : 'No' %></strong></td>
+            <td><%= check_box_tag "player_ids[]", player.id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= submit_tag "Save Selection" %>
+  <% end %>
+</div>
