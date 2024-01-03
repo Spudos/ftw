@@ -1,6 +1,6 @@
-module TurnsStadiumHelper
-  def stadium_upgrades(week)
-    turns = Turn.where("var1 LIKE ?", 'stand%').where(week: week)
+module TurnsCoachesHelper
+  def coach_upgrades(week)
+    turns = Turn.where("var1 LIKE ?", 'coach%').where(week: week)
     hash = {}
 
     turns.each do |turn|
@@ -17,11 +17,11 @@ module TurnsStadiumHelper
 
     hash.each do |key, value|
       bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], value[:var2], value[:var3])
-      add_to_stadium_upgrades(value[:action_id], value[:week], value[:club], value[:var1], value[:var2])
+      add_to_coach_upgrades(value[:action_id], value[:week], value[:club], value[:var1], value[:var2])
     end
   end
 
-  def add_to_stadium_upgrades(action_id, week, club, stand, seats)
+  def add_to_coach_upgrades(action_id, week, club, stand, seats)
     existing_upgrade = Upgrades.find_by(action_id:)
 
     if existing_upgrade.nil?
@@ -29,4 +29,3 @@ module TurnsStadiumHelper
     end
   end
 end
-

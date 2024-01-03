@@ -87,6 +87,7 @@ class PlayersController < ApplicationController
   end
 
   def player_params
-    params.require(:player).permit(:name, :age, :nationality, :pos, :pa, :co, :ta, :ru, :dr, :df, :of, :fl, :st, :cr, :cons, :fit, :club, :pot_pa, :pot_co, :pot_ta, :pot_ru, :pot_dr, :pot_df, :pot_of, :pot_fl, :pot_st, :pot_cr)
+    params.require(:player).permit(:name, :age, :nationality, :pos, :pa, :pot_pa, :co, :pot_co, :ta, :pot_ta, :ru, :pot_ru, :sh, :pot_sh, :dr, :pot_dr, :df, :pot_df, :of, :pot_of, :fl, :pot_fl, :st, :pot_st, :cr, :pot_cr, :fit, :club, :cons)
   end
+  
 end
