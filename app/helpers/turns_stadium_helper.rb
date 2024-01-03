@@ -22,12 +22,10 @@ module TurnsStadiumHelper
   end
 
   def add_to_upgrades(action_id, week, club, stand, seats)
-    existing_upgrade = Upgrades.find_by(action_id: action_id)
+    existing_upgrade = Upgrades.find_by(action_id:)
 
     if existing_upgrade.nil?
     Upgrades.create(action_id:, week:, club:, var1: stand, var2: seats, var3: 0)
     end
   end
-
-
 end

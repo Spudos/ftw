@@ -1,6 +1,7 @@
 class TurnsController < ApplicationController
   include TurnsHelper
   include TurnsStadiumHelper
+  include TurnsPlayerHelper
 
   before_action :set_turn, only: %i[ show edit update destroy ]
 
@@ -62,6 +63,7 @@ class TurnsController < ApplicationController
 
   def process_turn
     stadium_upgrades(params[:week])
+    player_upgrades(params[:week])
     increment_upgrades
   end
 
