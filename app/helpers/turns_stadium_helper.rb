@@ -1,5 +1,6 @@
 module TurnsStadiumHelper
   def stadium_upgrades(week)
+    
     turns = Turn.where("var1 LIKE ?", 'stand%').where(week: week)
     hash = {}
 
@@ -25,8 +26,15 @@ module TurnsStadiumHelper
     existing_upgrade = Upgrades.find_by(action_id:)
 
     if existing_upgrade.nil?
-    Upgrades.create(action_id:, week:, club:, var1: stand, var2: seats, var3: 0)
+      
+      upgrade = Upgrades.create(action_id:, week:, club:, var1: stand, var2: seats.to_i, var3: 0)
+      if upgrade.save
+        puts "Upgrade saved successfully!"
+      else
+        puts "Error saving upgrade: #{upgrade.errors.full_messages.join(', ')}"
+      end
     end
   end
+
 end
 

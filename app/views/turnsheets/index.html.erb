@@ -1,7 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Turnsheets</h1>
-
+<br>
+<form action="/turnsheets/process_turnsheet" method="post">
+  <button type="submit">Process Turnsheets</button>
+</form>
+<br>
+<%= form_tag new_turnsheet_path, method: :get do %>
+  <%= select_tag :club, options_from_collection_for_select(Club.all, :abbreviation, :name), prompt: "Select a club" %>
+  <%= submit_tag "New turnsheet" %>
+<% end %>
+<br>
 <div id="turnsheets">
   <% @turnsheets.each do |turnsheet| %>
     <%= render turnsheet %>
@@ -10,5 +19,3 @@
     </p>
   <% end %>
 </div>
-
-<%= link_to "New turnsheet", new_turnsheet_path %>

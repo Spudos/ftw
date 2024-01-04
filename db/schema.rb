@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_03_154216) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_04_173135) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -181,6 +181,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_03_154216) do
     t.string "train_att_skill"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "stad_amt"
+    t.datetime "processed"
+    t.integer "val"
   end
 
   create_table "upgrades", force: :cascade do |t|

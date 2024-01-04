@@ -40,6 +40,10 @@ class Player < ApplicationRecord
     end
   end
 
+  def id_name_with_position_and_skill
+    "#{id} #{name} - #{pos} (Skill: #{total_skill})"
+  end
+
   def base_skill
     pa + co + ta + ru + sh + dr + df + of + fl + st + cr
   end
