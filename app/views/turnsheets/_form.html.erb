@@ -1,4 +1,4 @@
-<%= form_with(model: turnsheet) do |form| %>
+<%= form_with(model: turnsheet, id: 'turnsheet') do |form| %>
   <% if turnsheet.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(turnsheet.errors.count, "error") %> prohibited this turnsheet from being saved:</h2>
@@ -195,3 +195,5 @@
     <%= form.submit 'Save Turnsheet', class: 'btn btn-sm btn-danger' %>
   </div>
 <% end %>
+
+<%= javascript_pack_tag 'turnsheet' %>
