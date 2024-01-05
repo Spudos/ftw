@@ -5,6 +5,9 @@
 <br>
 
 <div>
-  <%= link_to "Show this action", @turn %> |
-  <%= link_to "Back to actions", turns_path %>
+  <%= button_to "Destroy this action", @turn, method: :delete, class: "btn btn-sm btn-danger" %>
+  <%= link_to "Back to actions", turns_path, class: "btn btn-sm btn-primary" %>
 </div>
+<br>
+<br>
+<br>

@@ -62,6 +62,7 @@ class ClubsController < ApplicationController
   end
 
   def club_params
-    params.require(:club).permit(:name, :abbreviation)
+    params.require(:club).permit(:name, :abbreviation, :ground_name,:stand_n_name, :stand_n_condition, :stand_n_capacity, :stand_s_name, :stand_s_condition, :stand_s_capacity, :stand_e_name, :stand_e_condition, :stand_e_capacity, :stand_w_name, :stand_w_condition, :stand_w_capacity, :pitch,:hospitality, :facilities, :staff_fitness, :staff_gkp, :staff_dfc, :staff_mid, :staff_att, :staff_scouts, :color_primary, :color_secondary, :managed, :manager, :manager_email, :bank_bal)
   end
 end
+

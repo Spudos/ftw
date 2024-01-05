@@ -55,7 +55,7 @@
         <td><%= player[:goal_count] %></td>
         <td><%= player[:assist_count] %></td>
         <td><%= player[:average_match_performance] %></td>
-        <td><%= link_to "Edit", edit_player_path(player[:id]) %></td>
+        <td><%= link_to "Edit", edit_player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>

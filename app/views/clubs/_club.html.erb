@@ -1,8 +1,8 @@
 <div id="<%= dom_id club %>">
         <td><%= club.name %></td>
         <td><%= club.abbreviation %></td>
-        <td><%= link_to "Show", club_path(club.abbreviation) %></td>
-        <td><%= link_to "Edit", edit_club_path(club.abbreviation) %></td>
+        <td><%= link_to "Show", club_path(club.abbreviation), class: "btn btn-sm btn-primary" %></td>
+        <td><%= link_to "Edit", edit_club_path(club.abbreviation), class: "btn btn-sm btn-primary" %></td>
       </tr>
 </div>
 

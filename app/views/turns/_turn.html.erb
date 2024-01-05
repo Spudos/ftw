@@ -5,8 +5,6 @@
     <td><%= turn.var1 %></td>
     <td><%= turn.var2 %></td>
     <td><%= turn.var3 %></td>
-    <td><%= turn.date_completed %></td>
-    <td><%= link_to "Show", turn_path(turn.id) %></td>
-    <td><%= link_to "Edit", edit_turn_path(turn.id) %></td>
+    <td><%= link_to "Edit", edit_turn_path(turn.id), class: "btn btn-sm btn-primary" %></td>
   </tr>
 </div>

@@ -10,7 +10,19 @@
       </ul>
     </div>
   <% end %>
-
+  <div>
+    <h4>Turn Action Guidance</h4>
+    <h6>Stand Upgrades</h6>
+    <p>var1: Stand to be upgraded: stand_n_capacity - stand_s_capacity - stand_e_capacity - stand_w_capacity<br>
+    var2: Number of seats: 2000, 4000, 6000, 8000, 1000<br>
+    var3: Cost: seats * 1000</p>
+    <h6>Coach Upgrades</h6>
+    <p>var1: Department to Increase: staff_fit, staff_scout, staff_gkp - staff_dfc - staff_mid - staff_att</p>
+    <h6>Player Training</h6>
+    var1: train<br>
+    var2: Capitalized Player name<br>
+    <p>var3: Player skill</p>
+  </div>
   <div>
     <%= form.label :week, style: "display: block" %>
     <%= form.number_field :week %>
@@ -37,6 +49,6 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit 'Save', class: "btn btn-sm btn-danger" %>
   </div>
 <% end %>
