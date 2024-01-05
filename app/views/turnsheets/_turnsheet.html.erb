@@ -1,22 +1,182 @@
 <div id="<%= dom_id turnsheet %>">
-  <p>
-    <strong>Week:</strong>
-    <%= turnsheet.week %>
-  </p>
-
-  <p>
-    <strong>Club:</strong>
-    <%= turnsheet.club %>
-  </p>
-
-  <p>
-    <strong>Manager:</strong>
-    <%= turnsheet.manager %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= turnsheet.email %>
-  </p>
-
+  <table class="table table-hover">  
+    <h4>Club Details</h4>
+    <tr>
+      <td scope="col">Week</td>
+      <td scope="col">Club</td>
+      <td scope="col">Manager</td>
+      <td scope="col">Email</td>
+      <td scope="col">Processed</td>
+    </tr>
+    <tr scope="row">
+      <td>
+        <%= turnsheet.week %>
+      </td>
+      <td>
+        <%= turnsheet.club %>
+      </td>
+      <td>
+        <%= turnsheet.manager %>
+      </td>
+      <td>
+        <%= turnsheet.email %>
+      </td>
+      <td>
+        <%= turnsheet.processed %>
+      </td>
+    <tr>
+  </table>
+  <br>
+  <br>
+    <table class="table table-hover">
+      <h4>Upgrades</h4>
+    <tr>
+      <td scope="col">Action</td>
+      <td scope="col">Seats</td>
+      <td scope="col">Cost</td>
+    </tr>
+    <tr scope="row">
+      <td>
+        <%= turnsheet.stad_upg%>
+      </td>
+      <td>
+        <%= turnsheet.stad_amt %>
+      </td>
+      <td>
+        <%= turnsheet.val %>
+      </td>
+    </tr>
+     <tr scope="row">
+      <td>
+        <%= turnsheet.coach_upg %>
+      </td>
+    </tr>     
+  </table>
+  <br>
+  <br>
+  <table class="table table-hover">
+      <h4>Training</h4>
+    <tr>
+      <td scope="col">Position</td>
+      <td scope="col">Player</td>
+      <td scope="col">Skill</td>
+    </tr>
+    <tr scope="row">
+      <td>
+        Goalkeeper</td>
+      </td>
+      <td>
+        <%= turnsheet.train_gkp%>
+      </td>
+      <td>
+        <%= turnsheet.train_gkp_skill %>
+      </td>
+    </tr>
+        <tr scope="row">
+      <td>
+        Defender</td>
+      </td>
+      <td>
+        <%= turnsheet.train_dfc%>
+      </td>
+      <td>
+        <%= turnsheet.train_dfc_skill %>
+      </td>
+    </tr>
+        <tr scope="row">
+      <td>
+        Midfielder</td>
+      </td>
+      <td>
+        <%= turnsheet.train_mid%>
+      </td>
+      <td>
+        <%= turnsheet.train_mid_skill %>
+      </td>
+    </tr>
+        <tr scope="row">
+      <td>
+        Attacker</td>
+      </td>
+      <td>
+        <%= turnsheet.train_att%>
+      </td>
+      <td>
+        <%= turnsheet.train_att_skill %>
+      </td>
+    </tr>  
+  </table>
+  <br>
+  <br>
+  <table class="table table-hover">
+    <h4>Team</h4>
+    <tr scope="col">
+    </tr>
+    <tr scope="row">
+      <td>
+        <% player = Player.find(turnsheet.player_1) %>
+        <%= player.id_name_with_position_and_skill %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>
+        <% player = Player.find(turnsheet.player_2) %>
+        <%= player.id_name_with_position_and_skill %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>
+        <% player = Player.find(turnsheet.player_3) %>
+        <%= player.id_name_with_position_and_skill %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>
+        <% player = Player.find(turnsheet.player_4) %>
+        <%= player.id_name_with_position_and_skill %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>
+        <% player = Player.find(turnsheet.player_5) %>
+        <%= player.id_name_with_position_and_skill %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>
+        <% player = Player.find(turnsheet.player_6) %>
+        <%= player.id_name_with_position_and_skill %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>
+        <% player = Player.find(turnsheet.player_7) %>
+        <%= player.id_name_with_position_and_skill %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>
+        <% player = Player.find(turnsheet.player_8) %>
+        <%= player.id_name_with_position_and_skill %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>
+        <% player = Player.find(turnsheet.player_9) %>
+        <%= player.id_name_with_position_and_skill %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>
+        <% player = Player.find(turnsheet.player_10) %>
+        <%= player.id_name_with_position_and_skill %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>
+        <% player = Player.find(turnsheet.player_11) %>
+        <%= player.id_name_with_position_and_skill %>
+      </td>
+    </tr>
+  </table>
 </div>

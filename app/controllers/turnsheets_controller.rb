@@ -49,11 +49,15 @@ class TurnsheetsController < ApplicationController
 
   # DELETE /turnsheets/1 or /turnsheets/1.json
   def destroy
-    @turnsheet.destroy
+    @turnsheet = Turnsheets.find(params[:id])
 
-    respond_to do |format|
-      format.html { redirect_to turnsheets_url, notice: "Turnsheet was successfully destroyed." }
-      format.json { head :no_content }
+    if @turnsheet.destroy
+      # Successful deletion
+      redirect_to turnsheets_path, notice: "Turnsheet was successfully deleted."
+    else
+      # Error occurred during deletion
+      Rails.logger.error("Error deleting turnsheet: #{@turnsheet.errors}")
+      redirect_to turnsheets_path, alert: "Error deleting turnsheet."
     end
   end
 
@@ -65,19 +69,9 @@ class TurnsheetsController < ApplicationController
 
       Selection.where(club: turnsheet.club).destroy_all
 
-      Selection.create([
-        { club: turnsheet.club, player_id: turnsheet.player_1, turnsheet: turnsheet },
-        { club: turnsheet.club, player_id: turnsheet.player_2, turnsheet: turnsheet },
-        { club: turnsheet.club, player_id: turnsheet.player_3, turnsheet: turnsheet },
-        { club: turnsheet.club, player_id: turnsheet.player_4, turnsheet: turnsheet },
-        { club: turnsheet.club, player_id: turnsheet.player_5, turnsheet: turnsheet },
-        { club: turnsheet.club, player_id: turnsheet.player_6, turnsheet: turnsheet },
-        { club: turnsheet.club, player_id: turnsheet.player_7, turnsheet: turnsheet },
-        { club: turnsheet.club, player_id: turnsheet.player_8, turnsheet: turnsheet },
-        { club: turnsheet.club, player_id: turnsheet.player_9, turnsheet: turnsheet },
-        { club: turnsheet.club, player_id: turnsheet.player_10, turnsheet: turnsheet },
-        { club: turnsheet.club, player_id: turnsheet.player_11, turnsheet: turnsheet }
-      ])
+      (1..11).each do |i|
+        Selection.create(club: turnsheet.club, player_id: turnsheet.send("player_#{i}"), turnsheet: turnsheet)
+      end
 
       if turnsheet.coach_upg.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.coach_upg, turnsheet: turnsheet })
@@ -115,6 +109,6 @@ class TurnsheetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
   def turnsheet_params
-    params.require(:turnsheet).permit(:week, :club, :manager, :email, :player_1, :player_2, :player_3, :player_4, :player_5, :player_6,:player_7, :player_8, :player_9, :player_10, :player_11, :stad_upg, :coach_upg, :train_gkp, :train_gkp_skill, :train_dfc, :train_dfc_skill, :train_mid, :train_mid_skill, :train_att, :train_att_skill, :stad_amt, :coach_upg, :val)
+    params.require(:turnsheet).permit(:week, :club, :manager, :email, :player_1, :player_2, :player_3, :player_4, :player_5, :player_6,:player_7, :player_8, :player_9, :player_10, :player_11, :stad_upg, :coach_upg, :train_gkp, :train_gkp_skill, :train_dfc, :train_dfc_skill, :train_mid, :train_mid_skill, :train_att, :train_att_skill, :stad_amt, :coach_upg, :val, :manager, :email, :processed)
   end
 end

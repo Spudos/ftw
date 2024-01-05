@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_04_173135) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_05_114529) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -41,6 +41,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_04_173135) do
     t.string "color_primary"
     t.string "color_secondary"
     t.integer "bank_bal"
+    t.boolean "managed"
+    t.string "manager"
+    t.string "manager_email"
   end
 
   create_table "fixtures", force: :cascade do |t|

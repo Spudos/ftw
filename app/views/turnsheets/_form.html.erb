@@ -12,22 +12,25 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-12 align-top d-flex align-items-center justify-content-center">        
+      <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
+      <h3>Turnsheet for <%=  Club.find_by(abbreviation: params[:club])&.name %></h3> 
+      </div>
+      <div class="col-md-12 align-top d-flex align-items-center justify-content-center">   
         <div>
           <%= form.label :week, style: "display: inline-block" %>
           <%= form.number_field :week %>
         </div>
         <div>
           <%= form.label :club, style: "display: inline-block" %>
-          <%= form.text_field :club %>
+          <%= form.text_field :club, value: Club.find_by(abbreviation: params[:club])&.abbreviation%>
         </div>
         <div>
           <%= form.label :manager, style: "display: inline-block" %>
-          <%= form.text_field :manager %>
+          <%= form.text_field :manager, value: Club.find_by(abbreviation: params[:club])&.manager %>
         </div>
         <div>
           <%= form.label :email, style: "display: inline-block" %>
-          <%= form.text_field :email %>
+          <%= form.text_field :email, value: Club.find_by(abbreviation: params[:club])&.manager_email %>
         </div>
       </div>
     </div>
@@ -50,6 +53,12 @@
               </td>
               <td>
                 <%= form.select :val, options_for_select([200000, 400000, 600000, 800000, 1000000]), prompt: "Cost" %>
+              </td>
+            </tr>
+            <tr scope="row">
+              <td>Coach</td>
+              <td>
+                <%= form.select :coach_upg, options_for_select({ "Fitness" => "staff_fit", "Scout" => "staff_scout", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }), prompt: "Select a coach" %>
               </td>
             </tr>
           </table>
@@ -183,6 +192,6 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit 'Save Turnsheet', class: 'btn btn-sm btn-danger' %>
   </div>
 <% end %>

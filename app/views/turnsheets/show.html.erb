@@ -1,10 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
+<br>
+<h3>Turnsheet for <%=  Club.find_by(abbreviation: @turnsheet.club)&.name %></h3>
+<br>
+
 <%= render @turnsheet %>
 
 <div>
-  <%= link_to "Edit this turnsheet", edit_turnsheet_path(@turnsheet) %> |
-  <%= link_to "Back to turnsheets", turnsheets_path %>
-
-  <%= button_to "Destroy this turnsheet", @turnsheet, method: :delete %>
+  <%= link_to "Edit this turnsheet", edit_turnsheet_path, class: "btn btn-sm btn-primary" %> 
+  <%= link_to "Back to turnsheets", turnsheets_path, class: "btn btn-sm btn-primary"  %>
+  <%= link_to "Destroy this turnsheet", @turnsheet, method: :delete, class: "btn btn-sm btn-danger"   %>
+  <br>
+  <br>
+  <br>
 </div>

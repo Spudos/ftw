@@ -3,19 +3,41 @@
 <h1>Turnsheets</h1>
 <br>
 <form action="/turnsheets/process_turnsheet" method="post">
-  <button type="submit">Process Turnsheets</button>
+  <button type="submit" class="btn btn-danger btn-sm">Process Turnsheets</button>
 </form>
 <br>
 <%= form_tag new_turnsheet_path, method: :get do %>
   <%= select_tag :club, options_from_collection_for_select(Club.all, :abbreviation, :name), prompt: "Select a club" %>
-  <%= submit_tag "New turnsheet" %>
+  <button type="submit" class="btn btn-primary btn-sm">New Turnsheet</button>
 <% end %>
 <br>
 <div id="turnsheets">
+  <table class="table table-hover">
+    <tr>
+      <td scope="col">Week</td>
+      <td scope="col">Club</td>
+      <td scope="col">Manager</td>
+      <td scope="col">Email</td>
+      <td scope="col">Show</td>
+    </tr>
   <% @turnsheets.each do |turnsheet| %>
-    <%= render turnsheet %>
-    <p>
-      <%= link_to "Show this turnsheet", turnsheet %>
-    </p>
-  <% end %>
+    <tr scope="row">
+      <td>
+        <%= turnsheet.week %>
+      </td>
+      <td>
+        <%= turnsheet.club %>
+      </td>
+      <td>
+        <%= turnsheet.manager %>
+      </td>
+      <td>
+        <%= turnsheet.email %>
+      </td>
+      <td>
+        <%= link_to "Show this turnsheet", turnsheet, class: "btn btn-sm btn-primary" %>
+      </td>
+    <tr>
+   <% end %>   
+  <table>
 </div>

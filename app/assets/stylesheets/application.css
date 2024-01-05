@@ -13,7 +13,6 @@
  *= require_tree .
  *= require_self
  */
-@import 'will_paginate';
 
 .main {
   width: 80%;
@@ -68,4 +67,8 @@ footer {
 
 .row {
   margin: 50px;
+}
+
+.btn {
+  margin: 5px;
 }

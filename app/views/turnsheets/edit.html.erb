@@ -1,10 +1,213 @@
 <h1>Editing turnsheet</h1>
+<%= form_with(model: @turnsheet, local: true) do |form| %>
+  <% if @turnsheet.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@turnsheet.errors.count, "error") %> prohibited this turnsheet from being saved:</h2>
+      <ul>
+      <% @turnsheet.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= render "form", turnsheet: @turnsheet %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
+        <h3>Turnsheet for <%= Club.find_by(abbreviation: @turnsheet.club)&.name %></h3> 
+      </div>
+      <div class="col-md-12 align-top d-flex align-items-center justify-content-center">   
+        <div>
+          <%= form.label :week, style: "display: inline-block" %>
+          <%= form.number_field :week %>
+        </div>
+        <div>
+          <%= form.label :club, style: "display: inline-block" %>
+          <%= form.text_field :club, value: @turnsheet.club %>
+        </div>
+        <div>
+          <%= form.label :manager, style: "display: inline-block" %>
+          <%= form.text_field :manager, value: @turnsheet.manager %>
+        </div>
+        <div>
+          <%= form.label :email, style: "display: inline-block" %>
+          <%= form.text_field :email, value: @turnsheet.email %>
+        </div>
+        <div>
+          <%= form.label :processed, style: "display: inline-block" %>
+          <%= form.text_field :processed, value: @turnsheet.processed %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
+          <table class="table table-hover">
+            <th><h4>Club Upgrades</h4></th>
+            <tr>
+              <th scope="col">Type</th>
+              <th scope="col">Area</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Cost</th>
+            <tr scope="row">
+              <td>Stand</td>
+              <td>
+                <%= form.select :stad_upg, options_for_select({ "North Stand" => "stand_n_capacity", "South Stand" => "stand_s_capacity", "East Stand" => "stand_e_capacity", "West Stand" => "stand_w_capacity" }, @turnsheet.stad_upg), prompt: "Select a stand" %>
+              </td>
+              <td>
+                <%= form.select :stad_amt, options_for_select([2000, 4000, 6000, 8000, 10000], @turnsheet.stad_amt), prompt: "How many seats?" %>
+              </td>
+              <td>
+                <%= form.select :val, options_for_select([200000, 400000, 600000, 800000, 1000000], @turnsheet.val), prompt: "Cost" %>
+              </td>
+            </tr>
+            <tr scope="row">
+              <td>Coach</td>
+              <td>
+                <%= form.select :coach_upg, options_for_select({ "Fitness" => "staff_fit", "Scout" => "staff_scout", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, @turnsheet.coach_upg), prompt: "Select a coach" %>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-md-6 align-top"> 
+          <h4>Team Selection</h4>
+            <table class="table table-hover">
+              <tr>
+                <th scope="col">Shirt</th>
+                <th scope="col">Player</th>
+              <tr scope="row">
+                <td>Player 1</td>
+                <td>
+                  <%= form.select :player_1, options_from_collection_for_select(Player.where(club: @turnsheet.club, pos: "gkp"), :id, :id_name_with_position_and_skill, @turnsheet.player_1), prompt: "Select a player" %>
+                </td>
+              </tr>
+              <tr scope="row">
+              <td>Player 2</td>
+              <td>
+                <%= form.select :player_2, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_2), prompt: "Select a player" %>
+              </td>
+            </tr>
+            <tr scope="row">
+              <td>Player 3</td>
+              <td>
+                <%= form.select :player_3, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_3), prompt: "Select a player" %>
+              </td>
+            </tr>
+            <tr scope="row">
+              <td>Player 4</td>
+              <td>
+                <%= form.select :player_4, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_4), prompt: "Select a player" %>
+              </td>
+            </tr>
+            <tr scope="row">
+            <td>Player 5</td>
+              <td>
+                <%= form.select :player_5, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_5), prompt: "Select a player" %>
+              </td>
+            </tr>
+            <tr scope="row">
+            <td>Player 6</td>
+              <td>
+                <%= form.select :player_6, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_6), prompt: "Select a player" %>
+              </td>
+            </tr>
+            <tr scope="row">
+            <td>Player 7</td>
+              <td>
+                <%= form.select :player_7, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_7), prompt: "Select a player" %>
+              </td>
+            </tr>
+            <tr scope="row">
+            <td>Player 8</td>
+              <td>
+                <%= form.select :player_8, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_8), prompt: "Select a player" %>
+              </td>
+            </tr>
+            <tr scope="row">
+            <td>Player 9</td>
+              <td>
+                <%= form.select :player_9, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_9), prompt: "Select a player" %>
+              </td>
+            </tr>
+            <tr scope="row">
+            <td>Player 10</td>
+              <td>
+                <%= form.select :player_10, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_10), prompt: "Select a player" %>
+              </td>
+            </tr>
+            <tr scope="row">
+            <td>Player 11</td>
+              <td>
+                <%= form.select :player_11, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_11), prompt: "Select a player" %>
+              </td>
+            </tr>
+          </table>
+      </div>
+
+      <div class="col-md-6 align-top"> 
+        <h4>Player Training</h4>
+        <table class="table table-hover">
+          <tr>
+            <th scope="col">Position</th>
+            <th scope="col">Player</th>
+            <th scope="col">skill</th>
+          </tr>
+          <tr scope="row">
+            <td>Goalkeeper</td>
+            <td>
+              <%= form.label :train_gkp, style: "display: none" %>
+              <%= form.select :train_gkp, options_from_collection_for_select(Player.where(club: @turnsheet.club, pos: "gkp"), :name, :id_name_with_position_and_skill, @turnsheet.train_gkp), prompt: "Select a player" %>
+            </td>
+            <td>
+              <%= form.label :train_gkp_skill, style: "display: none" %>
+              <%= form.select :train_gkp_skill, options_for_select(['pa', 'co', 'ta', 'ru', 'sh', 'dr', 'df', 'of', 'fl', 'st', 'cr'], @turnsheet.train_gkp_skill), prompt: "Which Skill?" %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td>Defender</td>
+            <td>
+              <%= form.label :train_dfc, style: "display: none" %>
+              <%= form.select :train_dfc, options_from_collection_for_select(Player.where(club: @turnsheet.club, pos: "dfc"), :name, :id_name_with_position_and_skill, @turnsheet.train_dfc), prompt: "Select a player" %>
+            </td>
+            <td>
+              <%= form.label :train_dfc_skill, style: "display: none" %>
+              <%= form.select :train_dfc_skill, options_for_select(['pa', 'co', 'ta', 'ru', 'sh', 'dr', 'df', 'of', 'fl', 'st', 'cr'], @turnsheet.train_dfc_skill), prompt: "Which Skill?" %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td>Midfield</td>
+            <td>
+              <%= form.label :train_mid, style: "display: none" %>
+              <%= form.select :train_mid, options_from_collection_for_select(Player.where(club: @turnsheet.club, pos: "mid"), :name, :id_name_with_position_and_skill, @turnsheet.train_mid), prompt: "Select a player" %>
+            </td>
+            <td>
+              <%= form.label :train_mid_skill, style: "display: none" %>
+              <%= form.select :train_mid_skill, options_for_select(['pa', 'co', 'ta', 'ru', 'sh', 'dr', 'df', 'of', 'fl', 'st', 'cr'], @turnsheet.train_mid_skill), prompt: "Which Skill?" %>
+              </td>
+          </tr>
+          <tr scope="row">
+            <td>Attack</td>
+            <td>
+              <%= form.label :train_att, style: "display: none" %>
+              <%= form.select :train_att, options_from_collection_for_select(Player.where(club: @turnsheet.club, pos: "att"), :name, :id_name_with_position_and_skill, @turnsheet.train_att), prompt: "Select a player" %>
+            </td>
+            <td>
+              <%= form.label :train_att_skill, style: "display: none" %>
+              <%= form.select :train_att_skill, options_for_select(['pa', 'co', 'ta', 'ru', 'sh', 'dr', 'df', 'of', 'fl', 'st', 'cr'], @turnsheet.train_att_skill), prompt: "Which Skill?" %>
+            </td>
+          </tr>
+        </table>
+      </div>
+  </div>
+
+  <div>
+    <%= link_to "Cancel and go back to turnsheets", turnsheets_path, class: "btn btn-sm btn-primary"  %>
+    <%= form.submit 'Save Changes', class: 'btn btn-sm btn-danger' %>
+  </div>
+<% end %>
 <br>
-
-<div>
-  <%= link_to "Show this turnsheet", @turnsheet %> |
-  <%= link_to "Back to turnsheets", turnsheets_path %>
-</div>
+<br>
+<br>
