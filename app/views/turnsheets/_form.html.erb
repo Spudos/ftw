@@ -22,7 +22,7 @@
         </div>
         <div>
           <%= form.label :club, style: "display: inline-block" %>
-          <%= form.text_field :club, value: Club.find_by(abbreviation: params[:club])&.abbreviation%>
+          <%= form.text_field :club, value: Club.find_by(abbreviation: params[:club])&.abbreviation %>
         </div>
         <div>
           <%= form.label :manager, style: "display: inline-block" %>
@@ -52,13 +52,13 @@
                 <%= form.select :stad_amt, options_for_select([2000, 4000, 6000, 8000, 10000]), prompt: "How many seats?" %>
               </td>
               <td>
-                <%= form.select :val, options_for_select([200000, 400000, 600000, 800000, 1000000]), prompt: "Cost" %>
+                <%= form.text_field :val, readonly: true %>
               </td>
             </tr>
             <tr scope="row">
               <td>Coach</td>
               <td>
-                <%= form.select :coach_upg, options_for_select({ "Fitness" => "staff_fit", "Scout" => "staff_scout", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }), prompt: "Select a coach" %>
+                <%= form.select :coach_upg, options_for_select({ "No coach selected" => "None", "Fitness" => "staff_fit", "Scout" => "staff_scout", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, selected: "None") %>
               </td>
             </tr>
           </table>
@@ -195,5 +195,3 @@
     <%= form.submit 'Save Turnsheet', class: 'btn btn-sm btn-danger' %>
   </div>
 <% end %>
-
-<%= javascript_pack_tag 'turnsheet' %>
