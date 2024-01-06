@@ -64,6 +64,7 @@ class TurnsController < ApplicationController
 
   def process_turn
     stadium_upgrades(params[:week])
+    property_upgrades(params[:week])
     player_upgrades(params[:week])
     coach_upgrades(params[:week])
     increment_upgrades

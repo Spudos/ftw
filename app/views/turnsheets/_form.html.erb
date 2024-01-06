@@ -57,6 +57,17 @@
             </tr>
             </tr>
             <tr scope="row">
+              <td>Stand Condition</td>
+              <td>
+                <%= form.select :stad_cond_upg, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }), prompt: "Select a stand" %>
+              </td>
+            <tr scope="row">  
+              <td>
+                <p>Stand condition upgrades cost £100000</p>
+              </td>
+            </tr>
+            </tr>
+            <tr scope="row">
               <td>Coach</td>
               <td>
                 <%= form.select :coach_upg, options_for_select({ "No coach selected" => "None", "Fitness" => "staff_fit", "Scout" => "staff_scout", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, selected: "None") %>
@@ -65,6 +76,17 @@
             <tr scope="row">  
               <td>
                 <p>Coach upgrades cost £500,000</p>
+              </td>
+            </tr>
+            <tr scope="row">
+              <td>Property</td>
+              <td>
+                <%= form.select :prop_upg, options_for_select({ "Not selected" => "None", "Pitch" => "Pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, selected: "None") %>
+              </td>
+            </tr>    
+            <tr scope="row">  
+              <td>
+                <p>Property upgrades cost £250,000</p>
               </td>
             </tr>
           </table>

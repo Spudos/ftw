@@ -17,15 +17,15 @@ module TurnsCoachesHelper
 
     hash.each do |key, value|
       bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], value[:var2], value[:var3])
-      add_to_coach_upgrades(value[:action_id], value[:week], value[:club], value[:var1], value[:var2])
+      add_to_coach_upgrades(value[:action_id], value[:week], value[:club], value[:var2])
     end
   end
 
-  def add_to_coach_upgrades(action_id, week, club, stand, seats)
+  def add_to_coach_upgrades(action_id, week, club, coach)
     existing_upgrade = Upgrades.find_by(action_id:)
 
     if existing_upgrade.nil?
-    Upgrades.create(action_id:, week:, club:, var1: stand, var2: seats, var3: 0)
+    Upgrades.create(action_id:, week:, club:, var1: coach, var3: 0)
     end
   end
 end

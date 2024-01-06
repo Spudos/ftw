@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_05_114529) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_06_121415) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_05_114529) do
     t.string "stand_w_name"
     t.integer "stand_w_condition"
     t.integer "stand_w_capacity"
-    t.string "pitch"
+    t.integer "pitch"
     t.integer "hospitality"
     t.integer "facilities"
     t.integer "staff_fitness"
@@ -187,6 +187,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_05_114529) do
     t.integer "stad_amt"
     t.datetime "processed"
     t.integer "val"
+    t.string "prop_upg"
+    t.string "stad_cond_upg"
   end
 
   create_table "upgrades", force: :cascade do |t|

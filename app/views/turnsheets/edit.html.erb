@@ -60,12 +60,23 @@
                 <%= form.select :val, options_for_select([200000, 400000, 600000, 800000, 1000000], @turnsheet.val), prompt: "Cost" %>
               </td>
             </tr>
+            <td>Stand condition</td>
+              <td>
+                <%= form.select :stad_cond_upg, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }, @turnsheet.stad_upg), prompt: "Select a stand" %>
+              </td>
+            </tr>
             <tr scope="row">
               <td>Coach</td>
               <td>
                 <%= form.select :coach_upg, options_for_select({ "Fitness" => "staff_fit", "Scout" => "staff_scout", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, @turnsheet.coach_upg), prompt: "Select a coach" %>
               </td>
             </tr>
+            <tr scope="row">
+              <td>Property</td>
+              <td>
+                <%= form.select :prop_upg, options_for_select({ "Not selected" => "None", "Pich" => "Pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, selected: "None") %>
+              </td>
+            </tr>    
           </table>
         </div>
       </div>

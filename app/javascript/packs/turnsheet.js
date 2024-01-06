@@ -47,6 +47,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     for (let i = 0; i < playerFields.length; i++) {
+      console.log(playerFields[i].value)
+      }    
+
+    for (let i = 0; i < playerFields.length; i++) {
       if (playerFields[i].value === '') {
         event.preventDefault();
         alert('Please select a player for all positions');
