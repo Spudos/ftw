@@ -2,17 +2,13 @@
 
 <h2>Turn actions</h2>
 
-
-
-<br>
 <form action="/turns/process_turn" method="post">
   <input type="hidden" name="week" value="<%= params[:week] %>">
   <button type="submit" class="btn btn-sm btn-danger" >Process Turn Actions</button>
 </form>
-<br>
+
 <%= link_to "Click here a create a new turn action", new_turn_path, class: "btn btn-sm btn-primary" %>
-<br>
-<br>
+
 <form action="/turns" method="get">
   <label for="week">Select Week Number:</label>
   <select name="week" id="week">
@@ -22,7 +18,6 @@
   </select>
   <button type="submit" class="btn btn-primary btn-sm">Submit</button>
 </form>
-<br>
 
 <div id="turns">
   <table class="table table-hover">

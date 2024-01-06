@@ -17,6 +17,7 @@
 .main {
   width: 80%;
   margin: auto;
+  margin-bottom: 200px;
 }
 
 th {
@@ -48,10 +49,6 @@ th {
   background-color: red;
 }
 
-body {
-  height: 100vh;
-}
-
 footer {
   width: 80%;
   margin: auto;
@@ -71,4 +68,12 @@ footer {
 
 .btn {
   margin: 5px;
+}
+
+table {
+  margin: 50px;
+}
+
+.turnsheet_headers {
+  padding: 10px;
 }

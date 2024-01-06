@@ -58,6 +58,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_06_121415) do
 
   create_table "matches", force: :cascade do |t|
     t.integer "match_id"
+    t.integer "week"
+    t.string "comp"
     t.string "hm_team"
     t.string "aw_team"
     t.integer "hm_poss"

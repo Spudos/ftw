@@ -1,20 +1,16 @@
 <% club = Club.find_by(abbreviation: params[:id]) %>
 
-<br>
 <div class="container align-items-start text-center">
   <div class="row">
     <div class="col-md-12">
       <h2><%= @club.name %></h2>
       <h5>Primary Club Color: <%= @club.color_primary %></h5>             
       <h5>Secondary Club Color: <%= @club.color_secondary %></h5>
-      <br>
       <h5>The clubs bank balance is currently: £<%= @club.bank_bal %></h5>
-      <br>
-
     </div>
   </div>
 
-<div class="text-left">
+  <div class="text-left">
     <%= render "messages_new" %>
     <div class="row text-left">
       <div class="col-md-6">
@@ -30,8 +26,7 @@
     <%= render "hidden_skills" %>
 
     <%= render "team_selection" %>
-    <br>
-    <br>
+
     <%= render "results" %>
 
     <%= render "messages" %>
