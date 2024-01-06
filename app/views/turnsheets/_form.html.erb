@@ -42,7 +42,6 @@
               <th scope="col">Type</th>
               <th scope="col">Area</th>
               <th scope="col">Amount</th>
-              <th scope="col">Cost</th>
             <tr scope="row">
               <td>Stand</td>
               <td>
@@ -51,14 +50,21 @@
               <td>
                 <%= form.select :stad_amt, options_for_select([2000, 4000, 6000, 8000, 10000]), prompt: "How many seats?" %>
               </td>
+            <tr scope="row">  
               <td>
-                <%= form.text_field :val, readonly: true %>
+                <p>Stand upgrades cost £1000 per seat so 2000 costs £2,000,000 and so on</p>
               </td>
+            </tr>
             </tr>
             <tr scope="row">
               <td>Coach</td>
               <td>
                 <%= form.select :coach_upg, options_for_select({ "No coach selected" => "None", "Fitness" => "staff_fit", "Scout" => "staff_scout", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, selected: "None") %>
+              </td>
+            </tr>    
+            <tr scope="row">  
+              <td>
+                <p>Coach upgrades cost £500,000</p>
               </td>
             </tr>
           </table>
