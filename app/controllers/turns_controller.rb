@@ -68,6 +68,8 @@ class TurnsController < ApplicationController
     player_upgrades(params[:week])
     coach_upgrades(params[:week])
     increment_upgrades
+
+    redirect_to request.referrer
   end
 
   private

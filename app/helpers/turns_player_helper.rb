@@ -17,6 +17,8 @@ module TurnsPlayerHelper
 
     hash.each do |key, value|
       train_player(value[:action_id], value[:week], value[:club], value[:var2], value[:var3])
+      turn = Turn.find(key)
+      turn.update(date_completed: DateTime.now)
     end
   end
 

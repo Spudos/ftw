@@ -24,6 +24,8 @@ module TurnsStadiumHelper
       end
       bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], value[:var2], cost)
       add_to_stadium_upgrades(value[:action_id], value[:week], value[:club], value[:var1], value[:var2])
+      turn = Turn.find(key)
+      turn.update(date_completed: DateTime.now)
     end
   end
 
@@ -31,7 +33,6 @@ module TurnsStadiumHelper
     existing_upgrade = Upgrades.find_by(action_id:)
 
     if existing_upgrade.nil?
-      
       upgrade = Upgrades.create(action_id:, week:, club:, var1: stand, var2: seats.to_i, var3: 0)
       if upgrade.save
         puts "Upgrade saved successfully!"
@@ -55,11 +56,13 @@ module TurnsStadiumHelper
         var3: turn.var3,
         Actioned: turn.date_completed
       }
-  end
+  end 
 
     hash.each do |key, value|
       bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], value[:var2], value[:var3])
       add_to_property_upgrades(value[:action_id], value[:week], value[:club], value[:var2])
+      turn = Turn.find(key)
+      turn.update(date_completed: DateTime.now)
     end
   end
 

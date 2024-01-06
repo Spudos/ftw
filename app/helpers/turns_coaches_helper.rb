@@ -18,6 +18,8 @@ module TurnsCoachesHelper
     hash.each do |key, value|
       bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], value[:var2], value[:var3])
       add_to_coach_upgrades(value[:action_id], value[:week], value[:club], value[:var2])
+      turn = Turn.find(key)
+      turn.update(date_completed: DateTime.now)
     end
   end
 

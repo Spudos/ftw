@@ -23,19 +23,19 @@
         </div>
         <div>
           <%= form.label :club, style: "display: inline-block" %>
-          <%= form.text_field :club, value: @turnsheet.club %>
+          <%= form.text_field :club, value: @turnsheet.club, readonly: true %>
         </div>
         <div>
           <%= form.label :manager, style: "display: inline-block" %>
-          <%= form.text_field :manager, value: @turnsheet.manager %>
+          <%= form.text_field :manager, value: @turnsheet.manager, readonly: true %>
         </div>
         <div>
           <%= form.label :email, style: "display: inline-block" %>
-          <%= form.text_field :email, value: @turnsheet.email %>
+          <%= form.text_field :email, value: @turnsheet.email, readonly: true %>
         </div>
         <div>
           <%= form.label :processed, style: "display: inline-block" %>
-          <%= form.text_field :processed, value: @turnsheet.processed %>
+          <%= form.text_field :processed, value: @turnsheet.processed, readonly: true %>
         </div>
       </div>
     </div>
@@ -47,7 +47,6 @@
               <th scope="col">Type</th>
               <th scope="col">Area</th>
               <th scope="col">Amount</th>
-              <th scope="col">Cost</th>
             <tr scope="row">
               <td>Stand</td>
               <td>
@@ -55,9 +54,6 @@
               </td>
               <td>
                 <%= form.select :stad_amt, options_for_select([2000, 4000, 6000, 8000, 10000], @turnsheet.stad_amt), prompt: "How many seats?" %>
-              </td>
-              <td>
-                <%= form.select :val, options_for_select([200000, 400000, 600000, 800000, 1000000], @turnsheet.val), prompt: "Cost" %>
               </td>
             </tr>
             <td>Stand condition</td>

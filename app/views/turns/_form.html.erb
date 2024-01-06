@@ -10,45 +10,62 @@
       </ul>
     </div>
   <% end %>
-  <div>
-    <h4>Turn Action Guidance</h4>
-    <h6>Stand Upgrades</h6>
-    <p>var1: Stand to be upgraded: stand_n_capacity - stand_s_capacity - stand_e_capacity - stand_w_capacity<br>
-    var2: Number of seats: 2000, 4000, 6000, 8000, 1000<br>
-    var3: Cost: seats * 1000</p>
-    <h6>Coach Upgrades</h6>
-    <p>var1: Department to Increase: staff_fit, staff_scout, staff_gkp - staff_dfc - staff_mid - staff_att</p>
-    <h6>Player Training</h6>
-    var1: train<br>
-    var2: Capitalized Player name<br>
-    <p>var3: Player skill</p>
-  </div>
-  <div>
-    <%= form.label :week, style: "display: block" %>
-    <%= form.number_field :week %>
-  </div>
 
-  <div>
-    <%= form.label :club, style: "display: block" %>
-    <%= form.text_field :club %>
-  </div>
+  <div class="row">
+    <div class="col-md-3 align-top">    
+      <div>
+        <%= form.label :week, style: "display: block" %>
+        <%= form.number_field :week %>
+      </div>
 
-  <div>
-    <%= form.label :var1, style: "display: block" %>
-    <%= form.text_field :var1 %>
-  </div>
+      <div>
+        <%= form.label :club, style: "display: block" %>
+        <%= form.text_field :club %>
+      </div>
 
-  <div>
-    <%= form.label :var2, style: "display: block" %>
-    <%= form.text_field :var2 %>
-  </div>
+      <div>
+        <%= form.label :var1, style: "display: block" %>
+        <%= form.text_field :var1 %>
+      </div>
 
-  <div>
-    <%= form.label :var3, style: "display: block" %>
-    <%= form.text_field :var3 %>
-  </div>
+      <div>
+        <%= form.label :var2, style: "display: block" %>
+        <%= form.text_field :var2 %>
+      </div>
 
-  <div>
-    <%= form.submit 'Save', class: "btn btn-sm btn-danger" %>
+      <div>
+        <%= form.label :var3, style: "display: block" %>
+        <%= form.text_field :var3 %>
+      </div>
+
+      <div>
+        <%= form.submit 'Save', class: "btn btn-sm btn-danger" %>
+      </div>
+    <% end %>
+    </div>
+    <div class="col-md-9 align-top"> 
+      <h4>Turn Action Guidance</h4>
+      <h6>Stand Seating Upgrades</h6>
+      <p>var1: Stand to be upgraded: stand_n_capacity - stand_s_capacity - stand_e_capacity - stand_w_capacity<br>
+      var2: Number of seats: 2000, 4000, 6000, 8000, 1000<br>
+      <br>
+      <h6>Stand Condition Upgrades</h6>
+      <p>var1: Stand to be upgraded: stand_n_condition - stand_s_condition - stand_e_condition - stand_w_condition<br>
+      var3: 100000</p>
+      <br>
+      <h6>Property Upgrades</h6>
+      var1: prop<br>
+      var2: Item to be upgraded: hospitality - facilities - pitch<br>
+      var3: 250000</p>
+      <br>
+      <h6>Coach Upgrades</h6>
+      <p>var1: coach<br>
+      var2: Department to Increase: staff_fit, staff_scout, staff_gkp - staff_dfc - staff_mid - staff_att<br>
+      var3: 500000</p>
+      <br>
+      <h6>Player Training</h6>
+      <p>var1: train<br>
+      var2: Capitalized Player name<br>
+      var3: Player skill</p>
+    </div>
   </div>
-<% end %>

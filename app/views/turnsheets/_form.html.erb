@@ -13,7 +13,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
-      <h3>Turnsheet for <%=  Club.find_by(abbreviation: params[:club])&.name %></h3> 
+      <h3>New Turnsheet for <%=  Club.find_by(abbreviation: params[:club])&.name %></h3> 
       </div>
       <div class="col-md-12 align-top d-flex align-items-center justify-content-center">   
         <div>
@@ -22,82 +22,22 @@
         </div>
         <div>
           <%= form.label :club, style: "display: inline-block" %>
-          <%= form.text_field :club, value: Club.find_by(abbreviation: params[:club])&.abbreviation %>
+          <%= form.text_field :club, value: Club.find_by(abbreviation: params[:club])&.abbreviation, readonly: true %>
         </div>
         <div>
           <%= form.label :manager, style: "display: inline-block" %>
-          <%= form.text_field :manager, value: Club.find_by(abbreviation: params[:club])&.manager %>
+          <%= form.text_field :manager, value: Club.find_by(abbreviation: params[:club])&.manager, readonly: true %>
         </div>
         <div>
           <%= form.label :email, style: "display: inline-block" %>
-          <%= form.text_field :email, value: Club.find_by(abbreviation: params[:club])&.manager_email %>
+          <%= form.text_field :email, value: Club.find_by(abbreviation: params[:club])&.manager_email, readonly: true %>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
-          <table class="table table-hover">
-            <th><h4>Club Upgrades</h4></th>
-            <tr>
-              <th scope="col">Type</th>
-              <th scope="col">Area</th>
-              <th scope="col">Amount</th>
-            <tr scope="row">
-              <td>Stand</td>
-              <td>
-                <%= form.select :stad_upg, options_for_select({ "North Stand" => "stand_n_capacity", "South Stand" => "stand_s_capacity", "East Stand" => "stand_e_capacity", "West Stand" => "stand_w_capacity" }), prompt: "Select a stand" %>
-              </td>
-              <td>
-                <%= form.select :stad_amt, options_for_select([2000, 4000, 6000, 8000, 10000]), prompt: "How many seats?" %>
-              </td>
-            <tr scope="row">  
-              <td>
-                <p>Stand upgrades cost £1000 per seat so 2000 costs £2,000,000 and so on</p>
-              </td>
-            </tr>
-            </tr>
-            <tr scope="row">
-              <td>Stand Condition</td>
-              <td>
-                <%= form.select :stad_cond_upg, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }), prompt: "Select a stand" %>
-              </td>
-            <tr scope="row">  
-              <td>
-                <p>Stand condition upgrades cost £100000</p>
-              </td>
-            </tr>
-            </tr>
-            <tr scope="row">
-              <td>Coach</td>
-              <td>
-                <%= form.select :coach_upg, options_for_select({ "No coach selected" => "None", "Fitness" => "staff_fit", "Scout" => "staff_scout", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, selected: "None") %>
-              </td>
-            </tr>    
-            <tr scope="row">  
-              <td>
-                <p>Coach upgrades cost £500,000</p>
-              </td>
-            </tr>
-            <tr scope="row">
-              <td>Property</td>
-              <td>
-                <%= form.select :prop_upg, options_for_select({ "Not selected" => "None", "Pitch" => "Pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, selected: "None") %>
-              </td>
-            </tr>    
-            <tr scope="row">  
-              <td>
-                <p>Property upgrades cost £250,000</p>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
-
     <div class="row">
       <div class="col-md-6 align-top"> 
           <h4>Team Selection</h4>
-            <table class="table table-hover">
+            <table class="table table-hover table-bordered">
               <tr>
                 <th scope="col">Shirt</th>
                 <th scope="col">Player</th>
@@ -165,7 +105,7 @@
 
       <div class="col-md-6 align-top"> 
         <h4>Player Training</h4>
-        <table class="table table-hover">
+        <table class="table table-hover table-bordered">
           <tr>
             <th scope="col">Position</th>
             <th scope="col">Player</th>
@@ -216,8 +156,67 @@
             </td>
           </tr>
         </table>
+    </div>   
+
+    <div class="row">
+      <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
+          <table class="table table-hover table-bordered">
+            <th><h4>Club Upgrades</h4></th>
+            <tr>
+              <th scope="col">Type</th>
+              <th scope="col">Area</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Info</th>
+            <tr scope="row">
+              <td>Stand</td>
+              <td>
+                <%= form.select :stad_upg, options_for_select({ "North Stand" => "stand_n_capacity", "South Stand" => "stand_s_capacity", "East Stand" => "stand_e_capacity", "West Stand" => "stand_w_capacity" }), prompt: "Select a stand" %>
+              </td>
+              <td>
+                <%= form.select :stad_amt, options_for_select([2000, 4000, 6000, 8000, 10000]), prompt: "How many seats?" %>
+              </td>
+              <td>
+                <p>£1000 per seat</p>
+              </td>
+            </tr>
+            <tr scope="row">
+              <td>Stand Condition</td>
+              <td>
+                <%= form.select :stad_cond_upg, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }), prompt: "Select a stand" %>
+              </td>
+              <td>
+                <p></p>
+              </td> 
+              <td>
+                <p>£100000</p>
+              </td>
+            </tr>
+            <tr scope="row">
+              <td>Coach</td>
+              <td>
+                <%= form.select :coach_upg, options_for_select({ "No coach selected" => "None", "Fitness" => "staff_fit", "Scout" => "staff_scout", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, selected: "None") %>
+              </td>  
+              <td>
+                <p></p>
+              </td> 
+              <td>
+                <p>£500,000</p>
+              </td>
+            <tr scope="row">
+              <td>Property</td>
+              <td>
+                <%= form.select :prop_upg, options_for_select({ "Not selected" => "None", "Pitch" => "Pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, selected: "None") %>
+              </td>  
+              <td>
+                <p></p>
+              </td>    
+              <td>
+                <p>£250,000</p>
+              </td>
+          </table>
+        </div>
       </div>
-  </div>
+    </div>
 
   <div>
     <%= form.submit 'Save Turnsheet', class: 'btn btn-sm btn-danger' %>
