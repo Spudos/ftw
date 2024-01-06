@@ -8,13 +8,13 @@ module TurnsHelper
       new_bal = club_full.bank_bal.to_i - amount.to_i
       club_full.update(bank_bal: new_bal)
       if reason == "coach"
-        Messages.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to the #{dept} department")
+        Messages.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{dept}")
       elsif reason == "prop"
-        Messages.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to the #{dept} department")
+        Messages.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{dept}")
       elsif reason.end_with?("condition")
-        Messages.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to the #{reason} department")
+        Messages.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{reason}")
       else
-        Messages.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to the #{club_full[reason.gsub("capacity", "name")]}")
+        Messages.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{club_full[reason.gsub("capacity", "name")]}")
       end
     end
   end

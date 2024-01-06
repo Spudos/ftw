@@ -14,10 +14,15 @@ module TurnsStadiumHelper
         var3: turn.var3,
         Actioned: turn.date_completed
       }
-  end
+      end
 
     hash.each do |key, value|
-      bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], value[:var2], value[:var3])
+      if value[:var2] == ""
+        cost = 100000
+      else
+        cost = value[:var2].to_i * 1000
+      end
+      bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], value[:var2], cost)
       add_to_stadium_upgrades(value[:action_id], value[:week], value[:club], value[:var1], value[:var2])
     end
   end
