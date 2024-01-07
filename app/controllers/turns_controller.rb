@@ -63,14 +63,24 @@ class TurnsController < ApplicationController
   end
 
   def process_turn
-    stadium_upgrades(params[:week])
-    property_upgrades(params[:week])
-    player_upgrades(params[:week])
-    coach_upgrades(params[:week])
-    increment_upgrades
-
-    redirect_to request.referrer
+    errors = [] # Initialize an empty array to store any errors
+  
+    begin
+      stadium_upgrades(params[:week])
+      property_upgrades(params[:week])
+      player_upgrades(params[:week])
+      coach_upgrades(params[:week])
+      increment_upgrades
+  
+      notice = "Processes ran successfully."
+    rescue StandardError => e
+      errors << "Error occurred during processing: #{e.message}"
+      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
+    end
+  
+    redirect_to request.referrer, notice: notice
   end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

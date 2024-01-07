@@ -62,52 +62,67 @@ class TurnsheetsController < ApplicationController
   end
 
   def process_turnsheet
+    errors = [] # Initialize an empty array to store any errors
+  
     Turnsheet.find_each do |turnsheet|
       next if turnsheet.processed.present?
-
+  
       turnsheet.save # Save the Turnsheet record first
-
+  
       Selection.where(club: turnsheet.club).destroy_all
-
+  
       (1..11).each do |i|
         Selection.create(club: turnsheet.club, player_id: turnsheet.send("player_#{i}"), turnsheet: turnsheet)
       end
-
+  
       if turnsheet.coach_upg.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'coach', var2: turnsheet.coach_upg, var3: 500000, turnsheet: turnsheet })
       end
-
+  
       if turnsheet.prop_upg.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'prop', var2: turnsheet.prop_upg, var3: 250000, turnsheet: turnsheet })
       end
-
+  
       if turnsheet.train_gkp.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_gkp, var3: turnsheet.train_gkp_skill, turnsheet: turnsheet })
       end
-
+  
       if turnsheet.train_dfc.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_dfc, var3: turnsheet.train_dfc_skill, turnsheet: turnsheet })
       end
-
+  
       if turnsheet.train_mid.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_mid, var3: turnsheet.train_mid_skill, turnsheet: turnsheet })
       end
-
+  
       if turnsheet.train_att.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_att, var3: turnsheet.train_att_skill, turnsheet: turnsheet })
       end
-
+  
       if turnsheet.stad_upg.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stad_upg, var2: turnsheet.stad_amt, var3: turnsheet.val, turnsheet: turnsheet })
       end
-
+  
       if turnsheet.stad_cond_upg.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stad_cond_upg, var3: 100000, turnsheet: turnsheet })
       end
-
+  
       turnsheet.update(processed: DateTime.now)
+    rescue StandardError => e
+      errors << "Error processing turnsheet with ID #{turnsheet.id}: #{e.message}"
+    end
+  
+    if errors.empty?
+      notice = "Turnsheets were processed successfully."
+    else
+      notice = "Errors occurred while processing turnsheets:\n\n#{errors.join("\n")}"
+    end
+  
+    respond_to do |format|
+      format.html { redirect_to turnsheets_url, notice: notice }
     end
   end
+  
 
   private
 
