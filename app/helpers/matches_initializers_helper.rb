@@ -85,7 +85,9 @@ module MatchesInitializersHelper
     elsif @cha_res == 'away'
       @commentary = chance_commentary.gsub('{team}', away_team)
     else
-      @commentary = general_commentary
+      team_names = [away_team, home_team]
+      selected_team = team_names.sample
+      @commentary = general_commentary.gsub('{team}', selected_team)
     end
   end
 end
