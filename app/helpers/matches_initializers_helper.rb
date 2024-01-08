@@ -1,6 +1,5 @@
 module MatchesInitializersHelper
   def initialize_sqd(fixture)
-
     @match_id = fixture[:match_id].to_i
     @week_number = fixture[:week_number].to_i
     @club_hm = fixture[:club_hm]
@@ -71,11 +70,13 @@ module MatchesInitializersHelper
     chance_commentary = Template.random_match_chance_commentary
     chance_tar_commentary = Template.random_match_chance_tar_commentary
     goal_commentary = Template.random_match_goal_commentary
+    home_name = @sqd_hm.select { |player| player.pos != "gkp" }.map(&:name)
+    away_name = @sqd_aw.select { |player| player.pos != "gkp" }.map(&:name)
 
     if @goal_scored == 'home goal'
-      @commentary = goal_commentary.gsub('{team}', home_team).gsub('{assister}', assister).gsub('{scorer}', scorer)
+      @commentary = goal_commentary.gsub('{team}', home_team).gsub('{assister}', assister).gsub('{scorer}', scorer).gsub('{player}', home_name.sample)
     elsif @goal_scored == 'away goal'
-      @commentary = goal_commentary.gsub('{team}', away_team).gsub('{assister}', assister).gsub('{scorer}', scorer)
+      @commentary = goal_commentary.gsub('{team}', away_team).gsub('{assister}', assister).gsub('{scorer}', scorer).gsub('{player}', away_name.sample)
     elsif @cha_res == 'home' && @cha_on_tar == 'home'
       @commentary = chance_tar_commentary.gsub('{team}', home_team)
     elsif @cha_res == 'away' && @cha_on_tar == 'away'
