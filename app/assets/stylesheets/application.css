@@ -30,7 +30,7 @@ th {
   text-align: center;
 }
 
-#match {
+#match, #match_commentary {
   display: flex;
   border-radius: 10px;
   background-color: whitesmoke;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_08_083023) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_08_152155) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -56,6 +56,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_08_083023) do
     t.boolean "managed"
     t.string "manager"
     t.string "manager_email"
+  end
+
+  create_table "commentaries", force: :cascade do |t|
+    t.string "game_id"
+    t.integer "minute"
+    t.text "commentary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "fixtures", force: :cascade do |t|
@@ -153,6 +161,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_08_083023) do
   create_table "selections", force: :cascade do |t|
     t.string "club"
     t.integer "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "commentary_type"
+    t.string "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

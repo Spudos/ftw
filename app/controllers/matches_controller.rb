@@ -85,11 +85,13 @@ class MatchesController < ApplicationController
       initialize_cha_count
       initialize_cha_on_tar
       initialize_goal_scored?(i)
+      initialize_commentary
       initialize_build_results(i)
     end
   end
 
   def initialize_end_of_game
+    Commentary.create(@res)
     initialize_possession
     initialize_motm
     initalize_save

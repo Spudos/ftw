@@ -109,4 +109,19 @@
     </table>
   </div>
 </div>
-
+  <div id="match_commentary">
+    <h3>Match Commentary</h3>
+    <table>
+      <tr>
+        <th>Minute</th>
+        <th>Commentary</th>
+      </tr>
+      <% comm = Commentary.where(game_id: @match.match_id) %>
+      <% comm.each do |comment| %>
+        <tr>
+          <td><%= comment.minute %></td>
+          <td><%= comment.commentary %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>

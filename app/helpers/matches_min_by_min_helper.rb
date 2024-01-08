@@ -75,7 +75,7 @@ module MatchesMinByMinHelper
       assist = top_players.sample
     end
 
-    goal = { scorer: scorer, assist: assist , time: i}
+    @goal = { scorer: scorer, assist: assist , time: i}
 
     player_stats = {}
     sqd_pl.each do |player|
@@ -91,6 +91,6 @@ module MatchesMinByMinHelper
       end
     end
 
-    { goal: goal, player_stats: player_stats }
+    { goal: @goal, player_stats: player_stats }
   end
 end

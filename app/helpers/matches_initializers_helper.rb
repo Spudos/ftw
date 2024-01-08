@@ -47,17 +47,9 @@ module MatchesInitializersHelper
   def initialize_build_results(i)
     @res <<
       {
-        number: i + 1,
-        hm_mod: @hm_mod,
-        aw_mod: @aw_mod,
-        cha: @cha,
-        cha_res: @cha_res,
-        cha_count_hm: @cha_count_hm,
-        cha_count_aw: @cha_count_aw,
-        cha_on_tar: @cha_on_tar,
-        goal_scored?: @goal_scored,
-        assist: @goal.empty? ? nil : @goal[:assist],
-        scorer: @goal.empty? ? nil : @goal[:scorer]
+        game_id: @match_id,
+        minute: i + 1,
+        commentary: @commentary
       }
   end
 
@@ -68,5 +60,30 @@ module MatchesInitializersHelper
   def initialize_motm
     @motm_hm = select_motm(@sqd_pl_hm)
     @motm_aw = select_motm(@sqd_pl_aw)
+  end
+
+  def initialize_commentary
+    home_team = Club.find_by(abbreviation: @club_hm)&.name
+    away_team = Club.find_by(abbreviation: @club_hm)&.name
+    scorer = Player.find_by(id: @goal[:scorer])&.name
+    assister = Player.find_by(id: @goal[:assist])&.name
+    general_commentary = Template.random_match_general_commentary
+    chance_commentary = Template.random_match_chance_commentary
+
+    if @goal_scored == 'home goal'
+      @commentary = "Great play by #{home_team} as #{assister} creates a great chance for #{scorer}.  He hits the shot well and it goes in, great strike!"
+    elsif @goal_scored == 'away goal'
+      @commentary = @commentary = "Great play by #{away_team} as #{assister} creates a great chance for #{scorer}.  He hits the shot well and it goes in, great strike!"
+    elsif @cha_res == 'home' && @cha_on_tar == 'home'
+      @commentary = "#{home_team} have a chance that is on target but they miss"
+    elsif @cha_res == 'away' && @cha_on_tar == 'away'
+      @commentary = "#{away_team} have a chance that is on target but they miss"
+    elsif @cha_res == 'home'
+      @commentary = home_team + chance_commentary
+    elsif @cha_res == 'away'
+      @commentary = away_team + chance_commentary
+    else
+      @commentary = general_commentary
+    end
   end
 end
