@@ -64,24 +64,26 @@ module MatchesInitializersHelper
 
   def initialize_commentary
     home_team = Club.find_by(abbreviation: @club_hm)&.name
-    away_team = Club.find_by(abbreviation: @club_hm)&.name
+    away_team = Club.find_by(abbreviation: @club_aw)&.name
     scorer = Player.find_by(id: @goal[:scorer])&.name
     assister = Player.find_by(id: @goal[:assist])&.name
     general_commentary = Template.random_match_general_commentary
     chance_commentary = Template.random_match_chance_commentary
+    chance_tar_commentary = Template.random_match_chance_tar_commentary
+    goal_commentary = Template.random_match_goal_commentary
 
     if @goal_scored == 'home goal'
-      @commentary = "Great play by #{home_team} as #{assister} creates a great chance for #{scorer}.  He hits the shot well and it goes in, great strike!"
+      @commentary = goal_commentary.gsub('{team}', home_team).gsub('{assister}', assister).gsub('{scorer}', scorer)
     elsif @goal_scored == 'away goal'
-      @commentary = @commentary = "Great play by #{away_team} as #{assister} creates a great chance for #{scorer}.  He hits the shot well and it goes in, great strike!"
+      @commentary = goal_commentary.gsub('{team}', away_team).gsub('{assister}', assister).gsub('{scorer}', scorer)
     elsif @cha_res == 'home' && @cha_on_tar == 'home'
-      @commentary = "#{home_team} have a chance that is on target but they miss"
+      @commentary = chance_tar_commentary.gsub('{team}', home_team)
     elsif @cha_res == 'away' && @cha_on_tar == 'away'
-      @commentary = "#{away_team} have a chance that is on target but they miss"
+      @commentary = chance_tar_commentary.gsub('{team}', away_team)
     elsif @cha_res == 'home'
-      @commentary = home_team + chance_commentary
+      @commentary = chance_commentary.gsub('{team}', home_team)
     elsif @cha_res == 'away'
-      @commentary = away_team + chance_commentary
+      @commentary = chance_commentary.gsub('{team}', away_team)
     else
       @commentary = general_commentary
     end
