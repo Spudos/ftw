@@ -1,1 +1,12 @@
-home index
+<% if current_user %>
+    hello <%= current_user.email %><br>
+    you are a <%= current_user.role %><br>
+    <%= link_to "sign out", destroy_user_session_path, 'data-turbo-method': :delete %><br>
+    <% if current_user.gm? %>
+    users: <%= User.count %>
+    <% end %>
+<% else %>
+  Not logged in<br>
+  <%= link_to "sign up", new_user_registration_path %><br>
+  <%= link_to "sign in", new_user_session_path %>
+<% end %>

@@ -8,7 +8,7 @@ gem 'pry-rails', group: :development
 gem 'will_paginate', '~> 4.0'
 gem 'sassc-rails', '~> 2.1'
 gem 'annotate_models'
-
+gem 'pundit'
 gem 'webpacker'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8"
@@ -77,3 +77,5 @@ group :test do
   gem "selenium-webdriver"
 
 end
+
+gem "devise", "~> 4.9"
