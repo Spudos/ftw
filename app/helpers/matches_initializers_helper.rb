@@ -44,10 +44,12 @@ module MatchesInitializersHelper
   end
 
   def initialize_build_results(i)
+
     @res <<
       {
         game_id: @match_id,
         minute: i + 1,
+        event: @event,
         commentary: @commentary
       }
   end
@@ -74,18 +76,25 @@ module MatchesInitializersHelper
     away_name = @sqd_aw.select { |player| player.pos != "gkp" }.map(&:name)
 
     if @goal_scored == 'home goal'
+      @event = 'Home Goal'
       @commentary = goal_commentary.gsub('{team}', home_team).gsub('{assister}', assister).gsub('{scorer}', scorer).gsub('{player}', home_name.sample)
     elsif @goal_scored == 'away goal'
+      @event = 'Away Goal'
       @commentary = goal_commentary.gsub('{team}', away_team).gsub('{assister}', assister).gsub('{scorer}', scorer).gsub('{player}', away_name.sample)
     elsif @cha_res == 'home' && @cha_on_tar == 'home'
-      @commentary = chance_tar_commentary.gsub('{team}', home_team)
+      @event = 'Good chance'
+      @commentary = chance_tar_commentary.gsub('{team}', home_team).gsub('{player}', home_name.sample)
     elsif @cha_res == 'away' && @cha_on_tar == 'away'
-      @commentary = chance_tar_commentary.gsub('{team}', away_team)
+      @event = 'Good chance'
+      @commentary = chance_tar_commentary.gsub('{team}', away_team).gsub('{player}', away_name.sample)
     elsif @cha_res == 'home'
-      @commentary = chance_commentary.gsub('{team}', home_team)
+      @event = 'Chance'
+      @commentary = chance_commentary.gsub('{team}', home_team).gsub('{player}', home_name.sample)
     elsif @cha_res == 'away'
-      @commentary = chance_commentary.gsub('{team}', away_team)
+      @event = 'Chance'
+      @commentary = chance_commentary.gsub('{team}', away_team).gsub('{player}', away_name.sample)
     else
+      @event = ''
       team_names = [away_team, home_team]
       selected_team = team_names.sample
       @commentary = general_commentary.gsub('{team}', selected_team)

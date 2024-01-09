@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_08_152155) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_09_140332) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -64,6 +64,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_08_152155) do
     t.text "commentary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "event"
+    t.integer "home_score"
+    t.integer "away_score"
   end
 
   create_table "fixtures", force: :cascade do |t|

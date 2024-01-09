@@ -77,3 +77,11 @@ table {
 .turnsheet_headers {
   padding: 10px;
 }
+
+tr.goal {
+  color: darkgreen;
+}
+
+tr.chance {
+  color: orange;
+}

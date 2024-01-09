@@ -3,7 +3,7 @@
 </div>
 <div id="match">
   <div id="match_details">
-    <h3>Home Team: <%= @match.hm_team %></h3>
+    <h3><%= Club.find_by(abbreviation: @match.hm_team)&.name %>(<%= @match.hm_team %>)</h3>
     <table>
       <tr>
         <th>ID</th>
@@ -24,7 +24,7 @@
     </table>
   </div>
   <div>
-    <h3>Away Team: <%= @match.aw_team %></h3>
+    <h3><%= Club.find_by(abbreviation: @match.aw_team)&.name %>(<%= @match.aw_team %>)</h3>
     <table>
       <tr>
         <th>ID</th>
@@ -109,19 +109,37 @@
     </table>
   </div>
 </div>
-  <div id="match_commentary">
-    <h3>Match Commentary</h3>
+<div id="match_commentary">
+  <div>
     <table>
       <tr>
-        <th>Minute</th>
+        <th style="text-align: center;">Minute</th>
+        <th style="text-align: center;">Event</th>
+        <th style="text-align: center;">Home</th>
+        <th style="text-align: center;">v</th>
+        <th style="text-align: center;">Away</th>
         <th>Commentary</th>
       </tr>
       <% comm = Commentary.where(game_id: @match.match_id) %>
+      
+      <% home_score = 0 %>
+      <% away_score = 0 %>
+
       <% comm.each do |comment| %>
-        <tr>
-          <td><%= comment.minute %></td>
+        <% if comment.event == 'Home Goal' %>
+          <% home_score += 1 %>
+        <% elsif comment.event == 'Away Goal'%>
+          <% away_score += 1 %>
+        <% end %>
+        <tr class="<%= comment.event.downcase %>">
+          <td style="text-align: center;"><strong><%= comment.minute %></strong></td>
+          <td style="text-align: center;"><strong><%= comment.event %></strong></td>
+          <td style="text-align: center;"><strong><%= home_score %></strong></td>
+          <td style="text-align: center;"><strong>-</strong></td>
+          <td style="text-align: center;"><strong><%= away_score %></strong></td>
           <td><%= comment.commentary %></td>
         </tr>
       <% end %>
     </table>
   </div>
+</div>
