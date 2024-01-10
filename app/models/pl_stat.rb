@@ -1,10 +1,10 @@
 # == Schema Information
 #
-# Table name: pl_stats
+# Table name: pl_statistics
 #
 #  id         :integer          not null, primary key
 #  player_id  :integer
-#  motm       :integer
+#  man_of_the_match       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  match_id   :integer
@@ -22,7 +22,7 @@ end
 # ---------- -------------------- ------- ------- ----------
 # id         INTEGER              false   true              
 # player_id  INTEGER              true    false             
-# motm       INTEGER              true    false             
+# man_of_the_match       INTEGER              true    false             
 # created_at datetime(6)          false   false             
 # updated_at datetime(6)          false   false             
 # match_id   INTEGER              true    false             

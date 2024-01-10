@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_10_085450) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_10_125816) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -81,20 +81,20 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_085450) do
 
   create_table "matches", force: :cascade do |t|
     t.integer "match_id"
-    t.string "hm_team"
-    t.string "aw_team"
-    t.integer "hm_poss"
-    t.integer "aw_poss"
-    t.integer "hm_cha"
-    t.integer "aw_cha"
-    t.integer "hm_cha_on_tar"
-    t.integer "aw_cha_on_tar"
-    t.string "hm_motm"
-    t.string "aw_motm"
+    t.string "home_team"
+    t.string "away_team"
+    t.integer "home_possession"
+    t.integer "away_possession"
+    t.integer "home_chance"
+    t.integer "away_chance"
+    t.integer "home_chance_on_target"
+    t.integer "away_chance_on_target"
+    t.string "home_man_of_the_match"
+    t.string "away_man_of_the_match"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "hm_goal"
-    t.integer "aw_goal"
+    t.integer "home_goals"
+    t.integer "away_goals"
     t.integer "week_number"
   end
 
@@ -111,17 +111,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_085450) do
   create_table "pl_matches", force: :cascade do |t|
     t.integer "match_id"
     t.integer "player_id"
-    t.integer "match_perf"
+    t.integer "match_performance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "player_pos"
-    t.string "pos_detail"
+    t.string "player_position"
+    t.string "player_position_detail"
     t.integer "tactic"
   end
 
   create_table "pl_stats", force: :cascade do |t|
     t.integer "player_id"
-    t.integer "motm"
+    t.integer "man_of_the_match"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "match_id"
@@ -134,35 +134,35 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_085450) do
     t.string "name"
     t.integer "age"
     t.string "nationality"
-    t.string "pos"
-    t.integer "pa"
-    t.integer "co"
-    t.integer "ta"
-    t.integer "ru"
-    t.integer "sh"
-    t.integer "dr"
-    t.integer "df"
-    t.integer "of"
-    t.integer "fl"
-    t.integer "st"
-    t.integer "cr"
-    t.integer "fit"
+    t.string "position"
+    t.integer "passing"
+    t.integer "control"
+    t.integer "tackling"
+    t.integer "running"
+    t.integer "shooting"
+    t.integer "dribbling"
+    t.integer "defensive_heading"
+    t.integer "offensive_heading"
+    t.integer "flair"
+    t.integer "strength"
+    t.integer "creativity"
+    t.integer "fitness"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "club"
-    t.integer "cons"
-    t.integer "pot_pa"
-    t.integer "pot_co"
-    t.integer "pot_ta"
-    t.integer "pot_ru"
-    t.integer "pot_sh"
-    t.integer "pot_dr"
-    t.integer "pot_df"
-    t.integer "pot_of"
-    t.integer "pot_fl"
-    t.integer "pot_st"
-    t.integer "pot_cr"
-    t.string "pos_detail"
+    t.integer "consistency"
+    t.integer "potential_passing"
+    t.integer "potential_control"
+    t.integer "potential_tackling"
+    t.integer "potential_running"
+    t.integer "potential_shooting"
+    t.integer "potential_dribbling"
+    t.integer "potential_defensive_heading"
+    t.integer "potential_offensive_heading"
+    t.integer "potential_flair"
+    t.integer "potential_strength"
+    t.integer "potential_creativity"
+    t.string "player_position_detail"
   end
 
   create_table "selections", force: :cascade do |t|
@@ -213,23 +213,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_085450) do
     t.string "player_9"
     t.string "player_10"
     t.string "player_11"
-    t.string "stad_upg"
-    t.string "coach_upg"
-    t.string "train_gkp"
-    t.string "train_gkp_skill"
-    t.string "train_dfc"
-    t.string "train_dfc_skill"
-    t.string "train_mid"
-    t.string "train_mid_skill"
-    t.string "train_att"
-    t.string "train_att_skill"
+    t.string "stadium_upgrade"
+    t.string "coach_upgrade"
+    t.string "train_goalkeeper"
+    t.string "train_goalkeeper_skill"
+    t.string "train_defender"
+    t.string "train_defender_skill"
+    t.string "train_midfielder"
+    t.string "train_midfielder_skill"
+    t.string "train_attacker"
+    t.string "train_attacker_skill"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "stad_amt"
+    t.integer "stadium_amount"
     t.datetime "processed"
     t.integer "val"
-    t.string "prop_upg"
-    t.string "stad_cond_upg"
+    t.string "property_upgrade"
+    t.string "stadium_condition_upgrade"
   end
 
   create_table "upgrades", force: :cascade do |t|

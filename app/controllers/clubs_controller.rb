@@ -8,9 +8,8 @@ class ClubsController < ApplicationController
   def show
     @selection = Selection.where(club: params[:id])
     @players = Player.where(club: params[:id])
-    @club_matches = Matches.where('hm_team = ? OR aw_team = ?', params[:id], params[:id])
+    @club_matches = Matches.where('home_team = ? OR away_team = ?', params[:id], params[:id])
     @message = Messages.where(club: params[:id])
-
   end
 
   def new
@@ -62,7 +61,7 @@ class ClubsController < ApplicationController
   end
 
   def club_params
-    params.require(:club).permit(:name, :abbreviation, :ground_name,:stand_n_name, :stand_n_condition, :stand_n_capacity, :stand_s_name, :stand_s_condition, :stand_s_capacity, :stand_e_name, :stand_e_condition, :stand_e_capacity, :stand_w_name, :stand_w_condition, :stand_w_capacity, :pitch,:hospitality, :facilities, :staff_fitness, :staff_gkp, :staff_dfc, :staff_mid, :staff_att, :staff_scouts, :color_primary, :color_secondary, :managed, :manager, :manager_email, :bank_bal)
-  end
+    params.require(:club).permit!
+  end  
 end
 

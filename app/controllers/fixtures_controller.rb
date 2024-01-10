@@ -3,6 +3,5 @@ class FixturesController < ApplicationController
     @fixtures = Fixtures.all
   end
 
-  def show
-  end
+  def show; end
 end

@@ -4,16 +4,16 @@ class CreateMatches < ActiveRecord::Migration[7.0]
       t.integer :match_id
       t.integer :week
       t.string :comp
-      t.string :hm_team
-      t.string :aw_team
-      t.integer :hm_poss
-      t.integer :aw_poss
-      t.integer :hm_cha
-      t.integer :aw_cha
-      t.integer :hm_cha_on_tar
-      t.integer :aw_cha_on_tar
-      t.string :hm_motm
-      t.string :aw_motm
+      t.string :home_team
+      t.string :away_team
+      t.integer :home_possession
+      t.integer :away_possession
+      t.integer :home_cha
+      t.integer :away_cha
+      t.integer :home_chance_on_target
+      t.integer :away_chance_on_target
+      t.string :home_man_of_the_match
+      t.string :away_man_of_the_match
       t.timestamps
     end
   end

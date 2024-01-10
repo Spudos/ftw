@@ -8,10 +8,10 @@
     <option value="nationality">Nat</option>
     <option value="position">Pos</option>
     <option value="total_skill">TS</option>
-    <option value="match_performance_count">Played</option>
+    <option value="match_performanceormance_count">Played</option>
     <option value="goal_count">Goal</option>
     <option value="assist_count">Assist</option>
-    <option value="average_match_performance">Perf</option>
+    <option value="average_match_performanceormance">Perf</option>
   </select>
   <label for="sort_direction">Sort by:</label>
   <select id="sort_direction" name="sort_direction">
@@ -47,10 +47,10 @@
         <td><%= player[:nationality] %></td>
         <td><%= player[:position] %></td>
         <td><%= player[:total_skill] %></td>
-        <td><%= player[:match_performance_count] %></td>
+        <td><%= player[:match_performanceormance_count] %></td>
         <td><%= player[:goal_count] %></td>
         <td><%= player[:assist_count] %></td>
-        <td><%= player[:average_match_performance] %></td>
+        <td><%= player[:average_match_performanceormance] %></td>
         <td><%= link_to "Edit", edit_player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>
       </tr>
     <% end %>

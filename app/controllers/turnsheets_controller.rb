@@ -80,12 +80,12 @@ class TurnsheetsController < ApplicationController
         Selection.create(club: turnsheet.club, player_id: turnsheet.send("player_#{i}"), turnsheet: turnsheet)
       end
 
-      if turnsheet.coach_upg.present?
-        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'coach', var2: turnsheet.coach_upg, var3: 500000, turnsheet: turnsheet })
+      if turnsheet.coach_upgrade.present?
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'coach', var2: turnsheet.coach_upgrade, var3: 500000, turnsheet: turnsheet })
       end
 
-      if turnsheet.prop_upg.present?
-        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'prop', var2: turnsheet.prop_upg, var3: 250000, turnsheet: turnsheet })
+      if turnsheet.prop_upgrade.present?
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'prop', var2: turnsheet.prop_upgrade, var3: 250000, turnsheet: turnsheet })
       end
 
       if turnsheet.train_gkp.present?
@@ -104,12 +104,12 @@ class TurnsheetsController < ApplicationController
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_att, var3: turnsheet.train_att_skill, turnsheet: turnsheet })
       end
 
-      if turnsheet.stad_upg.present?
-        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stad_upg, var2: turnsheet.stad_amt, var3: turnsheet.val, turnsheet: turnsheet })
+      if turnsheet.stad_upgrade.present?
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stad_upgrade, var2: turnsheet.stad_amt, var3: turnsheet.val, turnsheet: turnsheet })
       end
   
-      if turnsheet.stad_cond_upg.present?
-        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stad_cond_upg, var3: 100000, turnsheet: turnsheet })
+      if turnsheet.stad_cond_upgrade.present?
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stad_cond_upgrade, var3: 100000, turnsheet: turnsheet })
       end
 
       turnsheet.update(processed: DateTime.now)
@@ -128,15 +128,13 @@ class TurnsheetsController < ApplicationController
     end
   end
 
-
   private
 
   def set_turnsheet
     @turnsheet = Turnsheet.find(params[:id])
   end
 
-    # Only allow a list of trusted parameters through.
   def turnsheet_params
-    params.require(:turnsheet).permit(:week, :club, :manager, :email, :player_1, :player_2, :player_3, :player_4, :player_5, :player_6,:player_7, :player_8, :player_9, :player_10, :player_11, :stad_upg, :coach_upg, :train_gkp, :train_gkp_skill, :train_dfc, :train_dfc_skill, :train_mid, :train_mid_skill, :train_att, :train_att_skill, :stad_amt, :coach_upg, :val, :manager, :email, :processed, :prop_upg, :stad_cond_upg)
+    params.require(:turnsheet).permit!
   end
 end

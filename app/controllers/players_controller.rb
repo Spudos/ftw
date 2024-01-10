@@ -1,6 +1,5 @@
 class PlayersController < ApplicationController
   include PlayersHelper
-  include PlayersPotUpdateHelper
 
   before_action :set_player
   def index
@@ -73,13 +72,6 @@ class PlayersController < ApplicationController
     end
   end
 
-  def pot_update
-    update_pot_for_gkp
-    update_pot_for_dfc
-    update_pot_for_mid
-    update_pot_for_att
-  end
-
   private
 
   def set_player
@@ -87,7 +79,6 @@ class PlayersController < ApplicationController
   end
 
   def player_params
-    params.require(:player).permit(:name, :age, :nationality, :pos, :pa, :pot_pa, :co, :pot_co, :ta, :pot_ta, :ru, :pot_ru, :sh, :pot_sh, :dr, :pot_dr, :df, :pot_df, :of, :pot_of, :fl, :pot_fl, :st, :pot_st, :cr, :pot_cr, :fit, :club, :cons)
-  end
-  
+    params.require(:player).permit!
+  end  
 end

@@ -50,7 +50,7 @@
             <tr scope="row">
               <td>Stand</td>
               <td>
-                <%= form.select :stad_upg, options_for_select({ "North Stand" => "stand_n_capacity", "South Stand" => "stand_s_capacity", "East Stand" => "stand_e_capacity", "West Stand" => "stand_w_capacity" }, @turnsheet.stad_upg), prompt: "Select a stand" %>
+                <%= form.select :stad_upgrade, options_for_select({ "North Stand" => "stand_n_capacity", "South Stand" => "stand_s_capacity", "East Stand" => "stand_e_capacity", "West Stand" => "stand_w_capacity" }, @turnsheet.stad_upgrade), prompt: "Select a stand" %>
               </td>
               <td>
                 <%= form.select :stad_amt, options_for_select([2000, 4000, 6000, 8000, 10000], @turnsheet.stad_amt), prompt: "How many seats?" %>
@@ -58,19 +58,19 @@
             </tr>
             <td>Stand condition</td>
               <td>
-                <%= form.select :stad_cond_upg, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }, @turnsheet.stad_upg), prompt: "Select a stand" %>
+                <%= form.select :stad_cond_upgrade, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }, @turnsheet.stad_upgrade), prompt: "Select a stand" %>
               </td>
             </tr>
             <tr scope="row">
               <td>Coach</td>
               <td>
-                <%= form.select :coach_upg, options_for_select({ "Fitness" => "staff_fit", "Scout" => "staff_scout", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, @turnsheet.coach_upg), prompt: "Select a coach" %>
+                <%= form.select :coach_upgrade, options_for_select({ "Fitness" => "staff_fit", "Scout" => "staff_scout", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, @turnsheet.coach_upgrade), prompt: "Select a coach" %>
               </td>
             </tr>
             <tr scope="row">
               <td>Property</td>
               <td>
-                <%= form.select :prop_upg, options_for_select({ "Not selected" => "None", "Pich" => "Pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, selected: "None") %>
+                <%= form.select :prop_upgrade, options_for_select({ "Not selected" => "None", "Pich" => "Pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, selected: "None") %>
               </td>
             </tr>    
           </table>

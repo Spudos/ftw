@@ -3,7 +3,7 @@
 </div>
 <div id="match">
   <div id="match_details">
-    <h3><%= Club.find_by(abbreviation: @match.hm_team)&.name %>(<%= @match.hm_team %>)</h3>
+    <h3><%= Club.find_by(abbreviation: @match.home_team)&.name %>(<%= @match.home_team %>)</h3>
     <table>
       <tr>
         <th>ID</th>
@@ -12,19 +12,19 @@
         <th>Match Perf</th>
       </tr>
       <% @players.each do |player| %>
-        <% if player.club == @match.hm_team %>
+        <% if player.club == @match.home_team %>
           <tr>
             <td><%= player.id %></td>
             <td><%= player.name %></td>
-            <td><%= (player.pos + player.pos_detail).upcase %></td>
-            <td><%= @pl_match.find { |pl_m| pl_m.player_id == player.id }&.match_perf %></td>
+            <td><%= (player.position + player.player_position_detail).upcase %></td>
+            <td><%= @pl_match.find { |pl_m| pl_m.player_id == player.id }&.match_performance %></td>
           </tr>
         <% end %>
       <% end %>
     </table>
   </div>
   <div>
-    <h3><%= Club.find_by(abbreviation: @match.aw_team)&.name %>(<%= @match.aw_team %>)</h3>
+    <h3><%= Club.find_by(abbreviation: @match.away_team)&.name %>(<%= @match.away_team %>)</h3>
     <table>
       <tr>
         <th>ID</th>
@@ -33,12 +33,12 @@
         <th>Match Perf</th>
       </tr>
       <% @players.each do |player| %>
-        <% if player.club == @match.aw_team %>
+        <% if player.club == @match.away_team %>
           <tr>
             <td><%= player.id %></td>
             <td><%= player.name %></td>
-            <td><%= (player.pos + player.pos_detail).upcase %></td>
-            <td><%= @pl_match.find { |pl_m| pl_m.player_id == player.id }&.match_perf %></td>
+            <td><%= (player.position + player.player_position_detail).upcase %></td>
+            <td><%= @pl_match.find { |pl_m| pl_m.player_id == player.id }&.match_performance %></td>
           </tr>
         <% end %>
       <% end %>
@@ -59,33 +59,33 @@
       </tr>
       <tr>
         <td>Club id</td>
-        <td><%= @match.hm_team %></td>
-        <td><%= @match.aw_team %></td>
+        <td><%= @match.home_team %></td>
+        <td><%= @match.away_team %></td>
       </tr>
       <tr>
-        <td>Possession</td>
-        <td><%= @match.hm_poss %></td>
-        <td><%= @match.aw_poss %></td>
+        <td>possessionession</td>
+        <td><%= @match.home_possession %></td>
+        <td><%= @match.away_possession %></td>
       </tr>
       <tr>
         <td>Chances</td>
-        <td><%= @match.hm_cha %></td>
-        <td><%= @match.aw_cha %></td>
+        <td><%= @match.home_chance %></td>
+        <td><%= @match.away_chance %></td>
       </tr>
       <tr>
         <td>On Target</td>
-        <td><%= @match.hm_cha_on_tar %></td>
-        <td><%= @match.aw_cha_on_tar %></td>
+        <td><%= @match.home_chance_on_target %></td>
+        <td><%= @match.away_chance_on_target %></td>
       </tr>
       <tr>
         <td>Goals</td>
-        <td><%= @match.hm_goal %></td>
-        <td><%= @match.aw_goal %></td>
+        <td><%= @match.home_goals %></td>
+        <td><%= @match.away_goals %></td>
       </tr>  
       <tr>
-        <td>MOTM</td>
-        <td><%= @players.find { |player| player.id == @match.hm_motm.to_i }&.name %></td>
-        <td><%= @players.find { |player| player.id == @match.aw_motm.to_i }&.name %></td>
+        <td>man_of_the_match</td>
+        <td><%= @players.find { |player| player.id == @match.home_man_of_the_match.to_i }&.name %></td>
+        <td><%= @players.find { |player| player.id == @match.away_man_of_the_match.to_i }&.name %></td>
       </tr> 
     </table>
   </div>
@@ -98,7 +98,7 @@
         <th>Event</th>
         <th>Player</th>
       </tr>
-      <% @pl_stats.each do |pl_stat| %>
+      <% @pl_statistics.each do |pl_stat| %>
         <tr>
           <td><%= @players.find { |player| player.id == pl_stat.player_id }&.club %></td>
           <td><%= pl_stat.time %></td>

@@ -3,7 +3,7 @@ class CreatePlMatches < ActiveRecord::Migration[7.0]
     create_table :pl_matches do |t|
       t.integer :match_id
       t.integer :player_id
-      t.integer :match_perf
+      t.integer :match_performance
 
       t.timestamps
     end

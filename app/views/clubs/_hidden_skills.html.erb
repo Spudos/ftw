@@ -17,7 +17,7 @@
       <th scope="col">Pot FL</th>
       <th scope="col">Pot ST</th>
       <th scope="col">Pot CR</th>
-      <th scope="col">Cons</th>
+      <th scope="col">consistency</th>
 
     </tr>
   </thead>
@@ -27,19 +27,19 @@
         <td><%= player.name %></td>
         <td><%= player.age %></td>
         <td><%= player.nationality %></td>
-        <td><%= (player.pos + player.pos_detail).upcase %></td>
-        <td><%= player.pot_pa %></td>
-        <td><%= player.pot_co %></td>
-        <td><%= player.pot_ta %></td>
-        <td><%= player.pot_ru %></td>
-        <td><%= player.pot_sh %></td>
-        <td><%= player.pot_dr %></td>
-        <td><%= player.pot_df %></td>
-        <td><%= player.pot_of %></td>
-        <td><%= player.pot_fl %></td>
-        <td><%= player.pot_st %></td>
-        <td><%= player.pot_cr %></td>
-        <td><%= player.cons %></td>
+        <td><%= (player.position + player.player_position_detail).upcase %></td>
+        <td><%= player.potential_pa %></td>
+        <td><%= player.potential_co %></td>
+        <td><%= player.potential_ta %></td>
+        <td><%= player.potential_ru %></td>
+        <td><%= player.potential_sh %></td>
+        <td><%= player.potential_dr %></td>
+        <td><%= player.potential_df %></td>
+        <td><%= player.potential_of %></td>
+        <td><%= player.potential_fl %></td>
+        <td><%= player.potential_st %></td>
+        <td><%= player.potential_cr %></td>
+        <td><%= player.consistency %></td>
       </tr>
     <% end %>
   </tbody>

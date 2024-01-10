@@ -11,11 +11,11 @@ match index
           <th>base_skill</th>
           <th>pos_skl</th>
           <th>total_skill</th>
-          <th>match_perf</th>
+          <th>match_performance</th>
         </tr>
       </thead>
       <tbody>
-        <% @sqd_pl_hm.each do |player| %>
+        <% @sqd_pl_home.each do |player| %>
           <tr>
             <td><%= player[:club] %></td>
             <td><%= player[:name] %></td>
@@ -23,7 +23,7 @@ match index
             <td><%= player[:base_skl] %></td>
             <td><%= player[:pos_skl] %></td>
             <td><%= player[:total_skill] %></td>
-            <td><%= player[:match_perf] %></td>
+            <td><%= player[:match_performance] %></td>
           </tr>
         <% end %>
       </tbody>
@@ -40,11 +40,11 @@ match index
           <th>base_skill</th>
           <th>pos_skl</th>
           <th>total_skill</th>
-          <th>match_perf</th>
+          <th>match_performance</th>
         </tr>
       </thead>
       <tbody>
-        <% @sqd_pl_aw.each do |player| %>
+        <% @sqd_pl_away.each do |player| %>
           <tr>
             <td><%= player[:club] %></td>
             <td><%= player[:name] %></td>
@@ -52,7 +52,7 @@ match index
             <td><%= player[:base_skl] %></td>
             <td><%= player[:pos_skl] %></td>
             <td><%= player[:total_skill] %></td>
-            <td><%= player[:match_perf] %></td>
+            <td><%= player[:match_performance] %></td>
           </tr>
         <% end %>
       </tbody>
@@ -74,30 +74,30 @@ match index
       <tbody>
         <tr>
           <td>dfc</td>
-          <td><%= @dfc_hm %></td>
-          <td><%= @dfc_aw %></td>
+          <td><%= @dfc_home %></td>
+          <td><%= @dfc_away %></td>
         </tr>
         <tr>
           <td>mid</td>
-          <td><%= @mid_hm %></td>
-          <td><%= @mid_aw %></td>
+          <td><%= @mid_home %></td>
+          <td><%= @mid_away %></td>
         </tr>
         <tr>
           <td>att</td>
-          <td><%= @att_hm %></td>
-          <td><%= @att_aw %></td>
+          <td><%= @att_home %></td>
+          <td><%= @att_away %></td>
         </tr>    
         <tr>
           <td>Total</td>
-          <td><%= @dfc_hm + @mid_hm + @att_hm %></td>
-          <td><%= @dfc_aw + @mid_aw + @att_aw %></td>
+          <td><%= @dfc_home + @mid_home + @att_home %></td>
+          <td><%= @dfc_away + @mid_away + @att_away %></td>
         </tr>
       </tbody>
     </table>
   </div>
   <div style="flex: 1;">
     <table>
-      <h2>Stats</h2>
+      <h2>statistics</h2>
       <thead>
         <tr>
           <th>stat</th>
@@ -107,29 +107,29 @@ match index
       </thead>
       <tbody>
           <tr>
-            <td>possession</td>
-            <td><%= @hm_poss %></td>
-            <td><%= @aw_poss %></td>
+            <td>possessionession</td>
+            <td><%= @home_possession %></td>
+            <td><%= @away_possession %></td>
           </tr>
           <tr>
             <td>Chances</td>
-            <td><%= @cha_count_hm %></td>
-            <td><%= @cha_count_aw %></td>
+            <td><%= @chance_count_home %></td>
+            <td><%= @chance_count_away %></td>
           </tr>
           <tr>
             <td>On target</td>
-            <td><%= @cha_on_tar_hm %></td>
-            <td><%= @cha_on_tar_aw %></td>
+            <td><%= @chance_on_target_home %></td>
+            <td><%= @chance_on_target_away %></td>
           </tr>
           <tr>
             <td>Goals</td>
-            <td><%= @goal_hm %></td>
-            <td><%= @goal_aw %></td>
+            <td><%= @goal_home %></td>
+            <td><%= @goal_away %></td>
           </tr>
           <tr>
-            <td>motm</td>
-            <td><%= @motm_hm %></td>
-            <td><%= @motm_aw %></td>
+            <td>man_of_the_match</td>
+            <td><%= @man_of_the_match_home %></td>
+            <td><%= @man_of_the_match_away %></td>
           </tr>
       </tbody>
     </table>
@@ -143,10 +143,10 @@ match index
       <th>minute</th>
       <th>home_mod</th>
       <th>away_mod</th>
-      <th>cha_res</th>
-      <th>cha_count_home</th>
-      <th>cha_count_away</th>
-      <th>cha_on_tar?</th>
+      <th>chance_res</th>
+      <th>chance_count_home</th>
+      <th>chance_count_awayay</th>
+      <th>chance_on_target?</th>
       <th>scored?</th>
       <th>assist</th>
       <th>scorer</th>
@@ -156,12 +156,12 @@ match index
     <% @res.each do |result| %>
       <tr>
         <td><%= result[:number] %></td>
-        <td><%= result[:hm_mod] %></td>
-        <td><%= result[:aw_mod] %></td>
-        <td><%= result[:cha_res] %></td>
-        <td><%= result[:cha_count_hm] %></td>
-        <td><%= result[:cha_count_aw] %></td>
-        <td><%= result[:cha_on_tar] %></td>
+        <td><%= result[:home_mod] %></td>
+        <td><%= result[:away_mod] %></td>
+        <td><%= result[:chance_res] %></td>
+        <td><%= result[:chance_count_home] %></td>
+        <td><%= result[:chance_count_away] %></td>
+        <td><%= result[:chance_on_target] %></td>
         <td><%= result[:goal_scored?]%></td>
         <td><%= result[:assist] %></td>
         <td><%= result[:scorer] %></td>

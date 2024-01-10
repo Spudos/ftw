@@ -66,11 +66,11 @@ class TurnsController < ApplicationController
     errors = [] # Initialize an empty array to store any errors
   
     begin
-      stadium_upgrades(params[:week])
-      property_upgrades(params[:week])
-      player_upgrades(params[:week])
-      coach_upgrades(params[:week])
-      increment_upgrades
+      stadium_upgraderades(params[:week])
+      property_upgraderades(params[:week])
+      player_upgraderades(params[:week])
+      coach_upgraderades(params[:week])
+      increment_upgraderades
   
       notice = "Processes ran successfully."
     rescue StandardError => e
@@ -90,6 +90,6 @@ class TurnsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def turn_params
-      params.require(:turn).permit(:week, :club, :var1, :var2, :var3)
+      params.require(:turn).permit!
     end
 end

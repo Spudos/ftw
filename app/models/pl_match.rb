@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  match_id   :integer
 #  player_id  :integer
-#  match_perf :integer
+#  match_performance :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -21,7 +21,7 @@ end
 # id         INTEGER              false   true              
 # match_id   INTEGER              true    false             
 # player_id  INTEGER              true    false             
-# match_perf INTEGER              true    false             
+# match_performance INTEGER              true    false             
 # created_at datetime(6)          false   false             
 # updated_at datetime(6)          false   false             
 #

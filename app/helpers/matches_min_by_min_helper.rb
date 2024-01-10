@@ -1,12 +1,12 @@
 module MatchesMinByMinHelper
   def cha?
-    cha = @hm_mod - @aw_mod
+    cha = @home_mod - @away_mod
     if cha >= 0 && rand(0..100) < 16
-      @cha_res = 'home'
+      @chance_res = 'home'
     elsif cha.negative? && rand(0..100) < 16
-      @cha_res = 'away'
+      @chance_res = 'away'
     else
-      @cha_res = add_rand_cha
+      @chance_res = add_rand_cha
     end
   end
 
@@ -14,43 +14,43 @@ module MatchesMinByMinHelper
     random_number = rand(1..100)
 
     if random_number <= 5
-      @cha_res = 'home'
+      @chance_res = 'home'
     elsif random_number > 5 && random_number <= 10
-      @cha_res = 'away'
+      @chance_res = 'away'
     else
-      @cha_res = 'none'
+      @chance_res = 'none'
     end
   end
 
-  def cha_count
-    if @cha_res == 'home'
-      @cha_count_hm += 1
-    elsif @cha_res == 'away'
-      @cha_count_aw += +1
+  def chance_count
+    if @chance_res == 'home'
+      @chance_count_home += 1
+    elsif @chance_res == 'away'
+      @chance_count_away += +1
     end
   end
 
-  def cha_on_tar(att_hm, att_aw)
-    if @cha_res == 'home' && att_hm / 2 > rand(0..100)
-      @cha_on_tar = 'home'
-      @cha_on_tar_hm += 1
-    elsif @cha_res == 'away' && att_aw / 2 > rand(0..100)
-      @cha_on_tar = 'away'
-      @cha_on_tar_aw += 1
+  def chance_on_target(att_home, att_away)
+    if @chance_res == 'home' && att_home / 2 > rand(0..100)
+      @chance_on_target = 'home'
+      @chance_on_target_home += 1
+    elsif @chance_res == 'away' && att_away / 2 > rand(0..100)
+      @chance_on_target = 'away'
+      @chance_on_target_away += 1
     else
-      @cha_on_tar = 'none'
+      @chance_on_target = 'none'
     end
   end
 
-  def goal_scored?(att_hm, att_aw, i)
-    if @cha_on_tar == 'home' && att_hm / 3 > rand(0..100)
+  def goal_scored?(att_home, att_away, i)
+    if @chance_on_target == 'home' && att_home / 3 > rand(0..100)
       @goal_scored = 'home goal'
-      @goal_hm += 1
-      assist_and_scorer(@sqd_pl_hm, i)
-    elsif @cha_on_tar == 'away' && att_aw / 3 > rand(0..100)
+      @goal_home += 1
+      assist_and_scorer(@sqd_pl_home, i)
+    elsif @chance_on_target == 'away' && att_away / 3 > rand(0..100)
       @goal_scored = 'away goal'
-      @goal_aw += 1
-      assist_and_scorer(@sqd_pl_aw, i)
+      @goal_away += 1
+      assist_and_scorer(@sqd_pl_away, i)
     else
       @goal_scored = 'no'
       @goal = { scorer: 'none', assist: 'none' }
@@ -63,7 +63,7 @@ module MatchesMinByMinHelper
 
     filtered_players = sqd_pl.reject { |player| player[:pos] == 'gkp' }
 
-    top_players = filtered_players.sort_by { |player| -player[:match_perf] }
+    top_players = filtered_players.sort_by { |player| -player[:match_performance] }
                                   .first(5)
                                   .map { |player| player[:id] }
 
@@ -77,20 +77,20 @@ module MatchesMinByMinHelper
 
     @goal = { scorer: scorer, assist: assist , time: i}
 
-    player_stats = {}
+    player_statistics = {}
     sqd_pl.each do |player|
-      player_stats[player[:id]] = { goals: 0, assists: 0, time: i, match_id: match_id }
+      player_statistics[player[:id]] = { goals: 0, assists: 0, time: i, match_id: match_id }
     end
 
-    player_stats[scorer][:goals] += 1
-    player_stats[assist][:assists] += 1
+    player_statistics[scorer][:goals] += 1
+    player_statistics[assist][:assists] += 1
 
-    player_stats.each do |player_id, stats|
-      if stats[:goals] > 0 || stats[:assists] > 0
-        PlStat.create(player_id: player_id, match_id: stats[:match_id], time: stats[:time], goal: stats[:goals] > 0, assist: stats[:assists] > 0)
+    player_statistics.each do |player_id, statistics|
+      if statistics[:goals] > 0 || statistics[:assists] > 0
+        PlStat.create(player_id: player_id, match_id: statistics[:match_id], time: statistics[:time], goal: statistics[:goals] > 0, assist: statistics[:assists] > 0)
       end
     end
 
-    { goal: @goal, player_stats: player_stats }
+    { goal: @goal, player_statistics: player_statistics }
   end
 end

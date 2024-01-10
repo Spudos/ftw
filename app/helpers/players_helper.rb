@@ -1,11 +1,11 @@
 module PlayersHelper
   def total_goals(player_id)
-    pl_stats = PlStat.where(player_id: player_id, goal: true)
-    pl_stats.sum(:goals)
+    pl_statistics = PlStat.where(player_id: player_id, goal: true)
+    pl_statistics.sum(:goals)
   end
 
   def total_assists(player_id)
-    pl_stats = PlStat.where(player_id: player_id, assist: true)
-    pl_stats.sum(:assists)
+    pl_statistics = PlStat.where(player_id: player_id, assist: true)
+    pl_statistics.sum(:assists)
   end
 end

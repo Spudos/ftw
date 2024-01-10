@@ -2,45 +2,45 @@ module MatchesInitializersHelper
   def initialize_sqd(fixture)
     @match_id = fixture[:match_id].to_i
     @week_number = fixture[:week_number].to_i
-    @club_hm = fixture[:club_hm]
-    @club_aw = fixture[:club_aw]
+    @club_home = fixture[:club_home]
+    @club_awayay = fixture[:club_awayay]
 
-    player_ids_hm = Selection.where(club: @club_hm).pluck(:player_id)
-    player_ids_aw = Selection.where(club: @club_aw).pluck(:player_id)
+    player_ids_home = Selection.where(club: @club_home).pluck(:player_id)
+    player_ids_away = Selection.where(club: @club_awayay).pluck(:player_id)
 
-    @sqd_hm = Player.where(id: player_ids_hm)
-    @sqd_aw = Player.where(id: player_ids_aw)
+    @sqd_home = Player.where(id: player_ids_home)
+    @sqd_away = Player.where(id: player_ids_away)
   end
 
-  def initialize_sqd_pl
-    @sqd_pl_hm = sqd_pl(@sqd_hm)
-    @sqd_pl_aw = sqd_pl(@sqd_aw)
+  def initialize_squad_pl
+    @sqd_pl_home = sqd_pl(@sqd_home)
+    @sqd_pl_away = sqd_pl(@sqd_away)
   end
 
-  def initialize_tm_tot
-    @dfc_hm, @mid_hm, @att_hm = tm_tot(@sqd_pl_hm)
-    @dfc_aw, @mid_aw, @att_aw = tm_tot(@sqd_pl_aw)
+  def initialize_team_total
+    @dfc_home, @mid_home, @att_home = tm_total(@sqd_pl_home)
+    @dfc_away, @mid_away, @att_away = tm_total(@sqd_pl_away)
   end
 
-  def initialize_tm_cha_val
-    @aw_mod = (@mid_aw + (@att_aw * 0.50)) + rand(-20..20)
-    @hm_mod = (@mid_hm + (@att_hm * 0.50)) + rand(-20..20)
+  def initialize_team_chance_val
+    @away_mod = (@mid_away + (@att_away * 0.50)) + rand(-20..20)
+    @home_mod = (@mid_home + (@att_home * 0.50)) + rand(-20..20)
   end
 
-  def initialize_cha?
-    @cha_res = cha?
+  def initialize_chance?
+    @chance_res = cha?
   end
 
-  def initialize_cha_count
-    cha_count
+  def initialize_chance_count
+    chance_count
   end
 
-  def initialize_cha_on_tar
-    cha_on_tar(@att_hm, @att_aw)
+  def initialize_chance_on_target
+    chance_on_target(@att_home, @att_away)
   end
 
   def initialize_goal_scored?(i)
-    goal_scored?(@att_hm, @att_aw, i)
+    goal_scored?(@att_home, @att_away, i)
   end
 
   def initialize_build_results(i)
@@ -54,26 +54,26 @@ module MatchesInitializersHelper
       }
   end
 
-  def initialize_possession
-    calc_possession
+  def initialize_possessionession
+    calc_possessionession
   end
 
-  def initialize_motm
-    @motm_hm = select_motm(@sqd_pl_hm)
-    @motm_aw = select_motm(@sqd_pl_aw)
+  def initialize_man_of_the_match
+    @man_of_the_match_home = select_man_of_the_match(@sqd_pl_home)
+    @man_of_the_match_away = select_man_of_the_match(@sqd_pl_away)
   end
 
   def initialize_commentary
-    home_team = Club.find_by(abbreviation: @club_hm)&.name
-    away_team = Club.find_by(abbreviation: @club_aw)&.name
+    home_team = Club.find_by(abbreviation: @club_home)&.name
+    away_team = Club.find_by(abbreviation: @club_awayay)&.name
     scorer = Player.find_by(id: @goal[:scorer])&.name
     assister = Player.find_by(id: @goal[:assist])&.name
     general_commentary = Template.random_match_general_commentary
     chance_commentary = Template.random_match_chance_commentary
     chance_tar_commentary = Template.random_match_chance_tar_commentary
     goal_commentary = Template.random_match_goal_commentary
-    home_name = @sqd_hm.select { |player| player.pos != "gkp" }.map(&:name)
-    away_name = @sqd_aw.select { |player| player.pos != "gkp" }.map(&:name)
+    home_name = @sqd_home.select { |player| player.position != "gkp" }.map(&:name)
+    away_name = @sqd_away.select { |player| player.position != "gkp" }.map(&:name)
 
     if @goal_scored == 'home goal'
       @event = 'Home Goal'
@@ -81,16 +81,16 @@ module MatchesInitializersHelper
     elsif @goal_scored == 'away goal'
       @event = 'Away Goal'
       @commentary = goal_commentary.gsub('{team}', away_team).gsub('{assister}', assister).gsub('{scorer}', scorer).gsub('{player}', away_name.sample)
-    elsif @cha_res == 'home' && @cha_on_tar == 'home'
+    elsif @chance_res == 'home' && @chance_on_target == 'home'
       @event = 'Good chance'
       @commentary = chance_tar_commentary.gsub('{team}', home_team).gsub('{player}', home_name.sample)
-    elsif @cha_res == 'away' && @cha_on_tar == 'away'
+    elsif @chance_res == 'away' && @chance_on_target == 'away'
       @event = 'Good chance'
       @commentary = chance_tar_commentary.gsub('{team}', away_team).gsub('{player}', away_name.sample)
-    elsif @cha_res == 'home'
+    elsif @chance_res == 'home'
       @event = 'Chance'
       @commentary = chance_commentary.gsub('{team}', home_team).gsub('{player}', home_name.sample)
-    elsif @cha_res == 'away'
+    elsif @chance_res == 'away'
       @event = 'Chance'
       @commentary = chance_commentary.gsub('{team}', away_team).gsub('{player}', away_name.sample)
     else

@@ -4,20 +4,20 @@
 #
 #  id            :integer          not null, primary key
 #  match_id      :integer
-#  hm_team       :string
-#  aw_team       :string
-#  hm_poss       :integer
-#  aw_poss       :integer
-#  hm_cha        :integer
-#  aw_cha        :integer
-#  hm_cha_on_tar :integer
-#  aw_cha_on_tar :integer
-#  hm_motm       :string
-#  aw_motm       :string
+#  home_team       :string
+#  away_team       :string
+#  home_possession       :integer
+#  away_possession       :integer
+#  home_cha        :integer
+#  away_cha        :integer
+#  home_chance_on_target :integer
+#  away_chance_on_target :integer
+#  home_man_of_the_match       :string
+#  away_man_of_the_match       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  hm_goal       :integer
-#  aw_goal       :integer
+#  home_goals       :integer
+#  away_goals       :integer
 #
 class Matches < ApplicationRecord
 end
@@ -29,20 +29,20 @@ end
 # ------------- -------------------- ------- ------- ----------
 # id            INTEGER              false   true              
 # match_id      INTEGER              true    false             
-# hm_team       varchar              true    false             
-# aw_team       varchar              true    false             
-# hm_poss       INTEGER              true    false             
-# aw_poss       INTEGER              true    false             
-# hm_cha        INTEGER              true    false             
-# aw_cha        INTEGER              true    false             
-# hm_cha_on_tar INTEGER              true    false             
-# aw_cha_on_tar INTEGER              true    false             
-# hm_motm       varchar              true    false             
-# aw_motm       varchar              true    false             
+# home_team       varchar              true    false             
+# away_team       varchar              true    false             
+# home_possession       INTEGER              true    false             
+# away_possession       INTEGER              true    false             
+# home_cha        INTEGER              true    false             
+# away_cha        INTEGER              true    false             
+# home_chance_on_target INTEGER              true    false             
+# away_chance_on_target INTEGER              true    false             
+# home_man_of_the_match       varchar              true    false             
+# away_man_of_the_match       varchar              true    false             
 # created_at    datetime(6)          false   false             
 # updated_at    datetime(6)          false   false             
-# hm_goal       INTEGER              true    false             
-# aw_goal       INTEGER              true    false             
+# home_goals       INTEGER              true    false             
+# away_goals       INTEGER              true    false             
 # week_number   INTEGER              true    false             
 #
 #------------------------------------------------------------------------------

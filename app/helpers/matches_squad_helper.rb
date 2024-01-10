@@ -1,7 +1,7 @@
 module MatchesSquadHelper
   def sqd_pl(sqd)
     sqd.map do |player|
-      @pl_match_perf = player.match_perf(player)
+      @pl_match_performance = player.match_performance(player)
       
       tactic = Tactic.find_by(abbreviation: player.club)&.tactics
 
@@ -9,9 +9,9 @@ module MatchesSquadHelper
         player_id: player.id,
         match_id: @match_id,
         tactic: tactic,
-        player_pos: player.pos,
-        pos_detail: player.pos_detail,
-        match_perf: @pl_match_perf
+        player_position: player.position,
+        player_position_detail: player.player_position_detail,
+        match_performance: @pl_match_performance
       )
 
       tactic_adjustment(pl_match)
@@ -22,15 +22,15 @@ module MatchesSquadHelper
         club: player.club,
         name: player.name,
         tactic: tactic,
-        pos: player.pos,
-        pos_detail: player.pos_detail,
+        pos: player.position,
+        player_position_detail: player.player_position_detail,
         total_skill: player.total_skill,
-        match_perf: @pl_match_perf
+        match_performance: @pl_match_performance
       }
     end
   end
 
-  def tm_tot(sqd_pl)
+  def tm_total(sqd_pl)
 
     stadium_effect(sqd_pl.first[:club])
 
@@ -41,11 +41,11 @@ module MatchesSquadHelper
     sqd_pl.each do |player|
       case player[:pos]
       when 'gkp', 'dfc'
-        dfc += player[:match_perf]
+        dfc += player[:match_performance]
       when 'mid'
-        mid += player[:match_perf]
+        mid += player[:match_performance]
       else
-        att += player[:match_perf]
+        att += player[:match_performance]
       end
     end
 
@@ -53,7 +53,7 @@ module MatchesSquadHelper
   end
 
   def stadium_effect(club)
-    if club == @club_hm
+    if club == @club_home
       club = Club.find_by(abbreviation: club)
       stadium_size = club.stand_n_capacity + club.stand_s_capacity + club.stand_e_capacity + club.stand_w_capacity
       calc_stadium_effect(stadium_size)
@@ -83,7 +83,7 @@ module MatchesSquadHelper
   end
 
   def pos_skl(player)
-    case player.pos
+    case player.position
     when 'gkp'
       player.gkp_skill
     when 'dfc'
@@ -104,29 +104,29 @@ module MatchesSquadHelper
     # 5      Narrow      0   0    0   -10  +10
     # 6      Direct     +5  -5   +5    0    0
 
-    if pl_match.pos_detail == 'c'
-      pl_match.match_perf -= 10 if pl_match.tactic == 4
-      pl_match.match_perf += 10 if pl_match.tactic == 5
-    elsif pl_match.pos_detail == 'r' || pl_match.pos_detail == 'r'
-     pl_match.match_perf += 10 if pl_match.tactic == 4
-      pl_match.match_perf -= 10 if pl_match.tactic == 5
+    if pl_match.player_position_detail == 'c'
+      pl_match.match_performance -= 10 if pl_match.tactic == 4
+      pl_match.match_performance += 10 if pl_match.tactic == 5
+    elsif pl_match.player_position_detail == 'r' || pl_match.player_position_detail == 'r'
+     pl_match.match_performance += 10 if pl_match.tactic == 4
+      pl_match.match_performance -= 10 if pl_match.tactic == 5
     end 
 
-      if pl_match.player_pos == 'dfc'
-        pl_match.match_perf -= 5 if pl_match.tactic == 1
-        pl_match.match_perf += 15 if pl_match.tactic == 2
-        pl_match.match_perf -= 10 if pl_match.tactic == 3
-        pl_match.match_perf += 5 if pl_match.tactic == 6
-      elsif pl_match.player_pos == 'mid'
-        pl_match.match_perf += 15 if pl_match.tactic == 1
-        pl_match.match_perf -= 10 if pl_match.tactic == 2
-        pl_match.match_perf += 15 if pl_match.tactic == 3
-        pl_match.match_perf -= 5 if pl_match.tactic == 6
-      elsif pl_match.player_pos == 'att'
-        pl_match.match_perf -= 5 if pl_match.tactic == 1
-        pl_match.match_perf -= 10 if pl_match.tactic == 2
-        pl_match.match_perf += 10 if pl_match.tactic == 3
-        pl_match.match_perf += 5 if pl_match.tactic == 6
+      if pl_match.player_position == 'dfc'
+        pl_match.match_performance -= 5 if pl_match.tactic == 1
+        pl_match.match_performance += 15 if pl_match.tactic == 2
+        pl_match.match_performance -= 10 if pl_match.tactic == 3
+        pl_match.match_performance += 5 if pl_match.tactic == 6
+      elsif pl_match.player_position == 'mid'
+        pl_match.match_performance += 15 if pl_match.tactic == 1
+        pl_match.match_performance -= 10 if pl_match.tactic == 2
+        pl_match.match_performance += 15 if pl_match.tactic == 3
+        pl_match.match_performance -= 5 if pl_match.tactic == 6
+      elsif pl_match.player_position == 'att'
+        pl_match.match_performance -= 5 if pl_match.tactic == 1
+        pl_match.match_performance -= 10 if pl_match.tactic == 2
+        pl_match.match_performance += 10 if pl_match.tactic == 3
+        pl_match.match_performance += 5 if pl_match.tactic == 6
       end
   end
 end
