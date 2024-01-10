@@ -16,7 +16,7 @@
           <tr>
             <td><%= player.id %></td>
             <td><%= player.name %></td>
-            <td><%= player.pos %></td>
+            <td><%= (player.pos + player.pos_detail).upcase %></td>
             <td><%= @pl_match.find { |pl_m| pl_m.player_id == player.id }&.match_perf %></td>
           </tr>
         <% end %>
@@ -37,7 +37,7 @@
           <tr>
             <td><%= player.id %></td>
             <td><%= player.name %></td>
-            <td><%= player.pos %></td>
+            <td><%= (player.pos + player.pos_detail).upcase %></td>
             <td><%= @pl_match.find { |pl_m| pl_m.player_id == player.id }&.match_perf %></td>
           </tr>
         <% end %>

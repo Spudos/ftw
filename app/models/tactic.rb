@@ -1,0 +1,3 @@
+class Tactic < ApplicationRecord
+
+end

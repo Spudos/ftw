@@ -2,19 +2,28 @@ module MatchesSquadHelper
   def sqd_pl(sqd)
     sqd.map do |player|
       @pl_match_perf = player.match_perf(player)
+      
+      tactic = Tactic.find_by(abbreviation: player.club)&.tactics
 
       pl_match = PlMatch.create(
         player_id: player.id,
         match_id: @match_id,
+        tactic: tactic,
+        player_pos: player.pos,
+        pos_detail: player.pos_detail,
         match_perf: @pl_match_perf
       )
+
+      tactic_adjustment(pl_match)
 
       {
         match_id: @match_id,
         id: player.id,
         club: player.club,
         name: player.name,
+        tactic: tactic,
         pos: player.pos,
+        pos_detail: player.pos_detail,
         total_skill: player.total_skill,
         match_perf: @pl_match_perf
       }
@@ -84,5 +93,40 @@ module MatchesSquadHelper
     else
       player.att_skill
     end
+  end
+
+  def tactic_adjustment(pl_match)
+    # tactic name       dfc  mid  att  l,r  c
+    # 1      passing    -5  +10  -0    0    0
+    # 2      defensive  +15 -5   -10   0    0
+    # 3      Attacking  -10 +5   +15   0    0
+    # 4      Wide        0   0    0   +10  -10
+    # 5      Narrow      0   0    0   -10  +10
+    # 6      Direct     +5  -5   +5    0    0
+
+    if pl_match.pos_detail == 'c'
+      pl_match.match_perf -= 10 if pl_match.tactic == 4
+      pl_match.match_perf += 10 if pl_match.tactic == 5
+    elsif pl_match.pos_detail == 'r' || pl_match.pos_detail == 'r'
+     pl_match.match_perf += 10 if pl_match.tactic == 4
+      pl_match.match_perf -= 10 if pl_match.tactic == 5
+    end 
+
+      if pl_match.player_pos == 'dfc'
+        pl_match.match_perf -= 5 if pl_match.tactic == 1
+        pl_match.match_perf += 15 if pl_match.tactic == 2
+        pl_match.match_perf -= 10 if pl_match.tactic == 3
+        pl_match.match_perf += 5 if pl_match.tactic == 6
+      elsif pl_match.player_pos == 'mid'
+        pl_match.match_perf += 15 if pl_match.tactic == 1
+        pl_match.match_perf -= 10 if pl_match.tactic == 2
+        pl_match.match_perf += 15 if pl_match.tactic == 3
+        pl_match.match_perf -= 5 if pl_match.tactic == 6
+      elsif pl_match.player_pos == 'att'
+        pl_match.match_perf -= 5 if pl_match.tactic == 1
+        pl_match.match_perf -= 10 if pl_match.tactic == 2
+        pl_match.match_perf += 10 if pl_match.tactic == 3
+        pl_match.match_perf += 5 if pl_match.tactic == 6
+      end
   end
 end

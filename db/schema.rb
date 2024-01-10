@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_09_140332) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_10_085450) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -114,6 +114,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_09_140332) do
     t.integer "match_perf"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "player_pos"
+    t.string "pos_detail"
+    t.integer "tactic"
   end
 
   create_table "pl_stats", force: :cascade do |t|
@@ -159,11 +162,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_09_140332) do
     t.integer "pot_fl"
     t.integer "pot_st"
     t.integer "pot_cr"
+    t.string "pos_detail"
   end
 
   create_table "selections", force: :cascade do |t|
     t.string "club"
     t.integer "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tactics", force: :cascade do |t|
+    t.string "abbreviation"
+    t.integer "tactics"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
