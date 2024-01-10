@@ -1,5 +1,5 @@
 module TurnsCoachesHelper
-  def coach_upgraderades(week)
+  def coach_upgrade(week)
     turns = Turn.where("var1 LIKE ?", 'coach%').where(week: week)
     hash = {}
 
@@ -17,16 +17,16 @@ module TurnsCoachesHelper
 
     hash.each do |key, value|
       bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], value[:var2], value[:var3])
-      add_to_coach_upgraderades(value[:action_id], value[:week], value[:club], value[:var2])
+      add_to_coach_upgrades(value[:action_id], value[:week], value[:club], value[:var2])
       turn = Turn.find(key)
       turn.update(date_completed: DateTime.now)
     end
   end
 
-  def add_to_coach_upgraderades(action_id, week, club, coach)
-    existing_upgraderade = Upgrades.find_by(action_id:)
+  def add_to_coach_upgrades(action_id, week, club, coach)
+    existing_upgrade = Upgrades.find_by(action_id:)
 
-    if existing_upgraderade.nil?
+    if existing_upgrade.nil?
     Upgrades.create(action_id:, week:, club:, var1: coach, var3: 0)
     end
   end

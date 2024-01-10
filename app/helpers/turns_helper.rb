@@ -19,7 +19,7 @@ module TurnsHelper
     end
   end
 
-  def increment_upgraderades
+  def increment_upgrades
     to_complete = Upgrades.all
 
     to_complete.each do |item|
@@ -27,12 +27,12 @@ module TurnsHelper
       item.save
 
       if item.var3 == 6
-        perform_completed_upgraderades(item)
+        perform_completed_upgrades(item)
       end
     end
   end
 
-  def perform_completed_upgraderades(item)
+  def perform_completed_upgrades(item)
     club_full = Club.find_by(abbreviation: item.club)
 
     if item.var1.start_with?("staff")

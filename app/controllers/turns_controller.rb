@@ -66,11 +66,11 @@ class TurnsController < ApplicationController
     errors = [] # Initialize an empty array to store any errors
   
     begin
-      stadium_upgraderades(params[:week])
-      property_upgraderades(params[:week])
-      player_upgraderades(params[:week])
-      coach_upgraderades(params[:week])
-      increment_upgraderades
+      stadium_upgrade(params[:week])
+      property_upgrade(params[:week])
+      player_upgrade(params[:week])
+      coach_upgrade(params[:week])
+      increment_upgrades
   
       notice = "Processes ran successfully."
     rescue StandardError => e

@@ -1,5 +1,5 @@
 module TurnsPlayerHelper
-  def player_upgraderades(week)
+  def player_upgrade(week)
     turns = Turn.where("var1 LIKE ?", 'train%').where(week: week)
     hash = {}
 
@@ -28,7 +28,7 @@ module TurnsPlayerHelper
     if existing_training.nil?
       club_staff = Club.find_by(abbreviation: club)
       player_data = Player.find_by(club: club, name: player)
-      coach = club_staff.send("staff_#{player_data.pos}")
+      coach = club_staff.send("staff_#{player_data.position}")
 
       if player_data[skill] < player_data.send("potential_#{skill}")
         if player_data[skill] < coach

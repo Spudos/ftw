@@ -84,32 +84,32 @@ class TurnsheetsController < ApplicationController
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'coach', var2: turnsheet.coach_upgrade, var3: 500000, turnsheet: turnsheet })
       end
 
-      if turnsheet.prop_upgrade.present?
-        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'prop', var2: turnsheet.prop_upgrade, var3: 250000, turnsheet: turnsheet })
+      if turnsheet.property_upgrade.present?
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'prop', var2: turnsheet.property_upgrade, var3: 250000, turnsheet: turnsheet })
       end
 
-      if turnsheet.train_gkp.present?
-        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_gkp, var3: turnsheet.train_gkp_skill, turnsheet: turnsheet })
+      if turnsheet.train_goalkeeper.present?
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_goalkeeper, var3: turnsheet.train_goalkeeper_skill, turnsheet: turnsheet })
       end
 
-      if turnsheet.train_dfc.present?
-        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_dfc, var3: turnsheet.train_dfc_skill, turnsheet: turnsheet })
+      if turnsheet.train_defender.present?
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_defender, var3: turnsheet.train_defender_skill, turnsheet: turnsheet })
       end
 
-      if turnsheet.train_mid.present?
-        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_mid, var3: turnsheet.train_mid_skill, turnsheet: turnsheet })
+      if turnsheet.train_midfielder.present?
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_midfielder, var3: turnsheet.train_midfielder_skill, turnsheet: turnsheet })
       end
   
-      if turnsheet.train_att.present?
-        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_att, var3: turnsheet.train_att_skill, turnsheet: turnsheet })
+      if turnsheet.train_attacker.present?
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_attacker, var3: turnsheet.train_attacker_skill, turnsheet: turnsheet })
       end
 
-      if turnsheet.stad_upgrade.present?
-        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stad_upgrade, var2: turnsheet.stad_amt, var3: turnsheet.val, turnsheet: turnsheet })
+      if turnsheet.stadium_upgrade.present?
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stadium_upgrade, var2: turnsheet.stadium_amount, var3: turnsheet.val, turnsheet: turnsheet })
       end
   
-      if turnsheet.stad_cond_upgrade.present?
-        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stad_cond_upgrade, var3: 100000, turnsheet: turnsheet })
+      if turnsheet.stadium_condition_upgrade.present?
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stadium_condition_upgrade, var3: 100000, turnsheet: turnsheet })
       end
 
       turnsheet.update(processed: DateTime.now)
