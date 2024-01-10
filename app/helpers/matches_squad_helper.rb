@@ -22,7 +22,7 @@ module MatchesSquadHelper
         club: player.club,
         name: player.name,
         tactic: tactic,
-        pos: player.position,
+        position: player.position,
         player_position_detail: player.player_position_detail,
         total_skill: player.total_skill,
         match_performance: @pl_match_performance

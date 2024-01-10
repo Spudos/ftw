@@ -44,7 +44,7 @@
               <tr scope="row">
                 <td>Player 1</td>
                 <td>
-                  <%= form.select :player_1, options_from_collection_for_select(Player.where(club: params[:club], pos: "gkp"), :id, :id_name_with_position_and_skill), prompt: "Select a player" %>
+                  <%= form.select :player_1, options_from_collection_for_select(Player.where(club: params[:club], position: "gkp"), :id, :id_name_with_position_and_skill), prompt: "Select a player" %>
                 </td>
               </tr>
             <tr scope="row">
@@ -114,45 +114,45 @@
           <tr scope="row">
             <td>Goalkeeper</td>
             <td>
-              <%= form.label :train_gkp, style: "display: none" %>
-              <%= form.select :train_gkp, options_from_collection_for_select(Player.where(club: params[:club], pos: "gkp"), :name, :id_name_with_position_and_skill), prompt: "Select a player" %>
+              <%= form.label :train_goalkeeper, style: "display: none" %>
+              <%= form.select :train_goalkeeper, options_from_collection_for_select(Player.where(club: params[:club], position: "gkp"), :name, :id_name_with_position_and_skill), prompt: "Select a player" %>
             </td>
             <td>
-              <%= form.label :train_gkp_skill, style: "display: none" %>
-              <%= form.select :train_gkp_skill, options_for_select(['pa', 'co', 'ta', 'ru', 'sh', 'dr', 'df', 'of', 'fl', 'st', 'cr']), prompt: "Which Skill?" %>
+              <%= form.label :train_goalkeeper_skill, style: "display: none" %>
+              <%= form.select :train_goalkeeper_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
             </td>
           </tr>
           <tr scope="row">
             <td>Defender</td>
             <td>
-              <%= form.label :train_dfc, style: "display: none" %>
-              <%= form.select :train_dfc, options_from_collection_for_select(Player.where(club: params[:club], pos: "dfc"), :name, :id_name_with_position_and_skill), prompt: "Select a player" %>
+              <%= form.label :train_defender, style: "display: none" %>
+              <%= form.select :train_defender, options_from_collection_for_select(Player.where(club: params[:club], position: "dfc"), :name, :id_name_with_position_and_skill), prompt: "Select a player" %>
             </td>
             <td>
-              <%= form.label :train_dfc_skill, style: "display: none" %>
-              <%= form.select :train_dfc_skill, options_for_select(['pa', 'co', 'ta', 'ru', 'sh', 'dr', 'df', 'of', 'fl', 'st', 'cr']), prompt: "Which Skill?" %>
+              <%= form.label :train_defender_skill, style: "display: none" %>
+              <%= form.select :train_defender_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
             </td>
           </tr>
           <tr scope="row">
             <td>Midfield</td>
             <td>
-              <%= form.label :train_mid, style: "display: none" %>
-              <%= form.select :train_mid, options_from_collection_for_select(Player.where(club: params[:club], pos: "mid"), :name, :id_name_with_position_and_skill), prompt: "Select a player" %>
+              <%= form.label :train_midfielder, style: "display: none" %>
+              <%= form.select :train_midfielder, options_from_collection_for_select(Player.where(club: params[:club], position: "mid"), :name, :id_name_with_position_and_skill), prompt: "Select a player" %>
             </td>
             <td>
-              <%= form.label :train_mid_skill, style: "display: none" %>
-              <%= form.select :train_mid_skill, options_for_select(['pa', 'co', 'ta', 'ru', 'sh', 'dr', 'df', 'of', 'fl', 'st', 'cr']), prompt: "Which Skill?" %>
+              <%= form.label :train_midfielder_skill, style: "display: none" %>
+              <%= form.select :train_midfielder_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
               </td>
           </tr>
           <tr scope="row">
             <td>Attack</td>
             <td>
-              <%= form.label :train_att, style: "display: none" %>
-              <%= form.select :train_att, options_from_collection_for_select(Player.where(club: params[:club], pos: "att"), :name, :id_name_with_position_and_skill), prompt: "Select a player" %>
+              <%= form.label :train_attacker, style: "display: none" %>
+              <%= form.select :train_attacker, options_from_collection_for_select(Player.where(club: params[:club], position: "att"), :name, :id_name_with_position_and_skill), prompt: "Select a player" %>
             </td>
             <td>
-              <%= form.label :train_att_skill, style: "display: none" %>
-              <%= form.select :train_att_skill, options_for_select(['pa', 'co', 'ta', 'ru', 'sh', 'dr', 'df', 'of', 'fl', 'st', 'cr']), prompt: "Which Skill?" %>
+              <%= form.label :train_attacker_skill, style: "display: none" %>
+              <%= form.select :train_attacker_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
             </td>
           </tr>
         </table>
@@ -169,10 +169,10 @@
             <tr scope="row">
               <td>Stand</td>
               <td>
-                <%= form.select :stad_upgrade, options_for_select({ "North Stand" => "stand_n_capacity", "South Stand" => "stand_s_capacity", "East Stand" => "stand_e_capacity", "West Stand" => "stand_w_capacity" }), prompt: "Select a stand" %>
+                <%= form.select :stadium_upgrade, options_for_select({ "North Stand" => "stand_n_capacity", "South Stand" => "stand_s_capacity", "East Stand" => "stand_e_capacity", "West Stand" => "stand_w_capacity" }), prompt: "Select a stand" %>
               </td>
               <td>
-                <%= form.select :stad_amt, options_for_select([2000, 4000, 6000, 8000, 10000]), prompt: "How many seats?" %>
+                <%= form.select :stadium_amount, options_for_select([2000, 4000, 6000, 8000, 10000]), prompt: "How many seats?" %>
               </td>
               <td>
                 <p>£1000 per seat</p>
@@ -181,7 +181,7 @@
             <tr scope="row">
               <td>Stand Condition</td>
               <td>
-                <%= form.select :stad_cond_upgrade, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }), prompt: "Select a stand" %>
+                <%= form.select :stadium_condition_upgrade, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }), prompt: "Select a stand" %>
               </td>
               <td>
                 <p></p>
@@ -204,7 +204,7 @@
             <tr scope="row">
               <td>Property</td>
               <td>
-                <%= form.select :prop_upgrade, options_for_select({ "Select a property" => "None", "Pitch" => "Pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, selected: "None") %>
+                <%= form.select :property_upgrade, options_for_select({ "Select a property" => "None", "Pitch" => "Pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, selected: "None") %>
               </td>  
               <td>
                 <p></p>

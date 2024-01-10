@@ -10,8 +10,8 @@ class MatchesInitializersHelperTest < ActionView::TestCase
     @goal_scored = 'home goal'
     @chance_res = 'home'
     @chance_on_target = 'home'
-    @sqd_home = [Player.new(name: 'Player 1', pos: 'gkp'), Player.new(name: 'Player 2', pos: 'def')]
-    @sqd_away = [Player.new(name: 'Player 3', pos: 'gkp'), Player.new(name: 'Player 4', pos: 'def')]
+    @sqd_home = [Player.new(name: 'Player 1', :position 'gkp'), Player.new(name: 'Player 2', :position 'def')]
+    @sqd_away = [Player.new(name: 'Player 3', :position 'gkp'), Player.new(name: 'Player 4', :position 'def')]
   end
 
   def test_initialize_commentary_home_goals

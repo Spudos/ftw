@@ -8,8 +8,8 @@ class MatchesSquadHelperTest < ActionView::TestCase
   end
 
   def test_squad_pl
-    player1 = Player.new(id: 1, club: 'ABC', name: 'Player 1', pos: 'gkp', total_skill: 80)
-    player2 = Player.new(id: 2, club: 'XYZ', name: 'Player 2', pos: 'def', total_skill: 70)
+    player1 = Player.new(id: 1, club: 'ABC', name: 'Player 1', :position 'gkp', total_skill: 80)
+    player2 = Player.new(id: 2, club: 'XYZ', name: 'Player 2', :position 'def', total_skill: 70)
     sqd = [player1, player2]
 
     expected_result = [
@@ -18,7 +18,7 @@ class MatchesSquadHelperTest < ActionView::TestCase
         id: player1.id,
         club: player1.club,
         name: player1.name,
-        pos: player1.pos,
+        :position player1.pos,
         total_skill: player1.total_skill,
         match_performance: player1.match_performance(player1)
       },
@@ -27,7 +27,7 @@ class MatchesSquadHelperTest < ActionView::TestCase
         id: player2.id,
         club: player2.club,
         name: player2.name,
-        pos: player2.pos,
+        :position player2.pos,
         total_skill: player2.total_skill,
         match_performance: player2.match_performance(player2)
       }

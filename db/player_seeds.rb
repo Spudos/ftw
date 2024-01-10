@@ -21,7 +21,7 @@ codes.each do |code|
         name: Faker::Name.last_name,
         age: random_number(18, 35),
         nationality: uk_countries.sample,
-        pos: positions[index],
+        :position positions[index],
         pa: random_number(3, 9),
         co: random_number(3, 8),
         ta: random_number(3, 6),

@@ -16,16 +16,16 @@ class MatchesMinByMinHelperTest < ActionView::TestCase
     @goal_home = 0
     @goal_away = 0
     @sqd_pl_home = [
-      { id: 1, match_id: 1, pos: 'gkp', match_performance: 7 },
-      { id: 2, match_id: 1, pos: 'def', match_performance: 8 },
-      { id: 3, match_id: 1, pos: 'mid', match_performance: 9 },
-      { id: 4, match_id: 1, pos: 'fwd', match_performance: 10 }
+      { id: 1, match_id: 1, :position 'gkp', match_performance: 7 },
+      { id: 2, match_id: 1, :position 'def', match_performance: 8 },
+      { id: 3, match_id: 1, :position 'mid', match_performance: 9 },
+      { id: 4, match_id: 1, :position 'fwd', match_performance: 10 }
     ]
     @sqd_pl_away = [
-      { id: 5, match_id: 1, pos: 'gkp', match_performance: 7 },
-      { id: 6, match_id: 1, pos: 'def', match_performance: 8 },
-      { id: 7, match_id: 1, pos: 'mid', match_performance: 9 },
-      { id: 8, match_id: 1, pos: 'fwd', match_performance: 10 }
+      { id: 5, match_id: 1, :position 'gkp', match_performance: 7 },
+      { id: 6, match_id: 1, :position 'def', match_performance: 8 },
+      { id: 7, match_id: 1, :position 'mid', match_performance: 9 },
+      { id: 8, match_id: 1, :position 'fwd', match_performance: 10 }
     ]
   end
 

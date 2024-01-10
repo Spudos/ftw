@@ -2,6 +2,7 @@ class PlayersController < ApplicationController
   include PlayersHelper
 
   before_action :set_player
+
   def index
     @clubs = Player.distinct.pluck(:club)
     @players = Player.all
@@ -13,8 +14,9 @@ class PlayersController < ApplicationController
     criteria = params[:sort_criteria]
 
     @players = Player.all
+    player_view = @players.dup
 
-    @sort1 = player_view.sort_by! { |player| player[column.to_sym] }
+    @sort1 = player_view.sort_by { |player| player[column.to_sym] }
     @sort2 = direction == 'desc' ? @sort1.reverse! : @sort1
 
     if criteria == ""
@@ -80,5 +82,5 @@ class PlayersController < ApplicationController
 
   def player_params
     params.require(:player).permit!
-  end  
+  end
 end
