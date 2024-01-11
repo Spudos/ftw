@@ -18,13 +18,13 @@
         </tr>
       </thead>
       <tbody>
-        <% Player.where(club: params[:id]).order(Arel.sql("CASE pos WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
+        <% Player.where(club: params[:id]).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
           <tr scope="row">
             <td><%= player.name %></td>
             <td><%= (player.position + player.player_position_detail).upcase %></td>
             <td><%= player.age %></td>
             <td><%= player.total_skill %></td>
-            <td><%= player.fit %></td>
+            <td><%= player.fitness %></td>
             <td><%= PlMatch.where(player_id: player.id).count(:match_performance) %></td>
             <td><%= PlStat.where(player_id: player.id, goal: true).count %></td>
             <td><%= PlStat.where(player_id: player.id, assist: true).count %></td>

@@ -22,23 +22,23 @@
     </tr>
   </thead>
   <tbody>
-    <% Player.where(club: params[:id]).order(Arel.sql("CASE pos WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
+    <% Player.where(club: params[:id]).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
       <tr scope="row">
         <td><%= player.name %></td>
         <td><%= player.age %></td>
         <td><%= player.nationality %></td>
         <td><%= (player.position + player.player_position_detail).upcase %></td>
-        <td><%= player.potential_pa %></td>
-        <td><%= player.potential_co %></td>
-        <td><%= player.potential_ta %></td>
-        <td><%= player.potential_ru %></td>
-        <td><%= player.potential_sh %></td>
-        <td><%= player.potential_dr %></td>
-        <td><%= player.potential_df %></td>
-        <td><%= player.potential_of %></td>
-        <td><%= player.potential_fl %></td>
-        <td><%= player.potential_st %></td>
-        <td><%= player.potential_cr %></td>
+        <td><%= player.potential_passing %></td>
+        <td><%= player.potential_control %></td>
+        <td><%= player.potential_tackling %></td>
+        <td><%= player.potential_running %></td>
+        <td><%= player.potential_shooting %></td>
+        <td><%= player.potential_dribbling %></td>
+        <td><%= player.potential_defensive_heading %></td>
+        <td><%= player.potential_offensive_heading %></td>
+        <td><%= player.potential_flair %></td>
+        <td><%= player.potential_strength %></td>
+        <td><%= player.potential_creativity %></td>
         <td><%= player.consistency %></td>
       </tr>
     <% end %>

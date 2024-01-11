@@ -85,7 +85,7 @@ class TurnsheetsController < ApplicationController
       end
 
       if turnsheet.property_upgrade.present?
-        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'prop', var2: turnsheet.property_upgrade, var3: 250000, turnsheet: turnsheet })
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'property', var2: turnsheet.property_upgrade, var3: 250000, turnsheet: turnsheet })
       end
 
       if turnsheet.train_goalkeeper.present?

@@ -64,13 +64,13 @@
             <tr scope="row">
               <td>Coach</td>
               <td>
-                <%= form.select :coach_upgrade, options_for_select({ "Fitness" => "staff_fit", "Scout" => "staff_scout", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, @turnsheet.coach_upgrade), prompt: "Select a coach" %>
+                <%= form.select :coach_upgrade, options_for_select({ "Fitness" => "staff_fit", "Scout" => "staff_scouts", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, @turnsheet.coach_upgrade), prompt: "Select a coach" %>
               </td>
             </tr>
             <tr scope="row">
               <td>Property</td>
               <td>
-                <%= form.select :property_upgrade, options_for_select({ "Not selected" => "None", "Pich" => "Pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, selected: "None") %>
+                <%= form.select :property_upgrade, options_for_select({ "Pitch" => "pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, selected: "None") %>
               </td>
             </tr>    
           </table>

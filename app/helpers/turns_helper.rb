@@ -9,7 +9,7 @@ module TurnsHelper
       club_full.update(bank_bal: new_bal)
       if reason == "coach"
         Messages.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{dept}")
-      elsif reason == "prop"
+      elsif reason == "property"
         Messages.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{dept}")
       elsif reason.end_with?("condition")
         Messages.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{reason}")
@@ -44,9 +44,9 @@ module TurnsHelper
     elsif item.var1 == "facilities" || item.var1 == "hospitality" || item.var1 == "pitch"
       new_coach = club_full[item.var1] += 1
       club_full.update(item.var1 => new_coach)
-
+    
       Messages.create(action_id: item.action_id, week: item.week, club: item.club, var1: "Your upgrade to the #{item.var1} was completed, the new value is #{club_full[item.var1]}")
-
+    
     elsif item.var1.ends_with?("condition")
       new_coach = club_full[item.var1] += 1
       club_full.update(item.var1 => new_coach)

@@ -8,7 +8,7 @@
       <th scope="col">Home possession</th>
       <th scope="col">Away possession</th>
       <th scope="col">Home Chances</th>
-      <th scope="col">Away Cances</th>
+      <th scope="col">Away Chances</th>
       <th scope="col">Home On Tar</th>
       <th scope="col">Away On Tar</th>
       <th scope="col">Home Goals</th>
@@ -24,8 +24,8 @@
         <td><%= Club.find_by(abbreviation: match.away_team)&.name %></td>
         <td><%= match.home_possession %></td>
         <td><%= match.away_possession %></td>
-        <td><%= match.home_cha %></td>
-        <td><%= match.away_cha %></td>
+        <td><%= match.home_chance %></td>
+        <td><%= match.away_chance %></td>
         <td><%= match.home_chance_on_target %></td>
         <td><%= match.away_chance_on_target %></td>
         <td><%= match.home_goals %></td>
