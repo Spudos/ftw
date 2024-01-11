@@ -1,6 +1,14 @@
 class TeamStatisticsCalculator
   def compile_league_table
-    league_table_information = Hash.new { |hash, key| hash[key] = { played: 0, won: 0, lost: 0, drawn: 0, goals_scored: 0, goals_conceded: 0, points: 0 } }
+    league_table_information = Hash.new { |hash, key|
+      hash[key] =
+        { played: 0,
+          won: 0,
+          lost: 0,
+          drawn: 0,
+          goals_scored: 0,
+          goals_conceded: 0,
+          points: 0 } }
 
     match_info = Matches.all
 
@@ -8,7 +16,6 @@ class TeamStatisticsCalculator
       update_team_statistics(league_table_information, match.home_team, match.home_goals, match.away_goals)
       update_team_statistics(league_table_information, match.away_team, match.away_goals, match.home_goals)
     end
-
     league_table_information
   end
 
