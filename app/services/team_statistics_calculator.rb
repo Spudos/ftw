@@ -21,19 +21,21 @@ class TeamStatisticsCalculator
 
   private
 
-  def update_team_statistics(league_table_information, team, goals_for, goals_against)
-    league_table_information[team][:played] += 1
-    league_table_information[team][:goals_scored] += goals_for
-    league_table_information[team][:goals_conceded] += goals_against
+  def update_team_statistics(team_statistics, team, goals_for, goals_against)
+    stats = team_statistics[team]
+
+    stats[:played] += 1
+    stats[:goals_scored] += goals_for
+    stats[:goals_conceded] += goals_against
 
     if goals_for > goals_against
-      league_table_information[team][:won] += 1
-      league_table_information[team][:points] += 3
+      stats[:won] += 1
+      stats[:points] += 3
     elsif goals_for < goals_against
-      league_table_information[team][:lost] += 1
+      stats[:lost] += 1
     else
-      league_table_information[team][:drawn] += 1
-      league_table_information[team][:points] += 1
+      stats[:drawn] += 1
+      stats[:points] += 1
     end
   end
 end
