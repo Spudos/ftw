@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_10_125816) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_11_132733) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -117,6 +117,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_125816) do
     t.string "player_position"
     t.string "player_position_detail"
     t.integer "tactic"
+    t.string "club"
+    t.string "player_name"
+    t.integer "total_skill"
   end
 
   create_table "pl_stats", force: :cascade do |t|

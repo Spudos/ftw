@@ -1,26 +1,5 @@
 module MatchesMinByMinHelper
-  def cha?
-    cha = @home_mod - @away_mod
-    if cha >= 0 && rand(0..100) < 16
-      @chance_res = 'home'
-    elsif cha.negative? && rand(0..100) < 16
-      @chance_res = 'away'
-    else
-      @chance_res = add_rand_cha
-    end
-  end
 
-  def add_rand_cha
-    random_number = rand(1..100)
-
-    if random_number <= 5
-      @chance_res = 'home'
-    elsif random_number > 5 && random_number <= 10
-      @chance_res = 'away'
-    else
-      @chance_res = 'none'
-    end
-  end
 
   def chance_count
     if @chance_res == 'home'
