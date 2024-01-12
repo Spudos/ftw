@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_12_134803) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_12_144010) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -106,31 +106,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_12_134803) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "action_id"
-  end
-
-  create_table "pl_matches", force: :cascade do |t|
-    t.integer "match_id"
-    t.integer "player_id"
-    t.integer "match_performance"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "player_position"
-    t.string "player_position_detail"
-    t.integer "tactic"
-    t.string "club"
-    t.string "player_name"
-    t.integer "total_skill"
-  end
-
-  create_table "pl_stats", force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "man_of_the_match"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "match_id"
-    t.boolean "goal"
-    t.boolean "assist"
-    t.integer "time"
   end
 
   create_table "player_match_data", force: :cascade do |t|
@@ -271,6 +246,4 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_12_134803) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "pl_matches", "players"
-  add_foreign_key "pl_stats", "players"
 end
