@@ -1,27 +1,44 @@
 class Matches < ApplicationRecord
   def match_engine(params)
-    # get the fixture list then iterate through it running the game for each match
+    # get the fixture list then iterate through it preparing the squads for each match
     fixture_list = get_fixtures_for_week(params)
 
     fixture_list.each do |fixture|
       match_squad = create_squad_for_game(fixture)
       match_squad_with_performance = calculate_player_performance(match_squad)
-      squads_with_adjusted_peformance = adjust_player_performance_by_tactic(match_squad_with_performance)
-      basic_team_totals = calculate_team_totals(squads_with_adjusted_peformance)
+      squads_with_adjusted_performance = adjust_player_performance_by_tactic(match_squad_with_performance)
+      basic_team_totals = calculate_team_totals(squads_with_adjusted_performance)
       home_stadium_size = calculate_stadium_size(basic_team_totals)
       adjusted_team_totals = calculate_teams_with_stadium_effect(basic_team_totals, home_stadium_size)
-      run_match_logic(adjusted_team_totals)
+      run_match_logic(adjusted_team_totals, squads_with_adjusted_performance)
     end
   end
 
-  def run_match_logic(adjusted_team_totals)
+  def run_match_logic(adjusted_team_totals, squads_with_adjusted_performance)
+    home_list, away_list = compile_list_of_players(squads_with_adjusted_performance)
+    home_top_5, away_top_5 = compile_list_of_top_5_players(home_list, away_list)
+
     minute_by_minute = []
     rand(90..98).times do |i|
-      chance_result = calculate_chance(adjusted_team_totals, i)
+      chance_result = calculate_chance_created(adjusted_team_totals, i)
       chance_on_target_result = calculate_if_chance_on_target(chance_result, adjusted_team_totals)
+      goal_scored = calculate_goal_scored(chance_on_target_result, adjusted_team_totals)
 
-      minute_by_minute << { **chance_result, **chance_on_target_result }
+      if goal_scored[:goal_scored] != 'none'
+        assist = who_assisted(home_top_5, away_top_5, goal_scored)
+        scorer = who_scored(home_top_5, away_top_5, assist, goal_scored)
+      else
+        assist = { assist: 'none' }
+        scorer = { scorer: 'none' }
+      end
+
+      minute_by_minute << { **chance_result, **chance_on_target_result, **goal_scored, **assist, **scorer }
+      
+      run_end_of_match(home_list, away_list, minute_by_minute)
     end
+  end
+
+  def run_end_of_match(home_list, away_list, minute_by_minute)
     binding.pry
   end
 
@@ -212,7 +229,7 @@ class Matches < ApplicationRecord
 
   # ----------------------------------------------------------------
 
-  def calculate_chance(adjusted_team_totals, i)
+  def calculate_chance_created(adjusted_team_totals, i)
     random_number = rand(1..100)
     chance = adjusted_team_totals.first[:midfield] - adjusted_team_totals.last[:midfield]
     chance_outcome = ''
@@ -252,5 +269,68 @@ class Matches < ApplicationRecord
     {
       chance_on_target: chance_on_target
     }
+  end
+
+  def calculate_goal_scored(chance_on_target_result, adjusted_team_totals)
+    home_attack = adjusted_team_totals.first[:attack]
+    away_attack = adjusted_team_totals.last[:attack]
+    goal_scored = ''
+
+    if chance_on_target_result == 'home' && home_attack / 3 > rand(0..100)
+      goal_scored = 'home'
+    elsif chance_on_target_result == 'away' && away_attack / 3 > rand(0..100)
+      goal_scored = 'away'
+    else
+      goal_scored = 'none'
+    end
+    {
+      goal_scored:
+    }
+  end
+
+  def compile_list_of_players(squads_with_adjusted_performance)
+    home_team = squads_with_adjusted_performance.first[:club]
+    home_list = []
+    away_list = []
+
+    squads_with_adjusted_performance.each do |player|
+      if player[:club] == home_team
+        home_list << { player_id: player[:player_id], player_position: player[:player_position],match_performance: player[:match_performance] }
+      else
+        away_list << { player_id: player[:player_id], player_position: player[:player_position],match_performance: player[:match_performance] }
+      end
+    end
+
+   return home_list, away_list
+  end
+
+  def compile_list_of_top_5_players(home_list, away_list)
+    home_top_5 = home_list.reject { |player| player[:player_position] == "gkp" }
+                         .sort_by { |player| -player[:match_performance] }
+                         .first(5)
+    away_top_5 = away_list.reject { |player| player[:player_position] == "gkp" }
+                         .sort_by { |player| -player[:match_performance] }
+                         .first(5)
+    return home_top_5, away_top_5
+  end
+
+  def who_assisted(home_top_5, away_top_5, goal_scored)
+    if goal_scored == 'home'
+      assist = home_top_5.sample[:player_id]
+    else
+      assist = away_top_5.sample[:player_id]
+    end
+
+    return assist
+  end
+
+  def who_scored(home_top_5, away_top_5, assist, goal_scored)
+    if goal_scored == 'home'
+      scorer = home_top_5.reject { |player| player[:player_id] == assist[:player_id] }.sample[:player_id]
+    else
+      scorer = away_top_5.reject { |player| player[:player_id] == assist[:player_id] }.sample[:player_id]
+    end
+
+    scorer
   end
 end
