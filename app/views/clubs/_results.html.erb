@@ -5,6 +5,8 @@
       <th scope="col">Match ID</th>
       <th scope="col">Home</th>
       <th scope="col">Away</th>
+      <th scope="col">Home Tactic</th>
+      <th scope="col">Away Tactic</th>
       <th scope="col">Home possession</th>
       <th scope="col">Away possession</th>
       <th scope="col">Home Chances</th>
@@ -22,6 +24,38 @@
         <td><%= match.match_id %></td>
         <td><%= Club.find_by(abbreviation: match.home_team)&.name %></td>
         <td><%= Club.find_by(abbreviation: match.away_team)&.name %></td>
+        <td>
+          <% case match.tactic_home.to_i %>
+          <% when 1 %>
+            Passing
+          <% when 2 %>
+            Defensive
+          <% when 3 %>
+            Attacking
+          <% when 4 %>
+            Wide
+          <% when 5 %>
+            Narrow
+          <% else %>
+            Direct
+          <% end %>
+        </td>
+        <td>
+          <% case match.tactic_away.to_i %>
+          <% when 1 %>
+            Passing
+          <% when 2 %>
+            Defensive
+          <% when 3 %>
+            Attacking
+          <% when 4 %>
+            Wide
+          <% when 5 %>
+            Narrow
+          <% else %>
+            Direct
+          <% end %>
+        </td>
         <td><%= match.home_possession %></td>
         <td><%= match.away_possession %></td>
         <td><%= match.home_chance %></td>

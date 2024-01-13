@@ -155,6 +155,19 @@
       </div>
 
       <div class="col-md-6 align-top"> 
+        <h4 style="text-align: center">Player Team Tactics</h4>
+        <table class="table table-hover table-bordered">
+          <tr scope="row">
+            <th scope="col">Select you tactic</th>
+          </tr>
+          <tr scope="row">
+            <td scope="col">Tactic for this game:</td>
+            <td>
+              <%= form.label :tactic, style: "display: none" %>
+              <%= form.select :tactic, options_for_select({ "Passing" => 1, "Defensive" => 2, "Attacking" => 3, "Wide" => 4, "Narrow" => 5, "Direct" => 6 }, @turnsheet.tactic), prompt: "Select a tactic" %>
+            </td>
+          </tr>
+        </table>
         <h4>Player Training</h4>
         <table class="table table-hover">
           <tr>

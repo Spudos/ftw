@@ -15,6 +15,13 @@ class Turnsheet < ApplicationRecord
         Selection.create(club: turnsheet.club, player_id: turnsheet.send("player_#{i}"), turnsheet: turnsheet)
       end
 
+      tactic_record = Tactic.find_by(abbreviation: turnsheet.club)
+      if turnsheet.tactic.present?
+        tactic_record.update(tactics: turnsheet.tactic)
+      else
+        tactic_record.update(tactics: 1)
+      end
+
       if turnsheet.coach_upgrade.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'coach', var2: turnsheet.coach_upgrade, var3: 500000, turnsheet: turnsheet })
       end
@@ -34,7 +41,7 @@ class Turnsheet < ApplicationRecord
       if turnsheet.train_midfielder.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_midfielder, var3: turnsheet.train_midfielder_skill, turnsheet: turnsheet })
       end
-  
+
       if turnsheet.train_attacker.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_attacker, var3: turnsheet.train_attacker_skill, turnsheet: turnsheet })
       end
@@ -42,7 +49,7 @@ class Turnsheet < ApplicationRecord
       if turnsheet.stadium_upgrade.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stadium_upgrade, var2: turnsheet.stadium_amount, var3: turnsheet.val, turnsheet: turnsheet })
       end
-  
+
       if turnsheet.stadium_condition_upgrade.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stadium_condition_upgrade, var3: 100000, turnsheet: turnsheet })
       end

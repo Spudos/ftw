@@ -180,4 +180,26 @@
       </td>
     </tr>
   </table>
+        <h4 style="text-align: center">Team Tactics</h4>
+        <table class="table table-hover table-bordered">
+          <tr scope="row">
+            <td scope="col">Tactic for this game:</td>
+            <td>
+              <% case turnsheet.tactic.to_i %>
+                <% when 1 %>
+                  Passing
+                <% when 2 %>
+                  Defensive
+                <% when 3 %>
+                  Attacking
+                <% when 4 %>
+                  Wide
+                <% when 5 %>
+                  Narrow
+                <% else %>
+                  Direct
+                <% end %>
+            </td>
+          </tr>
+        </table>
 </div>
