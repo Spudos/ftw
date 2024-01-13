@@ -4,6 +4,7 @@ class MatchesController < ApplicationController
   def show
     @player_match_data = PlayerMatchData.where(match_id: params[:id])
     @matches = Matches.where(match_id: params[:id])
+    @goal_information = GoalsAndAssistsByMatch.where(match_id: params[:id])
   end
 
   def match_multiple

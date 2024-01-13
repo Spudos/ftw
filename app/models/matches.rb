@@ -46,7 +46,7 @@ class Matches < ApplicationRecord
 
     detailed_match_summary << { **match_summary, **possession, **man_of_the_match }
     save_detailed_match_summary(detailed_match_summary)
-
+    save_goal_and_assist_information(minute_by_minute)
     create_match_commentary(home_list, away_list, minute_by_minute)
   end
 
@@ -74,24 +74,26 @@ class Matches < ApplicationRecord
       match_id: fixture[:match_id],
       week: fixture[:week_number],
       club_home: fixture[:club_home],
-      club_away: fixture[:club_away]
+      tactic_home: Tactic.find_by(abbreviation: fixture[:club_home])&.tactics,
+      club_away: fixture[:club_away],
+      tactic_away: Tactic.find_by(abbreviation: fixture[:club_away])&.tactics
     }
+
     # this populates the player_ids array for both teams with a list of players for the match
     player_ids = []
     teams.each_value do |team|
       player_ids += Selection.where(club: team).pluck(:player_id)
     end
-  
+
     # this populates the match_squad for home and away with a list of full player details for the match
     match_squad = []
     match_id = fixture[:match_id]
-  
+
     player_ids.each do |player_id|
       match_squad += Player.where(id: player_id)
     end
     return teams, match_squad
   end
-  
 
   def calculate_player_performance(match_squad)
     players_array = []
@@ -128,7 +130,7 @@ class Matches < ApplicationRecord
     players = match_squad_with_performance
 
     players.each do |player|
-      if player[:match_performance] == 'c'
+      if player[:player_position_detail] == 'c'
         player[:match_performance] -= 10 if player[:tactic] == 4
         player[:match_performance] += 10 if player[:tactic] == 5
       elsif player[:player_position_detail] == 'r' || player[:player_position_detail] == 'l'
@@ -363,7 +365,9 @@ class Matches < ApplicationRecord
     match_id = minute_by_minute.first[:match_id]
     week = minute_by_minute.first[:week]
     club_home = minute_by_minute.first[:club_home]
+    tactic_home = minute_by_minute.first[:tactic_home]
     club_away = minute_by_minute.first[:club_away]
+    tactic_away = minute_by_minute.first[:tactic_away]
     chance_count_home = minute_by_minute.count { |chance| chance[:chance_outcome] == 'home' }
     chance_count_away = minute_by_minute.count { |chance| chance[:chance_outcome] == 'away' }
     chance_on_target_home = minute_by_minute.count { |chance| chance[:chance_on_target] == 'home' }
@@ -375,7 +379,9 @@ class Matches < ApplicationRecord
       match_id:,
       week:,
       club_home:,
+      tactic_home:,
       club_away:,
+      tactic_away:,
       chance_count_home:,
       chance_count_away:,
       chance_on_target_home:,
@@ -402,12 +408,13 @@ class Matches < ApplicationRecord
 
   def save_detailed_match_summary(detailed_match_summary)
     match_data = detailed_match_summary[0] # Access the first hash in the array
-  
     match = Matches.new(
       match_id: match_data[:match_id].to_i,
       week_number: match_data[:week].to_i,
       home_team: match_data[:club_home],
+      tactic_home: match_data[:tactic_home],
       away_team: match_data[:club_away],
+      tactic_away: match_data[:tactic_away],
       home_possession: match_data[:home_possession].to_i,
       away_possession: match_data[:away_possession].to_i,
       home_chance: match_data[:chance_count_home].to_i,
@@ -424,6 +431,20 @@ class Matches < ApplicationRecord
       puts "Match data saved successfully."
     else
       puts "Failed to save match data."
+    end
+  end
+
+  def save_goal_and_assist_information(minute_by_minute)
+    minute_by_minute.each do |match_data|
+      if match_data[:goal_scored] != 'none'
+      match = GoalsAndAssistsByMatch.create(
+        match_id: match_data[:match_id],
+        week_number: match_data[:week],
+        minute: match_data[:minute],
+        assist: match_data[:assist],
+        scorer: match_data[:scorer]
+      )
+      end
     end
   end
 

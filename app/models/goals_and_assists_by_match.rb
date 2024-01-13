@@ -1,0 +1,2 @@
+class GoalsAndAssistsByMatch < ApplicationRecord
+end

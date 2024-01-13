@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_12_144010) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_13_072906) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -79,6 +79,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_12_144010) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "goals_and_assists_by_matches", force: :cascade do |t|
+    t.integer "match_id"
+    t.integer "week_number"
+    t.integer "minute"
+    t.integer "assist"
+    t.integer "scorer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "matches", force: :cascade do |t|
     t.integer "match_id"
     t.string "home_team"
@@ -96,6 +106,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_12_144010) do
     t.integer "home_goals"
     t.integer "away_goals"
     t.integer "week_number"
+    t.integer "tactic_home"
+    t.integer "tactic_away"
   end
 
   create_table "messages", force: :cascade do |t|

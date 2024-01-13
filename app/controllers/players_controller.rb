@@ -1,6 +1,4 @@
 class PlayersController < ApplicationController
-  include PlayersHelper
-
   before_action :set_player
 
   def index
@@ -13,7 +11,8 @@ class PlayersController < ApplicationController
     direction = params[:sort_direction]
     criteria = params[:sort_criteria]
 
-    @players = Player.all
+    @players = Player.compile_player_view
+
     player_view = @players.dup
 
     @sort1 = player_view.sort_by { |player| player[column.to_sym] }

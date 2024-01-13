@@ -38,6 +38,24 @@ class Player < ApplicationRecord
     control + running + shooting + dribbling + offensive_heading + flair
   end
 
+  def self.compile_player_view
+    players = Player.all.map do |player|
+      info = {
+      id: player.id,
+      name: player.name,
+      age: player.age,
+      club: player.club,
+      nationality: player.nationality,
+      position: (player.position + player.player_position_detail).upcase,
+      total_skill: player.total_skill,
+      played: PlayerMatchData.where(player_id: player.id).count,
+      goals: GoalsAndAssistsByMatch.where(scorer: player.id).count(:scorer),
+      assists: GoalsAndAssistsByMatch.where(assist: player.id).count(:assist),
+      average_match_performance: PlayerMatchData.where(player_id: player.id).average(:match_performance).to_i
+      }
+    end
+  end
+
   def match_performance(player)
     if player.position == 'gkp'
       (player.gkp_skill * player.fitness / 100) + player.calc_pl_performance_random(player)
