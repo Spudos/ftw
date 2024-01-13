@@ -1,8 +1,4 @@
 class TurnsController < ApplicationController
-  include TurnsHelper
-  include TurnsStadiumHelper
-  include TurnsPlayerHelper
-  include TurnsCoachesHelper
 
   before_action :set_turn, only: %i[ show edit update destroy ]
 
@@ -66,11 +62,8 @@ class TurnsController < ApplicationController
     errors = [] # Initialize an empty array to store any errors
   
     begin
-      stadium_upgrade(params[:week])
-      property_upgrade(params[:week])
-      player_upgrade(params[:week])
-      coach_upgrade(params[:week])
-      increment_upgrades
+      turn = Turn.new
+      turn.process_turn_actions(params)
   
       notice = "Processes ran successfully."
     rescue StandardError => e
