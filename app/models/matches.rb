@@ -43,8 +43,8 @@ class Matches < ApplicationRecord
     match_summary = create_match_summary(minute_by_minute)
     possession = calc_possession(match_summary)
     man_of_the_match = select_man_of_the_match(home_list, away_list)
-
     detailed_match_summary << { **match_summary, **possession, **man_of_the_match }
+
     save_detailed_match_summary(detailed_match_summary)
     save_goal_and_assist_information(minute_by_minute)
     create_match_commentary(home_list, away_list, minute_by_minute)
@@ -358,7 +358,16 @@ class Matches < ApplicationRecord
     else
       scorer = away_top_5.reject { |player| player[:player_id] == assist }.sample[:player_id]
     end
-    { scorer: }
+  
+    while scorer == assist
+      if goal_scored[:goal_scored] == 'home'
+        scorer = home_top_5.reject { |player| player[:player_id] == assist }.sample[:player_id]
+      else
+        scorer = away_top_5.reject { |player| player[:player_id] == assist }.sample[:player_id]
+      end
+    end
+  
+    { scorer: scorer }
   end
 
   def create_match_summary(minute_by_minute)
