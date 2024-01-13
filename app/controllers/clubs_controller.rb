@@ -62,6 +62,5 @@ class ClubsController < ApplicationController
 
   def club_params
     params.require(:club).permit!
-  end  
+  end
 end
-

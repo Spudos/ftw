@@ -60,29 +60,29 @@ class TurnsController < ApplicationController
 
   def process_turn
     errors = [] # Initialize an empty array to store any errors
-  
+
     begin
       turn = Turn.new
       turn.process_turn_actions(params)
-  
+
       notice = "Processes ran successfully."
     rescue StandardError => e
       errors << "Error occurred during processing: #{e.message}"
       notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
     end
-  
+
     redirect_to request.referrer, notice: notice
   end
-  
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_turn
-      @turn = Turn.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def turn_params
-      params.require(:turn).permit!
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_turn
+    @turn = Turn.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def turn_params
+    params.require(:turn).permit!
+  end
 end
