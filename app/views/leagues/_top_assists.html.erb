@@ -1,0 +1,22 @@
+
+<table class="table table-hover">
+  <tr>
+    <th scope="col"><h4>Top 10 Players by Assists</h4><th>
+  </tr>
+  <tr>
+    <th scope="col">id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Club</th>
+    <th scope="col">Position</th>
+    <th scope="col">Assists</th>
+  </tr>
+  <% @top_assists.each do |player| %>
+    <tr scope="row">
+      <td><%= player[:id] %></td>
+      <td><%= player[:name] %></td>
+      <td><%= Club.find_by(abbreviation: player[:club])&.name %></td>
+      <td><%= player[:position] %></td>
+      <td><%= player[:assists] %></td>
+    </tr>
+  <% end %>
+</table>

@@ -56,6 +56,86 @@ class Player < ApplicationRecord
     end
   end
 
+  def self.compile_top_total_skill_view
+    players = Player.all.map do |player|
+      info = {
+        id: player.id,
+        name: player.name,
+        club: player.club,
+        position: (player.position + player.player_position_detail).upcase,
+        total_skill: player.total_skill
+      }
+    end
+
+    # Sort players based on total skill in descending order
+    players.sort_by! { |player| -player[:total_skill] }
+
+    # Select the top 10 players
+    top_skill_players = players.take(10)
+
+    return top_skill_players
+  end
+
+  def self.compile_top_performance_view
+    players = Player.all.map do |player|
+      info = {
+        id: player.id,
+        name: player.name,
+        club: player.club,
+        position: (player.position + player.player_position_detail).upcase,
+        average_match_performance: PlayerMatchData.where(player_id: player.id).average(:match_performance).to_i
+      }
+    end
+
+    # Sort players based on total skill in descending order
+    players.sort_by! { |player| -player[:average_match_performance] }
+
+    # Select the top 10 players
+    top_perf_players = players.take(10)
+
+    return top_perf_players
+  end
+
+  def self.compile_top_goals_view
+    players = Player.all.map do |player|
+      info = {
+        id: player.id,
+        name: player.name,
+        club: player.club,
+        position: (player.position + player.player_position_detail).upcase,
+        goals: GoalsAndAssistsByMatch.where(scorer: player.id).count(:scorer),
+      }
+    end
+
+    # Sort players based on total skill in descending order
+    players.sort_by! { |player| -player[:goals] }
+
+    # Select the top 10 players
+    top_goals_players = players.take(10)
+
+    return top_goals_players
+  end
+
+  def self.compile_top_assists_view
+    players = Player.all.map do |player|
+      info = {
+        id: player.id,
+        name: player.name,
+        club: player.club,
+        position: (player.position + player.player_position_detail).upcase,
+        assists: GoalsAndAssistsByMatch.where(assist: player.id).count(:assist)
+      }
+    end
+
+    # Sort players based on total skill in descending order
+    players.sort_by! { |player| -player[:assists] }
+
+    # Select the top 10 players
+    top_assists_players = players.take(10)
+
+    return top_assists_players
+  end
+
   def match_performance(player)
     if player.position == 'gkp'
       (player.gkp_skill * player.fitness / 100) + player.calc_pl_performance_random(player)

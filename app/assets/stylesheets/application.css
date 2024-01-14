@@ -85,3 +85,18 @@ tr.goal {
 tr.chance {
   color: orange;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 30px;
+  justify-content: center;
+  width: 90%;
+  margin: 0 auto;
+  font-size: 80%;
+}
+
+.stats {
+  border: 1px solid black;
+  padding: 30px;
+}
