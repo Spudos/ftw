@@ -89,7 +89,7 @@ tr.chance {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 30px;
+  grid-gap: 10px;
   justify-content: center;
   width: 90%;
   margin: 0 auto;
@@ -97,6 +97,6 @@ tr.chance {
 }
 
 .stats {
-  border: 1px solid black;
-  padding: 30px;
+  border: 1px solid green;
+  padding: 10px;
 }
