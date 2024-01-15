@@ -47,7 +47,11 @@
           </td>
           <td><%= fixture.comp %></td>
           <td>
-            <%= link_to 'Show Result', show_match_path(fixture.match_id), class: "btn btn-sm btn-primary" %>
+            <% if Matches.exists?(match_id: fixture.match_id) %>
+              <%= link_to 'Show Result', show_match_path(fixture.match_id), class: "btn btn-sm btn-primary" %>
+            <% else %>
+              <%= link_to 'Show Result', '#', class: "btn btn-sm btn-primary disabled", disabled: true %>
+            <% end %>
           </td>
         </tr>
       <% end %>
