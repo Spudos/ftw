@@ -1,8 +1,11 @@
-<%= render 'leagues/table'%>
-
-<div class="grid-container">
-  <div class="stats"><%= render 'leagues/top_total_skill'%></div>
-  <div class="stats"><%= render 'leagues/top_performance'%></div>
-  <div class="stats"><%= render 'leagues/top_assists'%></div>
-  <div class="stats"><%= render 'leagues/top_goals'%></div>
-</div>
+<%= form_with(url: leagues_path, method: :get) do |form| %>
+  <%= form.select :competition, options_for_select(["Premier League", "Championship"]), prompt: "Select a competition" %>
+  <%= form.submit "Submit" %>
+  <%= render 'leagues/table' %>
+  <div class="grid-container">
+    <div class="stats"><%= render 'leagues/top_total_skill' %></div>
+    <div class="stats"><%= render 'leagues/top_performance' %></div>
+    <div class="stats"><%= render 'leagues/top_assists' %></div>
+    <div class="stats"><%= render 'leagues/top_goals' %></div>
+  </div>
+<% end %>

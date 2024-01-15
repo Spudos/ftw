@@ -1,5 +1,5 @@
 class TeamStatisticsCalculator
-  def compile_league_table
+  def compile_league_table(params)
     league_table_information = Hash.new { |hash, key|
       hash[key] =
         { played: 0,
@@ -8,9 +8,10 @@ class TeamStatisticsCalculator
           drawn: 0,
           goals_scored: 0,
           goals_conceded: 0,
-          points: 0 } }
+          points: 0 } 
+        }
 
-    match_info = Matches.all
+    match_info = Matches.where(competition: params)
 
     match_info.each do |match|
       update_team_statistics(league_table_information, match.home_team, match.home_goals, match.away_goals)

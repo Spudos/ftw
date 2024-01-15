@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :matches
   resources :fixtures
   resources :clubs, param: :abbreviation
-  resources :leagues
+  resources :leagues, param: :competition
   resources :admin
   resources :messages
 
