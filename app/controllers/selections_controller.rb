@@ -30,6 +30,7 @@ class SelectionsController < ApplicationController
 
       # Save the new selection
       player_ids.each do |player_id|
+
         Selection.create(club: club.abbreviation, player_id: player_id)
       end
 

@@ -16,10 +16,15 @@ class Turnsheet < ApplicationRecord
       end
 
       tactic_record = Tactic.find_by(abbreviation: turnsheet.club)
-      if turnsheet.tactic.present?
-        tactic_record.update(tactics: turnsheet.tactic)
+
+      if tactic_record
+        tactic_record.destroy # Remove the existing tactic entry
+      end
+
+      if turnsheet.tactic.nil?
+        Tactic.create(abbreviation: turnsheet.club, tactics: 1)
       else
-        tactic_record.update(tactics: 1)
+        Tactic.create(abbreviation: turnsheet.club, tactics: turnsheet.tactic)
       end
 
       if turnsheet.coach_upgrade.present?

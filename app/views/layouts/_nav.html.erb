@@ -6,20 +6,39 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ms-auto">
+        <% if current_user&.manager? %>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= leagues_path %>">My Club</a>
+        </li>
+        <% end %> 
         <li class="nav-item">
           <a class="nav-link" href="<%= leagues_path %>">Leagues</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<%= players_path %>">Players</a>
         </li>
+        <% if current_user&.manager? %>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= new_turnsheet_path %>">Turnsheet Entry</a>
+        </li>
+        <% end %> 
         <% if current_user&.gm? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Admin
             </a>
             <ul class="dropdown-menu">
-              <li>Admin Functions</li>
-              <li><a class="nav-link" href="<%= clubs_path %>">Club</a></li>
+              <li>Club Functions</li>
+              <li><a class="nav-link" href="<%= clubs_path %>">View and Edit Clubs</a></li>
+              <li><a class="nav-link" href="<%= new_club_path %>">Create A Club</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>Player Functions</li>
+              <li><a class="nav-link" href="<%= players_path %>">View and Edit Players</a></li>
+              <li><a class="nav-link" href="<%= new_player_path %>">Create A Player</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>Fixture Functions</li>
+              <li><a class="nav-link" href="<%= fixtures_path %>">View Fixtures</a></li>
+              <li><a class="nav-link" href="<%= new_fixture_path %>">Create A Fixture</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>Turn Functions</li>
               <li><a class="nav-link" href="<%= turnsheets_path %>">Turnsheet</a></li>
