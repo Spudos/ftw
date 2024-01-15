@@ -59,10 +59,11 @@ class Matches < ApplicationRecord
     fixture_list = []
     fixtures.each do |fixture|
       fixture_list << {
-        match_id: fixture.match_id,
+        id: fixture.id,
         club_home: fixture.home,
         club_away: fixture.away,
-        week_number: fixture.week_number
+        week_number: fixture.week_number,
+        competition: fixture.comp
       }
     end
     fixture_list
@@ -71,8 +72,9 @@ class Matches < ApplicationRecord
   def create_squad_for_game(fixture)
     # create a hash of teams in the fixture to be played
     teams = {
-      match_id: fixture[:match_id],
+      id: fixture[:id],
       week: fixture[:week_number],
+      competition: fixture[:competition],
       club_home: fixture[:club_home],
       tactic_home: Tactic.find_by(abbreviation: fixture[:club_home])&.tactics,
       club_away: fixture[:club_away],
@@ -87,7 +89,7 @@ class Matches < ApplicationRecord
 
     # this populates the match_squad for home and away with a list of full player details for the match
     match_squad = []
-    match_id = fixture[:match_id]
+    id = fixture[:id]
 
     player_ids.each do |player_id|
       match_squad += Player.where(id: player_id)
@@ -104,7 +106,7 @@ class Matches < ApplicationRecord
       # create and return a hash with each players details including performance
       hash = {
         player_id: player.id,
-        match_id: @match_id,
+        id: @id,
         club: player.club,
         player_name: player.name,
         total_skill: player.total_skill,
@@ -159,10 +161,10 @@ class Matches < ApplicationRecord
   end
 
   def save_player_match_data(squads_with_adjusted_performance, match_info)
-    match_id = match_info[:match_id]
+    id = match_info[:id]
     squads_with_adjusted_performance.each do |player|
       PlayerMatchData.create(
-        match_id: match_id,
+        match_id: id,
         player_id: player[:player_id],
         club: player[:club],
         name: Player.find_by(id: player[:player_id])&.name,
@@ -371,8 +373,9 @@ class Matches < ApplicationRecord
   end
 
   def create_match_summary(minute_by_minute)
-    match_id = minute_by_minute.first[:match_id]
+    id = minute_by_minute.first[:id]
     week = minute_by_minute.first[:week]
+    competition = minute_by_minute.first[:competition]
     club_home = minute_by_minute.first[:club_home]
     tactic_home = minute_by_minute.first[:tactic_home]
     club_away = minute_by_minute.first[:club_away]
@@ -385,8 +388,9 @@ class Matches < ApplicationRecord
     goal_away = minute_by_minute.count { |chance| chance[:goal_scored] == 'away' }
 
     match_summary = {
-      match_id:,
+      id:,
       week:,
+      competition:,
       club_home:,
       tactic_home:,
       club_away:,
@@ -417,9 +421,11 @@ class Matches < ApplicationRecord
 
   def save_detailed_match_summary(detailed_match_summary)
     match_data = detailed_match_summary[0] # Access the first hash in the array
+
     match = Matches.new(
-      match_id: match_data[:match_id].to_i,
+      match_id: match_data[:id].to_i,
       week_number: match_data[:week].to_i,
+      competition: match_data[:competition],
       home_team: match_data[:club_home],
       tactic_home: match_data[:tactic_home],
       away_team: match_data[:club_away],
@@ -447,7 +453,7 @@ class Matches < ApplicationRecord
     minute_by_minute.each do |match_data|
       if match_data[:goal_scored] != 'none'
       match = GoalsAndAssistsByMatch.create(
-        match_id: match_data[:match_id],
+        match_id: match_data[:id],
         week_number: match_data[:week],
         minute: match_data[:minute],
         assist: match_data[:assist],
@@ -477,7 +483,7 @@ class Matches < ApplicationRecord
       away_name = Player.find_by(id: away_filtered_list.sample[:player_id])&.name
 
       time = minute[:minute]
-      game_id = minute[:match_id]
+      game_id = minute[:id]
 
       if minute[:goal_scored] == 'home'
         scorer = Player.find_by(id: minute[:scorer])&.name

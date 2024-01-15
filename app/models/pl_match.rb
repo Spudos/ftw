@@ -3,7 +3,7 @@
 # Table name: pl_matches
 #
 #  id         :integer          not null, primary key
-#  match_id   :integer
+#  id   :integer
 #  player_id  :integer
 #  match_performance :integer
 #  created_at :datetime         not null
@@ -19,7 +19,7 @@ end
 # Name       SQL Type             Null    Primary Default
 # ---------- -------------------- ------- ------- ----------
 # id         INTEGER              false   true              
-# match_id   INTEGER              true    false             
+# id   INTEGER              true    false             
 # player_id  INTEGER              true    false             
 # match_performance INTEGER              true    false             
 # created_at datetime(6)          false   false             

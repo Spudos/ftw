@@ -4,7 +4,7 @@ class FixturesController < ApplicationController
   end
 
   def show
-    @fixtures = Fixtures.find_by(match_id: params[:id])
+    @fixtures = Fixtures.find_by(id: params[:id])
   end
 
   def new
@@ -12,7 +12,7 @@ class FixturesController < ApplicationController
   end
 
   def edit
-    @fixtures = Fixtures.find_by(match_id: params[:id])
+    @fixtures = Fixtures.find_by(id: params[:id])
   end
 
   def create
@@ -58,5 +58,5 @@ end
 private
 
 def fixtures_params
-  params.require(:fixtures).permit(:match_id, :week_number, :home, :away, :comp)
+  params.require(:fixtures).permit(:id, :week_number, :home, :away, :comp)
 end

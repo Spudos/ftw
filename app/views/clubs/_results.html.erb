@@ -21,7 +21,7 @@
   <tbody>
     <% @club_matches.each do |match| %>
       <tr scope="row">
-        <td><%= match.match_id %></td>
+        <td><%= match.id %></td>
         <td><%= Club.find_by(abbreviation: match.home_team)&.name %></td>
         <td><%= Club.find_by(abbreviation: match.away_team)&.name %></td>
         <td>

@@ -16,16 +16,16 @@ class MatchesMinByMinHelperTest < ActionView::TestCase
     @goal_home = 0
     @goal_away = 0
     @sqd_pl_home = [
-      { id: 1, match_id: 1, :position 'gkp', match_performance: 7 },
-      { id: 2, match_id: 1, :position 'def', match_performance: 8 },
-      { id: 3, match_id: 1, :position 'mid', match_performance: 9 },
-      { id: 4, match_id: 1, :position 'fwd', match_performance: 10 }
+      { id: 1, id: 1, :position 'gkp', match_performance: 7 },
+      { id: 2, id: 1, :position 'def', match_performance: 8 },
+      { id: 3, id: 1, :position 'mid', match_performance: 9 },
+      { id: 4, id: 1, :position 'fwd', match_performance: 10 }
     ]
     @sqd_pl_away = [
-      { id: 5, match_id: 1, :position 'gkp', match_performance: 7 },
-      { id: 6, match_id: 1, :position 'def', match_performance: 8 },
-      { id: 7, match_id: 1, :position 'mid', match_performance: 9 },
-      { id: 8, match_id: 1, :position 'fwd', match_performance: 10 }
+      { id: 5, id: 1, :position 'gkp', match_performance: 7 },
+      { id: 6, id: 1, :position 'def', match_performance: 8 },
+      { id: 7, id: 1, :position 'mid', match_performance: 9 },
+      { id: 8, id: 1, :position 'fwd', match_performance: 10 }
     ]
   end
 
@@ -109,20 +109,20 @@ class MatchesMinByMinHelperTest < ActionView::TestCase
     srand(1)
     expected_goal = { scorer: 4, assist: 3, time: 1 }
     expected_player_statistics = {
-      1 => { goals: 0, assists: 0, time: 1, match_id: 1 },
-      2 => { goals: 0, assists: 0, time: 1, match_id: 1 },
-      3 => { goals: 0, assists: 1, time: 1, match_id: 1 },
-      4 => { goals: 1, assists: 0, time: 1, match_id: 1 }
+      1 => { goals: 0, assists: 0, time: 1, id: 1 },
+      2 => { goals: 0, assists: 0, time: 1, id: 1 },
+      3 => { goals: 0, assists: 1, time: 1, id: 1 },
+      4 => { goals: 1, assists: 0, time: 1, id: 1 }
     }
     assert_equal({ goal: expected_goal, player_statistics: expected_player_statistics }, assist_and_scorer(@sqd_pl_home, 1))
 
     srand(2)
     expected_goal = { scorer: 8, assist: 7, time: 1 }
     expected_player_statistics = {
-      5 => { goals: 0, assists: 0, time: 1, match_id: 1 },
-      6 => { goals: 0, assists: 0, time: 1, match_id: 1 },
-      7 => { goals: 0, assists: 1, time: 1, match_id: 1 },
-      8 => { goals: 1, assists: 0, time: 1, match_id: 1 }
+      5 => { goals: 0, assists: 0, time: 1, id: 1 },
+      6 => { goals: 0, assists: 0, time: 1, id: 1 },
+      7 => { goals: 0, assists: 1, time: 1, id: 1 },
+      8 => { goals: 1, assists: 0, time: 1, id: 1 }
     }
     assert_equal({ goal: expected_goal, player_statistics: expected_player_statistics }, assist_and_scorer(@sqd_pl_away, 1))
   end

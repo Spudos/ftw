@@ -1,7 +1,7 @@
 class CreateMatches < ActiveRecord::Migration[7.0]
   def change
     create_table :matches do |t|
-      t.integer :match_id
+      t.integer :id
       t.integer :week
       t.string :comp
       t.string :home_team

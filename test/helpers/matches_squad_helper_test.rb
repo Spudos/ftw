@@ -4,7 +4,7 @@ class MatchesSquadHelperTest < ActionView::TestCase
   include MatchesSquadHelper
 
   def setup
-    @match_id = 1
+    @id = 1
   end
 
   def test_squad_pl
@@ -14,7 +14,7 @@ class MatchesSquadHelperTest < ActionView::TestCase
 
     expected_result = [
       {
-        match_id: @match_id,
+        id: @id,
         id: player1.id,
         club: player1.club,
         name: player1.name,
@@ -23,7 +23,7 @@ class MatchesSquadHelperTest < ActionView::TestCase
         match_performance: player1.match_performance(player1)
       },
       {
-        match_id: @match_id,
+        id: @id,
         id: player2.id,
         club: player2.club,
         name: player2.name,

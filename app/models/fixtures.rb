@@ -3,7 +3,7 @@
 # Table name: fixtures
 #
 #  id          :integer          not null, primary key
-#  match_id    :integer
+#  id    :integer
 #  week_number :integer
 #  home        :string
 #  away        :string
@@ -20,7 +20,7 @@ end
 # Name        SQL Type             Null    Primary Default
 # ----------- -------------------- ------- ------- ----------
 # id          INTEGER              false   true              
-# match_id    INTEGER              true    false             
+# id    INTEGER              true    false             
 # week_number INTEGER              true    false             
 # home        varchar              true    false             
 # away        varchar              true    false             

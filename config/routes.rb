@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   post '/matches/match', to: 'matches#match'
   get '/matches/outcome', to: 'matches#outcome'
   post '/matches/save', to: 'matches#save', as: 'save_match'
-  get '/matches/:match_id', to: 'matches#show', as: 'show_match'
+  get '/matches/:id', to: 'matches#show', as: 'show_match'
   post '/matches/match_multiple', to: 'matches#match_multiple'
   post '/players/potential_update', to: 'players#potential_update'
   get '/players/total_goals', to: 'players#total_goals'

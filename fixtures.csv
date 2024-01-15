@@ -1,4 +1,4 @@
-id,match_id,week_number,home,away,comp,created_at,updated_at
+id,id,week_number,home,away,comp,created_at,updated_at
 1,1,1,imj,gcm,League,27/12/2023,27/12/2023
 2,2,1,qsj,yju,League,27/12/2023,27/12/2023
 3,3,1,ioz,rct,League,27/12/2023,27/12/2023

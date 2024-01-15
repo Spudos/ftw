@@ -7,7 +7,7 @@
 #  man_of_the_match       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  match_id   :integer
+#  id   :integer
 #  goal       :boolean
 #  assist     :boolean
 #
@@ -25,7 +25,7 @@ end
 # man_of_the_match       INTEGER              true    false             
 # created_at datetime(6)          false   false             
 # updated_at datetime(6)          false   false             
-# match_id   INTEGER              true    false             
+# id   INTEGER              true    false             
 # goal       boolean              true    false             
 # assist     boolean              true    false             
 # time       INTEGER              true    false             
