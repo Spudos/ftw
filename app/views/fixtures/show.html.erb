@@ -1,0 +1,18 @@
+<% fixture = Fixtures.find_by(id: params[:id]) %>
+
+<div class="container align-items-start">
+  <div class="row">
+    <div class="col-md-4">
+      <h5>Match ID: <%= fixture.match_id %></h5>             
+      <h5>Week: <%= fixture.week_number %></h5>
+      <h5>Home: <%= fixture.home %></h5>
+      <h5>Away: <%= fixture.away %></h5>
+      <h5>Competition: <%= fixture.comp %></h5>
+    </div>
+  </div>  
+  <div>
+    <%= link_to "Back to fixtures", fixtures_path, class: "btn btn-sm btn-primary"  %>
+    <%= link_to "Edit this fixture", edit_fixture_path(fixture.match_id), class: "btn btn-sm btn-primary" %>
+    <%= button_to "Delete fixture", @fixture, method: :delete, class: "btn btn-sm btn-danger" %>
+  </div>
+</div>

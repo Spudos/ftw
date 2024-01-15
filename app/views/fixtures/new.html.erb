@@ -1,0 +1,48 @@
+<h1>New Fixture</h1>
+
+<%= form_with(model: @fixtures, url: fixtures_path) do |form| %>
+  <% if @fixtures.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(club.errors.count, "error") %> prohibited this fixture from being saved:</h2>
+
+      <ul>
+        <% @fixtures.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :match_id, style: "display: block" %>
+    <%= form.text_field :match_id %>
+  </div>
+
+  <div>
+    <%= form.label :week_number, style: "display: block" %>
+    <%= form.text_field :week_number %>
+  </div>
+
+  <div>
+    <%= form.label :home, style: "display: block" %>
+    <%= form.text_field :home %>
+  </div>
+
+  <div>
+    <%= form.label :away, style: "display: block" %>
+    <%= form.text_field :away %>
+  </div>
+
+  <div>
+    <%= form.label :comp, style: "display: block" %>
+    <%= form.text_field :comp %>
+  </div>
+
+  <div>
+    <%= form.submit 'Save', class: "btn btn-sm btn-danger" %>
+  </div>
+<% end %>
+
+<div>
+  <%= link_to "Back to fixtures", fixtures_path %>
+</div>

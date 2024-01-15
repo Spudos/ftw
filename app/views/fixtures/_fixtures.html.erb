@@ -53,6 +53,9 @@
               <%= link_to 'Show Result', '#', class: "btn btn-sm btn-primary disabled", disabled: true %>
             <% end %>
           </td>
+          <td>
+            <%= button_to "Delete fixture", fixture, method: :delete, class: "btn btn-sm btn-danger" %>
+          </td>
         </tr>
       <% end %>
     <% end %>

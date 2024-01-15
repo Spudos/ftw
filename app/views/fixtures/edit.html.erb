@@ -1,0 +1,42 @@
+<h1>Editing Fixture</h1>
+<%= form_with(model: @fixtures, local: true) do |form| %>
+  <% if @fixtures.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(club.errors.count, "error0") %> prohibited this fixture from being saved:</h2>
+      <ul>
+        <% @fixtures.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div>
+      <%= form.label :match_id, style: "display: inline-block" %>
+      <%= form.text_field :match_id, value: @fixtures.match_id %>
+    </div>
+    <div>
+      <%= form.label :week_number, style: "display: inline-block" %>
+      <%= form.text_field :week_number, value: @fixtures.week_number %>
+    </div>
+    <div>
+      <%= form.label :home, style: "display: inline-block" %>
+      <%= form.text_field :home, value: @fixtures.home %>
+    </div>
+    <div>
+      <%= form.label :away, style: "display: inline-block" %>
+      <%= form.text_field :away, value: @fixtures.away %>
+    </div>
+    <div>
+      <%= form.label :comp, style: "display: inline-block" %>
+      <%= form.text_field :comp, value: @fixtures.comp %>
+    </div>
+    <div>
+      <%= form.submit 'Save Changes', class: 'btn btn-sm btn-danger' %>
+  </div>
+<% end %>
+
+
+<div>
+  <%= link_to "Show this fixture", @fixture, class: "btn btn-sm btn-primary" %>
+  <%= link_to "Back to fixtures", fixtures_path, class: "btn btn-sm btn-primary" %>
+</div>
