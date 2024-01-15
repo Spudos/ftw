@@ -54,7 +54,7 @@
             <% end %>
           </td>
           <td>
-            <%= button_to "Delete fixture", fixture, method: :delete, class: "btn btn-sm btn-danger" %>
+            <%= button_to "Delete fixture", fixture, method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "Are you sure you want to delete this fixture?" } %>
           </td>
         </tr>
       <% end %>
