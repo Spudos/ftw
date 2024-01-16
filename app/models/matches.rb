@@ -5,7 +5,7 @@ class Matches < ApplicationRecord
     fixture_list.each do |fixture|
       match_info, match_squad = SquadCreator.new(fixture).squad_for_game
       match_squad_with_performance = player_performance(match_squad)
-      squads_with_adjusted_performance = player_performance_by_tactic(match_squad_with_performance)
+      squads_with_adjusted_performance = TacticAdjustment.new(match_squad_with_performance).player_performance_by_tactic
       save_player_match_data(squads_with_adjusted_performance, match_info)
       basic_team_totals = team_totals(squads_with_adjusted_performance)
       home_stadium_size = stadium_size(basic_team_totals)
@@ -46,7 +46,7 @@ class Matches < ApplicationRecord
 
     save_detailed_match_summary(detailed_match_summary)
     save_goal_and_assist_information(minute_by_minute)
-    match_commentary(home_list, away_list, minute_by_minute)
+    MatchCommentary.new(home_list, away_list, minute_by_minute).match_commentary
   end
 
   private
@@ -86,46 +86,6 @@ class Matches < ApplicationRecord
       players_array << hash
     end
     players_array
-  end
-
-  def player_performance_by_tactic(match_squad_with_performance)
-    # tactic name       dfc  mid  att  l,r  c
-    # 1      passing    -5  +10  -0    0    0
-    # 2      defensive  +15 -5   -10   0    0
-    # 3      Attacking  -10 +5   +15   0    0
-    # 4      Wide        0   0    0   +10  -10
-    # 5      Narrow      0   0    0   -10  +10
-    # 6      Direct     +5  -5   +5    0    0
-
-    players = match_squad_with_performance
-
-    players.each do |player|
-      if player[:player_position_detail] == 'c'
-        player[:match_performance] -= 10 if player[:tactic] == 4
-        player[:match_performance] += 10 if player[:tactic] == 5
-      elsif player[:player_position_detail] == 'r' || player[:player_position_detail] == 'l'
-        player[:match_performance] += 10 if player[:tactic] == 4
-        player[:match_performance] -= 10 if player[:tactic] == 5
-      end
-
-      if player[:player_position] == 'dfc'
-        player[:match_performance] -= 5 if player[:tactic] == 1
-        player[:match_performance] += 15 if player[:tactic] == 2
-        player[:match_performance] -= 10 if player[:tactic] == 3
-        player[:match_performance] += 5 if player[:tactic] == 6
-      elsif player[:player_position] == 'mid'
-        player[:match_performance] += 15 if player[:tactic] == 1
-        player[:match_performance] -= 10 if player[:tactic] == 2
-        player[:match_performance] += 15 if player[:tactic] == 3
-        player[:match_performance] -= 5 if player[:tactic] == 6
-      elsif player[:player_position] == 'att'
-        player[:match_performance] -= 5 if player[:tactic] == 1
-        player[:match_performance] -= 10 if player[:tactic] == 2
-        player[:match_performance] += 10 if player[:tactic] == 3
-        player[:match_performance] += 5 if player[:tactic] == 6
-      end
-    end
-    squads_with_adjusted_peformance = players
   end
 
   def save_player_match_data(squads_with_adjusted_performance, match_info)
@@ -331,7 +291,7 @@ class Matches < ApplicationRecord
     else
       scorer = away_top_5.reject { |player| player[:player_id] == assist }.sample[:player_id]
     end
-  
+
     while scorer == assist
       if goal_scored[:goal_scored] == 'home'
         scorer = home_top_5.reject { |player| player[:player_id] == assist }.sample[:player_id]
@@ -339,39 +299,25 @@ class Matches < ApplicationRecord
         scorer = away_top_5.reject { |player| player[:player_id] == assist }.sample[:player_id]
       end
     end
-  
+
     { scorer: scorer }
   end
 
   def match_summary(minute_by_minute)
-    id = minute_by_minute.first[:id]
-    week = minute_by_minute.first[:week]
-    competition = minute_by_minute.first[:competition]
-    club_home = minute_by_minute.first[:club_home]
-    tactic_home = minute_by_minute.first[:tactic_home]
-    club_away = minute_by_minute.first[:club_away]
-    tactic_away = minute_by_minute.first[:tactic_away]
-    chance_count_home = minute_by_minute.count { |chance| chance[:chance_outcome] == 'home' }
-    chance_count_away = minute_by_minute.count { |chance| chance[:chance_outcome] == 'away' }
-    chance_on_target_home = minute_by_minute.count { |chance| chance[:chance_on_target] == 'home' }
-    chance_on_target_away = minute_by_minute.count { |chance| chance[:chance_on_target] == 'away' }
-    goal_home = minute_by_minute.count { |chance| chance[:goal_scored] == 'home' }
-    goal_away = minute_by_minute.count { |chance| chance[:goal_scored] == 'away' }
-
     match_summary = {
-      id:,
-      week:,
-      competition:,
-      club_home:,
-      tactic_home:,
-      club_away:,
-      tactic_away:,
-      chance_count_home:,
-      chance_count_away:,
-      chance_on_target_home:,
-      chance_on_target_away:,
-      goal_home:,
-      goal_away:
+      id: minute_by_minute.first[:id],
+      week: minute_by_minute.first[:week],
+      competition: minute_by_minute.first[:competition],
+      club_home: minute_by_minute.first[:club_home],
+      tactic_home: minute_by_minute.first[:tactic_home],
+      club_away: minute_by_minute.first[:club_away],
+      tactic_away: minute_by_minute.first[:tactic_away],
+      chance_count_home: minute_by_minute.count { |chance| chance[:chance_outcome] == 'home' },
+      chance_count_away: minute_by_minute.count { |chance| chance[:chance_outcome] == 'away' },
+      chance_on_target_home: minute_by_minute.count { |chance| chance[:chance_on_target] == 'home' },
+      chance_on_target_away: minute_by_minute.count { |chance| chance[:chance_on_target] == 'away' },
+      goal_home: minute_by_minute.count { |chance| chance[:goal_scored] == 'home' },
+      goal_away: minute_by_minute.count { |chance| chance[:goal_scored] == 'away' }
     }
     match_summary
   end
@@ -432,70 +378,6 @@ class Matches < ApplicationRecord
           competition: match_data[:competition]
         )
       end
-    end
-  end
-
-  def match_commentary(home_list, away_list, minute_by_minute)
-    home_team = Club.find_by(abbreviation: minute_by_minute.first[:club_home])&.name
-    away_team = Club.find_by(abbreviation: minute_by_minute.first[:club_away])&.name
-
-    home_score = 0
-    away_score = 0
-
-    minute_by_minute.each do |minute|
-      general_commentary = Template.random_match_general_commentary
-      chance_commentary = Template.random_match_chance_commentary
-      chance_tar_commentary = Template.random_match_chance_tar_commentary
-      goal_commentary = Template.random_match_goal_commentary  
-
-      home_filtered_list = home_list.select { |player| player[:player_position] != "gkp" }
-      home_name = Player.find_by(id: home_filtered_list.sample[:player_id])&.name
-
-      away_filtered_list = away_list.select { |player| player[:player_position] != "gkp" }
-      away_name = Player.find_by(id: away_filtered_list.sample[:player_id])&.name
-
-      time = minute[:minute]
-      game_id = minute[:id]
-
-      if minute[:goal_scored] == 'home'
-        scorer = Player.find_by(id: minute[:scorer])&.name
-        assister = Player.find_by(id: minute[:assist])&.name
-        home_score += 1
-        event = 'Home Goal'
-        commentary = goal_commentary.gsub('{team}', home_team).gsub('{assister}', assister).gsub('{scorer}', scorer)
-      elsif minute[:goal_scored] == 'away'
-        scorer = Player.find_by(id: minute[:scorer])&.name
-        assister = Player.find_by(id: minute[:assist])&.name
-        away_score += 1
-        event = 'Away Goal'
-        commentary = goal_commentary.gsub('{team}', away_team).gsub('{assister}', assister).gsub('{scorer}', scorer)
-      elsif minute[:chance_on_target] == 'home'
-        event = 'Good chance'
-        commentary = chance_tar_commentary.gsub('{team}', home_team).gsub('{player}', home_name)
-      elsif minute[:chance_on_target] == 'away'
-        event = 'Good chance'
-        commentary = chance_tar_commentary.gsub('{team}', away_team).gsub('{player}', away_name)
-      elsif minute[:chance_outcome] == 'home'
-        event = 'Chance'
-        commentary = chance_commentary.gsub('{team}', home_team).gsub('{player}', home_name)
-      elsif minute[:chance_outcome] == 'away'
-        event = 'Chance'
-        commentary = chance_commentary.gsub('{team}', away_team).gsub('{player}', away_name)
-      else
-        event = ''
-        team_names = [away_team, home_team]
-        selected_team = team_names.sample
-        commentary = general_commentary.gsub('{team}', selected_team)
-      end
-
-      Commentary.create(
-        game_id: game_id,
-        minute: time,
-        commentary: commentary,
-        event: event,
-        home_score: home_score,
-        away_score: away_score
-      )
     end
   end
 end
