@@ -26,7 +26,7 @@ At present, to play a game you carry out the following steps:
 
 ## Things to improve
 
-1. controllers must be simpler
+1. controllers must be simpler - DONE
 2. all business logic in models (not necessarily one file, but called from within models via callback methods and similar)
 3. full names for variables
 4. remove all business logic global variables and replace them with method returns and method arguments
@@ -61,3 +61,4 @@ class EventCommentary
     @commentary.gsub(...)
   end
 end
+10. sort out associations

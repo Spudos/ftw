@@ -1,0 +1,57 @@
+# strategy pattern
+
+# how to use concrete actions in code
+actions = [SquadAction, PlayerPerformanceAction]
+
+fixture_list.each do |fixture|
+  result = nil
+  actions.each do |action|
+    result = action.new(fixture).call
+  end
+end
+
+# concrete actions below
+class AbstractMatch
+  def action
+    raise NotImplementedError
+  end
+end
+
+class SquadAction < AbstractMatch
+  def initialize(options = {})
+    @fixture = options[:key]
+  end
+
+  def call
+    teams = {
+      id: fixture[:id],
+      week: fixture[:week_number],
+      competition: fixture[:competition],
+      club_home: fixture[:club_home],
+      tactic_home: Tactic.find_by(abbreviation: fixture[:club_home])&.tactics,
+      club_away: fixture[:club_away],
+      tactic_away: Tactic.find_by(abbreviation: fixture[:club_away])&.tactics
+    }
+
+    # this populates the player_ids array for both teams with a list of players for the match
+    player_ids = []
+    teams.each_value do |team|
+      player_ids += Selection.where(club: team).pluck(:player_id)
+    end
+
+    # this populates the match_squad for home and away with a list of full player details for the match
+    match_squad = []
+    id = fixture[:id]
+
+    player_ids.each do |player_id|
+      match_squad += Player.where(id: player_id)
+    end
+    return teams, match_squad
+  end
+end
+
+class PlayerPerformanceAction < AbstractMatch
+  def action
+    ...
+  end
+end

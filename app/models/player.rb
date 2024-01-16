@@ -36,7 +36,9 @@ class Player < ApplicationRecord
     control + running + shooting + dribbling + offensive_heading + flair
   end
 
+  # n+1 problem in sql
   def self.compile_player_view
+    # Player.joins(:player_match_data).joins(:goals_and_assists_by_matches)
     players = Player.all.map do |player|
       info = {
       id: player.id,

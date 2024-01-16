@@ -1,10 +1,10 @@
 class Matches < ApplicationRecord
-  def match_engine(params)
+  def match_engine(params) # rubocop:disable Metrics/MethodLength # TODO: method name doesn't explain what's actually doing
     # get the fixture list then iterate through it preparing the squads for each match
-    fixture_list = get_fixtures_for_week(params)
+    fixture_list = get_fixtures_for_week(params) # no need to prefix get_ for things that only retrieve data in ruby
 
     fixture_list.each do |fixture|
-      match_info, match_squad = create_squad_for_game(fixture)
+      match_info, match_squad = SquadCreator.new(fixture).create_squad_for_game # SquadCreator.new(fixture).call and do similar with other methods below
       match_squad_with_performance = calculate_player_performance(match_squad)
       squads_with_adjusted_performance = adjust_player_performance_by_tactic(match_squad_with_performance)
       save_player_match_data(squads_with_adjusted_performance, match_info)
