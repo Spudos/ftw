@@ -1,33 +1,32 @@
 class Matches < ApplicationRecord
-  def match_engine(params) # rubocop:disable Metrics/MethodLength # TODO: method name doesn't explain what's actually doing
-    # get the fixture list then iterate through it preparing the squads for each match
-    fixture_list = get_fixtures_for_week(params) # no need to prefix get_ for things that only retrieve data in ruby
+  def run_matches(params)
+    fixture_list = fixtures_for_week(params)
 
     fixture_list.each do |fixture|
-      match_info, match_squad = SquadCreator.new(fixture).create_squad_for_game # SquadCreator.new(fixture).call and do similar with other methods below
-      match_squad_with_performance = calculate_player_performance(match_squad)
-      squads_with_adjusted_performance = adjust_player_performance_by_tactic(match_squad_with_performance)
+      match_info, match_squad = SquadCreator.new(fixture).squad_for_game
+      match_squad_with_performance = player_performance(match_squad)
+      squads_with_adjusted_performance = player_performance_by_tactic(match_squad_with_performance)
       save_player_match_data(squads_with_adjusted_performance, match_info)
-      basic_team_totals = calculate_team_totals(squads_with_adjusted_performance)
-      home_stadium_size = calculate_stadium_size(basic_team_totals)
-      adjusted_team_totals = calculate_teams_with_stadium_effect(basic_team_totals, home_stadium_size)
+      basic_team_totals = team_totals(squads_with_adjusted_performance)
+      home_stadium_size = stadium_size(basic_team_totals)
+      adjusted_team_totals = teams_with_stadium_effect(basic_team_totals, home_stadium_size)
       run_match_logic(adjusted_team_totals, squads_with_adjusted_performance, match_info)
     end
   end
 
   def run_match_logic(adjusted_team_totals, squads_with_adjusted_performance, match_info)
-    home_list, away_list = compile_list_of_players(squads_with_adjusted_performance)
-    home_top_5, away_top_5 = compile_list_of_top_5_players(home_list, away_list)
+    home_list, away_list = list_of_players(squads_with_adjusted_performance)
+    home_top_5, away_top_5 = list_of_top_5_players(home_list, away_list)
 
     minute_by_minute = []
     rand(90..98).times do |i|
-      chance_result = calculate_chance_created(adjusted_team_totals, i)
-      chance_on_target_result = calculate_if_chance_on_target(chance_result, adjusted_team_totals)
-      goal_scored = calculate_goal_scored(chance_on_target_result, adjusted_team_totals)
+      chance_result = chance_created(adjusted_team_totals, i)
+      chance_on_target_result = if_chance_on_target(chance_result, adjusted_team_totals)
+      goal_scored = goal_scored(chance_on_target_result, adjusted_team_totals)
 
       if goal_scored[:goal_scored] != 'none'
-        assist = who_assisted(home_top_5, away_top_5, goal_scored)
-        scorer = who_scored(home_top_5, away_top_5, assist, goal_scored)
+        assist = assisted(home_top_5, away_top_5, goal_scored)
+        scorer = scored(home_top_5, away_top_5, assist, goal_scored)
       else
         assist = { assist: 'none' }
         scorer = { scorer: 'none' }
@@ -40,20 +39,19 @@ class Matches < ApplicationRecord
 
   def run_end_of_match(home_list, away_list, minute_by_minute)
     detailed_match_summary = []
-    match_summary = create_match_summary(minute_by_minute)
-    possession = calc_possession(match_summary)
-    man_of_the_match = select_man_of_the_match(home_list, away_list)
+    match_summary = match_summary(minute_by_minute)
+    possession = possession(match_summary)
+    man_of_the_match = man_of_the_match(home_list, away_list)
     detailed_match_summary << { **match_summary, **possession, **man_of_the_match }
 
     save_detailed_match_summary(detailed_match_summary)
     save_goal_and_assist_information(minute_by_minute)
-    create_match_commentary(home_list, away_list, minute_by_minute)
+    match_commentary(home_list, away_list, minute_by_minute)
   end
 
   private
 
-  def get_fixtures_for_week(params)
-    # get the fixtures for the week
+  def fixtures_for_week(params)
     fixtures = Fixtures.where(week_number: params[:selected_week])
 
     fixture_list = []
@@ -69,41 +67,11 @@ class Matches < ApplicationRecord
     fixture_list
   end
 
-  def create_squad_for_game(fixture)
-    # create a hash of teams in the fixture to be played
-    teams = {
-      id: fixture[:id],
-      week: fixture[:week_number],
-      competition: fixture[:competition],
-      club_home: fixture[:club_home],
-      tactic_home: Tactic.find_by(abbreviation: fixture[:club_home])&.tactics,
-      club_away: fixture[:club_away],
-      tactic_away: Tactic.find_by(abbreviation: fixture[:club_away])&.tactics
-    }
-
-    # this populates the player_ids array for both teams with a list of players for the match
-    player_ids = []
-    teams.each_value do |team|
-      player_ids += Selection.where(club: team).pluck(:player_id)
-    end
-
-    # this populates the match_squad for home and away with a list of full player details for the match
-    match_squad = []
-    id = fixture[:id]
-
-    player_ids.each do |player_id|
-      match_squad += Player.where(id: player_id)
-    end
-    return teams, match_squad
-  end
-
-  def calculate_player_performance(match_squad)
+  def player_performance(match_squad)
     players_array = []
     match_squad.each do |player|
-      # get the tactic that team is using
       tactic = Tactic.find_by(abbreviation: player.club)&.tactics
 
-      # create and return a hash with each players details including performance
       hash = {
         player_id: player.id,
         id: @id,
@@ -120,7 +88,7 @@ class Matches < ApplicationRecord
     players_array
   end
 
-  def adjust_player_performance_by_tactic(match_squad_with_performance)
+  def player_performance_by_tactic(match_squad_with_performance)
     # tactic name       dfc  mid  att  l,r  c
     # 1      passing    -5  +10  -0    0    0
     # 2      defensive  +15 -5   -10   0    0
@@ -178,7 +146,7 @@ class Matches < ApplicationRecord
     end
   end
 
-  def calculate_team_totals(squads_with_adjusted_performance)
+  def team_totals(squads_with_adjusted_performance)
     squads = squads_with_adjusted_performance
 
     home_team = squads.first[:club]
@@ -231,14 +199,14 @@ class Matches < ApplicationRecord
     totals
   end
 
-  def calculate_stadium_size(basic_team_totals)
+  def stadium_size(basic_team_totals)
     club = Club.find_by(abbreviation: basic_team_totals.first[:team])
     stadium_size = club.stand_n_capacity + club.stand_s_capacity + club.stand_e_capacity + club.stand_w_capacity
 
     stadium_size
   end
 
-  def calculate_teams_with_stadium_effect(basic_team_totals, home_stadium_size)
+  def teams_with_stadium_effect(basic_team_totals, home_stadium_size)
     if home_stadium_size <= 10000
       stadium_effect = 0
     elsif home_stadium_size <= 20000
@@ -264,7 +232,7 @@ class Matches < ApplicationRecord
     basic_team_totals
   end
 
-  def calculate_chance_created(adjusted_team_totals, i)
+  def chance_created(adjusted_team_totals, i)
     random_number = rand(1..100)
     chance = adjusted_team_totals.first[:midfield] - adjusted_team_totals.last[:midfield]
     chance_outcome = ''
@@ -289,7 +257,7 @@ class Matches < ApplicationRecord
     chance_result
   end
 
-  def calculate_if_chance_on_target(chance_result ,adjusted_team_totals)
+  def if_chance_on_target(chance_result ,adjusted_team_totals)
     home_attack = adjusted_team_totals.first[:attack]
     away_attack = adjusted_team_totals.last[:attack]
     chance_on_target = ''
@@ -306,7 +274,7 @@ class Matches < ApplicationRecord
     }
   end
 
-  def calculate_goal_scored(chance_on_target_result, adjusted_team_totals)
+  def goal_scored(chance_on_target_result, adjusted_team_totals)
     home_attack = adjusted_team_totals.first[:attack]
     away_attack = adjusted_team_totals.last[:attack]
     goal_scored = ''
@@ -323,7 +291,7 @@ class Matches < ApplicationRecord
     }
   end
 
-  def compile_list_of_players(squads_with_adjusted_performance)
+  def list_of_players(squads_with_adjusted_performance)
     home_team = squads_with_adjusted_performance.first[:club]
     home_list = []
     away_list = []
@@ -338,7 +306,7 @@ class Matches < ApplicationRecord
    return home_list, away_list
   end
 
-  def compile_list_of_top_5_players(home_list, away_list)
+  def list_of_top_5_players(home_list, away_list)
     home_top_5 = home_list.reject { |player| player[:player_position] == "gkp" }
                          .sort_by { |player| -player[:match_performance] }
                          .first(5)
@@ -348,7 +316,7 @@ class Matches < ApplicationRecord
     return home_top_5, away_top_5
   end
 
-  def who_assisted(home_top_5, away_top_5, goal_scored)
+  def assisted(home_top_5, away_top_5, goal_scored)
     if goal_scored[:goal_scored] == 'home'
       assist = home_top_5.sample[:player_id]
     else
@@ -357,7 +325,7 @@ class Matches < ApplicationRecord
     { assist: }
   end
 
-  def who_scored(home_top_5, away_top_5, assist, goal_scored)
+  def scored(home_top_5, away_top_5, assist, goal_scored)
     if goal_scored[:goal_scored] == 'home'
       scorer = home_top_5.reject { |player| player[:player_id] == assist }.sample[:player_id]
     else
@@ -375,7 +343,7 @@ class Matches < ApplicationRecord
     { scorer: scorer }
   end
 
-  def create_match_summary(minute_by_minute)
+  def match_summary(minute_by_minute)
     id = minute_by_minute.first[:id]
     week = minute_by_minute.first[:week]
     competition = minute_by_minute.first[:competition]
@@ -408,14 +376,14 @@ class Matches < ApplicationRecord
     match_summary
   end
 
-  def calc_possession(match_summary)
+  def possession(match_summary)
     home_possession = (match_summary[:chance_count_home] / (match_summary[:chance_count_home] + match_summary[:chance_count_away]).to_f * 80).to_i
     away_possession = 100 - home_possession
 
     { home_possession:, away_possession:}
   end
 
-  def select_man_of_the_match(home_list, away_list)
+  def man_of_the_match(home_list, away_list)
     home_man_of_the_match = home_list.max_by { |player| player[:match_performance] }[:player_id]
     away_man_of_the_match = away_list.max_by { |player| player[:match_performance] }[:player_id]
 
@@ -467,7 +435,7 @@ class Matches < ApplicationRecord
     end
   end
 
-  def create_match_commentary(home_list, away_list, minute_by_minute)
+  def match_commentary(home_list, away_list, minute_by_minute)
     home_team = Club.find_by(abbreviation: minute_by_minute.first[:club_home])&.name
     away_team = Club.find_by(abbreviation: minute_by_minute.first[:club_away])&.name
 
@@ -520,7 +488,6 @@ class Matches < ApplicationRecord
         commentary = general_commentary.gsub('{team}', selected_team)
       end
 
-      # Save the commentary to the commentaries table
       Commentary.create(
         game_id: game_id,
         minute: time,

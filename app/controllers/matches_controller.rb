@@ -9,7 +9,7 @@ class MatchesController < ApplicationController
 
   def match_multiple
     match = Matches.new
-    match.match_engine(params)
+    match.run_matches(params)
 
     redirect_to fixtures_path
   end
