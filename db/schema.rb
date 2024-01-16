@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_15_215132) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_16_102007) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -88,6 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_15_215132) do
     t.integer "scorer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "competition"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -132,6 +133,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_15_215132) do
     t.integer "match_performance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "competition"
   end
 
   create_table "players", force: :cascade do |t|

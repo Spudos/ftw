@@ -162,6 +162,8 @@ class Matches < ApplicationRecord
 
   def save_player_match_data(squads_with_adjusted_performance, match_info)
     id = match_info[:id]
+    competition = match_info[:competition]
+
     squads_with_adjusted_performance.each do |player|
       PlayerMatchData.create(
         match_id: id,
@@ -170,7 +172,8 @@ class Matches < ApplicationRecord
         name: Player.find_by(id: player[:player_id])&.name,
         player_position: Player.find_by(id: player[:player_id])&.position,
         player_position_detail: Player.find_by(id: player[:player_id])&.player_position_detail,
-        match_performance: player[:match_performance]
+        match_performance: player[:match_performance],
+        competition:
       )
     end
   end
@@ -457,7 +460,8 @@ class Matches < ApplicationRecord
         week_number: match_data[:week],
         minute: match_data[:minute],
         assist: match_data[:assist],
-        scorer: match_data[:scorer]
+        scorer: match_data[:scorer],
+        competition: match_data[:competition]
       )
       end
     end

@@ -15,7 +15,7 @@ class Player < ApplicationRecord
   end
 
   def id_name_with_position_and_skill
-    "#{id} #{name} - #{position} (Skill: #{total_skill})"
+    "#{id} #{name} - #{position.upcase}#{player_position_detail.upcase} (Skill: #{total_skill})"
   end
 
   def base_skill
@@ -85,27 +85,20 @@ class Player < ApplicationRecord
 
   def self.compile_top_performance_view(params)
     players = Player.all.map do |player|
-      
-      unless Club.find_by(abbreviation: player.club)&.league == params
-        next  # Skip to the next iteration if the condition is false
-      end
 
       info = {
         id: player.id,
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        average_match_performance: PlayerMatchData.where(player_id: player.id).average(:match_performance).to_i
+        average_match_performance: PlayerMatchData.where(player_id: player.id, competition: params).average(:match_performance).to_i
       }
     end
 
-    # Remove nil values from the players array
     players.compact!
 
-    # Sort players based on total skill in descending order
     players.sort_by! { |player| -player[:average_match_performance] }
 
-    # Select the top 10 players
     top_perf_players = players.take(10)
 
     return top_perf_players
@@ -113,26 +106,20 @@ class Player < ApplicationRecord
 
   def self.compile_top_goals_view(params)
     players = Player.all.map do |player|
-      unless Club.find_by(abbreviation: player.club)&.league == params
-        next  # Skip to the next iteration if the condition is false
-      end
 
       info = {
         id: player.id,
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        goals: GoalsAndAssistsByMatch.where(scorer: player.id).count(:scorer),
+        goals: GoalsAndAssistsByMatch.where(scorer: player.id, competition: params).count(:scorer)
       }
     end
 
-    # Remove nil values from the players array
     players.compact!
 
-    # Sort players based on total skill in descending order
     players.sort_by! { |player| -player[:goals] }
 
-    # Select the top 10 players
     top_goals_players = players.take(10)
 
     return top_goals_players
@@ -140,25 +127,20 @@ class Player < ApplicationRecord
 
   def self.compile_top_assists_view(params)
     players = Player.all.map do |player|
-      unless Club.find_by(abbreviation: player.club)&.league == params
-        next  # Skip to the next iteration if the condition is false
-      end
+
       info = {
         id: player.id,
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        assists: GoalsAndAssistsByMatch.where(assist: player.id).count(:assist)
+        assists: GoalsAndAssistsByMatch.where(assist: player.id, competition: params).count(:assist)
       }
     end
 
-    # Remove nil values from the players array
     players.compact!
 
-    # Sort players based on total skill in descending order
     players.sort_by! { |player| -player[:assists] }
 
-    # Select the top 10 players
     top_assists_players = players.take(10)
 
     return top_assists_players
