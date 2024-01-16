@@ -1,0 +1,12 @@
+<h3 class="text-center">Tactics Selection</h3>
+<div id="form-container" class="text-center">
+  <%= form_with(model: @tactic, url: tactics_path, local: true) do |form| %>
+    <div class="field">
+      <%= form.label :tactics %>
+      <%= form.select :tactics, { "Passing" => 1, "Defensive" => 2, "Attacking" => 3, "Wide" => 4, "Narrow" => 5, "Direct" => 6 }, {}, { name: 'tactic[tactics]' } %>
+    </div>
+    <%= form.hidden_field :abbreviation, value: params[:id] %>
+    <%= form.submit "Save tactic", class: "btn btn-sm btn-danger"%>
+  <% end %>
+</div>
+

@@ -1,7 +1,4 @@
 class Turn < ApplicationRecord
-  belongs_to :turnsheet, optional: true
-  attribute :turnsheet_id, :integer
-
   def process_turn_actions(params)
     stadium_upgrade(params[:week])
     property_upgrade(params[:week])

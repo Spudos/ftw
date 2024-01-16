@@ -10,6 +10,7 @@ class ClubsController < ApplicationController
     @players = Player.where(club: params[:id])
     @club_matches = Matches.where('home_team = ? OR away_team = ?', params[:id], params[:id])
     @message = Messages.where(club: params[:id])
+    @tactics = Tactic.where(club: params[:id])
   end
 
   def new

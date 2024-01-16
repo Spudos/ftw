@@ -68,7 +68,12 @@ class TurnsheetsController < ApplicationController
 
   def process_turnsheet
     turnsheet = Turnsheet.new
-    turnsheet.process_turnsheet
+    if turnsheet.process_turnsheet
+      redirect_to turnsheets_path, notice: "Turnsheets processed successfully."
+    else
+      errors = turnsheet.errors.full_messages.join(", ")
+      redirect_to turnsheets_path, alert: "Error processing turnsheets. #{errors} :("
+    end
   end
 
   private

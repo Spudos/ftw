@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :leagues, param: :competition
   resources :admin
   resources :messages
+  resources :tactics
 
   root 'welcome#index'
 

@@ -1,6 +1,4 @@
 class Selection < ApplicationRecord
-  belongs_to :turnsheet
-  attribute :turnsheet_id, :integer
 end
 
 #------------------------------------------------------------------------------

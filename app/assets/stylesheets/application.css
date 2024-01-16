@@ -100,3 +100,7 @@ tr.chance {
   border: 1px solid green;
   padding: 10px;
 }
+
+#form-container {
+  margin-bottom: 50px;
+}
