@@ -53,7 +53,7 @@ class Matches < ApplicationRecord
   private
 
   def get_fixtures_for_week(params)
-    # gets the fixtures for the week then sends them into run_and_save_matches
+    # get the fixtures for the week
     fixtures = Fixtures.where(week_number: params[:selected_week])
 
     fixture_list = []
@@ -110,7 +110,7 @@ class Matches < ApplicationRecord
         club: player.club,
         player_name: player.name,
         total_skill: player.total_skill,
-        tactic: tactic,
+        tactic:,
         player_position: player.position,
         player_position_detail: player.player_position_detail,
         match_performance: player.match_performance(player)
@@ -455,14 +455,14 @@ class Matches < ApplicationRecord
   def save_goal_and_assist_information(minute_by_minute)
     minute_by_minute.each do |match_data|
       if match_data[:goal_scored] != 'none'
-      match = GoalsAndAssistsByMatch.create(
-        match_id: match_data[:id],
-        week_number: match_data[:week],
-        minute: match_data[:minute],
-        assist: match_data[:assist],
-        scorer: match_data[:scorer],
-        competition: match_data[:competition]
-      )
+        match = GoalsAndAssistsByMatch.create(
+          match_id: match_data[:id],
+          week_number: match_data[:week],
+          minute: match_data[:minute],
+          assist: match_data[:assist],
+          scorer: match_data[:scorer],
+          competition: match_data[:competition]
+        )
       end
     end
   end
