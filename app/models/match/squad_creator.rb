@@ -1,5 +1,4 @@
-class Match
-  class SquadCreator
+  class Match::SquadCreator
     attr_reader :fixture
 
     def initialize(fixture)
@@ -43,4 +42,3 @@ class Match
         }
     end
   end
-end

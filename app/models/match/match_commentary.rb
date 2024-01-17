@@ -1,4 +1,4 @@
-class MatchCommentary
+class Match::MatchCommentary
   attr_reader :home_list, :away_list, :minute_by_minute
 
   def initialize(home_list, away_list, minute_by_minute)

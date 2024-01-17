@@ -1,4 +1,4 @@
-class TacticAdjustment
+class Match::TacticAdjustment
   # tactic name       dfc  mid  att  l,r  c
   # 1      passing    -5  +10  -0    0    0
   # 2      defensive  +15 -5   -10   0    0

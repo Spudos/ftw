@@ -5,7 +5,7 @@ class Match < ApplicationRecord
     fixture_list.each do |fixture|
       match_info, match_squad = Match::SquadCreator.new(fixture).squad_for_game
       match_squad_with_performance = player_performance(match_squad)
-      squads_with_adjusted_performance = TacticAdjustment.new(match_squad_with_performance).player_performance_by_tactic
+      squads_with_adjusted_performance = Match::TacticAdjustment.new(match_squad_with_performance).player_performance_by_tactic
       save_player_match_data(squads_with_adjusted_performance, match_info)
       basic_team_totals = team_totals(squads_with_adjusted_performance)
       home_stadium_size = stadium_size(basic_team_totals)
@@ -46,7 +46,7 @@ class Match < ApplicationRecord
 
     save_detailed_match_summary(detailed_match_summary)
     save_goal_and_assist_information(minute_by_minute)
-    MatchCommentary.new(home_list, away_list, minute_by_minute).match_commentary
+    Match::MatchCommentary.new(home_list, away_list, minute_by_minute).match_commentary
   end
 
   private
