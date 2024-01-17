@@ -18,8 +18,12 @@
     <option value="desc">Descending</option>
   </select>
   <input type="text" id="sort_criteria" name="sort_criteria">
+  <input type="hidden" id="page" name="page" value="<%= params[:page] || 1 %>">
   <button type="submit" class="btn btn-primary btn-sm">Sort</button>
 </form>
+<div>
+  <%= will_paginate @paginated_players, class: "apple_pagination" %>
+</div>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -39,7 +43,7 @@
   </thead>
   <tbody>
     
-    <% @sorted.each do |player| %>
+    <% @paginated_players.each do |player| %>
       <tr scope="row">
         <td><%= player[:id] %></td>
         <td><%= player[:name] %></td>
@@ -57,3 +61,6 @@
     <% end %>
   </tbody>
 </table>
+<div>
+  <%= will_paginate @paginated_players, class: "apple_pagination" %>
+</div>

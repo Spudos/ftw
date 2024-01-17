@@ -106,9 +106,9 @@
         <% @goal_information.each do |event| %>
           <tr>
             <td><%= event[:minute] %></td>
-            <td><%= Player.find_by(id: event[:assist])&.club %></td>
-            <td><%= Player.find_by(id: event[:assist])&.name %></td>
-            <td><%= Player.find_by(id: event[:scorer])&.name %></td>
+            <td><%= Player.find_by(id: event[:assist_id])&.club %></td>
+            <td><%= Player.find_by(id: event[:assist_id])&.name %></td>
+            <td><%= Player.find_by(id: event[:scorer_id])&.name %></td>
           </tr>
         <% end %>
     </table>

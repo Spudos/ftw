@@ -3,7 +3,7 @@ class Match < ApplicationRecord
     fixture_list = fixtures_for_week(params)
 
     fixture_list.each do |fixture|
-      match_info, match_squad = SquadCreator.new(fixture).squad_for_game
+      match_info, match_squad = Match::SquadCreator.new(fixture).squad_for_game
       match_squad_with_performance = player_performance(match_squad)
       squads_with_adjusted_performance = TacticAdjustment.new(match_squad_with_performance).player_performance_by_tactic
       save_player_match_data(squads_with_adjusted_performance, match_info)
@@ -28,7 +28,7 @@ class Match < ApplicationRecord
         assist = assisted(home_top_5, away_top_5, goal_scored)
         scorer = scored(home_top_5, away_top_5, assist, goal_scored)
       else
-        assist = { assist: 'none' }
+        assist = { assist_id: 'none' }
         scorer = { scorer: 'none' }
       end
 
@@ -300,7 +300,7 @@ class Match < ApplicationRecord
       end
     end
 
-    { scorer: scorer }
+    { scorer: }
   end
 
   def match_summary(minute_by_minute)
@@ -373,8 +373,8 @@ class Match < ApplicationRecord
           match_id: match_data[:id],
           week_number: match_data[:week],
           minute: match_data[:minute],
-          assist: match_data[:assist],
-          scorer: match_data[:scorer],
+          assist_id: match_data[:assist],
+          scorer_id: match_data[:scorer],
           competition: match_data[:competition]
         )
       end

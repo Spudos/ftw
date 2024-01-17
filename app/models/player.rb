@@ -1,4 +1,7 @@
 class Player < ApplicationRecord
+  has_many :performances
+  has_many :goals, foreign_key: :scorer
+  has_many :assists, foreign_key: :assist, class_name: 'Goal'
 
   def total_skill
     if position == 'gkp'
@@ -36,22 +39,20 @@ class Player < ApplicationRecord
     control + running + shooting + dribbling + offensive_heading + flair
   end
 
-  # n+1 problem in sql
   def self.compile_player_view
-    # Player.joins(:player_match_data).joins(:goals_and_assists_by_matches)
-    players = Player.all.map do |player|
-      info = {
-      id: player.id,
-      name: player.name,
-      age: player.age,
-      club: player.club,
-      nationality: player.nationality,
-      position: (player.position + player.player_position_detail).upcase,
-      total_skill: player.total_skill,
-      played: Performance.where(player_id: player.id).count,
-      goals: Goal.where(scorer: player.id).count(:scorer),
-      assists: Goal.where(assist: player.id).count(:assist),
-      average_match_performance: Performance.where(player_id: player.id).average(:match_performance).to_i
+    Player.includes(:performances, :goals, :assists).map do |player|
+      {
+        id: player.id,
+        name: player.name,
+        age: player.age,
+        club: player.club,
+        nationality: player.nationality,
+        position: (player.position + player.player_position_detail).upcase,
+        total_skill: player.total_skill,
+        played: player.performances.count,
+        goals: player.goals.count,
+        assists: player.assists.count,
+        average_match_performance: player.performances.average(:match_performance).to_i
       }
     end
   end
@@ -59,7 +60,7 @@ class Player < ApplicationRecord
   def self.compile_top_total_skill_view(params)
     players = Player.all.map do |player|
       unless Club.find_by(abbreviation: player.club)&.league == params
-        next  # Skip to the next iteration if the condition is false
+        next
       end
 
       info = {
@@ -84,14 +85,13 @@ class Player < ApplicationRecord
   end
 
   def self.compile_top_performance_view(params)
-    players = Player.all.map do |player|
-
-      info = {
+    players = Player.includes(:performances, :goals, :assists).map do |player|
+      {
         id: player.id,
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        average_match_performance: Performance.where(player_id: player.id, competition: params).average(:match_performance).to_i
+        average_match_performance: player.performances.where(competition: params).average(:match_performance).to_i
       }
     end
 
@@ -105,14 +105,13 @@ class Player < ApplicationRecord
   end
 
   def self.compile_top_goals_view(params)
-    players = Player.all.map do |player|
-
-      info = {
+    players = Player.includes(:performances, :goals, :assists).map do |player|
+      {
         id: player.id,
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        goals: Goal.where(scorer: player.id, competition: params).count(:scorer)
+        goals: player.goals.where(competition: params).count(:scorer_id).to_i
       }
     end
 
@@ -126,20 +125,19 @@ class Player < ApplicationRecord
   end
 
   def self.compile_top_assists_view(params)
-    players = Player.all.map do |player|
-
-      info = {
+    players = Player.includes(:performances, :goals, :assists).map do |player|
+      {
         id: player.id,
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        assists: Goal.where(assist: player.id, competition: params).count(:assist)
+        assists: player.assists.where(competition: params).count(:assist_id).to_i
       }
     end
 
     players.compact!
 
-    players.sort_by! { |player| -player[:assists] }
+    players.sort_by! { |record| -record[:assists] }
 
     top_assists_players = players.take(10)
 

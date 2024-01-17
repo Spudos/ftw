@@ -26,7 +26,7 @@
             <td><%= player.total_skill %></td>
             <td><%= player.fitness %></td>
             <td><%= Performance.where(player_id: player.id).count(:match_performance) %></td>
-            <td><%= Goal.where(assist: player.id).count(:assist) %></td>
+            <td><%= Goal.where(assist_id: player.id).count(:assist_id) %></td>
             <td><%= Goal.where(scorer: player.id).count(:scorer) %></td>
             <td><%= Performance.where(player_id: player.id).average(:match_performance).to_i %></td>
             <td><strong><%= Selection.exists?(player_id: player.id) ? 'Yes' : 'No' %></strong></td>
