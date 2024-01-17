@@ -8,13 +8,13 @@
           <th scope="col">Position</th>
           <th scope="col">Age</th>
           <th scope="col">Total Skill</th>
+          <th scope="col">Selected</th>
+          <th scope="col">Pick</th>          
           <th scope="col">Fitness</th>
           <th scope="col">Played</th>
           <th scope="col">Goals</th>
           <th scope="col">Assists</th>
           <th scope="col">Av. Perf</th>
-          <th scope="col">Currently Selected</th>
-          <th scope="col">Select</th>
         </tr>
       </thead>
       <tbody>
@@ -24,13 +24,13 @@
             <td><%= (player.position + player.player_position_detail).upcase %></td>
             <td><%= player.age %></td>
             <td><%= player.total_skill %></td>
+            <td><strong><%= Selection.exists?(player_id: player.id) ? 'Yes' : 'No' %></strong></td>
+            <td><%= check_box_tag "player_ids[]", player.id %></td>
             <td><%= player.fitness %></td>
             <td><%= Performance.where(player_id: player.id).count(:match_performance) %></td>
             <td><%= Goal.where(assist_id: player.id).count(:assist_id) %></td>
-            <td><%= Goal.where(scorer: player.id).count(:scorer) %></td>
+            <td><%= Goal.where(scorer_id: player.id).count(:scorer_id) %></td>
             <td><%= Performance.where(player_id: player.id).average(:match_performance).to_i %></td>
-            <td><strong><%= Selection.exists?(player_id: player.id) ? 'Yes' : 'No' %></strong></td>
-            <td><%= check_box_tag "player_ids[]", player.id %></td>
           </tr>
         <% end %>
       </tbody>
