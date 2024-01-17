@@ -18,7 +18,7 @@
   </thead>
   <tbody>
     <% @fixtures.each do |fixture| %>
-      <% match_exists = Matches.exists?(id: fixture.id) %>
+      <% match_exists = Match.exists?(id: fixture.id) %>
       <% home_selection_exists = Selection.exists?(club: fixture.home) %>
       <% away_selection_exists = Selection.exists?(club: fixture.away) %>
       <% if fixture.week_number.to_s == params[:week_number] %>
@@ -47,7 +47,7 @@
           </td>
           <td><%= fixture.comp %></td>
           <td>
-            <% if Matches.exists?(match_id: fixture.id) %>
+            <% if Match.exists?(match_id: fixture.id) %>
               <%= link_to 'Show Result', show_match_path(fixture.id), class: "btn btn-sm btn-primary" %>
             <% else %>
               <%= link_to 'Show Result', '#', class: "btn btn-sm btn-primary disabled", disabled: true %>

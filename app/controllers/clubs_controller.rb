@@ -8,8 +8,8 @@ class ClubsController < ApplicationController
   def show
     @selection = Selection.where(club: params[:id])
     @players = Player.where(club: params[:id])
-    @club_matches = Matches.where('home_team = ? OR away_team = ?', params[:id], params[:id])
-    @message = Messages.where(club: params[:id])
+    @club_matches = Match.where('home_team = ? OR away_team = ?', params[:id], params[:id])
+    @message = Message.where(club: params[:id])
     @tactics = Tactic.where(club: params[:id])
   end
 

@@ -125,7 +125,7 @@
         <th style="text-align: center;">Away</th>
         <th>Commentary</th>
       </tr>
-      <% comm = Commentary.where(game_id: @matches[0].match_id) %>
+      <% comm = Commentary.where(match_id: @matches[0].match_id) %>
       
       <% home_score = 0 %>
       <% away_score = 0 %>

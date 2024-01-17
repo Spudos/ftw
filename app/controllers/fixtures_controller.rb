@@ -1,22 +1,22 @@
 class FixturesController < ApplicationController
   def index
-    @fixtures = Fixtures.all
+    @fixtures = Fixture.all
   end
 
   def show
-    @fixtures = Fixtures.find_by(id: params[:id])
+    @fixtures = Fixture.find_by(id: params[:id])
   end
 
   def new
-    @fixtures = Fixtures.new
+    @fixtures = Fixture.new
   end
 
   def edit
-    @fixtures = Fixtures.find_by(id: params[:id])
+    @fixtures = Fixture.find_by(id: params[:id])
   end
 
   def create
-    @fixtures = Fixtures.new(fixtures_params)
+    @fixtures = Fixture.new(fixtures_params)
 
     respond_to do |format|
       if @fixtures.save
@@ -30,7 +30,7 @@ class FixturesController < ApplicationController
   end
 
   def update
-    @fixtures = Fixtures.find_by(id: params[:id])
+    @fixtures = Fixture.find_by(id: params[:id])
 
     respond_to do |format|
       if @fixtures.update(fixtures_params)
@@ -44,7 +44,7 @@ class FixturesController < ApplicationController
   end
 
   def destroy
-    fixture = Fixtures.find_by(id: params[:id])
+    fixture = Fixture.find_by(id: params[:id])
 
     fixture.destroy
 
@@ -58,5 +58,5 @@ end
 private
 
 def fixtures_params
-  params.require(:fixtures).permit(:id, :week_number, :home, :away, :comp)
+  params.require(:fixture).permit(:id, :week_number, :home, :away, :comp)
 end

@@ -48,10 +48,10 @@ class Player < ApplicationRecord
       nationality: player.nationality,
       position: (player.position + player.player_position_detail).upcase,
       total_skill: player.total_skill,
-      played: PlayerMatchData.where(player_id: player.id).count,
-      goals: GoalsAndAssistsByMatch.where(scorer: player.id).count(:scorer),
-      assists: GoalsAndAssistsByMatch.where(assist: player.id).count(:assist),
-      average_match_performance: PlayerMatchData.where(player_id: player.id).average(:match_performance).to_i
+      played: Performance.where(player_id: player.id).count,
+      goals: Goal.where(scorer: player.id).count(:scorer),
+      assists: Goal.where(assist: player.id).count(:assist),
+      average_match_performance: Performance.where(player_id: player.id).average(:match_performance).to_i
       }
     end
   end
@@ -91,7 +91,7 @@ class Player < ApplicationRecord
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        average_match_performance: PlayerMatchData.where(player_id: player.id, competition: params).average(:match_performance).to_i
+        average_match_performance: Performance.where(player_id: player.id, competition: params).average(:match_performance).to_i
       }
     end
 
@@ -112,7 +112,7 @@ class Player < ApplicationRecord
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        goals: GoalsAndAssistsByMatch.where(scorer: player.id, competition: params).count(:scorer)
+        goals: Goal.where(scorer: player.id, competition: params).count(:scorer)
       }
     end
 
@@ -133,7 +133,7 @@ class Player < ApplicationRecord
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        assists: GoalsAndAssistsByMatch.where(assist: player.id, competition: params).count(:assist)
+        assists: Goal.where(assist: player.id, competition: params).count(:assist)
       }
     end
 

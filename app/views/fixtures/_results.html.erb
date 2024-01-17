@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <% Matches.where(week_number: params[:week_number]).each do |match| %>
+    <% Match.where(week_number: params[:week_number]).each do |match| %>
       <tr scope="row">
         <td><%= match.id %></td>
         <td><%= Club.find_by(abbreviation: match.home_team)&.name %></td>

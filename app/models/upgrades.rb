@@ -1,2 +1,0 @@
-class Upgrades < ApplicationRecord
-end

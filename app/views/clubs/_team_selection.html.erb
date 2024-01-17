@@ -25,10 +25,10 @@
             <td><%= player.age %></td>
             <td><%= player.total_skill %></td>
             <td><%= player.fitness %></td>
-            <td><%= PlayerMatchData.where(player_id: player.id).count(:match_performance) %></td>
-            <td><%= GoalsAndAssistsByMatch.where(assist: player.id).count(:assist) %></td>
-            <td><%= GoalsAndAssistsByMatch.where(scorer: player.id).count(:scorer) %></td>
-            <td><%= PlayerMatchData.where(player_id: player.id).average(:match_performance).to_i %></td>
+            <td><%= Performance.where(player_id: player.id).count(:match_performance) %></td>
+            <td><%= Goal.where(assist: player.id).count(:assist) %></td>
+            <td><%= Goal.where(scorer: player.id).count(:scorer) %></td>
+            <td><%= Performance.where(player_id: player.id).average(:match_performance).to_i %></td>
             <td><strong><%= Selection.exists?(player_id: player.id) ? 'Yes' : 'No' %></strong></td>
             <td><%= check_box_tag "player_ids[]", player.id %></td>
           </tr>

@@ -1,2 +1,0 @@
-class PlayerMatchData < ApplicationRecord
-end

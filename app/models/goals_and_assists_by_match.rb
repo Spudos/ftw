@@ -1,2 +1,0 @@
-class GoalsAndAssistsByMatch < ApplicationRecord
-end

@@ -11,7 +11,7 @@ class TeamStatisticsCalculator
           points: 0 } 
         }
 
-    match_info = Matches.where(competition: params)
+    match_info = Match.where(competition: params)
 
     match_info.each do |match|
       update_team_statistics(league_table_information, match.home_team, match.home_goals, match.away_goals)

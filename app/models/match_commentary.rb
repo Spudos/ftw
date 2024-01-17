@@ -27,7 +27,7 @@ class MatchCommentary
       away_name = Player.find_by(id: away_filtered_list.sample[:player_id])&.name
 
       time = minute[:minute]
-      game_id = minute[:id]
+      match_id = minute[:id]
 
       if minute[:goal_scored] == 'home'
         scorer = Player.find_by(id: minute[:scorer])&.name
@@ -61,7 +61,7 @@ class MatchCommentary
       end
 
       Commentary.create(
-        game_id: game_id,
+        match_id: match_id,
         minute: time,
         commentary: commentary,
         event: event,

@@ -1,4 +1,4 @@
-class Matches < ApplicationRecord
+class Match < ApplicationRecord
   def run_matches(params)
     fixture_list = fixtures_for_week(params)
 
@@ -52,7 +52,7 @@ class Matches < ApplicationRecord
   private
 
   def fixtures_for_week(params)
-    fixtures = Fixtures.where(week_number: params[:selected_week])
+    fixtures = Fixture.where(week_number: params[:selected_week])
 
     fixture_list = []
     fixtures.each do |fixture|
@@ -93,7 +93,7 @@ class Matches < ApplicationRecord
     competition = match_info[:competition]
 
     squads_with_adjusted_performance.each do |player|
-      PlayerMatchData.create(
+      Performance.create(
         match_id: id,
         player_id: player[:player_id],
         club: player[:club],
@@ -339,7 +339,7 @@ class Matches < ApplicationRecord
   def save_detailed_match_summary(detailed_match_summary)
     match_data = detailed_match_summary[0] # Access the first hash in the array
 
-    match = Matches.new(
+    match = Match.new(
       match_id: match_data[:id].to_i,
       week_number: match_data[:week].to_i,
       competition: match_data[:competition],
@@ -369,7 +369,7 @@ class Matches < ApplicationRecord
   def save_goal_and_assist_information(minute_by_minute)
     minute_by_minute.each do |match_data|
       if match_data[:goal_scored] != 'none'
-        match = GoalsAndAssistsByMatch.create(
+        match = Goal.create(
           match_id: match_data[:id],
           week_number: match_data[:week],
           minute: match_data[:minute],

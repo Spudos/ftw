@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_16_102007) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_17_075308) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -60,7 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_16_102007) do
   end
 
   create_table "commentaries", force: :cascade do |t|
-    t.string "game_id"
+    t.string "match_id"
     t.integer "minute"
     t.text "commentary"
     t.datetime "created_at", null: false
@@ -71,7 +71,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_16_102007) do
   end
 
   create_table "fixtures", force: :cascade do |t|
-    t.integer "match_id"
     t.integer "week_number"
     t.string "home"
     t.string "away"
@@ -80,7 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_16_102007) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "goals_and_assists_by_matches", force: :cascade do |t|
+  create_table "goals", force: :cascade do |t|
     t.integer "match_id"
     t.integer "week_number"
     t.integer "minute"
@@ -123,7 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_16_102007) do
     t.string "action_id"
   end
 
-  create_table "player_match_data", force: :cascade do |t|
+  create_table "performances", force: :cascade do |t|
     t.integer "match_id"
     t.integer "player_id"
     t.string "club"
