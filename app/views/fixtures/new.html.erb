@@ -30,7 +30,7 @@
 
   <div>
     <%= form.label :comp, style: "display: block" %>
-    <%= form.text_field :comp %>
+    <%= form.collection_select :comp, ['Premier League', 'Championship', 'Cup', 'Friendly'], :to_s, :to_s, { include_blank: true }, { class: 'form-control' } %>
   </div>
 
   <div>

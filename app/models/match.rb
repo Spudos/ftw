@@ -52,7 +52,11 @@ class Match < ApplicationRecord
   private
 
   def fixtures_for_week(params)
-    fixtures = Fixture.where(week_number: params[:selected_week])
+    if params[:competition] == nil
+      fixtures = Fixture.where(week_number: params[:selected_week])
+    else
+      fixtures = Fixture.where(week_number: params[:selected_week], comp: params[:competition])
+    end
 
     fixture_list = []
     fixtures.each do |fixture|

@@ -24,7 +24,7 @@
     </div>
     <div>
       <%= form.label :comp, style: "display: inline-block" %>
-      <%= form.text_field :comp, value: @fixtures.comp %>
+      <%= form.select :comp, ['Premier League', 'Championship', 'Cup', 'Friendly'], { include_blank: true, selected: @fixtures.comp }, { class: 'form-control' } %>
     </div>
     <div>
       <%= form.submit 'Save Changes', class: 'btn btn-sm btn-danger' %>
