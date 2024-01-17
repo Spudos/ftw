@@ -59,8 +59,8 @@
       </tr>
       <tr>
         <td>Club id</td>
-        <td><%= @matches[0].home_team %></td>
-        <td><%= @matches[0].away_team %></td>
+        <td><%= Club.find_by(abbreviation: @matches[0].home_team)&.name %></td>
+        <td><%= Club.find_by(abbreviation: @matches[0].away_team)&.name %></td>
       </tr>
       <tr>
         <td>Tactic</td>
@@ -88,7 +88,7 @@
         <td><%= @matches[0].away_goals %></td>
       </tr>  
       <tr>
-        <td>man_of_the_match</td>
+        <td>Man of the Match</td>
         <td><%= Player.find_by(id: @matches[0].home_man_of_the_match)&.name %></td>
         <td><%= Player.find_by(id: @matches[0].away_man_of_the_match)&.name %></td>
       </tr> 
@@ -106,7 +106,7 @@
         <% @goal_information.each do |event| %>
           <tr>
             <td><%= event[:minute] %></td>
-            <td><%= Player.find_by(id: event[:assist_id])&.club %></td>
+            <td><%= Club.find_by(abbreviation: Player.find_by(id: event[:assist_id])&.club)&.name %></td>
             <td><%= Player.find_by(id: event[:assist_id])&.name %></td>
             <td><%= Player.find_by(id: event[:scorer_id])&.name %></td>
           </tr>

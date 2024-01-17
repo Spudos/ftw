@@ -38,7 +38,8 @@ hash = [
   { code: '117', tactic: 1 },
   { code: '118', tactic: 2 },
   { code: '119', tactic: 3 },
-  { code: '120', tactic: 4 }
+  { code: '120', tactic: 4 },
+  { code: '999', tactic: 3 }
 ]
 
 hash.each do |hash|

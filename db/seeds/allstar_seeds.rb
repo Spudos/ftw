@@ -1,0 +1,177 @@
+def random_number(min, max)
+  rand(min..max)
+end
+
+countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales', 'NI', 'RoI', 'Brazil', 'Argentina', 'Spain', 'France', 'Germany', 'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay','Brazil', 'England', 'Mexico', 'Germany', 'Italy', 'Spain', 'France', 'Argentina', 'Netherlands', 'Portugal', 'Belgium', 'Uruguay', 'Colombia', 'Croatia', 'Sweden', 'Switzerland', 'Poland', 'Denmark', 'Chile', 'Austria', 'Turkey', 'Russia', 'Japan', 'South Korea', 'Australia']
+position_detail = ['c', 'c', 'c', 'l', 'r']
+
+3.times do
+  Player.create(
+    name: Faker::Name.last_name,
+    age: random_number(18, 32),
+    nationality: countries.sample,
+    position: 'gkp',
+    passing: random_number(5, 11),
+    control: random_number(5, 11),
+    tackling: random_number(5, 11),
+    running: random_number(5, 8),
+    shooting: random_number(5, 11),
+    dribbling: random_number(5, 8),
+    defensive_heading: random_number(5, 8),
+    offensive_heading: random_number(5, 11),
+    flair: random_number(5, 8),
+    strength: random_number(5, 11),
+    creativity: random_number(5, 8),
+    fitness: 100,
+    club: 999,
+    consistency: 5,
+    player_position_detail: 'p',
+    potential_passing: random_number(11, 20),
+    potential_control: random_number(11, 20),
+    potential_tackling: random_number(11, 20),
+    potential_running: random_number(8, 18),
+    potential_shooting: random_number(11, 20),
+    potential_dribbling: random_number(8, 18),
+    potential_defensive_heading: random_number(8, 18),
+    potential_offensive_heading: random_number(11, 20),
+    potential_flair: random_number(8, 18),
+    potential_strength: random_number(11, 20),
+    potential_creativity: random_number(8, 18)
+  )
+end
+
+7.times do
+  Player.create(
+    name: Faker::Name.last_name,
+    age: random_number(18, 32),
+    nationality: countries.sample,
+    position: 'dfc',
+    passing: random_number(5, 8),
+    control: random_number(5, 11),
+    tackling: random_number(5, 11),
+    running: random_number(5, 11),
+    shooting: random_number(5, 8),
+    dribbling: random_number(5, 8),
+    defensive_heading: random_number(5, 11),
+    offensive_heading: random_number(5, 8),
+    flair: random_number(5, 8),
+    strength: random_number(5, 11),
+    creativity: random_number(5, 11),
+    fitness: 100,
+    club: 999,
+    consistency: 5,
+    player_position_detail: position_detail.sample,
+    potential_passing: random_number(8, 18),
+    potential_control: random_number(11, 20),
+    potential_tackling: random_number(11, 20),
+    potential_running: random_number(11, 20),
+    potential_shooting: random_number(8, 18),
+    potential_dribbling: random_number(8, 18),
+    potential_defensive_heading: random_number(11, 20),
+    potential_offensive_heading: random_number(8, 18),
+    potential_flair: random_number(8, 18),
+    potential_strength: random_number(11, 20),
+    potential_creativity: random_number(11, 20)
+  )
+end
+
+7.times do
+  Player.create(
+    name: Faker::Name.last_name,
+    age: random_number(18, 32),
+    nationality: countries.sample,
+    position: 'mid',
+    passing: random_number(5, 11),
+    control: random_number(5, 11),
+    tackling: random_number(5, 8),
+    running: random_number(5, 8),
+    shooting: random_number(5, 11),
+    dribbling: random_number(5, 11),
+    defensive_heading: random_number(5, 8),
+    offensive_heading: random_number(5, 8),
+    flair: random_number(5, 11),
+    strength: random_number(5, 8),
+    creativity: random_number(5, 11),
+    fitness: 100,
+    consistency: 5,
+    club: 999,
+    player_position_detail: position_detail.sample,
+    potential_passing: random_number(11, 20),
+    potential_control: random_number(11, 20),
+    potential_tackling: random_number(8, 18),
+    potential_running: random_number(8, 18),
+    potential_shooting: random_number(11, 20),
+    potential_dribbling: random_number(11, 20),
+    potential_defensive_heading: random_number(8, 18),
+    potential_offensive_heading: random_number(8, 18),
+    potential_flair: random_number(11, 20),
+    potential_strength: random_number(8, 18),
+    potential_creativity: random_number(11, 20)
+  )
+end
+
+6.times do
+  Player.create(
+    name: Faker::Name.last_name,
+    age: random_number(18, 32),
+    nationality: countries.sample,
+    position: 'att',
+    passing: random_number(5, 8),
+    control: random_number(5, 11),
+    tackling: random_number(5, 8),
+    running: random_number(5, 11),
+    shooting: random_number(5, 11),
+    dribbling: random_number(5, 11),
+    defensive_heading: random_number(5, 8),
+    offensive_heading: random_number(5, 11),
+    flair: random_number(5, 11),
+    strength: random_number(5, 8),
+    creativity: random_number(5, 8),
+    fitness: 100,
+    club: 999,
+    consistency: 5,
+    player_position_detail: position_detail.sample,
+    potential_passing: random_number(8, 18),
+    potential_control: random_number(11, 20),
+    potential_tackling: random_number(8, 18),
+    potential_running: random_number(11, 20),
+    potential_shooting: random_number(11, 20),
+    potential_dribbling: random_number(11, 20),
+    potential_defensive_heading: random_number(8, 18),
+    potential_offensive_heading: random_number(11, 20),
+    potential_flair: random_number(11, 20),
+    potential_strength: random_number(8, 18),
+    potential_creativity: random_number(8, 18)
+  )
+end
+
+Club.create(
+  abbreviation: 999,
+  name: 'Allstars',
+  ground_name: 'Star Stadium',
+  stand_n_name: 'Woolley Stand',
+  stand_s_name: 'Croxford Stand',
+  stand_e_name: 'Geoff Stand',
+  stand_w_name: 'Teddy Stand',
+  stand_n_condition: random_number(8, 10),
+  stand_s_condition: random_number(8, 10),
+  stand_e_condition: random_number(8, 10),
+  stand_w_condition: random_number(8, 10),
+  stand_n_capacity: random_number(8000, 20000),
+  stand_s_capacity: random_number(8000, 20000),
+  stand_e_capacity: random_number(8000, 20000),
+  stand_w_capacity: random_number(8000, 20000),
+  pitch: random_number(8, 10),
+  hospitality: random_number(8, 10),
+  facilities: random_number(8, 10),
+  staff_fitness: random_number(8, 10),
+  staff_gkp: random_number(8, 12),
+  staff_dfc: random_number(8, 12),
+  staff_mid: random_number(8, 12),
+  staff_att: random_number(8, 12),
+  staff_scouts: random_number(8, 12),
+  color_primary: 'Black',
+  color_secondary: 'Red',
+  bank_bal: random_number(500000000, 1200000000),
+  league: 'Allstar'
+)

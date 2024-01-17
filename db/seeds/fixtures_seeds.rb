@@ -761,7 +761,7 @@ hashfix = [
   { week_number: 38, home: '118', away: '120', comp: 'Championship' }]
 
 hashfix.each do |hash|
-  Fixtures.create(
+  Fixture.create(
     week_number: hash[:week_number],
     home: hash[:home],
     away: hash[:away],

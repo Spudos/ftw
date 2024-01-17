@@ -48,7 +48,7 @@
         <td><%= player[:id] %></td>
         <td><%= player[:name] %></td>
         <td><%= player[:age] %></td>
-        <td><%= player[:club] %></td>
+        <td><%= Club.find_by(abbreviation: player[:club])&.name %></td>
         <td><%= player[:nationality] %></td>
         <td><%= player[:position] %></td>
         <td><%= player[:total_skill] %></td>
