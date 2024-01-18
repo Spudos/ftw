@@ -132,3 +132,7 @@ tr.chance {
     color: black; }
     .apple_pagination a:hover, .apple_pagination a:focus {
       text-decoration: underline; }
+
+.field {
+  margin-bottom: 30px;
+}

@@ -5,6 +5,16 @@
       <%= form.label :tactics %>
       <%= form.select :tactics, { "Passing" => 1, "Defensive" => 2, "Attacking" => 3, "Wide" => 4, "Narrow" => 5, "Direct" => 6 }, {}, { name: 'tactic[tactics]' } %>
     </div>
+    <div class="field">
+      <%= form.label :dfc_aggression %>
+      <%= form.select :dfc_aggression, ( 1..10 ) %>
+
+      <%= form.label :mid_aggression %>
+      <%= form.select :mid_aggression, ( 1..10 ) %>
+
+      <%= form.label :att_aggression %>
+      <%= form.select :att_aggression, ( 1..10 ) %>
+    </div>
     <%= form.hidden_field :abbreviation, value: params[:id] %>
     <%= form.submit "Save tactic", class: "btn btn-sm btn-danger"%>
   <% end %>
