@@ -5,7 +5,7 @@ end
 countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales', 'NI', 'RoI', 'Brazil', 'Argentina', 'Spain', 'France', 'Germany', 'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay','Brazil', 'England', 'Mexico', 'Germany', 'Italy', 'Spain', 'France', 'Argentina', 'Netherlands', 'Portugal', 'Belgium', 'Uruguay', 'Colombia', 'Croatia', 'Sweden', 'Switzerland', 'Poland', 'Denmark', 'Chile', 'Austria', 'Turkey', 'Russia', 'Japan', 'South Korea', 'Australia']
 position_detail = ['c', 'c', 'c', 'l', 'r']
 club_code = ['001', '002', '003', '004', '005', '006', '007', '008', '009', '010', '011', '012', '013', '014', '015', '016', '017', '018', '019', '020']
-blend = [1,1,1,1,2,1,2,1,2,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,7,7,8,8,9,9]
+blend = [1,2,3,4,5,6,7,8,9]
 
 3.times do
   club_code.each do |code|
@@ -26,6 +26,7 @@ blend = [1,1,1,1,2,1,2,1,2,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,7,7,8,8,9,9]
       strength: random_number(3, 8),
       creativity: random_number(3, 5),
       fitness: 100,
+      contract: random_number(3, 24),
       club: code,
       consistency: 20,
       blend: blend.sample,
@@ -64,6 +65,7 @@ end
       strength: random_number(3, 8),
       creativity: random_number(3, 8),
       fitness: 100,
+      contract: random_number(3, 24),
       club: code,
       consistency: 20,
       blend: blend.sample,
@@ -102,6 +104,7 @@ end
       strength: random_number(3, 5),
       creativity: random_number(3, 8),
       fitness: 100,
+      contract: random_number(3, 24),
       club: code,
       consistency: 20,
       blend: blend.sample,
@@ -140,6 +143,7 @@ end
       strength: random_number(3, 5),
       creativity: random_number(3, 5),
       fitness: 100,
+      contract: random_number(3, 24),
       club: code,
       consistency: 20,
       blend: blend.sample,
