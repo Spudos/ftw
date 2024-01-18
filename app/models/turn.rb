@@ -7,6 +7,7 @@ class Turn < ApplicationRecord
     coach_upgrade(params[:week])
     increment_upgrades
     fitness_increase
+    contract_decrease
   end
 
   private
@@ -99,7 +100,7 @@ class Turn < ApplicationRecord
         var3: turn.var3,
         Actioned: turn.date_completed
       }
-  end
+    end
 
     hash.each do |key, value|
       bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], value[:var2], value[:var3])
@@ -131,7 +132,7 @@ class Turn < ApplicationRecord
         var3: turn.var3,
         Actioned: turn.date_completed
       }
-  end
+    end
 
     hash.each do |key, value|
       train_player(value[:action_id], value[:week], value[:club], value[:var2], value[:var3])
@@ -175,7 +176,7 @@ class Turn < ApplicationRecord
         var2: turn.var2,
         Actioned: turn.date_completed
       }
-  end
+    end
 
     hash.each do |key, value|
       player_fitness(value[:action_id], value[:week], value[:club], value[:var2])
@@ -261,16 +262,28 @@ class Turn < ApplicationRecord
       Message.create(action_id: item.action_id, week: item.week, club: item.club, var1: "Your upgrade to the #{club_full[item.var1.gsub("capacity", "name")]} was completed, the new value is #{club_full[item.var1]}")
     end
   end
-end
 
-def fitness_increase
-  players = Player.all
+  def fitness_increase
+    players = Player.all
 
-  players.each do |player|
-    if player.fitness < 100
-      player.fitness += rand(0..5)
-      player.fitness = 100 if player.fitness > 100
-      player.save
+    players.each do |player|
+      if player.fitness < 100
+        player.fitness += rand(0..5)
+        player.fitness = 100 if player.fitness > 100
+        player.save
+      end
+    end
+  end
+
+  def contract_decrease
+    players = Player.all
+
+    players.each do |player|
+      if player.contract > 0
+        player.contract -= 1
+        player.contract = 0 if player.contract < 0
+        player.save
+      end
     end
   end
 end
