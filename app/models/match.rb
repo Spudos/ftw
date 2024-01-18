@@ -120,27 +120,27 @@ class Match < ApplicationRecord
 
       if player[:player_position] == 'gkp'
         if player_record[:club] == match_info[:club_home]
-          player_fitness -= match_info[:dfc_aggression_home]
+          player_fitness -= match_info[:dfc_aggression_home] * 2
         else
-          player_fitness -= match_info[:dfc_aggression_away]
+          player_fitness -= match_info[:dfc_aggression_away] * 2
         end
       elsif player[:player_position] == 'dfc'
         if player_record[:club] == match_info[:club_home]
-          player_fitness -= match_info[:dfc_aggression_home]
+          player_fitness -= match_info[:dfc_aggression_home] * 2
         else
-          player_fitness -= match_info[:dfc_aggression_away]
+          player_fitness -= match_info[:dfc_aggression_away] * 2
         end
       elsif player[:player_position] == 'mid'
         if player_record[:club] == match_info[:club_home]
-          player_fitness -= match_info[:mid_aggression_home]
+          player_fitness -= match_info[:mid_aggression_home] * 2
         else
-          player_fitness -= match_info[:mid_aggression_away]
+          player_fitness -= match_info[:mid_aggression_away] * 2
         end
       else
         if player_record[:club] == match_info[:club_home]
-          player_fitness -= match_info[:att_aggression_home]
+          player_fitness -= match_info[:att_aggression_home] * 2
         else
-          player_fitness -= match_info[:att_aggression_away]
+          player_fitness -= match_info[:att_aggression_away] * 2
         end
       end
 
