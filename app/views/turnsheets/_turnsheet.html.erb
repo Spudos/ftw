@@ -108,6 +108,15 @@
         <%= turnsheet.train_attacker_skill %>
       </td>
     </tr>  
+    </tr>
+        <tr scope="row">
+      <td>
+        Fitness Coaching</td>
+      </td>
+      <td>
+        <%= turnsheet.fitness_coaching %>
+      </td>
+    </tr>
   </table>
   <table class="table table-hover">
     <h4>Team</h4>
@@ -116,67 +125,67 @@
     <tr scope="row">
       <td>
         <% player = Player.find(turnsheet.player_1) %>
-        <%= player.id_name_with_position_and_skill %>
+        <%= player.player_selection_information %>
       </td>
     </tr>
     <tr scope="row">
       <td>
         <% player = Player.find(turnsheet.player_2) %>
-        <%= player.id_name_with_position_and_skill %>
+        <%= player.player_selection_information %>
       </td>
     </tr>
     <tr scope="row">
       <td>
         <% player = Player.find(turnsheet.player_3) %>
-        <%= player.id_name_with_position_and_skill %>
+        <%= player.player_selection_information %>
       </td>
     </tr>
     <tr scope="row">
       <td>
         <% player = Player.find(turnsheet.player_4) %>
-        <%= player.id_name_with_position_and_skill %>
+        <%= player.player_selection_information %>
       </td>
     </tr>
     <tr scope="row">
       <td>
         <% player = Player.find(turnsheet.player_5) %>
-        <%= player.id_name_with_position_and_skill %>
+        <%= player.player_selection_information %>
       </td>
     </tr>
     <tr scope="row">
       <td>
         <% player = Player.find(turnsheet.player_6) %>
-        <%= player.id_name_with_position_and_skill %>
+        <%= player.player_selection_information %>
       </td>
     </tr>
     <tr scope="row">
       <td>
         <% player = Player.find(turnsheet.player_7) %>
-        <%= player.id_name_with_position_and_skill %>
+        <%= player.player_selection_information %>
       </td>
     </tr>
     <tr scope="row">
       <td>
         <% player = Player.find(turnsheet.player_8) %>
-        <%= player.id_name_with_position_and_skill %>
+        <%= player.player_selection_information %>
       </td>
     </tr>
     <tr scope="row">
       <td>
         <% player = Player.find(turnsheet.player_9) %>
-        <%= player.id_name_with_position_and_skill %>
+        <%= player.player_selection_information %>
       </td>
     </tr>
     <tr scope="row">
       <td>
         <% player = Player.find(turnsheet.player_10) %>
-        <%= player.id_name_with_position_and_skill %>
+        <%= player.player_selection_information %>
       </td>
     </tr>
     <tr scope="row">
       <td>
         <% player = Player.find(turnsheet.player_11) %>
-        <%= player.id_name_with_position_and_skill %>
+        <%= player.player_selection_information %>
       </td>
     </tr>
   </table>

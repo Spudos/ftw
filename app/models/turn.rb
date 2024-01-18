@@ -3,6 +3,7 @@ class Turn < ApplicationRecord
     stadium_upgrade(params[:week])
     property_upgrade(params[:week])
     player_upgrade(params[:week])
+    fitness_upgrade(params[:week])
     coach_upgrade(params[:week])
     increment_upgrades
     fitness_increase
@@ -158,6 +159,44 @@ class Turn < ApplicationRecord
       else
         Message.create(action_id:, week:, club:, var1: "Training #{player} in #{skill} failed due to reaching potential")
       end
+    end
+  end
+
+  def fitness_upgrade(week)
+    turns = Turn.where("var1 LIKE ?", 'fitness%').where(week: week)
+    hash = {}
+
+    turns.each do |turn|
+      hash[turn.id] = {
+        action_id: turn.week.to_s + turn.club + turn.id.to_s,
+        week: turn.week,
+        club: turn.club,
+        var1: turn.var1,
+        var2: turn.var2,
+        Actioned: turn.date_completed
+      }
+  end
+
+    hash.each do |key, value|
+      player_fitness(value[:action_id], value[:week], value[:club], value[:var2])
+      turn = Turn.find(key)
+      turn.update(date_completed: DateTime.now)
+    end
+  end
+
+  def player_fitness(action_id, week, club, player)
+    existing_training = Message.find_by(action_id: action_id)
+
+    if existing_training.nil?
+      player_data = Player.find_by(club: club, name: player)
+      coach = Club.find_by(abbreviation: club)&.staff_fitness
+
+      increased_fitness = player_data.fitness + coach
+      final_fitness = increased_fitness > 100 ? 100 : increased_fitness
+
+      player_data.update(fitness: final_fitness)
+
+      Message.create(action_id: action_id, week: week, club: club, var1: "Fitness training for #{player} was completed! His new value is #{final_fitness}")
     end
   end
 

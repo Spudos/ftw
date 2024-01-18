@@ -65,6 +65,10 @@ class Turnsheet < ApplicationRecord
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'train', var2: turnsheet.train_attacker, var3: turnsheet.train_attacker_skill })
       end
 
+      if turnsheet.fitness_coaching.present?
+        Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: 'fitness', var2: turnsheet.fitness_coaching })
+      end
+
       if turnsheet.stadium_upgrade.present?
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stadium_upgrade, var2: turnsheet.stadium_amount, var3: turnsheet.val })
       end

@@ -64,7 +64,7 @@
             <tr scope="row">
               <td>Coach</td>
               <td>
-                <%= form.select :coach_upgrade, options_for_select({ "Fitness" => "staff_fit", "Scout" => "staff_scouts", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, @turnsheet.coach_upgrade), prompt: "Select a coach" %>
+                <%= form.select :coach_upgrade, options_for_select({ "Fitness" => "staff_fitness", "Scout" => "staff_scouts", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, @turnsheet.coach_upgrade), prompt: "Select a coach" %>
               </td>
             </tr>
             <tr scope="row">
@@ -88,67 +88,67 @@
               <tr scope="row">
                 <td>Player 1</td>
                 <td>
-                  <%= form.select :player_1, options_from_collection_for_select(Player.where(club: @turnsheet.club, position: "gkp"), :id, :id_name_with_position_and_skill, @turnsheet.player_1), prompt: "Select a player" %>
+                  <%= form.select :player_1, options_from_collection_for_select(Player.where(club: @turnsheet.club, position: "gkp"), :id, :player_selection_information, @turnsheet.player_1), prompt: "Select a player" %>
                 </td>
               </tr>
               <tr scope="row">
               <td>Player 2</td>
               <td>
-                <%= form.select :player_2, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_2), prompt: "Select a player" %>
+                <%= form.select :player_2, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :player_selection_information, @turnsheet.player_2), prompt: "Select a player" %>
               </td>
             </tr>
             <tr scope="row">
               <td>Player 3</td>
               <td>
-                <%= form.select :player_3, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_3), prompt: "Select a player" %>
+                <%= form.select :player_3, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :player_selection_information, @turnsheet.player_3), prompt: "Select a player" %>
               </td>
             </tr>
             <tr scope="row">
               <td>Player 4</td>
               <td>
-                <%= form.select :player_4, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_4), prompt: "Select a player" %>
+                <%= form.select :player_4, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :player_selection_information, @turnsheet.player_4), prompt: "Select a player" %>
               </td>
             </tr>
             <tr scope="row">
             <td>Player 5</td>
               <td>
-                <%= form.select :player_5, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_5), prompt: "Select a player" %>
+                <%= form.select :player_5, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :player_selection_information, @turnsheet.player_5), prompt: "Select a player" %>
               </td>
             </tr>
             <tr scope="row">
             <td>Player 6</td>
               <td>
-                <%= form.select :player_6, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_6), prompt: "Select a player" %>
+                <%= form.select :player_6, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :player_selection_information, @turnsheet.player_6), prompt: "Select a player" %>
               </td>
             </tr>
             <tr scope="row">
             <td>Player 7</td>
               <td>
-                <%= form.select :player_7, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_7), prompt: "Select a player" %>
+                <%= form.select :player_7, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :player_selection_information, @turnsheet.player_7), prompt: "Select a player" %>
               </td>
             </tr>
             <tr scope="row">
             <td>Player 8</td>
               <td>
-                <%= form.select :player_8, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_8), prompt: "Select a player" %>
+                <%= form.select :player_8, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :player_selection_information, @turnsheet.player_8), prompt: "Select a player" %>
               </td>
             </tr>
             <tr scope="row">
             <td>Player 9</td>
               <td>
-                <%= form.select :player_9, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_9), prompt: "Select a player" %>
+                <%= form.select :player_9, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :player_selection_information, @turnsheet.player_9), prompt: "Select a player" %>
               </td>
             </tr>
             <tr scope="row">
             <td>Player 10</td>
               <td>
-                <%= form.select :player_10, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_10), prompt: "Select a player" %>
+                <%= form.select :player_10, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :player_selection_information, @turnsheet.player_10), prompt: "Select a player" %>
               </td>
             </tr>
             <tr scope="row">
             <td>Player 11</td>
               <td>
-                <%= form.select :player_11, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :id_name_with_position_and_skill, @turnsheet.player_11), prompt: "Select a player" %>
+                <%= form.select :player_11, options_from_collection_for_select(Player.where(club: @turnsheet.club), :id, :player_selection_information, @turnsheet.player_11), prompt: "Select a player" %>
               </td>
             </tr>
           </table>
@@ -200,7 +200,7 @@
             <td>Goalkeeper</td>
             <td>
               <%= form.label :train_goalkeeper, style: "display: none" %>
-              <%= form.select :train_goalkeeper, options_from_collection_for_select(Player.where(club: @turnsheet.club, position: "gkp"), :name, :id_name_with_position_and_skill, @turnsheet.train_goalkeeper), prompt: "Select a player" %>
+              <%= form.select :train_goalkeeper, options_from_collection_for_select(Player.where(club: @turnsheet.club, position: "gkp"), :name, :player_selection_information, @turnsheet.train_goalkeeper), prompt: "Select a player" %>
             </td>
             <td>
               <%= form.label :train_goalkeeper_skill, style: "display: none" %>
@@ -211,7 +211,7 @@
             <td>Defender</td>
             <td>
               <%= form.label :train_defender, style: "display: none" %>
-              <%= form.select :train_defender, options_from_collection_for_select(Player.where(club: @turnsheet.club, position: "dfc"), :name, :id_name_with_position_and_skill, @turnsheet.train_defender), prompt: "Select a player" %>
+              <%= form.select :train_defender, options_from_collection_for_select(Player.where(club: @turnsheet.club, position: "dfc"), :name, :player_selection_information, @turnsheet.train_defender), prompt: "Select a player" %>
             </td>
             <td>
               <%= form.label :train_defender_skill, style: "display: none" %>
@@ -222,7 +222,7 @@
             <td>Midfield</td>
             <td>
               <%= form.label :train_midfielder, style: "display: none" %>
-              <%= form.select :train_midfielder, options_from_collection_for_select(Player.where(club: @turnsheet.club, position: "mid"), :name, :id_name_with_position_and_skill, @turnsheet.train_midfielder), prompt: "Select a player" %>
+              <%= form.select :train_midfielder, options_from_collection_for_select(Player.where(club: @turnsheet.club, position: "mid"), :name, :player_selection_information, @turnsheet.train_midfielder), prompt: "Select a player" %>
             </td>
             <td>
               <%= form.label :train_midfielder_skill, style: "display: none" %>
@@ -233,11 +233,21 @@
             <td>Attack</td>
             <td>
               <%= form.label :train_attacker, style: "display: none" %>
-              <%= form.select :train_attacker, options_from_collection_for_select(Player.where(club: @turnsheet.club, position: "att"), :name, :id_name_with_position_and_skill, @turnsheet.train_attacker), prompt: "Select a player" %>
+              <%= form.select :train_attacker, options_from_collection_for_select(Player.where(club: @turnsheet.club, position: "att"), :name, :player_selection_information, @turnsheet.train_attacker), prompt: "Select a player" %>
             </td>
             <td>
               <%= form.label :train_attacker_skill, style: "display: none" %>
               <%= form.select :train_attacker_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity'], @turnsheet.train_attacker_skill), prompt: "Which Skill?" %>
+            </td>
+          </tr>
+        </table>
+        <h4 style="text-align: center">Fitness Coaching</h4>
+        <table class="table table-hover table-bordered">
+          <tr scope="row">
+            <td>Player to treat</td>
+            <td>
+              <%= form.label :fitness_coaching, style: "display: none" %>
+              <%= form.select :fitness_coaching, options_from_collection_for_select(Player.where(club: @turnsheet.club), :name, :player_selection_information, @turnsheet.fitness_coaching), prompt: "Select a player" %>
             </td>
           </tr>
         </table>
