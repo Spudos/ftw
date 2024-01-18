@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_18_121400) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_18_165649) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -116,6 +116,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_121400) do
     t.integer "dfc_aggression_away"
     t.integer "mid_aggression_away"
     t.integer "att_aggression_away"
+    t.integer "dfc_blend_home"
+    t.integer "mid_blend_home"
+    t.integer "att_blend_home"
+    t.integer "dfc_blend_away"
+    t.integer "mid_blend_away"
+    t.integer "att_blend_away"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -174,6 +180,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_121400) do
     t.integer "potential_strength"
     t.integer "potential_creativity"
     t.string "player_position_detail"
+    t.integer "blend"
   end
 
   create_table "selections", force: :cascade do |t|

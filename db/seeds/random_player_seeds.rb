@@ -5,6 +5,7 @@ end
 
 countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales', 'NI', 'RoI', 'Brazil', 'Argentina', 'Spain', 'France', 'Germany', 'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay','Brazil', 'England', 'Mexico', 'Germany', 'Italy', 'Spain', 'France', 'Argentina', 'Netherlands', 'Portugal', 'Belgium', 'Uruguay', 'Colombia', 'Croatia', 'Sweden', 'Switzerland', 'Poland', 'Denmark', 'Chile', 'Austria', 'Turkey', 'Russia', 'Japan', 'South Korea', 'Australia']
 position_detail = ['c', 'c', 'c', 'l', 'r']
+blend = [1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,7,7,8,8,9,9]
 
 1000.times do
     Player.create(
@@ -25,6 +26,7 @@ position_detail = ['c', 'c', 'c', 'l', 'r']
       creativity: random_number(3, 5),
       fitness: 100,
       consistency: 20,
+      blend: blend.sample,
       player_position_detail: 'p',
       potential_passing: random_number(8, 15),
       potential_control: random_number(8, 15),
@@ -59,6 +61,7 @@ position_detail = ['c', 'c', 'c', 'l', 'r']
       creativity: random_number(3, 8),
       fitness: 100,
       consistency: 20,
+      blend: blend.sample,
       player_position_detail: position_detail.sample,
       potential_passing: random_number(5, 12),
       potential_control: random_number(8, 15),
@@ -93,6 +96,7 @@ position_detail = ['c', 'c', 'c', 'l', 'r']
       creativity: random_number(3, 8),
       fitness: 100,
       consistency: 20,
+      blend: blend.sample,
       player_position_detail: position_detail.sample,
       potential_passing: random_number(8, 15),
       potential_control: random_number(8, 15),
@@ -127,6 +131,7 @@ position_detail = ['c', 'c', 'c', 'l', 'r']
       creativity: random_number(3, 5),
       fitness: 100,
       consistency: 20,
+      blend: blend.sample,
       player_position_detail: position_detail.sample,
       potential_passing: random_number(5, 12),
       potential_control: random_number(8, 15),

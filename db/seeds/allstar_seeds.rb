@@ -130,6 +130,7 @@ end
     fitness: 100,
     club: 999,
     consistency: 5,
+    blend: 2,
     player_position_detail: position_detail.sample,
     potential_passing: random_number(8, 18),
     potential_control: random_number(11, 20),

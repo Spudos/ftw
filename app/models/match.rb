@@ -4,20 +4,27 @@ class Match < ApplicationRecord
 
     fixture_list.each do |fixture|
       match_info, match_squad = Match::SquadCreator.new(fixture).squad_for_game
+
       squads_with_performance = player_performance(match_squad)
-      squads_with_tactics = Match::TacticAdjustment.new(squads_with_performance).player_performance_by_tactic
-      save_player_match_data(squads_with_tactics, match_info)
-      player_fitness(squads_with_tactics, match_info)
-      totals = team_totals(squads_with_performance)
-      home_stadium = stadium_size(totals)
-      totals_with_stadium = teams_with_stadium_effect(totals, home_stadium)
-      totals_with_aggression = totals_with_aggression_effect(totals_with_stadium)
-      run_match_logic(totals_with_aggression, squads_with_performance, match_info)
+      final_squad_totals = Match::TacticAdjustment.new(squads_with_performance).player_performance_by_tactic
+
+      save_player_match_data(final_squad_totals, match_info)
+      player_fitness(final_squad_totals, match_info)
+
+      totals = team_totals(final_squad_totals)
+
+      totals_with_blend, blend_totals = team_blend(totals)
+      match_info = add_blend(blend_totals, match_info)
+      home_stadium = stadium_size(totals_with_blend)
+      totals_with_stadium = teams_with_stadium_effect(totals_with_blend, home_stadium)
+      final_team_totals = totals_with_aggression_effect(totals_with_stadium)
+
+      run_match_logic(final_team_totals, final_squad_totals, match_info)
     end
   end
 
-  def run_match_logic(final_team_totals, squads_with_performance, match_info)
-    home_list, away_list = list_of_players(squads_with_performance)
+  def run_match_logic(final_team_totals, final_squad_totals, match_info)
+    home_list, away_list = list_of_players(final_squad_totals)
     home_top_5, away_top_5 = list_of_top_5_players(home_list, away_list)
 
     minute_by_minute = []
@@ -87,6 +94,7 @@ class Match < ApplicationRecord
         tactic:,
         player_position: player.position,
         player_position_detail: player.player_position_detail,
+        player_blend: player.blend,
         match_performance: player.match_performance(player)
       }
       players_array << hash
@@ -144,44 +152,69 @@ class Match < ApplicationRecord
         end
       end
 
-      player_fitness = 0 if player_fitness < 0
+      player_fitness = 50 if player_fitness < 50
 
       player_record.update(fitness: player_fitness) if player_record
     end
   end
 
-  def team_totals(squads_with_performance)
-    squads = squads_with_performance
+  def team_totals(final_squad_totals)
+    squads = final_squad_totals
 
     home_team = squads.first[:club]
     away_team = squads.last[:club]
 
     home_dfc = 0
+    home_dfc_blend = 0
     home_mid = 0
+    home_mid_blend = 0
     home_att = 0
+    home_att_blend = 0
     away_dfc = 0
+    away_dfc_blend = 0
     away_mid = 0
+    away_mid_blend = 0
     away_att = 0
+    away_att_blend = 0
+
+    home_dfc_count = 0
+    home_mid_count = 0
+    home_att_count = 0
+    away_dfc_count = 0
+    away_mid_count = 0
+    away_att_count = 0
 
     squads.each do |player|
       case player[:player_position]
       when 'gkp', 'dfc'
         if player[:club] == home_team
           home_dfc += player[:match_performance]
+          home_dfc_blend += player[:player_blend]
+          home_dfc_count += 1
         else
           away_dfc += player[:match_performance]
+          away_dfc_blend += player[:player_blend]
+          away_dfc_count += 1
         end
       when 'mid'
         if player[:club] == home_team
           home_mid += player[:match_performance]
+          home_mid_blend += player[:player_blend]
+          home_mid_count += 1
         else
           away_mid += player[:match_performance]
+          away_mid_blend += player[:player_blend]
+          away_mid_count += 1
         end
       else
         if player[:club] == home_team
           home_att += player[:match_performance]
+          home_att_blend += player[:player_blend]
+          home_att_count += 1
         else
           away_att += player[:match_performance]
+          away_att_blend += player[:player_blend]
+          away_att_count += 1
         end
       end
     end
@@ -190,27 +223,74 @@ class Match < ApplicationRecord
       {
         team: home_team,
         defense: home_dfc,
+        defense_blend: home_dfc_blend / home_dfc_count.to_i,
         midfield: home_mid,
-        attack: home_att
+        midfield_blend: home_mid_blend / home_mid_count.to_i,
+        attack: home_att,
+        attack_blend: home_att_blend / home_att_count.to_i
       },
       {
         team: away_team,
         defense: away_dfc,
+        defense_blend: away_dfc_blend / away_dfc_count.to_i,
         midfield: away_mid,
-        attack: away_att
+        midfield_blend: away_mid_blend / away_mid_count.to_i,
+        attack: away_att,
+        attack_blend: away_att_blend / away_att_count.to_i
       }
     ]
     totals
   end
 
-  def stadium_size(team_totals)
-    club = Club.find_by(abbreviation: team_totals.first[:team])
+  def team_blend(totals)
+    totals_with_blend = []
+    blend_totals = []
+
+    totals.each do |team|
+      hash = {
+        team: team[:team],
+        defense: (team[:defense] * (1 - ((team[:defense_blend].to_f) / 10) / 2)).to_i,
+        midfield: (team[:midfield] * (1 - ((team[:midfield_blend].to_f) / 10) / 2)).to_i,
+        attack: (team[:attack] * (1 - ((team[:attack_blend].to_f) / 10) / 2)).to_i
+      }
+      totals_with_blend << hash
+    end
+
+    totals.each do |team|
+      hash = {
+        team: team[:team],
+        defense: team[:defense_blend],
+        midfield: team[:midfield_blend],
+        attack: team[:attack_blend]
+    }
+    blend_totals << hash
+    end
+
+    return totals_with_blend, blend_totals
+  end
+
+  def add_blend(blend_totals, match_info)
+    updated_match_info = match_info.merge(
+      {
+        dfc_blend_home: blend_totals[0][:defense],
+        mid_blend_home: blend_totals[0][:midfield],
+        att_blend_home: blend_totals[0][:attack],
+        dfc_blend_away: blend_totals[1][:defense],
+        mid_blend_away: blend_totals[1][:midfield],
+        att_blend_away: blend_totals[1][:attack]
+      }
+    )
+    updated_match_info
+  end
+
+  def stadium_size(totals_with_blend)
+    club = Club.find_by(abbreviation: totals_with_blend.first[:team])
     stadium_size = club.stand_n_capacity + club.stand_s_capacity + club.stand_e_capacity + club.stand_w_capacity
 
     stadium_size
   end
 
-  def teams_with_stadium_effect(team_totals, home_stadium_size)
+  def teams_with_stadium_effect(totals_with_blend, home_stadium_size)
     if home_stadium_size <= 10000
       stadium_effect = 0
     elsif home_stadium_size <= 20000
@@ -229,11 +309,11 @@ class Match < ApplicationRecord
       stadium_effect = 10
     end
 
-    team_totals.first[:defense] += stadium_effect
-    team_totals.first[:midfield] += stadium_effect
-    team_totals.first[:attack] += stadium_effect
+    totals_with_blend.first[:defense] += stadium_effect
+    totals_with_blend.first[:midfield] += stadium_effect
+    totals_with_blend.first[:attack] += stadium_effect
 
-    team_totals
+    totals_with_blend
   end
 
   def totals_with_aggression_effect(totals_with_stadium)
@@ -276,9 +356,9 @@ class Match < ApplicationRecord
     chance_result
   end
 
-  def if_chance_on_target(chance_result ,adjusted_team_totals)
-    home_attack = adjusted_team_totals.first[:attack]
-    away_attack = adjusted_team_totals.last[:attack]
+  def if_chance_on_target(chance_result, final_team_totals)
+    home_attack = final_team_totals.first[:attack]
+    away_attack = final_team_totals.last[:attack]
     chance_on_target = ''
 
     if chance_result[:chance_outcome] == 'home' && home_attack / 2 > rand(0..100)
@@ -293,9 +373,9 @@ class Match < ApplicationRecord
     }
   end
 
-  def goal_scored(chance_on_target_result, adjusted_team_totals)
-    home_attack = adjusted_team_totals.first[:attack]
-    away_attack = adjusted_team_totals.last[:attack]
+  def goal_scored(chance_on_target_result, final_team_totals)
+    home_attack = final_team_totals.first[:attack]
+    away_attack = final_team_totals.last[:attack]
     goal_scored = ''
 
     if chance_on_target_result[:chance_on_target]  == 'home' && home_attack / 3 > rand(0..100)
@@ -310,12 +390,12 @@ class Match < ApplicationRecord
     }
   end
 
-  def list_of_players(squads_with_adjusted_performance)
-    home_team = squads_with_adjusted_performance.first[:club]
+  def list_of_players(final_squad_totals)
+    home_team = final_squad_totals.first[:club]
     home_list = []
     away_list = []
 
-    squads_with_adjusted_performance.each do |player|
+    final_squad_totals.each do |player|
       if player[:club] == home_team
         home_list << { player_id: player[:player_id], player_position: player[:player_position],match_performance: player[:match_performance] }
       else
@@ -369,11 +449,17 @@ class Match < ApplicationRecord
       competition: minute_by_minute.first[:competition],
       club_home: minute_by_minute.first[:club_home],
       tactic_home: minute_by_minute.first[:tactic_home],
+      dfc_blend_home: minute_by_minute.first[:dfc_blend_home],
+      mid_blend_home: minute_by_minute.first[:mid_blend_home],
+      att_blend_home: minute_by_minute.first[:att_blend_home],
       dfc_aggression_home: minute_by_minute.first[:dfc_aggression_home],
       mid_aggression_home: minute_by_minute.first[:mid_aggression_home],
       att_aggression_home: minute_by_minute.first[:att_aggression_home],
       club_away: minute_by_minute.first[:club_away],
       tactic_away: minute_by_minute.first[:tactic_away],
+      dfc_blend_away: minute_by_minute.first[:dfc_blend_away],
+      mid_blend_away: minute_by_minute.first[:mid_blend_away],
+      att_blend_away: minute_by_minute.first[:att_blend_away],
       dfc_aggression_away: minute_by_minute.first[:dfc_aggression_away],
       mid_aggression_away: minute_by_minute.first[:mid_aggression_away],
       att_aggression_away: minute_by_minute.first[:att_aggression_away],
@@ -402,19 +488,24 @@ class Match < ApplicationRecord
   end
 
   def save_detailed_match_summary(detailed_match_summary)
-    match_data = detailed_match_summary[0] # Access the first hash in the array
-
+    match_data = detailed_match_summary[0]
     match = Match.new(
       match_id: match_data[:id].to_i,
       week_number: match_data[:week].to_i,
       competition: match_data[:competition],
       home_team: match_data[:club_home],
       tactic_home: match_data[:tactic_home],
+      dfc_blend_home: match_data[:dfc_blend_home],
+      mid_blend_home: match_data[:mid_blend_home],
+      att_blend_home: match_data[:att_blend_home],
       dfc_aggression_home: match_data[:dfc_aggression_home],
       mid_aggression_home: match_data[:mid_aggression_home],
       att_aggression_home: match_data[:att_aggression_home],
       away_team: match_data[:club_away],
       tactic_away: match_data[:tactic_away],
+      dfc_blend_away: match_data[:dfc_blend_away],
+      mid_blend_away: match_data[:mid_blend_away],
+      att_blend_away: match_data[:att_blend_away],
       dfc_aggression_away: match_data[:dfc_aggression_away],
       mid_aggression_away: match_data[:mid_aggression_away],
       att_aggression_away: match_data[:att_aggression_away],

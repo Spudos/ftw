@@ -7,24 +7,24 @@ class Match::TacticAdjustment
   # 5      Narrow      0   0    0   -10  +10
   # 6      Direct     +5  -5   +5    0    0
 
-  attr_reader :match_squad_with_performance
+  attr_reader :squad_with_performance
 
-  def initialize(match_squad_with_performance)
-    @match_squad_with_performance = match_squad_with_performance
+  def initialize(squad_with_performance)
+    @squad_with_performance = squad_with_performance
   end
 
   def player_performance_by_tactic
-    players = match_squad_with_performance
+    players = squad_with_performance
 
     players.each do |player|
-      adjust_performance_by_position_detail(player)
-      adjust_performance_by_position(player)
+      performance_by_position_detail(player)
+      performance_by_position(player)
     end
 
     squads_with_adjusted_performance = players
   end
 
-  def adjust_performance_by_position_detail(player)
+  def performance_by_position_detail(player)
     if player[:player_position_detail] == 'c'
       player[:match_performance] -= 10 if player[:tactic] == 4
       player[:match_performance] += 10 if player[:tactic] == 5
@@ -34,7 +34,7 @@ class Match::TacticAdjustment
     end
   end
 
-  def adjust_performance_by_position(player)
+  def performance_by_position(player)
     if player[:player_position] == 'dfc'
       player[:match_performance] -= 5 if player[:tactic] == 1
       player[:match_performance] += 15 if player[:tactic] == 2
