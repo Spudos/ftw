@@ -37,8 +37,14 @@
           competition: fixture[:competition],
           club_home: fixture[:club_home],
           tactic_home: Tactic.find_by(abbreviation: fixture[:club_home])&.tactics,
+          dfc_aggression_home: Tactic.find_by(abbreviation: fixture[:club_home])&.dfc_aggression,
+          mid_aggression_home: Tactic.find_by(abbreviation: fixture[:club_home])&.mid_aggression,
+          att_aggression_home: Tactic.find_by(abbreviation: fixture[:club_home])&.att_aggression,
           club_away: fixture[:club_away],
-          tactic_away: Tactic.find_by(abbreviation: fixture[:club_away])&.tactics
+          tactic_away: Tactic.find_by(abbreviation: fixture[:club_away])&.tactics,
+          dfc_aggression_away: Tactic.find_by(abbreviation: fixture[:club_away])&.dfc_aggression,
+          mid_aggression_away: Tactic.find_by(abbreviation: fixture[:club_away])&.mid_aggression,
+          att_aggression_away: Tactic.find_by(abbreviation: fixture[:club_away])&.att_aggression
         }
     end
   end

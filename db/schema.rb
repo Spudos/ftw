@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_17_092257) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_18_102414) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -110,6 +110,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_17_092257) do
     t.integer "tactic_home"
     t.integer "tactic_away"
     t.string "competition"
+    t.integer "dfc_aggression_home"
+    t.integer "mid_aggression_home"
+    t.integer "att_aggression_home"
+    t.integer "dfc_aggression_away"
+    t.integer "mid_aggression_away"
+    t.integer "att_aggression_away"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -182,6 +188,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_17_092257) do
     t.integer "tactics"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "dfc_aggression"
+    t.integer "mid_aggression"
+    t.integer "att_aggression"
   end
 
   create_table "templates", force: :cascade do |t|
@@ -236,6 +245,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_17_092257) do
     t.string "property_upgrade"
     t.string "stadium_condition_upgrade"
     t.integer "tactic"
+    t.integer "dfc_aggression"
+    t.integer "mid_aggression"
+    t.integer "att_aggression"
   end
 
   create_table "upgrades", force: :cascade do |t|

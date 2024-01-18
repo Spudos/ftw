@@ -4,7 +4,7 @@ class Turnsheet < ApplicationRecord
       next if turnsheet.processed.present?
 
       turnsheet.save # Save the Turnsheet record first
-      
+
       Selection.where(club: turnsheet.club).destroy_all
 
       (1..11).each do |i|
@@ -21,6 +21,24 @@ class Turnsheet < ApplicationRecord
         Tactic.create(abbreviation: turnsheet.club, tactics: 1)
       else
         Tactic.create(abbreviation: turnsheet.club, tactics: turnsheet.tactic)
+      end
+
+      if turnsheet.dfc_aggression.nil?
+        Tactic.find_by(abbreviation: turnsheet.club).update(dfc_aggression: 0)
+      else
+        Tactic.find_by(abbreviation: turnsheet.club).update(dfc_aggression: turnsheet.dfc_aggression)
+      end
+
+      if turnsheet.mid_aggression.nil?
+        Tactic.find_by(abbreviation: turnsheet.club).update(mid_aggression: 0)
+      else
+        Tactic.find_by(abbreviation: turnsheet.club).update(mid_aggression: turnsheet.mid_aggression)
+      end
+
+      if turnsheet.att_aggression.nil?
+        Tactic.find_by(abbreviation: turnsheet.club).update(att_aggression: 0)
+      else
+        Tactic.find_by(abbreviation: turnsheet.club).update(att_aggression: turnsheet.att_aggression)
       end
 
       if turnsheet.coach_upgrade.present?

@@ -4,25 +4,27 @@ class Match < ApplicationRecord
 
     fixture_list.each do |fixture|
       match_info, match_squad = Match::SquadCreator.new(fixture).squad_for_game
-      match_squad_with_performance = player_performance(match_squad)
-      squads_with_adjusted_performance = Match::TacticAdjustment.new(match_squad_with_performance).player_performance_by_tactic
-      save_player_match_data(squads_with_adjusted_performance, match_info)
-      basic_team_totals = team_totals(squads_with_adjusted_performance)
-      home_stadium_size = stadium_size(basic_team_totals)
-      adjusted_team_totals = teams_with_stadium_effect(basic_team_totals, home_stadium_size)
-      run_match_logic(adjusted_team_totals, squads_with_adjusted_performance, match_info)
+      squads_with_performance = player_performance(match_squad)
+      squads_with_tactics = Match::TacticAdjustment.new(squads_with_performance).player_performance_by_tactic
+      save_player_match_data(squads_with_tactics, match_info)
+      player_fitness(squads_with_tactics, match_info)
+      totals = team_totals(squads_with_performance)
+      home_stadium = stadium_size(totals)
+      totals_with_stadium = teams_with_stadium_effect(totals, home_stadium)
+      totals_with_aggression = totals_with_aggression_effect(totals_with_stadium)
+      run_match_logic(totals_with_aggression, squads_with_performance, match_info)
     end
   end
 
-  def run_match_logic(adjusted_team_totals, squads_with_adjusted_performance, match_info)
-    home_list, away_list = list_of_players(squads_with_adjusted_performance)
+  def run_match_logic(final_team_totals, squads_with_performance, match_info)
+    home_list, away_list = list_of_players(squads_with_performance)
     home_top_5, away_top_5 = list_of_top_5_players(home_list, away_list)
 
     minute_by_minute = []
     rand(90..98).times do |i|
-      chance_result = chance_created(adjusted_team_totals, i)
-      chance_on_target_result = if_chance_on_target(chance_result, adjusted_team_totals)
-      goal_scored = goal_scored(chance_on_target_result, adjusted_team_totals)
+      chance_result = chance_created(final_team_totals, i)
+      chance_on_target_result = if_chance_on_target(chance_result, final_team_totals)
+      goal_scored = goal_scored(chance_on_target_result, final_team_totals)
 
       if goal_scored[:goal_scored] != 'none'
         assist = assisted(home_top_5, away_top_5, goal_scored)
@@ -92,11 +94,11 @@ class Match < ApplicationRecord
     players_array
   end
 
-  def save_player_match_data(squads_with_adjusted_performance, match_info)
+  def save_player_match_data(squads_with_performance, match_info)
     id = match_info[:id]
     competition = match_info[:competition]
 
-    squads_with_adjusted_performance.each do |player|
+    squads_with_performance.each do |player|
       Performance.create(
         match_id: id,
         player_id: player[:player_id],
@@ -110,8 +112,46 @@ class Match < ApplicationRecord
     end
   end
 
-  def team_totals(squads_with_adjusted_performance)
-    squads = squads_with_adjusted_performance
+  def player_fitness(squads_with_performance, match_info)
+    squads_with_performance.each do |player|
+      player_record = Player.find_by(id: player[:player_id])
+      player_fitness = player_record&.fitness
+      player_fitness -= rand(3..8)
+
+      if player[:player_position] == 'gkp'
+        if player_record[:club] == match_info[:club_home]
+          player_fitness -= match_info[:dfc_aggression_home]
+        else
+          player_fitness -= match_info[:dfc_aggression_away]
+        end
+      elsif player[:player_position] == 'dfc'
+        if player_record[:club] == match_info[:club_home]
+          player_fitness -= match_info[:dfc_aggression_home]
+        else
+          player_fitness -= match_info[:dfc_aggression_away]
+        end
+      elsif player[:player_position] == 'mid'
+        if player_record[:club] == match_info[:club_home]
+          player_fitness -= match_info[:mid_aggression_home]
+        else
+          player_fitness -= match_info[:mid_aggression_away]
+        end
+      else
+        if player_record[:club] == match_info[:club_home]
+          player_fitness -= match_info[:att_aggression_home]
+        else
+          player_fitness -= match_info[:att_aggression_away]
+        end
+      end
+
+      player_fitness = 0 if player_fitness < 0
+
+      player_record.update(fitness: player_fitness) if player_record
+    end
+  end
+
+  def team_totals(squads_with_performance)
+    squads = squads_with_performance
 
     home_team = squads.first[:club]
     away_team = squads.last[:club]
@@ -163,14 +203,14 @@ class Match < ApplicationRecord
     totals
   end
 
-  def stadium_size(basic_team_totals)
-    club = Club.find_by(abbreviation: basic_team_totals.first[:team])
+  def stadium_size(team_totals)
+    club = Club.find_by(abbreviation: team_totals.first[:team])
     stadium_size = club.stand_n_capacity + club.stand_s_capacity + club.stand_e_capacity + club.stand_w_capacity
 
     stadium_size
   end
 
-  def teams_with_stadium_effect(basic_team_totals, home_stadium_size)
+  def teams_with_stadium_effect(team_totals, home_stadium_size)
     if home_stadium_size <= 10000
       stadium_effect = 0
     elsif home_stadium_size <= 20000
@@ -189,16 +229,31 @@ class Match < ApplicationRecord
       stadium_effect = 10
     end
 
-    basic_team_totals.first[:defense] += stadium_effect
-    basic_team_totals.first[:midfield] += stadium_effect
-    basic_team_totals.first[:attack] += stadium_effect
+    team_totals.first[:defense] += stadium_effect
+    team_totals.first[:midfield] += stadium_effect
+    team_totals.first[:attack] += stadium_effect
 
-    basic_team_totals
+    team_totals
   end
 
-  def chance_created(adjusted_team_totals, i)
+  def totals_with_aggression_effect(totals_with_stadium)
+    totals_with_aggression = []
+
+    totals_with_stadium.each do |team|
+      hash = {
+        team: team[:team],
+        defense: team[:defense] + Tactic.find_by(abbreviation: team[:team])&.dfc_aggression * 5,
+        midfield: team[:midfield] + Tactic.find_by(abbreviation: team[:team])&.mid_aggression * 5,
+        attack: team[:attack] + Tactic.find_by(abbreviation: team[:team])&.att_aggression * 5
+      }
+      totals_with_aggression << hash
+    end
+    return totals_with_aggression
+  end
+
+  def chance_created(final_team_totals, i)
     random_number = rand(1..100)
-    chance = adjusted_team_totals.first[:midfield] - adjusted_team_totals.last[:midfield]
+    chance = final_team_totals.first[:midfield] - final_team_totals.last[:midfield]
     chance_outcome = ''
 
     if chance >= 0 && rand(0..100) < 16
@@ -314,8 +369,14 @@ class Match < ApplicationRecord
       competition: minute_by_minute.first[:competition],
       club_home: minute_by_minute.first[:club_home],
       tactic_home: minute_by_minute.first[:tactic_home],
+      dfc_aggression_home: minute_by_minute.first[:dfc_aggression_home],
+      mid_aggression_home: minute_by_minute.first[:mid_aggression_home],
+      att_aggression_home: minute_by_minute.first[:att_aggression_home],
       club_away: minute_by_minute.first[:club_away],
       tactic_away: minute_by_minute.first[:tactic_away],
+      dfc_aggression_away: minute_by_minute.first[:dfc_aggression_away],
+      mid_aggression_away: minute_by_minute.first[:mid_aggression_away],
+      att_aggression_away: minute_by_minute.first[:att_aggression_away],
       chance_count_home: minute_by_minute.count { |chance| chance[:chance_outcome] == 'home' },
       chance_count_away: minute_by_minute.count { |chance| chance[:chance_outcome] == 'away' },
       chance_on_target_home: minute_by_minute.count { |chance| chance[:chance_on_target] == 'home' },
@@ -349,8 +410,14 @@ class Match < ApplicationRecord
       competition: match_data[:competition],
       home_team: match_data[:club_home],
       tactic_home: match_data[:tactic_home],
+      dfc_aggression_home: match_data[:dfc_aggression_home],
+      mid_aggression_home: match_data[:mid_aggression_home],
+      att_aggression_home: match_data[:att_aggression_home],
       away_team: match_data[:club_away],
       tactic_away: match_data[:tactic_away],
+      dfc_aggression_away: match_data[:dfc_aggression_away],
+      mid_aggression_away: match_data[:mid_aggression_away],
+      att_aggression_away: match_data[:att_aggression_away],
       home_possession: match_data[:home_possession].to_i,
       away_possession: match_data[:away_possession].to_i,
       home_chance: match_data[:chance_count_home].to_i,

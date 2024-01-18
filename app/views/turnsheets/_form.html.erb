@@ -113,6 +113,27 @@
               <%= form.select :tactic, options_for_select({ "Passing" => 1, "Defensive" => 2, "Attacking" => 3, "Wide" => 4, "Narrow" => 5, "Direct" => 6 }), prompt: "Select a tactic" %>
             </td>
           </tr>
+          <tr scope="row">
+            <td scope="col">Defence aggression for this game:</td>
+            <td>
+              <%= form.label :dfc_aggression, style: "display: none" %>
+              <%= form.select :dfc_aggression, options_for_select( 1..10 ), prompt: "Select agression" %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td scope="col">Midfield aggression for this game:</td>
+            <td>
+              <%= form.label :mid_aggression, style: "display: none" %>
+              <%= form.select :mid_aggression, options_for_select( 1..10 ), prompt: "Select agression" %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td scope="col">Attack aggression for this game:</td>
+            <td>
+              <%= form.label :att_aggression, style: "display: none" %>
+              <%= form.select :att_aggression, options_for_select( 1..10 ), prompt: "Select agression" %>
+            </td>
+          </tr>
         </table>
         <h4 style="text-align: center">Player Training</h4>
         <table class="table table-hover table-bordered">
