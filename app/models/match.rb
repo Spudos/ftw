@@ -6,7 +6,8 @@ class Match < ApplicationRecord
       match_info, match_squad = Match::SquadCreator.new(fixture).squad_for_game
 
       squads_with_performance = player_performance(match_squad)
-      final_squad_totals = Match::TacticAdjustment.new(squads_with_performance).player_performance_by_tactic
+      squads_with_tactics = Match::TacticAdjustment.new(squads_with_performance).player_performance_by_tactic
+      final_squad_totals = star_effect(squads_with_tactics)
 
       save_player_match_data(final_squad_totals, match_info)
       Match::PlayerFitness.new(final_squad_totals, match_info).player_fitness
@@ -94,11 +95,28 @@ class Match < ApplicationRecord
         player_position: player.position,
         player_position_detail: player.player_position_detail,
         player_blend: player.blend,
+        star: player.star,
         match_performance: player.match_performance(player)
       }
       players_array << hash
     end
     players_array
+  end
+
+  def star_effect(squads_with_tactics)
+    players = squads_with_tactics
+
+    players.each do |player|
+      if rand(100) > 50
+        player[:match_performance] += player[:star]
+      end
+
+      if player[:match_performance] < 20
+        player[:match_performance] = rand(20..30)
+      end
+    end
+
+    totals_with_star = players
   end
 
   def save_player_match_data(squads_with_performance, match_info)
