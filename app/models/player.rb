@@ -72,13 +72,10 @@ class Player < ApplicationRecord
       }
     end
 
-    # Remove nil values from the players array
     players.compact!
 
-    # Sort players based on total skill in descending order
     players.sort_by! { |player| -player[:total_skill] }
 
-    # Select the top 10 players
     top_skill_players = players.take(10)
 
     return top_skill_players
