@@ -21,7 +21,7 @@
 # stand_w_name      varchar              true    false             
 # stand_w_condition INTEGER              true    false             
 # stand_w_capacity  INTEGER              true    false             
-# pitch             varchar              true    false             
+# pitch             INTEGER              true    false             
 # hospitality       INTEGER              true    false             
 # facilities        INTEGER              true    false             
 # staff_fitness     INTEGER              true    false             
@@ -32,6 +32,11 @@
 # staff_scouts      INTEGER              true    false             
 # color_primary     varchar              true    false             
 # color_secondary   varchar              true    false             
+# bank_bal          INTEGER              true    false             
+# managed           boolean              true    false             
+# manager           varchar              true    false             
+# manager_email     varchar              true    false             
+# league            varchar              true    false             
 #
 #------------------------------------------------------------------------------
 

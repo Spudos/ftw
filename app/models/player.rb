@@ -161,3 +161,47 @@ class Player < ApplicationRecord
     random_number = rand(-consistency..consistency)
   end
 end
+
+#------------------------------------------------------------------------------
+# Player
+#
+# Name                        SQL Type             Null    Primary Default
+# --------------------------- -------------------- ------- ------- ----------
+# id                          INTEGER              false   true              
+# name                        varchar              true    false             
+# age                         INTEGER              true    false             
+# nationality                 varchar              true    false             
+# position                    varchar              true    false             
+# passing                     INTEGER              true    false             
+# control                     INTEGER              true    false             
+# tackling                    INTEGER              true    false             
+# running                     INTEGER              true    false             
+# shooting                    INTEGER              true    false             
+# dribbling                   INTEGER              true    false             
+# defensive_heading           INTEGER              true    false             
+# offensive_heading           INTEGER              true    false             
+# flair                       INTEGER              true    false             
+# strength                    INTEGER              true    false             
+# creativity                  INTEGER              true    false             
+# fitness                     INTEGER              true    false             
+# created_at                  datetime(6)          false   false             
+# updated_at                  datetime(6)          false   false             
+# club                        varchar              true    false             
+# consistency                 INTEGER              true    false             
+# potential_passing           INTEGER              true    false             
+# potential_control           INTEGER              true    false             
+# potential_tackling          INTEGER              true    false             
+# potential_running           INTEGER              true    false             
+# potential_shooting          INTEGER              true    false             
+# potential_dribbling         INTEGER              true    false             
+# potential_defensive_heading INTEGER              true    false             
+# potential_offensive_heading INTEGER              true    false             
+# potential_flair             INTEGER              true    false             
+# potential_strength          INTEGER              true    false             
+# potential_creativity        INTEGER              true    false             
+# player_position_detail      varchar              true    false             
+# blend                       INTEGER              true    false             
+# contract                    INTEGER              true    false   24        
+# star                        INTEGER              true    false             
+#
+#------------------------------------------------------------------------------

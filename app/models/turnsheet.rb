@@ -83,3 +83,49 @@ class Turnsheet < ApplicationRecord
     end
   end
 end
+
+#------------------------------------------------------------------------------
+# Turnsheet
+#
+# Name                      SQL Type             Null    Primary Default
+# ------------------------- -------------------- ------- ------- ----------
+# id                        INTEGER              false   true              
+# week                      INTEGER              true    false             
+# club                      varchar              true    false             
+# manager                   varchar              true    false             
+# email                     varchar              true    false             
+# player_1                  varchar              true    false             
+# player_2                  varchar              true    false             
+# player_3                  varchar              true    false             
+# player_4                  varchar              true    false             
+# player_5                  varchar              true    false             
+# player_6                  varchar              true    false             
+# player_7                  varchar              true    false             
+# player_8                  varchar              true    false             
+# player_9                  varchar              true    false             
+# player_10                 varchar              true    false             
+# player_11                 varchar              true    false             
+# stadium_upgrade           varchar              true    false             
+# coach_upgrade             varchar              true    false             
+# train_goalkeeper          varchar              true    false             
+# train_goalkeeper_skill    varchar              true    false             
+# train_defender            varchar              true    false             
+# train_defender_skill      varchar              true    false             
+# train_midfielder          varchar              true    false             
+# train_midfielder_skill    varchar              true    false             
+# train_attacker            varchar              true    false             
+# train_attacker_skill      varchar              true    false             
+# created_at                datetime(6)          false   false             
+# updated_at                datetime(6)          false   false             
+# stadium_amount            INTEGER              true    false             
+# processed                 datetime(6)          true    false             
+# val                       INTEGER              true    false             
+# property_upgrade          varchar              true    false             
+# stadium_condition_upgrade varchar              true    false             
+# tactic                    INTEGER              true    false             
+# dfc_aggression            INTEGER              true    false             
+# mid_aggression            INTEGER              true    false             
+# att_aggression            INTEGER              true    false             
+# fitness_coaching          varchar              true    false             
+#
+#------------------------------------------------------------------------------

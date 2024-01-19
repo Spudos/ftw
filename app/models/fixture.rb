@@ -14,18 +14,3 @@
 class Fixture < ApplicationRecord
 end
 
-#------------------------------------------------------------------------------
-# Fixtures
-#
-# Name        SQL Type             Null    Primary Default
-# ----------- -------------------- ------- ------- ----------
-# id          INTEGER              false   true              
-# id    INTEGER              true    false             
-# week_number INTEGER              true    false             
-# home        varchar              true    false             
-# away        varchar              true    false             
-# comp        varchar              true    false             
-# created_at  datetime(6)          false   false             
-# updated_at  datetime(6)          false   false             
-#
-#------------------------------------------------------------------------------

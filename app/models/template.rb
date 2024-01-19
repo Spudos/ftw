@@ -26,3 +26,16 @@ class Template < ApplicationRecord
     commentaries.sample
   end
 end
+
+#------------------------------------------------------------------------------
+# Template
+#
+# Name            SQL Type             Null    Primary Default
+# --------------- -------------------- ------- ------- ----------
+# id              INTEGER              false   true              
+# commentary_type varchar              true    false             
+# text            varchar              true    false             
+# created_at      datetime(6)          false   false             
+# updated_at      datetime(6)          false   false             
+#
+#------------------------------------------------------------------------------

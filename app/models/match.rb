@@ -410,3 +410,43 @@ class Match < ApplicationRecord
     end
   end
 end
+
+#------------------------------------------------------------------------------
+# Match
+#
+# Name                  SQL Type             Null    Primary Default
+# --------------------- -------------------- ------- ------- ----------
+# id                    INTEGER              false   true              
+# match_id              INTEGER              true    false             
+# home_team             varchar              true    false             
+# away_team             varchar              true    false             
+# home_possession       INTEGER              true    false             
+# away_possession       INTEGER              true    false             
+# home_chance           INTEGER              true    false             
+# away_chance           INTEGER              true    false             
+# home_chance_on_target INTEGER              true    false             
+# away_chance_on_target INTEGER              true    false             
+# home_man_of_the_match varchar              true    false             
+# away_man_of_the_match varchar              true    false             
+# created_at            datetime(6)          false   false             
+# updated_at            datetime(6)          false   false             
+# home_goals            INTEGER              true    false             
+# away_goals            INTEGER              true    false             
+# week_number           INTEGER              true    false             
+# tactic_home           INTEGER              true    false             
+# tactic_away           INTEGER              true    false             
+# competition           varchar              true    false             
+# dfc_aggression_home   INTEGER              true    false             
+# mid_aggression_home   INTEGER              true    false             
+# att_aggression_home   INTEGER              true    false             
+# dfc_aggression_away   INTEGER              true    false             
+# mid_aggression_away   INTEGER              true    false             
+# att_aggression_away   INTEGER              true    false             
+# dfc_blend_home        INTEGER              true    false             
+# mid_blend_home        INTEGER              true    false             
+# att_blend_home        INTEGER              true    false             
+# dfc_blend_away        INTEGER              true    false             
+# mid_blend_away        INTEGER              true    false             
+# att_blend_away        INTEGER              true    false             
+#
+#------------------------------------------------------------------------------
