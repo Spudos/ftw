@@ -1,6 +1,6 @@
 class Match::TacticAdjustment
   # tactic name       dfc  mid  att  l,r  c
-  # 1      passing    -5  +10  -0    0    0
+  # 1      passing    -5  +15  -5    0    0
   # 2      defensive  +15 -5   -10   0    0
   # 3      Attacking  -10 +5   +15   0    0
   # 4      Wide        0   0    0   +10  -10
