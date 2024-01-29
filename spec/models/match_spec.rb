@@ -50,7 +50,8 @@ RSpec.describe Match, type: :model do
       { tactic: 3, expected_results: [40, 55, 65] },
       { tactic: 4, expected_results: [40, 60, 60] },
       { tactic: 5, expected_results: [60, 40, 40] },
-      { tactic: 6, expected_results: [55, 45, 55] }
+      { tactic: 6, expected_results: [55, 45, 55] },
+      { tactic: nil, expected_results: [50, 50, 50] }
     ].each do |test_case|
       it "should return correct adjusted values for tactic #{test_case[:tactic]}" do
         @squad_with_performance.each { |player| player[:tactic] = test_case[:tactic] }
