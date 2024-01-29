@@ -11,7 +11,7 @@ blend = [1,2,3,4,5,6,7,8,9]
 3.times do
   club_code.each do |code|
     Player.create(
-      name: Faker::Name.last_name,
+      name: Faker::Name.unique.last_name,
       age: random_number(18, 35),
       nationality: countries.sample,
       position: 'gkp',
@@ -51,7 +51,7 @@ end
 7.times do
   club_code.each do |code|
     Player.create(
-      name: Faker::Name.last_name,
+      name: Faker::Name.unique.last_name,
       age: random_number(18, 35),
       nationality: countries.sample,
       position: 'dfc',
@@ -91,7 +91,7 @@ end
 7.times do
   club_code.each do |code|
     Player.create(
-      name: Faker::Name.last_name,
+      name: Faker::Name.unique.last_name,
       age: random_number(18, 35),
       nationality: countries.sample,
       position: 'mid',
@@ -131,7 +131,7 @@ end
 6.times do
   club_code.each do |code|
     Player.create(
-      name: Faker::Name.last_name,
+      name: Faker::Name.unique.last_name,
       age: random_number(18, 35),
       nationality: countries.sample,
       position: 'att',
