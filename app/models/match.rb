@@ -5,11 +5,11 @@ class Match < ApplicationRecord
     fixture_list.each do |fixture|
       match_info, match_squad = Match::SquadCreator.new(fixture).squad_for_game
 
-      squads_with_performance = player_performance(match_squad)
+      squads_with_performance = Match::PlayerPerformance.new(match_squad).player_performance
       squads_with_tactics = Match::TacticAdjustment.new(squads_with_performance).player_performance_by_tactic
-      final_squad_totals = star_effect(squads_with_tactics)
+      final_squad_totals = Match::StarEffect.new(squads_with_tactics).star_effect
 
-      save_player_match_data(final_squad_totals, match_info)
+      Match::SavePlayerMatchData.new(final_squad_totals, match_info).save_player_match_data
       Match::PlayerFitness.new(final_squad_totals, match_info).player_fitness
 
       totals = Match::TeamTotals.new(final_squad_totals).team_totals
@@ -48,13 +48,13 @@ class Match < ApplicationRecord
 
   def run_end_of_match(home_list, away_list, minute_by_minute)
     detailed_match_summary = []
-    match_summary = match_summary(minute_by_minute)
+    match_summary = Match::MatchSummary.new(minute_by_minute).match_summary
     possession = possession(match_summary)
     man_of_the_match = man_of_the_match(home_list, away_list)
     detailed_match_summary << { **match_summary, **possession, **man_of_the_match }
 
-    save_detailed_match_summary(detailed_match_summary)
-    save_goal_and_assist_information(minute_by_minute)
+    Match::SaveDetailedMatchSummary.new(detailed_match_summary).save_detailed_match_summary
+    Match::SaveGoalAndAssistInformation.new(minute_by_minute).save_goal_and_assist_information
     Match::MatchCommentary.new(home_list, away_list, minute_by_minute).match_commentary
   end
 
@@ -78,63 +78,6 @@ class Match < ApplicationRecord
       }
     end
     fixture_list
-  end
-
-  def player_performance(match_squad)
-    players_array = []
-    match_squad.each do |player|
-      tactic = Tactic.find_by(abbreviation: player.club)&.tactics
-
-      hash = {
-        player_id: player.id,
-        id: @id,
-        club: player.club,
-        player_name: player.name,
-        total_skill: player.total_skill,
-        tactic:,
-        player_position: player.position,
-        player_position_detail: player.player_position_detail,
-        player_blend: player.blend,
-        star: player.star,
-        match_performance: player.match_performance(player)
-      }
-      players_array << hash
-    end
-    players_array
-  end
-
-  def star_effect(squads_with_tactics)
-    players = squads_with_tactics
-
-    players.each do |player|
-      if rand(100) > 50
-        player[:match_performance] += player[:star]
-      end
-
-      if player[:match_performance] < 20
-        player[:match_performance] = rand(20..30)
-      end
-    end
-
-    totals_with_star = players
-  end
-
-  def save_player_match_data(squads_with_performance, match_info)
-    id = match_info[:id]
-    competition = match_info[:competition]
-
-    squads_with_performance.each do |player|
-      Performance.create(
-        match_id: id,
-        player_id: player[:player_id],
-        club: player[:club],
-        name: Player.find_by(id: player[:player_id])&.name,
-        player_position: Player.find_by(id: player[:player_id])&.position,
-        player_position_detail: Player.find_by(id: player[:player_id])&.player_position_detail,
-        match_performance: player[:match_performance],
-        competition:
-      )
-    end
   end
 
   def add_blend(blend_totals, match_info)
@@ -309,37 +252,6 @@ class Match < ApplicationRecord
     { scorer: }
   end
 
-  def match_summary(minute_by_minute)
-    match_summary = {
-      id: minute_by_minute.first[:id],
-      week: minute_by_minute.first[:week],
-      competition: minute_by_minute.first[:competition],
-      club_home: minute_by_minute.first[:club_home],
-      tactic_home: minute_by_minute.first[:tactic_home],
-      dfc_blend_home: minute_by_minute.first[:dfc_blend_home],
-      mid_blend_home: minute_by_minute.first[:mid_blend_home],
-      att_blend_home: minute_by_minute.first[:att_blend_home],
-      dfc_aggression_home: minute_by_minute.first[:dfc_aggression_home],
-      mid_aggression_home: minute_by_minute.first[:mid_aggression_home],
-      att_aggression_home: minute_by_minute.first[:att_aggression_home],
-      club_away: minute_by_minute.first[:club_away],
-      tactic_away: minute_by_minute.first[:tactic_away],
-      dfc_blend_away: minute_by_minute.first[:dfc_blend_away],
-      mid_blend_away: minute_by_minute.first[:mid_blend_away],
-      att_blend_away: minute_by_minute.first[:att_blend_away],
-      dfc_aggression_away: minute_by_minute.first[:dfc_aggression_away],
-      mid_aggression_away: minute_by_minute.first[:mid_aggression_away],
-      att_aggression_away: minute_by_minute.first[:att_aggression_away],
-      chance_count_home: minute_by_minute.count { |chance| chance[:chance_outcome] == 'home' },
-      chance_count_away: minute_by_minute.count { |chance| chance[:chance_outcome] == 'away' },
-      chance_on_target_home: minute_by_minute.count { |chance| chance[:chance_on_target] == 'home' },
-      chance_on_target_away: minute_by_minute.count { |chance| chance[:chance_on_target] == 'away' },
-      goal_home: minute_by_minute.count { |chance| chance[:goal_scored] == 'home' },
-      goal_away: minute_by_minute.count { |chance| chance[:goal_scored] == 'away' }
-    }
-    match_summary
-  end
-
   def possession(match_summary)
     home_possession = (match_summary[:chance_count_home] / (match_summary[:chance_count_home] + match_summary[:chance_count_away]).to_f * 80).to_i
     away_possession = 100 - home_possession
@@ -352,62 +264,6 @@ class Match < ApplicationRecord
     away_man_of_the_match = away_list.max_by { |player| player[:match_performance] }[:player_id]
 
     { home_man_of_the_match:, away_man_of_the_match:}
-  end
-
-  def save_detailed_match_summary(detailed_match_summary)
-    match_data = detailed_match_summary[0]
-    match = Match.new(
-      match_id: match_data[:id].to_i,
-      week_number: match_data[:week].to_i,
-      competition: match_data[:competition],
-      home_team: match_data[:club_home],
-      tactic_home: match_data[:tactic_home],
-      dfc_blend_home: match_data[:dfc_blend_home],
-      mid_blend_home: match_data[:mid_blend_home],
-      att_blend_home: match_data[:att_blend_home],
-      dfc_aggression_home: match_data[:dfc_aggression_home],
-      mid_aggression_home: match_data[:mid_aggression_home],
-      att_aggression_home: match_data[:att_aggression_home],
-      away_team: match_data[:club_away],
-      tactic_away: match_data[:tactic_away],
-      dfc_blend_away: match_data[:dfc_blend_away],
-      mid_blend_away: match_data[:mid_blend_away],
-      att_blend_away: match_data[:att_blend_away],
-      dfc_aggression_away: match_data[:dfc_aggression_away],
-      mid_aggression_away: match_data[:mid_aggression_away],
-      att_aggression_away: match_data[:att_aggression_away],
-      home_possession: match_data[:home_possession].to_i,
-      away_possession: match_data[:away_possession].to_i,
-      home_chance: match_data[:chance_count_home].to_i,
-      away_chance: match_data[:chance_count_away].to_i,
-      home_chance_on_target: match_data[:chance_on_target_home].to_i,
-      away_chance_on_target: match_data[:chance_on_target_away].to_i,
-      home_goals: match_data[:goal_home].to_i,
-      away_goals: match_data[:goal_away].to_i,
-      home_man_of_the_match: match_data[:home_man_of_the_match],
-      away_man_of_the_match: match_data[:away_man_of_the_match],
-    )
-
-    if match.save
-      puts "Match data saved successfully."
-    else
-      puts "Failed to save match data."
-    end
-  end
-
-  def save_goal_and_assist_information(minute_by_minute)
-    minute_by_minute.each do |match_data|
-      if match_data[:goal_scored] != 'none'
-        match = Goal.create(
-          match_id: match_data[:id],
-          week_number: match_data[:week],
-          minute: match_data[:minute],
-          assist_id: match_data[:assist],
-          scorer_id: match_data[:scorer],
-          competition: match_data[:competition]
-        )
-      end
-    end
   end
 end
 
