@@ -24,7 +24,6 @@ class Match::TeamTotals
     away_att = 0
     away_att_blend = []
 
-
     squads.each do |player|
       case player[:player_position]
       when 'gkp', 'dfc'
