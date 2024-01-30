@@ -16,7 +16,7 @@ RSpec.describe Match, type: :model do
 
       stadium_size_answer = match.send(:stadium_size, totals_with_blend)
 
-      expect(stadium_size_answer).to be == 10_000
+      expect(stadium_size_answer).to be == 10000
     end
   end
 
@@ -62,6 +62,31 @@ RSpec.describe Match, type: :model do
           expect(adjusted_player[index][:match_performance]).to be == expected_result
         end
       end
+    end
+  end
+
+  describe 'star effect should amend the performance' do
+    it 'should return the performance with star effect if triggered of 70, if not 50' do
+      squads_with_tactics = [
+        {
+          match_performance: 50,
+          star: 20
+        }
+      ]
+      adjusted_player = Match::StarEffect.new(squads_with_tactics).star_effect
+
+      expect(adjusted_player[0][:match_performance]).to eq(50).or eq(70)
+    end
+    it 'should return the performance of 20 to 30' do
+      squads_with_tactics = [
+        {
+          match_performance: 10,
+          star: 0
+        }
+      ]
+      adjusted_player = Match::StarEffect.new(squads_with_tactics).star_effect
+
+      expect(adjusted_player[0][:match_performance]).to be_between(20, 30).inclusive
     end
   end
 end
