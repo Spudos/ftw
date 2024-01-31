@@ -5,7 +5,7 @@ class Match::StarEffect
     @squads_with_tactics = squads_with_tactics
   end
 
-  def star_effect
+  def run
     players = squads_with_tactics
 
     players.each do |player|

@@ -6,7 +6,7 @@ class Match::SavePlayerMatchData
     @match_info = match_info
   end
 
-  def save_player_match_data
+  def save
     id = match_info[:id]
     competition = match_info[:competition]
 

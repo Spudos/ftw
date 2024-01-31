@@ -5,7 +5,7 @@ class Match::MatchSummary
     @minute_by_minute = minute_by_minute
   end
 
-  def match_summary
+  def run
     match_summary = {
       id: minute_by_minute.first[:id],
       week: minute_by_minute.first[:week],

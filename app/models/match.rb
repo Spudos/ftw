@@ -3,17 +3,17 @@ class Match < ApplicationRecord
     fixture_list = fixtures_for_week(params)
 
     fixture_list.each do |fixture|
-      match_info, match_squad = Match::SquadCreator.new(fixture).squad_for_game
+      match_info, match_squad = Match::SquadCreator.new(fixture).run
 
-      squads_with_performance = Match::PlayerPerformance.new(match_squad).player_performance
-      squads_with_tactics = Match::TacticAdjustment.new(squads_with_performance).player_performance_by_tactic
-      final_squad_totals = Match::StarEffect.new(squads_with_tactics).star_effect
+      squads_with_performance = Match::PlayerPerformance.new(match_squad).run
+      squads_with_tactics = Match::TacticAdjustment.new(squads_with_performance).run
+      final_squad_totals = Match::StarEffect.new(squads_with_tactics).run
 
-      Match::SavePlayerMatchData.new(final_squad_totals, match_info).save_player_match_data
-      Match::PlayerFitness.new(final_squad_totals, match_info).player_fitness
+      Match::SavePlayerMatchData.new(final_squad_totals, match_info).save
+      Match::PlayerFitness.new(final_squad_totals, match_info).run
 
-      totals = Match::TeamTotals.new(final_squad_totals).team_totals
-      totals_with_blend, blend_totals = Match::Blends.new(totals).team_blend
+      totals = Match::TeamTotals.new(final_squad_totals).run
+      totals_with_blend, blend_totals = Match::Blends.new(totals).run
       match_info = add_blend(blend_totals, match_info)
       home_stadium = stadium_size(totals_with_blend)
       totals_with_stadium = teams_with_stadium_effect(totals_with_blend, home_stadium)
@@ -48,14 +48,14 @@ class Match < ApplicationRecord
 
   def run_end_of_match(home_list, away_list, minute_by_minute)
     detailed_match_summary = []
-    match_summary = Match::MatchSummary.new(minute_by_minute).match_summary
+    match_summary = Match::MatchSummary.new(minute_by_minute).run
     possession = possession(match_summary)
     man_of_the_match = man_of_the_match(home_list, away_list)
     detailed_match_summary << { **match_summary, **possession, **man_of_the_match }
 
-    Match::SaveDetailedMatchSummary.new(detailed_match_summary).save_detailed_match_summary
-    Match::SaveGoalAndAssistInformation.new(minute_by_minute).save_goal_and_assist_information
-    Match::MatchCommentary.new(home_list, away_list, minute_by_minute).match_commentary
+    Match::SaveDetailedMatchSummary.new(detailed_match_summary).save
+    Match::SaveGoalAndAssistInformation.new(minute_by_minute).save
+    Match::MatchCommentary.new(home_list, away_list, minute_by_minute).run
   end
 
   private

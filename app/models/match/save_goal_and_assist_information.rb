@@ -5,7 +5,7 @@ class Match::SaveGoalAndAssistInformation
     @minute_by_minute = minute_by_minute
   end
 
-  def save_goal_and_assist_information
+  def save
     minute_by_minute.each do |match_data|
       if match_data[:goal_scored] != 'none'
         match = Goal.create(
