@@ -48,7 +48,8 @@ RSpec.describe Match, type: :model do
   end
 
   describe 'star effect should amend the performance' do
-    it 'should return the performance with star effect if triggered of 70, if not 50' do
+    it 'should return the performance with star effect of 70' do
+      allow_any_instance_of(Kernel).to receive(:rand).with(100).and_return(51)
       squads_with_tactics = [
         {
           match_performance: 50,
@@ -57,7 +58,19 @@ RSpec.describe Match, type: :model do
       ]
       adjusted_player = Match::StarEffect.new(squads_with_tactics).star_effect
 
-      expect(adjusted_player[0][:match_performance]).to eq(50).or eq(70)
+      expect(adjusted_player[0][:match_performance]).to eq(70)
+    end
+    it 'should return the performance without star effect of 50' do
+      allow_any_instance_of(Kernel).to receive(:rand).with(100).and_return(49)
+      squads_with_tactics = [
+        {
+          match_performance: 50,
+          star: 20
+        }
+      ]
+      adjusted_player = Match::StarEffect.new(squads_with_tactics).star_effect
+
+      expect(adjusted_player[0][:match_performance]).to eq(50)
     end
     it 'should return the performance of 20 to 30' do
       squads_with_tactics = [
