@@ -7,14 +7,14 @@ class Match::TacticAdjustment
   # 5      Narrow      0   0    0   -10  +10
   # 6      Direct     +5  -5   +5    0    0
 
-  attr_reader :squad_with_performance
+  attr_reader :squad_performance
 
-  def initialize(squad_with_performance)
-    @squad_with_performance = squad_with_performance
+  def initialize(squad_performance)
+    @squad_performance = squad_performance
   end
 
   def call
-    players = squad_with_performance
+    players = squad_performance
 
     players.each do |player|
       performance_by_position_detail(player)

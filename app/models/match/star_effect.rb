@@ -1,12 +1,12 @@
 class Match::StarEffect
-  attr_reader :squads_with_tactics
+  attr_reader :squads_tactics
 
-  def initialize(squads_with_tactics)
-    @squads_with_tactics = squads_with_tactics
+  def initialize(squads_tactics)
+    @squads_tactics = squads_tactics
   end
 
   def call
-    players = squads_with_tactics
+    players = squads_tactics
 
     players.each do |player|
       if rand(100) > 50

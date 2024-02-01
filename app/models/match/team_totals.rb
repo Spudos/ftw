@@ -1,12 +1,12 @@
 class Match::TeamTotals
-  attr_reader :final_squad_totals
+  attr_reader :final_squad
 
-  def initialize(final_squad_totals)
-    @final_squad_totals = final_squad_totals
+  def initialize(final_squad)
+    @final_squad = final_squad
   end
 
   def call
-    squads = final_squad_totals
+    squads = final_squad
 
     home_team = squads.first[:club]
     away_team = squads.last[:club]

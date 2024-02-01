@@ -1,13 +1,13 @@
 class Match::PlayerFitness
-  attr_reader :squads_with_performance, :match_info
+  attr_reader :squads_performance, :match_info
 
-  def initialize(squads_with_performance, match_info)
-    @squads_with_performance = squads_with_performance
+  def initialize(squads_performance, match_info)
+    @squads_performance = squads_performance
     @match_info = match_info
   end
 
   def call
-    squads_with_performance.each do |player|
+    squads_performance.each do |player|
       player_record = Player.find_by(id: player[:player_id])
       player_fitness = player_record&.fitness
       player_fitness -= rand(3..8)

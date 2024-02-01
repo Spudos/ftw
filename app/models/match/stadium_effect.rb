@@ -1,9 +1,9 @@
 class Match::StadiumEffect
-  attr_reader :home_stadium_size, :totals_with_blend
+  attr_reader :home_stadium_size, :totals_blend
 
-  def initialize(totals_with_blend, home_stadium_size)
+  def initialize(totals_blend, home_stadium_size)
     @home_stadium_size = home_stadium_size
-    @totals_with_blend = totals_with_blend
+    @totals_blend = totals_blend
   end
 
   def call
@@ -25,10 +25,10 @@ class Match::StadiumEffect
       stadium_effect = 10
     end
 
-    totals_with_blend.first[:defense] += stadium_effect
-    totals_with_blend.first[:midfield] += stadium_effect
-    totals_with_blend.first[:attack] += stadium_effect
+    totals_blend.first[:defense] += stadium_effect
+    totals_blend.first[:midfield] += stadium_effect
+    totals_blend.first[:attack] += stadium_effect
 
-    totals_with_blend
+    totals_blend
   end
 end

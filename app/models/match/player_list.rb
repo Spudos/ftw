@@ -1,16 +1,16 @@
 class Match::PlayerList
-  attr_reader :final_squad_totals
+  attr_reader :final_squad
 
-  def initialize(final_squad_totals)
-    @final_squad_totals = final_squad_totals
+  def initialize(final_squad)
+    @final_squad = final_squad
   end
 
   def call
-    home_team = final_squad_totals.first[:club]
+    home_team = final_squad.first[:club]
     home_list = []
     away_list = []
 
-    final_squad_totals.each do |player|
+    final_squad.each do |player|
       if player[:club] == home_team
         home_list << { player_id: player[:player_id], player_position: player[:player_position],match_performance: player[:match_performance] }
       else

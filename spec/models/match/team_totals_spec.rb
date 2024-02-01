@@ -4,7 +4,7 @@ require 'pry'
 RSpec.describe Match, type: :model do
   describe 'team totals' do
     it 'should return the total performance for each area of the team' do
-      final_squad_totals = [
+      final_squad = [
         {
           match_performance: 50,
           player_position: 'gkp',
@@ -66,7 +66,7 @@ RSpec.describe Match, type: :model do
           player_blend: 4
         }
       ]
-      totals = Match::TeamTotals.new(final_squad_totals).call
+      totals = Match::TeamTotals.new(final_squad).call
 
       expect(totals[0][:team]).to eq('001')
       expect(totals[0][:defense]).to eq(100)

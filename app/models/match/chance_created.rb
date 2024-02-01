@@ -1,14 +1,14 @@
 class Match::ChanceCreated
-  attr_reader :final_team_totals, :i
+  attr_reader :final_team, :i
 
-  def initialize(final_team_totals, i)
-    @final_team_totals = final_team_totals
+  def initialize(final_team, i)
+    @final_team= final_team
     @i = i
   end
 
   def call
     random_number = rand(1..100)
-    chance = final_team_totals.first[:midfield] - final_team_totals.last[:midfield]
+    chance = final_team.first[:midfield] - final_team.last[:midfield]
     chance_outcome = ''
 
     if chance >= 0 && rand(0..100) < 16

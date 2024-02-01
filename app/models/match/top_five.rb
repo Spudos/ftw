@@ -7,12 +7,12 @@ class Match::TopFive
   end
 
   def call
-    home_top_5 = home_list.reject { |player| player[:player_position] == "gkp" }
+    home_top = home_list.reject { |player| player[:player_position] == "gkp" }
                          .sort_by { |player| -player[:match_performance] }
                          .first(5)
-    away_top_5 = away_list.reject { |player| player[:player_position] == "gkp" }
+    away_top = away_list.reject { |player| player[:player_position] == "gkp" }
                          .sort_by { |player| -player[:match_performance] }
                          .first(5)
-    return home_top_5, away_top_5
+    return home_top, away_top
   end
 end

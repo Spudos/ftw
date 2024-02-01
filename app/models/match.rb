@@ -3,9 +3,9 @@ class Match < ApplicationRecord
     fixture_list = Match::CreateFixtures.new(params).call
 
     fixture_list.each do |fixture|
-      final_squad_totals, match_info = squad(fixture)
-      final_team_totals, match_info = teams(final_squad_totals, match_info)
-      minute_by_minute, home_list, away_list = match(final_team_totals, final_squad_totals, match_info)
+      final_squad, match_info = squad(fixture)
+      final_team, match_info = teams(final_squad, match_info)
+      minute_by_minute, home_list, away_list = match(final_team, final_squad, match_info)
       detailed_match_summary = match_end(home_list, away_list, minute_by_minute)
       save_match(detailed_match_summary, home_list, away_list, minute_by_minute)
     end
@@ -15,35 +15,35 @@ class Match < ApplicationRecord
 
   def squad(fixture)
     match_info, match_squad = Match::SquadCreator.new(fixture).call
-    squads_with_performance = Match::PlayerPerformance.new(match_squad).call
-    squads_with_tactics = Match::TacticAdjustment.new(squads_with_performance).call
-    final_squad_totals = Match::StarEffect.new(squads_with_tactics).call
-    Match::SavePlayerMatchData.new(final_squad_totals, match_info).call
-    Match::PlayerFitness.new(final_squad_totals, match_info).call
+    squads_performance = Match::PlayerPerformance.new(match_squad).call
+    squad_tactics = Match::TacticAdjustment.new(squads_performance).call
+    final_squad = Match::StarEffect.new(squad_tactics).call
+    Match::SavePlayerMatchData.new(final_squad, match_info).call
+    Match::PlayerFitness.new(final_squad, match_info).call
 
-    return final_squad_totals, match_info
+    return final_squad, match_info
   end
 
-  def teams(final_squad_totals, match_info)
-    totals = Match::TeamTotals.new(final_squad_totals).call
-    totals_with_blend, blend_totals = Match::BlendAdjustment.new(totals).call
+  def teams(final_squad, match_info)
+    totals = Match::TeamTotals.new(final_squad).call
+    totals_blend, blend_totals = Match::BlendAdjustment.new(totals).call
     match_info = Match::BlendAdd.new(blend_totals, match_info).call
-    home_stadium = Match::StadiumSize.new(totals_with_blend).call
-    totals_with_stadium = Match::StadiumEffect.new(totals_with_blend, home_stadium).call
-    final_team_totals = Match::AggressionEffect.new(totals_with_stadium).call
+    home_stadium = Match::StadiumSize.new(totals_blend).call
+    totals_with_stadium = Match::StadiumEffect.new(totals_blend, home_stadium).call
+    final_team = Match::AggressionEffect.new(totals_with_stadium).call
 
-    return final_team_totals, match_info
+    return final_team, match_info
   end
 
-  def match(final_team_totals, final_squad_totals, match_info)
-    home_top_five, away_top_five, home_list, away_list = Match::MatchLists.new(final_squad_totals).call
+  def match(final_team, final_squad, match_info)
+    home_top, away_top, home_list, away_list = Match::MatchLists.new(final_squad).call
 
     minute_by_minute = []
     rand(90..98).times do |i|
-      chance_result = Match::ChanceCreated.new(final_team_totals, i).call
-      chance_on_target_result = Match::ChanceOnTarget.new(chance_result, final_team_totals).call
-      goal_scored = Match::GoalScored.new(chance_on_target_result, final_team_totals).call
-      assist, scorer = Match::Names.new(goal_scored, home_top_five, away_top_five).call
+      chance_result = Match::ChanceCreated.new(final_team, i).call
+      chance_on_target_result = Match::ChanceOnTarget.new(chance_result, final_team).call
+      goal_scored = Match::GoalScored.new(chance_on_target_result, final_team).call
+      assist, scorer = Match::Names.new(goal_scored, home_top, away_top).call
 
       minute_by_minute << { **match_info, **chance_result, **chance_on_target_result, **goal_scored, **assist, **scorer }
     end

@@ -1,8 +1,8 @@
 class Match::SavePlayerMatchData
-  attr_reader :squads_with_performance, :match_info
+  attr_reader :squads_performance, :match_info
 
-  def initialize(squads_with_performance, match_info)
-    @squads_with_performance = squads_with_performance
+  def initialize(squads_performance, match_info)
+    @squads_performance = squads_performance
     @match_info = match_info
   end
 
@@ -10,7 +10,7 @@ class Match::SavePlayerMatchData
     id = match_info[:id]
     competition = match_info[:competition]
 
-    squads_with_performance.each do |player|
+    squads_performance.each do |player|
       Performance.create(
         match_id: id,
         player_id: player[:player_id],
