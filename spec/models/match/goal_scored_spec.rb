@@ -7,22 +7,22 @@ RSpec.describe Match::GoalScored, type: :model do
     let(:team2) { { team: 002, defense: 250, midfield: 200, attack: 150 } }
     let(:final_team) { [team1, team2] }
 
-    chance_result = { minute: 1, chance_outcome: 'home' }
+    chance_on_target_result = { minute: 1, chance_on_target: 'home' }
 
     it 'return that the goal was scored' do
       allow_any_instance_of(Kernel).to receive(:rand).with(0..100).and_return(10)
 
-      chance = Match::ChanceOnTarget.new(chance_result, final_team).call
+      chance = Match::GoalScored.new(chance_on_target_result, final_team).call
 
-      expect(chance[:chance_on_target]).to eq('home')
+      expect(chance[:goal_scored]).to eq('home')
     end
 
-    it 'return that the goal was not on scored' do
+    it 'return that the goal was not scored' do
       allow_any_instance_of(Kernel).to receive(:rand).with(0..100).and_return(90)
 
-      chance = Match::ChanceOnTarget.new(chance_result, final_team).call
+      chance = Match::GoalScored.new(chance_on_target_result, final_team).call
 
-      expect(chance[:chance_on_target]).to eq('none')
+      expect(chance[:goal_scored]).to eq('none')
     end
   end
 
@@ -31,22 +31,22 @@ RSpec.describe Match::GoalScored, type: :model do
     let(:team2) { { team: 002, defense: 250, midfield: 200, attack: 150 } }
     let(:final_team) { [team1, team2] }
 
-    chance_result = { minute: 1, chance_outcome: 'away' }
+    chance_on_target_result = { minute: 1, chance_on_target: 'away' }
 
-    it 'return that the goal was on scored' do
+    it 'return that the goal was scored' do
       allow_any_instance_of(Kernel).to receive(:rand).with(0..100).and_return(10)
 
-      chance = Match::ChanceOnTarget.new(chance_result, final_team).call
+      chance = Match::GoalScored.new(chance_on_target_result, final_team).call
 
-      expect(chance[:chance_on_target]).to eq('away')
+      expect(chance[:goal_scored]).to eq('away')
     end
 
     it 'return that the goal was not on scored' do
       allow_any_instance_of(Kernel).to receive(:rand).with(0..100).and_return(90)
 
-      chance = Match::ChanceOnTarget.new(chance_result, final_team).call
+      chance = Match::GoalScored.new(chance_on_target_result, final_team).call
 
-      expect(chance[:chance_on_target]).to eq('none')
+      expect(chance[:goal_scored]).to eq('none')
     end
   end
 end
