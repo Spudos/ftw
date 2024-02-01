@@ -2,7 +2,7 @@ class Match::ChanceCreated
   attr_reader :final_team, :i
 
   def initialize(final_team, i)
-    @final_team= final_team
+    @final_team = final_team
     @i = i
   end
 
