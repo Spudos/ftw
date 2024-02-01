@@ -64,6 +64,6 @@ class Match < ApplicationRecord
   def save_match(detailed_match_summary, home_list, away_list, minute_by_minute)
     Match::SaveDetailedMatchSummary.new(detailed_match_summary).save
     Match::SaveGoalAndAssistInformation.new(minute_by_minute).save
-    Match::MatchCommentary.new(home_list, away_list, minute_by_minute).call
+    Match::SaveMatchCommentary.new(home_list, away_list, minute_by_minute).call
   end
 end
