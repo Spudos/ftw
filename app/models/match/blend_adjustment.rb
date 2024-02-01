@@ -1,11 +1,11 @@
-class Match::Blends
+class Match::BlendAdjustment
   attr_reader :totals
 
   def initialize(totals)
     @totals = totals
   end
 
-  def run
+  def call
     totals_with_blend = []
     blend_totals = []
 

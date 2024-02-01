@@ -25,7 +25,7 @@ RSpec.describe Match, type: :model do
         }
       ]
 
-      totals_with_blend, blend_totals = Match::Blends.new(totals).run
+      totals_with_blend, blend_totals = Match::BlendAdjustment.new(totals).call
 
       expect(totals_with_blend[0][:defense]).to eq(150)
       expect(totals_with_blend[0][:midfield]).to eq(112)

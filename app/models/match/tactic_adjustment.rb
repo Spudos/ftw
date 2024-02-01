@@ -13,7 +13,7 @@ class Match::TacticAdjustment
     @squad_with_performance = squad_with_performance
   end
 
-  def run
+  def call
     players = squad_with_performance
 
     players.each do |player|

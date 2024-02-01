@@ -5,7 +5,7 @@ class Match::TeamTotals
     @final_squad_totals = final_squad_totals
   end
 
-  def run
+  def call
     squads = final_squad_totals
 
     home_team = squads.first[:club]

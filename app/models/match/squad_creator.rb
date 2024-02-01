@@ -5,7 +5,7 @@
       @fixture = fixture
     end
 
-    def run
+    def call
       [match_info, match_squad]
     end
 

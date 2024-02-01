@@ -7,7 +7,7 @@ class Match::MatchCommentary
     @minute_by_minute = minute_by_minute
   end
 
-  def run
+  def call
     home_team = Club.find_by(abbreviation: minute_by_minute.first[:club_home])&.name
     away_team = Club.find_by(abbreviation: minute_by_minute.first[:club_away])&.name
 

@@ -66,7 +66,7 @@ RSpec.describe Match, type: :model do
           player_blend: 4
         }
       ]
-      totals = Match::TeamTotals.new(final_squad_totals).run
+      totals = Match::TeamTotals.new(final_squad_totals).call
 
       expect(totals[0][:team]).to eq('001')
       expect(totals[0][:defense]).to eq(100)

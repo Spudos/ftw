@@ -5,7 +5,7 @@ class Match::PlayerPerformance
     @match_squad = match_squad
   end
 
-  def run
+  def call
     players_array = []
     match_squad.each do |player|
       tactic = Tactic.find_by(abbreviation: player.club)&.tactics

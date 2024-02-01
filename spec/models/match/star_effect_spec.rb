@@ -11,7 +11,7 @@ RSpec.describe Match, type: :model do
           star: 20
         }
       ]
-      adjusted_player = Match::StarEffect.new(squads_with_tactics).run
+      adjusted_player = Match::StarEffect.new(squads_with_tactics).call
 
       expect(adjusted_player[0][:match_performance]).to eq(70)
     end
@@ -23,7 +23,7 @@ RSpec.describe Match, type: :model do
           star: 20
         }
       ]
-      adjusted_player = Match::StarEffect.new(squads_with_tactics).run
+      adjusted_player = Match::StarEffect.new(squads_with_tactics).call
 
       expect(adjusted_player[0][:match_performance]).to eq(50)
     end
@@ -34,7 +34,7 @@ RSpec.describe Match, type: :model do
           star: 0
         }
       ]
-      adjusted_player = Match::StarEffect.new(squads_with_tactics).run
+      adjusted_player = Match::StarEffect.new(squads_with_tactics).call
 
       expect(adjusted_player[0][:match_performance]).to be_between(20, 30).inclusive
     end

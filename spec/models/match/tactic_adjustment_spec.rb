@@ -38,7 +38,7 @@ RSpec.describe Match, type: :model do
       it "should return correct adjusted values for tactic #{test_case[:tactic]}" do
         @squad_with_performance.each { |player| player[:tactic] = test_case[:tactic] }
 
-        adjusted_player = Match::TacticAdjustment.new(@squad_with_performance).run
+        adjusted_player = Match::TacticAdjustment.new(@squad_with_performance).call
 
         test_case[:expected_results].each_with_index do |expected_result, index|
           expect(adjusted_player[index][:match_performance]).to be == expected_result

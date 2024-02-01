@@ -6,7 +6,7 @@ class Match::PlayerFitness
     @match_info = match_info
   end
 
-  def run
+  def call
     squads_with_performance.each do |player|
       player_record = Player.find_by(id: player[:player_id])
       player_fitness = player_record&.fitness
