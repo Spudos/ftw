@@ -5,7 +5,7 @@ class Match::SaveDetailedMatchSummary
     @detailed_match_summary = detailed_match_summary
   end
 
-  def save
+  def call
     match_data = detailed_match_summary[0]
     match = Match.new(
       match_id: match_data[:id].to_i,

@@ -18,7 +18,7 @@ class Match < ApplicationRecord
     squads_with_performance = Match::PlayerPerformance.new(match_squad).call
     squads_with_tactics = Match::TacticAdjustment.new(squads_with_performance).call
     final_squad_totals = Match::StarEffect.new(squads_with_tactics).call
-    Match::SavePlayerMatchData.new(final_squad_totals, match_info).save
+    Match::SavePlayerMatchData.new(final_squad_totals, match_info).call
     Match::PlayerFitness.new(final_squad_totals, match_info).call
 
     return final_squad_totals, match_info
@@ -62,8 +62,8 @@ class Match < ApplicationRecord
   end
 
   def save_match(detailed_match_summary, home_list, away_list, minute_by_minute)
-    Match::SaveDetailedMatchSummary.new(detailed_match_summary).save
-    Match::SaveGoalAndAssistInformation.new(minute_by_minute).save
+    Match::SaveDetailedMatchSummary.new(detailed_match_summary).call
+    Match::SaveGoalAndAssistInformation.new(minute_by_minute).call
     Match::SaveMatchCommentary.new(home_list, away_list, minute_by_minute).call
   end
 end
