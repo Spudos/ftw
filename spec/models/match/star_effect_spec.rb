@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'pry'
 
-RSpec.describe Match, type: :model do
+RSpec.describe Match::StarEffect, type: :model do
   describe 'star effect should amend the performance' do
     it 'should return the performance with star effect of 70' do
       allow_any_instance_of(Kernel).to receive(:rand).with(100).and_return(51)

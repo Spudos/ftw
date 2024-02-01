@@ -29,8 +29,8 @@ class Match < ApplicationRecord
     totals_blend, blend_totals = Match::BlendAdjustment.new(totals).call
     match_info = Match::BlendAdd.new(blend_totals, match_info).call
     home_stadium = Match::StadiumSize.new(totals_blend).call
-    totals_with_stadium = Match::StadiumEffect.new(totals_blend, home_stadium).call
-    final_team = Match::AggressionEffect.new(totals_with_stadium).call
+    totals_stadium = Match::StadiumEffect.new(totals_blend, home_stadium).call
+    final_team = Match::AggressionEffect.new(totals_stadium).call
 
     return final_team, match_info
   end

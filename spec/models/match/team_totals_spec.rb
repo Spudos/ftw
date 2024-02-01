@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'pry'
 
-RSpec.describe Match, type: :model do
+RSpec.describe Match::TeamTotals, type: :model do
   describe 'team totals' do
     it 'should return the total performance for each area of the team' do
       final_squad = [

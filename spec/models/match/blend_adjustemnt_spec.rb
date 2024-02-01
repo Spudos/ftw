@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'pry'
 
-RSpec.describe Match, type: :model do
+RSpec.describe Match::BlendAdjustment, type: :model do
   describe 'totals with blend' do
     it 'should return the total performance for each area of the team adjusted by that areas blend value' do
       totals = [

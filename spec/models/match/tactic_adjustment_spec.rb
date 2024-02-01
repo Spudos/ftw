@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'pry'
 
-RSpec.describe Match, type: :model do
+RSpec.describe Match::TacticAdjustment, type: :model do
   describe 'squad with tactics calculation' do
     before do
       @squad_with_performance = [
