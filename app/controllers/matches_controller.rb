@@ -8,6 +8,11 @@ class MatchesController < ApplicationController
   end
 
   def match_multiple
+    if params[:selected_week].nil? || params[:selected_week].empty?
+      flash[:notice] = "Please select a week to run the matches"
+      return
+    end
+
     match = Match.new
     match.run_matches(params)
 
