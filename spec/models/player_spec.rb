@@ -58,6 +58,31 @@ RSpec.describe Player, type: :model do
         # 6 core skills * 5 from player model = 30.  fitness 90 to give 27, consistency +-10 so 17 to 37
         expect(match_performance).to be_between(17, 37).inclusive
       end
+
+      it 'should return the correct match performance for a dfc' do
+        player = build(:player, position: 'dfc')
+
+        match_performance = player.send(:match_performance, player)
+        # 6 core skills * 5 from player model = 30.  fitness 90 to give 27, consistency +-10 so 17 to 37
+        expect(match_performance).to be_between(17, 37).inclusive
+      end
+
+      it 'should return the correct match performance for a mid' do
+        player = build(:player, position: 'mid')
+
+        match_performance = player.send(:match_performance, player)
+        # 6 core skills * 5 from player model = 30.  fitness 90 to give 27, consistency +-10 so 17 to 37
+        expect(match_performance).to be_between(17, 37).inclusive
+      end
+
+      it 'should return the correct match performance for a att' do
+        player = build(:player, position: 'att')
+
+        match_performance = player.send(:match_performance, player)
+        # 6 core skills * 5 from player model = 30.  fitness 90 to give 27, consistency +-10 so 17 to 37
+        expect(match_performance).to be_between(17, 37).inclusive
+      end
+
     end
   end
 end
