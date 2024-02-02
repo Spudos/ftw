@@ -12,7 +12,7 @@ class Match::Names
       assist = Match::Assisted.new(home_top, away_top, goal_scored).call
       scorer = Match::Scored.new(home_top, away_top, assist, goal_scored).call
     else
-      assist = { assist_id: 'none' }
+      assist = { assist: 'none' }
       scorer = { scorer: 'none' }
     end
 

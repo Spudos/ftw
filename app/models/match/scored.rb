@@ -10,16 +10,16 @@ class Match::Scored
 
   def call
     if goal_scored[:goal_scored] == 'home'
-      scorer = home_top.reject { |player| player[:player_id] == assist }.sample[:player_id]
+      scorer = home_top.reject { |player| player[:player_id] == assist[:assist] }.sample[:player_id]
     else
-      scorer = away_top.reject { |player| player[:player_id] == assist }.sample[:player_id]
+      scorer = away_top.reject { |player| player[:player_id] == assist[:assist] }.sample[:player_id]
     end
 
     while scorer == assist
       if goal_scored[:goal_scored] == 'home'
-        scorer = home_top.reject { |player| player[:player_id] == assist }.sample[:player_id]
+        scorer = home_top.reject { |player| player[:player_id] == assist[:assist] }.sample[:player_id]
       else
-        scorer = away_top.reject { |player| player[:player_id] == assist }.sample[:player_id]
+        scorer = away_top.reject { |player| player[:player_id] == assist[:assist] }.sample[:player_id]
       end
     end
 
