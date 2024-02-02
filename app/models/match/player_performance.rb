@@ -25,6 +25,7 @@ class Match::PlayerPerformance
       }
       players_array << hash
     end
+
     players_array
   end
 end

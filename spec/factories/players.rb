@@ -1,5 +1,8 @@
 FactoryBot.define do
   factory :player do
+    id { 401 }
+    club { '001' }
+    name { 'Woolley' }
     position { 'gkp' }
     passing { 5 }
     control { 5 }
@@ -14,5 +17,7 @@ FactoryBot.define do
     creativity { 5 }
     fitness { 90 }
     consistency { 10 }
+    player_position_detail { 'p' }
+    star { 5 }
   end
 end
