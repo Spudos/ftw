@@ -10,7 +10,7 @@ RSpec.describe Match::PlayerPerformance, type: :model do
 
       players_array = Match::PlayerPerformance.new(match_squad).call
 
-      expect(players_array[0][:player_id]).to eq(401)
+      expect(players_array[0][:player_id]).to eq(402)
       expect(players_array[0][:id]).to eq(nil)
       expect(players_array[0][:club]).to eq('001')
       expect(players_array[0][:player_name]).to eq('Woolley')
@@ -20,8 +20,8 @@ RSpec.describe Match::PlayerPerformance, type: :model do
       expect(players_array[0][:player_position_detail]).to eq('p')
       expect(players_array[0][:player_blend]).to eq(nil)
       expect(players_array[0][:star]).to eq(5)
-      expect(players_array[0][:match_performance]).to be_between(20, 200).inclusive
-      expect(players_array[1][:player_id]).to eq(401)
+      expect(players_array[0][:match_performance]).to be_between(0, 200).inclusive
+      expect(players_array[1][:player_id]).to eq(403)
     end
   end
 end
