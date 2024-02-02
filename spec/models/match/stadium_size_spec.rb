@@ -18,5 +18,4 @@ RSpec.describe Match::StadiumSize, type: :model do
       expect(stadium_size_answer).to be == 10000
     end
   end
-
 end
