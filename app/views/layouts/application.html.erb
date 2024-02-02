@@ -15,8 +15,21 @@
   <body>
     <div class='main'>
       <%= render 'layouts/nav' %>
-      <p style="color: green"><%= notice %></p>
-      <p style="color: red"><%= alert %></p>
+
+      <% if notice.present? %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= notice %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+
+      <% if alert.present? %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= alert %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+      
       <%= yield %>
     </div>
     <footer class="fixed-bottom">
