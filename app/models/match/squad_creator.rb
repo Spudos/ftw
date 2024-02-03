@@ -21,20 +21,23 @@ class Match::SquadCreator
   private
 
   def tactics_check
-    if Tactic.find_by(abbreviation: fixture[:club_home]).nil?
+    home_tactic = Tactic.find_by(abbreviation: fixture[:club_home])
+    away_tactic = Tactic.find_by(abbreviation: fixture[:club_away])
+
+    if home_tactic.nil?
       Tactic.new(abbreviation: fixture[:club_home], tactics: 1, dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
     end
 
-    if Tactic.find_by(abbreviation: fixture[:club_away]).nil?
+    if away_tactic.nil?
       Tactic.new(abbreviation: fixture[:club_away], tactics: 1, dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
     end
 
-    if Tactic.find_by(abbreviation: fixture[:club_home])&.dfc_aggression.nil? || Tactic.find_by(abbreviation: fixture[:club_home])&.mid_aggression.nil? || Tactic.find_by(abbreviation: fixture[:club_home])&.att_aggression.nil?
-      Tactic.find_by(abbreviation: fixture[:club_home]).update(dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
+    if home_tactic&.dfc_aggression.nil? || home_tactic&.mid_aggression.nil? || home_tactic&.att_aggression.nil?
+      home_tactic.update(dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
     end
 
-    if Tactic.find_by(abbreviation: fixture[:club_away])&.dfc_aggression.nil? || Tactic.find_by(abbreviation: fixture[:club_away])&.mid_aggression.nil? || Tactic.find_by(abbreviation: fixture[:club_away])&.att_aggression.nil?
-      Tactic.find_by(abbreviation: fixture[:club_away]).update(dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
+    if away_tactic&.dfc_aggression.nil? || away_tactic&.mid_aggression.nil? || away_tactic&.att_aggression.nil?
+      away_tactic.update(dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
     end
   end
 
