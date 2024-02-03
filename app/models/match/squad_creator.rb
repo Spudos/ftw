@@ -6,7 +6,12 @@ class Match::SquadCreator
   end
 
   def call
-    if Selection.where(club: fixture[:club_home]).count == 11 && Selection.where(club: fixture[:club_away]).count == 11
+    home_selection = Selection.where(club: fixture[:club_home]).count
+    away_selection = Selection.where(club: fixture[:club_away]).count
+
+    if home_selection != 11 || away_selection != 11
+      raise StandardError, "Team #{fixture[:club_home]} have selected #{home_selection} players, Team #{fixture[:club_away]} have selected #{away_selection} players.  Both teams must have 11 players selected.  This game and all subsequent games have not been run"
+    else
       [match_info, match_squad]
     end
   end

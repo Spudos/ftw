@@ -1,4 +1,6 @@
 class MatchesController < ApplicationController
+  rescue_from StandardError, with: :handle_error
+
   def index; end
 
   def show
@@ -16,5 +18,9 @@ class MatchesController < ApplicationController
     match.run_matches(params)
 
     redirect_to fixtures_path
+  end
+
+  def handle_error(exception)
+    redirect_to fixtures_path, alert: exception.message
   end
 end
