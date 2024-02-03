@@ -24,6 +24,11 @@ class Match::CreateFixtures
         }
       end
     end
+
+    if fixture_list.empty?
+      raise StandardError, "No outstanding #{params[:competition]} fixtures found for week #{params[:selected_week]}"
+    end
+
     fixture_list
   end
 end
