@@ -13,10 +13,9 @@ class Turn < ApplicationRecord
   private
 
   def stadium_upgrade(week)
-    turns = Turn.where("var1 LIKE ?", 'stand%').where(week: week)
     hash = {}
 
-    turns.each do |turn|
+    Turn.where("var1 LIKE ?", 'stand%').where(week: week).each do |turn|
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club + turn.id.to_s,
         week: turn.week,
@@ -26,7 +25,7 @@ class Turn < ApplicationRecord
         var3: turn.var3,
         Actioned: turn.date_completed
       }
-      end
+    end
 
     hash.each do |key, value|
       if value[:var2] == nil
@@ -43,14 +42,8 @@ class Turn < ApplicationRecord
   end
 
   def add_to_stadium_upgrades(action_id, week, club, stand, seats)
-    existing_upgrade = Upgrade.find_by(action_id:)
-    if existing_upgrade.nil?
-      upgrade = Upgrade.create(action_id:, week:, club:, var1: stand, var2: seats.to_i, var3: 0)
-      if upgrade.save
-        puts "Upgrade saved successfully!"
-      else
-        puts "Error saving upgrade: #{upgrade.errors.full_messages.join(', ')}"
-      end
+    if Upgrade.find_by(action_id:).nil?
+      Upgrade.create(action_id:, week:, club:, var1: stand, var2: seats.to_i, var3: 0)
     end
   end
 
@@ -68,7 +61,7 @@ class Turn < ApplicationRecord
         var3: turn.var3,
         Actioned: turn.date_completed
       }
-  end 
+    end
 
     hash.each do |key, value|
       bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], value[:var2], value[:var3])
@@ -79,18 +72,15 @@ class Turn < ApplicationRecord
   end
 
   def add_to_property_upgrades(action_id, week, club, prop)
-    existing_upgrade = Upgrade.find_by(action_id:)
-
-    if existing_upgrade.nil?
-    Upgrade.create(action_id:, week:, club:, var1: prop, var3: 0)
+    if Upgrade.find_by(action_id:).nil?
+      Upgrade.create(action_id:, week:, club:, var1: prop, var3: 0)
     end
   end
 
   def coach_upgrade(week)
-    turns = Turn.where("var1 LIKE ?", 'coach%').where(week: week)
     hash = {}
 
-    turns.each do |turn|
+    Turn.where("var1 LIKE ?", 'coach%').where(week: week).each do |turn|
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club + turn.id.to_s,
         week: turn.week,
@@ -111,18 +101,15 @@ class Turn < ApplicationRecord
   end
 
   def add_to_coach_upgrades(action_id, week, club, coach)
-    existing_upgrade = Upgrade.find_by(action_id:)
-
-    if existing_upgrade.nil?
-    Upgrade.create(action_id:, week:, club:, var1: coach, var3: 0)
+    if Upgrade.find_by(action_id:).nil?
+      Upgrade.create(action_id:, week:, club:, var1: coach, var3: 0)
     end
   end
 
   def player_upgrade(week)
-    turns = Turn.where("var1 LIKE ?", 'train%').where(week: week)
     hash = {}
 
-    turns.each do |turn|
+    Turn.where("var1 LIKE ?", 'train%').where(week: week).each do |turn|
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club + turn.id.to_s,
         week: turn.week,
@@ -142,9 +129,7 @@ class Turn < ApplicationRecord
   end
 
   def train_player(action_id, week, club, player, skill)
-    existing_training = Message.find_by(action_id: action_id)
-
-    if existing_training.nil?
+    if Message.find_by(action_id: action_id).nil?
       club_staff = Club.find_by(abbreviation: club)
       player_data = Player.find_by(club: club, name: player)
       coach = club_staff.send("staff_#{player_data.position}")
@@ -164,10 +149,9 @@ class Turn < ApplicationRecord
   end
 
   def fitness_upgrade(week)
-    turns = Turn.where("var1 LIKE ?", 'fitness%').where(week: week)
     hash = {}
 
-    turns.each do |turn|
+    Turn.where("var1 LIKE ?", 'fitness%').where(week: week).each do |turn|
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club + turn.id.to_s,
         week: turn.week,
@@ -186,9 +170,7 @@ class Turn < ApplicationRecord
   end
 
   def player_fitness(action_id, week, club, player)
-    existing_training = Message.find_by(action_id: action_id)
-
-    if existing_training.nil?
+    if Message.find_by(action_id: action_id).nil?
       player_data = Player.find_by(club: club, name: player)
       coach = Club.find_by(abbreviation: club)&.staff_fitness
 
@@ -202,9 +184,7 @@ class Turn < ApplicationRecord
   end
 
   def bank_adjustment(action_id, week, club, reason, dept, amount)
-    existing_message = Message.find_by(action_id: action_id)
-
-    if existing_message.nil?
+    if Message.find_by(action_id: action_id).nil?
       club_full = Club.find_by(abbreviation: club)
 
       new_bal = club_full.bank_bal.to_i - amount.to_i
@@ -222,9 +202,7 @@ class Turn < ApplicationRecord
   end
 
   def increment_upgrades
-    to_complete = Upgrade.all
-
-    to_complete.each do |item|
+    Upgrade.all.each do |item|
       item.var3 += 1
       item.save
 
@@ -246,13 +224,13 @@ class Turn < ApplicationRecord
     elsif item.var1 == "facilities" || item.var1 == "hospitality" || item.var1 == "pitch"
       new_coach = club_full[item.var1] += 1
       club_full.update(item.var1 => new_coach)
-    
+
       Message.create(action_id: item.action_id, week: item.week, club: item.club, var1: "Your upgrade to the #{item.var1} was completed, the new value is #{club_full[item.var1]}")
-    
+
     elsif item.var1.ends_with?("condition")
       new_coach = club_full[item.var1] += 1
       club_full.update(item.var1 => new_coach)
-  
+
       Message.create(action_id: item.action_id, week: item.week, club: item.club, var1: "Your upgrade to the #{item.var1} was completed, the new value is #{club_full[item.var1]}")
 
     else
@@ -264,10 +242,8 @@ class Turn < ApplicationRecord
   end
 
   def fitness_increase
-    players = Player.all
-
-    players.each do |player|
-      if player.fitness < 100
+    Player.all.each do |player|
+      if player.fitness != 100
         player.fitness += rand(0..5)
         player.fitness = 100 if player.fitness > 100
         player.save
@@ -276,12 +252,13 @@ class Turn < ApplicationRecord
   end
 
   def contract_decrease
-    players = Player.all
-
-    players.each do |player|
-      if player.contract > 0
+    Player.all.each do |player|
+      if player.contract.positive?
         player.contract -= 1
         player.contract = 0 if player.contract < 0
+        player.save
+      else
+        player.contract = 0
         player.save
       end
     end

@@ -1,26 +1,21 @@
 class TurnsController < ApplicationController
-
+  rescue_from StandardError, with: :handle_error
   before_action :set_turn, only: %i[ show edit update destroy ]
 
-  # GET /turns or /turns.json
   def index
     @turns = Turn.all
   end
 
-  # GET /turns/1 or /turns/1.json
   def show
   end
 
-  # GET /turns/new
   def new
     @turn = Turn.new
   end
 
-  # GET /turns/1/edit
   def edit
   end
 
-  # POST /turns or /turns.json
   def create
     @turn = Turn.new(turn_params)
 
@@ -35,7 +30,6 @@ class TurnsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /turns/1 or /turns/1.json
   def update
     respond_to do |format|
       if @turn.update(turn_params)
@@ -48,7 +42,6 @@ class TurnsController < ApplicationController
     end
   end
 
-  # DELETE /turns/1 or /turns/1.json
   def destroy
     @turn.destroy
 
@@ -59,7 +52,7 @@ class TurnsController < ApplicationController
   end
 
   def process_turn
-    errors = [] # Initialize an empty array to store any errors
+    errors = []
 
     begin
       turn = Turn.new
@@ -76,13 +69,15 @@ class TurnsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_turn
     @turn = Turn.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def turn_params
     params.require(:turn).permit!
+  end
+
+  def handle_error(exception)
+    redirect_to turns_path, alert: exception.message
   end
 end
