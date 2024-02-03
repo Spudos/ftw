@@ -6,7 +6,7 @@ class Match::SquadCreator
   end
 
   def call
-    if Selection.where(club: fixture[:club_home]).count == 11 && Selection.where(club: fixture[:club_home]).count == 11
+    if Selection.where(club: fixture[:club_home]).count == 11 && Selection.where(club: fixture[:club_away]).count == 11
       [match_info, match_squad]
     end
   end
