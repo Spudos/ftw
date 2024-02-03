@@ -29,11 +29,11 @@ class Match::SquadCreator
       Tactic.new(abbreviation: fixture[:club_away], tactics: 1, dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
     end
 
-    if Tactic.find_by(abbreviation: fixture[:club_home])&.dfc_aggression.nil?
+    if Tactic.find_by(abbreviation: fixture[:club_home])&.dfc_aggression.nil? || Tactic.find_by(abbreviation: fixture[:club_home])&.mid_aggression.nil? || Tactic.find_by(abbreviation: fixture[:club_home])&.att_aggression.nil?
       Tactic.find_by(abbreviation: fixture[:club_home]).update(dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
     end
 
-    if Tactic.find_by(abbreviation: fixture[:club_away])&.dfc_aggression.nil?
+    if Tactic.find_by(abbreviation: fixture[:club_away])&.dfc_aggression.nil? || Tactic.find_by(abbreviation: fixture[:club_away])&.mid_aggression.nil? || Tactic.find_by(abbreviation: fixture[:club_away])&.att_aggression.nil?
       Tactic.find_by(abbreviation: fixture[:club_away]).update(dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
     end
   end
