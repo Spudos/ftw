@@ -7,6 +7,10 @@ class Match::TopFive
   end
 
   def call
+    if @home_list.nil? || @away_list.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+    
     home_top = home_list.reject { |player| player[:player_position] == "gkp" }
                          .sort_by { |player| -player[:match_performance] }
                          .first(5)

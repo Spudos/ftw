@@ -6,6 +6,10 @@ class Match::MatchLists
   end
 
   def call
+    if @final_squad.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+
     home_list, away_list = Match::PlayerList.new(final_squad).call
     home_top, away_top = Match::TopFive.new(home_list, away_list).call
 

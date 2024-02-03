@@ -6,6 +6,10 @@ class Match::BlendAdjustment
   end
 
   def call
+    if @totals.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+
     totals_with_blend = []
     blend_totals = []
 

@@ -8,6 +8,10 @@ class Match::SaveMatchCommentary
   end
 
   def call
+    if @home_list.nil? || @away_list.nil? || @minute_by_minute.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+
     home_team = Club.find_by(abbreviation: minute_by_minute.first[:club_home])&.name
     away_team = Club.find_by(abbreviation: minute_by_minute.first[:club_away])&.name
 

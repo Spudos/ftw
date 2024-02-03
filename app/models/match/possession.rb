@@ -6,6 +6,10 @@ class Match::Possession
   end
 
   def call
+    if match_summary.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+
     if (match_summary[:chance_count_home] + match_summary[:chance_count_away]) == 0
       away_possession = 48
     else

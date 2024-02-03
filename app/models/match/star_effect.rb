@@ -6,6 +6,10 @@ class Match::StarEffect
   end
 
   def call
+    if @squads_tactics.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+    
     players = squads_tactics
 
     players.each do |player|

@@ -6,6 +6,10 @@ class Match::PlayerList
   end
 
   def call
+    if @final_squad.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+
     home_team = final_squad.first[:club]
     home_list = []
     away_list = []

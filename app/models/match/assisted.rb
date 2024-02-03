@@ -8,6 +8,10 @@ class Match::Assisted
   end
 
   def call
+    if @home_top.nil? || @away_top.nil? || @goal_scored.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+
     if goal_scored[:goal_scored] == 'home'
       assist = home_top.sample[:player_id]
     else

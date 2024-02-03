@@ -6,6 +6,10 @@ class Match::SaveGoalAndAssistInformation
   end
 
   def call
+    if @minute_by_minute.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+
     minute_by_minute.each do |match_data|
       if match_data[:goal_scored] != 'none'
         match = Goal.create(

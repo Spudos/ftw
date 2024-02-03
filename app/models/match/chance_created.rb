@@ -7,6 +7,10 @@ class Match::ChanceCreated
   end
 
   def call
+    if @final_team.nil? || @i.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+
     random_number = rand(1..100)
     chance = final_team.first[:midfield] - final_team.last[:midfield]
     chance_outcome = ''

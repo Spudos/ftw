@@ -6,6 +6,10 @@ class Match::AggressionEffect
   end
 
   def call
+    if totals_stadium.empty?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+
     totals_aggression = []
 
     totals_stadium.each do |team|

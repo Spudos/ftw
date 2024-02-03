@@ -6,6 +6,10 @@ class Match::PlayerPerformance
   end
 
   def call
+    if @match_squad.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+
     players_array = []
     match_squad.each do |player|
       tactic = Tactic.find_by(abbreviation: player.club)&.tactics

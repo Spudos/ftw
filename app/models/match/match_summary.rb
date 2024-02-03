@@ -6,6 +6,10 @@ class Match::MatchSummary
   end
 
   def call
+    if @minute_by_minute.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+    
     match_summary = {
       id: minute_by_minute.first[:id],
       week: minute_by_minute.first[:week],

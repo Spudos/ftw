@@ -6,6 +6,10 @@ class Match::SaveDetailedMatchSummary
   end
 
   def call
+    if detailed_match_summary.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+
     match_data = detailed_match_summary[0]
     match = Match.new(
       match_id: match_data[:id].to_i,

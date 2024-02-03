@@ -7,6 +7,10 @@ class Match::PlayerFitness
   end
 
   def call
+    if @squads_performance.nil? || @match_info.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+
     squads_performance.each do |player|
       player_record = Player.find_by(id: player[:player_id])
       player_fitness = player_record&.fitness

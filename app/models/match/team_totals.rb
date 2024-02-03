@@ -6,6 +6,10 @@ class Match::TeamTotals
   end
 
   def call
+    if @final_squad.nil?
+      raise StandardError, "There was an error in the #{self.class.name} class"
+    end
+    
     squads = final_squad
 
     home_team = squads.first[:club]
