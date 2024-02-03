@@ -6,6 +6,8 @@ class Match::SquadCreator
   end
 
   def call
+    tactics_check
+
     home_selection = Selection.where(club: fixture[:club_home]).count
     away_selection = Selection.where(club: fixture[:club_away]).count
 
@@ -17,6 +19,24 @@ class Match::SquadCreator
   end
 
   private
+
+  def tactics_check
+    if Tactic.find_by(abbreviation: fixture[:club_home]).nil?
+      Tactic.new(abbreviation: fixture[:club_home], tactics: 1, dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
+    end
+
+    if Tactic.find_by(abbreviation: fixture[:club_away]).nil?
+      Tactic.new(abbreviation: fixture[:club_away], tactics: 1, dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
+    end
+
+    if Tactic.find_by(abbreviation: fixture[:club_home])&.dfc_aggression.nil?
+      Tactic.find_by(abbreviation: fixture[:club_home]).update(dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
+    end
+
+    if Tactic.find_by(abbreviation: fixture[:club_away])&.dfc_aggression.nil?
+      Tactic.find_by(abbreviation: fixture[:club_away]).update(dfc_aggression: 1, mid_aggression: 1, att_aggression: 1)
+    end
+  end
 
   def match_squad
     [].tap do |match_squad|
