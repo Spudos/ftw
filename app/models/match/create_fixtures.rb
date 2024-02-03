@@ -14,13 +14,15 @@ class Match::CreateFixtures
 
     fixture_list = []
     fixtures.each do |fixture|
-      fixture_list << {
-        id: fixture.id,
-        club_home: fixture.home,
-        club_away: fixture.away,
-        week_number: fixture.week_number,
-        competition: fixture.comp
-      }
+      unless Match.exists?(match_id: fixture.id)
+        fixture_list << {
+          id: fixture.id,
+          club_home: fixture.home,
+          club_away: fixture.away,
+          week_number: fixture.week_number,
+          competition: fixture.comp
+        }
+      end
     end
     fixture_list
   end
