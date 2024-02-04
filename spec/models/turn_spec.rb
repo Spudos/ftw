@@ -155,7 +155,77 @@ RSpec.describe Turn, type: :model do
   end
 
   describe 'train_player' do
-   
+    it 'increases the skill by 1 point as the coach > skill and he has potential' do
+      week = 1
+      action_id = '10011'
+      club = '001'
+      player = 'Woolley'
+      skill = 'tackling'
+
+      create(:club, staff_dfc: 10)
+      create(:player, position: 'dfc')
+
+      Turn.new.send(:train_player, action_id, week, club, player, skill)
+
+      player = Player.find_by(name: 'Woolley')
+
+      expect(player.tackling).to eq(6)
+      expect(Message.first[:var1]).to eq("Training #{player.name} in #{skill} suceeded! His new value is #{player.tackling}")
+    end
+
+    it 'will not increse the skill by 1 point as the coach > skill and he has no potential' do
+      week = 1
+      action_id = '10011'
+      club = '001'
+      player = 'Woolley'
+      skill = 'tackling'
+
+      create(:club, staff_dfc: 10)
+      create(:player, position: 'dfc', potential_tackling: 5)
+
+      Turn.new.send(:train_player, action_id, week, club, player, skill)
+
+      player = Player.find_by(name: 'Woolley')
+
+      expect(player.tackling).to eq(5)
+      expect(Message.first[:var1]).to eq("Training #{player.name} in #{skill} failed due to reaching potential")
+    end
+
+    it 'will not increse the skill by 1 point as the coach < skill and he has no potential' do
+      week = 1
+      action_id = '10011'
+      club = '001'
+      player = 'Woolley'
+      skill = 'tackling'
+
+      create(:club, staff_dfc: 4)
+      create(:player, position: 'dfc', potential_tackling: 5)
+
+      Turn.new.send(:train_player, action_id, week, club, player, skill)
+
+      player = Player.find_by(name: 'Woolley')
+
+      expect(player.tackling).to eq(5)
+      expect(Message.first[:var1]).to eq("Training #{player.name} in #{skill} failed due to reaching potential")
+    end
+
+    it 'will not increse the skill by 1 point as the coach < skill but he has potential' do
+      week = 1
+      action_id = '10011'
+      club = '001'
+      player = 'Woolley'
+      skill = 'tackling'
+
+      create(:club, staff_dfc: 4)
+      create(:player, position: 'dfc', potential_tackling: 10)
+
+      Turn.new.send(:train_player, action_id, week, club, player, skill)
+
+      player = Player.find_by(name: 'Woolley')
+
+      expect(player.tackling).to eq(5)
+      expect(Message.first[:var1]).to eq("Training #{player.name} in #{skill} failed - this coach isn't good enough to train #{skill} for #{player.name}")
+    end
   end
 
   describe 'fitness_upgrade' do
@@ -180,15 +250,202 @@ RSpec.describe Turn, type: :model do
   end
 
   describe 'player_fitness' do
-   
+    it 'will increase the players fitness by 8' do
+      week = 1
+      action_id = '10011'
+      club = '001'
+      player = 'Woolley'
+
+      create(:club, staff_fitness: 8)
+      create(:player, fitness: 90)
+
+      Turn.new.send(:player_fitness, action_id, week, club, player)
+
+      player = Player.find_by(name: 'Woolley')
+
+      expect(player.fitness).to eq(98)
+      expect(Message.first[:var1]).to eq("Fitness training for #{player.name} was completed! His new value is #{player.fitness}")
+    end
+
+    it 'will not change the fitness as it is already at 100' do
+      week = 1
+      action_id = '10011'
+      club = '001'
+      player = 'Woolley'
+
+      create(:club, staff_fitness: 8)
+      create(:player, fitness: 100)
+
+      Turn.new.send(:player_fitness, action_id, week, club, player)
+
+      player = Player.find_by(name: 'Woolley')
+
+      expect(player.fitness).to eq(100)
+      expect(Message.first[:var1]).to eq("Fitness training for #{player.name} was completed! His new value is #{player.fitness}")
+    end
+
+    it 'will change fitness to 100 as it is above 100' do
+      week = 1
+      action_id = '10011'
+      club = '001'
+      player = 'Woolley'
+
+      create(:club, staff_fitness: 8)
+      create(:player, fitness: 130)
+
+      Turn.new.send(:player_fitness, action_id, week, club, player)
+
+      player = Player.find_by(name: 'Woolley')
+
+      expect(player.fitness).to eq(100)
+      expect(Message.first[:var1]).to eq("Fitness training for #{player.name} was completed! His new value is #{player.fitness}")
+    end
+
+    it 'will change fitness to 100 as it is above 100 after the fitness change is applied' do
+      week = 1
+      action_id = '10011'
+      club = '001'
+      player = 'Woolley'
+
+      create(:club, staff_fitness: 8)
+      create(:player, fitness: 98)
+
+      Turn.new.send(:player_fitness, action_id, week, club, player)
+
+      player = Player.find_by(name: 'Woolley')
+
+      expect(player.fitness).to eq(100)
+      expect(Message.first[:var1]).to eq("Fitness training for #{player.name} was completed! His new value is #{player.fitness}")
+    end
   end
 
   describe 'bank_adjustment' do
-   
+    it 'reduces the bank by the amount and posts a message to confirm the coach upgrade was completed' do
+      action_id = '10011'
+      week = 1
+      club = '001'
+      reason = 'coach'
+      dept = 'staff_fitness'
+      amount = 500000
+
+      create(:club, bank_bal: 10000000)
+
+      Turn.new.send(:bank_adjustment, action_id, week, club, reason, dept, amount)
+
+      expect(Club.first[:bank_bal]).to eq(9500000)
+      expect(Message.first[:var1]).to eq("Your bank account was charged with #{amount} due to starting an upgrade to #{dept}")
+    end
+
+    it 'reduces the bank by the amount and posts a message to confirm the property upgrade was completed' do
+      action_id = '10011'
+      week = 1
+      club = '001'
+      reason = 'property'
+      dept = 'pitch'
+      amount = 500000
+
+      create(:club, bank_bal: 10000000)
+
+      Turn.new.send(:bank_adjustment, action_id, week, club, reason, dept, amount)
+
+      expect(Club.first[:bank_bal]).to eq(9500000)
+      expect(Message.first[:var1]).to eq("Your bank account was charged with #{amount} due to starting an upgrade to #{dept}")
+    end
+
+    it 'reduces the bank by the amount and posts a message to confirm the condition upgrade was completed' do
+      action_id = '10011'
+      week = 1
+      club = '001'
+      reason = 'condition'
+      dept = 'stand_n_condition'
+      amount = 500000
+
+      create(:club, bank_bal: 10000000)
+
+      Turn.new.send(:bank_adjustment, action_id, week, club, reason, dept, amount)
+
+      expect(Club.first[:bank_bal]).to eq(9500000)
+      expect(Message.first[:var1]).to eq("Your bank account was charged with #{amount} due to starting an upgrade to #{reason}")
+    end
+
+    it 'reduces the bank by the amount and posts a message to confirm the capacity upgrade was started' do
+      action_id = '10011'
+      week = 1
+      club = '001'
+      reason = 'stand_n_capacity'
+      dept = 'stand_n_capacity'
+      amount = 500000
+      name = 'north'
+
+      create(:club, bank_bal: 10000000, stand_n_name: 'north')
+
+      Turn.new.send(:bank_adjustment, action_id, week, club, reason, dept, amount)
+
+      expect(Club.first[:bank_bal]).to eq(9500000)
+      expect(Message.first[:var1]).to eq("Your bank account was charged with #{amount} due to starting an upgrade to #{name}")
+    end
   end
 
   describe 'perform_completed_upgrades' do
-   
+    it 'performs the upgrade increase for staff' do
+      create(:club, staff_dfc: 1)
+      item = create(:upgrade, var1: 'staff_dfc', action_id: '10011')
+
+      Turn.new.send(:perform_completed_upgrades, item)
+
+      expect(Club.first[:staff_dfc]).to eq(2)
+      expect(Message.first[:var1]).to eq("Your upgrade to the #{item.var1} was completed, the new value is #{Club.first[:staff_dfc]}")
+    end
+
+    it 'performs the upgrade increase for facilities' do
+      create(:club, facilities: 1)
+      item = create(:upgrade, var1: 'facilities', action_id: '10011')
+
+      Turn.new.send(:perform_completed_upgrades, item)
+
+      expect(Club.first[:facilities]).to eq(2)
+      expect(Message.first[:var1]).to eq("Your upgrade to the #{item.var1} was completed, the new value is #{Club.first[:facilities]}")
+    end
+
+    it 'performs the upgrade increase for hospitality' do
+      create(:club, hospitality: 1)
+      item = create(:upgrade, var1: 'hospitality', action_id: '10011')
+
+      Turn.new.send(:perform_completed_upgrades, item)
+
+      expect(Club.first[:hospitality]).to eq(2)
+      expect(Message.first[:var1]).to eq("Your upgrade to the #{item.var1} was completed, the new value is #{Club.first[:hospitality]}")
+    end
+
+    it 'performs the upgrade increase for pitch' do
+      create(:club, pitch: 1)
+      item = create(:upgrade, var1: 'pitch', action_id: '10011')
+
+      Turn.new.send(:perform_completed_upgrades, item)
+
+      expect(Club.first[:pitch]).to eq(2)
+      expect(Message.first[:var1]).to eq("Your upgrade to the #{item.var1} was completed, the new value is #{Club.first[:pitch]}")
+    end
+
+    it 'performs the upgrade increase for stand condition' do
+      create(:club, stand_n_condition: 1)
+      item = create(:upgrade, var1: 'stand_n_condition', action_id: '10011')
+
+      Turn.new.send(:perform_completed_upgrades, item)
+
+      expect(Club.first[:stand_n_condition]).to eq(2)
+      expect(Message.first[:var1]).to eq("Your upgrade to the #{item.var1} was completed, the new value is #{Club.first[:stand_n_condition]}")
+    end
+
+    it 'performs the upgrade increase for stand condition' do
+      create(:club, stand_n_capacity: 5000, stand_n_name: 'north stand')
+      item = create(:upgrade, var1: 'stand_n_capacity', var2: 5000, action_id: '10011')
+
+      Turn.new.send(:perform_completed_upgrades, item)
+
+      expect(Club.first[:stand_n_capacity]).to eq(10000)
+      expect(Message.first[:var1]).to eq("Your upgrade to the #{Club.first[:stand_n_name]} was completed, the new value is #{Club.first[:stand_n_capacity]}")
+    end
   end
 
   describe 'increment_upgrades' do
