@@ -15,7 +15,7 @@ class Turn < ApplicationRecord
   def stadium_upgrade(week)
     hash = {}
 
-    Turn.where("var1 LIKE ?", 'stand%').where(week: week).each do |turn|
+    Turn.where("var1 LIKE ?", 'stand%').where(week:).each do |turn|
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club + turn.id.to_s,
         week: turn.week,
