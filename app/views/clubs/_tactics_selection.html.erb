@@ -1,22 +1,21 @@
 <h3 class="text-center">Tactics Selection</h3>
 <div id="form-container" class="text-center">
-  <%= form_with(model: @tactic, url: tactics_path, local: true) do |form| %>
+  <%= form_with scope: :tactic, url: tactics_path, local: true do |form| %>
     <div class="field">
       <%= form.label :tactics %>
-      <%= form.select :tactics, { "Passing" => 1, "Defensive" => 2, "Attacking" => 3, "Wide" => 4, "Narrow" => 5, "Direct" => 6 }, {}, { name: 'tactic[tactics]' } %>
+      <%= form.select :tactics, { "Please select a tactic" => nil, "Passing" => 1, "Defensive" => 2, "Attacking" => 3, "Wide" => 4, "Narrow" => 5, "Direct" => 6 }, {}, { name: 'tactic[tactics]', selected: @tactic&.tactics } %>
     </div>
     <div class="field">
       <%= form.label :dfc_aggression %>
-      <%= form.select :dfc_aggression, ( 1..10 ) %>
+      <%= form.select :dfc_aggression, (0..10), selected: @tactic&.dfc_aggression %>
 
       <%= form.label :mid_aggression %>
-      <%= form.select :mid_aggression, ( 1..10 ) %>
+      <%= form.select :mid_aggression, (0..10), selected: @tactic&.mid_aggression %>
 
       <%= form.label :att_aggression %>
-      <%= form.select :att_aggression, ( 1..10 ) %>
+      <%= form.select :att_aggression, (0..10), selected: @tactic&.att_aggression %>
     </div>
     <%= form.hidden_field :abbreviation, value: params[:id] %>
-    <%= form.submit "Save tactic", class: "btn btn-sm btn-danger"%>
+    <%= form.submit "Save tactic", class: "btn btn-sm btn-danger" %>
   <% end %>
 </div>
-

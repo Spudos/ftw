@@ -3,20 +3,36 @@ class TacticsController < ApplicationController
     @tactic = Tactic.new
   end
 
-  def create
-    @tactic = Tactic.find_or_initialize_by(abbreviation: params[:tactic][:abbreviation])
+  def edit; end
 
-    if @tactic.new_record?
-      if @tactic.save
-        redirect_to @tactic, notice: 'Tactic was successfully created.'
-      else
-        render :new
-      end
+  def update
+    @tactic = Tactic.find_by(abbreviation: params[:tactic][:abbreviation])
+    if @tactic.update(tactics_params)
+      redirect_to club_path(params[:tactic][:abbreviation]), notice: 'Tactics were successfully updated.'
     else
-      if @tactic.update(tactics_params)
-        redirect_to @tactic, notice: 'Tactic was successfully updated.'
+      redirect_to club_path(params[:tactic][:abbreviation]), alert: 'Tactics were not successfully updated.'
+    end
+  end
+
+  def create
+    @tactic = Tactic.find_by(abbreviation: params[:tactic][:abbreviation])
+
+    if tactics_params[:tactics] == ""
+      redirect_to club_path(params[:tactic][:abbreviation]), alert: 'You must select a tactic.'
+    else
+      if @tactic.nil?
+        @tactic = Tactic.new(tactics_params)
+        if @tactic.save
+          redirect_to club_path(params[:tactic][:abbreviation]), notice: 'Tactics created successfully.'
+        else
+          redirect_to club_path(params[:tactic][:abbreviation]), alert: 'Tactics not created successfully'
+        end
       else
-        render :new
+        if @tactic.update(tactics_params)
+          redirect_to club_path(params[:tactic][:abbreviation]), notice: 'Tactics updated successfully.'
+        else
+          redirect_to club_path(params[:tactic][:abbreviation]), alert: 'Tactics not updated successfully'
+        end
       end
     end
   end
@@ -24,6 +40,6 @@ class TacticsController < ApplicationController
   private
 
   def tactics_params
-    params.require(:tactic).permit(:tactics, :dfc_aggression, :mid_aggression, :att_aggression)
+    params.require(:tactic).permit(:abbreviation, :tactics, :dfc_aggression, :mid_aggression, :att_aggression)
   end
 end
