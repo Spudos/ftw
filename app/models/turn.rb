@@ -15,7 +15,7 @@ class Turn < ApplicationRecord
   def stadium_upgrade(week)
     hash = {}
 
-    Turn.where("var1 LIKE ?", 'stand%').where(week:).each do |turn|
+    Turn.where('var1 LIKE ?', 'stand%').where(week:).each do |turn|
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club + turn.id.to_s,
         week: turn.week,
@@ -23,7 +23,7 @@ class Turn < ApplicationRecord
         var1: turn.var1,
         var2: turn.var2,
         var3: turn.var3,
-        Actioned: turn.date_completed
+        date_completed: turn.date_completed
       }
     end
 
@@ -48,7 +48,7 @@ class Turn < ApplicationRecord
   end
 
   def property_upgrade(week)
-    turns = Turn.where("var1 LIKE ?", 'property').where(week: week)
+    turns = Turn.where('var1 LIKE ?', 'property').where(week:)
     hash = {}
 
     turns.each do |turn|
@@ -59,7 +59,7 @@ class Turn < ApplicationRecord
         var1: turn.var1,
         var2: turn.var2,
         var3: turn.var3,
-        Actioned: turn.date_completed
+        date_completed: turn.date_completed
       }
     end
 
@@ -80,7 +80,7 @@ class Turn < ApplicationRecord
   def coach_upgrade(week)
     hash = {}
 
-    Turn.where("var1 LIKE ?", 'coach%').where(week: week).each do |turn|
+    Turn.where('var1 LIKE ?', 'coach%').where(week:).each do |turn|
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club + turn.id.to_s,
         week: turn.week,
@@ -88,7 +88,7 @@ class Turn < ApplicationRecord
         var1: turn.var1,
         var2: turn.var2,
         var3: turn.var3,
-        Actioned: turn.date_completed
+        date_completed: turn.date_completed
       }
     end
 
@@ -109,7 +109,7 @@ class Turn < ApplicationRecord
   def player_upgrade(week)
     hash = {}
 
-    Turn.where("var1 LIKE ?", 'train%').where(week: week).each do |turn|
+    Turn.where('var1 LIKE ?', 'train%').where(week:).each do |turn|
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club + turn.id.to_s,
         week: turn.week,
@@ -117,7 +117,7 @@ class Turn < ApplicationRecord
         var1: turn.var1,
         var2: turn.var2,
         var3: turn.var3,
-        Actioned: turn.date_completed
+        date_completed: turn.date_completed
       }
     end
 
@@ -129,9 +129,9 @@ class Turn < ApplicationRecord
   end
 
   def train_player(action_id, week, club, player, skill)
-    if Message.find_by(action_id: action_id).nil?
+    if Message.find_by(action_id:).nil?
       club_staff = Club.find_by(abbreviation: club)
-      player_data = Player.find_by(club: club, name: player)
+      player_data = Player.find_by(club:, name: player)
       coach = club_staff.send("staff_#{player_data.position}")
 
       if player_data[skill] < player_data.send("potential_#{skill}")
@@ -151,14 +151,14 @@ class Turn < ApplicationRecord
   def fitness_upgrade(week)
     hash = {}
 
-    Turn.where("var1 LIKE ?", 'fitness%').where(week: week).each do |turn|
+    Turn.where('var1 LIKE ?', 'fitness%').where(week:).each do |turn|
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club + turn.id.to_s,
         week: turn.week,
         club: turn.club,
         var1: turn.var1,
         var2: turn.var2,
-        Actioned: turn.date_completed
+        date_completed: turn.date_completed
       }
     end
 
@@ -170,8 +170,8 @@ class Turn < ApplicationRecord
   end
 
   def player_fitness(action_id, week, club, player)
-    if Message.find_by(action_id: action_id).nil?
-      player_data = Player.find_by(club: club, name: player)
+    if Message.find_by(action_id:).nil?
+      player_data = Player.find_by(club:, name: player)
       coach = Club.find_by(abbreviation: club)&.staff_fitness
 
       increased_fitness = player_data.fitness + coach
@@ -179,21 +179,21 @@ class Turn < ApplicationRecord
 
       player_data.update(fitness: final_fitness)
 
-      Message.create(action_id: action_id, week: week, club: club, var1: "Fitness training for #{player} was completed! His new value is #{final_fitness}")
+      Message.create(action_id:, week:, club:, var1: "Fitness training for #{player} was completed! His new value is #{final_fitness}")
     end
   end
 
   def bank_adjustment(action_id, week, club, reason, dept, amount)
-    if Message.find_by(action_id: action_id).nil?
+    if Message.find_by(action_id:).nil?
       club_full = Club.find_by(abbreviation: club)
 
       new_bal = club_full.bank_bal.to_i - amount.to_i
       club_full.update(bank_bal: new_bal)
-      if reason == "coach"
+      if reason == 'coach'
         Message.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{dept}")
-      elsif reason == "property"
+      elsif reason == 'property'
         Message.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{dept}")
-      elsif reason.end_with?("condition")
+      elsif reason.end_with?('condition')
         Message.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{reason}")
       else
         Message.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{club_full[reason.gsub("capacity", "name")]}")
@@ -215,19 +215,19 @@ class Turn < ApplicationRecord
   def perform_completed_upgrades(item)
     club_full = Club.find_by(abbreviation: item.club)
 
-    if item.var1.start_with?("staff")
+    if item.var1.start_with?('staff')
       new_coach = club_full[item.var1] += 1
       club_full.update(item.var1 => new_coach)
 
       Message.create(action_id: item.action_id, week: item.week, club: item.club, var1: "Your upgrade to the #{item.var1} was completed, the new value is #{club_full[item.var1]}")
 
-    elsif item.var1 == "facilities" || item.var1 == "hospitality" || item.var1 == "pitch"
+    elsif item.var1 == 'facilities' || item.var1 == 'hospitality' || item.var1 == 'pitch'
       new_coach = club_full[item.var1] += 1
       club_full.update(item.var1 => new_coach)
 
       Message.create(action_id: item.action_id, week: item.week, club: item.club, var1: "Your upgrade to the #{item.var1} was completed, the new value is #{club_full[item.var1]}")
 
-    elsif item.var1.ends_with?("condition")
+    elsif item.var1.ends_with?('condition')
       new_coach = club_full[item.var1] += 1
       club_full.update(item.var1 => new_coach)
 
@@ -255,7 +255,7 @@ class Turn < ApplicationRecord
     Player.all.each do |player|
       if player.contract.positive?
         player.contract -= 1
-        player.contract = 0 if player.contract < 0
+        player.contract = 0 if player.contract.negative?
         player.save
       else
         player.contract = 0

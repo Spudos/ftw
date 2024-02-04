@@ -48,7 +48,26 @@ RSpec.describe Turn, type: :model do
   end
 
   describe 'property_upgrade' do
-   
+    it 'updates the turn records and performs necessary actions' do
+      turn = create(:turn, var1: 'property', var2: 'pitch', var3: nil, date_completed: nil)
+      week = 1
+      action_id = '10011'
+
+      allow_any_instance_of(Turn).to receive(:bank_adjustment)
+      allow_any_instance_of(Turn).to receive(:add_to_property_upgrades)
+
+      expect(turn).to receive(:bank_adjustment).with(action_id, week, turn.club, turn.var1, turn.var2, turn.var3)
+      expect(turn).to receive(:add_to_property_upgrades).with(action_id, week, turn.club, turn.var2)
+
+      turn.send(:property_upgrade, week)
+
+      expect(Turn.first[:week]).to eq(1)
+      expect(Turn.first[:club]).to eq('001')
+      expect(Turn.first[:var1]).to eq('property')
+      expect(Turn.first[:var2]).to eq('pitch')
+      expect(Turn.first[:var3]).to eq(nil)
+      expect(Turn.first[:date_completed]).to_not be_nil
+    end
   end
 
   describe 'add_to_property_upgrades' do
@@ -72,7 +91,26 @@ RSpec.describe Turn, type: :model do
   end
 
   describe 'coach_upgrade' do
+    it 'updates the turn records and performs necessary actions' do
+      turn = create(:turn, var1: 'coach', var2: 'dfc', var3: nil, date_completed: nil)
+      week = 1
+      action_id = '10011'
 
+      allow_any_instance_of(Turn).to receive(:bank_adjustment)
+      allow_any_instance_of(Turn).to receive(:add_to_coach_upgrades)
+
+      expect(turn).to receive(:bank_adjustment).with(action_id, week, turn.club, turn.var1, turn.var2, turn.var3)
+      expect(turn).to receive(:add_to_coach_upgrades).with(action_id, week, turn.club, turn.var2)
+
+      turn.send(:coach_upgrade, week)
+
+      expect(Turn.first[:week]).to eq(1)
+      expect(Turn.first[:club]).to eq('001')
+      expect(Turn.first[:var1]).to eq('coach')
+      expect(Turn.first[:var2]).to eq('dfc')
+      expect(Turn.first[:var3]).to eq(nil)
+      expect(Turn.first[:date_completed]).to_not be_nil
+    end
   end
 
   describe 'add_to_coach_upgrades' do
@@ -96,7 +134,24 @@ RSpec.describe Turn, type: :model do
   end
 
   describe 'player_upgrade' do
+    it 'updates the turn records and performs necessary actions' do
+      turn = create(:turn, var1: 'train', var2: 'Woolley', var3: 'Tackling', date_completed: nil)
+      week = 1
+      action_id = '10011'
 
+      allow_any_instance_of(Turn).to receive(:train_player)
+
+      expect(turn).to receive(:train_player).with(action_id, week, turn.club, turn.var2, turn.var3)
+
+      turn.send(:player_upgrade, week)
+
+      expect(Turn.first[:week]).to eq(1)
+      expect(Turn.first[:club]).to eq('001')
+      expect(Turn.first[:var1]).to eq('train')
+      expect(Turn.first[:var2]).to eq('Woolley')
+      expect(Turn.first[:var3]).to eq('Tackling')
+      expect(Turn.first[:date_completed]).to_not be_nil
+    end
   end
 
   describe 'train_player' do
@@ -104,7 +159,24 @@ RSpec.describe Turn, type: :model do
   end
 
   describe 'fitness_upgrade' do
-   
+    it 'updates the turn records and performs necessary actions' do
+      turn = create(:turn, var1: 'fitness', var2: 'Woolley', var3: nil, date_completed: nil)
+      week = 1
+      action_id = '10011'
+
+      allow_any_instance_of(Turn).to receive(:player_fitness)
+
+      expect(turn).to receive(:player_fitness).with(action_id, week, turn.club, turn.var2)
+
+      turn.send(:fitness_upgrade, week)
+
+      expect(Turn.first[:week]).to eq(1)
+      expect(Turn.first[:club]).to eq('001')
+      expect(Turn.first[:var1]).to eq('fitness')
+      expect(Turn.first[:var2]).to eq('Woolley')
+      expect(Turn.first[:var3]).to eq(nil)
+      expect(Turn.first[:date_completed]).to_not be_nil
+    end
   end
 
   describe 'player_fitness' do
