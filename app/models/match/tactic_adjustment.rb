@@ -17,7 +17,7 @@ class Match::TacticAdjustment
     if squad_performance.nil?
       raise StandardError, "There was an error in the #{self.class.name} class"
     end
-    
+
     players = squad_performance
 
     players.each do |player|
