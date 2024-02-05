@@ -40,9 +40,10 @@ class Match < ApplicationRecord
 
     minute_by_minute = []
     rand(90..98).times do |i|
-      chance_result = Match::ChanceCreated.new(final_team, i).call
-      chance_on_target_result = Match::ChanceOnTarget.new(chance_result, final_team).call
-      goal_scored = Match::GoalScored.new(chance_on_target_result, final_team).call
+      match_team = Match::PressingEffect.new(final_team, i).call
+      chance_result = Match::ChanceCreated.new(match_team, i).call
+      chance_on_target_result = Match::ChanceOnTarget.new(chance_result, match_team).call
+      goal_scored = Match::GoalScored.new(chance_on_target_result, match_team).call
       assist, scorer = Match::Names.new(goal_scored, home_top, away_top).call
 
       minute_by_minute << { **match_info, **chance_result, **chance_on_target_result, **goal_scored, **assist, **scorer }
