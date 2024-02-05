@@ -24,9 +24,9 @@ class Turnsheet < ApplicationRecord
       end
 
       if turnsheet.press.nil?
-        Tactic.create(abbreviation: turnsheet.club, press: 0)
+        Tactic.find_by(abbreviation: turnsheet.club).update(press: 0)
       else
-        Tactic.create(abbreviation: turnsheet.club, press: turnsheet.press)
+        Tactic.find_by(abbreviation: turnsheet.club).update(press: turnsheet.press)
       end
 
       if turnsheet.dfc_aggression.nil?
@@ -83,10 +83,14 @@ class Turnsheet < ApplicationRecord
         Turn.create({ week: turnsheet.week, club: turnsheet.club, var1: turnsheet.stadium_condition_upgrade, var3: 100000 })
       end
 
-      turnsheet.update(processed: DateTime.now)
-    rescue StandardError => e
-      errors.add(:base, "Error processing turnsheet with ID #{turnsheet.id}: #{e.message}")
+      begin
+        turnsheet.update(processed: DateTime.now)
+      rescue StandardError => e
+        errors << "Error processing turnsheet: #{e.message}"
+      end
     end
+
+    errors.empty? ? true : errors
   end
 end
 

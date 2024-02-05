@@ -29,7 +29,7 @@ class TurnsheetsController < ApplicationController
 
     respond_to do |format|
       if @turnsheet.save
-        format.html { redirect_to turnsheet_url(@turnsheet), notice: "Turnsheet was successfully created." }
+        format.html { redirect_to turnsheet_url(@turnsheet), notice: 'Turnsheet was successfully created.' }
         format.json { render :show, status: :created, location: @turnsheet }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,21 +58,20 @@ class TurnsheetsController < ApplicationController
 
     if @turnsheet.destroy
       # Successful deletion
-      redirect_to turnsheets_path, notice: "Turnsheet was successfully deleted."
+      redirect_to turnsheets_path, notice: 'Turnsheet was successfully deleted.'
     else
       # Error occurred during deletion
       Rails.logger.error("Error deleting turnsheet: #{@turnsheet.errors}")
-      redirect_to turnsheets_path, alert: "Error deleting turnsheet."
+      redirect_to turnsheets_path, alert: 'Error deleting turnsheet.'
     end
   end
 
   def process_turnsheet
     turnsheet = Turnsheet.new
     if turnsheet.process_turnsheet
-      redirect_to turnsheets_path, notice: "Turnsheets processed successfully."
+      redirect_to turnsheets_path, notice: 'Turnsheets processed successfully.'
     else
-      errors = turnsheet.errors.full_messages.join(", ")
-      redirect_to turnsheets_path, alert: "Error processing turnsheets. #{errors} :("
+      redirect_to turnsheets_path, alert: "Error processing turnsheets: #{result.join(', ')}"
     end
   end
 
