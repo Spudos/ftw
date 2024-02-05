@@ -66,11 +66,13 @@ class Match::SquadCreator
         dfc_aggression_home: Tactic.find_by(abbreviation: fixture[:club_home])&.dfc_aggression,
         mid_aggression_home: Tactic.find_by(abbreviation: fixture[:club_home])&.mid_aggression,
         att_aggression_home: Tactic.find_by(abbreviation: fixture[:club_home])&.att_aggression,
+        home_press: Tactic.find_by(abbreviation: fixture[:club_home])&.press,
         club_away: fixture[:club_away],
         tactic_away: Tactic.find_by(abbreviation: fixture[:club_away])&.tactics,
         dfc_aggression_away: Tactic.find_by(abbreviation: fixture[:club_away])&.dfc_aggression,
         mid_aggression_away: Tactic.find_by(abbreviation: fixture[:club_away])&.mid_aggression,
-        att_aggression_away: Tactic.find_by(abbreviation: fixture[:club_away])&.att_aggression
+        att_aggression_away: Tactic.find_by(abbreviation: fixture[:club_away])&.att_aggression,
+        away_press: Tactic.find_by(abbreviation: fixture[:club_away])&.press
       }
   end
 end

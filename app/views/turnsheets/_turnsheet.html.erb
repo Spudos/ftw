@@ -195,6 +195,8 @@
             <td scope="col">Tactic for this game:</td>
             <td>
               <% case turnsheet.tactic.to_i %>
+                <% when 0 %>
+                  Normal
                 <% when 1 %>
                   Passing
                 <% when 2 %>
@@ -207,6 +209,25 @@
                   Narrow
                 <% else %>
                   Direct
+                <% end %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td scope="col">Pressing style for this game:</td>
+            <td>
+              <% case turnsheet.press.to_i %>
+                <% when 10 %>
+                  Heavy Meteal Football
+                <% when 6 %>
+                  Strong Press
+                <% when 3 %>
+                  Normal Press
+                <% when 0 %>
+                  No Press
+                <% when -5 %>
+                  Late Press
+                <% else %>
+                  Late Heavy Metal Footy
                 <% end %>
             </td>
           </tr>

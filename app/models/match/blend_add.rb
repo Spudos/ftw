@@ -10,7 +10,7 @@ class Match::BlendAdd
     if @blend_totals.nil? || @match_info.nil?
       raise StandardError, "There was an error in the #{self.class.name} class"
     end
-    
+
     updated_match_info = match_info.merge(
       {
         dfc_blend_home: blend_totals[0][:defense],

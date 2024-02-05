@@ -40,6 +40,6 @@ class TacticsController < ApplicationController
   private
 
   def tactics_params
-    params.require(:tactic).permit(:abbreviation, :tactics, :dfc_aggression, :mid_aggression, :att_aggression)
+    params.require(:tactic).permit(:abbreviation, :tactics, :dfc_aggression, :mid_aggression, :att_aggression, :press)
   end
 end

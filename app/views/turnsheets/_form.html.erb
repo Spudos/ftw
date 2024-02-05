@@ -110,7 +110,14 @@
             <td scope="col">Tactic for this game:</td>
             <td>
               <%= form.label :tactic, style: "display: none" %>
-              <%= form.select :tactic, options_for_select({ "Passing" => 1, "Defensive" => 2, "Attacking" => 3, "Wide" => 4, "Narrow" => 5, "Direct" => 6 }), prompt: "Select a tactic" %>
+              <%= form.select :tactic, options_for_select({ "Normal" => 1, "Passing" => 1, "Defensive" => 2, "Attacking" => 3, "Wide" => 4, "Narrow" => 5, "Direct" => 6 }), prompt: "Select a tactic" %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td scope="col">Pressing style for this game:</td>
+            <td>
+              <%= form.label :press, style: "display: none"  %>
+              <%= form.select :press, options_for_select({"Please select a press style" => 0, "Heavy Metal Football" => 10, "Strong Press" => 6, "Normal Press" => 3, "No Press" => 0, "Late Press" => -5, "Late Heavy Metal Footy" => -8 }), prompt: "Select a pressing style" %>
             </td>
           </tr>
           <tr scope="row">

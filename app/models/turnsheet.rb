@@ -3,7 +3,7 @@ class Turnsheet < ApplicationRecord
     Turnsheet.find_each do |turnsheet|
       next if turnsheet.processed.present?
 
-      turnsheet.save # Save the Turnsheet record first
+      turnsheet.save
 
       Selection.where(club: turnsheet.club).destroy_all
 
@@ -14,13 +14,19 @@ class Turnsheet < ApplicationRecord
       tactic_record = Tactic.find_by(abbreviation: turnsheet.club)
 
       if tactic_record
-        tactic_record.destroy # Remove the existing tactic entry
+        tactic_record.destroy
       end
 
       if turnsheet.tactic.nil?
-        Tactic.create(abbreviation: turnsheet.club, tactics: 1)
+        Tactic.create(abbreviation: turnsheet.club, tactics: 0)
       else
         Tactic.create(abbreviation: turnsheet.club, tactics: turnsheet.tactic)
+      end
+
+      if turnsheet.press.nil?
+        Tactic.create(abbreviation: turnsheet.club, press: 0)
+      else
+        Tactic.create(abbreviation: turnsheet.club, press: turnsheet.press)
       end
 
       if turnsheet.dfc_aggression.nil?

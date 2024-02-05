@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_05_094138) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_05_105120) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -122,6 +122,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_05_094138) do
     t.integer "dfc_blend_away"
     t.integer "mid_blend_away"
     t.integer "att_blend_away"
+    t.integer "home_press"
+    t.integer "away_press"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -259,6 +261,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_05_094138) do
     t.integer "mid_aggression"
     t.integer "att_aggression"
     t.string "fitness_coaching"
+    t.integer "press"
   end
 
   create_table "upgrades", force: :cascade do |t|

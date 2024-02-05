@@ -10,7 +10,7 @@ class Match::SavePlayerMatchData
     if @squads_performance.nil? || @match_info.nil?
       raise StandardError, "There was an error in the #{self.class.name} class"
     end
-    
+
     id = match_info[:id]
     competition = match_info[:competition]
 

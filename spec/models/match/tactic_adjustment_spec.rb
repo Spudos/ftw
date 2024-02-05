@@ -27,6 +27,7 @@ RSpec.describe Match::TacticAdjustment, type: :model do
     end
 
     [
+      { tactic: 0, expected_results: [50, 50, 50] },
       { tactic: 1, expected_results: [45, 65, 45] },
       { tactic: 2, expected_results: [65, 40, 40] },
       { tactic: 3, expected_results: [40, 55, 65] },
