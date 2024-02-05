@@ -29,7 +29,7 @@ class TurnsheetsController < ApplicationController
 
     respond_to do |format|
       if @turnsheet.save
-        format.html { redirect_to turnsheet_url(@turnsheet), notice: 'Turnsheet was successfully created.' }
+        format.html { redirect_to turnsheets_path, notice: 'Turnsheet was successfully created.' }
         format.json { render :show, status: :created, location: @turnsheet }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +42,7 @@ class TurnsheetsController < ApplicationController
   def update
     respond_to do |format|
       if @turnsheet.update(turnsheet_params)
-        format.html { redirect_to turnsheet_url(@turnsheet), notice: 'Turnsheet was successfully updated.' }
+        format.html { redirect_to turnsheets_path, notice: 'Turnsheet was successfully updated.' }
         format.json { render :show, status: :ok, location: @turnsheet }
       else
         format.html { render :edit, status: :unprocessable_entity }

@@ -241,7 +241,7 @@
             <tr scope="row">
               <td>Coach</td>
               <td>
-                <%= form.select :coach_upgrade, options_for_select({ "Select a coach" => "None", "Fitness" => "staff_fitness", "Scout" => "staff_scouts", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }, selected: "None") %>
+                <%= form.select :coach_upgrade, options_for_select({ "Fitness" => "staff_fitness", "Scout" => "staff_scouts", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }), prompt: 'Select a coach' %>
               </td>  
               <td>
                 <p></p>
@@ -252,7 +252,7 @@
             <tr scope="row">
               <td>Property</td>
               <td>
-                <%= form.select :property_upgrade, options_for_select({ "Select a property" => "None", "Pitch" => "pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, selected: "None") %>
+                <%= form.select :property_upgrade, options_for_select({ "Pitch" => "pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }), prompt: 'Select a property' %>
               </td>  
               <td>
                 <p></p>

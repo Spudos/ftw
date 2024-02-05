@@ -20,7 +20,7 @@ class FixturesController < ApplicationController
 
     respond_to do |format|
       if @fixtures.save
-        format.html { redirect_to fixture_url(@fixtures), notice: "Fixture was successfully created." }
+        format.html { redirect_to fixtures_path, notice: "Fixture was successfully created." }
         format.json { render :show, status: :created, location: @fixtures }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -34,7 +34,7 @@ class FixturesController < ApplicationController
 
     respond_to do |format|
       if @fixtures.update(fixtures_params)
-        format.html { redirect_to fixtures_url(@fixtures), notice: "Fixture was successfully updated." }
+        format.html { redirect_to fixtures_path, notice: "Fixture was successfully updated." }
         format.json { render :show, status: :ok, location: @fixtures }
       else
         format.html { render :edit, status: :unprocessable_entity }

@@ -70,7 +70,7 @@
             <tr scope="row">
               <td>Property</td>
               <td>
-                <%= form.select :property_upgrade, options_for_select({ "Pitch" => "pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, selected: "None") %>
+                <%= form.select :property_upgrade, options_for_select({ "Pitch" => "pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }, @turnsheet.coach_upgrade), prompt: "Select a property" %>
               </td>
             </tr>    
           </table>

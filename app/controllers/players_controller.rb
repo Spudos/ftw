@@ -47,7 +47,7 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to players_url(@player), notice: "Player was successfully created." }
+        format.html { redirect_to players_path, notice: "Player was successfully created." }
         format.json { render :show, status: :created, location: @player }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -59,7 +59,7 @@ class PlayersController < ApplicationController
   def update
     respond_to do |format|
       if @player.update(player_params)
-        format.html { redirect_to players_url, notice: "Player was successfully updated." }
+        format.html { redirect_to players_path, notice: "Player was successfully updated." }
         format.json { render :show, status: :ok, location: @player }
       else
         format.html { render :edit, status: :unprocessable_entity }

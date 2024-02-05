@@ -21,7 +21,7 @@ class TurnsController < ApplicationController
 
     respond_to do |format|
       if @turn.save
-        format.html { redirect_to turn_url(@turn), notice: "Turn was successfully created." }
+        format.html { redirect_to turns_path, notice: 'Turn was successfully created.' }
         format.json { render :show, status: :created, location: @turn }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -33,7 +33,7 @@ class TurnsController < ApplicationController
   def update
     respond_to do |format|
       if @turn.update(turn_params)
-        format.html { redirect_to turn_url(@turn), notice: "Turn was successfully updated." }
+        format.html { redirect_to turns_path, notice: 'Turn was successfully updated.' }
         format.json { render :show, status: :ok, location: @turn }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ class TurnsController < ApplicationController
     @turn.destroy
 
     respond_to do |format|
-      format.html { redirect_to turns_url, notice: "Turn was successfully destroyed." }
+      format.html { redirect_to turns_url, notice: 'Turn was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -58,7 +58,7 @@ class TurnsController < ApplicationController
       turn = Turn.new
       turn.process_turn_actions(params)
 
-      notice = "Processes ran successfully."
+      notice = 'Processes ran successfully.'
     rescue StandardError => e
       errors << "Error occurred during processing: #{e.message}"
       notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
