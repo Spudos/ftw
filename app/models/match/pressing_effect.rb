@@ -7,7 +7,7 @@ class Match::PressingEffect
   end
 
   def call
-    pressing = pressing_information
+    pressing = press_information
     if @i < 10
       multiplier = 6
     elsif @i < 20
@@ -32,30 +32,37 @@ class Match::PressingEffect
 
     match_team = {
       team: final_team[0][:team],
-      defense: final_team[0][:defense] + (pressing[:dfc_home_pressing] * multiplier),
-      midfield: final_team[0][:midfield] + (pressing[:mid_home_pressing] * multiplier),
-      attack: final_team[0][:attack] + (pressing[:att_home_pressing] * multiplier)
+      defense: final_team[0][:defense],
+      midfield: final_team[0][:midfield] + (pressing[:home_press] * multiplier),
+      attack: final_team[0][:attack] + (pressing[:home_press] * multiplier)
     },
     {
       team: final_team[1][:team],
-      defense: final_team[1][:defense] + (pressing[:att_away_pressing] * multiplier),
-      midfield: final_team[1][:midfield] + (pressing[:att_away_pressing] * multiplier),
-      attack: final_team[1][:attack] + (pressing[:att_away_pressing] * multiplier)
+      defense: final_team[1][:defense],
+      midfield: final_team[1][:midfield] + (pressing[:away_press] * multiplier),
+      attack: final_team[1][:attack] + (pressing[:away_press] * multiplier)
     }
 
     return match_team
   end
-end
 
-private
+  private
 
-def pressing_information
-  {
-    dfc_home_pressing: 0,
-    mid_home_pressing: 0,
-    att_home_pressing: 0,
-    dfc_away_pressing: 0,
-    mid_away_pressing: 0,
-    att_away_pressing: 0
-  }
+  def press_information
+    home_press = Tactic.find_by(abbreviation: final_team[0][:team])&.press
+    away_press = Tactic.find_by(abbreviation: final_team[1][:team])&.press
+
+    if home_press.nil?
+      home_press = 0
+    end
+
+    if away_press.nil?
+      away_press = 0
+    end
+
+    {
+      home_press:,
+      away_press:
+    }
+  end
 end

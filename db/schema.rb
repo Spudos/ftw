@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_19_075557) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_05_084417) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -200,6 +200,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_19_075557) do
     t.integer "dfc_aggression"
     t.integer "mid_aggression"
     t.integer "att_aggression"
+    t.integer "press"
   end
 
   create_table "templates", force: :cascade do |t|
