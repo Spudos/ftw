@@ -1,12 +1,22 @@
-<% if current_user %>
-    hello <%= current_user.email %><br>
-    you are a <%= current_user.role %><br>
-    <%= link_to "sign out", destroy_user_session_path, 'data-turbo-method': :delete %><br>
-    <% if current_user.gm? %>
-    users: <%= User.count %>
-    <% end %>
-<% else %>
-  Not logged in<br>
-  <%= link_to "sign up", new_user_registration_path %><br>
-  <%= link_to "sign in", new_user_session_path %>
-<% end %>
+<h3>Welcome to FTW</h3>
+
+<h4>Future features:</h4>
+<p>turn actions from club screens<p>
+<p>colour code skills if trained to pot<p>
+<p>special events like community chance in monopoly<p>
+<p>list a player<p>
+<p>Player values</p>
+<p>loan<p>
+<p>sell / buy a player<p>
+<p>sponsorship<p>
+<p>ticket price<p>
+<p>attendance<p>
+<p>finance structure including weekly costs<p>
+<p>cards<p>
+<p>substitutions<p>
+<p>board interactions<p>
+<p>turn payment system<p>
+<p>player emails/comms<p>
+<p>international management<p>
+<p>manager rating<p>
+<p>generate youth player<p>

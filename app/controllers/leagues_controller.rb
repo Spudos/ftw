@@ -36,6 +36,7 @@ class LeaguesController < ApplicationController
   end
 
   def league_cup
+    initialize_fixtures('Cup')
     render 'leagues/cup/league'
   end
 

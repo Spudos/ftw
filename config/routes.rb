@@ -37,12 +37,15 @@ Rails.application.routes.draw do
   get '/leagues/cup/league', to: 'leagues#league_cup'
 
   post '/turnsheets/process_turnsheet', to: 'turnsheets#process_turnsheet'
+
   post '/turns/process_turn', to: 'turns#process_turn'
+
   post '/matches/match', to: 'matches#match'
   get '/matches/outcome', to: 'matches#outcome'
   post '/matches/save', to: 'matches#save', as: 'save_match'
   get '/matches/:id', to: 'matches#show', as: 'show_match'
   post '/matches/match_multiple', to: 'matches#match_multiple'
+
   post '/players/potential_update', to: 'players#potential_update'
   get '/players/total_goals', to: 'players#total_goals'
   get '/players/total_assists', to: 'players#total_assists'

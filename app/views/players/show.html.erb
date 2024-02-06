@@ -38,7 +38,9 @@
       <th scope="col">Gls</th>
       <th scope="col">Ast</th>
       <th scope="col">Perf</th>
-      <th scope="col">Action</th>
+      <% if current_user.gm? %>
+      <th scope="col">Edit</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -56,7 +58,9 @@
         <td><%= player[:goals] %></td>
         <td><%= player[:assists] %></td>
         <td><%= player[:average_match_performance] %></td>
+        <% if current_user.gm? %>
         <td><%= link_to "Edit", edit_player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

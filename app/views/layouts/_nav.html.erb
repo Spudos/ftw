@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="">For The Win</a>
+    <a class="navbar-brand" href="/">For The Win</a>
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -45,25 +45,20 @@
           <a class="nav-link" href="<%= leagues_cup_league_path %>">League Cup</a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link" href="<%= players_path %>">Players</a>
+        </li>
+
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Players
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="nav-link" href="<%= players_path %>">Player Statistics</a></li>
-              <li><a class="nav-link" href="<%= players_path %>">Player Search</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Transfer
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="nav-link" href="<%= players_path %>">Completed Transfers</a></li>
-              <li><a class="nav-link" href="<%= players_path %>">Listed Players</a></li>
-              <li><a class="nav-link" href="<%= players_path %>">Unsigned Players</a></li>
-            </ul>
-          </li>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Transfer
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="nav-link" href="<%= players_path %>">Completed Transfers</a></li>
+            <li><a class="nav-link" href="<%= players_path %>">Listed Players</a></li>
+            <li><a class="nav-link" href="<%= players_path %>">Unsigned Players</a></li>
+          </ul>
+        </li>
 
         <% if current_user&.manager? || current_user&.gm? %>
         <li class="nav-item">
