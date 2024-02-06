@@ -35,6 +35,10 @@ class PlayersController < ApplicationController
     end
   end
 
+  def player_view
+    # scope only correct results
+  end
+
   def new
     @player = Player.new
   end

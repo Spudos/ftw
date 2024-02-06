@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   resources :turns
   resources :selections
   resources :clubs
-  resources :players
+  resources :players do
+    collection do
+      get 'player_view', to: 'players#player_view'
+    end
+  end
   resources :matches
   resources :fixtures
   resources :clubs, param: :abbreviation
