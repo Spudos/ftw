@@ -1,7 +1,7 @@
 class Player < ApplicationRecord
   has_many :performances
-  has_many :goals, foreign_key: :scorer
-  has_many :assists, foreign_key: :assist, class_name: 'Goal'
+  has_many :goals, foreign_key: :scorer_id
+  has_many :assists, foreign_key: :assist_id, class_name: 'Goal'
 
   def total_skill
     if position == 'gkp'
@@ -39,8 +39,23 @@ class Player < ApplicationRecord
     control + running + shooting + dribbling + offensive_heading + flair
   end
 
+  def self.player_data
+    @player_data ||= Player.includes(:performances, :goals, :assists).load # Player.joins(:performances, :goals, :assists).load
+  end
+
+  def self.precalculate_average_match_performance
+    @precalculate_average_match_performance ||=
+      Performance.select('player_id, AVG(match_performance) AS total').group(:player_id)
+  end
+
+  def self.average_match_performance_for_player(player_id)
+    return 0 if precalculate_average_match_performance.select { |row| row.player_id == player_id }.first.nil?
+
+    precalculate_average_match_performance.select { |row| row.player_id == player_id }.first[:total]
+  end
+
   def self.compile_player_view
-    Player.includes(:performances, :goals, :assists).map do |player|
+    player_data.map do |player|
       {
         id: player.id,
         name: player.name,
@@ -49,10 +64,10 @@ class Player < ApplicationRecord
         nationality: player.nationality,
         position: (player.position + player.player_position_detail).upcase,
         total_skill: player.total_skill,
-        played: player.performances.count,
-        goals: player.goals.count,
-        assists: player.assists.count,
-        average_match_performance: player.performances.average(:match_performance).to_i
+        played: player.performances.size,
+        goals: player.goals.size,
+        assists: player.assists.size,
+        average_match_performance: average_match_performance_for_player(player.id).to_i #player.performances.average(:match_performance).to_i
       }
     end
   end
@@ -99,7 +114,7 @@ class Player < ApplicationRecord
 
 
   def self.compile_top_performance_view(params)
-    players = Player.includes(:performances, :goals, :assists).map do |player|
+    players = player_data.map do |player|
       {
         id: player.id,
         name: player.name,
@@ -119,7 +134,7 @@ class Player < ApplicationRecord
   end
 
   def self.compile_top_goals_view(params)
-    players = Player.includes(:performances, :goals, :assists).map do |player|
+    players = player_data.map do |player|
       {
         id: player.id,
         name: player.name,
@@ -139,7 +154,7 @@ class Player < ApplicationRecord
   end
 
   def self.compile_top_assists_view(params)
-    players = Player.includes(:performances, :goals, :assists).map do |player|
+    players = player_data.map do |player|
       {
         id: player.id,
         name: player.name,
