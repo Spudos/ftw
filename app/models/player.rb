@@ -57,29 +57,46 @@ class Player < ApplicationRecord
     end
   end
 
-  def self.compile_top_total_skill_view(params)
-    players = Player.all.map do |player|
-      unless Club.find_by(abbreviation: player.club)&.league == params
-        next
-      end
+  def self.compile_top_total_skill_view(league, position)
+    if position == 'all'
+      players = Player.all.map do |player|
+        unless Club.find_by(abbreviation: player.club)&.league == league
+          next
+        end
 
-      info = {
-        id: player.id,
-        name: player.name,
-        club: player.club,
-        position: (player.position + player.player_position_detail).upcase,
-        total_skill: player.total_skill
-      }
+        info = {
+          id: player.id,
+          name: player.name,
+          club: player.club,
+          position: (player.position + player.player_position_detail).upcase,
+          total_skill: player.total_skill
+        }
+      end
+    else
+      players = Player.where(position: position).map do |player|
+        unless Club.find_by(abbreviation: player.club)&.league == league
+          next
+        end
+
+        info = {
+          id: player.id,
+          name: player.name,
+          club: player.club,
+          position: (player.position + player.player_position_detail).upcase,
+          total_skill: player.total_skill
+        }
+      end
     end
 
     players.compact!
 
     players.sort_by! { |player| -player[:total_skill] }
 
-    top_skill_players = players.take(10)
+    top_skill_players = players.take(20)
 
     return top_skill_players
   end
+
 
   def self.compile_top_performance_view(params)
     players = Player.includes(:performances, :goals, :assists).map do |player|
@@ -96,7 +113,7 @@ class Player < ApplicationRecord
 
     players.sort_by! { |player| -player[:average_match_performance] }
 
-    top_perf_players = players.take(10)
+    top_perf_players = players.take(20)
 
     return top_perf_players
   end
@@ -116,7 +133,7 @@ class Player < ApplicationRecord
 
     players.sort_by! { |player| -player[:goals] }
 
-    top_goals_players = players.take(10)
+    top_goals_players = players.take(20)
 
     return top_goals_players
   end
@@ -136,7 +153,7 @@ class Player < ApplicationRecord
 
     players.sort_by! { |record| -record[:assists] }
 
-    top_assists_players = players.take(10)
+    top_assists_players = players.take(20)
 
     return top_assists_players
   end

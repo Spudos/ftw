@@ -47,7 +47,11 @@ class LeaguesController < ApplicationController
   end
 
   def initialize_statistics(league)
-    @top_total_skill = Player.compile_top_total_skill_view(league)
+    @top_total_skill = Player.compile_top_total_skill_view(league, 'all')
+    @top_total_skill_gkp = Player.compile_top_total_skill_view(league, 'gkp')
+    @top_total_skill_dfc = Player.compile_top_total_skill_view(league, 'dfc')
+    @top_total_skill_mid = Player.compile_top_total_skill_view(league, 'mid')
+    @top_total_skill_att = Player.compile_top_total_skill_view(league, 'att')
     @top_performance = Player.compile_top_performance_view(league)
     @top_goals = Player.compile_top_goals_view(league)
     @top_assists = Player.compile_top_assists_view(league)

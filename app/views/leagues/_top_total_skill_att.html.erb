@@ -1,21 +1,21 @@
 <table class="table-sm table-hover">
   <tr>
-    <th colspan="5" scope="col"><h4>Top Players by Performance</h4><th>
+    <th colspan="5" scope="col"><h4>Top Attackers by Skill</h4><th>
   </tr>
   <tr>
     <th scope="col">id</th>
     <th scope="col">Name</th>
     <th scope="col">Club</th>
     <th scope="col">Position</th>
-    <th scope="col">Performance</th>
+    <th scope="col">Total Skill</th>
   </tr>
-  <% @top_performance.each do |player| %>
+  <% @top_total_skill_att.each do |player| %>
     <tr scope="row">
       <td><%= player[:id] %></td>
       <td><%= player[:name] %></td>
       <td><%= Club.find_by(abbreviation: player[:club])&.name %></td>
       <td><%= player[:position] %></td>
-      <td><%= player[:average_match_performance] %></td>
+      <td><%= player[:total_skill] %></td>
     </tr>
   <% end %>
 </table>
