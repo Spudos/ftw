@@ -8,8 +8,8 @@ class Match::SquadCreator
   def call
     tactics_check
 
-    home_selection = Selection.where(club: fixture[:club_home]).count
-    away_selection = Selection.where(club: fixture[:club_away]).count
+    home_selection = Selection.where(club: fixture[:club_home]).size
+    away_selection = Selection.where(club: fixture[:club_away]).size
 
     if home_selection != 11 || away_selection != 11
       raise StandardError, "Team #{fixture[:club_home]} have selected #{home_selection} players, Team #{fixture[:club_away]} have selected #{away_selection} players.  Both teams must have 11 players selected.  This game and all subsequent games have not been run. class:#{self.class.name} class."

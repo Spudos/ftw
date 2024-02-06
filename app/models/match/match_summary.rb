@@ -32,12 +32,12 @@ class Match::MatchSummary
       mid_aggression_away: minute_by_minute.first[:mid_aggression_away],
       att_aggression_away: minute_by_minute.first[:att_aggression_away],
       away_press: minute_by_minute.first[:away_press],
-      chance_count_home: minute_by_minute.count { |chance| chance[:chance_outcome] == 'home' },
-      chance_count_away: minute_by_minute.count { |chance| chance[:chance_outcome] == 'away' },
-      chance_on_target_home: minute_by_minute.count { |chance| chance[:chance_on_target] == 'home' },
-      chance_on_target_away: minute_by_minute.count { |chance| chance[:chance_on_target] == 'away' },
-      goal_home: minute_by_minute.count { |chance| chance[:goal_scored] == 'home' },
-      goal_away: minute_by_minute.count { |chance| chance[:goal_scored] == 'away' }
+      chance_count_home: minute_by_minute.size { |chance| chance[:chance_outcome] == 'home' },
+      chance_count_away: minute_by_minute.size { |chance| chance[:chance_outcome] == 'away' },
+      chance_on_target_home: minute_by_minute.size { |chance| chance[:chance_on_target] == 'home' },
+      chance_on_target_away: minute_by_minute.size { |chance| chance[:chance_on_target] == 'away' },
+      goal_home: minute_by_minute.size { |chance| chance[:goal_scored] == 'home' },
+      goal_away: minute_by_minute.size { |chance| chance[:goal_scored] == 'away' }
     }
     match_summary
   end

@@ -25,7 +25,7 @@ class Player < ApplicationRecord
 
   def gkp_skill
     passing + control + tackling + shooting + offensive_heading + strength
-  end 
+  end
 
   def dfc_skill
     control + tackling + running + defensive_heading + strength + creativity
@@ -74,10 +74,10 @@ class Player < ApplicationRecord
 
   def self.compile_top_total_skill_view(league, position)
     if position == 'all'
-      players = Player.all.map do |player|
-        unless Club.find_by(abbreviation: player.club)&.league == league
-          next
-        end
+      players = player_data.map do |player|
+        # unless Club.find_by(abbreviation: player.club)&.league == league
+        #   next
+        # end
 
         info = {
           id: player.id,
@@ -89,9 +89,9 @@ class Player < ApplicationRecord
       end
     else
       players = Player.where(position: position).map do |player|
-        unless Club.find_by(abbreviation: player.club)&.league == league
-          next
-        end
+        # unless Club.find_by(abbreviation: player.club)&.league == league
+        #   next
+        # end
 
         info = {
           id: player.id,
@@ -112,7 +112,6 @@ class Player < ApplicationRecord
     return top_skill_players
   end
 
-
   def self.compile_top_performance_view(params)
     players = player_data.map do |player|
       {
@@ -120,7 +119,7 @@ class Player < ApplicationRecord
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        average_match_performance: player.performances.where(competition: params).average(:match_performance).to_i
+        average_match_performance: 1 # player.performances.where(competition: params).average(:match_performance).to_i
       }
     end
 
@@ -140,7 +139,7 @@ class Player < ApplicationRecord
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        goals: player.goals.where(competition: params).count(:scorer_id).to_i
+        goals: 2 #player.goals.where(competition: params).count(:scorer_id).to_i
       }
     end
 
@@ -160,7 +159,7 @@ class Player < ApplicationRecord
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        assists: player.assists.where(competition: params).count(:assist_id).to_i
+        assists: 1 #player.assists.where(competition: params).count(:assist_id).to_i
       }
     end
 

@@ -14,7 +14,7 @@ class SelectionsController < ApplicationController
 
   def create
     club = Club.find_by(abbreviation: params[:club])
-    if params[:player_ids].nil? || params[:player_ids].count != 11
+    if params[:player_ids].nil? || params[:player_ids].size != 11
       flash[:alert] = 'You must select 11 players.'
       redirect_to club_path(params[:club])
     else
