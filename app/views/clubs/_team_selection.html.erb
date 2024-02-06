@@ -31,6 +31,7 @@
             <td><%= Goal.where(assist_id: player.id).count(:assist_id) %></td>
             <td><%= Goal.where(scorer_id: player.id).count(:scorer_id) %></td>
             <td><%= Performance.where(player_id: player.id).average(:match_performance).to_i %></td>
+            <td><%= link_to "Show", player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>
           </tr>
         <% end %>
       </tbody>

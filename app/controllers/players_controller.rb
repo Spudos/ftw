@@ -6,7 +6,9 @@ class PlayersController < ApplicationController
     @players = Player.all
   end
 
-  def show
+  def show; end
+
+  def player_view
     @players = Player.compile_player_view
 
     @sort1 = @players.sort_by { |player| player[params[:sort_column].to_sym] }
@@ -35,23 +37,18 @@ class PlayersController < ApplicationController
     end
   end
 
-  def player_view
-    # scope only correct results
-  end
-
   def new
     @player = Player.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @player = Player.new(player_params)
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to players_path, notice: "Player was successfully created." }
+        format.html { redirect_to players_path, notice: 'Player was successfully created.' }
         format.json { render :show, status: :created, location: @player }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -63,7 +60,7 @@ class PlayersController < ApplicationController
   def update
     respond_to do |format|
       if @player.update(player_params)
-        format.html { redirect_to players_path, notice: "Player was successfully updated." }
+        format.html { redirect_to request.referrer, notice: 'Player was successfully updated.' }
         format.json { render :show, status: :ok, location: @player }
       else
         format.html { render :edit, status: :unprocessable_entity }

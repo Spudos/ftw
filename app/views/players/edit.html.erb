@@ -4,5 +4,5 @@
 
 <div>
   <%= button_to "Delete player", @player, method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "Are you sure you want to delete this player?" } %>
-  <%= link_to "Back to players", players_path, class: "btn btn-sm btn-primary" %>
+  <%= link_to "Back", request.referrer, class: "btn btn-sm btn-primary" %>
 </div>

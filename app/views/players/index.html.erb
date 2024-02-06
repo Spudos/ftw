@@ -1,4 +1,4 @@
-<form action="/players/player_view" method="get">
+<form action="/players2/player_view" method="get">
   <label for="sort_column">Sort by:</label>
   <select id="sort_column" name="sort_column">
     <option value="name">Name</option>
@@ -7,17 +7,18 @@
     <option value="nationality">Nat</option>
     <option value="position">Pos</option>
     <option value="total_skill">TS</option>
-    <option value="match_performanceormance_count">Played</option>
-    <option value="goal_count">Goal</option>
-    <option value="assist_count">Assist</option>
-    <option value="average_match_performanceormance">Perf</option>
+    <option value="played">Played</option>
+    <option value="goals">Goals</option>
+    <option value="assists">Assists</option>
+    <option value="average_match_performance">Average Perf</option>
   </select>
   <label for="sort_direction">Sort by:</label>
   <select id="sort_direction" name="sort_direction">
     <option value="asc">Ascending</option>
     <option value="desc">Descending</option>
   </select>
+  <label for="sort_criteria">Enter a player name to search for:</label>
   <input type="text" id="sort_criteria" name="sort_criteria">
   <input type="hidden" id="page" name="page" value="<%= params[:page] || 1 %>">
-  <button type="submit" class="btn btn-primary btn-sm">Show</button>
+  <button type="submit" class="btn btn-primary btn-sm">Sort</button>
 </form>

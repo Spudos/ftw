@@ -1,70 +1,7 @@
-<form action="/players/sort_players" method="get">
-  <label for="sort_column">Sort by:</label>
-  <select id="sort_column" name="sort_column">
-    <option value="name">Name</option>
-    <option value="age">Age</option>
-    <option value="club">Club</option>
-    <option value="nationality">Nat</option>
-    <option value="position">Pos</option>
-    <option value="total_skill">TS</option>
-    <option value="played">Played</option>
-    <option value="goals">Goals</option>
-    <option value="assists">Assists</option>
-    <option value="average_match_performance">Average Perf</option>
-  </select>
-  <label for="sort_direction">Sort by:</label>
-  <select id="sort_direction" name="sort_direction">
-    <option value="asc">Ascending</option>
-    <option value="desc">Descending</option>
-  </select>
-  <input type="text" id="sort_criteria" name="sort_criteria">
-  <input type="hidden" id="page" name="page" value="<%= params[:page] || 1 %>">
-  <button type="submit" class="btn btn-primary btn-sm">Sort</button>
-</form>
+<h1>Player View</h1>
+
+<%= render 'form', player: @player %>
+
 <div>
-  <%= will_paginate @paginated_players, class: "apple_pagination" %>
-</div>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Age</th>
-      <th scope="col">Club</th>
-      <th scope="col">Nat</th>
-      <th scope="col">Pos</th>
-      <th scope="col">TS</th>
-      <th scope="col">P</th>
-      <th scope="col">Gls</th>
-      <th scope="col">Ast</th>
-      <th scope="col">Perf</th>
-      <% if current_user.gm? %>
-      <th scope="col">Edit</th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    
-    <% @paginated_players.each do |player| %>
-      <tr scope="row">
-        <td><%= player[:id] %></td>
-        <td><%= player[:name] %></td>
-        <td><%= player[:age] %></td>
-        <td><%= Club.find_by(abbreviation: player[:club])&.name %></td>
-        <td><%= player[:nationality] %></td>
-        <td><%= player[:position] %></td>
-        <td><%= player[:total_skill] %></td>
-        <td><%= player[:played] %></td>
-        <td><%= player[:goals] %></td>
-        <td><%= player[:assists] %></td>
-        <td><%= player[:average_match_performance] %></td>
-        <% if current_user.gm? %>
-        <td><%= link_to "Edit", edit_player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<div>
-  <%= will_paginate @paginated_players, class: "apple_pagination" %>
+  <%= link_to "Back", request.referrer, class: "btn btn-sm btn-primary" %>
 </div>

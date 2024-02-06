@@ -41,6 +41,7 @@
         <td><%= player.creativity %></td>
         <td><%= player.fitness %></td>
         <td><%= player.contract %></td>
+        <td><%= link_to "Show", player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>
