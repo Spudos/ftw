@@ -62,48 +62,50 @@
         <td><%= Club.find_by(abbreviation: @matches[0].home_team)&.name %></td>
         <td><%= Club.find_by(abbreviation: @matches[0].away_team)&.name %></td>
       </tr>
-      <tr>
-        <td>Tactic</td>
-        <td><%= @matches[0].tactic_home %></td>
-        <td><%= @matches[0].tactic_away %></td>
-      </tr>
-      <tr>
-        <td>DFC Blend</td>
-        <td><%= @matches[0].dfc_blend_home %></td>
-        <td><%= @matches[0].dfc_blend_away %></td>
-      </tr>
-      <tr>
-        <td>MID Blend</td>
-        <td><%= @matches[0].mid_blend_home %></td>
-        <td><%= @matches[0].mid_blend_away %></td>
-      </tr>
-      <tr>
-        <td>ATT Blend</td>
-        <td><%= @matches[0].att_blend_home %></td>
-        <td><%= @matches[0].att_blend_away %></td>
-      </tr>
-      <tr>
-      <tr>
-        <td>DFC Aggression</td>
-        <td><%= @matches[0].dfc_aggression_home %></td>
-        <td><%= @matches[0].dfc_aggression_away %></td>
-      </tr>
-      <tr>
-        <td>MID Aggression</td>
-        <td><%= @matches[0].mid_aggression_home %></td>
-        <td><%= @matches[0].mid_aggression_away %></td>
-      </tr>
-      <tr>
-        <td>ATT Aggression</td>
-        <td><%= @matches[0].att_aggression_home %></td>
-        <td><%= @matches[0].att_aggression_away %></td>
-      </tr>
-      <tr>
-        <td>Press style</td>
-        <td><%= @matches[0].home_press %></td>
-        <td><%= @matches[0].away_press %></td>
-      </tr>
-      <tr>
+      <% if current_user.gm? || current_user.email == Club.find_by(abbreviation: @matches[0].home_team)&.manager_email || Club.find_by(abbreviation: @matches[0].away_team)&.manager_email %>
+        <tr>
+          <td>Tactic</td>
+          <td><%= @matches[0].tactic_home %></td>
+          <td><%= @matches[0].tactic_away %></td>
+        </tr>
+        <tr>
+          <td>DFC Blend</td>
+          <td><%= @matches[0].dfc_blend_home %></td>
+          <td><%= @matches[0].dfc_blend_away %></td>
+        </tr>
+        <tr>
+          <td>MID Blend</td>
+          <td><%= @matches[0].mid_blend_home %></td>
+          <td><%= @matches[0].mid_blend_away %></td>
+        </tr>
+        <tr>
+          <td>ATT Blend</td>
+          <td><%= @matches[0].att_blend_home %></td>
+          <td><%= @matches[0].att_blend_away %></td>
+        </tr>
+        <tr>
+        <tr>
+          <td>DFC Aggression</td>
+          <td><%= @matches[0].dfc_aggression_home %></td>
+          <td><%= @matches[0].dfc_aggression_away %></td>
+        </tr>
+        <tr>
+          <td>MID Aggression</td>
+          <td><%= @matches[0].mid_aggression_home %></td>
+          <td><%= @matches[0].mid_aggression_away %></td>
+        </tr>
+        <tr>
+          <td>ATT Aggression</td>
+          <td><%= @matches[0].att_aggression_home %></td>
+          <td><%= @matches[0].att_aggression_away %></td>
+        </tr>
+        <tr>
+          <td>Press style</td>
+          <td><%= @matches[0].home_press %></td>
+          <td><%= @matches[0].away_press %></td>
+        </tr>
+        <tr>
+      <% end %>
         <td>possession</td>
         <td><%= @matches[0].home_possession %></td>
         <td><%= @matches[0].away_possession %></td>

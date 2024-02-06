@@ -55,6 +55,5 @@ class LeaguesController < ApplicationController
 
   def initialize_fixtures(league)
     @fixtures = Fixture.where(comp: league)
-    @week_number = '1'
   end
 end
