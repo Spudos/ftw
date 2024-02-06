@@ -15,13 +15,28 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  post '/turnsheets/process_turnsheet', to: 'turnsheets#process_turnsheet'
-
   resources :turnsheets do
     get 'edit', on: :member
     post 'edit', on: :member
   end
 
+  get '/clubs/manager/club_view', to: 'clubs#club_view'
+  get '/clubs/manager/first_team', to: 'clubs#first_team'
+  get '/clubs/manager/team_statistics', to: 'clubs#team_statistics'
+  get '/clubs/manager/team_selection', to: 'clubs#team_selection'
+  get '/clubs/manager/results', to: 'clubs#results'
+  get '/clubs/manager/fixtures', to: 'clubs#fixtures'
+  get '/clubs/manager/history', to: 'clubs#history'
+
+  get '/leagues/premier/table', to: 'leagues#premier_league_table'
+  get '/leagues/premier/statistics', to: 'leagues#premier_league_statistics'
+  get '/leagues/premier/fixtures', to: 'leagues#premier_league_fixtures'
+  get '/leagues/championship/table', to: 'leagues#championship_league_table'
+  get '/leagues/championship/statistics', to: 'leagues#championship_league_statistics'
+  get '/leagues/championship/fixtures', to: 'leagues#championship_league_fixtures'
+  get '/leagues/cup/league', to: 'leagues#league_cup'
+
+  post '/turnsheets/process_turnsheet', to: 'turnsheets#process_turnsheet'
   post '/turns/process_turn', to: 'turns#process_turn'
   post '/matches/match', to: 'matches#match'
   get '/matches/outcome', to: 'matches#outcome'

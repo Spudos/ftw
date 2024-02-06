@@ -1,5 +1,3 @@
-<% club = Club.find_by(abbreviation: params[:id]) %>
-
 <div class="container align-items-start">
   <div class="row text-center">
     <div class="col-md-12">
@@ -11,7 +9,6 @@
   </div>
 
   <div class="text-left">
-    <%= render "messages_new" %>
     <div class="row text-left">
       <div class="col-md-6">
         <%= render "stadium" %>
@@ -19,23 +16,7 @@
       <div class="col-md-6">
         <%= render "staff" %>
       </div>
-
-    <%= render "normal_skills" %>
-
-    <%= render "hidden_skills" %>
-
-    <%= render "team_statistics" %>
-
-    <%= render "team_selection" %>
-
-    <%= render "tactics_selection" %>
-
-    <%= render "results" %>
-
-    <%= render "fixtures" %>
-
-    <%= render "messages" %>
-    
+    <%= render "messages_new" %>
     </div>
   </div>
 </div>

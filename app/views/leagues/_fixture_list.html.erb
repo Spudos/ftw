@@ -1,0 +1,34 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Week</th>
+      <th scope="col">HM Abbr</th>
+      <th scope="col">Home</th>
+      <th scope="col">AW Abbr</th>
+      <th scope="col">Away</th>
+      <th scope="col">Comp</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @fixtures.each do |fixture| %>
+      <tr scope="row">
+        <td><%= fixture.id %></td>
+        <td><%= fixture.week_number %></td>
+        <td><%= fixture.home %></td>
+        <td><%= Club.find_by(abbreviation: fixture.home)&.name %></td>
+        <td><%= fixture.away %></td>
+        <td><%= Club.find_by(abbreviation: fixture.away)&.name %></td>
+        <td><%= fixture.comp %></td>
+        <td>
+          <% if Match.exists?(match_id: fixture.id) %>
+            <%= link_to 'Show Result', show_match_path(fixture.id), class: "btn btn-sm btn-primary" %>
+          <% else %>
+            <%= link_to 'Show Result', '#', class: "btn btn-sm btn-primary disabled", disabled: true %>
+          <% end %>
+        </td
+      </tr>
+    <% end %>
+  </tbody>
+</table>

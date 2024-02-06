@@ -15,56 +15,43 @@
             My Club
             </a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="<%= clubs_path %>">Club View</a></li>
-              <li><a class="nav-link" href="<%= new_club_path %>">First Team</a></li>
-              <li><a class="nav-link" href="<%= players_path %>">Team Statistics</a></li>
-              <li><a class="nav-link" href="<%= new_player_path %>">Team Selection</a></li>
-              <li><a class="nav-link" href="<%= fixtures_path %>">Results</a></li>
-              <li><a class="nav-link" href="<%= new_fixture_path %>">Fixtures</a></li>
-              <li><a class="nav-link" href="<%= turnsheets_path %>">History</a></li>
+              <li><a class="nav-link" href="<%= clubs_manager_club_view_path %>">Club View</a></li>
+              <li><a class="nav-link" href="<%= clubs_manager_first_team_path %>">First Team</a></li>
+              <li><a class="nav-link" href="<%= clubs_manager_team_statistics_path %>">Team Statistics</a></li>
+              <li><a class="nav-link" href="<%= clubs_manager_team_selection_path %>">Team Selection</a></li>
+              <li><a class="nav-link" href="<%= clubs_manager_results_path %>">Results</a></li>
+              <li><a class="nav-link" href="<%= clubs_manager_fixtures_path %>">Fixtures</a></li>
+              <li><a class="nav-link" href="<%= clubs_manager_history_path %>">History</a></li>
             </ul>
           </li>
         <% end %>
 
-        <li class="nav-item dropdown" data-bs-hover="dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Leagues</a>
-          <ul class="dropdown-menu">
-            <li class="nav-item dropdown" data-bs-hover="dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Premier League</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Table</a></li>
-                <li><a class="dropdown-item" href="#">Statistics</a></li>
-                <li><a class="dropdown-item" href="#">Fixtures</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown" data-bs-hover="dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Championship</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Table</a></li>
-                <li><a class="dropdown-item" href="#">Statistics</a></li>
-                <li><a class="dropdown-item" href="#">Fixtures</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-
-
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            League Cup
+            League
             </a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="<%= clubs_path %>">League Cup Fixtures</a></li>
-              <li><a class="nav-link" href="<%= new_club_path %>">League Cup Results</a></li>
+              <li><a class="nav-link" href="<%= leagues_premier_table_path %>">Premier League Table</a></li>
+              <li><a class="nav-link" href="<%= leagues_premier_statistics_path %>">Premier League Statistics</a></li>
+              <li><a class="nav-link" href="<%= leagues_premier_fixtures_path %>">Premier League Fixtures</a></li>
+              <li><a class="nav-link" href="<%= leagues_championship_table_path %>">Championship Table</a></li>
+              <li><a class="nav-link" href="<%= leagues_championship_statistics_path %>">Championship Statistics</a></li>
+              <li><a class="nav-link" href="<%= leagues_championship_fixtures_path %>">Championship Fixtures</a></li>
             </ul>
           </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="<%= leagues_cup_league_path %>">League Cup</a>
+        </li>
+
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Players
             </a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="<%= clubs_path %>">Player Staistics</a></li>
-              <li><a class="nav-link" href="<%= new_club_path %>">Player Search</a></li>
+              <li><a class="nav-link" href="<%= players_path %>">Player Staistics</a></li>
+              <li><a class="nav-link" href="<%= players_path %>">Player Search</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -72,9 +59,9 @@
             Transfer
             </a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="<%= clubs_path %>">Completed Transfers</a></li>
-              <li><a class="nav-link" href="<%= new_club_path %>">Listed Players</a></li>
-              <li><a class="nav-link" href="<%= new_club_path %>">Unsigned Players</a></li>
+              <li><a class="nav-link" href="<%= players_path %>">Completed Transfers</a></li>
+              <li><a class="nav-link" href="<%= players_path %>">Listed Players</a></li>
+              <li><a class="nav-link" href="<%= players_path %>">Unsigned Players</a></li>
             </ul>
           </li>
 

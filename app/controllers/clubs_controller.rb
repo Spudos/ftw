@@ -1,5 +1,5 @@
 class ClubsController < ApplicationController
-  before_action :set_club, only: [:show, :edit, :update, :destroy]
+  before_action :set_club, except: [:index, :new]
 
   def index
     @clubs = Club.all
@@ -55,10 +55,40 @@ class ClubsController < ApplicationController
     end
   end
 
+  def club_view
+    render 'clubs/manager/club_view'
+  end
+
+  def first_team
+    render 'clubs/manager/first_team'
+  end
+
+  def team_statistics
+    render 'clubs/manager/team_statistics'
+  end
+
+  def team_selection
+    render 'clubs/manager/team_selection'
+  end
+
+  def results
+    render 'clubs/manager/results'
+  end
+
+  def fixtures
+    render 'clubs/manager/fixtures'
+  end
+
+  def history
+    render 'clubs/manager/history'
+  end
+
   private
 
   def set_club
-    @club = Club.find_by(abbreviation: params[:id])
+    @club = Club.find_by(manager_email: current_user[:email])
+    @club_matches = Match.where('home_team = ? OR away_team = ?', @club.abbreviation, @club.abbreviation)
+    @club_fixtures = Fixture.where('home= ? OR away = ?', @club.abbreviation, @club.abbreviation)
   end
 
   def club_params

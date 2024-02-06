@@ -1,0 +1,33 @@
+<h3 class="text-center">Team Statistics</h3>
+<div id="form-container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Position</th>
+        <th scope="col">Age</th>
+        <th scope="col">Total Skill</th>         
+        <th scope="col">Fitness</th>
+        <th scope="col">Played</th>
+        <th scope="col">Goals</th>
+        <th scope="col">Assists</th>
+        <th scope="col">Av. Perf</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Player.where(club: @club.abbreviation).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
+        <tr scope="row">
+          <td><%= player.name %></td>
+          <td><%= (player.position + player.player_position_detail).upcase %></td>
+          <td><%= player.age %></td>
+          <td><%= player.total_skill %></td>
+          <td><%= player.fitness %></td>
+          <td><%= Performance.where(player_id: player.id).count(:match_performance) %></td>
+          <td><%= Goal.where(assist_id: player.id).count(:assist_id) %></td>
+          <td><%= Goal.where(scorer_id: player.id).count(:scorer_id) %></td>
+          <td><%= Performance.where(player_id: player.id).average(:match_performance).to_i %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
