@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :player do
     sequence(:id) { |n| 401 + n }
-    club { '001' }
     name { 'Woolley' }
     position { 'gkp' }
     passing { 5 }

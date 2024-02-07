@@ -158,12 +158,12 @@ RSpec.describe Turn, type: :model do
     it 'increases the skill by 1 point as the coach > skill and he has potential' do
       week = 1
       action_id = '10011'
-      club = '001'
+      club = 1
       player = 'Woolley'
       skill = 'tackling'
 
       create(:club, staff_dfc: 10)
-      create(:player, position: 'dfc')
+      create(:player, position: 'dfc', club: 1)
 
       Turn.new.send(:train_player, action_id, week, club, player, skill)
 
