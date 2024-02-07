@@ -132,8 +132,14 @@ footer {
 #content {
   width: 80%;
   margin: auto;
+  margin-top: 50px;
 }
 
 .col-2 {
   height: 3200px;
+  color: white;
+}
+
+.accordion {
+  margin-top: 50px;
 }
