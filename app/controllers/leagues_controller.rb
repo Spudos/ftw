@@ -59,6 +59,7 @@ class LeaguesController < ApplicationController
   end
 
   def initialize_fixtures(league)
-    @fixtures = Fixture.where(comp: league)
+    @weeks = Fixture.distinct.pluck(:week_number).uniq
+    @fixtures = Fixture.where(comp: league, week_number: params[:week_number])
   end
 end
