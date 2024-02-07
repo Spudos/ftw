@@ -2,6 +2,7 @@ class Player < ApplicationRecord
   has_many :performances
   has_many :goals, foreign_key: :scorer_id
   has_many :assists, foreign_key: :assist_id, class_name: 'Goal'
+  belongs_to :club
 
   def total_skill
     if position == 'gkp'
@@ -40,7 +41,7 @@ class Player < ApplicationRecord
   end
 
   def self.player_data
-    @player_data ||= Player.includes(:performances, :goals, :assists).load
+    @player_data ||= Player.includes(:performances, :goals, :assists, :club).load
   end
 
   def self.precalculate_average_match_performance
@@ -60,7 +61,7 @@ class Player < ApplicationRecord
         id: player.id,
         name: player.name,
         age: player.age,
-        club: player.club,
+        club: player.club.name,
         nationality: player.nationality,
         position: (player.position + player.player_position_detail).upcase,
         total_skill: player.total_skill,
@@ -75,26 +76,26 @@ class Player < ApplicationRecord
   def self.compile_top_total_skill_view(league, position)
     if position == 'all'
       players = player_data.map do |player|
-        unless Club.find_by(abbreviation: player.club)&.league == league
+        unless player.club.league == league
           next
         end
         info = {
           id: player.id,
           name: player.name,
-          club: player.club,
+          club: player.club.name,
           position: (player.position + player.player_position_detail).upcase,
           total_skill: player.total_skill
         }
       end
     else
       players = player_data.where(position:).map do |player|
-        unless Club.find_by(abbreviation: player.club)&.league == league
+        unless player.club.league == league
           next
         end
         info = {
           id: player.id,
           name: player.name,
-          club: player.club,
+          club: player.club.name,
           position: (player.position + player.player_position_detail).upcase,
           total_skill: player.total_skill
         }
@@ -110,12 +111,15 @@ class Player < ApplicationRecord
     return top_skill_players
   end
 
-  def self.compile_top_performance_view(params)
+  def self.compile_top_performance_view(league)
     players = player_data.map do |player|
+      unless player.club.league == league
+        next
+      end
       {
         id: player.id,
         name: player.name,
-        club: player.club,
+        club: player.club.name,
         position: (player.position + player.player_position_detail).upcase,
         average_match_performance: average_match_performance_for_player(player.id).to_i
       }
@@ -130,12 +134,15 @@ class Player < ApplicationRecord
     return top_perf_players
   end
 
-  def self.compile_top_goals_view(params)
+  def self.compile_top_goals_view(league)
     players = player_data.map do |player|
+      unless player.club.league == league
+        next
+      end
       {
         id: player.id,
         name: player.name,
-        club: player.club,
+        club: player.club.name,
         position: (player.position + player.player_position_detail).upcase,
         goals: player.goals.size
       }
@@ -150,12 +157,15 @@ class Player < ApplicationRecord
     return top_goals_players
   end
 
-  def self.compile_top_assists_view(params)
+  def self.compile_top_assists_view(league)
     players = player_data.map do |player|
+      unless player.club.league == league
+        next
+      end
       {
         id: player.id,
         name: player.name,
-        club: player.club,
+        club: player.club.name,
         position: (player.position + player.player_position_detail).upcase,
         assists: player.assists.size
       }

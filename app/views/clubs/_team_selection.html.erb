@@ -27,9 +27,9 @@
             <td><strong><%= Selection.exists?(player_id: player.id) ? 'Yes' : 'No' %></strong></td>
             <td><%= check_box_tag "player_ids[]", player.id %></td>
             <td><%= player.fitness %></td>
-            <td><%= Performance.where(player_id: player.id).size(:match_performance) %></td>
-            <td><%= Goal.where(assist_id: player.id).size(:assist_id) %></td>
-            <td><%= Goal.where(scorer_id: player.id).size(:scorer_id) %></td>
+            <td><%= Performance.where(player_id: player.id).count(:match_performance) %></td>
+            <td><%= Goal.where(assist_id: player.id).count(:assist_id) %></td>
+            <td><%= Goal.where(scorer_id: player.id).count(:scorer_id) %></td>
             <td><%= Performance.where(player_id: player.id).average(:match_performance).to_i %></td>
             <td><%= link_to "Show", player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>
           </tr>

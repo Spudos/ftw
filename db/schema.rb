@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_05_105120) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_07_132016) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -185,6 +185,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_05_105120) do
     t.integer "blend"
     t.integer "contract", default: 24
     t.integer "star"
+    t.integer "club_id"
   end
 
   create_table "selections", force: :cascade do |t|

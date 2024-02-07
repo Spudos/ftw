@@ -164,9 +164,9 @@
     <tr scope="row">
       <td><%= form.label :club, style: "display: block" %></td>
       <% if current_user.gm? %>
-        <td><%= form.text_field :club %></td>
+        <td><%= form.text_field :club_id %></td>
       <% else%>
-        <td><%= form.text_field :club, readonly: true %></td>
+        <td><%= form.text_field :club_id, readonly: true %></td>
       <% end %>
     </tr>
     <% if current_user.gm? %>
