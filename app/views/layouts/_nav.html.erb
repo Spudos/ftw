@@ -1,109 +1,93 @@
-<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse">
-      
-      <ul class="navbar-nav flex-column">
-        <% if current_user&.manager? || current_user&.gm? %>
-        <li class="nav-item">
-          <a class="nav-link" href="/">Homepage</a>
-        </li>
-
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-regular fa-futbol"></i> My Club
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="nav-link" href="<%= clubs_manager_club_view_path %>">Club View</a></li>
-              <li><a class="nav-link" href="<%= clubs_manager_first_team_path %>">First Team</a></li>
-              <li><a class="nav-link" href="<%= clubs_manager_team_statistics_path %>">Team Statistics</a></li>
-              <li><a class="nav-link" href="<%= clubs_manager_team_selection_path %>">Team Selection</a></li>
-              <li><a class="nav-link" href="<%= clubs_manager_results_path %>">Results</a></li>
-              <li><a class="nav-link" href="<%= clubs_manager_fixtures_path %>">Fixtures</a></li>
-              <li><a class="nav-link" href="<%= clubs_manager_history_path %>">History</a></li>
-            </ul>
-          </li>
-        <% end %>
-
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-regular fa-futbol"></i> League
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="nav-link" href="<%= leagues_premier_table_path %>">Premier League Table</a></li>
-              <li><a class="nav-link" href="<%= leagues_premier_statistics_path %>">Premier League Statistics</a></li>
-              <li><a class="nav-link" href="<%= leagues_premier_fixtures_path %>">Premier League Fixtures</a></li>
-              <li><a class="nav-link" href="<%= leagues_championship_table_path %>">Championship Table</a></li>
-              <li><a class="nav-link" href="<%= leagues_championship_statistics_path %>">Championship Statistics</a></li>
-              <li><a class="nav-link" href="<%= leagues_championship_fixtures_path %>">Championship Fixtures</a></li>
-            </ul>
-          </li>
-
-
-        <li class="nav-item">
-          <a class="nav-link" href="<%= leagues_cup_league_path %>"><i class="fa-regular fa-futbol"></i> League Cup</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="<%= players_path %>"><i class="fa-regular fa-futbol"></i> Players</a>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fa-regular fa-futbol"></i> Transfer
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="nav-link" href="<%= players_path %>">Completed Transfers</a></li>
-            <li><a class="nav-link" href="<%= players_path %>">Listed Players</a></li>
-            <li><a class="nav-link" href="<%= players_path %>">Unsigned Players</a></li>
-          </ul>
-        </li>
-
-        <% if current_user&.manager? || current_user&.gm? %>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= new_turnsheet_path %>"><i class="fa-regular fa-futbol"></i> Turnsheet</a>
-        </li>
-        <% end %>
-
-        <% if current_user&.gm? %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-regular fa-futbol"></i> Admin
-            </a>
-            <ul class="dropdown-menu">
-              <li>Club Functions</li>
-              <li><a class="nav-link" href="<%= clubs_path %>">View and Edit Clubs</a></li>
-              <li><a class="nav-link" href="<%= new_club_path %>">Create A Club</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li>Player Functions</li>
-              <li><a class="nav-link" href="<%= players_path %>">View and Edit Players</a></li>
-              <li><a class="nav-link" href="<%= new_player_path %>">Create A Player</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li>Fixture Functions</li>
-              <li><a class="nav-link" href="<%= fixtures_path %>">View Fixtures</a></li>
-              <li><a class="nav-link" href="<%= new_fixture_path %>">Create A Fixture</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li>Turn Functions</li>
-              <li><a class="nav-link" href="<%= turnsheets_path %>">Turnsheet</a></li>
-              <li><a class="nav-link" href="<%= turns_path %>">Turn Actions</a></li>
-              <li><a class="nav-link" href="<%= fixtures_path %>">Fixtures</a></li>
-            </ul>
-          </li>
-        <% end %>  
-
-        <li class="nav-item"> 
-          <% if current_user %> 
-            <a class="nav-link" <%= link_to "Sign out", destroy_user_session_path, 'data-turbo-method': :delete %></a>
-          <% else %>
-            <li class="nav-item">
-              <a class="nav-link ms-auto" <%= link_to "Sign up", new_user_registration_path %></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link ms-auto" <%= link_to "Sign in", new_user_session_path %></a>
-            </li>
-          <% end %>
-        </li>
-
+<div class="accordion accordion-flush" id="accordion_nav">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingOne">
+      <button class="accordion-button collapsed bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        My Club
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordion_nav">
+      <ul>
+        <li><a class="nav-link" href="<%= clubs_manager_club_view_path %>">Club View</a></li>
+        <li><a class="nav-link" href="<%= clubs_manager_first_team_path %>">First Team</a></li>
+        <li><a class="nav-link" href="<%= clubs_manager_team_statistics_path %>">Team Statistics</a></li>
+        <li><a class="nav-link" href="<%= clubs_manager_team_selection_path %>">Team Selection</a></li>
+        <li><a class="nav-link" href="<%= clubs_manager_results_path %>">Results</a></li>
+        <li><a class="nav-link" href="<%= clubs_manager_fixtures_path %>">Fixtures</a></li>
+        <li><a class="nav-link" href="<%= clubs_manager_history_path %>">History</a></li>
+        <li><a class="nav-link" href="<%= new_turnsheet_path %>">Turnsheet</a></li>
       </ul>
     </div>
   </div>
-</nav>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingTwo">
+      <button class="accordion-button collapsed bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        Competitions
+      </button>
+    </h2>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordion_nav">
+      <ul>
+        <li><a class="nav-link" href="<%= leagues_cup_league_path %>">League Cup</a></li>
+        <li><a class="nav-link" href="<%= leagues_premier_table_path %>">Premier League Table</a></li>
+        <li><a class="nav-link" href="<%= leagues_premier_statistics_path %>">Premier League Statistics</a></li>
+        <li><a class="nav-link" href="<%= leagues_premier_fixtures_path %>">Premier League Fixtures</a></li>
+        <li><a class="nav-link" href="<%= leagues_championship_table_path %>">Championship Table</a></li>
+        <li><a class="nav-link" href="<%= leagues_championship_statistics_path %>">Championship Statistics</a></li>
+        <li><a class="nav-link" href="<%= leagues_championship_fixtures_path %>">Championship Fixtures</a></li>
+        </ul>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingThree">
+      <button class="accordion-button collapsed bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+        Players
+      </button>
+    </h2>
+    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordion_nav">
+      <ul>
+        <li><a class="nav-link" href="<%= players_path %>">Players</a></li>
+        <li><a class="nav-link" href="<%= players_path %>">Completed Transfers</a></li>
+        <li><a class="nav-link" href="<%= players_path %>">Listed Players</a></li>
+        <li><a class="nav-link" href="<%= players_path %>">Unsigned Players</a></li>
+      </ul>
+    </div>
+  </div>
+  <% if current_user&.gm? %>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingfour">
+      <button class="accordion-button collapsed bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+        Admin Functions
+      </button>
+    </h2>
+    <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordion_nav">
+      <ul>
+        <li><a class="nav-link" href="<%= clubs_path %>">View and Edit Clubs</a></li>
+        <li><a class="nav-link" href="<%= new_club_path %>">Create A Club</a></li>
+        <li><a class="nav-link" href="<%= players_path %>">View and Edit Players</a></li>
+        <li><a class="nav-link" href="<%= new_player_path %>">Create A Player</a></li>
+        <li><a class="nav-link" href="<%= fixtures_path %>">View Fixtures</a></li>
+        <li><a class="nav-link" href="<%= new_fixture_path %>">Create A Fixture</a></li>
+        <li><a class="nav-link" href="<%= turnsheets_path %>">Turnsheet</a></li>
+        <li><a class="nav-link" href="<%= turns_path %>">Turn Actions</a></li>
+        <li><a class="nav-link" href="<%= fixtures_path %>">Fixtures</a></li>
+        </ul>
+    </div>
+  </div>
+  <% end %>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingFive">
+      <button class="accordion-button collapsed bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+        User
+      </button>
+    </h2>
+    <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+      <ul>
+        <% if current_user %> 
+          <li><a class="nav-link" <%= link_to "Sign out", destroy_user_session_path, 'data-turbo-method': :delete %></a></li>
+        <% else %>
+          <li><a class="nav-link" <%= link_to "Sign up", new_user_registration_path %></a></li>
+          <li><a class="nav-link" <%= link_to "Sign in", new_user_session_path %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

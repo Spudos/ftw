@@ -16,15 +16,11 @@
   <div id="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-2 bg-primary">
+        <div class="col-2 bg-success">
           <%= render 'layouts/nav' %>
         </div>
 
         <div class="col-10">
-          <header class="bg-primary">
-            <h1>For the win</h1>
-          </header>
-
           <% if notice.present? %>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
               <%= notice %>
@@ -39,11 +35,7 @@
             </div>
           <% end %>
 
-          <%= yield %>
-
-        <footer class="fixed-bottom">
-        For The Win 2024
-        </footer>   
+          <%= yield %> 
         </div>
       </div>
     </div>
