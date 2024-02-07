@@ -6,7 +6,9 @@ class PlayersController < ApplicationController
     @players = Player.all
   end
 
-  def show; end
+  def show
+    @player = Player.find_by(id: params[:format])
+  end
 
   def player_view
     @players = Player.compile_player_view
