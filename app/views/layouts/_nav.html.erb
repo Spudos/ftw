@@ -1,19 +1,16 @@
 <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">For The Win</a>
-    
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto">
-      <ul class="navbar-nav">
-
+    <div class="collapse navbar-collapse">
+      
+      <ul class="navbar-nav flex-column">
         <% if current_user&.manager? || current_user&.gm? %>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Homepage</a>
+        </li>
+
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            My Club
+            <i class="fa-regular fa-futbol"></i> My Club
             </a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="<%= clubs_manager_club_view_path %>">Club View</a></li>
@@ -29,7 +26,7 @@
 
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            League
+            <i class="fa-regular fa-futbol"></i> League
             </a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="<%= leagues_premier_table_path %>">Premier League Table</a></li>
@@ -43,16 +40,16 @@
 
 
         <li class="nav-item">
-          <a class="nav-link" href="<%= leagues_cup_league_path %>">League Cup</a>
+          <a class="nav-link" href="<%= leagues_cup_league_path %>"><i class="fa-regular fa-futbol"></i> League Cup</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="<%= players_path %>">Players</a>
+          <a class="nav-link" href="<%= players_path %>"><i class="fa-regular fa-futbol"></i> Players</a>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Transfer
+          <i class="fa-regular fa-futbol"></i> Transfer
           </a>
           <ul class="dropdown-menu">
             <li><a class="nav-link" href="<%= players_path %>">Completed Transfers</a></li>
@@ -63,14 +60,14 @@
 
         <% if current_user&.manager? || current_user&.gm? %>
         <li class="nav-item">
-          <a class="nav-link" href="<%= new_turnsheet_path %>">Turnsheet</a>
+          <a class="nav-link" href="<%= new_turnsheet_path %>"><i class="fa-regular fa-futbol"></i> Turnsheet</a>
         </li>
         <% end %>
 
         <% if current_user&.gm? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Admin
+            <i class="fa-regular fa-futbol"></i> Admin
             </a>
             <ul class="dropdown-menu">
               <li>Club Functions</li>

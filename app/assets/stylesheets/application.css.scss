@@ -14,20 +14,8 @@
  *= require_self
  */
 
-.main {
-  width: 80%;
-  margin: auto;
-  margin-bottom: 200px;
-}
-
 th {
   width: fit-content;
-}
-
-.header {
-  padding: 20px;
-  margin: auto;
-  text-align: center;
 }
 
 #match, #match_commentary {
@@ -47,15 +35,6 @@ th {
 
 #not_exists {
   background-color: red;
-}
-
-footer {
-  width: 80%;
-  margin: auto;
-  padding: 10px;
-  font-weight: bolder;
-  text-align: center;
-  background-color: whitesmoke;
 }
 
 .align-top {
@@ -135,4 +114,26 @@ tr.chance {
 
 .field {
   margin-bottom: 30px;
+}
+
+header {
+  font-size: xx-large;
+  font-weight: bolder;
+  text-align: center;
+  color: white;
+}
+
+footer {
+  font-weight: bolder;
+  text-align: center;
+  background-color: #aaaaaa;
+}
+
+#content {
+  width: 80%;
+  margin: auto;
+}
+
+.col-2 {
+  height: 3200px;
 }
