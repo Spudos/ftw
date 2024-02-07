@@ -19,6 +19,10 @@
       <% end %>
     </tr>
     <tr scope="row">
+      <td><%= form.label :id, style: "display: block" %></td>
+      <td><%= form.text_field :id, readonly: true %></td>
+    </tr>
+    <tr scope="row">
       <td><%= form.label :name, style: "display: block" %></td>
       <% if current_user.gm? %>
         <td><%= form.text_field :name %></td>
@@ -173,10 +177,6 @@
     <tr scope="row">
       <td><%= form.label :contract, style: "display: block" %></td>
       <td><%= form.text_field :contract %></td>
-    </tr>  
-    <tr scope="row">
-      <td><%= form.label :club, style: "display: block" %></td>
-      <td><%= form.text_field :club %></td>
     </tr>
     <tr scope="row">
       <td><%= form.label :consistency, style: "display: block" %></td>

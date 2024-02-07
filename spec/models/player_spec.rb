@@ -82,7 +82,6 @@ RSpec.describe Player, type: :model do
         # 6 core skills * 5 from player model = 30.  fitness 90 to give 27, consistency +-10 so 17 to 37
         expect(match_performance).to be_between(17, 37).inclusive
       end
-
     end
   end
 end

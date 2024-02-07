@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   get 'new_player', to: 'players#new'
   get 'edit_player', to: 'players#edit'
   get 'player', to: 'players#show'
-  patch '/players/', to: 'players#update'
+  patch '/player', to: 'players#update'
   put '/players/', to: 'players#update'
   delete '/players/', to: 'players#destroy'
   post '/players/potential_update', to: 'players#potential_update'

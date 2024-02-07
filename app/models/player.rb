@@ -40,7 +40,7 @@ class Player < ApplicationRecord
   end
 
   def self.player_data
-    @player_data ||= Player.includes(:performances, :goals, :assists).load # Player.joins(:performances, :goals, :assists).load
+    @player_data ||= Player.includes(:performances, :goals, :assists).load
   end
 
   def self.precalculate_average_match_performance
@@ -67,7 +67,7 @@ class Player < ApplicationRecord
         played: player.performances.size,
         goals: player.goals.size,
         assists: player.assists.size,
-        average_match_performance: average_match_performance_for_player(player.id).to_i #player.performances.average(:match_performance).to_i
+        average_match_performance: average_match_performance_for_player(player.id).to_i
       }
     end
   end
@@ -75,10 +75,9 @@ class Player < ApplicationRecord
   def self.compile_top_total_skill_view(league, position)
     if position == 'all'
       players = player_data.map do |player|
-        # unless Club.find_by(abbreviation: player.club)&.league == league
-        #   next
-        # end
-
+        unless Club.find_by(abbreviation: player.club)&.league == league
+          next
+        end
         info = {
           id: player.id,
           name: player.name,
@@ -88,11 +87,10 @@ class Player < ApplicationRecord
         }
       end
     else
-      players = Player.where(position: position).map do |player|
-        # unless Club.find_by(abbreviation: player.club)&.league == league
-        #   next
-        # end
-
+      players = player_data.where(position:).map do |player|
+        unless Club.find_by(abbreviation: player.club)&.league == league
+          next
+        end
         info = {
           id: player.id,
           name: player.name,
@@ -119,7 +117,7 @@ class Player < ApplicationRecord
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        average_match_performance: 1 # player.performances.where(competition: params).average(:match_performance).to_i
+        average_match_performance: average_match_performance_for_player(player.id).to_i
       }
     end
 
@@ -139,7 +137,7 @@ class Player < ApplicationRecord
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        goals: 2 #player.goals.where(competition: params).count(:scorer_id).to_i
+        goals: player.goals.size
       }
     end
 
@@ -159,7 +157,7 @@ class Player < ApplicationRecord
         name: player.name,
         club: player.club,
         position: (player.position + player.player_position_detail).upcase,
-        assists: 1 #player.assists.where(competition: params).count(:assist_id).to_i
+        assists: player.assists.size
       }
     end
 
