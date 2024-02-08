@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   get '/clubs/manager/club_view', to: 'clubs#club_view'
   get '/clubs/manager/first_team', to: 'clubs#first_team'
+  get '/clubs/manager/players_contract', to: 'clubs#players_contract'
   get '/clubs/manager/team_statistics', to: 'clubs#team_statistics'
   get '/clubs/manager/team_selection', to: 'clubs#team_selection'
   get '/clubs/manager/results', to: 'clubs#results'

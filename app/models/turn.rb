@@ -1,5 +1,6 @@
 class Turn < ApplicationRecord
   def process_turn_actions(params)
+    unmanaged_bid(params[:week])
     stadium_upgrade(params[:week])
     property_upgrade(params[:week])
     player_upgrade(params[:week])
@@ -8,9 +9,47 @@ class Turn < ApplicationRecord
     increment_upgrades
     fitness_increase
     contract_decrease
+    player_value
+    player_wages
   end
 
   private
+
+  def unmanaged_bid(week)
+    hash = {}
+
+    Turn.where('var1 LIKE ?', 'unmanaged%').where(week:).each do |turn|
+      hash[turn.id] = {
+        action_id: turn.week.to_s + turn.club + turn.id.to_s,
+        week: turn.week,
+        club: turn.club,
+        var1: turn.var1, #unmanaged
+        var2: turn.var2, #player_id
+        var3: turn.var3, #bid
+        date_completed: turn.date_completed
+      }
+    end
+
+    hash.each do |key, value|
+      player = Player.find_by(id: value[:var2].to_i)
+      if player.club.managed
+        Message.create(action_id: value[:action_id], week: value[:week], club: value[:club], var1: "Your bid for #{player.name} failed due to the player being at a managed club")
+      else
+        if value[:var3].to_i > player.value * 1.5
+          Message.create(action_id: value[:action_id], week: value[:week], club: value[:club], var1: "Your bid for #{player.name} succeeded!  The player has joined your club for #{value[:var3]}")
+          player.club = value[:club]
+          player.club_id = Club.find_by(abbreviation: value[:club]).id
+          player.save
+          bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], player.name, value[:var3])
+        else
+          Message.create(action_id: value[:action_id], week: value[:week], club: value[:club], var1: "Your bid for #{player.name} failed due to not meeting the clubs valuation for the player")
+        end
+      end
+
+      turn = Turn.find(key)
+      turn.update(date_completed: DateTime.now)
+    end
+  end
 
   def stadium_upgrade(week)
     hash = {}
@@ -193,6 +232,8 @@ class Turn < ApplicationRecord
         Message.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{dept}")
       elsif reason == 'property'
         Message.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{dept}")
+      elsif reason == 'unmanged_bid'
+        Message.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due a player purchase (#{dept})")
       elsif reason.end_with?('condition')
         Message.create(action_id:, week:, club:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{reason}")
       else
@@ -242,7 +283,7 @@ class Turn < ApplicationRecord
   end
 
   def fitness_increase
-    Player.all.each do |player|
+    player_data.each do |player|
       if player.fitness != 100
         player.fitness += rand(0..5)
         player.fitness = 100 if player.fitness > 100
@@ -252,7 +293,7 @@ class Turn < ApplicationRecord
   end
 
   def contract_decrease
-    Player.all.each do |player|
+    player_data.each do |player|
       if player.contract.positive?
         player.contract -= 1
         player.contract = 0 if player.contract.negative?
@@ -262,6 +303,42 @@ class Turn < ApplicationRecord
         player.save
       end
     end
+  end
+
+  def player_value
+    player_data.each do |player|
+      if player.total_skill < 77
+        player.value = player.total_skill * 259740
+      elsif player.total_skill < 99
+        player.value = player.total_skill * 505050
+      elsif player.total_skill < 110
+        player.value = player.total_skill * 772727
+      else
+        player.value = player.total_skill * 867546
+      end
+
+      player.save
+    end
+  end
+
+  def player_wages
+    player_data.each do |player|
+      if player.total_skill < 77
+        player.wages = player.total_skill * 845
+      elsif player.total_skill < 99
+        player.wages = player.total_skill * 2025
+      elsif player.total_skill < 110
+        player.wages = player.total_skill * 3287
+      else
+        player.wages = player.total_skill * 4181
+      end
+
+      player.save
+    end
+  end
+
+  def player_data
+    @player_data ||= Player.includes(:performances, :goals, :assists, :club).load
   end
 end
 

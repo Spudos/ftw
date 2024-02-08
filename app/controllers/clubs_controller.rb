@@ -67,6 +67,10 @@ class ClubsController < ApplicationController
     render 'clubs/manager/first_team'
   end
 
+  def players_contract
+    render 'clubs/manager/players_contract'
+  end
+
   def team_statistics
     render 'clubs/manager/team_statistics'
   end

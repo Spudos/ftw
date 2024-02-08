@@ -521,4 +521,15 @@ RSpec.describe Turn, type: :model do
       expect(adjusted_player[0][:contract]).to eq(0)
     end
   end
+
+  describe 'player_valuation' do
+    it 'calculates the correct player value' do
+      create(:player)
+      create(:club)
+
+      adjusted_player = Turn.new.send(:player_valuation)
+
+      expect(adjusted_player[0][:value]).to eq(19)
+    end
+  end
 end
