@@ -1,5 +1,11 @@
-<h2>For The Win</h2>
-<h4>A PBEM for the modern age</h4>
+<%= link_to "<h1>FTW</h1><h2>Inspired by FreedomPBEM</h2>".html_safe, "/", style: "text-decoration: none; color: white;" %>
+<% if current_user %>
+<br>
+<br>
+<br>
+<h5>You are logged in!</h5>
+<h5>Email: <%= current_user[:email] %></h5>
+<h5>Role: <%= current_user[:role] %></h5>
 <div class="accordion accordion-flush" id="accordion_nav">
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingOne">
@@ -53,6 +59,7 @@
       </ul>
     </div>
   </div>
+  <% end %>
   <% if current_user&.gm? %>
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingfour">

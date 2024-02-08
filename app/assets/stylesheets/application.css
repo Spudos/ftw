@@ -79,6 +79,12 @@ tr.chance {
 .stats {
   border: 1px solid green;
   padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  margin: auto;
+  width: 100%;
+  justify-content: center;
+  font-size: large;
 }
 
 #form-container {
@@ -144,12 +150,35 @@ footer {
 .col-2 {
   height: 3200px;
   color: white;
+  border-radius: 10px;
 }
 
 .accordion {
   margin-top: 50px;
 }
 
-h2, h4 { 
+h1, h2, h3, h4 { 
   text-align: center;
 }
+
+.welcome_div {
+  text-align: center;
+}
+
+#header {
+  padding: 10px;
+  margin: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  width: 50%;
+  color: #ffffff;
+  height: 125px;
+  background-image: url("header-transparent.png");
+  background-color: rgba(0, 0, 0, 0.3);
+  background-repeat: no-repeat, repeat;
+  background-position: center;
+  border-radius: 25px;
+  font-family: 'Dosis', sans-serif;
+  text-shadow: black 2px 2px 2px;
+}
+

@@ -16,6 +16,10 @@
   </head>
 
 <body>
+  <div id='header'>
+  <h1>For The Win</h1>
+  <h2>A PBEM for the modern game</h2>
+  </div>
   <div id="content">
     <div class="container-fluid">
       <div class="row">
@@ -23,7 +27,7 @@
           <%= render 'layouts/nav' %>
         </div>
 
-        <div class="col-10">
+        <div class="col-8">
           <% if notice.present? %>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
               <%= notice %>

@@ -1,5 +1,5 @@
 class TurnsheetsController < ApplicationController
-  before_action :set_turnsheet, only: %i[ show edit update destroy ]
+  before_action :set_turnsheet, only: %i[show edit update destroy]
   before_action :authenticate_user!
 
   # GET /turnsheets or /turnsheets.json
@@ -16,6 +16,10 @@ class TurnsheetsController < ApplicationController
   def new
     @turnsheet = Turnsheet.new
     authorize @turnsheet
+    club = Club.find_by(manager_email: current_user.email)
+    players = club&.players
+
+    @selection = players.map(&:player_selection_information)
   end
 
   # GET /turnsheets/1/edit
@@ -29,7 +33,7 @@ class TurnsheetsController < ApplicationController
 
     respond_to do |format|
       if @turnsheet.save
-        format.html { redirect_to turnsheets_path, notice: 'Turnsheet was successfully created.' }
+        format.html { redirect_to request.referrer, notice: 'Turnsheet was successfully created.' }
         format.json { render :show, status: :created, location: @turnsheet }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +46,7 @@ class TurnsheetsController < ApplicationController
   def update
     respond_to do |format|
       if @turnsheet.update(turnsheet_params)
-        format.html { redirect_to turnsheets_path, notice: 'Turnsheet was successfully updated.' }
+        format.html { redirect_to request.referrer, notice: 'Turnsheet was successfully updated.' }
         format.json { render :show, status: :ok, location: @turnsheet }
       else
         format.html { render :edit, status: :unprocessable_entity }

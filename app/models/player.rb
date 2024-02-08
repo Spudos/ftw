@@ -17,7 +17,13 @@ class Player < ApplicationRecord
   end
 
   def player_selection_information
-    "#{id} #{name} - #{position.upcase}#{player_position_detail.upcase} (Skill: #{total_skill}) (Fitness: #{fitness})"
+    {
+      id:,
+      name:,
+      position: (position + player_position_detail).upcase,
+      ts: total_skill,
+      fitness:
+    }
   end
 
   def base_skill

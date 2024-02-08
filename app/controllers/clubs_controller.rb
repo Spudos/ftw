@@ -59,6 +59,10 @@ class ClubsController < ApplicationController
     render 'clubs/manager/club_view'
   end
 
+  def messages
+    render 'clubs/manager/mesages_new'
+  end
+
   def first_team
     render 'clubs/manager/first_team'
   end
@@ -83,12 +87,17 @@ class ClubsController < ApplicationController
     render 'clubs/manager/history'
   end
 
+  def messages
+    render 'clubs/manager/mesages'
+  end
+
   private
 
   def set_club
     @club = Club.find_by(manager_email: current_user[:email])
     @club_matches = Match.where('home_team = ? OR away_team = ?', @club.abbreviation, @club.abbreviation)
     @club_fixtures = Fixture.where('home= ? OR away = ?', @club.abbreviation, @club.abbreviation)
+    @messages = Message.where(club: Club.find_by(manager_email: current_user[:email])&.abbreviation)
   end
 
   def club_params
