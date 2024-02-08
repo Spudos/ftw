@@ -46,11 +46,11 @@ class Turn::TurnActions
             bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], player.name, value[:var3])
             transfer_save(value[:week], player.club.id, player_original_club[:id], value[:var2], value[:var3], 'transfer_completed')
           else
-            Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player choosing to stay at their current club")
+            Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player choosing not to join your club")
             transfer_save(value[:week], player.club.id, player_original_club[:id], value[:var2], value[:var3], 'player_refusal')
           end
         else
-          Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your #{value[:var3]} bid for #{player.name} failed due to not meeting the clubs valuation for the player")
+          Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your #{value[:var3]} bid for #{player.name} failed due to not meet an acceptable valuation for the player")
           transfer_save(value[:week], player.club.id, player_original_club[:id], value[:var2], value[:var3], 'club_refusal')
         end
       end

@@ -1,0 +1,34 @@
+<h2>Transfer History</h2>
+
+<form action="/transfers" method="get">
+  <label for="week">Select Week Number:</label>
+  <select name="week" id="week">
+    <% @transfers.map(&:week).uniq.each do |week| %>
+      <option value="<%= week %>">Week <%= week %></option>
+    <% end %>
+  </select>
+  <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+</form>
+
+<div id="transfers">
+  <table class="table table-hover">
+    <tbody>
+      <tr>
+        <th scope="col">Week</th>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Sold by</th>
+        <th scope="col">Bought by</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Outcome</th>
+      </tr>
+      <tr scope="row">
+        <% @transfers.each do |transfer| %>
+          <% if transfer.week.to_s == params[:week] %>
+          <%= render transfer %>
+          <% end %>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>

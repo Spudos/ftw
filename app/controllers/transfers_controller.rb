@@ -1,10 +1,10 @@
 class TransfersController < ApplicationController
   def index
-    @transfers = Transfers.all
+    @transfers = Transfer.all
   end
 
   def show
-    @transfers = Transfers.all
+    @transfers = Transfer.find_by(params[:week])
   end
 
   def new; end

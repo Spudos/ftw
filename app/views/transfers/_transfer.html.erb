@@ -1,0 +1,12 @@
+<div id="<%= dom_id transfer %>">
+  <tr scope="row">
+    <td><%= transfer.week %></td>
+    <td><%= transfer.player_id %></td>
+    <td><%= Player.find_by(id: transfer.player_id)&.name %></td>
+    <td><%= Club.find_by(id: transfer.sell_club)&.name %></td>
+    <td><%= Club.find_by(id: transfer.buy_club)&.name %></td>
+    <td><%= transfer.bid %></td>
+    <td><%= transfer.status %></td>
+  </tr>
+</div>
+
