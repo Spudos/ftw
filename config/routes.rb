@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :admin
   resources :messages
   resources :tactics
+  resources :transfers
 
   root 'welcome#index'
 

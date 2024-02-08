@@ -204,6 +204,16 @@
             </td>
           </tr>
         </table>
+        <h4 style="text-align: center">Fitness Coaching</h4>
+        <table class="table table-hover table-bordered">
+          <tr scope="row">
+            <td>Player to treat</td>
+            <td>
+              <%= form.label :fitness_coaching, style: "display: none" %>
+              <%= form.select :fitness_coaching, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]}", record[:name]] }, prompt: "Select a player" %>
+            </td>
+          </tr>
+        </table>
     </div>   
 
       <div class="col-md-6 align-top"> 

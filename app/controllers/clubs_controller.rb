@@ -92,7 +92,7 @@ class ClubsController < ApplicationController
   end
 
   def messages
-    render 'clubs/manager/mesages'
+    render 'clubs/manager/messages'
   end
 
   private

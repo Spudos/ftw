@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_08_070612) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_08_121002) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -212,6 +212,27 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_08_070612) do
   create_table "templates", force: :cascade do |t|
     t.string "commentary_type"
     t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transfers", force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "sell_club"
+    t.integer "buy_club"
+    t.integer "week"
+    t.integer "bid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "status"
+  end
+
+  create_table "transfers_tables", force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "sell_club"
+    t.integer "buy_club"
+    t.integer "week"
+    t.integer "bid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -36,20 +36,25 @@ class Turn::TurnActions
       if Message.find_by(action_id: value[:action_id]).nil?
         player = Player.find_by(id: value[:var2].to_i)
         club = Club.find_by(abbreviation: value[:club])
+        player_original_club = player.club
 
-        if player.club.managed?
+        if player_original_club.managed?
           Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player being at a managed club")
+          transfer_save(value[:week], player.club.id, player_original_club[:id], value[:var2], value[:var3], 'player_managed')
         elsif bid_decision(value, player)
           if rand(100) > 25
             player.club = Club.find_by(abbreviation: value[:club])
             player.save
             Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your bid for #{player.name} succeeded!  The player has joined your club for #{value[:var3]}")
             bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], player.name, value[:var3])
+            transfer_save(value[:week], player.club.id, player_original_club[:id], value[:var2], value[:var3], 'transfer_completed')
           else
             Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player choosing to stay at their current club")
+            transfer_save(value[:week], player.club.id, player_original_club[:id], value[:var2], value[:var3], 'player_refusal')
           end
         else
           Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your #{value[:var3]} bid for #{player.name} failed due to not meeting the clubs valuation for the player")
+          transfer_save(value[:week], player.club.id, player_original_club[:id], value[:var2], value[:var3], 'club_refusal')
         end
       end
       turn = Turn.find(key)
@@ -67,6 +72,10 @@ class Turn::TurnActions
     else
       value[:var3].to_i > player.value * 1.723
     end
+  end
+
+  def transfer_save(week, buy_club, sell_club, player_id, bid, status)
+    Transfer.create(week:, buy_club:, sell_club:, player_id:, bid:, status:)
   end
 
   def stadium_upgrade
