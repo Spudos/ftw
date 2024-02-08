@@ -169,6 +169,14 @@
         <td><%= form.text_field :club_id, readonly: true %></td>
       <% end %>
     </tr>
+    <tr scope="row">
+      <td><%= form.label :wages, style: "display: block" %></td>
+      <td><%= form.text_field :wages, readonly: true %></td>
+    </tr>
+    <tr scope="row">
+      <td><%= form.label :value, style: "display: block" %></td>
+      <td><%= form.text_field :value, readonly: true %></td>
+    </tr>
     <% if current_user.gm? %>
     <tr scope="row">
       <td><%= form.label :fitness, style: "display: block" %></td>

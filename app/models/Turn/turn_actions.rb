@@ -38,18 +38,34 @@ class Turn::TurnActions
         club = Club.find_by(abbreviation: value[:club])
 
         if player.club.managed?
-          Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your bid for #{player.name} failed due to the player being at a managed club")
-        elsif value[:var3].to_i > player.value * 1.5
-          player.club = Club.find_by(abbreviation: value[:club])
-          player.save
-          Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your bid for #{player.name} succeeded!  The player has joined your club for #{value[:var3]}")
-          bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], player.name, value[:var3])
+          Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player being at a managed club")
+        elsif bid_decision(value, player)
+          if rand(100) > 25
+            player.club = Club.find_by(abbreviation: value[:club])
+            player.save
+            Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your bid for #{player.name} succeeded!  The player has joined your club for #{value[:var3]}")
+            bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], player.name, value[:var3])
+          else
+            Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player choosing to stay at their current club")
+          end
         else
-          Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your bid for #{player.name} failed due to not meeting the clubs valuation for the player")
+          Message.create(action_id: value[:action_id], week: value[:week], club: club.abbreviation, var1: "Your #{value[:var3]} bid for #{player.name} failed due to not meeting the clubs valuation for the player")
         end
       end
       turn = Turn.find(key)
       turn.update(date_completed: DateTime.now)
+    end
+  end
+
+  def bid_decision(value, player)
+    if player.total_skill < 77
+      value[:var3].to_i > player.value * 1
+    elsif player.total_skill < 99
+      value[:var3].to_i > player.value * 1.234
+    elsif player.total_skill < 110
+      value[:var3].to_i > player.value * 1.498
+    else
+      value[:var3].to_i > player.value * 1.723
     end
   end
 
