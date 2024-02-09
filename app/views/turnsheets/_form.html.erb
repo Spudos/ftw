@@ -34,6 +34,7 @@
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-6 align-top"> 
           <h4 style="text-align: center">Team Selection</h4>
@@ -47,60 +48,115 @@
                   <%= form.select :player_1, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
                 </td>
               </tr>
+              <tr scope="row">
+                <td>Player 2</td>
+                <td>
+                  <%= form.select :player_2, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                </td>
+              </tr>
+              <tr scope="row">
+                <td>Player 3</td>
+                <td>
+                  <%= form.select :player_3, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                </td>
+              </tr>
+              <tr scope="row">
+                <td>Player 4</td>
+                <td>
+                  <%= form.select :player_4, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                </td>
+              </tr>
+              <td>Player 5</td>
+                <td>
+                  <%= form.select :player_5, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                </td>
+              </tr>
+              <td>Player 6</td>
+                <td>
+                  <%= form.select :player_6, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                </td>
+              </tr>
+              <td>Player 7</td>
+                <td>
+                  <%= form.select :player_7, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                </td>
+              </tr>
+              <td>Player 8</td>
+                <td>
+                  <%= form.select :player_8, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                </td>
+              </tr>
+              <td>Player 9</td>
+                <td>
+                  <%= form.select :player_9, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                </td>
+              </tr>
+              <td>Player 10</td>
+                <td>
+                  <%= form.select :player_10, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                </td>
+              </tr>
+              <td>Player 11</td>
+                <td>
+                  <%= form.select :player_11, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                </td>
+              </tr>
+            </table>
+          <h4 style="text-align: center">Club Upgrades</h4>
+          <table class="table table-hover table-bordered">
+            <tr>
+              <th scope="col">Type</th>
+              <th scope="col">Area</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Info</th>
             <tr scope="row">
-              <td>Player 2</td>
+              <td>Stand</td>
               <td>
-                <%= form.select :player_2, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                <%= form.select :stadium_upgrade, options_for_select({ "North Stand" => "stand_n_capacity", "South Stand" => "stand_s_capacity", "East Stand" => "stand_e_capacity", "West Stand" => "stand_w_capacity" }), prompt: "Select a stand" %>
+              </td>
+              <td>
+                <%= form.select :stadium_amount, options_for_select([2000, 4000, 6000, 8000, 10000]), prompt: "How many seats?" %>
+              </td>
+              <td>
+                <p>£1000 per seat</p>
               </td>
             </tr>
             <tr scope="row">
-              <td>Player 3</td>
+              <td>Stand Condition</td>
               <td>
-                <%= form.select :player_3, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                <%= form.select :stadium_condition_upgrade, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }), prompt: "Select a stand" %>
+              </td>
+              <td>
+                <p></p>
+              </td> 
+              <td>
+                <p>£100,000</p>
               </td>
             </tr>
             <tr scope="row">
-              <td>Player 4</td>
+              <td>Coach</td>
               <td>
-                <%= form.select :player_4, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-              </td>
-            </tr>
-            <td>Player 5</td>
+                <%= form.select :coach_upgrade, options_for_select({ "Fitness" => "staff_fitness", "Scout" => "staff_scouts", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }), prompt: 'Select a coach' %>
+              </td>  
               <td>
-                <%= form.select :player_5, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-              </td>
-            </tr>
-            <td>Player 6</td>
+                <p></p>
+              </td> 
               <td>
-                <%= form.select :player_6, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                <p>£500,000</p>
               </td>
-            </tr>
-            <td>Player 7</td>
+            <tr scope="row">
+              <td>Property</td>
               <td>
-                <%= form.select :player_7, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-              </td>
-            </tr>
-            <td>Player 8</td>
+                <%= form.select :property_upgrade, options_for_select({ "Pitch" => "pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }), prompt: 'Select a property' %>
+              </td>  
               <td>
-                <%= form.select :player_8, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-              </td>
-            </tr>
-            <td>Player 9</td>
+                <p></p>
+              </td>    
               <td>
-                <%= form.select :player_9, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+                <p>£250,000</p>
               </td>
-            </tr>
-            <td>Player 10</td>
-              <td>
-                <%= form.select :player_10, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-              </td>
-            </tr>
-            <td>Player 11</td>
-              <td>
-                <%= form.select :player_11, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-              </td>
-            </tr>
           </table>
+        </div>
       </div>
 
       <div class="col-md-6 align-top">
@@ -204,76 +260,79 @@
             </td>
           </tr>
         </table>
-        <h4 style="text-align: center">Fitness Coaching</h4>
+        <h4 style="text-align: center">Transfers</h4>
         <table class="table table-hover table-bordered">
           <tr scope="row">
-            <td>Player to treat</td>
+            <td>Type</td>
             <td>
-              <%= form.label :fitness_coaching, style: "display: none" %>
-              <%= form.select :fitness_coaching, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]}", record[:name]] }, prompt: "Select a player" %>
+              <%= form.label :transfer_type, style: "display: none" %>
+              <%= form.select :transfer_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit'), prompt: "Select a transfer type?" %>
+            </td>
+            <td>Player ID</td>
+            <td>
+              <%= form.label :transfer_player_id, style: "display: none" %>
+              <%= form.text_field :transfer_player_id %>
+            </td>
+            <td>Amount</td>
+            <td>
+              <%= form.label :transfer_amount, style: "display: none" %>
+              <%= form.text_field :transfer_amount %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td>Type</td>
+            <td>
+              <%= form.label :transfer1_type, style: "display: none" %>
+              <%= form.select :transfer1_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit'), prompt: "Select a transfer type?" %>
+            </td>
+            <td>Player ID</td>
+            <td>
+              <%= form.label :transfer1_player_id, style: "display: none" %>
+              <%= form.text_field :transfer1_player_id %>
+            </td>
+            <td>Amount</td>
+            <td>
+              <%= form.label :transfer1_amount, style: "display: none" %>
+              <%= form.text_field :transfer1_amount %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td>Type</td>
+            <td>
+              <%= form.label :transfer2_type, style: "display: none" %>
+              <%= form.select :transfer2_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit'), prompt: "Select a transfer type?" %>
+            </td>
+            <td>Player ID</td>
+            <td>
+              <%= form.label :transfer2_player_id, style: "display: none" %>
+              <%= form.text_field :transfer2_player_id %>
+            </td>
+            <td>Amount</td>
+            <td>
+              <%= form.label :transfer2_amount, style: "display: none" %>
+              <%= form.text_field :transfer2_amount %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td>Type</td>
+            <td>
+              <%= form.label :transfer3_type, style: "display: none" %>
+              <%= form.select :transfer3_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit'), prompt: "Select a transfer type?" %>
+            </td>
+            <td>Player ID</td>
+            <td>
+              <%= form.label :transfer3_player_id, style: "display: none" %>
+              <%= form.text_field :transfer3_player_id %>
+            </td>
+            <td>Amount</td>
+            <td>
+              <%= form.label :transfer3_amount, style: "display: none" %>
+              <%= form.text_field :transfer3_amount %>
             </td>
           </tr>
         </table>
-    </div>   
-
-      <div class="col-md-6 align-top"> 
-        <h4 style="text-align: center">Club Upgrades</h4>
-          <table class="table table-hover table-bordered">
-            <tr>
-              <th scope="col">Type</th>
-              <th scope="col">Area</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Info</th>
-            <tr scope="row">
-              <td>Stand</td>
-              <td>
-                <%= form.select :stadium_upgrade, options_for_select({ "North Stand" => "stand_n_capacity", "South Stand" => "stand_s_capacity", "East Stand" => "stand_e_capacity", "West Stand" => "stand_w_capacity" }), prompt: "Select a stand" %>
-              </td>
-              <td>
-                <%= form.select :stadium_amount, options_for_select([2000, 4000, 6000, 8000, 10000]), prompt: "How many seats?" %>
-              </td>
-              <td>
-                <p>£1000 per seat</p>
-              </td>
-            </tr>
-            <tr scope="row">
-              <td>Stand Condition</td>
-              <td>
-                <%= form.select :stadium_condition_upgrade, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }), prompt: "Select a stand" %>
-              </td>
-              <td>
-                <p></p>
-              </td> 
-              <td>
-                <p>£100,000</p>
-              </td>
-            </tr>
-            <tr scope="row">
-              <td>Coach</td>
-              <td>
-                <%= form.select :coach_upgrade, options_for_select({ "Fitness" => "staff_fitness", "Scout" => "staff_scouts", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }), prompt: 'Select a coach' %>
-              </td>  
-              <td>
-                <p></p>
-              </td> 
-              <td>
-                <p>£500,000</p>
-              </td>
-            <tr scope="row">
-              <td>Property</td>
-              <td>
-                <%= form.select :property_upgrade, options_for_select({ "Pitch" => "pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }), prompt: 'Select a property' %>
-              </td>  
-              <td>
-                <p></p>
-              </td>    
-              <td>
-                <p>£250,000</p>
-              </td>
-          </table>
-        </div>
       </div>
-
+    </div>
   <div>
     <%= form.submit 'Save Turnsheet', class: 'btn btn-sm btn-danger' %>
   </div>
