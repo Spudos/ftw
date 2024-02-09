@@ -4,7 +4,8 @@ RSpec.describe Player, type: :model do
   describe 'perform basic skill calculations' do
     context 'with valid player data' do
       it 'should return the base skill of a player' do
-        player = build(:player)
+        club = build(:club)
+        player = build(:player, club_id: club)
 
         base_skill = player.send(:base_skill)
 

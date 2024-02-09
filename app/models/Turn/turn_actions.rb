@@ -13,8 +13,6 @@ class Turn::TurnActions
     coach_upgrade
   end
 
-  private
-
   def unmanaged_bid
     hash = {}
 

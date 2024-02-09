@@ -14,8 +14,6 @@ class Turn::PlayerUpdates
     player_wages
   end
 
-  private
-
   def player_upgrade
     hash = {}
 
@@ -41,7 +39,7 @@ class Turn::PlayerUpdates
   def train_player(action_id, week, club, player, skill)
     if Message.find_by(action_id:).nil?
       club_staff = Club.find_by(abbreviation: club)
-      player_data = Player.find_by(club:, name: player)
+      player_data = Player.find_by(name: player)
       coach = club_staff.send("staff_#{player_data.position}")
 
       if player_data[skill] < player_data.send("potential_#{skill}")
@@ -81,7 +79,7 @@ class Turn::PlayerUpdates
 
   def player_fitness(action_id, week, club, player)
     if Message.find_by(action_id:).nil?
-      player_data = Player.find_by(club:, name: player)
+      player_data = Player.find_by(name: player)
       coach = Club.find_by(abbreviation: club)&.staff_fitness
 
       increased_fitness = player_data.fitness + coach

@@ -16,8 +16,6 @@ class Turn::UpgradeAdmin
     end
   end
 
-  private
-
   def perform_completed_upgrades(item, week)
     club_full = Club.find_by(abbreviation: item.club)
 
