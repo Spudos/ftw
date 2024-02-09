@@ -69,7 +69,7 @@ RSpec.describe Turn, type: :model do
     it 'increases the upgrade var 3 value by 1' do
       create(:upgrade, var3: 0)
 
-      Turn::UpgradeAdmin.increment_upgrades
+      Turn::UpgradeAdmin.call
 
       upgrade = Upgrade.first
 
@@ -82,7 +82,7 @@ RSpec.describe Turn, type: :model do
 
       expect(turn).to receive(:perform_completed_upgrades)
 
-      Turn::UpgradeAdmin.increment_upgrades
+      Turn::UpgradeAdmin.call
     end
   end
 end
