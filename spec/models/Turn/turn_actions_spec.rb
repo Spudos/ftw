@@ -9,6 +9,8 @@ RSpec.describe Turn, type: :model do
       action_id = '10011'
       cost = 5000000
 
+      Turn::TurnActions.new(week)
+
       allow_any_instance_of(Turn::TurnActions).to receive(:bank_adjustment)
       allow_any_instance_of(Turn::TurnActions).to receive(:add_to_stadium_upgrades)
 

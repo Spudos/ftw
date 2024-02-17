@@ -18,7 +18,6 @@ class Turn::UpgradeAdmin
 
   def perform_completed_upgrades(item, week)
     club_full = Club.find_by(abbreviation: item.club)
-
     if item.var1.start_with?('staff')
       new_coach = club_full[item.var1] += 1
       club_full.update(item.var1 => new_coach)

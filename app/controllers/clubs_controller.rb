@@ -1,5 +1,6 @@
 class ClubsController < ApplicationController
   before_action :set_club, except: [:index, :new]
+  before_action :set_club_theme
 
   def index
     @clubs = Club.all
@@ -102,6 +103,11 @@ class ClubsController < ApplicationController
     @club_matches = Match.where('home_team = ? OR away_team = ?', @club.abbreviation, @club.abbreviation)
     @club_fixtures = Fixture.where('home= ? OR away = ?', @club.abbreviation, @club.abbreviation)
     @messages = Message.where(club: Club.find_by(manager_email: current_user[:email])&.abbreviation)
+  end
+
+  def set_club_theme
+    @primary = Club.find_by(manager_email: current_user[:email]).color_primary
+    @secondary = Club.find_by(manager_email: current_user[:email]).color_secondary
   end
 
   def club_params

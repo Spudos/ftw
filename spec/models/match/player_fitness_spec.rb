@@ -9,11 +9,16 @@ RSpec.describe Match::PlayerFitness do
     it 'updates the fitness of players based on squads_performance and match_info' do
       allow_any_instance_of(Kernel).to receive(:rand).with(3..8).and_return(5)
 
-      player1 = Player.create(id: 2, fitness: 90)
+      Player.create!(id: 1, fitness: 90, club: build(:club))
+      Player.create!(id: 2, fitness: 80, club: build(:club))
 
       Match::PlayerFitness.new(squads_performance, match_info).call
 
-      expect(player1.reload.fitness).to eq(95)
+      player1 = Player.first
+      player2 = Player.last
+
+      expect(player1.fitness).to eq(75)
+      expect(player2.fitness).to eq(65)
     end
   end
 end

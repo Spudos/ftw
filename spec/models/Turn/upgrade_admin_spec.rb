@@ -63,26 +63,15 @@ RSpec.describe Turn, type: :model do
       expect(Club.first[:stand_n_capacity]).to eq(10000)
       expect(Message.first[:var1]).to eq("Your upgrade to the #{Club.first[:stand_n_name]} was completed, the new value is #{Club.first[:stand_n_capacity]}")
     end
-  end
 
-  describe 'increment_upgrades' do
-    it 'increases the upgrade var 3 value by 1' do
-      create(:upgrade, var3: 0)
-
+    it 'should perform completed upgrades for items with var3 equal to 6' do
+      upgrade = Upgrade.create(var3: 5)
+      
       Turn::UpgradeAdmin.call
 
-      upgrade = Upgrade.first
+      expect(upgrade.reload.var3).to eq(6)
 
-      expect(upgrade[:var3]).to eq(1)
-    end
-
-    it 'increases the upgrade var 3 value by 1 and calls perform_completed_upgrades if var3 is now 6' do
-      create(:upgrade, var3: 5)
-      turn = Turn::TurnActions
-
-      expect(turn).to receive(:perform_completed_upgrades)
-
-      Turn::UpgradeAdmin.call
+      expect(self).to have_received(:perform_completed_upgrades).with(upgrade, week)
     end
   end
 end

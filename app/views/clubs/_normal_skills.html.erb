@@ -1,30 +1,30 @@
 <h3 class="text-center">Skills</h3>
-<table class="table table-hover">
-  <thead>
+<table>
+  <thead class="table-header">
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Age</th>
-      <th scope="col">Nationality</th>
-      <th scope="col">Position</th>
-      <th scope="col">PA</th>
-      <th scope="col">CO</th>
-      <th scope="col">TA</th>
-      <th scope="col">RU</th>
-      <th scope="col">SH</th>
-      <th scope="col">DR</th>
-      <th scope="col">DF</th>
-      <th scope="col">OF</th>
-      <th scope="col">FL</th>
-      <th scope="col">ST</th>
-      <th scope="col">CR</th>
-      <th scope="col">TS</th>
-      <th scope="col">Fit</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Nationality</th>
+      <th>Position</th>
+      <th>PA</th>
+      <th>CO</th>
+      <th>TA</th>
+      <th>RU</th>
+      <th>SH</th>
+      <th>DR</th>
+      <th>DF</th>
+      <th>OF</th>
+      <th>FL</th>
+      <th>ST</th>
+      <th>CR</th>
+      <th>TS</th>
+      <th>Fit</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-detail">
     <% Player.where(club: @club.abbreviation).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
-      <tr scope="row">
+      <tr>
         <td><%= player.id %></td>
         <td><%= player.name %></td>
         <td><%= player.age %></td>
