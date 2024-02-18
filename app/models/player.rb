@@ -50,16 +50,16 @@ class Player < ApplicationRecord
     @player_data ||= Player.includes(:performances, :goals, :assists, :club).load
   end
 
-  def self.precalculate_average_match_performance
-    @precalculate_average_match_performance ||=
-      Performance.select('player_id, AVG(match_performance) AS total').group(:player_id)
-  end
+  # def self.precalculate_average_match_performance
+  #   @precalculate_average_match_performance ||=
+  #     Performance.select('player_id, AVG(match_performance) AS total').group(:player_id)
+  # end
 
-  def self.average_match_performance_for_player(player_id)
-    return 0 if precalculate_average_match_performance.select { |row| row.player_id == player_id }.first.nil?
+  # def self.average_match_performance_for_player(player_id)
+  #   return 0 if precalculate_average_match_performance.select { |row| row.player_id == player_id }.first.nil?
 
-    precalculate_average_match_performance.select { |row| row.player_id == player_id }.first[:total]
-  end
+  #   precalculate_average_match_performance.select { |row| row.player_id == player_id }.first[:total]
+  # end
 
   def self.compile_player_view
     player_data.map do |player|
@@ -71,10 +71,10 @@ class Player < ApplicationRecord
         nationality: player.nationality,
         position: (player.position + player.player_position_detail).upcase,
         total_skill: player.total_skill,
-        played: player.performances.size,
-        goals: player.goals.size,
-        assists: player.assists.size,
-        average_match_performance: average_match_performance_for_player(player.id).to_i
+        played: player.games_played,
+        goals: player.total_goals,
+        assists: player.total_assists,
+        average_match_performance: player.average_performance
       }
     end
   end
@@ -127,7 +127,7 @@ class Player < ApplicationRecord
         name: player.name,
         club: player.club.name,
         position: (player.position + player.player_position_detail).upcase,
-        average_match_performance: average_match_performance_for_player(player.id).to_i
+        average_match_performance: player.average_performance
       }
     end
 
@@ -150,7 +150,7 @@ class Player < ApplicationRecord
         name: player.name,
         club: player.club.name,
         position: (player.position + player.player_position_detail).upcase,
-        goals: player.goals.size
+        goals: player.total_goals
       }
     end
 
@@ -173,7 +173,7 @@ class Player < ApplicationRecord
         name: player.name,
         club: player.club.name,
         position: (player.position + player.player_position_detail).upcase,
-        assists: player.assists.size
+        assists: player.total_assists
       }
     end
 
