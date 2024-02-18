@@ -8,8 +8,8 @@ class Match::SquadCreator
   def call
     tactics_check
 
-    home_selection = Selection.where(club: fixture[:club_home]).size
-    away_selection = Selection.where(club: fixture[:club_away]).size
+    home_selection = Selection.where(club_id: fixture[:club_home]).size
+    away_selection = Selection.where(club_id: fixture[:club_away]).size
 
     if home_selection != 11 || away_selection != 11
       raise StandardError, "Team #{fixture[:club_home]} have selected #{home_selection} players, Team #{fixture[:club_away]} have selected #{away_selection} players.  Both teams must have 11 players selected.  This game and all subsequent games have not been run. class:#{self.class.name} class."
@@ -47,12 +47,10 @@ class Match::SquadCreator
   end
 
   def populate_teams
-    [].tap do |player_ids|
-      match_info.each_value do |team|
-        player_ids += Selection.where(club: team).pluck(:player_id)
-      end
-    return player_ids
-    end
+    player_ids = []
+    player_ids += Selection.where(club_id: match_info[:club_home].to_i).pluck(:player_id)
+    player_ids += Selection.where(club_id: match_info[:club_away].to_i).pluck(:player_id)
+    player_ids
   end
 
   def match_info

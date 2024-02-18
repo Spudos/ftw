@@ -5,10 +5,10 @@ class Turnsheet < ApplicationRecord
 
       turnsheet.save
 
-      Selection.where(club: turnsheet.club).destroy_all
+      Selection.where(club_id: turnsheet.club).destroy_all
 
       (1..11).each do |i|
-        Selection.create(club: turnsheet.club, player_id: turnsheet.send("player_#{i}"))
+        Selection.create(club_id: turnsheet.club, player_id: turnsheet.send("player_#{i}"))
       end
 
       tactic_record = Tactic.find_by(club_id: turnsheet.club)

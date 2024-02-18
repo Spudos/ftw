@@ -36,7 +36,7 @@ class SquadAction < AbstractMatch
     # this populates the player_ids array for both teams with a list of players for the match
     player_ids = []
     teams.each_value do |team|
-      player_ids += Selection.where(club: team).pluck(:player_id)
+      player_ids += Selection.where(club_id: team).pluck(:player_id)
     end
 
     # this populates the match_squad for home and away with a list of full player details for the match

@@ -5,7 +5,7 @@
 </form>
 
 <%= form_tag new_turnsheet_path, method: :get do %>
-  <%= select_tag :club, options_from_collection_for_select(Club.all, :club_id, :name), prompt: "Select a club" %>
+  <%= select_tag :club, options_from_collection_for_select(Club.all, :id, :name), prompt: "Select a club" %>
   <button type="submit" class="btn btn-primary btn-sm">New Turnsheet</button>
 <% end %>
 

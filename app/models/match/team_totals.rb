@@ -9,11 +9,11 @@ class Match::TeamTotals
     if @final_squad.nil?
       raise StandardError, "There was an error in the #{self.class.name} class"
     end
-    
+
     squads = final_squad
 
-    home_team = squads.first[:club]
-    away_team = squads.last[:club]
+    home_team = squads.first[:club_id]
+    away_team = squads.last[:club_id]
 
     home_dfc = 0
     home_dfc_blend = []
@@ -31,7 +31,7 @@ class Match::TeamTotals
     squads.each do |player|
       case player[:player_position]
       when 'gkp', 'dfc'
-        if player[:club] == home_team
+        if player[:club_id] == home_team
           home_dfc += player[:match_performance]
           home_dfc_blend.append(player[:player_blend])
         else
@@ -39,7 +39,7 @@ class Match::TeamTotals
           away_dfc_blend.append(player[:player_blend])
         end
       when 'mid'
-        if player[:club] == home_team
+        if player[:club_id] == home_team
           home_mid += player[:match_performance]
           home_mid_blend.append(player[:player_blend])
         else
@@ -47,7 +47,7 @@ class Match::TeamTotals
           away_mid_blend.append(player[:player_blend])
         end
       else
-        if player[:club] == home_team
+        if player[:club_id] == home_team
           home_att += player[:match_performance]
           home_att_blend.append(player[:player_blend])
         else

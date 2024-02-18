@@ -13,17 +13,17 @@ class SelectionsController < ApplicationController
   def edit; end
 
   def create
-    club = Club.find_by(club_id: params[:club])
+    club = Club.find_by(id: params[:club])
     if params[:player_ids].nil? || params[:player_ids].size != 11
       flash[:alert] = 'You must select 11 players.'
       redirect_to club_path(params[:club])
     else
       player_ids = params[:player_ids].map(&:to_i)
 
-      Selection.where(club: club.club_id).delete_all
+      Selection.where(club_id: club.id).delete_all
 
       player_ids.each do |player_id|
-        Selection.create(club: club.club_id, player_id:)
+        Selection.create(club_id: club.id, player_id:)
       end
       flash[:notice] = 'Selection saved successfully.'
       redirect_to club_path(params[:club])

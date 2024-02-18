@@ -19,9 +19,9 @@ class Turn::PlayerUpdates
 
     Turn.where('var1 LIKE ?', 'train%').where(week:).each do |turn|
       hash[turn.id] = {
-        action_id: turn.week.to_s + turn.club + turn.id.to_s,
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
         week: turn.week,
-        club_id: turn.club,
+        club_id: turn.club_id,
         var1: turn.var1,
         var2: turn.var2,
         var3: turn.var3,
@@ -61,9 +61,9 @@ class Turn::PlayerUpdates
 
     Turn.where('var1 LIKE ?', 'fitness%').where(week:).each do |turn|
       hash[turn.id] = {
-        action_id: turn.week.to_s + turn.club + turn.id.to_s,
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
         week: turn.week,
-        club: turn.club,
+        club: turn.club_id,
         var1: turn.var1,
         var2: turn.var2,
         date_completed: turn.date_completed
@@ -80,7 +80,7 @@ class Turn::PlayerUpdates
   def player_fitness(action_id, week, club, player)
     if Message.find_by(action_id:).nil?
       player_data = Player.find_by(name: player)
-      coach = Club.find_by(club_id: club)&.staff_fitness
+      coach = Club.find_by(id: club)&.staff_fitness
 
       increased_fitness = player_data.fitness + coach
       final_fitness = increased_fitness > 100 ? 100 : increased_fitness

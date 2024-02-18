@@ -14,8 +14,8 @@ RSpec.describe Turn, type: :model do
       allow_any_instance_of(Turn::TurnActions).to receive(:bank_adjustment)
       allow_any_instance_of(Turn::TurnActions).to receive(:add_to_stadium_upgrades)
 
-      expect(Turn::TurnActions).to receive(:add_to_stadium_upgrades).with(action_id, week, turn.club, turn.var1, turn.var2)
-      expect(Turn::TurnActions).to receive(:bank_adjustment).with(action_id, week, turn.club, turn.var1, turn.var2, cost)
+      expect(Turn::TurnActions).to receive(:add_to_stadium_upgrades).with(action_id, week, turn.club_id, turn.var1, turn.var2)
+      expect(Turn::TurnActions).to receive(:bank_adjustment).with(action_id, week, turn.club_id, turn.var1, turn.var2, cost)
 
       turn.send(:stadium_upgrade, week)
 
@@ -58,8 +58,8 @@ RSpec.describe Turn, type: :model do
       allow_any_instance_of(Turn).to receive(:bank_adjustment)
       allow_any_instance_of(Turn).to receive(:add_to_property_upgrades)
 
-      expect(turn).to receive(:bank_adjustment).with(action_id, week, turn.club, turn.var1, turn.var2, turn.var3)
-      expect(turn).to receive(:add_to_property_upgrades).with(action_id, week, turn.club, turn.var2)
+      expect(turn).to receive(:bank_adjustment).with(action_id, week, turn.club_id, turn.var1, turn.var2, turn.var3)
+      expect(turn).to receive(:add_to_property_upgrades).with(action_id, week, turn.club_id, turn.var2)
 
       turn.send(:property_upgrade, week)
 
@@ -101,8 +101,8 @@ RSpec.describe Turn, type: :model do
       allow_any_instance_of(Turn).to receive(:bank_adjustment)
       allow_any_instance_of(Turn).to receive(:add_to_coach_upgrades)
 
-      expect(turn).to receive(:bank_adjustment).with(action_id, week, turn.club, turn.var1, turn.var2, turn.var3)
-      expect(turn).to receive(:add_to_coach_upgrades).with(action_id, week, turn.club, turn.var2)
+      expect(turn).to receive(:bank_adjustment).with(action_id, week, turn.club_id, turn.var1, turn.var2, turn.var3)
+      expect(turn).to receive(:add_to_coach_upgrades).with(action_id, week, turn.club_id, turn.var2)
 
       turn.send(:coach_upgrade, week)
 

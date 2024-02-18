@@ -18,9 +18,9 @@ class Turn::TurnActions
 
     Turn.where('var1 LIKE ?', 'unmanaged%').where(week:).each do |turn|
       hash[turn.id] = {
-        action_id: turn.week.to_s + turn.club + turn.id.to_s,
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
         week: turn.week,
-        club: turn.club,
+        club: turn.club_id_id,
         var1: turn.var1, # unmanaged_bid
         var2: turn.var2, # player_id
         var3: turn.var3, # bid
@@ -32,7 +32,7 @@ class Turn::TurnActions
       if Message.find_by(action_id: value[:action_id]).nil?
 
         player = Player.find_by(id: value[:var2].to_i)
-        club = Club.find_by(club_id: value[:club])
+        club = Club.find_by(id: value[:club])
         player_original_club = player.club
 
         if player_original_club.managed?
@@ -41,7 +41,7 @@ class Turn::TurnActions
 
         elsif bid_decision(value, player)
           if rand(100) > player.loyalty
-            player.club = Club.find_by(club_id: value[:club])
+            player.club = Club.find_by(id: value[:club])
             player[:contract] = 37
             player.save
 
@@ -81,9 +81,9 @@ class Turn::TurnActions
 
     Turn.where('var1 LIKE ?', 'circuit%').where(week:).each do |turn|
       hash[turn.id] = {
-        action_id: turn.week.to_s + turn.club + turn.id.to_s,
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
         week: turn.week,
-        club: turn.club,
+        club: turn.club_id,
         var1: turn.var1, # circuit
         var2: turn.var2, # player_id
         var3: turn.var3,
@@ -94,7 +94,7 @@ class Turn::TurnActions
     hash.each do |key, value|
       if Message.find_by(action_id: value[:action_id]).nil?
         player = Player.find_by(id: value[:var2].to_i)
-        club = Club.find_by(club_id: value[:club])
+        club = Club.find_by(id: value[:club])
 
         if player.club.club_id == value[:club]
           proceeds = (player.value * -0.75).to_i
@@ -127,9 +127,9 @@ class Turn::TurnActions
 
     Turn.where('var1 LIKE ?', 'stand%').where(week:).each do |turn|
       hash[turn.id] = {
-        action_id: turn.week.to_s + turn.club + turn.id.to_s,
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
         week: turn.week,
-        club: turn.club,
+        club: turn.club_id,
         var1: turn.var1,
         var2: turn.var2,
         var3: turn.var3,
@@ -165,9 +165,9 @@ class Turn::TurnActions
 
     turns.each do |turn|
       hash[turn.id] = {
-        action_id: turn.week.to_s + turn.club + turn.id.to_s,
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
         week: turn.week,
-        club: turn.club,
+        club: turn.club_id,
         var1: turn.var1,
         var2: turn.var2,
         var3: turn.var3,
@@ -196,9 +196,9 @@ class Turn::TurnActions
 
     Turn.where('var1 LIKE ?', 'coach%').where(week:).each do |turn|
       hash[turn.id] = {
-        action_id: turn.week.to_s + turn.club + turn.id.to_s,
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
         week: turn.week,
-        club: turn.club,
+        club: turn.club_id,
         var1: turn.var1,
         var2: turn.var2,
         var3: turn.var3,
@@ -223,7 +223,7 @@ class Turn::TurnActions
   end
 
   def bank_adjustment(action_id, week, club, reason, dept, amount)
-    club_full = Club.find_by(club_id: club)
+    club_full = Club.find_by(id: club)
 
     new_bal = club_full.bank_bal.to_i - amount.to_i
     club_full.update(bank_bal: new_bal)

@@ -67,7 +67,7 @@
         <td><%= match.home_goals %></td>
         <td><%= match.away_goals %></td>
         <td>
-          <% if match.home_team == @club.id %>
+          <% if match.home_team.to_i == @club.id %>
             <% if match.home_goals > match.away_goals %>
               <%= 'Win' %>
             <% elsif match.home_goals == match.away_goals %>

@@ -12,8 +12,8 @@ class Match::SaveMatchCommentary
       raise StandardError, "There was an error in the #{self.class.name} class"
     end
 
-    home_team = Club.find_by(club_id: minute_by_minute.first[:club_home])&.name
-    away_team = Club.find_by(club_id: minute_by_minute.first[:club_away])&.name
+    home_team = Club.find_by(id: minute_by_minute.first[:club_home])&.name
+    away_team = Club.find_by(id: minute_by_minute.first[:club_away])&.name
 
     home_score = 0
     away_score = 0

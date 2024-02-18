@@ -7,7 +7,7 @@ class ClubsController < ApplicationController
   end
 
   def show
-    @selection = Selection.where(club: params[:id])
+    @selection = Selection.where(club_id: params[:id])
     @players = Player.where(club: params[:id])
     @club_matches = Match.where('home_team = ? OR away_team = ?', params[:id], params[:id])
     @message = Message.where(club: params[:id])
@@ -35,7 +35,7 @@ class ClubsController < ApplicationController
   end
 
   def update
-    @club = Club.find_by(club_id: params[:club][:club_id])
+    @club = Club.find_by(id: params[:club][:club_id])
     respond_to do |format|
       if @club.update(club_params)
         format.html { redirect_to clubs_path, notice: "Club was successfully updated." }

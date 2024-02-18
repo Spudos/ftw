@@ -18,7 +18,7 @@ class Match::SavePlayerMatchData
       Performance.create(
         match_id: id,
         player_id: player[:player_id],
-        club: player[:club],
+        club_id: player[:club_id],
         name: Player.find_by(id: player[:player_id])&.name,
         player_position: Player.find_by(id: player[:player_id])&.position,
         player_position_detail: Player.find_by(id: player[:player_id])&.player_position_detail,
