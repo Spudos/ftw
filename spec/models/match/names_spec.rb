@@ -7,19 +7,19 @@ RSpec.describe Match::Names, type: :model do
 
     it 'should return home assist and scorer and they should be different' do
       home_top = [
-        { match_performance: 50, player_position: 'dfc', club: 1, player_id: 402 },
-        { match_performance: 55, player_position: 'mid', club: 1, player_id: 403 },
-        { match_performance: 60, player_position: 'att', club: 1, player_id: 404 },
-        { match_performance: 65, player_position: 'att', club: 1, player_id: 405 },
-        { match_performance: 70, player_position: 'att', club: 1, player_id: 406 },
+        { match_performance: 50, player_position: 'dfc', club_id: 1, player_id: 402 },
+        { match_performance: 55, player_position: 'mid', club_id: 1, player_id: 403 },
+        { match_performance: 60, player_position: 'att', club_id: 1, player_id: 404 },
+        { match_performance: 65, player_position: 'att', club_id: 1, player_id: 405 },
+        { match_performance: 70, player_position: 'att', club_id: 1, player_id: 406 },
       ]
 
       away_top = [
-        { match_performance: 50, player_position: 'dfc', club: 2, player_id: 502 },
-        { match_performance: 30, player_position: 'mid', club: 2, player_id: 503 },
-        { match_performance: 35, player_position: 'mid', club: 2, player_id: 504 },
-        { match_performance: 40, player_position: 'att', club: 2, player_id: 505 },
-        { match_performance: 45, player_position: 'att', club: 2, player_id: 506 },
+        { match_performance: 50, player_position: 'dfc', club_id: 2, player_id: 502 },
+        { match_performance: 30, player_position: 'mid', club_id: 2, player_id: 503 },
+        { match_performance: 35, player_position: 'mid', club_id: 2, player_id: 504 },
+        { match_performance: 40, player_position: 'att', club_id: 2, player_id: 505 },
+        { match_performance: 45, player_position: 'att', club_id: 2, player_id: 506 },
       ]
 
       assist, scorer = Match::Names.new(goal_scored, home_top, away_top).call
@@ -35,19 +35,19 @@ RSpec.describe Match::Names, type: :model do
 
     it 'should return away assist and scorer and they should be different' do
       home_top = [
-        { match_performance: 50, player_position: 'dfc', club: 1, player_id: 402 },
-        { match_performance: 55, player_position: 'mid', club: 1, player_id: 403 },
-        { match_performance: 60, player_position: 'att', club: 1, player_id: 404 },
-        { match_performance: 65, player_position: 'att', club: 1, player_id: 405 },
-        { match_performance: 70, player_position: 'att', club: 1, player_id: 406 },
+        { match_performance: 50, player_position: 'dfc', club_id: 1, player_id: 402 },
+        { match_performance: 55, player_position: 'mid', club_id: 1, player_id: 403 },
+        { match_performance: 60, player_position: 'att', club_id: 1, player_id: 404 },
+        { match_performance: 65, player_position: 'att', club_id: 1, player_id: 405 },
+        { match_performance: 70, player_position: 'att', club_id: 1, player_id: 406 },
       ]
 
       away_top = [
-        { match_performance: 50, player_position: 'dfc', club: 2, player_id: 502 },
-        { match_performance: 30, player_position: 'mid', club: 2, player_id: 503 },
-        { match_performance: 35, player_position: 'mid', club: 2, player_id: 504 },
-        { match_performance: 40, player_position: 'att', club: 2, player_id: 505 },
-        { match_performance: 45, player_position: 'att', club: 2, player_id: 506 },
+        { match_performance: 50, player_position: 'dfc', club_id: 2, player_id: 502 },
+        { match_performance: 30, player_position: 'mid', club_id: 2, player_id: 503 },
+        { match_performance: 35, player_position: 'mid', club_id: 2, player_id: 504 },
+        { match_performance: 40, player_position: 'att', club_id: 2, player_id: 505 },
+        { match_performance: 45, player_position: 'att', club_id: 2, player_id: 506 },
       ]
 
       assist, scorer = Match::Names.new(goal_scored, home_top, away_top).call
@@ -63,19 +63,19 @@ RSpec.describe Match::Names, type: :model do
 
     it 'should return no assist and scorer' do
       home_top = [
-        { match_performance: 50, player_position: 'dfc', club: 1, player_id: 402 },
-        { match_performance: 55, player_position: 'mid', club: 1, player_id: 403 },
-        { match_performance: 60, player_position: 'att', club: 1, player_id: 404 },
-        { match_performance: 65, player_position: 'att', club: 1, player_id: 405 },
-        { match_performance: 70, player_position: 'att', club: 1, player_id: 406 },
+        { match_performance: 50, player_position: 'dfc', club_id: 1, player_id: 402 },
+        { match_performance: 55, player_position: 'mid', club_id: 1, player_id: 403 },
+        { match_performance: 60, player_position: 'att', club_id: 1, player_id: 404 },
+        { match_performance: 65, player_position: 'att', club_id: 1, player_id: 405 },
+        { match_performance: 70, player_position: 'att', club_id: 1, player_id: 406 },
       ]
 
       away_top = [
-        { match_performance: 50, player_position: 'dfc', club: 2, player_id: 502 },
-        { match_performance: 30, player_position: 'mid', club: 2, player_id: 503 },
-        { match_performance: 35, player_position: 'mid', club: 2, player_id: 504 },
-        { match_performance: 40, player_position: 'att', club: 2, player_id: 505 },
-        { match_performance: 45, player_position: 'att', club: 2, player_id: 506 },
+        { match_performance: 50, player_position: 'dfc', club_id: 2, player_id: 502 },
+        { match_performance: 30, player_position: 'mid', club_id: 2, player_id: 503 },
+        { match_performance: 35, player_position: 'mid', club_id: 2, player_id: 504 },
+        { match_performance: 40, player_position: 'att', club_id: 2, player_id: 505 },
+        { match_performance: 45, player_position: 'att', club_id: 2, player_id: 506 },
       ]
 
       assist, scorer = Match::Names.new(goal_scored, home_top, away_top).call

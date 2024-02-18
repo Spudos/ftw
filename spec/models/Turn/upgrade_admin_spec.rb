@@ -5,8 +5,8 @@ RSpec.describe Turn, type: :model do
   describe 'perform_completed_upgrades' do
     let(:week) { 1 }
     it 'performs the upgrade increase for staff' do
-      create(:club, staff_dfc: 1)
-      item = create(:upgrade, var1: 'staff_dfc', action_id: '10011')
+      create(:club, id: 1, staff_dfc: 1)
+      item = create(:upgrade, week: 1, club_id: 1, var1: 'staff_dfc', action_id: '10011')
 
       Turn::UpgradeAdmin.new(week).perform_completed_upgrades(item, week)
 
@@ -16,7 +16,7 @@ RSpec.describe Turn, type: :model do
 
     it 'performs the upgrade increase for facilities' do
       create(:club, facilities: 1)
-      item = create(:upgrade, var1: 'facilities', action_id: '10011')
+      item = create(:upgrade, week: 1, club_id: 1, var1: 'facilities', action_id: '10011')
 
       Turn::UpgradeAdmin.new(week).perform_completed_upgrades(item, week)
 
@@ -26,7 +26,7 @@ RSpec.describe Turn, type: :model do
 
     it 'performs the upgrade increase for hospitality' do
       create(:club, hospitality: 1)
-      item = create(:upgrade, var1: 'hospitality', action_id: '10011')
+      item = create(:upgrade, week: 1, club_id: 1, var1: 'hospitality', action_id: '10011')
 
       Turn::UpgradeAdmin.new(week).perform_completed_upgrades(item, week)
 
@@ -36,7 +36,7 @@ RSpec.describe Turn, type: :model do
 
     it 'performs the upgrade increase for pitch' do
       create(:club, pitch: 1)
-      item = create(:upgrade, var1: 'pitch', action_id: '10011')
+      item = create(:upgrade, week: 1, club_id: 1, var1: 'pitch', action_id: '10011')
 
       Turn::UpgradeAdmin.new(week).perform_completed_upgrades(item, week)
 
@@ -46,7 +46,7 @@ RSpec.describe Turn, type: :model do
 
     it 'performs the upgrade increase for stand condition' do
       create(:club, stand_n_condition: 1)
-      item = create(:upgrade, var1: 'stand_n_condition', action_id: '10011')
+      item = create(:upgrade, week: 1, club_id: 1, var1: 'stand_n_condition', action_id: '10011')
 
       Turn::UpgradeAdmin.new(week).perform_completed_upgrades(item, week)
 
@@ -56,7 +56,7 @@ RSpec.describe Turn, type: :model do
 
     it 'performs the upgrade increase for stand condition' do
       create(:club, stand_n_capacity: 5000, stand_n_name: 'north stand')
-      item = create(:upgrade, var1: 'stand_n_capacity', var2: 5000, action_id: '10011')
+      item = create(:upgrade, week: 1, club_id: 1, var1: 'stand_n_capacity', var2: 5000, action_id: '10011')
 
       Turn::UpgradeAdmin.new(week).perform_completed_upgrades(item, week)
 

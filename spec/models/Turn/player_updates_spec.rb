@@ -27,14 +27,14 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
     it 'increases the skill by 1 point as the coach > skill and he has potential' do
       week = 1
       action_id = '10011'
-      club = 1
+      club_id = 1
       player = 'Woolley'
       skill = 'tackling'
 
       create(:club, staff_dfc: 10)
       create(:player, position: 'dfc')
 
-      Turn::PlayerUpdates.new(week).train_player(action_id, week, club, player, skill)
+      Turn::PlayerUpdates.new(week).train_player(action_id, week, club_id, player, skill)
 
       player = Player.find_by(name: 'Woolley')
 
@@ -45,14 +45,14 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
     it 'will not increse the skill by 1 point as the coach > skill and he has no potential' do
       week = 1
       action_id = '10011'
-      club = 1
+      club_id = 1
       player = 'Woolley'
       skill = 'tackling'
 
       create(:club, staff_dfc: 10)
       create(:player, position: 'dfc', potential_tackling: 5)
 
-      Turn::PlayerUpdates.new(week).train_player(action_id, week, club, player, skill)
+      Turn::PlayerUpdates.new(week).train_player(action_id, week, club_id, player, skill)
 
       player = Player.find_by(name: 'Woolley')
 
@@ -63,14 +63,14 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
     it 'will not increse the skill by 1 point as the coach < skill and he has no potential' do
       week = 1
       action_id = '10011'
-      club = 1
+      club_id = 1
       player = 'Woolley'
       skill = 'tackling'
 
       create(:club, staff_dfc: 4)
       create(:player, position: 'dfc', potential_tackling: 5)
 
-      Turn::PlayerUpdates.new(week).train_player(action_id, week, club, player, skill)
+      Turn::PlayerUpdates.new(week).train_player(action_id, week, club_id, player, skill)
 
       player = Player.find_by(name: 'Woolley')
 
@@ -81,14 +81,14 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
     it 'will not increse the skill by 1 point as the coach < skill but he has potential' do
       week = 1
       action_id = '10011'
-      club = 1
+      club_id = 1
       player = 'Woolley'
       skill = 'tackling'
 
       create(:club, staff_dfc: 4)
       create(:player, position: 'dfc', potential_tackling: 10)
 
-      Turn::PlayerUpdates.new(week).train_player(action_id, week, club, player, skill)
+      Turn::PlayerUpdates.new(week).train_player(action_id, week, club_id, player, skill)
 
       player = Player.find_by(name: 'Woolley')
 
@@ -99,7 +99,7 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
 
   describe 'fitness_upgrade' do
     it 'updates the turn records and performs necessary actions' do
-      turn = create(:turn, var1: 'fitness', var2: 'Woolley', var3: nil, date_completed: nil)
+      turn = create(:turn, week: 1, club_id: 1, var1: 'fitness', var2: 'Woolley', var3: nil, date_completed: nil)
       week = 1
       action_id = '10011'
 
@@ -124,13 +124,13 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
     it 'will increase the players fitness by 8' do
       week = 1
       action_id = '10011'
-      club = 1
+      club_id = 1
       player = 'Woolley'
 
       create(:club, staff_fitness: 8)
       create(:player, fitness: 90)
 
-      Turn::PlayerUpdates.new(week).player_fitness(action_id, week, club, player)
+      Turn::PlayerUpdates.new(week).player_fitness(action_id, week, club_id, player)
 
       player = Player.find_by(name: 'Woolley')
 
@@ -141,13 +141,13 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
     it 'will not change the fitness as it is already at 100' do
       week = 1
       action_id = '10011'
-      club = 1
+      club_id = 1
       player = 'Woolley'
 
       create(:club, staff_fitness: 8)
       create(:player, fitness: 100)
 
-      Turn::PlayerUpdates.new(week).player_fitness(action_id, week, club, player)
+      Turn::PlayerUpdates.new(week).player_fitness(action_id, week, club_id, player)
 
       player = Player.find_by(name: 'Woolley')
 
@@ -158,13 +158,13 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
     it 'will change fitness to 100 as it is above 100' do
       week = 1
       action_id = '10011'
-      club = 1
+      club_id = 1
       player = 'Woolley'
 
       create(:club, staff_fitness: 8)
       create(:player, fitness: 130)
 
-      Turn::PlayerUpdates.new(week).player_fitness(action_id, week, club, player)
+      Turn::PlayerUpdates.new(week).player_fitness(action_id, week, club_id, player)
 
       player = Player.find_by(name: 'Woolley')
 
@@ -175,13 +175,13 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
     it 'will change fitness to 100 as it is above 100 after the fitness change is applied' do
       week = 1
       action_id = '10011'
-      club = 1
+      club_id = 1
       player = 'Woolley'
 
       create(:club, staff_fitness: 8)
       create(:player, fitness: 98)
 
-      Turn::PlayerUpdates.new(week).player_fitness(action_id, week, club, player)
+      Turn::PlayerUpdates.new(week).player_fitness(action_id, week, club_id, player)
 
       player = Player.find_by(name: 'Woolley')
 
@@ -194,7 +194,8 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
     let(:week) { 1 }
 
     it 'does not effect fitness' do
-      create(:player, fitness: 100)
+      create(:club, id: 1)
+      create(:player, club_id: 1, fitness: 100)
 
       adjusted_player = Turn::PlayerUpdates.new(week).fitness_increase
 
@@ -202,7 +203,8 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
     end
 
     it 'sets fitness to 100' do
-      create(:player, fitness: 110)
+      create(:club, id: 1)
+      create(:player, club_id: 1, fitness: 110)
 
       adjusted_player = Turn::PlayerUpdates.new(week).fitness_increase
 
@@ -210,7 +212,8 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
     end
 
     it 'increases the fitness by 3' do
-      create(:player, fitness: 0)
+      create(:club, id: 1)
+      create(:player, club_id: 1, fitness: 0)
       allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
 
       adjusted_player = Turn::PlayerUpdates.new(week).fitness_increase
@@ -223,14 +226,16 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
   let(:week) { 1 }
 
     it 'reduces the contract by 1' do
-      create(:player, contract: 20)
+      create(:club, id: 1)
+      create(:player, club_id: 1, contract: 20)
       adjusted_player = Turn::PlayerUpdates.new(week).contract_decrease
 
       expect(adjusted_player[0][:contract]).to eq(19)
     end
 
     it 'does not reduce the contract past 0' do
-      create(:player, contract: 0)
+      create(:club, id: 1)
+      create(:player, club_id: 1, contract: 0)
 
       adjusted_player = Turn::PlayerUpdates.new(week).contract_decrease
 
@@ -238,7 +243,8 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
     end
 
     it 'sets the contract to 0 as it was negative' do
-      create(:player, contract: -20)
+      create(:club, id: 1)
+      create(:player, club_id: 1, contract: -20)
 
       adjusted_player = Turn::PlayerUpdates.new(week).contract_decrease
 
@@ -248,8 +254,8 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
 
   describe 'player_value' do
     it 'calculates the correct player value' do
-      create(:player)
-      create(:club)
+      create(:club, id: 1)
+      create(:player, club_id: 1)
       week = 1
 
       Turn::PlayerUpdates.new(week).player_value
@@ -262,8 +268,8 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
 
   describe 'player_wage' do
     it 'calculates the correct player wage' do
-      create(:player)
-      create(:club)
+      create(:club, id: 1)
+      create(:player, club_id: 1)
       week = 1
 
       Turn::PlayerUpdates.new(week).player_wages

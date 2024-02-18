@@ -4,7 +4,7 @@ class Turn < ApplicationRecord
       Turn::TurnActions.new(params[:week]).call
       Turn::PlayerUpdates.new(params[:week]).call
       Turn::UpgradeAdmin.new(params[:week]).call
-      Message.create(action_id: params[:week], week: params[:week], club: 'xxx', var1: "week #{params[:week]} processed")
+      Message.create(action_id: params[:week], week: params[:week], club_id: '999', var1: "week #{params[:week]} processed")
     else
       if params[:week].nil?
         raise 'Please select a week before trying to process turn actions.'

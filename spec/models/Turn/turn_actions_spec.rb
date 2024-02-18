@@ -4,7 +4,7 @@ require 'pry'
 RSpec.describe Turn, type: :model do
   describe 'stadium_upgrade' do
     it 'updates the turn records and performs necessary actions' do
-      turn = create(:turn, var1: 'stand_n_capacity', var2: 5000, var3: nil, date_completed: nil)
+      turn = create(:turn, week: 1, club_id: 1, var1: 'stand_n_capacity', var2: 5000, var3: nil, date_completed: nil)
       week = 1
       action_id = '10011'
       cost = 5000000
@@ -32,17 +32,17 @@ RSpec.describe Turn, type: :model do
     it 'adds the upgrade to the upgrade table' do
       action_id = 'test'
       week = 1
-      club = 1
+      club_id = 1
       stand = 'stand_n_capacity'
       seats = 5000
 
-      Turn::TurnActions.new(week).add_to_stadium_upgrades(action_id, week, club, stand, seats)
+      Turn::TurnActions.new(week).add_to_stadium_upgrades(action_id, week, club_id, stand, seats)
 
       upgrade = Upgrade.first
 
       expect(upgrade[:action_id]).to eq('test')
       expect(upgrade[:week]).to eq(1)
-      expect(upgrade[:club]).to eq(1)
+      expect(upgrade[:club_id].to_i).to eq(1)
       expect(upgrade[:var1]).to eq('stand_n_capacity')
       expect(upgrade[:var2]).to eq('5000')
       expect(upgrade[:var3]).to eq(0)
@@ -51,7 +51,7 @@ RSpec.describe Turn, type: :model do
 
   describe 'property_upgrade' do
     it 'updates the turn records and performs necessary actions' do
-      turn = create(:turn, var1: 'property', var2: 'pitch', var3: nil, date_completed: nil)
+      turn = create(:turn, week: 1, club_id: 1, var1: 'property', var2: 'pitch', var3: nil, date_completed: nil)
       week = 1
       action_id = '10011'
 
@@ -64,7 +64,7 @@ RSpec.describe Turn, type: :model do
       turn.send(:property_upgrade, week)
 
       expect(Turn.first[:week]).to eq(1)
-      expect(Turn.first[:club]).to eq(1)
+      expect(Turn.first[:club_id].to_i).to eq(1)
       expect(Turn.first[:var1]).to eq('property')
       expect(Turn.first[:var2]).to eq('pitch')
       expect(Turn.first[:var3]).to eq(nil)
@@ -76,16 +76,16 @@ RSpec.describe Turn, type: :model do
     it 'adds the upgrade to the upgrade table' do
       action_id = 'test'
       week = 1
-      club = 1
+      club_id = 1
       prop = 'pitch'
 
-      Turn::TurnActions.new(week).add_to_property_upgrades(action_id, week, club, prop)
+      Turn::TurnActions.new(week).add_to_property_upgrades(action_id, week, club_id, prop)
 
       upgrade = Upgrade.first
 
       expect(upgrade[:action_id]).to eq('test')
       expect(upgrade[:week]).to eq(1)
-      expect(upgrade[:club]).to eq(1)
+      expect(upgrade[:club_id].to_i).to eq(1)
       expect(upgrade[:var1]).to eq('pitch')
       expect(upgrade[:var2]).to eq(nil)
       expect(upgrade[:var3]).to eq(0)
@@ -94,7 +94,7 @@ RSpec.describe Turn, type: :model do
 
   describe 'coach_upgrade' do
     it 'updates the turn records and performs necessary actions' do
-      turn = create(:turn, var1: 'coach', var2: 'dfc', var3: nil, date_completed: nil)
+      turn = create(:turn, week: 1, club_id: 1, var1: 'coach', var2: 'dfc', var3: nil, date_completed: nil)
       week = 1
       action_id = '10011'
 
@@ -107,7 +107,7 @@ RSpec.describe Turn, type: :model do
       turn.send(:coach_upgrade, week)
 
       expect(Turn.first[:week]).to eq(1)
-      expect(Turn.first[:club]).to eq(1)
+      expect(Turn.first[:club_id].to_i).to eq(1)
       expect(Turn.first[:var1]).to eq('coach')
       expect(Turn.first[:var2]).to eq('dfc')
       expect(Turn.first[:var3]).to eq(nil)
@@ -119,16 +119,16 @@ RSpec.describe Turn, type: :model do
     it 'adds the upgrade to the upgrade table' do
       action_id = 'test'
       week = 1
-      club = 1
+      club_id = 1
       coach = 'dfc'
 
-      Turn::TurnActions.new(week).add_to_coach_upgrades(action_id, week, club, coach)
+      Turn::TurnActions.new(week).add_to_coach_upgrades(action_id, week, club_id, coach)
 
       upgrade = Upgrade.first
 
       expect(upgrade[:action_id]).to eq('test')
       expect(upgrade[:week]).to eq(1)
-      expect(upgrade[:club]).to eq(1)
+      expect(upgrade[:club_id].to_i).to eq(1)
       expect(upgrade[:var1]).to eq('dfc')
       expect(upgrade[:var2]).to eq(nil)
       expect(upgrade[:var3]).to eq(0)

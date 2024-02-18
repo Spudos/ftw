@@ -30,15 +30,15 @@ class Turn::PlayerUpdates
     end
 
     hash.each do |key, value|
-      train_player(value[:action_id], value[:week], value[:club], value[:var2], value[:var3])
+      train_player(value[:action_id], value[:week], value[:club_id].to_i, value[:var2], value[:var3])
       turn = Turn.find(key)
       turn.update(date_completed: DateTime.now)
     end
   end
 
-  def train_player(action_id, week, club, player, skill)
+  def train_player(action_id, week, club_id, player, skill)
     if Message.find_by(action_id:).nil?
-      club_staff = Club.find_by(id: club)
+      club_staff = Club.find_by(id: club_id)
       player_data = Player.find_by(name: player)
       coach = club_staff.send("staff_#{player_data.position}")
 
@@ -46,12 +46,12 @@ class Turn::PlayerUpdates
         if player_data[skill] < coach
           player_data[skill] += 1
           player_data.update(skill => player_data[skill])
-          Message.create(action_id:, week:, club:, var1: "Training #{player} in #{skill} suceeded! His new value is #{player_data[skill]}")
+          Message.create(action_id:, week:, club_id:, var1: "Training #{player} in #{skill} suceeded! His new value is #{player_data[skill]}")
         else
-          Message.create(action_id:, week:, club:, var1: "Training #{player} in #{skill} failed - this coach isn't good enough to train #{skill} for #{player}")  
+          Message.create(action_id:, week:, club_id:, var1: "Training #{player} in #{skill} failed - this coach isn't good enough to train #{skill} for #{player}")  
         end
       else
-        Message.create(action_id:, week:, club:, var1: "Training #{player} in #{skill} failed due to reaching potential")
+        Message.create(action_id:, week:, club_id:, var1: "Training #{player} in #{skill} failed due to reaching potential")
       end
     end
   end
@@ -63,7 +63,7 @@ class Turn::PlayerUpdates
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
         week: turn.week,
-        club: turn.club_id,
+        club_id: turn.club_id,
         var1: turn.var1,
         var2: turn.var2,
         date_completed: turn.date_completed
@@ -71,23 +71,23 @@ class Turn::PlayerUpdates
     end
 
     hash.each do |key, value|
-      player_fitness(value[:action_id], value[:week], value[:club], value[:var2])
+      player_fitness(value[:action_id], value[:week], value[:club_id].to_i, value[:var2])
       turn = Turn.find(key)
       turn.update(date_completed: DateTime.now)
     end
   end
 
-  def player_fitness(action_id, week, club, player)
+  def player_fitness(action_id, week, club_id, player)
     if Message.find_by(action_id:).nil?
       player_data = Player.find_by(name: player)
-      coach = Club.find_by(id: club)&.staff_fitness
+      coach = Club.find_by(id: club_id)&.staff_fitness
 
       increased_fitness = player_data.fitness + coach
       final_fitness = increased_fitness > 100 ? 100 : increased_fitness
 
       player_data.update(fitness: final_fitness)
 
-      Message.create(action_id:, week:, club:, var1: "Fitness training for #{player} was completed! His new value is #{final_fitness}")
+      Message.create(action_id:, week:, club_id:, var1: "Fitness training for #{player} was completed! His new value is #{final_fitness}")
     end
   end
 

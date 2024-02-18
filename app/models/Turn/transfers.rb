@@ -8,7 +8,7 @@ class Turn::Transfers
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
         week: turn.week,
-        club: turn.club_id,
+        club_id: turn.club_id,
         var1: turn.var1, # unmanaged_bid
         var2: turn.var2, # player_id
         var3: turn.var3, # bid
@@ -20,30 +20,30 @@ class Turn::Transfers
       if Message.find_by(action_id: value[:action_id]).nil?
 
         player = Player.find_by(id: value[:var2].to_i)
-        club = Club.find_by(id: value[:club])
+        club = Club.find_by(id: value[:club_id].to_i)
         player_original_club = player.club
 
         if player_original_club.managed?
-          Message.create(action_id: value[:action_id], week: value[:week], club: club.club_id, var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player being at a managed club")
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player being at a managed club")
           transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'player_managed')
 
         elsif bid_decision(value, player)
           if rand(100) > player.loyalty
-            player.club = Club.find_by(id: value[:club])
+            player.club = Club.find_by(id: value[:club_id].to_i)
             player[:contract] = 37
             player.save
 
-            Message.create(action_id: value[:action_id], week: value[:week], club: club.club_id, var1: "Your bid for #{player.name} succeeded!  The player has joined your club for #{value[:var3]}")
-            bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], player.name, value[:var3])
+            Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "Your bid for #{player.name} succeeded!  The player has joined your club for #{value[:var3]}")
+            bank_adjustment(value[:action_id], value[:week], value[:club_id].to_i, value[:var1], player.name, value[:var3])
             transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'transfer_completed')
 
           else
-            Message.create(action_id: value[:action_id], week: value[:week], club: club.club_id, var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player choosing not to join your club")
+            Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player choosing not to join your club")
             transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'player_refusal')
           end
 
         else
-          Message.create(action_id: value[:action_id], week: value[:week], club: club.club_id, var1: "Your #{value[:var3]} bid for #{player.name} failed due to not meet an acceptable valuation for the player")
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "Your #{value[:var3]} bid for #{player.name} failed due to not meet an acceptable valuation for the player")
           transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'club_refusal')
         end
       end
@@ -71,7 +71,7 @@ class Turn::Transfers
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
         week: turn.week,
-        club: turn.club_id,
+        club_id: turn.club_id,
         var1: turn.var1, # circuit
         var2: turn.var2, # player_id
         var3: turn.var3,
@@ -82,21 +82,20 @@ class Turn::Transfers
     hash.each do |key, value|
       if Message.find_by(action_id: value[:action_id]).nil?
         player = Player.find_by(id: value[:var2].to_i)
-        club = Club.find_by(id: value[:club])
+        club = Club.find_by(id: value[:club_id].to_i)
 
-        if player.club.club_id == value[:club]
+        if player.club.club_id == value[:club_id].to_i
           proceeds = (player.value * -0.75).to_i
           proceeds_positive = (proceeds * -1).to_i
 
           player[:club_id] = 42
-          player[:club] = 'xxx'
           player.save
 
-          Message.create(action_id: value[:action_id], week: value[:week], club: club.club_id, var1: "#{player.name} was sold to the free agent circuit for #{proceeds_positive}")
-          bank_adjustment(value[:action_id], value[:week], value[:club], value[:var1], player.name, proceeds)
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "#{player.name} was sold to the free agent circuit for #{proceeds_positive}")
+          bank_adjustment(value[:action_id], value[:week], value[:club_id].to_i, value[:var1], player.name, proceeds)
           transfer_save(value[:week], 42, club.id, value[:var2], proceeds, 'sale_completed')
         else
-          Message.create(action_id: value[:action_id], week: value[:week], club: club.club_id, var1: "#{player.name} could not be sold to the free agent circuit due to not being at your club")
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "#{player.name} could not be sold to the free agent circuit due to not being at your club")
           transfer_save(value[:week], 42, player.club_id, value[:var2], proceeds, 'sale_failed')
         end
       end

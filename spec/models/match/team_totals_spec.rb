@@ -8,61 +8,61 @@ RSpec.describe Match::TeamTotals, type: :model do
         {
           match_performance: 50,
           player_position: 'gkp',
-          club: 1,
+          club_id: 1,
           player_blend: 5
         },
         {
           match_performance: 50,
           player_position: 'dfc',
-          club: 1,
+          club_id: 1,
           player_blend: 15
         },
         {
           match_performance: 50,
           player_position: 'mid',
-          club: 1,
+          club_id: 1,
           player_blend: 5
         },
         {
           match_performance: 50,
           player_position: 'att',
-          club: 1,
+          club_id: 1,
           player_blend: 5
         },
         {
           match_performance: 40,
           player_position: 'gkp',
-          club: 2,
+          club_id: 2,
           player_blend: 4
         },
         {
           match_performance: 40,
           player_position: 'dfc',
-          club: 2,
+          club_id: 2,
           player_blend: 10
         },
         {
           match_performance: 40,
           player_position: 'mid',
-          club: 2,
+          club_id: 2,
           player_blend: 8
         },
         {
           match_performance: 40,
           player_position: 'mid',
-          club: 2,
+          club_id: 2,
           player_blend: 4
         },
         {
           match_performance: 40,
           player_position: 'att',
-          club: 2,
+          club_id: 2,
           player_blend: 6
         },
         {
           match_performance: 40,
           player_position: 'att',
-          club: 2,
+          club_id: 2,
           player_blend: 4
         }
       ]
