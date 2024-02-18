@@ -20,7 +20,7 @@ RSpec.describe Turn, type: :model do
       turn.send(:stadium_upgrade, week)
 
       expect(Turn.first[:week]).to eq(1)
-      expect(Turn.first[:club]).to eq('001')
+      expect(Turn.first[:club]).to eq(1)
       expect(Turn.first[:var1]).to eq('stand_n_capacity')
       expect(Turn.first[:var2]).to eq('5000')
       expect(Turn.first[:var3]).to eq(nil)
@@ -32,7 +32,7 @@ RSpec.describe Turn, type: :model do
     it 'adds the upgrade to the upgrade table' do
       action_id = 'test'
       week = 1
-      club = '001'
+      club = 1
       stand = 'stand_n_capacity'
       seats = 5000
 
@@ -42,7 +42,7 @@ RSpec.describe Turn, type: :model do
 
       expect(upgrade[:action_id]).to eq('test')
       expect(upgrade[:week]).to eq(1)
-      expect(upgrade[:club]).to eq('001')
+      expect(upgrade[:club]).to eq(1)
       expect(upgrade[:var1]).to eq('stand_n_capacity')
       expect(upgrade[:var2]).to eq('5000')
       expect(upgrade[:var3]).to eq(0)
@@ -64,7 +64,7 @@ RSpec.describe Turn, type: :model do
       turn.send(:property_upgrade, week)
 
       expect(Turn.first[:week]).to eq(1)
-      expect(Turn.first[:club]).to eq('001')
+      expect(Turn.first[:club]).to eq(1)
       expect(Turn.first[:var1]).to eq('property')
       expect(Turn.first[:var2]).to eq('pitch')
       expect(Turn.first[:var3]).to eq(nil)
@@ -76,7 +76,7 @@ RSpec.describe Turn, type: :model do
     it 'adds the upgrade to the upgrade table' do
       action_id = 'test'
       week = 1
-      club = '001'
+      club = 1
       prop = 'pitch'
 
       Turn::TurnActions.new(week).add_to_property_upgrades(action_id, week, club, prop)
@@ -85,7 +85,7 @@ RSpec.describe Turn, type: :model do
 
       expect(upgrade[:action_id]).to eq('test')
       expect(upgrade[:week]).to eq(1)
-      expect(upgrade[:club]).to eq('001')
+      expect(upgrade[:club]).to eq(1)
       expect(upgrade[:var1]).to eq('pitch')
       expect(upgrade[:var2]).to eq(nil)
       expect(upgrade[:var3]).to eq(0)
@@ -107,7 +107,7 @@ RSpec.describe Turn, type: :model do
       turn.send(:coach_upgrade, week)
 
       expect(Turn.first[:week]).to eq(1)
-      expect(Turn.first[:club]).to eq('001')
+      expect(Turn.first[:club]).to eq(1)
       expect(Turn.first[:var1]).to eq('coach')
       expect(Turn.first[:var2]).to eq('dfc')
       expect(Turn.first[:var3]).to eq(nil)
@@ -119,7 +119,7 @@ RSpec.describe Turn, type: :model do
     it 'adds the upgrade to the upgrade table' do
       action_id = 'test'
       week = 1
-      club = '001'
+      club = 1
       coach = 'dfc'
 
       Turn::TurnActions.new(week).add_to_coach_upgrades(action_id, week, club, coach)
@@ -128,7 +128,7 @@ RSpec.describe Turn, type: :model do
 
       expect(upgrade[:action_id]).to eq('test')
       expect(upgrade[:week]).to eq(1)
-      expect(upgrade[:club]).to eq('001')
+      expect(upgrade[:club]).to eq(1)
       expect(upgrade[:var1]).to eq('dfc')
       expect(upgrade[:var2]).to eq(nil)
       expect(upgrade[:var3]).to eq(0)

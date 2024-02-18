@@ -9,8 +9,8 @@ RSpec.describe Match::CreateFixtures do
       expect(fixture_list).to contain_exactly(
         {
           id: 1,
-          club_home: '001',
-          club_away: '002',
+          club_home: 1,
+          club_away: 2,
           week_number: 1,
           competition: 'Premier League'
         }

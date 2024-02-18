@@ -6,7 +6,7 @@ RSpec.describe Match::BlendAdjustment, type: :model do
     it 'should return the total performance for each area of the team adjusted by that areas blend value' do
       totals = [
         {
-          team: '001',
+          team: 1,
           defense: 200,
           defense_blend: 5,
           midfield: 150,
@@ -15,7 +15,7 @@ RSpec.describe Match::BlendAdjustment, type: :model do
           attack_blend: 5
         },
         {
-          team: '002',
+          team: 2,
           defense: 250,
           defense_blend: 2,
           midfield: 200,

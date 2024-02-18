@@ -7,13 +7,13 @@ RSpec.describe Match::StadiumEffect, type: :model do
       home_stadium_size = 9000
       totals_blend = [
         {
-          team: '001',
+          team: 1,
           defense: 200,
           midfield: 150,
           attack: 125
         },
         {
-          team: '002',
+          team: 2,
           defense: 100,
           midfield: 100,
           attack: 100
@@ -34,13 +34,13 @@ RSpec.describe Match::StadiumEffect, type: :model do
       home_stadium_size = 15_000
       totals_blend = [
         {
-          team: '001',
+          team: 1,
           defense: 200,
           midfield: 150,
           attack: 125
         },
         {
-          team: '002',
+          team: 2,
           defense: 100,
           midfield: 100,
           attack: 100
@@ -61,13 +61,13 @@ RSpec.describe Match::StadiumEffect, type: :model do
       home_stadium_size = 25_000
       totals_blend = [
         {
-          team: '001',
+          team: 1,
           defense: 200,
           midfield: 150,
           attack: 125
         },
         {
-          team: '002',
+          team: 2,
           defense: 100,
           midfield: 100,
           attack: 100
@@ -88,13 +88,13 @@ RSpec.describe Match::StadiumEffect, type: :model do
       home_stadium_size = 35_000
       totals_blend = [
         {
-          team: '001',
+          team: 1,
           defense: 200,
           midfield: 150,
           attack: 125
         },
         {
-          team: '002',
+          team: 2,
           defense: 100,
           midfield: 100,
           attack: 100
@@ -115,13 +115,13 @@ RSpec.describe Match::StadiumEffect, type: :model do
       home_stadium_size = 45_000
       totals_blend = [
         {
-          team: '001',
+          team: 1,
           defense: 200,
           midfield: 150,
           attack: 125
         },
         {
-          team: '002',
+          team: 2,
           defense: 100,
           midfield: 100,
           attack: 100
@@ -142,13 +142,13 @@ RSpec.describe Match::StadiumEffect, type: :model do
       home_stadium_size = 55_000
       totals_blend = [
         {
-          team: '001',
+          team: 1,
           defense: 200,
           midfield: 150,
           attack: 125
         },
         {
-          team: '002',
+          team: 2,
           defense: 100,
           midfield: 100,
           attack: 100
@@ -169,13 +169,13 @@ RSpec.describe Match::StadiumEffect, type: :model do
       home_stadium_size = 65_000
       totals_blend = [
         {
-          team: '001',
+          team: 1,
           defense: 200,
           midfield: 150,
           attack: 125
         },
         {
-          team: '002',
+          team: 2,
           defense: 100,
           midfield: 100,
           attack: 100
@@ -196,13 +196,13 @@ RSpec.describe Match::StadiumEffect, type: :model do
       home_stadium_size = 100_000
       totals_blend = [
         {
-          team: '001',
+          team: 1,
           defense: 200,
           midfield: 150,
           attack: 125
         },
         {
-          team: '002',
+          team: 2,
           defense: 100,
           midfield: 100,
           attack: 100

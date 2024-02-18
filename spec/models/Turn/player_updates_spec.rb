@@ -27,7 +27,7 @@ binding.pry
     it 'increases the skill by 1 point as the coach > skill and he has potential' do
       week = 1
       action_id = '10011'
-      club = '001'
+      club = 1
       player = 'Woolley'
       skill = 'tackling'
 
@@ -45,7 +45,7 @@ binding.pry
     it 'will not increse the skill by 1 point as the coach > skill and he has no potential' do
       week = 1
       action_id = '10011'
-      club = '001'
+      club = 1
       player = 'Woolley'
       skill = 'tackling'
 
@@ -63,7 +63,7 @@ binding.pry
     it 'will not increse the skill by 1 point as the coach < skill and he has no potential' do
       week = 1
       action_id = '10011'
-      club = '001'
+      club = 1
       player = 'Woolley'
       skill = 'tackling'
 
@@ -81,7 +81,7 @@ binding.pry
     it 'will not increse the skill by 1 point as the coach < skill but he has potential' do
       week = 1
       action_id = '10011'
-      club = '001'
+      club = 1
       player = 'Woolley'
       skill = 'tackling'
 
@@ -110,7 +110,7 @@ binding.pry
       turn.send(:fitness_upgrade, week)
 
       expect(Turn.first[:week]).to eq(1)
-      expect(Turn.first[:club]).to eq('001')
+      expect(Turn.first[:club]).to eq(1)
       expect(Turn.first[:var1]).to eq('fitness')
       expect(Turn.first[:var2]).to eq('Woolley')
       expect(Turn.first[:var3]).to eq(nil)
@@ -124,7 +124,7 @@ binding.pry
     it 'will increase the players fitness by 8' do
       week = 1
       action_id = '10011'
-      club = '001'
+      club = 1
       player = 'Woolley'
 
       create(:club, staff_fitness: 8)
@@ -141,7 +141,7 @@ binding.pry
     it 'will not change the fitness as it is already at 100' do
       week = 1
       action_id = '10011'
-      club = '001'
+      club = 1
       player = 'Woolley'
 
       create(:club, staff_fitness: 8)
@@ -158,7 +158,7 @@ binding.pry
     it 'will change fitness to 100 as it is above 100' do
       week = 1
       action_id = '10011'
-      club = '001'
+      club = 1
       player = 'Woolley'
 
       create(:club, staff_fitness: 8)
@@ -175,7 +175,7 @@ binding.pry
     it 'will change fitness to 100 as it is above 100 after the fitness change is applied' do
       week = 1
       action_id = '10011'
-      club = '001'
+      club = 1
       player = 'Woolley'
 
       create(:club, staff_fitness: 8)

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :match do
-    home_team { '001' }
-    away_team { '002' }
+    home_team { 1 }
+    away_team { 2 }
     sequence(:match_id) { |n| "number+#{n}" }
   end
 end
