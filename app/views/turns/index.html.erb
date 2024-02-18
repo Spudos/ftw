@@ -13,11 +13,11 @@
 <h6>Run Matches</h6>
 <form action="/matches/match_multiple" method="post">
   <input type="hidden" name="selected_week" value="<%= params[:week] %>">
-  <button type="submit" name="competition" value="Premier League" class="btn btn-danger">Premier League. Completed so far: <%= @premier_completed %></button><br>
-  <button type="submit" name="competition" value="Championship" class="btn btn-danger">Championship. Completed so far: <%= @championship_completed %></button><br>
-  <button type="submit" name="competition" value="Cup" class="btn btn-danger">Cup. Completed so far: <%= @cup_completed %></button><br>
-  <button type="submit" name="competition" value="Friendly" class="btn btn-danger">Friendlies. Completed so far: <%= @friendlies_completed %></button><br>
-  <button type="submit" class="btn btn-danger">All Games. Completed so far: <%= @games_completed %></button>
+  <button type="submit" name="competition" value="Premier League" class="btn btn-warning">Premier League. Completed so far: <%= @premier_completed %></button><br>
+  <button type="submit" name="competition" value="Championship" class="btn btn-warning">Championship. Completed so far: <%= @championship_completed %></button><br>
+  <button type="submit" name="competition" value="Cup" class="btn btn-warning">Cup. Completed so far: <%= @cup_completed %></button><br>
+  <button type="submit" name="competition" value="Friendly" class="btn btn-warning">Friendlies. Completed so far: <%= @friendlies_completed %></button><br>
+  <button type="submit" class="btn btn-warning">All Games. Completed so far: <%= @games_completed %></button>
 </form>
 
 <h6>Process Turn Actions</h6>
@@ -26,7 +26,7 @@
   <% if Message.exists?(action_id: "#{params[:week]}TA") %>
     <button type="submit" class="btn btn btn-danger disabled">Turn Actions Completed</button>
   <% else %>
-    <button type="submit" class="btn btn btn-danger">Process Turn Actions</button>
+    <button type="submit" class="btn btn btn-success">Process Turn Actions</button>
   <% end %>
 </form>
 
@@ -36,7 +36,7 @@
   <% if Message.exists?(action_id: "#{params[:week]}PU") %>
     <button type="submit" class="btn btn btn-danger disabled">Player Updates Completed</button>
   <% else %>
-    <button type="submit" class="btn btn btn-danger">Process Player Updates</button>
+    <button type="submit" class="btn btn btn-success">Process Player Updates</button>
   <% end %>
 </form>
 
