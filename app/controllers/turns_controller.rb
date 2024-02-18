@@ -4,6 +4,11 @@ class TurnsController < ApplicationController
 
   def index
     @turns = Turn.all
+    @premier_completed = (Match.where(week_number: params[:week], competition: 'Premier League')).count
+    @championship_completed = (Match.where(week_number: params[:week], competition: 'Chamnpionship')).count
+    @cup_completed = (Match.where(week_number: params[:week], competition: 'Cup')).count
+    @friendlies_completed = (Match.where(week_number: params[:week], competition: 'Friendly')).count
+    @games_completed = (Match.where(week_number: params[:week])).count
   end
 
   def show
