@@ -13,7 +13,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
-      <h3>New Turnsheet for <%=  Club.find_by(club_id: params[:club])&.name %></h3> 
+      <h3>New Turnsheet for <%=  @club.name %></h3> 
       </div>
       <div class="col-md-12 align-top d-flex align-items-center justify-content-center">   
         <div class="turnsheet_headers">
@@ -21,16 +21,16 @@
           <%= form.number_field :week %>
         </div>
         <div class="turnsheet_headers">
-          <%= form.label :abbr, style: "display: inline-block" %>
-          <%= form.text_field :club, value: Club.find_by(manager_email: current_user.email)&.club_id, readonly: true %>
+          <%= form.label :Id, style: "display: inline-block" %>
+          <%= form.text_field :club, value: @club.id, readonly: true %>
         </div>
         <div class="turnsheet_headers">
           <%= form.label :manager, style: "display: inline-block" %>
-          <%= form.text_field :manager, value: Club.find_by(manager_email: current_user.email)&.manager, readonly: true %>
+          <%= form.text_field :manager, value: @club.manager, readonly: true %>
         </div>
         <div class="turnsheet_headers">
           <%= form.label :email, style: "display: inline-block" %>
-          <%= form.text_field :email, value: Club.find_by(manager_email: current_user.email)&.manager_email, readonly: true %>
+          <%= form.text_field :email, value: @club.manager_email, readonly: true %>
         </div>
       </div>
     </div>

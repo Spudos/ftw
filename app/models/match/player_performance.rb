@@ -17,7 +17,7 @@ class Match::PlayerPerformance
       hash = {
         player_id: player.id,
         id: @id,
-        club: player.club.club_id,
+        club_id: player.club_id,
         player_name: player.name,
         total_skill: player.total_skill,
         tactic:,

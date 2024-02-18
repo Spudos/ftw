@@ -3,7 +3,7 @@ FactoryBot.define do
     sequence(:id) { |n| 401 + n }
     name { 'Woolley' }
     position { 'gkp' }
-    club { build(:club) }
+    club_id { 1 }
     passing { 5 }
     control { 5 }
     tackling { 5 }

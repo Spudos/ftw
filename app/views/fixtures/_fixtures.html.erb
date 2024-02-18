@@ -12,9 +12,9 @@
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Week</th>
-      <th scope="col">HM Abbr</th>
+      <th scope="col">HM Id</th>
       <th scope="col">Home</th>
-      <th scope="col">AW Abbr</th>
+      <th scope="col">AW Id</th>
       <th scope="col">Away</th>
       <th scope="col">Comp</th>
       <th scope="col"></th>
@@ -23,8 +23,8 @@
   <tbody>
     <% @fixtures.each do |fixture| %>
       <% match_exists = Match.exists?(id: fixture.id) %>
-      <% home_selection_exists = Selection.exists?(club: fixture.home) %>
-      <% away_selection_exists = Selection.exists?(club: fixture.away) %>
+      <% home_selection_exists = Selection.exists?(club_id: fixture.home) %>
+      <% away_selection_exists = Selection.exists?(club_id: fixture.away) %>
       <% if fixture.week_number.to_s == params[:week_number] %>
         <tr scope="row">
           <td><%= fixture.id %></td>
@@ -32,20 +32,20 @@
           <td><%= fixture.home %></td>
           <td>
             <% if home_selection_exists %>
-              <span id="exists"><%= Club.find_by(club_id: fixture.home)&.name %></span>
+              <span id="exists"><%= Club.find_by(id: fixture.home)&.name %></span>
               <%= link_to 'Show', club_path(fixture.home) %>
             <% else %>
-              <span id="not_exists"><%= Club.find_by(club_id: fixture.home)&.name %></span>
+              <span id="not_exists"><%= Club.find_by(id: fixture.home)&.name %></span>
               <%= link_to 'Show', club_path(fixture.home) %>
             <% end %>
           </td>
           <td><%= fixture.away %></td>
           <td>
             <% if away_selection_exists %>
-              <span id="exists"><%= Club.find_by(club_id: fixture.away)&.name %></span>
+              <span id="exists"><%= Club.find_by(id: fixture.away)&.name %></span>
               <%= link_to 'Show', club_path(fixture.away) %>
             <% else %>
-              <span id="not_exists"><%= Club.find_by(club_id: fixture.away)&.name %></span>
+              <span id="not_exists"><%= Club.find_by(id: fixture.away)&.name %></span>
               <%= link_to 'Show', club_path(fixture.away) %>
             <% end %>
           </td>

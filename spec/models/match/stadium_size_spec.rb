@@ -4,7 +4,7 @@ require 'pry'
 RSpec.describe Match::StadiumSize, type: :model do
   describe 'stadium_size calculation test' do
     it 'should return the total number of seats' do
-      totals_blend = [{ team: '001' }]
+      totals_blend = [{ team: 1 }]
 
       create(:club,
              stand_n_capacity: 1000,

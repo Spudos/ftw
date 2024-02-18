@@ -5,7 +5,7 @@
 <table class="table table-hover">
   <tr>
     <th scope="col">#</th>
-    <th scope="col">Abbr</th>
+    <th scope="col">Id</th>
     <th scope="col">Name</th>
     <th scope="col">Played</th>
     <th scope="col">Won</th>
@@ -20,7 +20,7 @@
     <tr scope="row">
       <td><%= index %></td>
       <td><%= team %></td>
-      <td><%= Club.find_by(club_id: team)&.name %></td>
+      <td><%= Club.find_by(id: team)&.name %></td>
       <td><%= statistics[:played] %></td>
       <td><%= statistics[:won] %></td>
       <td><%= statistics[:drawn] %></td>

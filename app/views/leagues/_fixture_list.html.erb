@@ -3,9 +3,9 @@
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Week</th>
-      <th scope="col">HM Abbr</th>
+      <th scope="col">HM Id</th>
       <th scope="col">Home</th>
-      <th scope="col">AW Abbr</th>
+      <th scope="col">AW Id</th>
       <th scope="col">Away</th>
       <th scope="col">Comp</th>
       <th scope="col"></th>
@@ -17,9 +17,9 @@
         <td><%= fixture.id %></td>
         <td><%= fixture.week_number %></td>
         <td><%= fixture.home %></td>
-        <td><%= Club.find_by(club_id: fixture.home)&.name %></td>
+        <td><%= Club.find_by(id: fixture.home)&.name %></td>
         <td><%= fixture.away %></td>
-        <td><%= Club.find_by(club_id: fixture.away)&.name %></td>
+        <td><%= Club.find_by(id: fixture.away)&.name %></td>
         <td><%= fixture.comp %></td>
         <td>
           <% if Match.exists?(match_id: fixture.id) %>

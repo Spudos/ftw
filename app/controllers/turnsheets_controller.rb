@@ -16,8 +16,8 @@ class TurnsheetsController < ApplicationController
   def new
     @turnsheet = Turnsheet.new
     authorize @turnsheet
-    club = Club.find_by(manager_email: current_user.email)
-    players = club&.players
+    @club = Club.find_by(manager_email: current_user.email)
+    players = @club&.players
 
     @selection = players.map(&:player_selection_information)
   end

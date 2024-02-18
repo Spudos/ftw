@@ -100,9 +100,9 @@ class ClubsController < ApplicationController
 
   def set_club
     @club = Club.find_by(manager_email: current_user[:email])
-    @club_matches = Match.where('home_team = ? OR away_team = ?', @club.club_id, @club.club_id)
-    @club_fixtures = Fixture.where('home= ? OR away = ?', @club.club_id, @club.club_id)
-    @messages = Message.where(club: Club.find_by(manager_email: current_user[:email])&.club_id)
+    @club_matches = Match.where('home_team = ? OR away_team = ?', @club.id, @club.id)
+    @club_fixtures = Fixture.where('home= ? OR away = ?', @club.id, @club.id)
+    @messages = Message.where(club_id: Club.find_by(manager_email: current_user[:email])&.id)
   end
 
   def set_club_theme

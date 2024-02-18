@@ -21,7 +21,7 @@ class Turn::PlayerUpdates
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club + turn.id.to_s,
         week: turn.week,
-        club: turn.club,
+        club_id: turn.club,
         var1: turn.var1,
         var2: turn.var2,
         var3: turn.var3,
@@ -38,7 +38,7 @@ class Turn::PlayerUpdates
 
   def train_player(action_id, week, club, player, skill)
     if Message.find_by(action_id:).nil?
-      club_staff = Club.find_by(club_id: club)
+      club_staff = Club.find_by(id: club)
       player_data = Player.find_by(name: player)
       coach = club_staff.send("staff_#{player_data.position}")
 

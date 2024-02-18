@@ -24,8 +24,8 @@
       <tr scope="row">
         <td><%= match.id %></td>
         <td><%= match.competition %></td>
-        <td><%= Club.find_by(club_id: match.home_team)&.name %></td>
-        <td><%= Club.find_by(club_id: match.away_team)&.name %></td>
+        <td><%= Club.find_by(id: match.home_team)&.name %></td>
+        <td><%= Club.find_by(id: match.away_team)&.name %></td>
         <td>
           <% case match.tactic_home.to_i %>
           <% when 1 %>
@@ -67,7 +67,7 @@
         <td><%= match.home_goals %></td>
         <td><%= match.away_goals %></td>
         <td>
-          <% if match.home_team == @club.club_id %>
+          <% if match.home_team == @club.id %>
             <% if match.home_goals > match.away_goals %>
               <%= 'Win' %>
             <% elsif match.home_goals == match.away_goals %>

@@ -4,18 +4,18 @@ require 'pry'
 RSpec.describe Turn::PlayerUpdates, type: :model do
   describe 'player_upgrade' do
     it 'updates the turn records and performs necessary actions' do
-      turn = create(:turn, var1: 'train', var2: 'Woolley', var3: 'Tackling', date_completed: nil)
+      turn = create(:turn, club_id: 1, var1: 'train', var2: 'Woolley', var3: 'Tackling', date_completed: nil)
       week = 1
       action_id = '10011'
 
       allow_any_instance_of(Turn::PlayerUpdates).to receive(:train_player)
 
-      expect(Turn::PlayerUpdates).to receive(:train_player).with(action_id, week, turn.club, turn.var2, turn.var3)
+      expect(Turn::PlayerUpdates).to receive(:train_player).with(action_id, week, turn.club_id, turn.var2, turn.var3)
 
       Turn::PlayerUpdates.new(week).player_upgrade(week)
-
+binding.pry
       expect(Turn.first[:week]).to eq(1)
-      expect(Turn.first[:club]).to eq('001')
+      expect(Turn.first[:club_id]).to eq(1)
       expect(Turn.first[:var1]).to eq('train')
       expect(Turn.first[:var2]).to eq('Woolley')
       expect(Turn.first[:var3]).to eq('Tackling')
