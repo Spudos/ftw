@@ -11,40 +11,40 @@ class Turnsheet < ApplicationRecord
         Selection.create(club: turnsheet.club, player_id: turnsheet.send("player_#{i}"))
       end
 
-      tactic_record = Tactic.find_by(abbreviation: turnsheet.club)
+      tactic_record = Tactic.find_by(club_id: turnsheet.club)
 
       if tactic_record
         tactic_record.destroy
       end
 
       if turnsheet.tactic.nil?
-        Tactic.create(abbreviation: turnsheet.club, tactics: 0)
+        Tactic.create(club_id: turnsheet.club, tactics: 0)
       else
-        Tactic.create(abbreviation: turnsheet.club, tactics: turnsheet.tactic)
+        Tactic.create(club_id: turnsheet.club, tactics: turnsheet.tactic)
       end
 
       if turnsheet.press.nil?
-        Tactic.find_by(abbreviation: turnsheet.club).update(press: 0)
+        Tactic.find_by(club_id: turnsheet.club).update(press: 0)
       else
-        Tactic.find_by(abbreviation: turnsheet.club).update(press: turnsheet.press)
+        Tactic.find_by(club_id: turnsheet.club).update(press: turnsheet.press)
       end
 
       if turnsheet.dfc_aggression.nil?
-        Tactic.find_by(abbreviation: turnsheet.club).update(dfc_aggression: 0)
+        Tactic.find_by(club_id: turnsheet.club).update(dfc_aggression: 0)
       else
-        Tactic.find_by(abbreviation: turnsheet.club).update(dfc_aggression: turnsheet.dfc_aggression)
+        Tactic.find_by(club_id: turnsheet.club).update(dfc_aggression: turnsheet.dfc_aggression)
       end
 
       if turnsheet.mid_aggression.nil?
-        Tactic.find_by(abbreviation: turnsheet.club).update(mid_aggression: 0)
+        Tactic.find_by(club_id: turnsheet.club).update(mid_aggression: 0)
       else
-        Tactic.find_by(abbreviation: turnsheet.club).update(mid_aggression: turnsheet.mid_aggression)
+        Tactic.find_by(club_id: turnsheet.club).update(mid_aggression: turnsheet.mid_aggression)
       end
 
       if turnsheet.att_aggression.nil?
-        Tactic.find_by(abbreviation: turnsheet.club).update(att_aggression: 0)
+        Tactic.find_by(club_id: turnsheet.club).update(att_aggression: 0)
       else
-        Tactic.find_by(abbreviation: turnsheet.club).update(att_aggression: turnsheet.att_aggression)
+        Tactic.find_by(club_id: turnsheet.club).update(att_aggression: turnsheet.att_aggression)
       end
 
       if turnsheet.coach_upgrade.present?
