@@ -58,7 +58,23 @@ class TurnsController < ApplicationController
       turn = Turn.new
       turn.process_turn_actions(params)
 
-      notice = 'Processes ran successfully.'
+      notice = 'Turn actions ran successfully.'
+    rescue StandardError => e
+      errors << "Error occurred during processing: #{e.message}"
+      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
+    end
+
+    redirect_to request.referrer, notice: notice
+  end
+
+  def process_player_updates
+    errors = []
+
+    begin
+      turn = Turn.new
+      turn.process_player_updates(params)
+
+      notice = 'Player updates ran successfully.'
     rescue StandardError => e
       errors << "Error occurred during processing: #{e.message}"
       notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"

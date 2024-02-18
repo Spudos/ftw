@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   post '/turnsheets/process_turnsheet', to: 'turnsheets#process_turnsheet'
 
   post '/turns/process_turn', to: 'turns#process_turn'
+  post '/turns/process_player_updates', to: 'turns#process_player_updates'
 
   post '/matches/match', to: 'matches#match'
   get '/matches/outcome', to: 'matches#outcome'

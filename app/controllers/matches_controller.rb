@@ -11,16 +11,16 @@ class MatchesController < ApplicationController
 
   def match_multiple
     if params[:selected_week].nil? || params[:selected_week].empty?
-      return redirect_to fixtures_path, alert: "Please select a week before attempting to run fixtures. class:#{self.class.name}"
+      return redirect_to request.referrer, alert: "Please select a week before attempting to run fixtures. class:#{self.class.name}"
     end
 
     match = Match.new
     match.run_matches(params)
-
-    redirect_to fixtures_path
+    notice = 'Matches ran successfully.'
+    redirect_to request.referrer, notice: notice
   end
 
   def handle_error(exception)
-    redirect_to fixtures_path, alert: exception.message
+    redirect_to request.referrer, alert: exception.message
   end
 end

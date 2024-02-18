@@ -1,15 +1,27 @@
 class Turn < ApplicationRecord
   def process_turn_actions(params)
-    if params[:week].present? && Message.find_by(action_id: params[:week]).nil?
+    if params[:week].present? && Message.find_by(action_id: "#{params[:week]}TA").nil?
       Turn::TurnActions.new(params[:week]).call
-      Turn::PlayerUpdates.new(params[:week]).call
       Turn::UpgradeAdmin.new(params[:week]).call
-      Message.create(action_id: params[:week], week: params[:week], club_id: '999', var1: "week #{params[:week]} processed")
+      Message.create(action_id: "#{params[:week]}TA", week: params[:week], club_id: '999', var1: "week #{params[:week]} Turn actions processed")
     else
       if params[:week].nil?
         raise 'Please select a week before trying to process turn actions.'
       else
-        raise 'Week has already been processed.'
+        raise 'Turn actions for that week have already been processed.'
+      end
+    end
+  end
+
+  def process_player_updates(params)
+    if params[:week].present? && Message.find_by(action_id: "#{params[:week]}PU").nil?
+      Turn::PlayerUpdates.new(params[:week]).call
+      Message.create(action_id: "#{params[:week]}PU", week: params[:week], club_id: '999', var1: "week #{params[:week]} Player updates processed")
+    else
+      if params[:week].nil?
+        raise 'Please select a week before trying to process turn actions.'
+      else
+        raise 'Player updates for that week have already been processed.'
       end
     end
   end

@@ -2,7 +2,7 @@ class Turn::PlayerUpdates
   attr_reader :week
 
   Rails.cache.clear
-  
+
   def initialize(week)
     @week = week
   end
