@@ -1,4 +1,4 @@
-<h3>Turnsheet for <%=  Club.find_by(abbreviation: @turnsheet.club)&.name %></h3>
+<h3>Turnsheet for <%=  Club.find_by(club_id: @turnsheet.club)&.name %></h3>
 
 <%= render @turnsheet %>
 

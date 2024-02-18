@@ -5,7 +5,7 @@
 # ----------------- -------------------- ------- ------- ----------
 # id                INTEGER              false   true              
 # name              varchar              true    false             
-# abbreviation      varchar              true    false             
+# club_id      varchar              true    false             
 # created_at        datetime(6)          false   false             
 # updated_at        datetime(6)          false   false             
 # ground_name       varchar              true    false             

@@ -47,7 +47,7 @@ hash = [
 
 hash.each do |hash|
   Club.create(
-    abbreviation: hash[:code],
+    club_id: hash[:code],
     name: hash[:name],
     ground_name: 'Stadium',
     stand_n_name: 'North Stand',

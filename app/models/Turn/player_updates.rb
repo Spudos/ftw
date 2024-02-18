@@ -38,7 +38,7 @@ class Turn::PlayerUpdates
 
   def train_player(action_id, week, club, player, skill)
     if Message.find_by(action_id:).nil?
-      club_staff = Club.find_by(abbreviation: club)
+      club_staff = Club.find_by(club_id: club)
       player_data = Player.find_by(name: player)
       coach = club_staff.send("staff_#{player_data.position}")
 
@@ -80,7 +80,7 @@ class Turn::PlayerUpdates
   def player_fitness(action_id, week, club, player)
     if Message.find_by(action_id:).nil?
       player_data = Player.find_by(name: player)
-      coach = Club.find_by(abbreviation: club)&.staff_fitness
+      coach = Club.find_by(club_id: club)&.staff_fitness
 
       increased_fitness = player_data.fitness + coach
       final_fitness = increased_fitness > 100 ? 100 : increased_fitness

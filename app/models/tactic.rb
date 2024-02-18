@@ -6,7 +6,7 @@ end
 # Name           SQL Type             Null    Primary Default
 # -------------- -------------------- ------- ------- ----------
 # id             INTEGER              false   true              
-# abbreviation   varchar              true    false             
+# club_id   varchar              true    false             
 # tactics        INTEGER              true    false             
 # created_at     datetime(6)          false   false             
 # updated_at     datetime(6)          false   false             

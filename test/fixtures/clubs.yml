@@ -4,18 +4,18 @@
 #
 #  id           :integer          not null, primary key
 #  name         :string
-#  abbreviation :string
+#  club_id :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
 
 one:
   name: MyString
-  abbreviation: MyString
+  club_id: MyString
 
 two:
   name: MyString
-  abbreviation: MyString
+  club_id: MyString
 
 #------------------------------------------------------------------------------
 # Club
@@ -24,7 +24,7 @@ two:
 # ----------------- -------------------- ------- ------- ----------
 # id                INTEGER              false   true              
 # name              varchar              true    false             
-# abbreviation      varchar              true    false             
+# club_id      varchar              true    false             
 # created_at        datetime(6)          false   false             
 # updated_at        datetime(6)          false   false             
 # ground_name       varchar              true    false             

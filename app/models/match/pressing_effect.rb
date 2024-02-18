@@ -49,8 +49,8 @@ class Match::PressingEffect
   private
 
   def press_information
-    home_press = Tactic.find_by(abbreviation: final_team[0][:team])&.press
-    away_press = Tactic.find_by(abbreviation: final_team[1][:team])&.press
+    home_press = Tactic.find_by(club_id: final_team[0][:team])&.press
+    away_press = Tactic.find_by(club_id: final_team[1][:team])&.press
 
     if home_press.nil?
       home_press = 0

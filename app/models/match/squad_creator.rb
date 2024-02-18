@@ -21,17 +21,17 @@ class Match::SquadCreator
   private
 
   def tactics_check
-    home_tactic = Tactic.find_by(abbreviation: fixture[:club_home])
-    away_tactic = Tactic.find_by(abbreviation: fixture[:club_away])
+    home_tactic = Tactic.find_by(club_id: fixture[:club_home])
+    away_tactic = Tactic.find_by(club_id: fixture[:club_away])
 
     if home_tactic.nil?
-      Tactic.create(abbreviation: fixture[:club_home], tactics: 1, dfc_aggression: 0, mid_aggression: 0, att_aggression: 0)
+      Tactic.create(club_id: fixture[:club_home], tactics: 1, dfc_aggression: 0, mid_aggression: 0, att_aggression: 0)
     elsif home_tactic&.dfc_aggression.nil? || home_tactic&.mid_aggression.nil? || home_tactic&.att_aggression.nil?
       home_tactic.update(dfc_aggression: 0, mid_aggression: 0, att_aggression: 0)
     end
 
     if away_tactic.nil?
-      Tactic.create(abbreviation: fixture[:club_away], tactics: 1, dfc_aggression: 0, mid_aggression: 0, att_aggression: 0)
+      Tactic.create(club_id: fixture[:club_away], tactics: 1, dfc_aggression: 0, mid_aggression: 0, att_aggression: 0)
     elsif away_tactic&.dfc_aggression.nil? || away_tactic&.mid_aggression.nil? || away_tactic&.att_aggression.nil?
       away_tactic.update(dfc_aggression: 0, mid_aggression: 0, att_aggression: 0)
     end
@@ -62,17 +62,17 @@ class Match::SquadCreator
         week: fixture[:week_number],
         competition: fixture[:competition],
         club_home: fixture[:club_home],
-        tactic_home: Tactic.find_by(abbreviation: fixture[:club_home])&.tactics,
-        dfc_aggression_home: Tactic.find_by(abbreviation: fixture[:club_home])&.dfc_aggression,
-        mid_aggression_home: Tactic.find_by(abbreviation: fixture[:club_home])&.mid_aggression,
-        att_aggression_home: Tactic.find_by(abbreviation: fixture[:club_home])&.att_aggression,
-        home_press: Tactic.find_by(abbreviation: fixture[:club_home])&.press,
+        tactic_home: Tactic.find_by(club_id: fixture[:club_home])&.tactics,
+        dfc_aggression_home: Tactic.find_by(club_id: fixture[:club_home])&.dfc_aggression,
+        mid_aggression_home: Tactic.find_by(club_id: fixture[:club_home])&.mid_aggression,
+        att_aggression_home: Tactic.find_by(club_id: fixture[:club_home])&.att_aggression,
+        home_press: Tactic.find_by(club_id: fixture[:club_home])&.press,
         club_away: fixture[:club_away],
-        tactic_away: Tactic.find_by(abbreviation: fixture[:club_away])&.tactics,
-        dfc_aggression_away: Tactic.find_by(abbreviation: fixture[:club_away])&.dfc_aggression,
-        mid_aggression_away: Tactic.find_by(abbreviation: fixture[:club_away])&.mid_aggression,
-        att_aggression_away: Tactic.find_by(abbreviation: fixture[:club_away])&.att_aggression,
-        away_press: Tactic.find_by(abbreviation: fixture[:club_away])&.press
+        tactic_away: Tactic.find_by(club_id: fixture[:club_away])&.tactics,
+        dfc_aggression_away: Tactic.find_by(club_id: fixture[:club_away])&.dfc_aggression,
+        mid_aggression_away: Tactic.find_by(club_id: fixture[:club_away])&.mid_aggression,
+        att_aggression_away: Tactic.find_by(club_id: fixture[:club_away])&.att_aggression,
+        away_press: Tactic.find_by(club_id: fixture[:club_away])&.press
       }
   end
 end

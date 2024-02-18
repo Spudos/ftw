@@ -14,7 +14,7 @@ class ClubsTest < ApplicationSystemTestCase
     visit clubs_url
     click_on "New club"
 
-    fill_in "Abbreviation", with: @club.abbreviation
+    fill_in "club_id", with: @club.club_id
     fill_in "Name", with: @club.name
     click_on "Create Club"
 
@@ -26,7 +26,7 @@ class ClubsTest < ApplicationSystemTestCase
     visit club_url(@club)
     click_on "Edit this club", match: :first
 
-    fill_in "Abbreviation", with: @club.abbreviation
+    fill_in "club_id", with: @club.club_id
     fill_in "Name", with: @club.name
     click_on "Update Club"
 

@@ -20,7 +20,7 @@
     <tr scope="row">
       <td><%= index %></td>
       <td><%= team %></td>
-      <td><%= Club.find_by(abbreviation: team)&.name %></td>
+      <td><%= Club.find_by(club_id: team)&.name %></td>
       <td><%= statistics[:played] %></td>
       <td><%= statistics[:won] %></td>
       <td><%= statistics[:drawn] %></td>

@@ -19,7 +19,7 @@
       <%= form.label :press %>
       <%= form.select :press, { "Please select a press style" => 0, "Heavy Metal Football" => 10, "Strong Press" => 6, "Normal Press" => 3, "No Press" => 0, "Late Press" => -5, "Late Heavy Metal Footy" => -8 }, {}, { name: 'tactic[press]', selected: @tactic&.press } %>
     </div>
-    <%= form.hidden_field :abbreviation, value: params[:id] %>
+    <%= form.hidden_field :club_id, value: params[:id] %>
     <%= form.submit "Save tactic", class: "btn btn-sm btn-danger" %>
   <% end %>
 </div>

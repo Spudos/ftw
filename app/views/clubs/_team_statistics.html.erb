@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <% Player.where(club: @club.abbreviation).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
+      <% Player.where(club: @club.club_id).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
         <tr scope="row">
           <td><%= player.name %></td>
           <td><%= (player.position + player.player_position_detail).upcase %></td>

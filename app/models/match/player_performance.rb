@@ -12,12 +12,12 @@ class Match::PlayerPerformance
 
     players_array = []
     match_squad.each do |player|
-      tactic = Tactic.find_by(abbreviation: player.club)&.tactics
+      tactic = Tactic.find_by(club_id: player.club)&.tactics
 
       hash = {
         player_id: player.id,
         id: @id,
-        club: player.club.abbreviation,
+        club: player.club.club_id,
         player_name: player.name,
         total_skill: player.total_skill,
         tactic:,

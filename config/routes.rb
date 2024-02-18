@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :clubs
   resources :matches
   resources :fixtures
-  resources :clubs, param: :abbreviation
+  resources :clubs, param: :club_id
   resources :leagues, param: :competition
   resources :admin
   resources :messages

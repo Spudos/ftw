@@ -7,12 +7,12 @@ RSpec.describe Match::PressingEffect, type: :model do
     let(:team2) { { team: '002', defense: 250, midfield: 200, attack: 150 } }
     let(:final_squad) { [team1, team2] }
 
-    let(:tactic1) { double('Tactic', abbreviation: '001', press: 1) }
-    let(:tactic2) { double('Tactic', abbreviation: '002', press: 2) }
+    let(:tactic1) { double('Tactic', club_id: '001', press: 1) }
+    let(:tactic2) { double('Tactic', club_id: '002', press: 2) }
 
     before do
-      allow(Tactic).to receive(:find_by).with(abbreviation: '001').and_return(tactic1)
-      allow(Tactic).to receive(:find_by).with(abbreviation: '002').and_return(tactic2)
+      allow(Tactic).to receive(:find_by).with(club_id: '001').and_return(tactic1)
+      allow(Tactic).to receive(:find_by).with(club_id: '002').and_return(tactic2)
     end
 
     it 'based on a press of 1 for the home side and 2 for the away side in the 9th minute' do
@@ -60,12 +60,12 @@ RSpec.describe Match::PressingEffect, type: :model do
     let(:team2) { { team: '002', defense: 250, midfield: 200, attack: 150 } }
     let(:final_squad) { [team1, team2] }
 
-    let(:tactic1) { double('Tactic', abbreviation: '001', press: -1) }
-    let(:tactic2) { double('Tactic', abbreviation: '002', press: -2) }
+    let(:tactic1) { double('Tactic', club_id: '001', press: -1) }
+    let(:tactic2) { double('Tactic', club_id: '002', press: -2) }
 
     before do
-      allow(Tactic).to receive(:find_by).with(abbreviation: '001').and_return(tactic1)
-      allow(Tactic).to receive(:find_by).with(abbreviation: '002').and_return(tactic2)
+      allow(Tactic).to receive(:find_by).with(club_id: '001').and_return(tactic1)
+      allow(Tactic).to receive(:find_by).with(club_id: '002').and_return(tactic2)
     end
 
     it 'based on a press of -1 for the home side and -2 for the away side in the 9th minute' do
@@ -113,12 +113,12 @@ RSpec.describe Match::PressingEffect, type: :model do
     let(:team2) { { team: '002', defense: 250, midfield: 200, attack: 150 } }
     let(:final_squad) { [team1, team2] }
 
-    let(:tactic1) { double('Tactic', abbreviation: '001', press: nil) }
-    let(:tactic2) { double('Tactic', abbreviation: '002', press: nil) }
+    let(:tactic1) { double('Tactic', club_id: '001', press: nil) }
+    let(:tactic2) { double('Tactic', club_id: '002', press: nil) }
 
     before do
-      allow(Tactic).to receive(:find_by).with(abbreviation: '001').and_return(tactic1)
-      allow(Tactic).to receive(:find_by).with(abbreviation: '002').and_return(tactic2)
+      allow(Tactic).to receive(:find_by).with(club_id: '001').and_return(tactic1)
+      allow(Tactic).to receive(:find_by).with(club_id: '002').and_return(tactic2)
     end
 
     it 'based on a press of null for the home side and null for the away side in the 9th minute' do

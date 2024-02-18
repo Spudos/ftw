@@ -11,7 +11,7 @@ class ClubsController < ApplicationController
     @players = Player.where(club: params[:id])
     @club_matches = Match.where('home_team = ? OR away_team = ?', params[:id], params[:id])
     @message = Message.where(club: params[:id])
-    @tactic = Tactic.find_by(abbreviation: params[:id])
+    @tactic = Tactic.find_by(club_id: params[:id])
   end
 
   def new
@@ -35,7 +35,7 @@ class ClubsController < ApplicationController
   end
 
   def update
-    @club = Club.find_by(abbreviation: params[:club][:abbreviation])
+    @club = Club.find_by(club_id: params[:club][:club_id])
     respond_to do |format|
       if @club.update(club_params)
         format.html { redirect_to clubs_path, notice: "Club was successfully updated." }
@@ -100,9 +100,9 @@ class ClubsController < ApplicationController
 
   def set_club
     @club = Club.find_by(manager_email: current_user[:email])
-    @club_matches = Match.where('home_team = ? OR away_team = ?', @club.abbreviation, @club.abbreviation)
-    @club_fixtures = Fixture.where('home= ? OR away = ?', @club.abbreviation, @club.abbreviation)
-    @messages = Message.where(club: Club.find_by(manager_email: current_user[:email])&.abbreviation)
+    @club_matches = Match.where('home_team = ? OR away_team = ?', @club.club_id, @club.club_id)
+    @club_fixtures = Fixture.where('home= ? OR away = ?', @club.club_id, @club.club_id)
+    @messages = Message.where(club: Club.find_by(manager_email: current_user[:email])&.club_id)
   end
 
   def set_club_theme

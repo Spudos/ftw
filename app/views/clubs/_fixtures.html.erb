@@ -17,9 +17,9 @@
         <td><%= match.id %></td>
         <td><%= match.comp %></td>
         <td><%= match.week_number %></td>
-        <td><%= Club.find_by(abbreviation: match.home)&.name %></td>
+        <td><%= Club.find_by(club_id: match.home)&.name %></td>
         <td><%= Match.find_by(match_id: match.id)&.home_goals %></td>
-        <td><%= Club.find_by(abbreviation: match.away)&.name %></td>
+        <td><%= Club.find_by(club_id: match.away)&.name %></td>
         <td><%= Match.find_by(match_id: match.id)&.away_goals %></td>
       </tr>
     <% end %>

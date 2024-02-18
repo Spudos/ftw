@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_08_235342) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_18_132836) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
-    t.string "abbreviation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ground_name"
@@ -118,7 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_08_235342) do
 
   create_table "messages", force: :cascade do |t|
     t.integer "week"
-    t.string "club"
+    t.string "club_id"
     t.string "var1"
     t.string "var2"
     t.datetime "created_at", null: false
@@ -129,7 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_08_235342) do
   create_table "performances", force: :cascade do |t|
     t.integer "match_id"
     t.integer "player_id"
-    t.string "club"
+    t.string "club_id"
     t.string "name"
     t.string "player_position"
     t.string "player_position_detail"
@@ -169,7 +168,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_08_235342) do
     t.integer "fitness"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "club"
     t.integer "consistency"
     t.integer "potential_passing"
     t.integer "potential_control"
@@ -194,14 +192,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_08_235342) do
   end
 
   create_table "selections", force: :cascade do |t|
-    t.string "club"
+    t.string "club_id"
     t.integer "player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "tactics", force: :cascade do |t|
-    t.string "abbreviation"
+    t.string "club_id"
     t.integer "tactics", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -231,7 +229,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_08_235342) do
 
   create_table "turns", force: :cascade do |t|
     t.integer "week"
-    t.string "club"
+    t.string "club_id"
     t.string "var1"
     t.string "var2"
     t.string "var3"
@@ -242,7 +240,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_08_235342) do
 
   create_table "turnsheets", force: :cascade do |t|
     t.integer "week"
-    t.string "club"
+    t.string "club_id"
     t.string "manager"
     t.string "email"
     t.string "player_1"
@@ -295,7 +293,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_08_235342) do
 
   create_table "upgrades", force: :cascade do |t|
     t.integer "week"
-    t.string "club"
+    t.string "club_id"
     t.string "var1"
     t.string "var2"
     t.datetime "created_at", null: false

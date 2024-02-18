@@ -3,7 +3,7 @@
 </div>
 <div id="match">
   <div id="match_details">
-    <h3><%= Club.find_by(abbreviation: @matches[0].home_team)&.name %>(<%= @matches[0].home_team %>)</h3>
+    <h3><%= Club.find_by(club_id: @matches[0].home_team)&.name %>(<%= @matches[0].home_team %>)</h3>
     <table>
       <tr>
         <th>ID</th>
@@ -24,7 +24,7 @@
     </table>
   </div>
   <div>
-    <h3><%= Club.find_by(abbreviation: @matches[0].away_team)&.name %>(<%= @matches[0].away_team %>)</h3>
+    <h3><%= Club.find_by(club_id: @matches[0].away_team)&.name %>(<%= @matches[0].away_team %>)</h3>
     <table>
       <tr>
         <th>ID</th>
@@ -59,10 +59,10 @@
       </tr>
       <tr>
         <td>Club id</td>
-        <td><%= Club.find_by(abbreviation: @matches[0].home_team)&.name %></td>
-        <td><%= Club.find_by(abbreviation: @matches[0].away_team)&.name %></td>
+        <td><%= Club.find_by(club_id: @matches[0].home_team)&.name %></td>
+        <td><%= Club.find_by(club_id: @matches[0].away_team)&.name %></td>
       </tr>
-      <% if current_user.gm? || current_user.email == Club.find_by(abbreviation: @matches[0].home_team)&.manager_email || Club.find_by(abbreviation: @matches[0].away_team)&.manager_email %>
+      <% if current_user.gm? || current_user.email == Club.find_by(club_id: @matches[0].home_team)&.manager_email || Club.find_by(club_id: @matches[0].away_team)&.manager_email %>
         <tr>
           <td>Tactic</td>
           <td><%= @matches[0].tactic_home %></td>

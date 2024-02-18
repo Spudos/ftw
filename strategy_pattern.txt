@@ -28,9 +28,9 @@ class SquadAction < AbstractMatch
       week: fixture[:week_number],
       competition: fixture[:competition],
       club_home: fixture[:club_home],
-      tactic_home: Tactic.find_by(abbreviation: fixture[:club_home])&.tactics,
+      tactic_home: Tactic.find_by(club_id: fixture[:club_home])&.tactics,
       club_away: fixture[:club_away],
-      tactic_away: Tactic.find_by(abbreviation: fixture[:club_away])&.tactics
+      tactic_away: Tactic.find_by(club_id: fixture[:club_away])&.tactics
     }
 
     # this populates the player_ids array for both teams with a list of players for the match
