@@ -20,7 +20,7 @@ class Turn::TurnActions
       hash[turn.id] = {
         action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
         week: turn.week,
-        club: turn.club_id_id,
+        club: turn.club_id,
         var1: turn.var1, # unmanaged_bid
         var2: turn.var2, # player_id
         var3: turn.var3, # bid

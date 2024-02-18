@@ -10,7 +10,7 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
 
       allow_any_instance_of(Turn::PlayerUpdates).to receive(:train_player)
 
-      expect(Turn::PlayerUpdates).to receive(:train_player).with(action_id, week, turn.club_id_id, turn.var2, turn.var3)
+      expect(Turn::PlayerUpdates).to receive(:train_player).with(action_id, week, turn.club_id, turn.var2, turn.var3)
 
       Turn::PlayerUpdates.new(week).player_upgrade(week)
 

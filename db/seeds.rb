@@ -1,4 +1,5 @@
 load(Rails.root.join('db', 'seeds', 'club_seeds.rb'))
+load(Rails.root.join('db', 'seeds', 'unmanaged_club_seed.rb'))
 load(Rails.root.join('db', 'seeds', 'premier_league_player_seeds.rb'))
 load(Rails.root.join('db', 'seeds', 'championship_player_seeds.rb'))
 load(Rails.root.join('db', 'seeds', 'random_player_seeds.rb'))
