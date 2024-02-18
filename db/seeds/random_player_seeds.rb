@@ -9,7 +9,7 @@ blend = [1,2,3,4,5,6,7,8,9]
 
 1000.times do
     Player.create(
-      name: Faker::Name.unique.last_name,
+      name: Faker::Name.last_name,
       age: random_number(18, 35),
       nationality: countries.sample,
       position: 'gkp',
@@ -47,7 +47,7 @@ blend = [1,2,3,4,5,6,7,8,9]
 
 2000.times do
     Player.create(
-      name: Faker::Name.unique.last_name,
+      name: Faker::Name.last_name,
       age: random_number(18, 35),
       nationality: countries.sample,
       position: 'dfc',
@@ -85,7 +85,7 @@ blend = [1,2,3,4,5,6,7,8,9]
 
 2000.times do
     Player.create(
-      name: Faker::Name.unique.last_name,
+      name: Faker::Name.last_name,
       age: random_number(18, 35),
       nationality: countries.sample,
       position: 'mid',
@@ -123,7 +123,7 @@ blend = [1,2,3,4,5,6,7,8,9]
 
 2000.times do
     Player.create(
-      name: Faker::Name.unique.last_name,
+      name: Faker::Name.last_name,
       age: random_number(18, 35),
       nationality: countries.sample,
       position: 'att',

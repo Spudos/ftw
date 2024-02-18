@@ -3,15 +3,16 @@ def random_number(min, max)
   rand(min..max)
 end
 
-countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales', 'NI', 'RoI', 'Brazil', 'Argentina', 'Spain', 'France', 'Germany', 'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay','Brazil', 'England', 'Mexico', 'Germany', 'Italy', 'Spain', 'France', 'Argentina', 'Netherlands', 'Portugal', 'Belgium', 'Uruguay', 'Colombia', 'Croatia', 'Sweden', 'Switzerland', 'Poland', 'Denmark', 'Chile', 'Austria', 'Turkey', 'Russia', 'Japan', 'South Korea', 'Australia']
-position_detail = ['c', 'c', 'c', 'l', 'r']
-club_code = ['101', '102', '103', '104', '105', '106', '107', '108', '109', '110', '111', '112', '113', '114', '115', '116', '117', '118', '119', '120']
-blend = [1,2,3,4,5,6,7,8,9]
+countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales', 'NI', 'RoI', 'Brazil', 'Argentina',
+             'Spain', 'France', 'Germany', 'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay', 'Brazil', 'England', 'Mexico', 'Germany', 'Italy', 'Spain', 'France', 'Argentina', 'Netherlands', 'Portugal', 'Belgium', 'Uruguay', 'Colombia', 'Croatia', 'Sweden', 'Switzerland', 'Poland', 'Denmark', 'Chile', 'Austria', 'Turkey', 'Russia', 'Japan', 'South Korea', 'Australia']
+position_detail = %w[c c c l r]
+club_code = [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
+blend = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 3.times do
   club_code.each do |code|
     Player.create(
-      name: Faker::Name.unique.last_name,
+      name: Faker::Name.last_name,
       age: random_number(18, 35),
       nationality: countries.sample,
       position: 'gkp',
@@ -28,7 +29,7 @@ blend = [1,2,3,4,5,6,7,8,9]
       creativity: random_number(3, 5),
       fitness: 100,
       contract: random_number(3, 24),
-      club: code,
+      club_id: code,
       blend: blend.sample,
       star: random_number(10, 30),
       consistency: random_number(1, 20),
@@ -52,7 +53,7 @@ end
 7.times do
   club_code.each do |code|
     Player.create(
-      name: Faker::Name.unique.last_name,
+      name: Faker::Name.last_name,
       age: random_number(18, 35),
       nationality: countries.sample,
       position: 'dfc',
@@ -69,7 +70,7 @@ end
       creativity: random_number(3, 8),
       fitness: 100,
       contract: random_number(3, 24),
-      club: code,
+      club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
       blend: blend.sample,
@@ -93,7 +94,7 @@ end
 7.times do
   club_code.each do |code|
     Player.create(
-      name: Faker::Name.unique.last_name,
+      name: Faker::Name.last_name,
       age: random_number(18, 35),
       nationality: countries.sample,
       position: 'mid',
@@ -110,7 +111,7 @@ end
       creativity: random_number(3, 8),
       fitness: 100,
       contract: random_number(3, 24),
-      club: code,
+      club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
       blend: blend.sample,
@@ -134,7 +135,7 @@ end
 6.times do
   club_code.each do |code|
     Player.create(
-      name: Faker::Name.unique.last_name,
+      name: Faker::Name.last_name,
       age: random_number(18, 35),
       nationality: countries.sample,
       position: 'att',
@@ -151,7 +152,7 @@ end
       creativity: random_number(3, 5),
       fitness: 100,
       contract: random_number(3, 24),
-      club: code,
+      club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
       blend: blend.sample,

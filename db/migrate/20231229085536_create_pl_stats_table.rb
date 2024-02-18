@@ -1,4 +1,4 @@
-class CreatePlstatisticsTable < ActiveRecord::Migration[6.1]
+class CreatePlStatsTable < ActiveRecord::Migration[6.1]
   def change
     create_table :pl_statistics do |t|
       t.integer :player_id
