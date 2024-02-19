@@ -20,9 +20,12 @@
   <h1>For The Win</h1>
   <h2>A classic PBEM for the modern game</h2>
   </div>
+
   <%= render 'layouts/nav' %>
+  
   <div id="content">
     <div class="container-fluid">
+      
       <% if notice.present? %>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <%= notice %>
@@ -37,7 +40,10 @@
         </div>
       <% end %>
 
-      <%= yield %> 
+    <div id="main">
+      <%= yield %>
+    </div> 
+
     </div>
   </div>
 

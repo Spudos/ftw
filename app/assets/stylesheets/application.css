@@ -123,9 +123,7 @@ tr.chance {
   margin-bottom: 30px;
 }
 
-body {
-  font-family: 'Dosis', sans-serif;
-}
+
 
 header {
   font-size: xx-large;
@@ -134,10 +132,9 @@ header {
   color: white;
 }
 
-footer {
-  font-weight: bolder;
-  text-align: center;
-  background-color: #aaaaaa;
+body {
+  font-family: 'Dosis', sans-serif;
+  border: black 100px solid;
 }
 
 #content {
@@ -145,6 +142,12 @@ footer {
   margin: auto;
   margin-top: 50px;
   font-family: 'Dosis', sans-serif;
+  min-height: 2000px;
+}
+
+#main {
+  width: 80%;
+  margin: auto;
 }
 
 h1, h2, h3, h4 { 
@@ -160,7 +163,7 @@ h1, h2, h3, h4 {
   margin: auto;
   margin-bottom: 20px;
   margin-top: 20px;
-  width: 50%;
+  width: 30%;
   color: #ffffff;
   height: 125px;
   background-image: url("header-transparent.png");
