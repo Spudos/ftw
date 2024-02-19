@@ -6,11 +6,90 @@ class Turn::TurnActions
   end
 
   def call
+    player_upgrade
+    fitness_upgrade
     unmanaged_bid
     circuit_sale
     stadium_upgrade
     property_upgrade
     coach_upgrade
+  end
+
+  def player_upgrade
+    hash = {}
+
+    Turn.where('var1 LIKE ?', 'train%').where(week:).each do |turn|
+      hash[turn.id] = {
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
+        week: turn.week,
+        club_id: turn.club_id,
+        var1: turn.var1,
+        var2: turn.var2,
+        var3: turn.var3,
+        date_completed: turn.date_completed
+      }
+    end
+
+    hash.each do |key, value|
+      train_player(value[:action_id], value[:week], value[:club_id].to_i, value[:var2], value[:var3])
+      turn = Turn.find(key)
+      turn.update(date_completed: DateTime.now)
+    end
+  end
+
+  def train_player(action_id, week, club_id, player, skill)
+    if Message.find_by(action_id:).nil?
+      club_staff = Club.find_by(id: club_id)
+      player_data = Player.find_by(name: player)
+      coach = club_staff.send("staff_#{player_data.position}")
+
+      if player_data[skill] < player_data.send("potential_#{skill}")
+        if player_data[skill] < coach
+          player_data[skill] += 1
+          player_data.update(skill => player_data[skill])
+          Message.create(action_id:, week:, club_id:, var1: "Training #{player} in #{skill} suceeded! His new value is #{player_data[skill]}")
+        else
+          Message.create(action_id:, week:, club_id:, var1: "Training #{player} in #{skill} failed - this coach isn't good enough to train #{skill} for #{player}")  
+        end
+      else
+        Message.create(action_id:, week:, club_id:, var1: "Training #{player} in #{skill} failed due to reaching potential")
+      end
+    end
+  end
+
+  def fitness_upgrade
+    hash = {}
+
+    Turn.where('var1 LIKE ?', 'fitness%').where(week:).each do |turn|
+      hash[turn.id] = {
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
+        week: turn.week,
+        club_id: turn.club_id,
+        var1: turn.var1,
+        var2: turn.var2,
+        date_completed: turn.date_completed
+      }
+    end
+
+    hash.each do |key, value|
+      player_fitness(value[:action_id], value[:week], value[:club_id].to_i, value[:var2])
+      turn = Turn.find(key)
+      turn.update(date_completed: DateTime.now)
+    end
+  end
+
+  def player_fitness(action_id, week, club_id, player)
+    if Message.find_by(action_id:).nil?
+      player_data = Player.find_by(name: player)
+      coach = Club.find_by(id: club_id)&.staff_fitness
+
+      increased_fitness = player_data.fitness + coach
+      final_fitness = increased_fitness > 100 ? 100 : increased_fitness
+
+      player_data.update(fitness: final_fitness)
+
+      Message.create(action_id:, week:, club_id:, var1: "Fitness training for #{player} was completed! His new value is #{final_fitness}")
+    end
   end
 
   def unmanaged_bid
@@ -96,7 +175,7 @@ class Turn::TurnActions
         player = Player.find_by(id: value[:var2].to_i)
         club = Club.find_by(id: value[:club_id].to_i)
 
-        if player.club.club_id == value[:club_id].to_i
+        if player.club.id == value[:club_id].to_i
           proceeds = (player.value * -0.75).to_i
           proceeds_positive = (proceeds * -1).to_i
 
