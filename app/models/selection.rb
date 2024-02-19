@@ -2,7 +2,7 @@ class Selection < ApplicationRecord
   def auto_selection(params)
     if params[:week].present? && Message.find_by(action_id: "#{params[:week]}AS").nil?
       Club.all.each do |club|
-        if Selection.where(club_id: club.id).size == 11
+        if Selection.where(club_id: club.id).size == 11 && club.managed == true
           next
         else
           run_auto_selection(club)

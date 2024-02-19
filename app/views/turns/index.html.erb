@@ -11,6 +11,15 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+<h6>Process Turnsheets</h6>
+<form action="/turnsheets/process_turnsheet" method="post">
+  <% if @turnsheets_processed == @turnsheets_submitted %>
+    <button type="submit" class="btn btn-danger disabled">Turnsheets <%= @turnsheets_processed %>/<%= @turnsheets_submitted %></button>
+  <% else %>
+    <button type="submit" class="btn btn-success">Turnsheets <%= @turnsheets_processed %>/<%= @turnsheets_submitted %></button>
+  <% end %>
+</form>
+
 <h6>Auto Selection</h6>
 <form action="/selections/auto_selection" method="post">
   <input type="hidden" name="week" value="<%= params[:week] %>">
@@ -18,15 +27,6 @@
     <button type="submit" class="btn btn-danger disabled">Run Auto Select</button>
   <% else %>
     <button type="submit" class="btn btn-success">Auto Select</button>
-  <% end %>
-</form>
-
-<h6>Process Turnsheets</h6>
-<form action="/turnsheets/process_turnsheet" method="post">
-  <% if @turnsheets_processed == @turnsheets_submitted %>
-    <button type="submit" class="btn btn-danger disabled">Turnsheets <%= @turnsheets_processed %>/<%= @turnsheets_submitted %></button>
-  <% else %>
-    <button type="submit" class="btn btn-success">Turnsheets <%= @turnsheets_processed %>/<%= @turnsheets_submitted %></button>
   <% end %>
 </form>
 
