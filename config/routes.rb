@@ -70,6 +70,8 @@ Rails.application.routes.draw do
 
   post '/turnsheets/process_turnsheet', to: 'turnsheets#process_turnsheet'
 
+  post '/selections/auto_selection', to: 'selections#auto_selection'
+
   post '/turns/process_turn', to: 'turns#process_turn'
   post '/turns/process_player_updates', to: 'turns#process_player_updates'
   post '/turns/process_upgrade_admin', to: 'turns#process_upgrade_admin'

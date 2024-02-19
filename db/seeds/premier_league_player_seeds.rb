@@ -4,7 +4,7 @@ end
 
 countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales', 'NI', 'RoI', 'Brazil', 'Argentina', 'Spain', 'France', 'Germany', 'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay','Brazil', 'England', 'Mexico', 'Germany', 'Italy', 'Spain', 'France', 'Argentina', 'Netherlands', 'Portugal', 'Belgium', 'Uruguay', 'Colombia', 'Croatia', 'Sweden', 'Switzerland', 'Poland', 'Denmark', 'Chile', 'Austria', 'Turkey', 'Russia', 'Japan', 'South Korea', 'Australia']
 position_detail = ['c', 'c', 'c', 'l', 'r']
-club_code = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,7,18,19,20]
+club_code = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 blend = [1,2,3,4,5,6,7,8,9]
 
 3.times do

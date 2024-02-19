@@ -1,4 +1,80 @@
 class Selection < ApplicationRecord
+  def auto_selection(params)
+    if params[:week].present? && Message.find_by(action_id: "#{params[:week]}AS").nil?
+      Club.all.each do |club|
+        if Selection.where(club_id: club.id).size == 11
+          next
+        else
+          run_auto_selection(club)
+        end
+        Message.create(action_id: "#{params[:week]}AS", week: params[:week], club_id: '999', var1: "week #{params[:week]} Auto Select processed")
+      end
+    else
+      if params[:week].nil?
+        raise 'Please select a week before trying to process Auto Selections.'
+      else
+        raise 'Auto Selections for that week have already been processed.'
+      end
+    end
+  end
+
+  def run_auto_selection(club)
+    Selection.where(club_id: club.id).destroy_all
+
+    dfc_number, mid_number, att_number = formation_picker
+
+    pick_gkp(club)
+    pick_dfc(club, dfc_number)
+    pick_mid(club, mid_number)
+    pick_att(club, att_number)
+  end
+
+  def formation_picker
+    formations = [
+      [4, 4, 2],
+      [4, 3, 3],
+      [4, 5, 1],
+      [3, 5, 2],
+      [3, 4, 3],
+      [3, 3, 4],
+      [5, 3, 2],
+      [5, 4, 1],
+      [5, 2, 3]
+    ]
+    selected_formation = formations.sample
+
+    dfc_number = selected_formation[0]
+    mid_number = selected_formation[1]
+    att_number = selected_formation[2]
+
+    return dfc_number, mid_number, att_number
+  end
+
+  def pick_gkp(club)
+    gkp = Player.where(club_id: club.id, position: 'gkp').order(total_skill: :desc).first
+    Selection.create(club_id: club.id, player_id: gkp.id)
+  end
+
+  def pick_dfc(club, dfc_number)
+    dfc = Player.where(club_id: club.id, position: 'dfc').order(total_skill: :desc).limit(dfc_number)
+    dfc.each do |player|
+      Selection.create(club_id: club.id, player_id: player.id)
+    end
+  end
+
+  def pick_mid(club, mid_number)
+    mid = Player.where(club_id: club.id, position: 'mid').order(total_skill: :desc).limit(mid_number)
+    mid.each do |player|
+      Selection.create(club_id: club.id, player_id: player.id)
+    end
+  end
+
+  def pick_att(club, att_number)
+    att = Player.where(club_id: club.id, position: 'att').order(total_skill: :desc).limit(att_number)
+    att.each do |player|
+      Selection.create(club_id: club.id, player_id: player.id)
+    end
+  end
 end
 
 #------------------------------------------------------------------------------

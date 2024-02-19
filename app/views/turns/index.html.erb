@@ -11,6 +11,16 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+<h6>Auto Selection</h6>
+<form action="/selections/auto_selection" method="post">
+  <input type="hidden" name="week" value="<%= params[:week] %>">
+  <% if Message.exists?(action_id: "#{params[:week]}AS") %>
+    <button type="submit" class="btn btn-danger disabled">Run Auto Select</button>
+  <% else %>
+    <button type="submit" class="btn btn-success">Auto Select</button>
+  <% end %>
+</form>
+
 <h6>Process Turnsheets</h6>
 <form action="/turnsheets/process_turnsheet" method="post">
   <% if @turnsheets_processed == @turnsheets_submitted %>

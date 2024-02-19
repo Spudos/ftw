@@ -51,6 +51,22 @@ class SelectionsController < ApplicationController
     end
   end
 
+  def auto_selection
+    errors = []
+
+    begin
+      selection = Selection.new
+      selection.auto_selection(params)
+
+      notice = 'Auto Selection ran successfully.'
+    rescue StandardError => e
+      errors << "Error occurred during processing: #{e.message}"
+      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
+    end
+
+    redirect_to request.referrer, notice: notice
+  end
+
   private
 
   def set_selection
