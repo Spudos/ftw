@@ -37,7 +37,7 @@ countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales', 'N
 position_detail = ['c', 'c', 'c', 'l', 'r']
 blend = [1,2,3,4,5,6,7,8,9]
 
-1000.times do
+100.times do
     Player.create(
       name: Faker::Name.last_name,
       age: random_number(18, 35),
@@ -76,7 +76,7 @@ blend = [1,2,3,4,5,6,7,8,9]
     )
   end
 
-2000.times do
+200.times do
     Player.create(
       name: Faker::Name.last_name,
       age: random_number(18, 35),
@@ -115,7 +115,7 @@ blend = [1,2,3,4,5,6,7,8,9]
     )
   end
 
-2000.times do
+200.times do
     Player.create(
       name: Faker::Name.last_name,
       age: random_number(18, 35),
@@ -154,7 +154,7 @@ blend = [1,2,3,4,5,6,7,8,9]
     )
   end
 
-2000.times do
+200.times do
     Player.create(
       name: Faker::Name.last_name,
       age: random_number(18, 35),
