@@ -1,26 +1,29 @@
 <h3 class="text-center">Club Staff</h3>
 <table class="table table-hover">
-  <tr style="border-bottom: 1px var(--primary-color) solid;" scope="row">
+  <tr style="border: 1px <%= @primary %> solid;">
+    <td scope="col">Coach</td>
+    <td scope="col">Rating</td>
+  </tr>
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
     <td>Fitness Coach</td>
     <td><%= @club.staff_fitness %></td>  
   </tr>       
-  <tr scope="row">
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
     <td>Goalkeeping Coach</td>
     <td><%= @club.staff_gkp %></td> 
   </tr>
-  <tr scope="row">
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
     <td>Defence Coach</td>
     <td><%= @club.staff_dfc %></td> 
-  <tr scope="row">
-    </tr>
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
     <td>Midfield Coach</td>
     <td><%= @club.staff_mid %></td> 
   </tr>
-  <tr scope="row">
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
     <td>Attack Coach</td>
     <td><%= @club.staff_att %></td>  
   </tr>
-  <tr scope="row">
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
     <td>Scouting Department</td>
     <td><%= @club.staff_scouts %></td> 
   </tr>

@@ -1,18 +1,19 @@
 <h3 class="text-center">Contracts</h3>
 <table class="table table-hover">
   <thead>
-    <tr>
+    <tr style="border: 1px <%= @primary %> solid;">
       <th scope="col">Name</th>
       <th scope="col">Age</th>
       <th scope="col">Position</th>
       <th scope="col">Con</th>
       <th scope="col">Wages</th>
       <th scope="col">Valuation</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     <% Player.where(club: @club.id).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
-      <tr scope="row">
+      <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
         <td><%= player.name %></td>
         <td><%= player.age %></td>
         <td><%= (player.position + player.player_position_detail).upcase %></td>

@@ -1,7 +1,7 @@
 <h3 class="text-center">Results</h3>
 <table class="table table-hover">
   <thead>
-    <tr>
+    <tr style="border: 1px <%= @primary %> solid;">
       <th scope="col">Match ID</th>
       <th scope="col">Competition</th>
       <th scope="col">Home</th>
@@ -21,7 +21,7 @@
   </thead>
   <tbody>
     <% @club_matches.each do |match| %>
-      <tr scope="row">
+      <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
         <td><%= match.id %></td>
         <td><%= match.competition %></td>
         <td><%= Club.find_by(id: match.home_team)&.name %></td>
