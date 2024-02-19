@@ -35,6 +35,9 @@ Rails.application.routes.draw do
   get '/leagues/championship/table', to: 'leagues#championship_league_table'
   get '/leagues/championship/statistics', to: 'leagues#championship_league_statistics'
   get '/leagues/championship/fixtures', to: 'leagues#championship_league_fixtures'
+  get '/leagues/ligue_1/table', to: 'leagues#ligue_1_league_table'
+  get '/leagues/ligue_1/statistics', to: 'leagues#ligue_1_statistics'
+  get '/leagues/ligue_1/fixtures', to: 'leagues#ligue_1_fixtures'
   get '/leagues/cup/league', to: 'leagues#league_cup'
 
   post '/turnsheets/process_turnsheet', to: 'turnsheets#process_turnsheet'

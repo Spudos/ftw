@@ -1,43 +1,14 @@
-# Define a method to generate a random number between min and max (inclusive)
 def random_number(min, max)
   rand(min..max)
 end
 
-Club.create(
-  name: 'unmanaged',
-  ground_name: 'Stadium',
-  stand_n_name: 'n Stand',
-  stand_s_name: 's Stand',
-  stand_e_name: 'e Stand',
-  stand_w_name: 'w Stand',
-  stand_n_condition: 0,
-  stand_s_condition: 0,
-  stand_e_condition: 0,
-  stand_w_condition: 0,
-  stand_n_capacity: 0,
-  stand_s_capacity: 0,
-  stand_e_capacity: 0,
-  stand_w_capacity: 0,
-  pitch: 0,
-  hospitality: 0,
-  facilities: 0,
-  staff_fitness: 0,
-  staff_gkp: 0,
-  staff_dfc: 0,
-  staff_mid: 0,
-  staff_att: 0,
-  staff_scouts: 0,
-  color_primary: 'Black',
-  color_secondary: 'Red',
-  bank_bal: 0,
-  league: 'unmanaged'
-)
-
-countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales', 'NI', 'RoI', 'Brazil', 'Argentina', 'Spain', 'France', 'Germany', 'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay','Brazil', 'England', 'Mexico', 'Germany', 'Italy', 'Spain', 'France', 'Argentina', 'Netherlands', 'Portugal', 'Belgium', 'Uruguay', 'Colombia', 'Croatia', 'Sweden', 'Switzerland', 'Poland', 'Denmark', 'Chile', 'Austria', 'Turkey', 'Russia', 'Japan', 'South Korea', 'Australia']
+countries = ['Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Brazil', 'Argentina', 'Spain', 'England', 'France', 'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay','Brazil', 'England', 'Mexico', 'Germany', 'Italy', 'Spain', 'France', 'Argentina', 'Netherlands', 'Portugal', 'Belgium', 'Uruguay', 'Colombia', 'Croatia', 'Sweden', 'Switzerland', 'Poland', 'Denmark', 'Chile', 'Austria', 'Turkey', 'Russia', 'Japan', 'South Korea', 'Australia']
 position_detail = ['c', 'c', 'c', 'l', 'r']
+club_code = [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120]
 blend = [1,2,3,4,5,6,7,8,9]
 
-1000.times do
+3.times do
+  club_code.each do |code|
     Player.create(
       name: Faker::Name.last_name,
       age: random_number(18, 35),
@@ -56,11 +27,11 @@ blend = [1,2,3,4,5,6,7,8,9]
       creativity: random_number(3, 5),
       fitness: 100,
       contract: random_number(3, 24),
+      club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
       blend: blend.sample,
       star: random_number(10, 30),
-      club_id: 242,
       player_position_detail: 'p',
       potential_passing: random_number(8, 15),
       potential_control: random_number(8, 15),
@@ -75,8 +46,10 @@ blend = [1,2,3,4,5,6,7,8,9]
       potential_creativity: random_number(5, 12)
     )
   end
+end
 
-2000.times do
+7.times do
+  club_code.each do |code|
     Player.create(
       name: Faker::Name.last_name,
       age: random_number(18, 35),
@@ -95,11 +68,11 @@ blend = [1,2,3,4,5,6,7,8,9]
       creativity: random_number(3, 8),
       fitness: 100,
       contract: random_number(3, 24),
+      club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
       blend: blend.sample,
       star: random_number(10, 30),
-      club_id: 242,
       player_position_detail: position_detail.sample,
       potential_passing: random_number(5, 12),
       potential_control: random_number(8, 15),
@@ -114,8 +87,10 @@ blend = [1,2,3,4,5,6,7,8,9]
       potential_creativity: random_number(8, 15)
     )
   end
+end
 
-2000.times do
+7.times do
+  club_code.each do |code|
     Player.create(
       name: Faker::Name.last_name,
       age: random_number(18, 35),
@@ -134,11 +109,11 @@ blend = [1,2,3,4,5,6,7,8,9]
       creativity: random_number(3, 8),
       fitness: 100,
       contract: random_number(3, 24),
+      club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
       blend: blend.sample,
       star: random_number(10, 30),
-      club_id: 242,
       player_position_detail: position_detail.sample,
       potential_passing: random_number(8, 15),
       potential_control: random_number(8, 15),
@@ -153,8 +128,10 @@ blend = [1,2,3,4,5,6,7,8,9]
       potential_creativity: random_number(8, 15)
     )
   end
+end
 
-2000.times do
+6.times do
+  club_code.each do |code|
     Player.create(
       name: Faker::Name.last_name,
       age: random_number(18, 35),
@@ -173,11 +150,11 @@ blend = [1,2,3,4,5,6,7,8,9]
       creativity: random_number(3, 5),
       fitness: 100,
       contract: random_number(3, 24),
+      club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
       blend: blend.sample,
       star: random_number(10, 30),
-      club_id: 242,
       player_position_detail: position_detail.sample,
       potential_passing: random_number(5, 12),
       potential_control: random_number(8, 15),
@@ -192,3 +169,4 @@ blend = [1,2,3,4,5,6,7,8,9]
       potential_creativity: random_number(5, 12)
     )
   end
+end

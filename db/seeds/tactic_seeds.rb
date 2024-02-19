@@ -1,50 +1,14 @@
-hash = [
-  { code: 1, tactic: 1 },
-  { code: 2, tactic: 2 },
-  { code: 3, tactic: 3 },
-  { code: 5, tactic: 4 },
-  { code: 5, tactic: 5 },
-  { code: 6, tactic: 6 },
-  { code: 7, tactic: 1 },
-  { code: 8, tactic: 2 },
-  { code: 9, tactic: 3 },
-  { code: 10, tactic: 4 },
-  { code: 11, tactic: 5 },
-  { code: 12, tactic: 6 },
-  { code: 13, tactic: 1 },
-  { code: 14, tactic: 2 },
-  { code: 15, tactic: 3 },
-  { code: 16, tactic: 4 },
-  { code: 17, tactic: 5 },
-  { code: 18, tactic: 6 },
-  { code: 19, tactic: 1 },
-  { code: 20, tactic: 2 },
-  { code: 21, tactic: 3 },
-  { code: 22, tactic: 4 },
-  { code: 23, tactic: 5 },
-  { code: 24, tactic: 5 },
-  { code: 25, tactic: 1 },
-  { code: 26, tactic: 2 },
-  { code: 27, tactic: 3 },
-  { code: 28, tactic: 4 },
-  { code: 29, tactic: 5 },
-  { code: 30, tactic: 6 },
-  { code: 31, tactic: 1 },
-  { code: 32, tactic: 2 },
-  { code: 33, tactic: 3 },
-  { code: 34, tactic: 4 },
-  { code: 35, tactic: 5 },
-  { code: 36, tactic: 6 },
-  { code: 37, tactic: 1 },
-  { code: 38, tactic: 2 },
-  { code: 39, tactic: 3 },
-  { code: 40, tactic: 4 },
-  { code: 41, tactic: 3 }
-]
+def random_number(min, max)
+  rand(min..max)
+end
 
-hash.each do |hash|
+(1..240).each do |code|
   Tactic.create(
-    club_id: hash[:code],
-    tactics: hash[:tactic]
+    club_id: code,
+    tactics: random_number(0, 6),
+    dfc_aggression: random_number(1, 10),
+    mid_aggression: random_number(1, 10),
+    att_aggression: random_number(1, 10),
+    press: random_number(1, 6)
   )
 end

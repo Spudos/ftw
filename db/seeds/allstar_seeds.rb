@@ -54,7 +54,7 @@ Club.create(
     creativity: random_number(5, 8),
     fitness: 100,
     contract: 24,
-    club_id: 41,
+    club_id: 241,
     consistency: 5,
     blend: 0,
     star: 30,
@@ -93,7 +93,7 @@ end
     creativity: random_number(5, 11),
     fitness: 100,
     contract: 24,
-    club_id: 41,
+    club_id: 241,
     consistency: 5,
     blend: 0,
     star: 30,
@@ -136,7 +136,7 @@ end
     star: 30,
     loyalty: 100,
     consistency: 5,
-    club_id: 41,
+    club_id: 241,
     player_position_detail: position_detail.sample,
     potential_passing: random_number(11, 20),
     potential_control: random_number(11, 20),
@@ -171,7 +171,7 @@ end
     creativity: random_number(5, 8),
     fitness: 100,
     contract: 24,
-    club_id: 41,
+    club_id: 241,
     consistency: 5,
     blend: 2,
     star: 30,
@@ -190,4 +190,3 @@ end
     potential_creativity: random_number(8, 18)
   )
 end
-

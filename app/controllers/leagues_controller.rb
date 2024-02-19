@@ -35,6 +35,21 @@ class LeaguesController < ApplicationController
     render 'leagues/championship/fixtures'
   end
 
+  def ligue_1_league_table
+    initialize_table('Ligue 1')
+    render 'leagues/ligue_1/table'
+  end
+
+  def ligue_1_statistics
+    initialize_statistics('Ligue 1')
+    render 'leagues/ligue_1/statistics'
+  end
+
+  def ligue_1_fixtures
+    initialize_fixtures('Ligue 1')
+    render 'leagues/ligue_1/fixtures'
+  end
+
   def league_cup
     initialize_fixtures('Cup')
     render 'leagues/cup/league'
