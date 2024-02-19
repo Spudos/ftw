@@ -2,11 +2,10 @@ class Turn < ApplicationRecord
   def process_turn_actions(params)
     if params[:week].present? && Message.find_by(action_id: "#{params[:week]}TA").nil?
       Turn::TurnActions.new(params[:week]).call
-      Turn::UpgradeAdmin.new(params[:week]).call
-      Message.create(action_id: "#{params[:week]}TA", week: params[:week], club_id: '999', var1: "week #{params[:week]} Turn actions processed")
+      Message.create(action_id: "#{params[:week]}TA", week: params[:week], club_id: '999', var1: "week #{params[:week]} Turn Actions processed")
     else
       if params[:week].nil?
-        raise 'Please select a week before trying to process turn actions.'
+        raise 'Please select a week before trying to process Turn Actions.'
       else
         raise 'Turn actions for that week have already been processed.'
       end
@@ -16,12 +15,25 @@ class Turn < ApplicationRecord
   def process_player_updates(params)
     if params[:week].present? && Message.find_by(action_id: "#{params[:week]}PU").nil?
       Turn::PlayerUpdates.new(params[:week]).call
-      Message.create(action_id: "#{params[:week]}PU", week: params[:week], club_id: '999', var1: "week #{params[:week]} Player updates processed")
+      Message.create(action_id: "#{params[:week]}PU", week: params[:week], club_id: '999', var1: "week #{params[:week]} Player Updates processed")
     else
       if params[:week].nil?
-        raise 'Please select a week before trying to process turn actions.'
+        raise 'Please select a week before trying to process Player Updates.'
       else
-        raise 'Player updates for that week have already been processed.'
+        raise 'Player Updates for that week have already been processed.'
+      end
+    end
+  end
+
+  def process_upgrade_admin(params)
+    if params[:week].present? && Message.find_by(action_id: "#{params[:week]}UA").nil?
+      Turn::UpgradeAdmin.new(params[:week]).call
+      Message.create(action_id: "#{params[:week]}UA", week: params[:week], club_id: '999', var1: "week #{params[:week]} Upgrade Admin processed")
+    else
+      if params[:week].nil?
+        raise 'Please select a week before trying to process Upgrade Admin.'
+      else
+        raise 'Upgrade Admin for that week has already been processed.'
       end
     end
   end

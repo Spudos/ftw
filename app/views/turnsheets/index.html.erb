@@ -1,9 +1,5 @@
 <h1>Turnsheets</h1>
 
-<form action="/turnsheets/process_turnsheet" method="post">
-  <button type="submit" class="btn btn-danger btn-sm">Process Turnsheets</button>
-</form>
-
 <%= form_tag new_turnsheet_path, method: :get do %>
   <%= select_tag :club, options_from_collection_for_select(Club.all, :id, :name), prompt: "Select a club" %>
   <button type="submit" class="btn btn-primary btn-sm">New Turnsheet</button>

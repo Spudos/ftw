@@ -4,11 +4,20 @@ class TurnsController < ApplicationController
 
   def index
     @turns = Turn.all
-    @premier_completed = (Match.where(week_number: params[:week], competition: 'Premier League')).count
-    @championship_completed = (Match.where(week_number: params[:week], competition: 'Chamnpionship')).count
-    @cup_completed = (Match.where(week_number: params[:week], competition: 'Cup')).count
-    @friendlies_completed = (Match.where(week_number: params[:week], competition: 'Friendly')).count
-    @games_completed = (Match.where(week_number: params[:week])).count
+    @premier_completed = Match.where(week_number: params[:week], competition: 'Premier League').count
+    @premier_scheduled = Fixture.where(week_number: params[:week], comp: 'Premier League').count
+    @championship_completed = Match.where(week_number: params[:week], competition: 'Championship').count
+    @championship_scheduled = Fixture.where(week_number: params[:week], comp: 'Championship').count
+    @cup_completed = Match.where(week_number: params[:week], competition: 'Cup').count
+    @cup_scheduled = Fixture.where(week_number: params[:week], comp: 'Cup').count
+    @friendlies_completed = Match.where(week_number: params[:week], competition: 'Friendly').count
+    @friendlies_scheduled = Fixture.where(week_number: params[:week], comp: 'Friendly').count
+    @games_completed = Match.where(week_number: params[:week]).count
+    @games_scheduled = Fixture.where(week_number: params[:week]).count
+    @turnsheets_processed = Turnsheet.where(week: params[:week], processed: true).count
+    @turnsheets_submitted = Turnsheet.where(week: params[:week]).count
+    @turn_actions_processed = Turn.where(week: params[:week], date_completed: true).count
+    @turn_actions_submitted = Turn.where(week: params[:week]).count
   end
 
   def show
@@ -63,7 +72,7 @@ class TurnsController < ApplicationController
       turn = Turn.new
       turn.process_turn_actions(params)
 
-      notice = 'Turn actions ran successfully.'
+      notice = 'Turn Actions ran successfully.'
     rescue StandardError => e
       errors << "Error occurred during processing: #{e.message}"
       notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
@@ -79,7 +88,23 @@ class TurnsController < ApplicationController
       turn = Turn.new
       turn.process_player_updates(params)
 
-      notice = 'Player updates ran successfully.'
+      notice = 'Player Updates ran successfully.'
+    rescue StandardError => e
+      errors << "Error occurred during processing: #{e.message}"
+      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
+    end
+
+    redirect_to request.referrer, notice: notice
+  end
+
+  def process_upgrade_admin
+    errors = []
+
+    begin
+      turn = Turn.new
+      turn.process_upgrade_admin(params)
+
+      notice = 'Upgrade Admin ran successfully.'
     rescue StandardError => e
       errors << "Error occurred during processing: #{e.message}"
       notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"

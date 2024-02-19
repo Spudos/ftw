@@ -7,40 +7,83 @@
       <option value="<%= week %>">Week <%= week %></option>
     <% end %>
   </select>
-  <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-<h6>Run Matches</h6>
-<form action="/matches/match_multiple" method="post">
-  <input type="hidden" name="selected_week" value="<%= params[:week] %>">
-  <button type="submit" name="competition" value="Premier League" class="btn btn-warning">Premier League. Completed so far: <%= @premier_completed %></button><br>
-  <button type="submit" name="competition" value="Championship" class="btn btn-warning">Championship. Completed so far: <%= @championship_completed %></button><br>
-  <button type="submit" name="competition" value="Cup" class="btn btn-warning">Cup. Completed so far: <%= @cup_completed %></button><br>
-  <button type="submit" name="competition" value="Friendly" class="btn btn-warning">Friendlies. Completed so far: <%= @friendlies_completed %></button><br>
-  <button type="submit" class="btn btn-warning">All Games. Completed so far: <%= @games_completed %></button>
+<h6>Process Turnsheets</h6>
+<form action="/turnsheets/process_turnsheet" method="post">
+  <% if @turnsheets_processed == @turnsheets_submitted %>
+    <button type="submit" class="btn btn-danger disabled">Turnsheets <%= @turnsheets_processed %>/<%= @turnsheets_submitted %></button>
+  <% else %>
+    <button type="submit" class="btn btn-success">Turnsheets <%= @turnsheets_processed %>/<%= @turnsheets_submitted %></button>
+  <% end %>
 </form>
 
 <h6>Process Turn Actions</h6>
 <form action="/turns/process_turn" method="post">
   <input type="hidden" name="week" value="<%= params[:week] %>">
   <% if Message.exists?(action_id: "#{params[:week]}TA") %>
-    <button type="submit" class="btn btn btn-danger disabled">Turn Actions Completed</button>
+    <button type="submit" class="btn btn-danger disabled">Turn Actions <%= @turn_actions_processed %>/<%= @turn_actions_submitted %></button>
   <% else %>
-    <button type="submit" class="btn btn btn-success">Process Turn Actions</button>
+    <button type="submit" class="btn btn-success">Turn Actions <%= @turn_actions_processed %>/<%= @turn_actions_submitted %></button>
   <% end %>
 </form>
 
-<h6>Process End of Turn player Updates</h6>
+<h6>Run Matches</h6>
+<form action="/matches/match_multiple" method="post">
+  <input type="hidden" name="selected_week" value="<%= params[:week] %>">
+  <% if @premier_completed == @premier_scheduled %>
+    <button type="submit" name="competition" value="Premier League" class="btn btn-danger disabled">Premier League <%= @premier_completed %>/<%= @premier_scheduled %></button><br>
+  <% else %>
+    <button type="submit" name="competition" value="Premier League" class="btn btn-success">Premier League <%= @premier_completed %>/<%= @premier_scheduled %></button><br>
+  <% end %>
+  
+  <% if @championship_completed == @championship_scheduled %>
+    <button type="submit" name="competition" value="Championship" class="btn btn-danger disabled">Championship <%= @championship_completed %>/<%= @championship_scheduled %></button><br>
+  <% else %>
+    <button type="submit" name="competition" value="Championship" class="btn btn-success">Championship <%= @championship_completed %>/<%= @championship_scheduled %></button><br>
+  <% end %>
+
+  <% if @cup_completed == @cup_scheduled %>
+    <button type="submit" name="competition" value="Cup" class="btn btn-danger disabled">Cup <%= @cup_completed %>/<%= @cup_scheduled %></button><br>
+  <% else %>
+    <button type="submit" name="competition" value="Cup" class="btn btn-warning">Cup <%= @cup_completed %>/<%= @cup_scheduled %></button><br>
+  <% end %>
+
+  <% if @friendlies_completed == @friendlies_scheduled %>
+    <button type="submit" name="competition" value="Friendly" class="btn btn-danger disabled">Friendlies <%= @friendlies_completed %>/<%= @friendlies_scheduled %></button><br>
+  <% else %>
+    <button type="submit" name="competition" value="Friendly" class="btn btn-success">Friendlies <%= @friendlies_completed %>/<%= @friendlies_scheduled %></button><br>
+  <% end %>
+
+  <% if @games_completed == @games_scheduled %>
+    <button type="submit" class="btn btn-danger disabled">All Games <%= @games_completed %>/<%= @games_scheduled %></button><br>
+  <% else %>
+    <button type="submit" class="btn btn-success">All Games <%= @games_completed %>/<%= @games_scheduled %></button>
+  <% end %>
+</form>
+
+<h6>Process End of Turn Player Updates</h6>
 <form action="/turns/process_player_updates" method="post">
   <input type="hidden" name="week" value="<%= params[:week] %>">
   <% if Message.exists?(action_id: "#{params[:week]}PU") %>
-    <button type="submit" class="btn btn btn-danger disabled">Player Updates Completed</button>
+    <button type="submit" class="btn btn-danger disabled">Player Updates Completed</button>
   <% else %>
-    <button type="submit" class="btn btn btn-success">Process Player Updates</button>
+    <button type="submit" class="btn btn-success">Player Updates</button>
   <% end %>
 </form>
 
-<h2>Turn actions</h2>
+<h6>Process End of Turn Upgrade Admin</h6>
+<form action="/turns/process_upgrade_admin" method="post">
+  <input type="hidden" name="week" value="<%= params[:week] %>">
+  <% if Message.exists?(action_id: "#{params[:week]}UA") %>
+    <button type="submit" class="btn btn-danger disabled">upgrade Admin Completed</button>
+  <% else %>
+    <button type="submit" class="btn btn-success">Upgrade Admin</button>
+  <% end %>
+</form>
+
+<h2>Turn Actions</h2>
 <%= link_to "Click here a create a new turn action", new_turn_path, class: "btn btn-sm btn-primary" %>
 
 <div id="turns">
