@@ -73,6 +73,7 @@ class PlayersController < ApplicationController
   end
 
   def destroy
+    binding.pry
     @player.destroy
 
     respond_to do |format|

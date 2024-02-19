@@ -1,122 +1,142 @@
-<h2>Turn Processing</h2>
-
-<h6>Select the week to be processed</h6>
-<form action="/turns" method="get">
-  <select name="week" id="week">
-    <option value="">No week selected</option>
-    <% (1..38).each do |week| %>
-      <option value="<%= week %>" <%= 'selected' if params[:week] == week.to_s %>>Week <%= week %></option>
-    <% end %>
-  </select>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
-<h6>Process Turnsheets</h6>
-<form action="/turnsheets/process_turnsheet" method="post">
-  <% if @turnsheets_processed == @turnsheets_submitted %>
-    <button type="submit" class="btn btn-danger disabled">Turnsheets <%= @turnsheets_processed %>/<%= @turnsheets_submitted %></button>
-  <% else %>
-    <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process Turnsheets?')">Turnsheets <%= @turnsheets_processed %>/<%= @turnsheets_submitted %></button>
-  <% end %>
-</form>
-
-<h6>Auto Selections</h6>
-<form action="/selections/auto_selection" method="post">
-  <input type="hidden" name="week" value="<%= params[:week] %>">
-  <% if Message.exists?(action_id: "#{params[:week]}AS") %>
-    <button type="submit" class="btn btn-danger disabled">Run Auto Select</button>
-  <% else %>
-    <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process Auto Select?')">Auto Select</button>
-  <% end %>
-</form>
-
-
-<h6>Process Turn Actions</h6>
-<form action="/turns/process_turn" method="post">
-  <input type="hidden" name="week" value="<%= params[:week] %>">
-  <% if Message.exists?(action_id: "#{params[:week]}TA") %>
-    <button type="submit" class="btn btn-danger disabled">Turn Actions <%= @turn_actions_processed %>/<%= @turn_actions_submitted %></button>
-  <% else %>
-    <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process Turn Actions?')">Turn Actions <%= @turn_actions_processed %>/<%= @turn_actions_submitted %></button>
-  <% end %>
-</form>
-
-<h6>Run Matches</h6>
-<form action="/matches/match_multiple" method="post">
-  <input type="hidden" name="selected_week" value="<%= params[:week] %>">
-  <% if @premier_completed == @premier_scheduled %>
-    <button type="submit" name="competition" value="Premier League" class="btn btn-danger disabled">Premier League <%= @premier_completed %>/<%= @premier_scheduled %></button><br>
-  <% else %>
-    <button type="submit" name="competition" value="Premier League" class="btn btn-success" onclick="return confirm('Are you sure you want to run Premier League games?')">Premier League <%= @premier_completed %>/<%= @premier_scheduled %></button><br>
-  <% end %>
-  
-  <% if @championship_completed == @championship_scheduled %>
-    <button type="submit" name="competition" value="Championship" class="btn btn-danger disabled">Championship <%= @championship_completed %>/<%= @championship_scheduled %></button><br>
-  <% else %>
-    <button type="submit" name="competition" value="Championship" class="btn btn-success" onclick="return confirm('Are you sure you want to run Championship games?')">Championship <%= @championship_completed %>/<%= @championship_scheduled %></button><br>
-  <% end %>
-
-  <% if @cup_completed == @cup_scheduled %>
-    <button type="submit" name="competition" value="Cup" class="btn btn-danger disabled">Cup <%= @cup_completed %>/<%= @cup_scheduled %></button><br>
-  <% else %>
-    <button type="submit" name="competition" value="Cup" class="btn btn-success" onclick="return confirm('Are you sure you want to run Cup games?')">Cup <%= @cup_completed %>/<%= @cup_scheduled %></button><br>
-  <% end %>
-
-  <% if @friendlies_completed == @friendlies_scheduled %>
-    <button type="submit" name="competition" value="Friendly" class="btn btn-danger disabled">Friendlies <%= @friendlies_completed %>/<%= @friendlies_scheduled %></button><br>
-  <% else %>
-    <button type="submit" name="competition" value="Friendly" class="btn btn-success" onclick="return confirm('Are you sure you want to run Friendly games?')">Friendlies <%= @friendlies_completed %>/<%= @friendlies_scheduled %></button><br>
-  <% end %>
-
-  <% if @games_completed == @games_scheduled %>
-    <button type="submit" class="btn btn-danger disabled">All Games <%= @games_completed %>/<%= @games_scheduled %></button><br>
-  <% else %>
-    <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run all games?')">All Games <%= @games_completed %>/<%= @games_scheduled %></button>
-  <% end %>
-</form>
-
-<h6>Process End of Turn Player Updates</h6>
-<form action="/turns/process_player_updates" method="post">
-  <input type="hidden" name="week" value="<%= params[:week] %>">
-  <% if Message.exists?(action_id: "#{params[:week]}PU") %>
-    <button type="submit" class="btn btn-danger disabled">Player Updates Completed</button>
-  <% else %>
-    <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Player Updates?')">Player Updates</button>
-  <% end %>
-</form>
-
-<h6>Process End of Turn Upgrade Admin</h6>
-<form action="/turns/process_upgrade_admin" method="post">
-  <input type="hidden" name="week" value="<%= params[:week] %>">
-  <% if Message.exists?(action_id: "#{params[:week]}UA") %>
-    <button type="submit" class="btn btn-danger disabled">upgrade Admin Completed</button>
-  <% else %>
-    <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Upgrade Admin?')">Upgrade Admin</button>
-  <% end %>
-</form>
-
-<h2>Turn Actions</h2>
-<%= link_to "Click here a create a new turn action", new_turn_path, class: "btn btn-sm btn-primary" %>
-
-<div id="turns">
-  <table class="table table-hover">
-    <tbody>
-      <tr>
-        <th scope="col">Week</th>
-        <th scope="col">Club</th>
-        <th scope="col">var1</th>
-        <th scope="col">var2</th>
-        <th scope="col">var3</th>
-        <th scope="col">Action</th>
-        <th scope="col">Date Processed</th>
-      </tr>
-      <tr scope="row">
-        <% @turns.each do |turn| %>
-          <% if turn.week.to_s == params[:week] %>
-          <%= render turn %>
+<h1>Turn Processing</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <h2>Step 1</h2>
+      <h6>Select the week to be processed</h6>
+      <form action="/turns" method="get">
+        <select name="week" id="week">
+          <option value="">No week selected</option>
+          <% (1..38).each do |week| %>
+            <option value="<%= week %>" <%= 'selected' if params[:week] == week.to_s %>>Week <%= week %></option>
           <% end %>
+        </select>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <div class="col-3">
+      <h2>Step 2</h2>
+      <h6>Process Turnsheets</h6>
+      <form action="/turnsheets/process_turnsheet" method="post">
+        <% if @turnsheets_processed == @turnsheets_submitted %>
+          <button type="submit" class="btn btn-danger disabled">Turnsheets <%= @turnsheets_processed %>/<%= @turnsheets_submitted %></button><br>
+        <% else %>
+          <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process Turnsheets?')">Turnsheets <%= @turnsheets_processed %>/<%= @turnsheets_submitted %></button><br>
         <% end %>
-      </tr>
-    </tbody>
-  </table>
+      </form>
+
+      <h6>Auto Selections</h6>
+      <form action="/selections/auto_selection" method="post">
+        <input type="hidden" name="week" value="<%= params[:week] %>">
+        <% if Message.exists?(action_id: "#{params[:week]}AS") %>
+          <button type="submit" class="btn btn-danger disabled">Run Auto Select</button><br>
+        <% else %>
+          <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process Auto Select?')">Auto Select</button><br>
+        <% end %>
+      </form>
+
+
+      <h6>Process Turn Actions</h6>
+      <form action="/turns/process_turn" method="post">
+        <input type="hidden" name="week" value="<%= params[:week] %>">
+        <% if Message.exists?(action_id: "#{params[:week]}TA") %>
+          <button type="submit" class="btn btn-danger disabled">Turn Actions <%= @turn_actions_processed %>/<%= @turn_actions_submitted %></button><br>
+        <% else %>
+          <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process Turn Actions?')">Turn Actions <%= @turn_actions_processed %>/<%= @turn_actions_submitted %></button><br>
+        <% end %>
+      </form>
+    </div>
+
+    <div class="col-3">
+      <h2>Step 3</h2>
+      <h6>Run Matches</h6>
+      <form action="/matches/match_multiple" method="post">
+        <input type="hidden" name="selected_week" value="<%= params[:week] %>">
+        <% if @games_completed == @games_scheduled %>
+          <button type="submit" class="btn btn-danger disabled">All Games <%= @games_completed %>/<%= @games_scheduled %></button><br>
+        <% else %>
+          <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run all games?')">All Games <%= @games_completed %>/<%= @games_scheduled %></button><br>
+        <% end %>
+
+        <% if @premier_completed == @premier_scheduled %>
+          <button type="submit" name="competition" value="Premier League" class="btn btn-danger disabled">Premier League <%= @premier_completed %>/<%= @premier_scheduled %></button><br>
+        <% else %>
+          <button type="submit" name="competition" value="Premier League" class="btn btn-success" onclick="return confirm('Are you sure you want to run Premier League games?')">Premier League <%= @premier_completed %>/<%= @premier_scheduled %></button><br>
+        <% end %>
+        
+        <% if @championship_completed == @championship_scheduled %>
+          <button type="submit" name="competition" value="Championship" class="btn btn-danger disabled">Championship <%= @championship_completed %>/<%= @championship_scheduled %></button><br>
+        <% else %>
+          <button type="submit" name="competition" value="Championship" class="btn btn-success" onclick="return confirm('Are you sure you want to run Championship games?')">Championship <%= @championship_completed %>/<%= @championship_scheduled %></button><br>
+        <% end %>
+
+        <% if @cup_completed == @cup_scheduled %>
+          <button type="submit" name="competition" value="Cup" class="btn btn-danger disabled">Cup <%= @cup_completed %>/<%= @cup_scheduled %></button><br>
+        <% else %>
+          <button type="submit" name="competition" value="Cup" class="btn btn-success" onclick="return confirm('Are you sure you want to run Cup games?')">Cup <%= @cup_completed %>/<%= @cup_scheduled %></button><br>
+        <% end %>
+
+        <% if @friendlies_completed == @friendlies_scheduled %>
+          <button type="submit" name="competition" value="Friendly" class="btn btn-danger disabled">Friendlies <%= @friendlies_completed %>/<%= @friendlies_scheduled %></button><br>
+        <% else %>
+          <button type="submit" name="competition" value="Friendly" class="btn btn-success" onclick="return confirm('Are you sure you want to run Friendly games?')">Friendlies <%= @friendlies_completed %>/<%= @friendlies_scheduled %></button><br>
+        <% end %>
+      </form>
+    </div>
+
+    <div class="col-3">
+      <h2>Step 4</h2>
+      <h6>Process End of Turn Player Updates</h6>
+      <form action="/turns/process_player_updates" method="post">
+        <input type="hidden" name="week" value="<%= params[:week] %>">
+        <% if Message.exists?(action_id: "#{params[:week]}PU") %>
+          <button type="submit" class="btn btn-danger disabled">Player Updates Completed</button><br>
+        <% else %>
+          <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Player Updates?')">Player Updates</button><br>
+        <% end %>
+      </form>
+
+      <h6>Process End of Turn Upgrade Admin</h6>
+      <form action="/turns/process_upgrade_admin" method="post">
+        <input type="hidden" name="week" value="<%= params[:week] %>">
+        <% if Message.exists?(action_id: "#{params[:week]}UA") %>
+          <button type="submit" class="btn btn-danger disabled">upgrade Admin Completed</button><br>
+        <% else %>
+          <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Upgrade Admin?')">Upgrade Admin</button><br>
+        <% end %>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <h2>Turn Actions</h2>
+      <%= link_to "Click here a create a new turn action", new_turn_path, class: "btn btn-sm btn-primary" %>
+      <div id="turns">
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <th scope="col">Week</th>
+              <th scope="col">Club</th>
+              <th scope="col">var1</th>
+              <th scope="col">var2</th>
+              <th scope="col">var3</th>
+              <th scope="col">Action</th>
+              <th scope="col">Date Processed</th>
+            </tr>
+            <tr scope="row">
+              <% @turns.each do |turn| %>
+                <% if turn.week.to_s == params[:week] %>
+                <%= render turn %>
+                <% end %>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

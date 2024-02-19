@@ -112,7 +112,7 @@ class Player < ApplicationRecord
 
     players.sort_by! { |player| -player[:total_skill] }
 
-    top_skill_players = players.take(20)
+    top_skill_players = players.take(15)
 
     return top_skill_players
   end
@@ -135,7 +135,7 @@ class Player < ApplicationRecord
 
     players.sort_by! { |player| -player[:average_match_performance] }
 
-    top_perf_players = players.take(20)
+    top_perf_players = players.take(15)
 
     return top_perf_players
   end
@@ -158,7 +158,7 @@ class Player < ApplicationRecord
 
     players.sort_by! { |player| -player[:goals] }
 
-    top_goals_players = players.take(20)
+    top_goals_players = players.take(15)
 
     return top_goals_players
   end
@@ -181,7 +181,7 @@ class Player < ApplicationRecord
 
     players.sort_by! { |record| -record[:assists] }
 
-    top_assists_players = players.take(20)
+    top_assists_players = players.take(15)
 
     return top_assists_players
   end

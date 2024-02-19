@@ -20,31 +20,24 @@
   <h1>For The Win</h1>
   <h2>A classic PBEM for the modern game</h2>
   </div>
+  <%= render 'layouts/nav' %>
   <div id="content">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-2 bg-success">
-          <%= render 'layouts/nav' %>
+      <% if notice.present? %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= notice %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+      <% end %>
 
-        <div class="col-8">
-          <% if notice.present? %>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-              <%= notice %>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          <% end %>
-
-          <% if alert.present? %>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <%= alert %>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          <% end %>
-
-          <%= yield %> 
+      <% if alert.present? %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= alert %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-      </div>
+      <% end %>
+
+      <%= yield %> 
     </div>
   </div>
 
