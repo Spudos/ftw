@@ -14,9 +14,9 @@ class TurnsController < ApplicationController
     @friendlies_scheduled = Fixture.where(week_number: params[:week], comp: 'Friendly').count
     @games_completed = Match.where(week_number: params[:week]).count
     @games_scheduled = Fixture.where(week_number: params[:week]).count
-    @turnsheets_processed = Turnsheet.where(week: params[:week], processed: true).count
+    @turnsheets_processed = Turnsheet.where(week: params[:week]).where.not(processed: nil).count
     @turnsheets_submitted = Turnsheet.where(week: params[:week]).count
-    @turn_actions_processed = Turn.where(week: params[:week], date_completed: true).count
+    @turn_actions_processed = Turn.where(week: params[:week]).where.not(date_completed: nil).count
     @turn_actions_submitted = Turn.where(week: params[:week]).count
   end
 

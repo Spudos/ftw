@@ -3,8 +3,9 @@
 <h6>Select the week to be processed</h6>
 <form action="/turns" method="get">
   <select name="week" id="week">
+    <option value="">No week selected</option>
     <% (1..38).each do |week| %>
-      <option value="<%= week %>">Week <%= week %></option>
+      <option value="<%= week %>" <%= 'selected' if params[:week] == week.to_s %>>Week <%= week %></option>
     <% end %>
   </select>
   <button type="submit" class="btn btn-primary">Submit</button>
