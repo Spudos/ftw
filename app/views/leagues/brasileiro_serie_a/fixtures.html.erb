@@ -1,0 +1,15 @@
+<h3 class="text-center">Brasileiro Serie A Fixture List</h3>
+
+<form action="" method="get">
+  <label for="week_number">Select Week Number:</label>
+  <select name="week_number" id="week_number">
+    <% @weeks.each do |week_number| %>
+      <option value="<%= week_number %>"><%= week_number %></option>
+    <% end %>
+  </select>
+  <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+</form>
+
+<h3>Week <%= params[:week_number]%></h3>
+
+<%= render 'leagues/fixture_list' %>

@@ -50,6 +50,141 @@ class LeaguesController < ApplicationController
     render 'leagues/ligue_1/fixtures'
   end
 
+  def ligue_2_league_table
+    initialize_table('Ligue 2')
+    render 'leagues/ligue_2/table'
+  end
+
+  def ligue_2_statistics
+    initialize_statistics('Ligue 2')
+    render 'leagues/ligue_2/statistics'
+  end
+
+  def ligue_2_fixtures
+    initialize_fixtures('Ligue 2')
+    render 'leagues/ligue_2/fixtures'
+  end
+
+  def bundesliga_1_league_table
+    initialize_table('Bundesliga 1')
+    render 'leagues/bundesliga_1/table'
+  end
+
+  def bundesliga_1_statistics
+    initialize_statistics('Bundesliga 1')
+    render 'leagues/bundesliga_1/statistics'
+  end
+
+  def bundesliga_1_fixtures
+    initialize_fixtures('Bundesliga 1')
+    render 'leagues/bundesliga_1/fixtures'
+  end
+
+  def bundesliga_2_league_table
+    initialize_table('Bundesliga 2')
+    render 'leagues/bundesliga_2/table'
+  end
+
+  def bundesliga_2_statistics
+    initialize_statistics('Bundesliga 2')
+    render 'leagues/bundesliga_2/statistics'
+  end
+
+  def bundesliga_2_fixtures
+    initialize_fixtures('Bundesliga 2')
+    render 'leagues/bundesliga_2/fixtures'
+  end
+
+  def brasileiro_serie_a_league_table
+    initialize_table('Brasileiro Serie A')
+    render 'leagues/brasileiro_serie_a/table'
+  end
+
+  def brasileiro_serie_a_statistics
+    initialize_statistics('Brasileiro Serie A')
+    render 'leagues/brasileiro_serie_a/statistics'
+  end
+
+  def brasileiro_serie_a_fixtures
+    initialize_fixtures('Brasileiro Serie A')
+    render 'leagues/brasileiro_serie_a/fixtures'
+  end
+
+  def brasileiro_serie_b_league_table
+    initialize_table('Brasileiro Serie B')
+    render 'leagues/brasileiro_serie_b/table'
+  end
+
+  def brasileiro_serie_b_statistics
+    initialize_statistics('Brasileiro Serie B')
+    render 'leagues/brasileiro_serie_b/statistics'
+  end
+
+  def brasileiro_serie_b_fixtures
+    initialize_fixtures('Brasileiro Serie B')
+    render 'leagues/brasileiro_serie_b/fixtures'
+  end
+
+  def serie_a_league_table
+    initialize_table('Serie A')
+    render 'leagues/serie_a/table'
+  end
+
+  def serie_a_statistics
+    initialize_statistics('Serie A')
+    render 'leagues/serie_a/statistics'
+  end
+
+  def serie_a_fixtures
+    initialize_fixtures('Serie A')
+    render 'leagues/serie_a/fixtures'
+  end
+
+  def serie_b_league_table
+    initialize_table('Serie B')
+    render 'leagues/serie_b/table'
+  end
+
+  def serie_b_statistics
+    initialize_statistics('Serie B')
+    render 'leagues/serie_b/statistics'
+  end
+
+  def serie_b_fixtures
+    initialize_fixtures('Serie B')
+    render 'leagues/serie_b/fixtures'
+  end
+
+  def la_liga_league_table
+    initialize_table('La Liga')
+    render 'leagues/la_liga/table'
+  end
+
+  def la_liga_statistics
+    initialize_statistics('La Liga')
+    render 'leagues/la_liga/statistics'
+  end
+
+  def la_liga_fixtures
+    initialize_fixtures('La Liga')
+    render 'leagues/la_liga/fixtures'
+  end
+
+  def segunda_division_league_table
+    initialize_table('Segunda Division')
+    render 'leagues/segunda_division/table'
+  end
+
+  def segunda_division_statistics
+    initialize_statistics('Segunda Division')
+    render 'leagues/segunda_division/statistics'
+  end
+
+  def segunda_division_fixtures
+    initialize_fixtures('Segunda Division')
+    render 'leagues/segunda_division/fixtures'
+  end
+
   def league_cup
     initialize_fixtures('Cup')
     render 'leagues/cup/league'
