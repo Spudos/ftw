@@ -50,17 +50,6 @@ class Player < ApplicationRecord
     @player_data ||= Player.includes(:performances, :goals, :assists, :club).load
   end
 
-  # def self.precalculate_average_match_performance
-  #   @precalculate_average_match_performance ||=
-  #     Performance.select('player_id, AVG(match_performance) AS total').group(:player_id)
-  # end
-
-  # def self.average_match_performance_for_player(player_id)
-  #   return 0 if precalculate_average_match_performance.select { |row| row.player_id == player_id }.first.nil?
-
-  #   precalculate_average_match_performance.select { |row| row.player_id == player_id }.first[:total]
-  # end
-
   def self.compile_player_view
     player_data.map do |player|
       {
