@@ -186,8 +186,13 @@ class LeaguesController < ApplicationController
   end
 
   def league_cup
-    initialize_fixtures('Cup')
-    render 'leagues/cup/league'
+    initialize_fixtures('League Cup')
+    render 'leagues/league_cup/league'
+  end
+
+  def wcc
+    initialize_fixtures('WCC')
+    render 'leagues/wcc/league'
   end
 
   private
@@ -210,6 +215,7 @@ class LeaguesController < ApplicationController
 
   def initialize_fixtures(league)
     @weeks = Fixture.distinct.pluck(:week_number).uniq
+    @weeks.sort!
     @fixtures = Fixture.where(comp: league, week_number: params[:week_number])
   end
 end

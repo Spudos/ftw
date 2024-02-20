@@ -34,8 +34,11 @@ class TurnsController < ApplicationController
     @brasileiro_serie_b_completed = Match.where(week_number: params[:week], competition: 'Brasileiro Serie B').count
     @brasileiro_serie_b_scheduled = Fixture.where(week_number: params[:week], comp: 'Brasileiro Serie B').count
 
-    @cup_completed = Match.where(week_number: params[:week], competition: 'Cup').count
-    @cup_scheduled = Fixture.where(week_number: params[:week], comp: 'Cup').count
+    @league_cup_completed = Match.where(week_number: params[:week], competition: 'League Cup').count
+    @league_cup_scheduled = Fixture.where(week_number: params[:week], comp: 'League Cup').count
+
+    @wcc_completed = Match.where(week_number: params[:week], competition: 'WCC').count
+    @wcc_scheduled = Fixture.where(week_number: params[:week], comp: 'WCC').count
 
     @friendlies_completed = Match.where(week_number: params[:week], competition: 'Friendly').count
     @friendlies_scheduled = Fixture.where(week_number: params[:week], comp: 'Friendly').count

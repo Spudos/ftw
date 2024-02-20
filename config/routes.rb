@@ -70,7 +70,8 @@ Rails.application.routes.draw do
   get '/leagues/brasileiro_serie_b/statistics', to: 'leagues#brasileiro_serie_b_statistics'
   get '/leagues/brasileiro_serie_b/fixtures', to: 'leagues#brasileiro_serie_b_fixtures'
 
-  get '/leagues/cup/league', to: 'leagues#league_cup'
+  get '/leagues/league_cup/league', to: 'leagues#league_cup'
+  get '/leagues/wcc/league', to: 'leagues#wcc'
 
   post '/turnsheets/process_turnsheet', to: 'turnsheets#process_turnsheet'
 

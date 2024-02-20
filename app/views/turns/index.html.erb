@@ -132,11 +132,18 @@
           <button type="submit" name="competition" value="Brasileiro Serie B" class="btn btn-success" onclick="return confirm('Are you sure you want to run Brasileiro Serie B games?')">Serie B <%= @brasileiro_serie_b_completed %>/<%= @brasileiro_serie_b_scheduled %></button><br>
         <% end %>
 
-        <h6>Cup</h6>
-        <% if @cup_completed == @cup_scheduled %>
-          <button type="submit" name="competition" value="Cup" class="btn btn-danger disabled">Cup <%= @cup_completed %>/<%= @cup_scheduled %></button><br>
+        <h6>League Cup</h6>
+        <% if @league_cup_completed == @league_cup_scheduled %>
+          <button type="submit" name="competition" value="League Cup" class="btn btn-danger disabled">Cup <%= @league_cup_completed %>/<%= @league_cup_scheduled %></button><br>
         <% else %>
-          <button type="submit" name="competition" value="Cup" class="btn btn-success" onclick="return confirm('Are you sure you want to run Cup games?')">Cup <%= @cup_completed %>/<%= @cup_scheduled %></button><br>
+          <button type="submit" name="competition" value="League Cup" class="btn btn-success" onclick="return confirm('Are you sure you want to run League Cup games?')">Cup <%= @league_cup_completed %>/<%= @league_cup_scheduled %></button><br>
+        <% end %>
+
+        <h6>World Club Cup</h6>
+        <% if @wcc_completed == @wcc_scheduled %>
+          <button type="submit" name="competition" value="WCC" class="btn btn-danger disabled">Cup <%= @wcc_completed %>/<%= @wcc_scheduled %></button><br>
+        <% else %>
+          <button type="submit" name="competition" value="WCC" class="btn btn-success" onclick="return confirm('Are you sure you want to run WCC games?')">Cup <%= @wcc_completed %>/<%= @wcc_scheduled %></button><br>
         <% end %>
         
         <h6>Other</h6>

@@ -1,7 +1,7 @@
 <form action="/fixtures" method="get">
   <label for="week_number">Select Week Number:</label>
   <select name="week_number" id="week_number">
-    <% @fixtures.map(&:week_number).uniq.each do |week_number| %>
+    <% @fixtures.map(&:week_number).uniq.sort.each do |week_number| %>
       <option value="<%= week_number %>">Week <%= week_number %></option>
     <% end %>
   </select>
