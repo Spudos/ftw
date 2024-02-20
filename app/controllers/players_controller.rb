@@ -39,10 +39,6 @@ class PlayersController < ApplicationController
     end
   end
 
-  def unmanaged_player_view
-    @unmanaged = Player.where(player.club.name = 'unmanaged').compile_player_view
-  end
-
   def new
     @player = Player.new
   end
