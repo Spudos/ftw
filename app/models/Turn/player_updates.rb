@@ -31,23 +31,25 @@ class Turn::PlayerUpdates
 
   def contract_decrease
     player_data.each do |player|
-      player.contract -= 1
-      player.save
+      if player.club.managed?
+        player.contract -= 1
+        player.save
 
-      if player.contract == 3 || player.contract < 1
-        contract_action(player)
+        if player.contract == 3 || player.contract < 1
+          contract_action(player)
+        end
       end
     end
   end
 
   def contract_action(player)
     if player.contract < 1
-      Message.create(week:, club_id: player.club_id, var1: "#{player.name}'s contract has expired and he has been released to the circuit.")
-      player.contract = 60
+      Message.create(week:, club_id: player.club_id, var1: "#{player.name} has been released at the end of his contract with the club.")
+      player.contract = 51
       player.club_id = 242
       player.save
     else
-      Message.create(week:, club_id: player.club_id, var1: "#{player.name} is down to the last 3 weeks of his contract.  When it reaches zero he will be released by the club.")
+      Message.create(week:, club_id: player.club_id, var1: "#{player.name} has only 3 weeks of his contract remaining.  When it reaches zero he will be released by the club.")
     end
   end
 

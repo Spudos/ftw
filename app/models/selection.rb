@@ -7,8 +7,8 @@ class Selection < ApplicationRecord
         else
           run_auto_selection(club)
         end
-        Message.create(action_id: "#{params[:week]}AS", week: params[:week], club_id: '999', var1: "week #{params[:week]} Auto Select processed")
       end
+      Message.create(action_id: "#{params[:week]}AS", week: params[:week], club_id: '999', var1: "week #{params[:week]} Auto Select processed")
     else
       if params[:week].nil?
         raise 'Please select a week before trying to process Auto Selections.'
