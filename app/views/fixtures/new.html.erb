@@ -1,43 +1,70 @@
-<h1>New Fixture</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h3>Create a individual Fixture</h3>
 
-<%= form_with(model: @fixtures, url: fixtures_path) do |form| %>
-  <% if @fixtures.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(club.errors.count, "error") %> prohibited this fixture from being saved:</h2>
+      <%= form_with(model: @fixtures, url: fixtures_path) do |form| %>
+        <% if @fixtures.errors.any? %>
+          <div style="color: red">
+            <h2><%= pluralize(club.errors.count, "error") %> prohibited this fixture from being saved:</h2>
 
-      <ul>
-        <% @fixtures.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+            <ul>
+              <% @fixtures.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div>
+          <%= form.label :week_number, style: "display: block" %>
+          <%= form.text_field :week_number %>
+        </div>
+
+        <div>
+          <%= form.label :home, style: "display: block" %>
+          <%= form.text_field :home %>
+        </div>
+
+        <div>
+          <%= form.label :away, style: "display: block" %>
+          <%= form.text_field :away %>
+        </div>
+
+        <div>
+          <%= form.label :comp, style: "display: block" %>
+          <%= form.collection_select :comp, ['Premier League', 'Championship', 'Cup', 'Friendly'], :to_s, :to_s, { include_blank: true }, { class: 'form-control' } %>
+        </div>
+
+        <div>
+          <%= form.submit 'Save', class: "btn btn-sm btn-danger" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :week_number, style: "display: block" %>
-    <%= form.text_field :week_number %>
   </div>
-
-  <div>
-    <%= form.label :home, style: "display: block" %>
-    <%= form.text_field :home %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h3>Import a Fixture CSV</h3>
+      <br>
+      <p>The required fields are:</p>
+      <ul>
+        <li>id - required in import file but ignored</li>
+        <li>week_number</li>
+        <li>home - club id number</li>
+        <li>away - club id number</li>
+        <li>comp - the competition name eg Premier League</li>
+      <ul>
+      <br>
+      <%= form_tag import_fixtures_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Import", class: "btn btn-sm btn-danger" %>
+      <% end %>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :away, style: "display: block" %>
-    <%= form.text_field :away %>
-  </div>
-
-  <div>
-    <%= form.label :comp, style: "display: block" %>
-    <%= form.collection_select :comp, ['Premier League', 'Championship', 'Cup', 'Friendly'], :to_s, :to_s, { include_blank: true }, { class: 'form-control' } %>
-  </div>
-
-  <div>
-    <%= form.submit 'Save', class: "btn btn-sm btn-danger" %>
-  </div>
-<% end %>
+</div>
 
 <div>
-  <%= link_to "Back to fixtures", fixtures_path %>
+  <%= link_to "Back to fixtures", fixtures_path, class: "btn btn-sm btn-primary" %>
 </div>

@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     post 'edit', on: :member
   end
 
+  resources :fixtures do
+    collection { post :import }
+  end
+
   get '/clubs/manager/club_view', to: 'clubs#club_view'
   get '/clubs/manager/first_team', to: 'clubs#first_team'
   get '/clubs/manager/players_contract', to: 'clubs#players_contract'

@@ -1,4 +1,6 @@
 class FixturesController < ApplicationController
+  require 'csv'
+
   def index
     @fixtures = Fixture.all
   end
@@ -53,10 +55,22 @@ class FixturesController < ApplicationController
       format.json { head :no_content }
     end
   end
-end
 
-private
+  def import
+    begin
+      CSV.foreach(params[:file].path, headers: true) do |row|
+        fixture = Fixture.find_or_initialize_by(week_number: row["week_number"], home: row["home"], away: row["away"], comp: row["comp"])
+        fixture.save unless fixture.persisted?
+      end
+      redirect_to request.referrer, notice: "CSV imported successfully!"
+    rescue StandardError => e
+      redirect_to request.referrer, alert: "Error importing CSV: #{e.message}"
+    end
+  end
 
-def fixtures_params
-  params.require(:fixture).permit(:id, :week_number, :home, :away, :comp)
+  private
+
+  def fixtures_params
+    params.require(:fixture).permit(:id, :week_number, :home, :away, :comp)
+  end
 end
