@@ -323,7 +323,7 @@ class Turn::TurnActions
 
         player = Player.find_by(id: value[:var2].to_i)
 
-        if rand(0..100) < (100 - (player.loyalty - (value[:var3].to_i / 100000)))
+        if rand(0..100) < (80 - (player.loyalty - (value[:var3].to_i / 100000)))
           player.contract = 24
           player.save
 
