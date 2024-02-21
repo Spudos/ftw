@@ -100,4 +100,6 @@ Rails.application.routes.draw do
   get '/players/total_assists', to: 'players#total_assists'
   post '/players/sort_players', to: 'players#sort_players', as: 'sort_players'
   get '/players/player_view', to: 'players#player_view'
+  get '/players/unmanaged_players', to: 'players#unmanaged_players'
+  get '/players/listed_players', to: 'players#listed_players'
 end

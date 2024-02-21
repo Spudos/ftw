@@ -39,6 +39,14 @@ class PlayersController < ApplicationController
     end
   end
 
+  def unmanaged_players
+    @unmanaged = Player.where(club_id: 242)
+  end
+
+  def listed_players
+    @listed = Player.where(listed: true)
+  end
+
   def new
     @player = Player.new
   end
