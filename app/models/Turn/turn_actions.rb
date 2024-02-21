@@ -144,11 +144,11 @@ class Turn::TurnActions
 
     hash.each do |key, value|
       player = Player.find_by(id: value[:var2])
-      if player.club_id == value[:club_id].to_i && player.listed == true
+      if player.club_id == value[:club_id].to_i && player.listed != false
         player.listed = false
         player.loyalty = 5
         player.save
-        Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id], var1: "Your player, #{player.name}, was removed from the transfer list.  he is unhappy with the way he has been treated by you")
+        Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id], var1: "Your player, #{player.name}, was removed from the transfer list.  However, he is unhappy with the way he has been treated by you")
       elsif player.listed == false
         Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id], var1: "Player #{player.name} could not be unlisted as he is not listed at present")
       else
