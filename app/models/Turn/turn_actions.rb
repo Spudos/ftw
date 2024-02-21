@@ -123,15 +123,17 @@ class Turn::TurnActions
           transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'player_managed')
 
         elsif bid_decision(value, player)
-          if rand(100) > player.loyalty
+          if rand(0..100) > player.loyalty
             player.club = Club.find_by(id: value[:club_id].to_i)
-            player[:contract] = 37
+            player[:contract] = 24
             player.save
 
             Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "Your bid for #{player.name} succeeded!  The player has joined your club for #{value[:var3]}")
             bank_adjustment(value[:action_id], value[:week], value[:club_id].to_i, value[:var1], player.name, value[:var3])
             transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'transfer_completed')
 
+            player_original_club.bank_bal += value[:var3].to_i
+            player_original_club.save
           else
             Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player choosing not to join your club")
             transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'player_refusal')
@@ -183,15 +185,15 @@ class Turn::TurnActions
           proceeds = (player.value * -0.75).to_i
           proceeds_positive = (proceeds * -1).to_i
 
-          player[:club_id] = 42
+          player[:club_id] = 242
           player.save
 
           Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "#{player.name} was sold to the free agent circuit for #{proceeds_positive}")
           bank_adjustment(value[:action_id], value[:week], value[:club_id].to_i, value[:var1], player.name, proceeds)
-          transfer_save(value[:week], 42, club.id, value[:var2], proceeds, 'sale_completed')
+          transfer_save(value[:week], 242, club.id, value[:var2], proceeds, 'sale_completed')
         else
           Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "#{player.name} could not be sold to the free agent circuit due to not being at your club")
-          transfer_save(value[:week], 42, player.club_id, value[:var2], proceeds, 'sale_failed')
+          transfer_save(value[:week], 242, player.club_id, value[:var2], proceeds, 'sale_failed')
         end
       end
 
@@ -324,7 +326,7 @@ class Turn::TurnActions
 
         player = Player.find_by(id: value[:var2].to_i)
 
-        if rand(0..100) < (80 - (player.loyalty - (value[:var3].to_i / 100000)))
+        if rand(0..100) > (80 - (player.loyalty - (value[:var3].to_i / 100000)))
           player.contract = 24
           player.save
 
