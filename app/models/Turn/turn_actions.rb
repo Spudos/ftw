@@ -8,6 +8,8 @@ class Turn::TurnActions
   def call
     player_upgrade
     fitness_upgrade
+    list_player
+    unlist_player
     unmanaged_bid
     circuit_sale
     stadium_upgrade
@@ -93,6 +95,67 @@ class Turn::TurnActions
       player_data.update(fitness: final_fitness)
 
       Message.create(action_id:, week:, club_id:, var1: "Fitness training for #{player} was completed! His new value is #{final_fitness}")
+    end
+  end
+
+  def list_player
+    hash = {}
+
+    Turn.where('var1 LIKE ?', 'list').where(week:).each do |turn|
+      hash[turn.id] = {
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
+        week: turn.week,
+        club_id: turn.club_id,
+        var1: turn.var1, # list
+        var2: turn.var2, # player_id
+        var3: turn.var3,
+        date_completed: turn.date_completed
+      }
+    end
+
+    hash.each do |key, value|
+      player = Player.find_by(id: value[:var2])
+      if player.club_id == value[:club_id].to_i
+        player.listed = true
+        player.save
+        Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id], var1: "Your player, #{player.name}, was put on the transfer list")
+
+        turn = Turn.find(key)
+        turn.update(date_completed: DateTime.now)
+      else
+        Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id], var1: "Player #{player.name} could not be listed due to not being at your club")
+      end
+    end
+  end
+
+  def unlist_player
+    hash = {}
+    Turn.where('var1 LIKE ?', 'unlist').where(week:).each do |turn|
+      hash[turn.id] = {
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
+        week: turn.week,
+        club_id: turn.club_id,
+        var1: turn.var1, # unlist
+        var2: turn.var2, # player_id
+        var3: turn.var3,
+        date_completed: turn.date_completed
+      }
+    end
+
+    hash.each do |key, value|
+      player = Player.find_by(id: value[:var2])
+      if player.club_id == value[:club_id].to_i && player.listed == true
+        player.listed = false
+        player.loyalty = 5
+        player.save
+        Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id], var1: "Your player, #{player.name}, was removed from the transfer list.  he is unhappy with the way he has been treated by you")
+      elsif player.listed == false
+        Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id], var1: "Player #{player.name} could not be unlisted as he is not listed at present")
+      else
+        Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id], var1: "Player #{player.name} could not be unlisted due to not being at your club")
+      end
+      turn = Turn.find(key)
+      turn.update(date_completed: DateTime.now)
     end
   end
 

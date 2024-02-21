@@ -166,6 +166,70 @@ RSpec.describe Turn, type: :model do
     end
   end
 
+  describe 'call: list_player' do
+    it 'player status change to listed:true' do
+      week = 1
+      create(:turn, week: 1, club_id: 1, var1: 'list', var2: 1, date_completed: nil)
+      create(:club, id: 1)
+      create(:player, id: 1, club_id: 1, listed: false)
+
+      Turn::TurnActions.new(week).call
+
+      expect(Player.first.listed).to eq(true)
+    end
+
+    it 'no listed status change if player is not owned by the club' do
+      week = 1
+      create(:turn, week: 1, club_id: 1, var1: 'list', var2: 1, date_completed: nil)
+      create(:club, id: 1)
+      create(:club, id: 2)
+      create(:player, id: 1, club_id: 2, listed: false)
+
+      Turn::TurnActions.new(week).call
+
+      expect(Player.first.listed).to eq(false)
+    end
+  end
+
+  describe 'call: unlist_player' do
+    it 'player status change to listed:false and set loyalty to 5' do
+      week = 1
+      create(:turn, week: 1, club_id: 1, var1: 'unlist', var2: 1, date_completed: nil)
+      create(:club, id: 1)
+      create(:player, id: 1, club_id: 1, loyalty: 10, listed: true)
+
+      Turn::TurnActions.new(week).call
+
+      expect(Player.first.listed).to eq(false)
+      expect(Player.first.loyalty).to eq(5)
+    end
+
+    it 'no listed status change if player is not owned by the club' do
+      week = 1
+      create(:turn, week: 1, club_id: 1, var1: 'unlist', var2: 1, date_completed: nil)
+      create(:club, id: 1)
+      create(:club, id: 2)
+      create(:player, id: 1, club_id: 2, loyalty: 10, listed: true)
+
+      Turn::TurnActions.new(week).call
+
+      expect(Player.first.listed).to eq(true)
+      expect(Player.first.loyalty).to eq(10)
+    end
+
+    it 'no listed status change if player is not listed by the club' do
+      week = 1
+      create(:turn, week: 1, club_id: 1, var1: 'unlist', var2: 1, date_completed: nil)
+      create(:club, id: 1)
+      create(:player, id: 1, club_id: 1, loyalty: 10, listed: false)
+
+      Turn::TurnActions.new(week).call
+
+      expect(Player.first.listed).to eq(false)
+      expect(Player.first.loyalty).to eq(10)
+    end
+  end
+
   describe 'call: stadium_upgrade' do
     it 'updates the turn records and performs necessary actions' do
       week = 1
