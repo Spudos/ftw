@@ -19,6 +19,8 @@ class Turn::PlayerUpdates
     player_average_perfomance
   end
 
+  private
+
   def fitness_increase
     player_data.each do |player|
       if player.fitness != 100

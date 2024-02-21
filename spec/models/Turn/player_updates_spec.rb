@@ -2,93 +2,116 @@ require 'rails_helper'
 require 'pry'
 
 RSpec.describe Turn::PlayerUpdates, type: :model do
-  describe 'fitness increase' do
+  describe 'player_update' do
     let(:week) { 1 }
 
-    it 'does not effect fitness' do
-      create(:club, id: 1)
-      create(:player, club_id: 1, fitness: 100)
+    it 'fitness increases by 3, contract decreases by 1, value and wages calculated' do
+      create(:club, id: 1, managed: true)
+      create(:player, id: 100)
+      create(:player,
+              id: 1,
+              club_id: 1,
+              fitness: 50,
+              contract: 24,
+              )
+      create(:performance, player_id: 1)
+      create(:goal, scorer_id: 1)
+      create(:goal, scorer_id: 1)
+      create(:goal, assist_id: 1)
+      create(:goal, assist_id: 1)
+      create(:goal, assist_id: 1)
 
-      adjusted_player = Turn::PlayerUpdates.new(week).fitness_increase
-
-      expect(adjusted_player[0][:fitness]).to eq(100)
-    end
-
-    it 'sets fitness to 100' do
-      create(:club, id: 1)
-      create(:player, club_id: 1, fitness: 110)
-
-      adjusted_player = Turn::PlayerUpdates.new(week).fitness_increase
-
-      expect(adjusted_player[0][:fitness]).to eq(100)
-    end
-
-    it 'increases the fitness by 3' do
-      create(:club, id: 1)
-      create(:player, club_id: 1, fitness: 0)
       allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
 
-      adjusted_player = Turn::PlayerUpdates.new(week).fitness_increase
+      Turn::PlayerUpdates.new(week).call
 
-      expect(adjusted_player[0][:fitness]).to eq(3)
-    end
-  end
-
-  describe 'contract_decrease' do
-  let(:week) { 1 }
-
-    it 'reduces the contract by 1' do
-      create(:club, id: 1)
-      create(:player, club_id: 1, contract: 20)
-      adjusted_player = Turn::PlayerUpdates.new(week).contract_decrease
-
-      expect(adjusted_player[0][:contract]).to eq(19)
+      expect(Player.first.fitness).to eq(53)
+      expect(Player.first.contract).to eq(23)
+      expect(Player.first.value).to eq(42929250)
+      expect(Player.first.wages).to eq(172125)
+      expect(Player.first.total_skill).to eq(85)
+      expect(Player.first.games_played).to eq(1)
+      expect(Player.first.total_goals).to eq(2)
+      expect(Player.first.total_assists).to eq(3)
+      expect(Player.first.average_performance).to eq(50)
     end
 
-    it 'does not reduce the contract past 0' do
-      create(:club, id: 1)
-      create(:player, club_id: 1, contract: 0)
+    it 'no contract decrease as it is an unmagaed club' do
+      create(:club, id: 1, managed: false)
+      create(:player,
+              club_id: 1,
+              fitness: 50,
+              contract: 24,
+              )
 
-      adjusted_player = Turn::PlayerUpdates.new(week).contract_decrease
+      allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
 
-      expect(adjusted_player[0][:contract]).to eq(0)
+      Turn::PlayerUpdates.new(week).call
+
+      expect(Player.first.contract).to eq(24)
     end
 
-    it 'sets the contract to 0 as it was negative' do
-      create(:club, id: 1)
-      create(:player, club_id: 1, contract: -20)
+    it 'fitness increases to 100' do
+      create(:club, id: 1, managed: true)
+      create(:player,
+              club_id: 1,
+              fitness: 99,
+              contract: 24,
+              )
 
-      adjusted_player = Turn::PlayerUpdates.new(week).contract_decrease
+      allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
 
-      expect(adjusted_player[0][:contract]).to eq(0)
+      Turn::PlayerUpdates.new(week).call
+
+      expect(Player.first.fitness).to eq(100)
     end
-  end
 
-  describe 'player_value' do
-    it 'calculates the correct player value' do
-      create(:club, id: 1)
-      create(:player, club_id: 1)
-      week = 1
+    it 'fitness corrected to 100' do
+      create(:club, id: 1, managed: true)
+      create(:player,
+              club_id: 1,
+              fitness: 200,
+              contract: 24,
+              )
 
-      Turn::PlayerUpdates.new(week).player_value
+      allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
 
-      player = Player.first
+      Turn::PlayerUpdates.new(week).call
 
-      expect(player.value).to eq(42929250)
+      expect(Player.first.fitness).to eq(100)
     end
-  end
 
-  describe 'player_wage' do
-    it 'calculates the correct player wage' do
-      create(:club, id: 1)
-      create(:player, club_id: 1)
-      week = 1
+    it 'contract reaches 3 so warning generated' do
+      create(:club, id: 1, managed: true)
+      create(:player,
+              club_id: 1,
+              fitness: 100,
+              contract: 4,
+              )
 
-      Turn::PlayerUpdates.new(week).player_wages
+      allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
 
-      player = Player.first
+      Turn::PlayerUpdates.new(week).call
 
-      expect(player.wages).to eq(172125)
+      expect(Player.first.contract).to eq(3)
+      expect(Player.first.club_id).to eq(1)
+      expect(Message.first.club_id).to eq('1')
+    end
+
+    it 'contract reaches 0 so player moved to club 242' do
+      create(:club, id: 1, managed: true)
+      create(:player,
+            club_id: 1,
+            fitness: 100,
+            contract: 1,
+            )
+
+      allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
+
+      Turn::PlayerUpdates.new(week).call
+
+      expect(Player.first.contract).to eq(51)
+      expect(Player.first.club_id).to eq(242)
     end
   end
 end
