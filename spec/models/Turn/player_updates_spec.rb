@@ -100,6 +100,7 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
 
     it 'contract reaches 0 so player moved to club 242' do
       create(:club, id: 1, managed: true)
+      create(:club, id: 242)
       create(:player,
             club_id: 1,
             fitness: 100,
