@@ -331,6 +331,77 @@
             </td>
           </tr>
         </table>
+        <h4 style="text-align: center">Player Actions</h4>
+        <table class="table table-hover table-bordered">
+          <tr scope="row">
+            <td>Type</td>
+            <td>
+              <%= form.label :player_action_1, style: "display: none" %>
+              <%= form.select :player_action_1, options_for_select('Contract' => 'contract'), prompt: "Select a player action?" %>
+            </td>
+            <td>Player ID</td>
+            <td>
+              <%= form.label :player_action_1_player_id, style: "display: none" %>
+              <%= form.text_field :player_action_1_player_id %>
+            </td>
+            <td>Amount</td>
+            <td>
+              <%= form.label :player_action_1_var, style: "display: none" %>
+              <%= form.text_field :player_action_1_var %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td>Type</td>
+            <td>
+              <%= form.label :player_action_2, style: "display: none" %>
+              <%= form.select :player_action_2, options_for_select('Contract' => 'contract'), prompt: "Select a player action?" %>
+            </td>
+            <td>Player ID</td>
+            <td>
+              <%= form.label :player_action_2_player_id, style: "display: none" %>
+              <%= form.text_field :player_action_2_player_id %>
+            </td>
+            <td>Amount</td>
+            <td>
+              <%= form.label :player_action_2_var, style: "display: none" %>
+              <%= form.text_field :player_action_2_var %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td>Type</td>
+            <td>
+              <%= form.label :player_action_3, style: "display: none" %>
+              <%= form.select :player_action_3, options_for_select('Contract' => 'contract'), prompt: "Select a player action?" %>
+            </td>
+            <td>Player ID</td>
+            <td>
+              <%= form.label :player_action_3_player_id, style: "display: none" %>
+              <%= form.text_field :player_action_3_player_id %>
+            </td>
+            <td>Amount</td>
+            <td>
+              <%= form.label :player_action_3_var, style: "display: none" %>
+              <%= form.text_field :player_action_3_var %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td>Type</td>
+            <td>
+              <%= form.label :player_action_4, style: "display: none" %>
+              <%= form.select :player_action_4, options_for_select('Contract' => 'contract'), prompt: "Select a player action?" %>
+            </td>
+            <td>Player ID</td>
+            <td>
+              <%= form.label :player_action_4_player_id, style: "display: none" %>
+              <%= form.text_field :player_action_4_player_id %>
+            </td>
+            <td>Amount</td>
+            <td>
+              <%= form.label :player_action_4_var, style: "display: none" %>
+              <%= form.text_field :player_action_4_var %>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   <div>

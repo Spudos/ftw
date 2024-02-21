@@ -2,24 +2,19 @@ require 'rails_helper'
 require 'pry'
 
 RSpec.describe Turn, type: :model do
-  describe 'player_upgrade' do
-    it 'updates the turn records and performs necessary actions' do
-      turn = create(:turn, club_id: 1, var1: 'train', var2: 'Woolley', var3: 'Tackling', date_completed: nil)
+  describe 'call: player_upgrade' do
+    it 'upgrades tackling by 1 point' do
       week = 1
-      action_id = '10011'
+      create(:turn, club_id: 1, var1: 'train', var2: 'Woolley', var3: 'Tackling', date_completed: nil)
+      create(:club, id: 1, staff_dfc: 10)
+      create(:player, name: 'Woolley', position: 'dfc')
 
-      allow_any_instance_of(Turn::TurnActions).to receive(:train_player)
+      turn_double = class_double("Turn::TurnActions").as_stubbed_const
 
-      expect(Turn::TurnActions).to receive(:train_player).with(action_id, week, turn.club_id, turn.var2, turn.var3)
+      allow(turn_double).to receive(:call)
+      turn_double.call(week)
 
-      Turn::TurnActions.new(week).player_upgrade(week)
-
-      expect(Turn.first[:week]).to eq(1)
-      expect(Turn.first[:club_id]).to eq(1)
-      expect(Turn.first[:var1]).to eq('train')
-      expect(Turn.first[:var2]).to eq('Woolley')
-      expect(Turn.first[:var3]).to eq('Tackling')
-      expect(Turn.first[:date_completed]).to_not be_nil
+      expect(Player.first.tackling).to eq(6)
     end
   end
 

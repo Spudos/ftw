@@ -13,7 +13,10 @@ class Turn::TurnActions
     stadium_upgrade
     property_upgrade
     coach_upgrade
+    contract_renewal
   end
+
+  private
 
   def player_upgrade
     hash = {}
@@ -300,6 +303,41 @@ class Turn::TurnActions
     end
   end
 
+  def contract_renewal
+    hash = {}
+
+    Turn.where('var1 LIKE ?', 'contract%').where(week:).each do |turn|
+      hash[turn.id] = {
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
+        week: turn.week,
+        club_id: turn.club_id,
+        var1: turn.var1, #contract
+        var2: turn.var2, #player_id
+        var3: turn.var3, #amount
+        date_completed: turn.date_completed
+      }
+    end
+
+    hash.each do |key, value|
+      if Message.find_by(action_id: value[:action_id]).nil?
+
+        player = Player.find_by(id: value[:var2].to_i)
+
+        if rand(0..100) < (100 - (player.loyalty - (value[:var3].to_i / 100000)))
+          player.contract = 24
+          player.save
+
+          bank_adjustment(value[:action_id], value[:week], value[:club_id].to_i, value[:var1], player.name, value[:var3])
+        else
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id].to_i, var1: "Your contract renewal for #{player.name} failed due to the player choosing not to renew")
+        end
+
+        turn = Turn.find(key)
+        turn.update(date_completed: DateTime.now)
+      end
+    end
+  end
+
   def bank_adjustment(action_id, week, club_id, reason, dept, amount)
     club_full = Club.find_by(id: club_id)
 
@@ -316,6 +354,8 @@ class Turn::TurnActions
       Message.create(action_id:, week:, club_id:, var1: "Your bank account was creditied with #{amount_positive} due a player sale (#{dept})")
     elsif reason.end_with?('condition')
       Message.create(action_id:, week:, club_id:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{reason}")
+    elsif reason == 'contract'
+      Message.create(action_id:, week:, club_id:, var1: "Your bank account was charged with #{amount} due to a 24 week contract renewal for #{dept}")
     else
       Message.create(action_id:, week:, club_id:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{club_full[reason.gsub("capacity", "name")]}")
     end

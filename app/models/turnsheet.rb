@@ -99,6 +99,22 @@ class Turnsheet < ApplicationRecord
         Turn.create({ week: turnsheet.week, club_id: turnsheet.club_id, var1: turnsheet.transfer3_type, var2: turnsheet.transfer3_player_id, var3: turnsheet.transfer3_amount})
       end
 
+      if turnsheet.player_action_1.present?
+        Turn.create({ week: turnsheet.week, club_id: turnsheet.club_id, var1: turnsheet.player_action_1, var2: turnsheet.player_action_1_player_id, var3: turnsheet.player_action_1_var})
+      end
+
+      if turnsheet.player_action_2.present?
+        Turn.create({ week: turnsheet.week, club_id: turnsheet.club_id, var1: turnsheet.player_action_2, var2: turnsheet.player_action_2_player_id, var3: turnsheet.player_action_2_var})
+      end
+
+      if turnsheet.player_action_3.present?
+        Turn.create({ week: turnsheet.week, club_id: turnsheet.club_id, var1: turnsheet.player_action_3, var2: turnsheet.player_action_3_player_id, var3: turnsheet.player_action_3_var})
+      end
+
+      if turnsheet.player_action_4.present?
+        Turn.create({ week: turnsheet.week, club_id: turnsheet.club_id, var1: turnsheet.player_action_4, var2: turnsheet.player_action_4_player_id, var3: turnsheet.player_action_4_var})
+      end
+
       begin
         turnsheet.update(processed: DateTime.now)
       rescue StandardError => e
