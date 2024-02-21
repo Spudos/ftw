@@ -16,6 +16,8 @@ class Turn::UpgradeAdmin
     end
   end
 
+  private
+
   def perform_completed_upgrades(item, week)
     club_full = Club.find_by(id: item.club_id)
     if item.var1.start_with?('staff')

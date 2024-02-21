@@ -5,8 +5,8 @@ RSpec.describe Match::PlayerPerformance, type: :model do
   describe 'build the player array' do
     it 'should return the correct information' do
       Club.create!(id: 1)
-      player1 = build(:player, club_id: 1)
-      player2 = build(:player, club_id: 1)
+      player1 = build(:player, id: 418, club_id: 1)
+      player2 = build(:player, id: 419, club_id: 1)
       match_squad = [player1, player2]
 
       players_array = Match::PlayerPerformance.new(match_squad).call
