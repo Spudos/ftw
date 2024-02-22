@@ -10,6 +10,7 @@ class Turn::TransferActions
     unlist_player
     unmanaged_bid
     circuit_sale
+    listed_bid
   end
 
   private
@@ -173,6 +174,46 @@ class Turn::TransferActions
         else
           Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "#{player.name} could not be sold to the free agent circuit due to not being at your club")
           transfer_save(value[:week], 242, player.club_id, value[:var2], proceeds, 'sale_failed')
+        end
+      end
+
+      turn = Turn.find(key)
+      turn.update(date_completed: DateTime.now)
+    end
+  end
+
+  def listed_bid
+    hash = {}
+
+    Turn.where('var1 LIKE ?', 'listed_bid').where(week:).each do |turn|
+      hash[turn.id] = {
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
+        week: turn.week,
+        club_id: turn.club_id,
+        var1: turn.var1, # listed_bid
+        var2: turn.var2, # player_id
+        var3: turn.var3, # amount bid
+        date_completed: turn.date_completed
+      }
+    end
+
+    hash.each do |key, value|
+      if Message.find_by(action_id: value[:action_id]).nil?
+
+        player = Player.find_by(id: value[:var2].to_i)
+        club = Club.find_by(id: value[:club_id].to_i)
+
+        if player.listed == true
+          if value[:var3].to_i > player.value
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "Your bid of #{player.name} for #{player.name} was logged")
+          transfer_save(value[:week], value[:club_id], player.club_id, value[:var2], value[:var3], 'bid')
+          else
+            Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "Your bid for #{player.name} failed due to not meeting an acceptable valuation for the player")
+            transfer_save(value[:week], value[:club_id], player.club_id, value[:var2], value[:var3], 'bid_failed')
+          end
+        else
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "You cannot bid for #{player.name} as he is not listed for sale")
+          transfer_save(value[:week], value[:club_id], player.club_id, value[:var2], value[:var3], 'bid_failed')
         end
       end
 

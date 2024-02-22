@@ -36,6 +36,11 @@ class Turn::BankAdjustment
       Message.create(action_id:, week:, club_id:, var1: "Your bank account was charged with #{amount} due to a 24 week contract renewal for #{dept}")
     elsif reason == 'loyalty'
       Message.create(action_id:, week:, club_id:, var1: "You paid an amount to #{dept} to thank him for his contribution to the club.  He now feels more loyal and is more likely to stick with the team in difficult times.  You bank was charged with #{amount}")
+    elsif reason == 'listed_sale'
+      amount_positive = (amount * -1).to_i
+      Message.create(action_id:, week:, club_id:, var1: "Your bank account was creditied with #{amount_positive} due a player sale (#{dept})")
+    elsif reason == 'listed_purchase'
+      Message.create(action_id:, week:, club_id:, var1: "Your bank account was charged with #{amount} due a player purchase (#{dept})")
     else
       Message.create(action_id:, week:, club_id:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{club_full[reason.gsub("capacity", "name")]}")
     end

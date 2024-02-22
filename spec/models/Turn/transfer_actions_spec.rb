@@ -159,4 +159,57 @@ RSpec.describe Turn, type: :model do
       expect(Player.first.loyalty).to eq(10)
     end
   end
+
+  describe 'call: listed_bid' do
+    it 'listed player and bid > value so log bid' do
+      week = 4
+      create(:turn, week: 4, club_id: 1, var1: 'listed_bid', var2: 1, var3: 2000000, date_completed: nil)
+      create(:club, id: 1)
+      create(:club, id: 2)
+      create(:player, id: 1, club_id: 2, listed: true, value: 1000000)
+
+      Turn::TransferActions.new(week).call
+
+      expect(Transfer.first.player_id).to eq(1)
+      expect(Transfer.first.sell_club).to eq(2)
+      expect(Transfer.first.buy_club).to eq(1)
+      expect(Transfer.first.week).to eq(4)
+      expect(Transfer.first.bid).to eq(2000000)
+      expect(Transfer.first.status).to eq('bid')
+    end
+
+    it 'not listed player so bid_failed' do
+      week = 4
+      create(:turn, week: 4, club_id: 1, var1: 'listed_bid', var2: 1, var3: 2000000, date_completed: nil)
+      create(:club, id: 1)
+      create(:club, id: 2)
+      create(:player, id: 1, club_id: 2, listed: false, value: 1000000)
+
+      Turn::TransferActions.new(week).call
+
+      expect(Transfer.first.player_id).to eq(1)
+      expect(Transfer.first.sell_club).to eq(2)
+      expect(Transfer.first.buy_club).to eq(1)
+      expect(Transfer.first.week).to eq(4)
+      expect(Transfer.first.bid).to eq(2000000)
+      expect(Transfer.first.status).to eq('bid_failed')
+    end
+
+    it 'listed player and bid < value so bid_failed' do
+      week = 4
+      create(:turn, week: 4, club_id: 1, var1: 'listed_bid', var2: 1, var3: 500000, date_completed: nil)
+      create(:club, id: 1)
+      create(:club, id: 2)
+      create(:player, id: 1, club_id: 2, listed: true, value: 1000000)
+
+      Turn::TransferActions.new(week).call
+
+      expect(Transfer.first.player_id).to eq(1)
+      expect(Transfer.first.sell_club).to eq(2)
+      expect(Transfer.first.buy_club).to eq(1)
+      expect(Transfer.first.week).to eq(4)
+      expect(Transfer.first.bid).to eq(500000)
+      expect(Transfer.first.status).to eq('bid_failed')
+    end
+  end
 end
