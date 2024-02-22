@@ -10,9 +10,13 @@ class Match::SquadCreator
 
     home_selection = Selection.where(club_id: fixture[:club_home]).size
     away_selection = Selection.where(club_id: fixture[:club_away]).size
+    home_player_ids = Selection.where(club_id: fixture[:club_home]).pluck(:player_id).compact.size
+    away_player_ids = Selection.where(club_id: fixture[:club_away]).pluck(:player_id).compact.size
 
     if home_selection != 11 || away_selection != 11
       raise StandardError, "Team #{fixture[:club_home]} have selected #{home_selection} players, Team #{fixture[:club_away]} have selected #{away_selection} players.  Both teams must have 11 players selected.  This game and all subsequent games have not been run. class:#{self.class.name} class."
+    elsif home_player_ids != 11 || away_player_ids != 11
+      raise StandardError, "Team #{fixture[:club_home]} has #{home_player_ids} player_ids, Team #{fixture[:club_away]} has #{away_player_ids} players.  Both teams must have 11 player_ids selected.  This game and all subsequent games have not been run. class:#{self.class.name} class."
     else
       [match_info, match_squad]
     end
@@ -25,15 +29,15 @@ class Match::SquadCreator
     away_tactic = Tactic.find_by(club_id: fixture[:club_away])
 
     if home_tactic.nil?
-      Tactic.create(club_id: fixture[:club_home], tactics: 1, dfc_aggression: 0, mid_aggression: 0, att_aggression: 0)
-    elsif home_tactic&.dfc_aggression.nil? || home_tactic&.mid_aggression.nil? || home_tactic&.att_aggression.nil?
-      home_tactic.update(dfc_aggression: 0, mid_aggression: 0, att_aggression: 0)
+      Tactic.create(club_id: fixture[:club_home], tactics: 1, dfc_aggression: 0, mid_aggression: 0, att_aggression: 0, press: 3)
+    elsif home_tactic&.dfc_aggression.nil? || home_tactic&.mid_aggression.nil? || home_tactic&.att_aggression.nil? || home_tactic&.press.nil?
+      home_tactic.update(dfc_aggression: 0, mid_aggression: 0, att_aggression: 0, press: 3)
     end
 
     if away_tactic.nil?
-      Tactic.create(club_id: fixture[:club_away], tactics: 1, dfc_aggression: 0, mid_aggression: 0, att_aggression: 0)
-    elsif away_tactic&.dfc_aggression.nil? || away_tactic&.mid_aggression.nil? || away_tactic&.att_aggression.nil?
-      away_tactic.update(dfc_aggression: 0, mid_aggression: 0, att_aggression: 0)
+      Tactic.create(club_id: fixture[:club_away], tactics: 1, dfc_aggression: 0, mid_aggression: 0, att_aggression: 0, press: 3)
+    elsif away_tactic&.dfc_aggression.nil? || away_tactic&.mid_aggression.nil? || away_tactic&.att_aggression.nil? || away_tactic&.press.nil?
+      away_tactic.update(dfc_aggression: 0, mid_aggression: 0, att_aggression: 0, press: 3)
     end
   end
 

@@ -1,10 +1,9 @@
 class Turn < ApplicationRecord
   def process_turn_actions(params)
-    if params[:week].present? && (Message.find_by(action_id: "#{params[:week]}TA").nil? && Message.find_by(action_id: "#{params[:week]}TRA").nil?)
+    if params[:week].present? && Message.find_by(action_id: "#{params[:week]}TTA").nil?
       Turn::TurnActions.new(params[:week]).call
-      Message.create(action_id: "#{params[:week]}TA", week: params[:week], club_id: '999', var1: "week #{params[:week]} Turn Actions processed")
       Turn::TransferActions.new(params[:week]).call
-      Message.create(action_id: "#{params[:week]}TU", week: params[:week], club_id: '999', var1: "week #{params[:week]} Turn Actions processed")
+      Message.create(action_id: "#{params[:week]}TTA", week: params[:week], club_id: '999', var1: "week #{params[:week]} Turn/Transfer Actions processed")
     else
       if params[:week].nil?
         raise 'Please select a week before trying to process Turn and Transfer Actions.'

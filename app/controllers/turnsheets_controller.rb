@@ -73,9 +73,9 @@ class TurnsheetsController < ApplicationController
   def process_turnsheet
     turnsheet = Turnsheet.new
     if turnsheet.process_turnsheet
-      redirect_to turnsheets_path, notice: 'Turnsheets processed successfully.'
+      redirect_to request.referrer, notice: 'Turnsheets processed successfully.'
     else
-      redirect_to turnsheets_path, alert: "Error processing turnsheets: #{result.join(', ')}"
+      redirect_to request.referrer, alert: "Error processing turnsheets: #{result.join(', ')}"
     end
   end
 

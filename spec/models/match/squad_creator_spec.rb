@@ -1,60 +1,150 @@
-# require 'rails_helper'
-# require 'pry'
+require 'rails_helper'
+require 'pry'
 
-# RSpec.describe Match::SquadCreator, type: :model do
-#   let(:fixture) do
-#     {
-#       id: 1,
-#       club_home: "001",
-#       club_away: "002",
-#       week_number: 1,
-#       competition: "Premier League"
-#     }
-#   end
+RSpec.describe Match::SquadCreator, type: :model do
+  describe "#call" do
+    let(:fixture) do
+      {
+        id: 1,
+        club_home: 1,
+        club_away: 2,
+        week_number: 1,
+        competition: "Premier League"
+      }
+    end
 
-#   let(:players) {
-#     FactoryBot.create_list(:player, 22)
-#   }
+    it "Selection and tactics exist so creates match info and match squad" do
+      create(:club, id: 1)
+      create(:tactic, club_id: 1, tactics: 3)
+      (1..11).each do |n|
+        create(:player, id: n, club_id: 1)
+      end
+      (1..11).each do |player_id|
+        Selection.create(player_id:, club_id: 1)
+      end
 
-#   describe "#call" do
-#     it "returns match_info and match_squad" do
-#       match_info, match_squad = Match::SquadCreator.new(fixture).call
+      create(:club, id: 2)
+      create(:tactic, club_id: 2, tactics: 3)
+      (12..22).each do |n|
+        create(:player, id: n, club_id: 2)
+      end
+      (12..22).each do |player_id|
+        Selection.create(player_id:, club_id: 2)
+      end
 
-#       expect(match_info).to be_a(Hash)
-#       expect(match_squad).to be_an(Array)
-#     end
-#   end
+      match_info, match_squad = Match::SquadCreator.new(fixture).call
 
-#   describe "#populate_teams" do
-#     it "returns an array of player_ids" do
-#       squad_creator = Match::SquadCreator.new(fixture)
+      # specific expectations as it is an important test
+      expect(match_info[:id]).to eq(1)
+      expect(match_info[:week]).to eq(1)
+      expect(match_info[:competition]).to eq('Premier League')
+      expect(match_info[:club_home]).to eq(1)
+      expect(match_info[:tactic_home]).to eq(3)
+      expect(match_info[:dfc_aggression_home]).to eq(6)
+      expect(match_info[:mid_aggression_home]).to eq(6)
+      expect(match_info[:att_aggression_home]).to eq(6)
+      expect(match_info[:home_press]).to eq(6)
+      expect(match_info[:club_away]).to eq(2)
+      expect(match_info[:tactic_away]).to eq(3)
+      expect(match_info[:dfc_aggression_away]).to eq(6)
+      expect(match_info[:mid_aggression_away]).to eq(6)
+      expect(match_info[:att_aggression_away]).to eq(6)
+      expect(match_info[:away_press]).to eq(6)
 
-#       player_ids = squad_creator.send(:populate_teams)
+      expect(Selection.all.size).to eq(22)
 
-#       expect(player_ids).to be_an(Array)
-#       expect(player_ids).to all(be_an(Integer))
-#     end
-#   end
+      expect(match_squad).to all(be_a(Player))
+      expect(match_squad.count { |player| player.club_id == 1 }).to eq(11)
+      expect(match_squad.count { |player| player.club_id == 2 }).to eq(11)
+      expect(match_squad.size).to eq(22)
+    end
 
-#   describe "#match_squad" do
-#     it "returns an array of players" do
-#       squad_creator = Match::SquadCreator.new(fixture)
+    it "Selection exists and tactics do not exist so creates match info and match squad" do
+      create(:club, id: 1)
+      (1..11).each do |n|
+        create(:player, id: n, club_id: 1)
+      end
+      (1..11).each do |player_id|
+        Selection.create(player_id:, club_id: 1)
+      end
 
-#       match_squad = squad_creator.send(:match_squad)
+      create(:club, id: 2)
+      (12..22).each do |n|
+        create(:player, id: n, club_id: 2)
+      end
+      (12..22).each do |player_id|
+        Selection.create(player_id:, club_id: 2)
+      end
 
-#       expect(match_squad).to be_an(Array)
-#       expect(match_squad).to all(be_a(Player))
-#     end
-#   end
+      match_info, match_squad = Match::SquadCreator.new(fixture).call
 
-#   describe "#match_info" do
-#     it "returns a hash of match information" do
-#       squad_creator = Match::SquadCreator.new(fixture)
+      # specific expectations as it is an important test
+      expect(match_info[:id]).to eq(1)
+      expect(match_info[:week]).to eq(1)
+      expect(match_info[:competition]).to eq('Premier League')
+      expect(match_info[:club_home]).to eq(1)
+      expect(match_info[:tactic_home]).to eq(1)
+      expect(match_info[:dfc_aggression_home]).to eq(0)
+      expect(match_info[:mid_aggression_home]).to eq(0)
+      expect(match_info[:att_aggression_home]).to eq(0)
+      expect(match_info[:home_press]).to eq(3)
+      expect(match_info[:club_away]).to eq(2)
+      expect(match_info[:tactic_away]).to eq(1)
+      expect(match_info[:dfc_aggression_away]).to eq(0)
+      expect(match_info[:mid_aggression_away]).to eq(0)
+      expect(match_info[:att_aggression_away]).to eq(0)
+      expect(match_info[:away_press]).to eq(3)
 
-#       match_info = squad_creator.send(:match_info)
+      expect(Selection.all.size).to eq(22)
 
-#       expect(match_info).to be_a(Hash)
-#       expect(match_info).to include(:id, :week, :competition, :club_home, :club_away)
-#     end
-#   end
-# end
+      expect(match_squad).to all(be_a(Player))
+      expect(match_squad.count { |player| player.club_id == 1 }).to eq(11)
+      expect(match_squad.count { |player| player.club_id == 2 }).to eq(11)
+      expect(match_squad.size).to eq(22)
+    end
+
+    it "Selection does not exist and tactics exist so raises an error" do
+      expect { Match::SquadCreator.new(fixture).call }.to raise_error(StandardError)
+    end
+
+    it "Selection less than 11 players and tactics do not exist so raises an error" do
+      create(:club, id: 1)
+      (1..5).each do |n|
+        create(:player, id: n, club_id: 1)
+      end
+      (1..5).each do |player_id|
+        Selection.create(player_id:, club_id: 1)
+      end
+
+      create(:club, id: 2)
+      (12..16).each do |n|
+        create(:player, id: n, club_id: 2)
+      end
+      (12..16).each do |player_id|
+        Selection.create(player_id:, club_id: 2)
+      end
+
+      expect { Match::SquadCreator.new(fixture).call }.to raise_error(StandardError)
+    end
+
+    it "Selection exists but it does not have player_ids recorded so raises an error" do
+      create(:club, id: 1)
+      (1..11).each do |n|
+        create(:player, id: n, club_id: 1)
+      end
+      (1..11).each do |player_id|
+        Selection.create(club_id: 1)
+      end
+
+      create(:club, id: 2)
+      (12..22).each do |n|
+        create(:player, id: n, club_id: 2)
+      end
+      (12..22).each do |player_id|
+        Selection.create(club_id: 2)
+      end
+
+      expect { Match::SquadCreator.new(fixture).call }.to raise_error(StandardError)
+    end
+  end
+end
