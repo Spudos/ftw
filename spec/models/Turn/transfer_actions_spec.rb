@@ -160,6 +160,32 @@ RSpec.describe Turn, type: :model do
     end
   end
 
+  describe 'call: deal' do
+    it 'deal details logged to be process at end of turn' do
+      week = 4
+      create(:turn, week: 4, club_id: 1, var1: 'deal', var2: 1, var3: 2000000, var4: 2, date_completed: nil)
+      create(:turn, week: 4, club_id: 2, var1: 'deal', var2: 1, var3: 2000000, var4: 1, date_completed: nil)
+      create(:club, id: 1)
+      create(:player, id: 1, club_id: 1)
+
+      Turn::TransferActions.new(week).call
+
+      expect(Transfer.first.player_id).to eq(1)
+      expect(Transfer.first.sell_club).to eq(1)
+      expect(Transfer.first.buy_club).to eq(2)
+      expect(Transfer.first.week).to eq(4)
+      expect(Transfer.first.bid).to eq(2000000)
+      expect(Transfer.first.status).to eq('deal')
+
+      expect(Transfer.last.player_id).to eq(1)
+      expect(Transfer.last.sell_club).to eq(1)
+      expect(Transfer.last.buy_club).to eq(2)
+      expect(Transfer.last.week).to eq(4)
+      expect(Transfer.last.bid).to eq(2000000)
+      expect(Transfer.last.status).to eq('deal')
+    end
+  end
+
   describe 'call: listed_bid' do
     it 'listed player and bid > value so log bid' do
       week = 4

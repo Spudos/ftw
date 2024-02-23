@@ -5,6 +5,7 @@
     <td><%= turn.var1 %></td>
     <td><%= turn.var2 %></td>
     <td><%= turn.var3 %></td>
+    <td><%= turn.var4 %></td>
     <td>
       <% if turn.date_completed.nil? %>
         <%= link_to "Edit", edit_turn_path(turn.id), class: "btn btn-sm btn-primary" %>

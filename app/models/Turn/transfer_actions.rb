@@ -10,6 +10,7 @@ class Turn::TransferActions
     unlist_player
     unmanaged_bid
     circuit_sale
+    deal
     listed_bid
   end
 
@@ -177,6 +178,34 @@ class Turn::TransferActions
         end
       end
 
+      turn = Turn.find(key)
+      turn.update(date_completed: DateTime.now)
+    end
+  end
+
+  def deal
+    hash = {}
+    Turn.where('var1 LIKE ?', 'deal').where(week:).each do |turn|
+      hash[turn.id] = {
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
+        week: turn.week,
+        club_id: turn.club_id,
+        var1: turn.var1, # deal
+        var2: turn.var2, # player_id
+        var3: turn.var3, # amount
+        var4: turn.var4, # other club
+        date_completed: turn.date_completed
+      }
+    end
+
+    hash.each do |key, value|
+      player = Player.find_by(id: value[:var2].to_i)
+
+      if player.club_id == value[:club_id].to_i
+        transfer_save(value[:week], value[:var4], value[:club_id], value[:var2], value[:var3], 'deal')
+      else
+        transfer_save(value[:week], value[:club_id], value[:var4], value[:var2], value[:var3], 'deal')
+      end
       turn = Turn.find(key)
       turn.update(date_completed: DateTime.now)
     end

@@ -39,6 +39,11 @@
       </div>
 
       <div>
+        <%= form.label :var4, style: "display: block" %>
+        <%= form.text_field :var4 %>
+      </div>
+
+      <div>
         <%= form.submit 'Save', class: "btn btn-sm btn-danger" %>
       </div>
     <% end %>
@@ -81,6 +86,17 @@
       <p>var1: contract<br>
       var2: player_id<br>
       var3: amount</p>
+      <br>
+      <h6>Bid for listed player</h6>
+      <p>var1: listed_bid<br>
+      var2: player_id<br>
+      var3: amount</p>
+      <br>
+      <h6>Deal between two clubs</h6>
+      <p>var1: deal<br>
+      var2: player_id<br>
+      var3: amount<br>
+      var4: other_club</p>
       </div>
     </div>
   </div>

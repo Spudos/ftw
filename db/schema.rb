@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_21_210934) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_22_223457) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -242,6 +242,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_21_210934) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date_completed"
+    t.string "var4"
   end
 
   create_table "turnsheets", force: :cascade do |t|
@@ -307,6 +308,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_21_210934) do
     t.string "player_action_4"
     t.integer "player_action_4_player_id"
     t.string "player_action_4_var"
+    t.string "transfer_club"
+    t.string "transfer1_club"
+    t.string "transfer2_club"
+    t.string "transfer3_club"
   end
 
   create_table "upgrades", force: :cascade do |t|

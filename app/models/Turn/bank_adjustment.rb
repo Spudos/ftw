@@ -18,9 +18,9 @@ class Turn::BankAdjustment
 
   def bank_adjustment
     club_full = Club.find_by(id: club_id)
-
     new_bal = club_full.bank_bal.to_i - amount.to_i
     club_full.update(bank_bal: new_bal)
+
     if reason == 'coach'
       Message.create(action_id:, week:, club_id:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{dept}")
     elsif reason == 'property'
@@ -39,7 +39,12 @@ class Turn::BankAdjustment
     elsif reason == 'listed_sale'
       amount_positive = (amount * -1).to_i
       Message.create(action_id:, week:, club_id:, var1: "Your bank account was creditied with #{amount_positive} due a player sale (#{dept})")
+    elsif reason == 'deal_sale'
+      amount_positive = (amount * -1).to_i
+      Message.create(action_id:, week:, club_id:, var1: "Your bank account was creditied with #{amount_positive} due a player sale (#{dept})")
     elsif reason == 'listed_purchase'
+      Message.create(action_id:, week:, club_id:, var1: "Your bank account was charged with #{amount} due a player purchase (#{dept})")
+    elsif reason == 'deal_purchase'
       Message.create(action_id:, week:, club_id:, var1: "Your bank account was charged with #{amount} due a player purchase (#{dept})")
     else
       Message.create(action_id:, week:, club_id:, var1: "Your bank account was charged with #{amount} due to starting an upgrade to #{club_full[reason.gsub("capacity", "name")]}")
