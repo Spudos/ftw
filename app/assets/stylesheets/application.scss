@@ -42,9 +42,16 @@ main {
   min-height: 2000px;
 }
 
-aside {
+aside-l {
   background-color: #bebebe;
+  box-shadow: 4px 0px 8px 0px rgba(0, 0, 0, 0.2);
 }
+
+aside-r {
+  background-color: #bebebe;
+  box-shadow: -4px 0px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
 
 .welcome_div {
   text-align: center;
