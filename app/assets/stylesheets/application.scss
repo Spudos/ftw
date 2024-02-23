@@ -2,11 +2,10 @@
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/maps";
 
-$custom-colors: (
-  "pink": #eb65d3,
-);
+$primary: #00043b;
+$danger: #d42321;
 
-$theme-colors: map-merge($theme-colors, $custom-colors);
+$theme-colors: map-merge($theme-colors, ("primary": $primary, "danger": $danger));
 
 @import "../../node_modules/bootstrap/scss/mixins";
 @import "../../node_modules/bootstrap/scss/utilities";
@@ -51,7 +50,6 @@ aside-r {
   background-color: #bebebe;
   box-shadow: -4px 0px 8px 0px rgba(0, 0, 0, 0.2);
 }
-
 
 .welcome_div {
   text-align: center;
