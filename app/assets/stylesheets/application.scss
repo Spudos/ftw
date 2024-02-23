@@ -29,81 +29,83 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
  *= require_self
  */
 
-th {
-  width: fit-content;
+/**General Styles**/
+
+body {
+  font-family: 'Dosis', sans-serif;
+  background-color: white;
+  min-height: 2000px;
 }
 
-#match, #match_commentary {
+main {
+  padding: 100px;
+  min-height: 2000px;
+}
+
+aside {
+  background-color: #bebebe;
+}
+
+.welcome_div {
+  text-align: center;
+}
+
+/** header **/
+
+.header {
+  height: 100px;
   display: flex;
-  border-radius: 10px;
-  background-color: whitesmoke;
-  padding: 10px;
+  color: white;
+  font-weight: bolder;
 }
 
-#match_details {
-  margin-right: 20px;
+.blue {
+  flex: 1;
+  background-color: #00043b;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding-right: 5px;
 }
 
-#exists {
-  background-color: lightgreen;
+.red {
+  flex: 1;
+  background-color: #d42321;
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
 }
 
-#not_exists {
-  background-color: red;
+.red2 {
+  flex: 1;
+  background-color: #d42321;
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
 }
 
-.align-top {
-  align-self: flex-start;
-}
+/** nav **/
 
-.row {
-  margin: 50px;
+.nav {
+  height: 75px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
 .btn {
-  margin: 5px;
+  margin: 0 10px;
 }
 
-table {
-  margin: 50px;
-}
-
-.turnsheet_headers {
-  padding: 10px;
-}
-
-tr.goal {
-  color: darkgreen;
-}
-
-tr.chance {
-  color: orange;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
-  justify-content: center;
-  width: 90%;
-  margin: 0 auto;
-  font-size: 80%;
-}
-
-.stats {
-  border: 1px solid green;
-  padding: 10px;
-  border-radius: 10px;
+#nav-center {
   display: flex;
   margin: auto;
-  width: 100%;
   justify-content: center;
-  font-size: large;
+  width: 35%;
 }
 
-#form-container {
-  margin-bottom: 50px;
-}
+/** pagination **/
 
 .apple_pagination {
   background: #f1f1f1;
@@ -133,61 +135,53 @@ tr.chance {
     .apple_pagination a:hover, .apple_pagination a:focus {
       text-decoration: underline; }
 
-.field {
-  margin-bottom: 30px;
+
+/** table **/
+
+th {
+  width: fit-content;
 }
 
-
-
-header {
-  font-size: xx-large;
-  font-weight: bolder;
-  text-align: center;
-  color: white;
+table {
+  margin: 50px;
 }
 
-body {
-  font-family: 'Dosis', sans-serif;
-  border: black 100px solid;
-}
-
-#content {
-  width: 80%;
-  margin: auto;
-  margin-top: 50px;
-  font-family: 'Dosis', sans-serif;
-  min-height: 2000px;
-}
-
-#main {
-  width: 80%;
-  margin: auto;
-}
-
-h1, h2, h3, h4 { 
-  text-align: center;
-}
-
-.welcome_div {
-  text-align: center;
-}
-
-#header {
+.turnsheet_headers {
   padding: 10px;
-  margin: auto;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  width: 30%;
-  color: #ffffff;
-  height: 125px;
-  background-image: url("header-transparent.png");
-  background-color: rgba(0, 0, 0, 0.3);
-  background-repeat: no-repeat, repeat;
-  background-position: center;
-  border-radius: 25px;
-  font-family: 'Dosis', sans-serif;
-  text-shadow: black 2px 2px 2px;
 }
+
+tr.goal {
+  color: darkgreen;
+}
+
+tr.chance {
+  color: orange;
+}
+
+/** fixtures **/
+
+#exists {
+  background-color: lightgreen;
+}
+
+#not_exists {
+  background-color: red;
+}
+
+/** match **/
+
+#match, #match_commentary {
+  display: flex;
+  border-radius: 10px;
+  background-color: whitesmoke;
+  padding: 10px;
+}
+
+#match_details {
+  margin-right: 20px;
+}
+
+/** turn **/
 
 .col-3 {
   display: flex;
@@ -196,3 +190,40 @@ h1, h2, h3, h4 {
   border: #aaaaaa 1px solid;
   border-radius: 10px;
 }
+
+/** other **/
+
+.align-top {
+  align-self: flex-start;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  justify-content: center;
+  width: 90%;
+  margin: 0 auto;
+  font-size: 80%;
+}
+
+.stats {
+  border: 1px solid green;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  margin: auto;
+  width: 100%;
+  justify-content: center;
+  font-size: large;
+}
+
+#form-container {
+  margin-bottom: 50px;
+}
+
+.field {
+  margin-bottom: 30px;
+}
+
+
