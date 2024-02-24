@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_24_123126) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_24_135307) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_24_123126) do
     t.string "league"
     t.integer "fan_happiness", default: 53
     t.integer "fanbase", default: 40980
+    t.integer "ticket_price"
   end
 
   create_table "commentaries", force: :cascade do |t|

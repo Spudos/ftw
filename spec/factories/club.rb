@@ -20,5 +20,6 @@ FactoryBot.define do
     staff_scouts { 0 }
     fanbase { 0 }
     fan_happiness { 0 }
+    ticket_price { 0 }
   end
 end

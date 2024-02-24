@@ -56,15 +56,15 @@ RSpec.describe Turn::ClubUpdates, type: :model do
         stand_w_condition: 1,
         facilities: 1,
         hospitality: 1,
-        pitch: 1
+        pitch: 1,
+        fanbase: 30000,
+        ticket_price: 10
       )
 
       allow_any_instance_of(Kernel).to receive(:rand).with(62..69).and_return(65)
       allow_any_instance_of(Kernel).to receive(:rand).with(4545..5234).and_return(5000)
-      allow_any_instance_of(Kernel).to receive(:rand).with(9234..11234).and_return(5000)
-      allow_any_instance_of(Kernel).to receive(:rand).with(1.07123..1.12123).and_return(5000)
 
-      Turn::ClubUpdates.new(week).call
+      Turn::ClubUpdates.new(week).send(:ground_upkeep)
 
       expect(Club.first.bank_bal).to eq(-135000)
     end
@@ -80,6 +80,57 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       Turn::ClubUpdates.new(week).call
 
       expect(Club.first.bank_bal).to be_between(107123, 112123)
+    end
+  end
+
+  describe 'Match_income' do
+    it 'should increase the bank balance all streams of income for a match day' do
+      create(:match)
+      create(:club, id: 1,
+        bank_bal: 0,
+        stand_n_capacity: 5000,
+        stand_s_capacity: 5000,
+        stand_e_capacity: 5000,
+        stand_w_capacity: 5000,
+        stand_n_condition: 1,
+        stand_s_condition: 1,
+        stand_e_condition: 1,
+        stand_w_condition: 1,
+        facilities: 1,
+        hospitality: 1,
+        pitch: 1,
+        fan_happiness: 50,
+        fanbase: 100000,
+        ticket_price: 10
+      )
+
+      Turn::ClubUpdates.new(week).send(:match_day_income)
+
+      expect(Club.first.bank_bal).to be_between(273960, 310083)
+    end
+
+    it 'does not effect bank as no home game' do
+      create(:club, id: 3,
+        bank_bal: 0,
+        stand_n_capacity: 5000,
+        stand_s_capacity: 5000,
+        stand_e_capacity: 5000,
+        stand_w_capacity: 5000,
+        stand_n_condition: 1,
+        stand_s_condition: 1,
+        stand_e_condition: 1,
+        stand_w_condition: 1,
+        facilities: 1,
+        hospitality: 1,
+        pitch: 1,
+        fan_happiness: 50,
+        fanbase: 100000,
+        ticket_price: 10
+      )
+
+      Turn::ClubUpdates.new(week).send(:match_day_income)
+
+      expect(Club.first.bank_bal).to eq(0)
     end
   end
 end
