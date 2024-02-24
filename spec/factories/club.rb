@@ -18,5 +18,7 @@ FactoryBot.define do
     staff_att { 0 }
     staff_fitness { 0 }
     staff_scouts { 0 }
+    fanbase { 0 }
+    fan_happiness { 0 }
   end
 end

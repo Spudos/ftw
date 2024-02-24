@@ -30,7 +30,9 @@ Club.create(
   color_primary: 'Black',
   color_secondary: 'Red',
   bank_bal: 0,
-  league: 'unmanaged'
+  league: 'unmanaged',
+  fan_happiness: 1,
+  fanbase: 10000
 )
 
 countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales', 'NI', 'RoI', 'Brazil', 'Argentina', 'Spain', 'France', 'Germany', 'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay','Brazil', 'England', 'Mexico', 'Germany', 'Italy', 'Spain', 'France', 'Argentina', 'Netherlands', 'Portugal', 'Belgium', 'Uruguay', 'Colombia', 'Croatia', 'Sweden', 'Switzerland', 'Poland', 'Denmark', 'Chile', 'Austria', 'Turkey', 'Russia', 'Japan', 'South Korea', 'Australia']

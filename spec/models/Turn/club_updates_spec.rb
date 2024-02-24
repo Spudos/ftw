@@ -61,11 +61,25 @@ RSpec.describe Turn::ClubUpdates, type: :model do
 
       allow_any_instance_of(Kernel).to receive(:rand).with(62..69).and_return(65)
       allow_any_instance_of(Kernel).to receive(:rand).with(4545..5234).and_return(5000)
-      allow_any_instance_of(Kernel).to receive(:rand).with(9234..11234).and_return(10000)
+      allow_any_instance_of(Kernel).to receive(:rand).with(9234..11234).and_return(5000)
+      allow_any_instance_of(Kernel).to receive(:rand).with(1.07123..1.12123).and_return(5000)
 
       Turn::ClubUpdates.new(week).call
 
       expect(Club.first.bank_bal).to eq(-135000)
+    end
+  end
+
+  describe 'club shop income' do
+    it 'should increase the bank balance by the sales during the week' do
+      create(:club, id: 1,
+        bank_bal: 0,
+        fanbase: 100000
+      )
+
+      Turn::ClubUpdates.new(week).call
+
+      expect(Club.first.bank_bal).to be_between(107123, 112123)
     end
   end
 end

@@ -9,6 +9,8 @@ class Turn::ClubUpdates
     wage_bill
     staff_costs
     ground_upkeep
+    club_shop_income
+    matchday_income
   end
 
   private
@@ -25,19 +27,19 @@ class Turn::ClubUpdates
 
       Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was charged with #{wage_bill} due to this weeks player wages", var2: 'payment', var3: wage_bill)
     end
+  end
 
-    def staff_costs
-      clubs = Club.all
-      clubs.each do |club|
-        action_id = week.to_s + club.id.to_s + 'upkeep'
+  def staff_costs
+    clubs = Club.all
+    clubs.each do |club|
+      action_id = week.to_s + club.id.to_s + 'upkeep'
 
-        staff_costs_total = ((club.staff_gkp + club.staff_dfc + club.staff_mid + club.staff_att + club.staff_fitness + club.staff_scouts)) * rand(9234..11234)
+      staff_costs_total = ((club.staff_gkp + club.staff_dfc + club.staff_mid + club.staff_att + club.staff_fitness + club.staff_scouts)) * rand(9234..11234)
 
-        new_bal = club.bank_bal.to_i - staff_costs_total.to_i
-        club.update(bank_bal: new_bal)
+      new_bal = club.bank_bal.to_i - staff_costs_total.to_i
+      club.update(bank_bal: new_bal)
 
-        Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was charged with #{staff_costs_total} due to this weeks staff wages", var2: 'payment', var3: staff_costs_total)
-      end
+      Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was charged with #{staff_costs_total} due to this weeks staff wages", var2: 'payment', var3: staff_costs_total)
     end
   end
 
@@ -58,5 +60,22 @@ class Turn::ClubUpdates
 
       Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was charged with #{ground_upkeep_total} due to this weeks stadium upkeep", var2: 'payment', var3: ground_upkeep_total)
     end
+  end
+
+  def club_shop_income
+    clubs = Club.all
+    clubs.each do |club|
+      action_id = week.to_s + club.id.to_s + 'shop'
+
+      club_shop_income = (club.fanbase * rand(1.07123..1.12123)).to_i
+
+      new_bal = club.bank_bal.to_i + club_shop_income.to_i
+      club.update(bank_bal: new_bal)
+
+      Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was credited with #{club_shop_income} due to this weeks club shop income", var2: 'income', var3: club_shop_income)
+    end
+  end
+
+  def matchday_income
   end
 end

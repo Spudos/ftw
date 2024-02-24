@@ -32,7 +32,9 @@ Club.create(
   color_primary: 'Black',
   color_secondary: 'Red',
   bank_bal: random_number(500000000, 1200000000),
-  league: 'Allstar'
+  league: 'Allstar',
+  fan_happiness: 100,
+  fanbase: 150000
 )
 
 3.times do

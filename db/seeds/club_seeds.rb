@@ -273,6 +273,8 @@ hash.each do |hash|
     color_primary: 'green',
     color_secondary: 'yellow',
     bank_bal: random_number(50000000, 120000000),
-    league: hash[:league]
+    league: hash[:league],
+    fan_happiness: random_number(4, 12),
+    fanbase: random_number(10000, 150000)
   )
 end
