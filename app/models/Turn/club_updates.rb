@@ -11,6 +11,8 @@ class Turn::ClubUpdates
     ground_upkeep
     club_shop_income
     match_day_income
+    fan_happiness_match
+    fan_happiness_signings
   end
 
   private
@@ -119,6 +121,65 @@ class Turn::ClubUpdates
       Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This cost you #{policing_cost} in policing costs", var2: 'payment', var3: policing_cost)
       Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This cost you #{stewarding_cost} in stewarding costs", var2: 'payment', var3: stewarding_cost)
       Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This cost you #{medical_cost} in medical costs", var2: 'payment', var3: medical_cost)
+    end
+  end
+
+  def fan_happiness_match
+    match = Match.where(week_number: week)
+
+    match.each do |match|
+      home_team = Club.find_by(id: match.home_team)
+      away_team = Club.find_by(id: match.away_team)
+
+      if match.home_goals > match.away_goals
+        home_team.fan_happiness = home_team.fan_happiness + 9
+        away_team.fan_happiness = away_team.fan_happiness - 5
+      elsif match.home_goals < match.away_goals
+        home_team.fan_happiness = home_team.fan_happiness - 5
+        away_team.fan_happiness = away_team.fan_happiness + 9
+      else
+        home_team.fan_happiness = home_team.fan_happiness + 3
+        away_team.fan_happiness = away_team.fan_happiness + 3
+      end
+      home_team.save
+      away_team.save
+    end
+  end
+
+  def fan_happiness_signings
+    signings = Transfer.where(week: week, status: 'completed')
+
+    signings.each do |signing|
+      club = Club.find_by(id: signing.buy_club)
+      club.fan_happiness = club.fan_happiness + 6
+      club.save
+    end
+  end
+
+  def fan_happiness_bank
+    clubs = Club.all
+
+    clubs.each do |club|
+      if club.bank_bal > 80000000
+        club.fan_happiness += 3
+      elsif club.bank_bal < 20000000
+        club.fan_happiness -= 5
+      end
+      club.save
+    end
+  end
+
+  def fan_happiness_random
+    clubs = Club.all
+
+    clubs.each do |club|
+      club.fan_happiness = club.fan_happiness + rand(-3..3)
+      if club.fan_happiness > 100
+        club.fan_happiness = 100
+      elsif club.fan_happiness < 0
+        club.fan_happiness = 0
+      end
+      club.save
     end
   end
 end

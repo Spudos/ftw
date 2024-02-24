@@ -133,4 +133,131 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       expect(Club.first.bank_bal).to eq(0)
     end
   end
+
+  describe 'fan_happiness_match' do
+    it 'adjust fan happiness depending on the match result (win for club 1)' do
+      create(:club, id: 1,
+        fan_happiness: 50
+      )
+      create(:club, id: 2,
+        fan_happiness: 50
+      )
+      create(:match, home_goals: 3, away_goals: 1)
+
+      Turn::ClubUpdates.new(week).send(:fan_happiness_match)
+
+      expect(Club.first.fan_happiness).to eq(59)
+      expect(Club.last.fan_happiness).to eq(45)
+    end
+
+    it 'adjust fan happiness depending on the match result (win for club 2)' do
+      create(:club, id: 1,
+        fan_happiness: 50
+      )
+      create(:club, id: 2,
+        fan_happiness: 50
+      )
+      create(:match, home_goals: 3, away_goals: 4)
+
+      Turn::ClubUpdates.new(week).send(:fan_happiness_match)
+
+      expect(Club.first.fan_happiness).to eq(45)
+      expect(Club.last.fan_happiness).to eq(59)
+    end
+
+    it 'adjust fan happiness depending on the match result (draw)' do
+      create(:club, id: 1,
+        fan_happiness: 50
+      )
+      create(:club, id: 2,
+        fan_happiness: 50
+      )
+      create(:match, home_goals: 3, away_goals: 3)
+
+      Turn::ClubUpdates.new(week).send(:fan_happiness_match)
+
+      expect(Club.first.fan_happiness).to eq(53)
+      expect(Club.last.fan_happiness).to eq(53)
+    end
+  end
+
+  describe 'fan_happiness_signings' do
+    it 'adjust fan happiness if a player is signed' do
+      create(:club, id: 2,
+        fan_happiness: 50
+      )
+
+      create(:transfer, player_id: 1, status: 'completed', week: 1)
+
+      Turn::ClubUpdates.new(week).send(:fan_happiness_signings)
+
+      expect(Club.first.fan_happiness).to eq(56)
+    end
+  end
+
+  describe 'fan_happiness_bank' do
+    it 'adjust fan happiness up by 3 as the club is rich' do
+      create(:club, id: 2,
+        bank_bal: 100000000,
+        fan_happiness: 50
+      )
+      Turn::ClubUpdates.new(week).send(:fan_happiness_bank)
+
+      expect(Club.first.fan_happiness).to eq(53)
+    end
+
+    it 'adjust fan happiness down by 5 as the club is poor' do
+      create(:club, id: 2,
+        bank_bal: 1000000,
+        fan_happiness: 50
+      )
+
+      Turn::ClubUpdates.new(week).send(:fan_happiness_bank)
+
+      expect(Club.first.fan_happiness).to eq(45)
+    end
+
+    it 'no fan happiness change' do
+      create(:club, id: 2,
+        bank_bal: 50000000,
+        fan_happiness: 50
+      )
+
+      Turn::ClubUpdates.new(week).send(:fan_happiness_bank)
+
+      expect(Club.first.fan_happiness).to eq(50)
+    end
+  end
+
+  describe 'fan_happiness_random' do
+    it 'adjust fan happiness by a randoim amount and make sure it is 0 to 100' do
+      create(:club, id: 2,
+        fan_happiness: 50
+      )
+      allow_any_instance_of(Kernel).to receive(:rand).with(-3..3).and_return(1)
+      Turn::ClubUpdates.new(week).send(:fan_happiness_random)
+
+      expect(Club.first.fan_happiness).to eq(51)
+    end
+
+    it 'corrects a high amount to 100' do
+      create(:club, id: 2,
+        fan_happiness: 250
+      )
+
+      Turn::ClubUpdates.new(week).send(:fan_happiness_random)
+
+      expect(Club.first.fan_happiness).to eq(100)
+    end
+
+    it 'corrects a minus amount to 0' do
+      create(:club, id: 2,
+        fan_happiness: -50
+      )
+
+      Turn::ClubUpdates.new(week).send(:fan_happiness_random)
+
+      expect(Club.first.fan_happiness).to eq(0)
+    end
+  end
 end

@@ -111,7 +111,7 @@ class Turn::TransferActions
 
             Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "Your bid for #{player.name} succeeded!  The player has joined your club for #{value[:var3]}")
             Turn::BankAdjustment.new(value[:action_id], value[:week], value[:club_id].to_i, value[:var1], player.name, value[:var3]).call
-            transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'transfer_completed')
+            transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'completed')
 
             player_original_club.bank_bal += value[:var3].to_i
             player_original_club.save
@@ -171,7 +171,7 @@ class Turn::TransferActions
 
           Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "#{player.name} was sold to the free agent circuit for #{proceeds_positive}")
           Turn::BankAdjustment.new(value[:action_id], value[:week], value[:club_id].to_i, value[:var1], player.name, proceeds).call
-          transfer_save(value[:week], 242, club.id, value[:var2], proceeds, 'sale_completed')
+          transfer_save(value[:week], 242, club.id, value[:var2], proceeds, 'completed')
         else
           Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, var1: "#{player.name} could not be sold to the free agent circuit due to not being at your club")
           transfer_save(value[:week], 242, player.club_id, value[:var2], proceeds, 'sale_failed')
