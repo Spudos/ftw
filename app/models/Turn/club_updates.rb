@@ -90,6 +90,8 @@ class Turn::ClubUpdates
         attendance = (club.fanbase * club.fan_happiness) / 100
       end
 
+      Match.find_by(week_number: week, home_team: team).update(attendance: attendance)
+
       match_day_income = (
       gate_receipts = attendance * club.ticket_price +
       hospitality_receipts = club.hospitality * rand(102345..119234) +

@@ -6,6 +6,7 @@
       <th scope="col">Competition</th>
       <th scope="col">Home</th>
       <th scope="col">Away</th>
+      <th scope="col">Attendance</th>
       <th scope="col">Home Tactic</th>
       <th scope="col">Away Tactic</th>
       <th scope="col">Home possession</th>
@@ -26,6 +27,7 @@
         <td><%= match.competition %></td>
         <td><%= Club.find_by(id: match.home_team)&.name %></td>
         <td><%= Club.find_by(id: match.away_team)&.name %></td>
+        <td><%= match.attendance %></td>
         <td>
           <% case match.tactic_home.to_i %>
           <% when 1 %>

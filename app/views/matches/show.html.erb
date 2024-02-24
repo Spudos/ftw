@@ -4,6 +4,7 @@
 <div id="match">
   <div id="match_details">
     <h3><%= Club.find_by(id: @matches[0].home_team)&.name %>(<%= @matches[0].home_team %>)</h3>
+    <h57>Match attendance: <%= @matches[0].attendance %></h57>
     <table>
       <tr>
         <th>ID</th>
