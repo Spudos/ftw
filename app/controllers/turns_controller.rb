@@ -146,6 +146,22 @@ class TurnsController < ApplicationController
     redirect_to request.referrer, notice: notice
   end
 
+  def process_club_updates
+    errors = []
+
+    begin
+      turn = Turn.new
+      turn.process_club_updates(params)
+
+      notice = 'Club Updates ran successfully.'
+    rescue StandardError => e
+      errors << "Error occurred during processing: #{e.message}"
+      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
+    end
+
+    redirect_to request.referrer, notice: notice
+  end
+
   private
 
   def set_turn

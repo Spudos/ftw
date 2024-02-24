@@ -20,5 +20,6 @@ FactoryBot.define do
     player_position_detail { 'p' }
     star { 5 }
     potential_tackling { 10 }
+    wages { 100 }
   end
 end

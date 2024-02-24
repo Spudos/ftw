@@ -80,6 +80,7 @@ Rails.application.routes.draw do
   post '/turns/process_turn', to: 'turns#process_turn'
   post '/turns/process_player_updates', to: 'turns#process_player_updates'
   post '/turns/process_upgrade_admin', to: 'turns#process_upgrade_admin'
+  post '/turns/process_club_updates', to: 'turns#process_club_updates'
 
   post '/matches/match', to: 'matches#match'
   get '/matches/outcome', to: 'matches#outcome'
