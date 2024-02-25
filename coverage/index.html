@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-02-24T19:42:57+00:00">2024-02-24T19:42:57+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-02-24T23:52:35+00:00">2024-02-24T23:52:35+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  93.83%
+  93.7%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         4.0
+         3.99
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>2852</b> relevant lines,
-    <span class="green"><b>2676</b> lines covered</span> and
-    <span class="red"><b>176</b> lines missed. </span>
+    <b>2858</b> relevant lines,
+    <span class="green"><b>2678</b> lines covered</span> and
+    <span class="red"><b>180</b> lines missed. </span>
     (<span class="green">
-  93.83%
+  93.7%
 </span>
 )
   </div>
@@ -182,12 +182,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#023ca79860523807515c7837729dc5b6b714a716" class="src_link" title="app/models/club.rb">app/models/club.rb</a></td>
-            <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">45</td>
-            <td class="cell--number">2</td>
-            <td class="cell--number">2</td>
-            <td class="cell--number">0</td>
-            <td class="cell--number">1.00</td>
+            <td class="red strong cell--number t-file__coverage">42.86 %</td>
+            <td class="cell--number">72</td>
+            <td class="cell--number">7</td>
+            <td class="cell--number">3</td>
+            <td class="cell--number">4</td>
+            <td class="cell--number">0.43</td>
             
           </tr>
         
@@ -689,9 +689,9 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#564b9b6af34ec1ae19786421af5774fc3a3e63e8" class="src_link" title="config/routes.rb">config/routes.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">106</td>
-            <td class="cell--number">92</td>
-            <td class="cell--number">92</td>
+            <td class="cell--number">107</td>
+            <td class="cell--number">93</td>
+            <td class="cell--number">93</td>
             <td class="cell--number">0</td>
             <td class="cell--number">1.01</td>
             
@@ -1579,7 +1579,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due to starting an upgrade to #{dept}&quot;, var2: &#39;payment&#39;, var3: amount.to_i)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due to starting an upgrade to #{dept}&quot;, var2: &#39;upgrades&#39;, var3: amount.to_i)</code>
           </li>
         </div>
       
@@ -1601,7 +1601,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due to starting an upgrade to #{dept}&quot;, var2: &#39;payment&#39;, var3: amount.to_i)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due to starting an upgrade to #{dept}&quot;, var2: &#39;transfer_in&#39;, var3: amount.to_i)</code>
           </li>
         </div>
       
@@ -1623,7 +1623,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due a player purchase (#{dept})&quot;, var2: &#39;payment&#39;, var3: amount.to_i)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due a player purchase (#{dept})&quot;, var2: &#39;transfer_in&#39;, var3: amount.to_i)</code>
           </li>
         </div>
       
@@ -1678,7 +1678,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due to starting an upgrade to #{reason}&quot;, var2: &#39;payment&#39;, var3: amount.to_i)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due to starting an upgrade to #{reason}&quot;, var2: &#39;upgrades&#39;, var3: amount.to_i)</code>
           </li>
         </div>
       
@@ -1700,7 +1700,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due to a 24 week contract renewal for #{dept}&quot;, var2: &#39;payment&#39;, var3: amount.to_i)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due to a 24 week contract renewal for #{dept}&quot;, var2: &#39;contracts&#39;, var3: amount.to_i)</code>
           </li>
         </div>
       
@@ -1722,7 +1722,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;You paid an amount to #{dept} to thank him for his contribution to the club.  He now feels more loyal and is more likely to stick with the team in difficult times.  You bank was charged with #{amount}&quot;, var2: &#39;payment&#39;, var3: amount.to_i)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;You paid an amount to #{dept} to thank him for his contribution to the club.  He now feels more loyal and is more likely to stick with the team in difficult times.  You bank was charged with #{amount}&quot;, var2: &#39;bonuses&#39;, var3: amount.to_i)</code>
           </li>
         </div>
       
@@ -1755,7 +1755,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was creditied with #{amount_positive} due a player sale (#{dept})&quot;, var2: &#39;receipt&#39;, var3: amount.to_i)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was creditied with #{amount_positive} due a player sale (#{dept})&quot;, var2: &#39;transfers_out&#39;, var3: amount.to_i)</code>
           </li>
         </div>
       
@@ -1788,7 +1788,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was creditied with #{amount_positive} due a player sale (#{dept})&quot;, var2: &#39;payment&#39;, var3: amount.to_i)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was creditied with #{amount_positive} due a player sale (#{dept})&quot;, var2: &#39;transfers_out&#39;, var3: amount.to_i)</code>
           </li>
         </div>
       
@@ -1810,7 +1810,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due a player purchase (#{dept})&quot;, var2: &#39;payment&#39;, var3: amount.to_i)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due a player purchase (#{dept})&quot;, var2: &#39;transfers_in&#39;, var3: amount.to_i)</code>
           </li>
         </div>
       
@@ -1832,7 +1832,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due a player purchase (#{dept})&quot;, var2: &#39;payment&#39;, var3: amount.to_i)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due a player purchase (#{dept})&quot;, var2: &#39;transfers_in&#39;, var3: amount.to_i)</code>
           </li>
         </div>
       
@@ -1854,7 +1854,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due to starting an upgrade to #{club_full[reason.gsub(&quot;capacity&quot;, &quot;name&quot;)]}&quot;, var2: &#39;payment&#39;, var3: amount.to_i)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id:, var1: &quot;Your bank account was charged with #{amount} due to starting an upgrade to #{club_full[reason.gsub(&quot;capacity&quot;, &quot;name&quot;)]}&quot;, var2: &#39;upgrades&#39;, var3: amount.to_i)</code>
           </li>
         </div>
       
@@ -2248,7 +2248,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;Your bank account was charged with #{wage_bill} due to this weeks player wages&quot;, var2: &#39;payment&#39;, var3: wage_bill)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;Your bank account was charged with #{wage_bill} due to this weeks player wages&quot;, var2: &#39;player_wages&#39;, var3: wage_bill)</code>
           </li>
         </div>
       
@@ -2402,7 +2402,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;Your bank account was charged with #{staff_costs_total} due to this weeks staff wages&quot;, var2: &#39;payment&#39;, var3: staff_costs_total)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;Your bank account was charged with #{staff_costs_total} due to this weeks staff wages&quot;, var2: &#39;staff_wages&#39;, var3: staff_costs_total)</code>
           </li>
         </div>
       
@@ -2611,7 +2611,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;Your bank account was charged with #{ground_upkeep_total} due to this weeks stadium upkeep&quot;, var2: &#39;payment&#39;, var3: ground_upkeep_total)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;Your bank account was charged with #{ground_upkeep_total} due to this weeks stadium upkeep&quot;, var2: &#39;stadium_upkeep&#39;, var3: ground_upkeep_total)</code>
           </li>
         </div>
       
@@ -2765,7 +2765,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;Your bank account was credited with #{club_shop_income} due to this weeks club shop income&quot;, var2: &#39;income&#39;, var3: club_shop_income)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;Your bank account was credited with #{club_shop_income} due to this weeks club shop income&quot;, var2: &#39;club_shop_online&#39;, var3: club_shop_income)</code>
           </li>
         </div>
       
@@ -3194,7 +3194,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This generated #{gate_receipts} in gate receipts&quot;, var2: &#39;income&#39;, var3: gate_receipts)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This generated #{gate_receipts} in gate receipts&quot;, var2: &#39;gate_receipts&#39;, var3: gate_receipts)</code>
           </li>
         </div>
       
@@ -3205,7 +3205,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This generated #{hospitality_receipts} in hospitality receipts&quot;, var2: &#39;income&#39;, var3: hospitality_receipts)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This generated #{hospitality_receipts} in hospitality receipts&quot;, var2: &#39;hospitality&#39;, var3: hospitality_receipts)</code>
           </li>
         </div>
       
@@ -3216,7 +3216,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This generated #{facilities_receipts} in facilities receipts&quot;, var2: &#39;income&#39;, var3: facilities_receipts)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This generated #{facilities_receipts} in facilities receipts&quot;, var2: &#39;facilities&#39;, var3: facilities_receipts)</code>
           </li>
         </div>
       
@@ -3227,7 +3227,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This generated #{programme_receipts} in programme receipts&quot;, var2: &#39;income&#39;, var3: programme_receipts)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This generated #{programme_receipts} in programme receipts&quot;, var2: &#39;programs&#39;, var3: programme_receipts)</code>
           </li>
         </div>
       
@@ -3238,7 +3238,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This generated #{club_shop_match_income} in club shop receipts&quot;, var2: &#39;income&#39;, var3: club_shop_match_income)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This generated #{club_shop_match_income} in club shop receipts&quot;, var2: &#39;club_shop_match&#39;, var3: club_shop_match_income)</code>
           </li>
         </div>
       
@@ -3249,7 +3249,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This cost you #{policing_cost} in policing costs&quot;, var2: &#39;payment&#39;, var3: policing_cost)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This cost you #{policing_cost} in policing costs&quot;, var2: &#39;policing&#39;, var3: policing_cost)</code>
           </li>
         </div>
       
@@ -3260,7 +3260,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This cost you #{stewarding_cost} in stewarding costs&quot;, var2: &#39;payment&#39;, var3: stewarding_cost)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This cost you #{stewarding_cost} in stewarding costs&quot;, var2: &#39;stewards&#39;, var3: stewarding_cost)</code>
           </li>
         </div>
       
@@ -3271,7 +3271,7 @@
 
             
 
-            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This cost you #{medical_cost} in medical costs&quot;, var2: &#39;payment&#39;, var3: medical_cost)</code>
+            <code class="ruby">      Message.create(action_id:, week:, club_id: club.id, var1: &quot;You had a home match this week; This cost you #{medical_cost} in medical costs&quot;, var2: &#39;medical&#39;, var3: medical_cost)</code>
           </li>
         </div>
       
@@ -6776,7 +6776,7 @@
 
             
 
-            <code class="ruby">            transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], &#39;transfer_completed&#39;)</code>
+            <code class="ruby">            transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], &#39;completed&#39;)</code>
           </li>
         </div>
       
@@ -7436,7 +7436,7 @@
 
             
 
-            <code class="ruby">          transfer_save(value[:week], 242, club.id, value[:var2], proceeds, &#39;sale_completed&#39;)</code>
+            <code class="ruby">          transfer_save(value[:week], 242, club.id, value[:var2], proceeds, &#39;completed&#39;)</code>
           </li>
         </div>
       
@@ -13238,8 +13238,8 @@
   <div class="header">
     <h3>app/models/club.rb</h3>
     <h4>
-      <span class="green">
-  100.0%
+      <span class="red">
+  42.86%
 </span>
 
       lines covered
@@ -13248,9 +13248,9 @@
     
 
     <div class="t-line-summary">
-      <b>2</b> relevant lines.
-      <span class="green"><b>2</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <b>7</b> relevant lines.
+      <span class="green"><b>3</b> lines covered</span> and
+      <span class="red"><b>4</b> lines missed.</span>
     </div>
 
     
@@ -13746,6 +13746,303 @@
       
         <div>
           <li class="never" data-hits="" data-linenumber="45">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="46">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def finance_items(club)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="47">
+            
+            
+
+            
+
+            <code class="ruby">    highest_week_number = Message.maximum(:week)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="48">
+            
+            
+
+            
+
+            <code class="ruby">    messages = Message.where(club_id: club, week: highest_week_number)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="49">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="50">
+            
+            
+
+            
+
+            <code class="ruby">    items = {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="51">
+            
+            
+
+            
+
+            <code class="ruby">      transfers_out: messages.where(var2: &#39;transfers_out&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="52">
+            
+            
+
+            
+
+            <code class="ruby">      club_shop_online: messages.where(var2: &#39;club_shop_online&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="53">
+            
+            
+
+            
+
+            <code class="ruby">      club_shop_match: messages.where(var2: &#39;club_shop_match&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="54">
+            
+            
+
+            
+
+            <code class="ruby">      gate_receipts: messages.where(var2: &#39;gate_receipts&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="55">
+            
+            
+
+            
+
+            <code class="ruby">      hospitality: messages.where(var2: &#39;hospitality&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="56">
+            
+            
+
+            
+
+            <code class="ruby">      facilities: messages.where(var2: &#39;facilities&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="57">
+            
+            
+
+            
+
+            <code class="ruby">      programs: messages.where(var2: &#39;programs&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="58">
+            
+            
+
+            
+
+            <code class="ruby">      player_wages: messages.where(var2: &#39;player_wages&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="59">
+            
+            
+
+            
+
+            <code class="ruby">      staff_wages: messages.where(var2: &#39;staff_wages&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="60">
+            
+            
+
+            
+
+            <code class="ruby">      transfers_in: messages.where(var2: &#39;transfers_in&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="61">
+            
+            
+
+            
+
+            <code class="ruby">      stadium_upkeep: messages.where(var2: &#39;stadium_upkeep&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="62">
+            
+            
+
+            
+
+            <code class="ruby">      policing: messages.where(var2: &#39;policing&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="63">
+            
+            
+
+            
+
+            <code class="ruby">      stewards: messages.where(var2: &#39;stewards&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="64">
+            
+            
+
+            
+
+            <code class="ruby">      medical: messages.where(var2: &#39;medical&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="65">
+            
+            
+
+            
+
+            <code class="ruby">      bonuses: messages.where(var2: &#39;bonuses&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="66">
+            
+            
+
+            
+
+            <code class="ruby">      contracts: messages.where(var2: &#39;contracts&#39;).sum(:var3),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="67">
+            
+            
+
+            
+
+            <code class="ruby">      upgrades: messages.where(var2: &#39;upgrades&#39;).sum(:var3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="68">
+            
+            
+
+            
+
+            <code class="ruby">    }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="69">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="70">
+            
+            
+
+            
+
+            <code class="ruby">    return items</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="71">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="72">
             
             
 
@@ -28700,8 +28997,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="61">
-            <span class="hits">4</span>
+          <li class="covered" data-hits="5" data-linenumber="61">
+            <span class="hits">5</span>
             
 
             
@@ -28854,8 +29151,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="75">
-            <span class="hits">3</span>
+          <li class="covered" data-hits="2" data-linenumber="75">
+            <span class="hits">2</span>
             
 
             
@@ -36355,8 +36652,8 @@
     
 
     <div class="t-line-summary">
-      <b>92</b> relevant lines.
-      <span class="green"><b>92</b> lines covered</span> and
+      <b>93</b> relevant lines.
+      <span class="green"><b>93</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -36671,7 +36968,7 @@
 
             
 
-            <code class="ruby">  get &#39;/clubs/manager/first_team&#39;, to: &#39;clubs#first_team&#39;</code>
+            <code class="ruby">  get &#39;/clubs/manager/finance&#39;, to: &#39;clubs#finance&#39;</code>
           </li>
         </div>
       
@@ -36682,7 +36979,7 @@
 
             
 
-            <code class="ruby">  get &#39;/clubs/manager/players_contract&#39;, to: &#39;clubs#players_contract&#39;</code>
+            <code class="ruby">  get &#39;/clubs/manager/first_team&#39;, to: &#39;clubs#first_team&#39;</code>
           </li>
         </div>
       
@@ -36693,7 +36990,7 @@
 
             
 
-            <code class="ruby">  get &#39;/clubs/manager/team_statistics&#39;, to: &#39;clubs#team_statistics&#39;</code>
+            <code class="ruby">  get &#39;/clubs/manager/players_contract&#39;, to: &#39;clubs#players_contract&#39;</code>
           </li>
         </div>
       
@@ -36704,7 +37001,7 @@
 
             
 
-            <code class="ruby">  get &#39;/clubs/manager/team_selection&#39;, to: &#39;clubs#team_selection&#39;</code>
+            <code class="ruby">  get &#39;/clubs/manager/team_statistics&#39;, to: &#39;clubs#team_statistics&#39;</code>
           </li>
         </div>
       
@@ -36715,7 +37012,7 @@
 
             
 
-            <code class="ruby">  get &#39;/clubs/manager/results&#39;, to: &#39;clubs#results&#39;</code>
+            <code class="ruby">  get &#39;/clubs/manager/team_selection&#39;, to: &#39;clubs#team_selection&#39;</code>
           </li>
         </div>
       
@@ -36726,7 +37023,7 @@
 
             
 
-            <code class="ruby">  get &#39;/clubs/manager/fixtures&#39;, to: &#39;clubs#fixtures&#39;</code>
+            <code class="ruby">  get &#39;/clubs/manager/results&#39;, to: &#39;clubs#results&#39;</code>
           </li>
         </div>
       
@@ -36737,29 +37034,29 @@
 
             
 
+            <code class="ruby">  get &#39;/clubs/manager/fixtures&#39;, to: &#39;clubs#fixtures&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="35">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">  get &#39;/clubs/manager/history&#39;, to: &#39;clubs#history&#39;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="35">
+          <li class="never" data-hits="" data-linenumber="36">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="36">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  get &#39;/leagues/premier/table&#39;, to: &#39;leagues#premier_league_table&#39;</code>
           </li>
         </div>
       
@@ -36770,7 +37067,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/premier/statistics&#39;, to: &#39;leagues#premier_league_statistics&#39;</code>
+            <code class="ruby">  get &#39;/leagues/premier/table&#39;, to: &#39;leagues#premier_league_table&#39;</code>
           </li>
         </div>
       
@@ -36781,7 +37078,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/premier/fixtures&#39;, to: &#39;leagues#premier_league_fixtures&#39;</code>
+            <code class="ruby">  get &#39;/leagues/premier/statistics&#39;, to: &#39;leagues#premier_league_statistics&#39;</code>
           </li>
         </div>
       
@@ -36792,7 +37089,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/championship/table&#39;, to: &#39;leagues#championship_league_table&#39;</code>
+            <code class="ruby">  get &#39;/leagues/premier/fixtures&#39;, to: &#39;leagues#premier_league_fixtures&#39;</code>
           </li>
         </div>
       
@@ -36803,7 +37100,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/championship/statistics&#39;, to: &#39;leagues#championship_league_statistics&#39;</code>
+            <code class="ruby">  get &#39;/leagues/championship/table&#39;, to: &#39;leagues#championship_league_table&#39;</code>
           </li>
         </div>
       
@@ -36814,7 +37111,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/championship/fixtures&#39;, to: &#39;leagues#championship_league_fixtures&#39;</code>
+            <code class="ruby">  get &#39;/leagues/championship/statistics&#39;, to: &#39;leagues#championship_league_statistics&#39;</code>
           </li>
         </div>
       
@@ -36825,7 +37122,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/ligue_1/table&#39;, to: &#39;leagues#ligue_1_league_table&#39;</code>
+            <code class="ruby">  get &#39;/leagues/championship/fixtures&#39;, to: &#39;leagues#championship_league_fixtures&#39;</code>
           </li>
         </div>
       
@@ -36836,7 +37133,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/ligue_1/statistics&#39;, to: &#39;leagues#ligue_1_statistics&#39;</code>
+            <code class="ruby">  get &#39;/leagues/ligue_1/table&#39;, to: &#39;leagues#ligue_1_league_table&#39;</code>
           </li>
         </div>
       
@@ -36847,7 +37144,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/ligue_1/fixtures&#39;, to: &#39;leagues#ligue_1_fixtures&#39;</code>
+            <code class="ruby">  get &#39;/leagues/ligue_1/statistics&#39;, to: &#39;leagues#ligue_1_statistics&#39;</code>
           </li>
         </div>
       
@@ -36858,7 +37155,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/ligue_2/table&#39;, to: &#39;leagues#ligue_2_league_table&#39;</code>
+            <code class="ruby">  get &#39;/leagues/ligue_1/fixtures&#39;, to: &#39;leagues#ligue_1_fixtures&#39;</code>
           </li>
         </div>
       
@@ -36869,7 +37166,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/ligue_2/statistics&#39;, to: &#39;leagues#ligue_2_statistics&#39;</code>
+            <code class="ruby">  get &#39;/leagues/ligue_2/table&#39;, to: &#39;leagues#ligue_2_league_table&#39;</code>
           </li>
         </div>
       
@@ -36880,7 +37177,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/ligue_2/fixtures&#39;, to: &#39;leagues#ligue_2_fixtures&#39;</code>
+            <code class="ruby">  get &#39;/leagues/ligue_2/statistics&#39;, to: &#39;leagues#ligue_2_statistics&#39;</code>
           </li>
         </div>
       
@@ -36891,7 +37188,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/bundesliga_1/table&#39;, to: &#39;leagues#bundesliga_1_league_table&#39;</code>
+            <code class="ruby">  get &#39;/leagues/ligue_2/fixtures&#39;, to: &#39;leagues#ligue_2_fixtures&#39;</code>
           </li>
         </div>
       
@@ -36902,7 +37199,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/bundesliga_1/statistics&#39;, to: &#39;leagues#bundesliga_1_statistics&#39;</code>
+            <code class="ruby">  get &#39;/leagues/bundesliga_1/table&#39;, to: &#39;leagues#bundesliga_1_league_table&#39;</code>
           </li>
         </div>
       
@@ -36913,7 +37210,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/bundesliga_1/fixtures&#39;, to: &#39;leagues#bundesliga_1_fixtures&#39;</code>
+            <code class="ruby">  get &#39;/leagues/bundesliga_1/statistics&#39;, to: &#39;leagues#bundesliga_1_statistics&#39;</code>
           </li>
         </div>
       
@@ -36924,7 +37221,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/bundesliga_2/table&#39;, to: &#39;leagues#bundesliga_2_league_table&#39;</code>
+            <code class="ruby">  get &#39;/leagues/bundesliga_1/fixtures&#39;, to: &#39;leagues#bundesliga_1_fixtures&#39;</code>
           </li>
         </div>
       
@@ -36935,7 +37232,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/bundesliga_2/statistics&#39;, to: &#39;leagues#bundesliga_2_statistics&#39;</code>
+            <code class="ruby">  get &#39;/leagues/bundesliga_2/table&#39;, to: &#39;leagues#bundesliga_2_league_table&#39;</code>
           </li>
         </div>
       
@@ -36946,7 +37243,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/bundesliga_2/fixtures&#39;, to: &#39;leagues#bundesliga_2_fixtures&#39;</code>
+            <code class="ruby">  get &#39;/leagues/bundesliga_2/statistics&#39;, to: &#39;leagues#bundesliga_2_statistics&#39;</code>
           </li>
         </div>
       
@@ -36957,7 +37254,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/la_liga/table&#39;, to: &#39;leagues#la_liga_league_table&#39;</code>
+            <code class="ruby">  get &#39;/leagues/bundesliga_2/fixtures&#39;, to: &#39;leagues#bundesliga_2_fixtures&#39;</code>
           </li>
         </div>
       
@@ -36968,7 +37265,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/la_liga/statistics&#39;, to: &#39;leagues#la_liga_statistics&#39;</code>
+            <code class="ruby">  get &#39;/leagues/la_liga/table&#39;, to: &#39;leagues#la_liga_league_table&#39;</code>
           </li>
         </div>
       
@@ -36979,7 +37276,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/la_liga/fixtures&#39;, to: &#39;leagues#la_liga_fixtures&#39;</code>
+            <code class="ruby">  get &#39;/leagues/la_liga/statistics&#39;, to: &#39;leagues#la_liga_statistics&#39;</code>
           </li>
         </div>
       
@@ -36990,7 +37287,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/segunda_division/table&#39;, to: &#39;leagues#segunda_division_league_table&#39;</code>
+            <code class="ruby">  get &#39;/leagues/la_liga/fixtures&#39;, to: &#39;leagues#la_liga_fixtures&#39;</code>
           </li>
         </div>
       
@@ -37001,7 +37298,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/segunda_division/statistics&#39;, to: &#39;leagues#segunda_division_statistics&#39;</code>
+            <code class="ruby">  get &#39;/leagues/segunda_division/table&#39;, to: &#39;leagues#segunda_division_league_table&#39;</code>
           </li>
         </div>
       
@@ -37012,7 +37309,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/segunda_division/fixtures&#39;, to: &#39;leagues#segunda_division_fixtures&#39;</code>
+            <code class="ruby">  get &#39;/leagues/segunda_division/statistics&#39;, to: &#39;leagues#segunda_division_statistics&#39;</code>
           </li>
         </div>
       
@@ -37023,7 +37320,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/serie_a/table&#39;, to: &#39;leagues#serie_a_league_table&#39;</code>
+            <code class="ruby">  get &#39;/leagues/segunda_division/fixtures&#39;, to: &#39;leagues#segunda_division_fixtures&#39;</code>
           </li>
         </div>
       
@@ -37034,7 +37331,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/serie_a/statistics&#39;, to: &#39;leagues#serie_a_statistics&#39;</code>
+            <code class="ruby">  get &#39;/leagues/serie_a/table&#39;, to: &#39;leagues#serie_a_league_table&#39;</code>
           </li>
         </div>
       
@@ -37045,7 +37342,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/serie_a/fixtures&#39;, to: &#39;leagues#serie_a_fixtures&#39;</code>
+            <code class="ruby">  get &#39;/leagues/serie_a/statistics&#39;, to: &#39;leagues#serie_a_statistics&#39;</code>
           </li>
         </div>
       
@@ -37056,7 +37353,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/serie_b/table&#39;, to: &#39;leagues#serie_b_league_table&#39;</code>
+            <code class="ruby">  get &#39;/leagues/serie_a/fixtures&#39;, to: &#39;leagues#serie_a_fixtures&#39;</code>
           </li>
         </div>
       
@@ -37067,7 +37364,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/serie_b/statistics&#39;, to: &#39;leagues#serie_b_statistics&#39;</code>
+            <code class="ruby">  get &#39;/leagues/serie_b/table&#39;, to: &#39;leagues#serie_b_league_table&#39;</code>
           </li>
         </div>
       
@@ -37078,7 +37375,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/serie_b/fixtures&#39;, to: &#39;leagues#serie_b_fixtures&#39;</code>
+            <code class="ruby">  get &#39;/leagues/serie_b/statistics&#39;, to: &#39;leagues#serie_b_statistics&#39;</code>
           </li>
         </div>
       
@@ -37089,7 +37386,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/brasileiro_serie_a/table&#39;, to: &#39;leagues#brasileiro_serie_a_league_table&#39;</code>
+            <code class="ruby">  get &#39;/leagues/serie_b/fixtures&#39;, to: &#39;leagues#serie_b_fixtures&#39;</code>
           </li>
         </div>
       
@@ -37100,7 +37397,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/brasileiro_serie_a/statistics&#39;, to: &#39;leagues#brasileiro_serie_a_statistics&#39;</code>
+            <code class="ruby">  get &#39;/leagues/brasileiro_serie_a/table&#39;, to: &#39;leagues#brasileiro_serie_a_league_table&#39;</code>
           </li>
         </div>
       
@@ -37111,7 +37408,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/brasileiro_serie_a/fixtures&#39;, to: &#39;leagues#brasileiro_serie_a_fixtures&#39;</code>
+            <code class="ruby">  get &#39;/leagues/brasileiro_serie_a/statistics&#39;, to: &#39;leagues#brasileiro_serie_a_statistics&#39;</code>
           </li>
         </div>
       
@@ -37122,7 +37419,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/brasileiro_serie_b/table&#39;, to: &#39;leagues#brasileiro_serie_b_league_table&#39;</code>
+            <code class="ruby">  get &#39;/leagues/brasileiro_serie_a/fixtures&#39;, to: &#39;leagues#brasileiro_serie_a_fixtures&#39;</code>
           </li>
         </div>
       
@@ -37133,7 +37430,7 @@
 
             
 
-            <code class="ruby">  get &#39;/leagues/brasileiro_serie_b/statistics&#39;, to: &#39;leagues#brasileiro_serie_b_statistics&#39;</code>
+            <code class="ruby">  get &#39;/leagues/brasileiro_serie_b/table&#39;, to: &#39;leagues#brasileiro_serie_b_league_table&#39;</code>
           </li>
         </div>
       
@@ -37144,29 +37441,29 @@
 
             
 
+            <code class="ruby">  get &#39;/leagues/brasileiro_serie_b/statistics&#39;, to: &#39;leagues#brasileiro_serie_b_statistics&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="72">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">  get &#39;/leagues/brasileiro_serie_b/fixtures&#39;, to: &#39;leagues#brasileiro_serie_b_fixtures&#39;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="72">
+          <li class="never" data-hits="" data-linenumber="73">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="73">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  get &#39;/leagues/league_cup/league&#39;, to: &#39;leagues#league_cup&#39;</code>
           </li>
         </div>
       
@@ -37177,12 +37474,23 @@
 
             
 
+            <code class="ruby">  get &#39;/leagues/league_cup/league&#39;, to: &#39;leagues#league_cup&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="75">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">  get &#39;/leagues/wcc/league&#39;, to: &#39;leagues#wcc&#39;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="75">
+          <li class="never" data-hits="" data-linenumber="76">
             
             
 
@@ -37193,7 +37501,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="76">
+          <li class="covered" data-hits="1" data-linenumber="77">
             <span class="hits">1</span>
             
 
@@ -37204,7 +37512,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="77">
+          <li class="never" data-hits="" data-linenumber="78">
             
             
 
@@ -37215,7 +37523,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="78">
+          <li class="covered" data-hits="1" data-linenumber="79">
             <span class="hits">1</span>
             
 
@@ -37226,24 +37534,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="79">
+          <li class="never" data-hits="" data-linenumber="80">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="80">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  post &#39;/turns/process_turn&#39;, to: &#39;turns#process_turn&#39;</code>
           </li>
         </div>
       
@@ -37254,7 +37551,7 @@
 
             
 
-            <code class="ruby">  post &#39;/turns/process_player_updates&#39;, to: &#39;turns#process_player_updates&#39;</code>
+            <code class="ruby">  post &#39;/turns/process_turn&#39;, to: &#39;turns#process_turn&#39;</code>
           </li>
         </div>
       
@@ -37265,7 +37562,7 @@
 
             
 
-            <code class="ruby">  post &#39;/turns/process_upgrade_admin&#39;, to: &#39;turns#process_upgrade_admin&#39;</code>
+            <code class="ruby">  post &#39;/turns/process_player_updates&#39;, to: &#39;turns#process_player_updates&#39;</code>
           </li>
         </div>
       
@@ -37276,29 +37573,29 @@
 
             
 
+            <code class="ruby">  post &#39;/turns/process_upgrade_admin&#39;, to: &#39;turns#process_upgrade_admin&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="84">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">  post &#39;/turns/process_club_updates&#39;, to: &#39;turns#process_club_updates&#39;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="84">
+          <li class="never" data-hits="" data-linenumber="85">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="85">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  post &#39;/matches/match&#39;, to: &#39;matches#match&#39;</code>
           </li>
         </div>
       
@@ -37309,7 +37606,7 @@
 
             
 
-            <code class="ruby">  get &#39;/matches/outcome&#39;, to: &#39;matches#outcome&#39;</code>
+            <code class="ruby">  post &#39;/matches/match&#39;, to: &#39;matches#match&#39;</code>
           </li>
         </div>
       
@@ -37320,7 +37617,7 @@
 
             
 
-            <code class="ruby">  post &#39;/matches/save&#39;, to: &#39;matches#save&#39;, as: &#39;save_match&#39;</code>
+            <code class="ruby">  get &#39;/matches/outcome&#39;, to: &#39;matches#outcome&#39;</code>
           </li>
         </div>
       
@@ -37331,7 +37628,7 @@
 
             
 
-            <code class="ruby">  get &#39;/matches/:id&#39;, to: &#39;matches#show&#39;, as: &#39;show_match&#39;</code>
+            <code class="ruby">  post &#39;/matches/save&#39;, to: &#39;matches#save&#39;, as: &#39;save_match&#39;</code>
           </li>
         </div>
       
@@ -37342,12 +37639,23 @@
 
             
 
+            <code class="ruby">  get &#39;/matches/:id&#39;, to: &#39;matches#show&#39;, as: &#39;show_match&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="90">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">  post &#39;/matches/match_multiple&#39;, to: &#39;matches#match_multiple&#39;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="90">
+          <li class="never" data-hits="" data-linenumber="91">
             
             
 
@@ -37358,7 +37666,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="91">
+          <li class="covered" data-hits="1" data-linenumber="92">
             <span class="hits">1</span>
             
 
@@ -37369,7 +37677,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="92">
+          <li class="covered" data-hits="1" data-linenumber="93">
             <span class="hits">1</span>
             
 
@@ -37380,7 +37688,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="93">
+          <li class="covered" data-hits="1" data-linenumber="94">
             <span class="hits">1</span>
             
 
@@ -37391,7 +37699,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="94">
+          <li class="covered" data-hits="1" data-linenumber="95">
             <span class="hits">1</span>
             
 
@@ -37402,7 +37710,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="95">
+          <li class="covered" data-hits="1" data-linenumber="96">
             <span class="hits">1</span>
             
 
@@ -37413,7 +37721,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="96">
+          <li class="covered" data-hits="1" data-linenumber="97">
             <span class="hits">1</span>
             
 
@@ -37424,7 +37732,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="97">
+          <li class="covered" data-hits="1" data-linenumber="98">
             <span class="hits">1</span>
             
 
@@ -37435,7 +37743,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="98">
+          <li class="covered" data-hits="1" data-linenumber="99">
             <span class="hits">1</span>
             
 
@@ -37446,7 +37754,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="99">
+          <li class="covered" data-hits="1" data-linenumber="100">
             <span class="hits">1</span>
             
 
@@ -37457,7 +37765,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="100">
+          <li class="covered" data-hits="1" data-linenumber="101">
             <span class="hits">1</span>
             
 
@@ -37468,7 +37776,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="101">
+          <li class="covered" data-hits="1" data-linenumber="102">
             <span class="hits">1</span>
             
 
@@ -37479,7 +37787,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="102">
+          <li class="covered" data-hits="1" data-linenumber="103">
             <span class="hits">1</span>
             
 
@@ -37490,7 +37798,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="103">
+          <li class="covered" data-hits="1" data-linenumber="104">
             <span class="hits">1</span>
             
 
@@ -37501,7 +37809,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="104">
+          <li class="covered" data-hits="1" data-linenumber="105">
             <span class="hits">1</span>
             
 
@@ -37512,7 +37820,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="105">
+          <li class="covered" data-hits="1" data-linenumber="106">
             <span class="hits">1</span>
             
 
@@ -37523,7 +37831,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="106">
+          <li class="never" data-hits="" data-linenumber="107">
             
             
 

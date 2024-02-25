@@ -1,0 +1,35 @@
+<h4 class="text-center">Income</h4>
+<table class="table table-hover">
+  <tr style="border: 1px <%= @primary %> solid;">
+    <td scope="col">Source</td>
+    <td scope="col">Amount</td>
+  </tr>
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+    <td>Transfers Out</td>
+    <td><%= @finance_items[:transfers_out] %></td>   
+  </tr>
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+    <td>Online Club Shop Sales</td>
+    <td><%= @finance_items[:club_shop_online] %></td>   
+  </tr>
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+    <td>Match Day Club Shop Sales</td>
+    <td><%= @finance_items[:club_shop_match] %></td>   
+  </tr>
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+    <td>Gate Receipts</td>
+    <td><%= @finance_items[:gate_receipts] %></td>   
+  </tr>
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+    <td>Hospitality Income</td>
+    <td><%= @finance_items[:hospitality] %></td>   
+  </tr>
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+    <td>Facilities and Catering</td>
+    <td><%= @finance_items[:facilities] %></td> 
+  </tr>
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+    <td>Program Sales</td>
+    <td><%= @finance_items[:programs] %></td> 
+  </tr>
+  </table>

@@ -60,8 +60,16 @@ class ClubsController < ApplicationController
     render 'clubs/manager/club_view'
   end
 
+  def finance
+    render 'clubs/manager/finance'
+  end
+
   def messages
     render 'clubs/manager/mesages_new'
+  end
+
+  def messages_finance
+    render 'clubs/manager/mesages_finance'
   end
 
   def first_team
@@ -103,6 +111,9 @@ class ClubsController < ApplicationController
     @club_matches = Match.where('home_team = ? OR away_team = ?', @club.id, @club.id)
     @club_fixtures = Fixture.where('home= ? OR away = ?', @club.id, @club.id)
     @messages = Message.where(club_id: Club.find_by(manager_email: current_user[:email])&.id)
+    @messages_new = Message.where(club_id: Club.find_by(manager_email: current_user[:email])&.id).where(var2: nil)
+    @messages_finance = Message.where(club_id: Club.find_by(manager_email: current_user[:email])&.id).where.not(var2: nil)
+    @finance_items = Club.new.finance_items(@club.id)
   end
 
   def set_club_theme

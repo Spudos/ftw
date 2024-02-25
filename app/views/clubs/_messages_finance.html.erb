@@ -1,14 +1,14 @@
 <div>
-  <h3 class="text-center">New Messages</h3>
+  <h3 class="text-center">Finance Messages</h3>
   <div id="messages">
-    <% if @messages_new.present? %>
+    <% if @messages_finance.present? %>
       <table class="table table-hover">
         <tbody>
           <tr>
             <th scope="col">Week</th>
             <th scope="col">Message</th>
           </tr>
-          <% @messages_new.each do |message| %>
+          <% @messages_finance.each do |message| %>
             <tr scope="row">
               <td><%= message.week %></td>
               <td><%= message.var1 %></td>

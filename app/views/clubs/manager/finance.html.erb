@@ -6,16 +6,28 @@
       <h5>Secondary Club Color: <%= @club.color_secondary %></h5>
     </div>
   </div>
+  <br>
+  <br>
+  <br>
+    <div class="text-left">
+    <div class="row text-left">
+      <h3 class="text-center">Income and Expenditure This Week</h3>
+      <div class="col-md-6">
+        <%= render "income" %>
+      </div>
+      <div class="col-md-6">
+        <%= render "payments" %>
+      </div>
+    </div>
+    <h4 class="text-center">Closing Bank Balance: £<%= @club.bank_bal %></h4>
+    <br>
+    <br>
+    <br>
+  </div>
 
   <div class="text-left">
     <div class="row text-left">
-      <div class="col-md-6">
-        <%= render "stadium" %>
-      </div>
-      <div class="col-md-6">
-        <%= render "staff" %>
-      </div>
-    <%= render "messages_new" %>
+      <%= render "messages_finance" %>
     </div>
   </div>
 </div>
