@@ -27,7 +27,7 @@ class Turn::ClubUpdates
       new_bal = club.bank_bal.to_i - wage_bill.to_i
       club.update(bank_bal: new_bal)
 
-      Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was charged with #{wage_bill} due to this weeks player wages", var2: 'player_wages', var3: wage_bill)
+      Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was charged with #{wage_bill} due to this weeks player wages", var2: 'dec-player_wages', var3: wage_bill)
     end
   end
 
@@ -41,7 +41,7 @@ class Turn::ClubUpdates
       new_bal = club.bank_bal.to_i - staff_costs_total.to_i
       club.update(bank_bal: new_bal)
 
-      Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was charged with #{staff_costs_total} due to this weeks staff wages", var2: 'staff_wages', var3: staff_costs_total)
+      Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was charged with #{staff_costs_total} due to this weeks staff wages", var2: 'dec-staff_wages', var3: staff_costs_total)
     end
   end
 
@@ -60,7 +60,7 @@ class Turn::ClubUpdates
       new_bal = club.bank_bal.to_i - ground_upkeep_total.to_i
       club.update(bank_bal: new_bal)
 
-      Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was charged with #{ground_upkeep_total} due to this weeks stadium upkeep", var2: 'stadium_upkeep', var3: ground_upkeep_total)
+      Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was charged with #{ground_upkeep_total} due to this weeks stadium upkeep", var2: 'dec-stadium_upkeep', var3: ground_upkeep_total)
     end
   end
 
@@ -74,7 +74,7 @@ class Turn::ClubUpdates
       new_bal = club.bank_bal.to_i + club_shop_income.to_i
       club.update(bank_bal: new_bal)
 
-      Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was credited with #{club_shop_income} due to this weeks club shop income", var2: 'club_shop_online', var3: club_shop_income)
+      Message.create(action_id:, week:, club_id: club.id, var1: "Your bank account was credited with #{club_shop_income} due to this weeks club shop income", var2: 'inc-club_shop_online', var3: club_shop_income)
     end
   end
 
@@ -111,14 +111,14 @@ class Turn::ClubUpdates
       new_bal = club.bank_bal.to_i + net_match_day
       club.update(bank_bal: new_bal)
 
-      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{gate_receipts} in gate receipts", var2: 'gate_receipts', var3: gate_receipts)
-      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{hospitality_receipts} in hospitality receipts", var2: 'hospitality', var3: hospitality_receipts)
-      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{facilities_receipts} in facilities receipts", var2: 'facilities', var3: facilities_receipts)
-      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{programme_receipts} in programme receipts", var2: 'programs', var3: programme_receipts)
-      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{club_shop_match_income} in club shop receipts", var2: 'club_shop_match', var3: club_shop_match_income)
-      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This cost you #{policing_cost} in policing costs", var2: 'policing', var3: policing_cost)
-      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This cost you #{stewarding_cost} in stewarding costs", var2: 'stewards', var3: stewarding_cost)
-      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This cost you #{medical_cost} in medical costs", var2: 'medical', var3: medical_cost)
+      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{gate_receipts} in gate receipts", var2: 'inc-gate_receipts', var3: gate_receipts)
+      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{hospitality_receipts} in hospitality receipts", var2: 'inc-hospitality', var3: hospitality_receipts)
+      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{facilities_receipts} in facilities receipts", var2: 'inc-facilities', var3: facilities_receipts)
+      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{programme_receipts} in programme receipts", var2: 'inc-programs', var3: programme_receipts)
+      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{club_shop_match_income} in club shop receipts", var2: 'inc-club_shop_match', var3: club_shop_match_income)
+      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This cost you #{policing_cost} in policing costs", var2: 'dec-policing', var3: policing_cost)
+      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This cost you #{stewarding_cost} in stewarding costs", var2: 'dec-stewards', var3: stewarding_cost)
+      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This cost you #{medical_cost} in medical costs", var2: 'dec-medical', var3: medical_cost)
     end
   end
 

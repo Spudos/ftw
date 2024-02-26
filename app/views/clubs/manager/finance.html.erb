@@ -11,7 +11,7 @@
   <br>
     <div class="text-left">
     <div class="row text-left">
-      <h3 class="text-center">Income and Expenditure This Week</h3>
+      <h3 class="text-center">Income and Expenditure For Week <%= @finance_items[:week] %></h3>
       <div class="col-md-6">
         <%= render "income" %>
       </div>
@@ -19,7 +19,8 @@
         <%= render "payments" %>
       </div>
     </div>
-    <h4 class="text-center">Closing Bank Balance: £<%= @club.bank_bal %></h4>
+    <h3 class="text-center">Summary</h3>
+    <%= render 'finance_summary' %>
     <br>
     <br>
     <br>
