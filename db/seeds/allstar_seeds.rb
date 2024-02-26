@@ -34,6 +34,7 @@ Club.create(
   bank_bal: random_number(500000000, 1200000000),
   league: 'Allstar',
   fan_happiness: 100,
+  ticket_price: random_number(30, 50),
   fanbase: 150000
 )
 
