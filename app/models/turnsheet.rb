@@ -115,6 +115,10 @@ class Turnsheet < ApplicationRecord
         Turn.create({ week: turnsheet.week, club_id: turnsheet.club_id, var1: turnsheet.player_action_4, var2: turnsheet.player_action_4_player_id, var3: turnsheet.player_action_4_var})
       end
 
+      if turnsheet.article_headline.present?
+        create_article(turnsheet.week, turnsheet.club_id, turnsheet.article_headline, turnsheet.article_sub_headline, turnsheet.article)
+      end
+
       begin
         turnsheet.update(processed: DateTime.now)
       rescue StandardError => e
@@ -123,6 +127,25 @@ class Turnsheet < ApplicationRecord
     end
 
     errors.empty? ? true : errors
+  end
+
+  private
+
+  def create_article(week, club_id, headline, sub_headline, article)
+    Article.create(week:, club_id:, image: 'club.jpg', article_type: 'club', headline:, sub_headline:, article:)
+    action_id = week.to_s + club_id.to_s + 'media'
+    club = Club.find_by(id: club_id)
+    club.bank_bal = club.bank_bal += 1000000
+    club.save
+
+    Message.create(
+      week:,
+      club_id:,
+      var1: 'Your bank account has been credited with 1000000 from a sports channel for your media duties',
+      var2: 'inc-other',
+      action_id:,
+      var3: 1000000
+      )
   end
 end
 

@@ -437,6 +437,32 @@
       </table>
     </div>
   </div>
+  <div class='col'>
+        <h4 style="text-align: center">New Articles</h4>
+        <table class="table table-hover table-bordered">
+          <tr scope="row">
+            <td scope="col">Headline:</td>
+            <td>
+              <%= form.label :article_headline, style: "display: none" %>
+              <%= form.text_field :article_headline %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td scope="col">Sub Headline:</td>
+            <td>
+              <%= form.label :article_sub_headline, style: "display: none" %>
+              <%= form.text_field :article_sub_headline %>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td scope="col">Article:</td>
+            <td>
+              <%= form.label :article, style: "display: none" %>
+              <%= form.text_area :article %>
+            </td>
+          </tr>
+        </table>
+      </div>
   <div>
     <%= form.submit 'Save Turnsheet', class: 'btn btn-sm btn-danger' %>
   </div>
