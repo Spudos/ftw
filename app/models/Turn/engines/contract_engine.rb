@@ -18,19 +18,15 @@ class Turn::Engines::ContractEngine
         player.contract -= 1
 
         if player.contract == 3 || player.contract < 1
-          contract_action(player)
+          if player.contract < 1
+            Message.create(week:, club_id: player.club_id, var1: "#{player.name} has been released at the end of his contract with the club.")
+            player.contract = 51
+            player.club_id = 242
+          else
+            Message.create(week:, club_id: player.club_id, var1: "#{player.name} has only 3 weeks of his contract remaining.  When it reaches zero he will be released by the club.")
+          end
         end
       end
-    end
-  end
-
-  def contract_action(player)
-    if player.contract < 1
-      Message.create(week:, club_id: player.club_id, var1: "#{player.name} has been released at the end of his contract with the club.")
-      player.contract = 51
-      player.club_id = 242
-    else
-      Message.create(week:, club_id: player.club_id, var1: "#{player.name} has only 3 weeks of his contract remaining.  When it reaches zero he will be released by the club.")
     end
   end
 end
