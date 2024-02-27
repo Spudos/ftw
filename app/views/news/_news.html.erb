@@ -1,0 +1,16 @@
+<tr>
+  <td>
+    <strong><%= news.headline %></strong>
+  </td>
+  <td>
+    <%= news.sub_headline %>
+  </td>
+  <td>
+    <%= link_to "Show Article", news_path(news.id), class: "btn btn-sm btn-primary" %>
+  </td>
+  <% if current.user? && current.user.gm? %>
+    <td>
+      <%= link_to "Edit", edit_news_path(news.id), class: "btn btn-sm btn-primary" %>
+    </td>
+  <% end %>
+</tr>

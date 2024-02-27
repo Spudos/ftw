@@ -1,0 +1,61 @@
+<p style="color: green"><%= notice %></p>
+<% if current.user? && current.user.gm? %>
+<%= link_to "Create News", new_news_path, class: "btn btn-sm btn-primary" %>
+<% end %>
+
+<div class="row flex justify-content-center">
+    <h3 class="text-center">Latest News</h3>
+    <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
+      <p><%= @news_main[0][:news_type] %></p>
+      <%= image_tag(@news_main[0][:image], style: "width: 100%; object-fit: cover;") %>
+      <h5><%= @news_main[0][:headline] %></h5>
+      <h6><%= @news_main[0][:sub_headline] %></h6>
+      <%= link_to "Show Article", news_path(@news_main[0][:id]), class: "btn btn-sm btn-primary" %>
+    </div>
+    <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
+      <p><%= @news_main[1][:news_type] %></p>
+      <%= image_tag(@news_main[1][:image], style: "width: 100%; object-fit: cover;") %>  
+      <h5><%= @news_main[1][:headline] %></h5>
+      <h6><%= @news_main[1][:sub_headline] %></h6>
+      <%= link_to "Show Article", news_path(@news_main[1][:id]), class: "btn btn-sm btn-primary" %>
+    </div>
+    <div class="col-md-3 m-3 border border-5 border-border shadow p-0 bg-light">
+      <p><%= @news_main[2][:news_type] %></p>
+      <%= image_tag(@news_main[2][:image], style: "width: 100%; object-fit: cover;") %> 
+      <h5><%= @news_main[2][:headline] %></h5>
+      <h6><%= @news_main[2][:sub_headline] %></h6>
+      <%= link_to "Show Article", news_path(@news_main[2][:id]), class: "btn btn-sm btn-primary" %>
+    </div>
+  </div>
+  <div class="row flex justify-content-center">
+    <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
+      <p><%= @news_main[3][:news_type] %></p>
+      <%= image_tag(@news_main[3][:image], style: "width: 100%; object-fit: cover;") %>
+      <h5><%= @news_main[3][:headline] %></h5>
+      <h6><%= @news_main[3][:sub_headline] %></h6>
+      <%= link_to "Show Article", news_path(@news_main[3][:id]), class: "btn btn-sm btn-primary" %>
+
+    </div>
+    <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
+      <p><%= @news_main[4][:news_type] %></p>
+      <%= image_tag(@news_main[4][:image], style: "width: 100%; object-fit: cover;") %>  
+      <h5><%= @news_main[4][:headline] %></h5>
+      <h6><%= @news_main[4][:sub_headline] %></h6>
+      <%= link_to "Show Article", news_path(@news_main[4][:id]), class: "btn btn-sm btn-primary" %>
+    </div>
+    <div class="col-md-3 m-3 border border-5 border-border shadow p-0 bg-light">
+      <p><%= @news_main[5][:news_type] %></p>
+      <%= image_tag(@news_main[5][:image], style: "width: 100%; object-fit: cover;") %> 
+      <h5><%= @news_main[5][:headline] %></h5>
+      <h6><%= @news_main[5][:sub_headline] %></h6>
+      <%= link_to "Show Article", news_path(@news_main[5][:id]), class: "btn btn-sm btn-primary" %>
+    </div>
+  </div>
+<h3 class="text-center">Other News</h3>
+<div id="news">
+  <table class="table table-hover">
+  <% @news_other.each do |news| %>
+    <%= render news %>
+  <% end %>  
+  </table>
+</div>

@@ -1,0 +1,10 @@
+<h1>Editing news</h1>
+
+<%= render "form", news: @news %>
+
+<br>
+
+<div>
+  <%= link_to "Show this news", @news, class: "btn btn-sm btn-primary" %>
+  <%= link_to "Back to news", news_index_path, class: "btn btn-sm btn-primary" %>
+</div>

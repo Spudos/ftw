@@ -3,6 +3,9 @@
   <li class="nav-item">
     <a href="/" class="btn btn-outline-dark">Home</a>
   </li>
+  <li class="nav-item">
+    <a href="<%= news_index_path %>" class="btn btn-outline-dark">News</a>
+  </li>
   <% if current_user && (current_user.manager? || current_user.gm?) %> 
   <li class="nav-item">
     <div class="btn-group">
@@ -100,14 +103,18 @@
           Admin
         </button>
         <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="<%= turns_path %>">Turn Processing</a></li>
+          <li><a class="dropdown-item" href="<%= turnsheets_path %>">Turnsheets</a></li>
+          <li><a class="dropdown-item" href="<%= news_index_path %>">View and Edit News</a></li>
+          <li><a class="dropdown-item" href="<%= new_news_path %>">Create News</a></li>
           <li><a class="dropdown-item" href="<%= clubs_path %>">View and Edit Clubs</a></li>
           <li><a class="dropdown-item" href="<%= new_club_path %>">Create A Club</a></li>
           <li><a class="dropdown-item" href="<%= players_path %>">View and Edit Players</a></li>
           <li><a class="dropdown-item" href="<%= new_player_path %>">Create A Player</a></li>
           <li><a class="dropdown-item" href="<%= fixtures_path %>">View and Edit Fixtures</a></li>
           <li><a class="dropdown-item" href="<%= new_fixture_path %>">Create A Fixture</a></li>
-          <li><a class="dropdown-item" href="<%= turnsheets_path %>">Turnsheet</a></li>
-          <li><a class="dropdown-item" href="<%= turns_path %>">Turn Processing</a></li>
+          
+          
         </ul>
       </div>
   </li>
