@@ -8,34 +8,54 @@ class Turn::PlayerUpdates
   end
 
   def call
-    fitness_increase
-    contract_decrease
-    player_value
-    player_wages
-    player_total_skill
-    player_games_played
-    player_total_goals
-    player_total_assists
-    player_average_perfomance
+    process
+    # fitness_increase
+    # contract_decrease
+    # player_value
+    # player_wages
+    # player_total_skill
+    # player_games_played
+    # player_total_goals
+    # player_total_assists
+    # player_average_perfomance
   end
 
   private
 
-  def fitness_increase
-    player_data.each do |player|
+  def process
+    functions = [:fitness_increase, :contract_decrease, :player_value]
+    # objects = [FitnessEngine, ContractEngine, PlayerEngine]
+
+    player_data.in_batches do |batch|
+      players = batch.load
+
+      functions.each do |function|
+        send(function, players)
+      end
+
+      # objects.each do |object|
+      #   players = object.new(players).process
+      # end
+
+      players.save
+    end
+  end
+
+  def fitness_increase(players)
+    players.each do |player|
       if player.fitness != 100
         player.fitness += rand(0..5)
         player.fitness = 100 if player.fitness > 100
-        player.save
+        # player.save
       end
     end
   end
 
-  def contract_decrease
-    player_data.each do |player|
+  def contract_decrease(players)
+    players.each do |player|
       if player.club.managed?
         player.contract -= 1
-        player.save
+        # player.save
 
         if player.contract == 3 || player.contract < 1
           contract_action(player)
@@ -49,14 +69,14 @@ class Turn::PlayerUpdates
       Message.create(week:, club_id: player.club_id, var1: "#{player.name} has been released at the end of his contract with the club.")
       player.contract = 51
       player.club_id = 242
-      player.save
+      # player.save
     else
       Message.create(week:, club_id: player.club_id, var1: "#{player.name} has only 3 weeks of his contract remaining.  When it reaches zero he will be released by the club.")
     end
   end
 
-  def player_value
-    player_data.each do |player|
+  def player_value(players)
+    players.each do |player|
       if player.total_skill < 77
         player.value = player.total_skill * 259740
       elsif player.total_skill < 99
@@ -67,12 +87,12 @@ class Turn::PlayerUpdates
         player.value = player.total_skill * 867546
       end
 
-      player.save
+      # player.save
     end
   end
 
-  def player_wages
-    player_data.each do |player|
+  def player_wages(players)
+    players.each do |player|
       if player.total_skill < 77
         player.wages = player.total_skill * 845
       elsif player.total_skill < 99
@@ -83,20 +103,20 @@ class Turn::PlayerUpdates
         player.wages = player.total_skill * 4181
       end
 
-      player.save
+      # player.save
     end
   end
 
-  def player_total_skill
-    player_data.each do |player|
+  def player_total_skill(players)
+    players.each do |player|
       player.total_skill = player.total_skill
 
       player.save
     end
   end
 
-  def player_games_played
-    player_data.each do |player|
+  def player_games_played(players)
+    players.each do |player|
       performances = Performance.where(player_id: player.id)
       player.games_played = performances.count(:match_performance)
 
@@ -104,8 +124,8 @@ class Turn::PlayerUpdates
     end
   end
 
-  def player_total_goals
-    player_data.each do |player|
+  def player_total_goals(players)
+    players.each do |player|
       goals = Goal.where(scorer_id: player.id)
       player.total_goals = goals.count(:scorer_id)
 
@@ -132,6 +152,6 @@ class Turn::PlayerUpdates
   end
 
   def player_data
-    @player_data ||= Player.includes(:performances, :goals, :assists, :club).load
+    @player_data ||= Player.includes(:performances, :goals, :assists, :club)
   end
 end
