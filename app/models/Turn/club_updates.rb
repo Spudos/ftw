@@ -50,10 +50,10 @@ class Turn::ClubUpdates
     clubs.each do |club|
       action_id = week.to_s + club.id.to_s + 'upkeep'
 
-      stadium_cost = ((club.stand_n_capacity * club.stand_n_condition) + (club.stand_s_capacity * club.stand_s_condition) + (club.stand_e_capacity * club.stand_e_condition) + (club.stand_w_capacity * club.stand_w_condition)) * 6
-      pitch_cost = club.pitch * rand(4545..5234)
-      facilities_cost = club.facilities * rand(4545..5234)
-      hospitality_cost = club.hospitality * rand(4545..5234)
+      stadium_cost = ((club.stand_n_capacity * club.stand_n_condition) + (club.stand_s_capacity * club.stand_s_condition) + (club.stand_e_capacity * club.stand_e_condition) + (club.stand_w_capacity * club.stand_w_condition)) * 3
+      pitch_cost = club.pitch * rand(1845..2434)
+      facilities_cost = club.facilities * rand(1845..2434)
+      hospitality_cost = club.hospitality * rand(1845..2434)
 
       ground_upkeep_total = stadium_cost + pitch_cost + facilities_cost + hospitality_cost
 
@@ -87,7 +87,7 @@ class Turn::ClubUpdates
       stadium_size = club.stand_n_capacity + club.stand_s_capacity + club.stand_e_capacity + club.stand_w_capacity
 
       if club.fanbase > stadium_size
-        attendance = (stadium_size * club.fan_happiness) / 100
+        attendance = (stadium_size * rand(0.9756..0.9923)).to_i
       else
         attendance = (club.fanbase * club.fan_happiness) / 100
       end
@@ -97,9 +97,10 @@ class Turn::ClubUpdates
       gate_receipts = attendance * club.ticket_price
       hospitality_receipts = club.hospitality * rand(102345..119234)
       facilities_receipts = club.facilities * rand(12345..19234)
-      programme_receipts = (attendance * 1.2465).to_i
-      club_shop_match_income = (attendance * 12.2465).to_i
-      match_day_income = gate_receipts + facilities_receipts + programme_receipts + club_shop_match_income + hospitality_receipts
+      programme_receipts = (attendance * 10.2465).to_i
+      club_shop_match_income = (attendance * 15.2465).to_i
+      tv_income = (attendance * 29.3456).to_i
+      match_day_income = gate_receipts + facilities_receipts + programme_receipts + club_shop_match_income + hospitality_receipts + tv_income
 
       policing_cost = (attendance * 3.5683).to_i
       stewarding_cost = (attendance * 2.3245).to_i
@@ -116,6 +117,7 @@ class Turn::ClubUpdates
       Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{facilities_receipts} in facilities receipts", var2: 'inc-facilities', var3: facilities_receipts)
       Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{programme_receipts} in programme receipts", var2: 'inc-programs', var3: programme_receipts)
       Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{club_shop_match_income} in club shop receipts", var2: 'inc-club_shop_match', var3: club_shop_match_income)
+      Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This generated #{tv_income} in world wide entertainment and TV rights", var2: 'inc-tv_income', var3: tv_income)
       Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This cost you #{policing_cost} in policing costs", var2: 'dec-policing', var3: policing_cost)
       Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This cost you #{stewarding_cost} in stewarding costs", var2: 'dec-stewards', var3: stewarding_cost)
       Message.create(action_id:, week:, club_id: club.id, var1: "You had a home match this week; This cost you #{medical_cost} in medical costs", var2: 'dec-medical', var3: medical_cost)

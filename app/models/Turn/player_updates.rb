@@ -23,7 +23,7 @@ class Turn::PlayerUpdates
         Turn::Engines::PlayerTotalSkillEngine,
         Turn::Engines::PlayerTotalGoalsEngine,
         Turn::Engines::PlayerTotalAssistsEngine,
-        Turn::Engines::PlayerAveragePerformanceEngine,
+        Turn::Engines::PlayerAveragePerformanceEngine
     ]
 
     player_data.in_batches do |batch|

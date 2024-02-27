@@ -28,7 +28,7 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
       expect(Player.first.fitness).to eq(53)
       expect(Player.first.contract).to eq(23)
       expect(Player.first.value).to eq(42929250)
-      expect(Player.first.wages).to eq(172125)
+      expect(Player.first.wages).to eq(87125)
       expect(Player.first.total_skill).to eq(85)
       expect(Player.first.games_played).to eq(1)
       expect(Player.first.total_goals).to eq(2)

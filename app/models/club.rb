@@ -60,6 +60,7 @@ class Club < ApplicationRecord
 
     items = {
       transfers_out: messages.where(var2: 'inc-transfers_out').sum(:var3),
+      tv_income: messages.where(var2: 'inc-tv_income').sum(:var3),
       club_shop_online: messages.where(var2: 'inc-club_shop_online').sum(:var3),
       club_shop_match: messages.where(var2: 'inc-club_shop_match').sum(:var3),
       gate_receipts: messages.where(var2: 'inc-gate_receipts').sum(:var3),

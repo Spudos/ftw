@@ -62,11 +62,11 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       )
 
       allow_any_instance_of(Kernel).to receive(:rand).with(62..69).and_return(65)
-      allow_any_instance_of(Kernel).to receive(:rand).with(4545..5234).and_return(5000)
+      allow_any_instance_of(Kernel).to receive(:rand).with(1845..2434).and_return(2200)
 
       Turn::ClubUpdates.new(week).send(:ground_upkeep)
 
-      expect(Club.first.bank_bal).to eq(-135000)
+      expect(Club.first.bank_bal).to eq(-66600)
     end
   end
 
@@ -104,9 +104,13 @@ RSpec.describe Turn::ClubUpdates, type: :model do
         ticket_price: 10
       )
 
+      allow_any_instance_of(Kernel).to receive(:rand).with(0.9756..0.9923).and_return(0.99)
+      allow_any_instance_of(Kernel).to receive(:rand).with(102345..119234).and_return(105000)
+      allow_any_instance_of(Kernel).to receive(:rand).with(12345..19234).and_return(15000)
+
       Turn::ClubUpdates.new(week).send(:match_day_income)
 
-      expect(Club.first.bank_bal).to be_between(273960, 310083)
+      expect(Club.first.bank_bal).to eq(1278439)
     end
 
     it 'does not effect bank as no home game' do
