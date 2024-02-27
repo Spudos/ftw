@@ -17,6 +17,34 @@ RSpec.describe Selection, type: :model do
     expect(club_selection).to eq(11)
     end
 
+    it "selects players if an incomplete selection exists for a managed club" do
+      5.times do |n|
+        create(:selection, player_id: n + 1)
+      end
+      create(:club, managed: true)
+
+      3.times do |n|
+        create(:player, position: 'gkp')
+      end
+      6.times do |n|
+        create(:player, position: 'dfc')
+      end
+      6.times do |n|
+        create(:player, position: 'mid')
+      end
+      6.times do |n|
+        create(:player, position: 'att')
+      end
+
+    params = {week: 1}
+
+    Selection.new.auto_selection(params)
+
+    club_selection = Selection.where(club_id: 1).count
+
+    expect(club_selection).to eq(11)
+    end
+
     it "selects 11 players for the club" do
       params = {week: 1}
       create(:club)
