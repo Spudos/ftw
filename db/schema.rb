@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_27_132709) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_27_151856) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -141,9 +141,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_27_132709) do
     t.string "action_id"
     t.integer "var3"
   end
-
-# Could not dump table "news" because of following StandardError
-#   Unknown type '' for column 'news_type'
 
   create_table "performances", force: :cascade do |t|
     t.integer "match_id"
