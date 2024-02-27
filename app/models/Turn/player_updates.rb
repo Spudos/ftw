@@ -23,7 +23,7 @@ class Turn::PlayerUpdates
   private
 
   def process
-    functions = [:fitness_increase, :contract_decrease, :player_value]
+    functions = [:fitness_increase, :contract_decrease, :player_value, :player_wages, :player_total_skill, :player_games_played, :player_total_goals, :player_total_assists, :player_average_perfomance]
     # objects = [FitnessEngine, ContractEngine, PlayerEngine]
 
     player_data.in_batches do |batch|
@@ -37,7 +37,9 @@ class Turn::PlayerUpdates
       #   players = object.new(players).process
       # end
 
-      players.save
+      # players.save
+      attributes = players.to_a.map(&:as_json)
+      Player.upsert_all(attributes)
     end
   end
 
@@ -111,7 +113,7 @@ class Turn::PlayerUpdates
     players.each do |player|
       player.total_skill = player.total_skill
 
-      player.save
+      # player.save
     end
   end
 
@@ -120,7 +122,7 @@ class Turn::PlayerUpdates
       performances = Performance.where(player_id: player.id)
       player.games_played = performances.count(:match_performance)
 
-      player.save
+      # player.save
     end
   end
 
@@ -129,21 +131,21 @@ class Turn::PlayerUpdates
       goals = Goal.where(scorer_id: player.id)
       player.total_goals = goals.count(:scorer_id)
 
-      player.save
+      # player.save
     end
   end
 
-  def player_total_assists
-    player_data.each do |player|
+  def player_total_assists(players)
+    players.each do |player|
       assists = Goal.where(assist_id: player.id)
       player.total_assists = assists.count(:assist_id)
 
-      player.save
+      # player.save
     end
   end
 
-  def player_average_perfomance
-    player_data.each do |player|
+  def player_average_perfomance(players)
+    players.each do |player|
       performances = Performance.where(player_id: player.id)
       player.average_performance = performances.average(:match_performance).to_i
 
