@@ -40,7 +40,7 @@ class Turn::ArticleUpdates
       article_type: 'Player',
       headline: "Deadly #{players[0][:name]}!",
       sub_headline: "No one has scored more than the #{players[0][:position]} so far this season",
-      article: "#{players[0][:name]} is in great form at the moment scoring #{players[0][:total_goals]} goals.  He has been performing very well for his club, #{Club.find_by(id: players[0][:club_id])&.name}, banging in more goals than anyone else in the world. The #{players[0][:position]} will be turning a few heads amongst managers around the world.  Other players who are in great form include #{players[1][:position]} #{players[1][:name]} with #{players[1][:total_goals]} goals, #{players[2][:position]} #{players[2][:name]} with #{players[2][:total_goals]} goals and #{players[3][:position]} #{players[3][:name]} with #{players[3][:total_goals]} goals}."
+      article: "#{players[0][:name]} is in great form at the moment scoring #{players[0][:total_goals]} goals.  He has been performing very well for his club, #{Club.find_by(id: players[0][:club_id])&.name}, banging in more goals than anyone else in the world. The #{players[0][:position]} will be turning a few heads amongst managers around the world.  Other players who are in great form include #{players[1][:position]} #{players[1][:name]} with #{players[1][:total_goals]} goals, #{players[2][:position]} #{players[2][:name]} with #{players[2][:total_goals]} goals and #{players[3][:position]} #{players[3][:name]} with #{players[3][:total_goals]} goals."
       )
   end
 
@@ -54,7 +54,7 @@ class Turn::ArticleUpdates
       article_type: 'Player',
       headline: "Assist King #{players[0][:name]}!",
       sub_headline: "No one has assisted more than the #{players[0][:position]} so far this season",
-      article: "#{players[0][:name]} is in great form at the moment assisting #{players[0][:total_assists]} goals.  He has been performing very well for his club, #{Club.find_by(id: players[0][:club_id])&.name}, chipping in with more assists than anyone else in the world. The #{players[0][:position]} will be interesting to managers who need a creative player.  Other players who are in great form include #{players[1][:position]} #{players[1][:name]} with #{players[1][:total_assists]} assists, #{players[2][:position]} #{players[2][:name]} with #{players[2][:total_assists]} assists and #{players[3][:position]} #{players[3][:name]} with #{players[3][:total_assists]} assists}."
+      article: "#{players[0][:name]} is in great form at the moment assisting #{players[0][:total_assists]} goals.  He has been performing very well for his club, #{Club.find_by(id: players[0][:club_id])&.name}, chipping in with more assists than anyone else in the world. The #{players[0][:position]} will be interesting to managers who need a creative player.  Other players who are in great form include #{players[1][:position]} #{players[1][:name]} with #{players[1][:total_assists]} assists, #{players[2][:position]} #{players[2][:name]} with #{players[2][:total_assists]} assists and #{players[3][:position]} #{players[3][:name]} with #{players[3][:total_assists]} assists."
       )
   end
 

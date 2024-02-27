@@ -10,7 +10,7 @@
       </div>
     </div>
   </div>
-
+<% if @latest_article.count == 3 %>
   <div class="row flex justify-content-center">
     <h3 class="text-left">Latest Articles</h3>
     <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
@@ -32,6 +32,7 @@
       <%= link_to "Show Article", article_path(@latest_article[2][:id]), class: "btn btn-sm btn-primary" %>
     </div>
   </div>
+<% end %>
 
   <div class="row flex justify-content-center">
     <h3 class="text-left">Game Features</h3>

@@ -2,7 +2,7 @@
 
 <%= link_to "Create Articles", new_article_path, class: "btn btn-sm btn-primary" %>
  
-
+<% if @articles_main.count == 6 %>
 <div class="row flex justify-content-center">
     <h3 class="text-center">Latest Articles</h3>
     <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
@@ -27,6 +27,7 @@
       <%= link_to "Show Article", article_path(@articles_main[2][:id]), class: "btn btn-sm btn-primary" %>
     </div>
   </div>
+
   <div class="row flex justify-content-center">
     <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
       <p><%= @articles_main[3][:articles_type] %></p>
@@ -34,7 +35,6 @@
       <h5><%= @articles_main[3][:headline] %></h5>
       <p><%= @articles_main[3][:sub_headline] %></p>
       <%= link_to "Show Article", article_path(@articles_main[3][:id]), class: "btn btn-sm btn-primary" %>
-
     </div>
     <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
       <p><%= @articles_main[4][:articles_type] %></p>
@@ -51,11 +51,16 @@
       <%= link_to "Show Article", article_path(@articles_main[5][:id]), class: "btn btn-sm btn-primary" %>
     </div>
   </div>
-<h3 class="text-center">Other Articles</h3>
-<div id="article">
-  <table class="table table-hover">
-  <% @articles_other.each do |article| %>
-    <%= render article %>
-  <% end %>  
-  </table>
-</div>
+<% end %>
+<% if @articles_other.count >= 1 %>
+  <h3 class="text-center">Other Articles</h3>
+  <div id="article">
+    <table class="table table-hover">
+    <% @articles_other.each do |article| %>
+      <%= render article %>
+    <% end %>  
+    </table>
+  </div>
+<% else%>
+  <h3 class="text-center">No Articles Exist</h3>
+<% end %>
