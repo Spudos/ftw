@@ -122,15 +122,15 @@
           <% end %>
 
           <% if @brasileiro_serie_a_completed == @brasileiro_serie_a_scheduled %>
-            <button type="submit" name="competition" value="Brasileiro Serie A" class="btn btn-danger disabled">Serie A <%= @brasileiro_serie_a_completed %>/<%= @brasileiro_serie_a_scheduled %></button><br>
+            <button type="submit" name="competition" value="Brasileiro Serie A" class="btn btn-danger disabled">Brasil Serie A <%= @brasileiro_serie_a_completed %>/<%= @brasileiro_serie_a_scheduled %></button><br>
           <% else %>
-            <button type="submit" name="competition" value="Brasileiro Serie A" class="btn btn-success" onclick="return confirm('Are you sure you want to run Brasileiro Serie A games?')">Serie A <%= @brasileiro_serie_a_completed %>/<%= @brasileiro_serie_a_scheduled %></button><br>
+            <button type="submit" name="competition" value="Brasileiro Serie A" class="btn btn-success" onclick="return confirm('Are you sure you want to run Brasileiro Serie A games?')">Brasil Serie A <%= @brasileiro_serie_a_completed %>/<%= @brasileiro_serie_a_scheduled %></button><br>
           <% end %>
 
           <% if @brasileiro_serie_b_completed == @brasileiro_serie_b_scheduled %>
-            <button type="submit" name="competition" value="Brasileiro Serie B" class="btn btn-danger disabled">Serie B <%= @brasileiro_serie_b_completed %>/<%= @brasileiro_serie_b_scheduled %></button><br>
+            <button type="submit" name="competition" value="Brasileiro Serie B" class="btn btn-danger disabled">Brasil Serie B <%= @brasileiro_serie_b_completed %>/<%= @brasileiro_serie_b_scheduled %></button><br>
           <% else %>
-            <button type="submit" name="competition" value="Brasileiro Serie B" class="btn btn-success" onclick="return confirm('Are you sure you want to run Brasileiro Serie B games?')">Serie B <%= @brasileiro_serie_b_completed %>/<%= @brasileiro_serie_b_scheduled %></button><br>
+            <button type="submit" name="competition" value="Brasileiro Serie B" class="btn btn-success" onclick="return confirm('Are you sure you want to run Brasileiro Serie B games?')">Brasil Serie B <%= @brasileiro_serie_b_completed %>/<%= @brasileiro_serie_b_scheduled %></button><br>
           <% end %>
 
           <h6>League Cup</h6>
@@ -185,6 +185,16 @@
             <button type="submit" class="btn btn-danger disabled">Club Updates Completed</button><br>
           <% else %>
             <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Club Updates?')">Club updates</button><br>
+          <% end %>
+        </form>
+
+        <h6>Process End of Turn Article Updates</h6>
+        <form action="/turns/process_article_updates" method="post">
+          <input type="hidden" name="week" value="<%= params[:week] %>">
+          <% if Message.exists?(action_id: "#{params[:week]}ARU") %>
+            <button type="submit" class="btn btn-danger disabled">Article Updates Completed</button><br>
+          <% else %>
+            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Article Updates?')">Article updates</button><br>
           <% end %>
         </form>
       </div>

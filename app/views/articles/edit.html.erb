@@ -1,0 +1,10 @@
+<h1>Editing articles</h1>
+
+<%= render "form", article: @articles %>
+
+<br>
+
+<div>
+  <%= link_to "Show this article", @articles, class: "btn btn-sm btn-primary" %>
+  <%= link_to "Back to articles", articles_path, class: "btn btn-sm btn-primary" %>
+</div>

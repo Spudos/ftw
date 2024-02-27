@@ -1,0 +1,11 @@
+<div class="row flex justify-content-center">
+  <h4 class="text-center"><strong><%= @article.headline %></strong></h4>
+  <div class="col-md-6 m-3 border border-5 shadow p-0 bg-light">
+    <%= image_tag(@article.image, style: "width: 100%; object-fit: cover;") %>
+    <h6>Article Type: <%= @article.article_type %></h6>
+    <h6>Club: <%= Club.find_by(id: @article.club_id)&.name %></h6>
+    <p><strong><%= @article.sub_headline %></strong></p>
+    <p><%= @article.article %></p>
+    <%= link_to "Back to Articles", articles_path, class: "btn btn-sm btn-primary" %>
+  </div>
+</div>

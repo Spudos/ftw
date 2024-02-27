@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :news do
+  factory :article do
     week { 1 }
     club_id { 1 }
     image { "MyString" }

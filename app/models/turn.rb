@@ -47,7 +47,20 @@ class Turn < ApplicationRecord
       if params[:week].nil?
         raise 'Please select a week before trying to process Upgrade Admin.'
       else
-        raise 'Upgrade Admin for that week has already been processed.'
+        raise 'Club Updates for that week has already been processed.'
+      end
+    end
+  end
+
+  def process_article_updates(params)
+    if params[:week].present? && Message.find_by(action_id: "#{params[:week]}ARU").nil?
+      Turn::ArticleUpdates.new(params[:week]).call
+      Message.create(action_id: "#{params[:week]}ARU", week: params[:week], club_id: '999', var1: "week #{params[:week]} Article Updates processed")
+    else
+      if params[:week].nil?
+        raise 'Please select a week before trying to process Upgrade Admin.'
+      else
+        raise 'Article Admin for that week has already been processed.'
       end
     end
   end

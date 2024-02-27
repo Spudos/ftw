@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :news
+  resources :articles
   devise_for :users
   resources :turnsheets
   resources :turns
@@ -83,6 +83,7 @@ Rails.application.routes.draw do
   post '/turns/process_player_updates', to: 'turns#process_player_updates'
   post '/turns/process_upgrade_admin', to: 'turns#process_upgrade_admin'
   post '/turns/process_club_updates', to: 'turns#process_club_updates'
+  post '/turns/process_article_updates', to: 'turns#process_article_updates'
 
   post '/matches/match', to: 'matches#match'
   get '/matches/outcome', to: 'matches#outcome'

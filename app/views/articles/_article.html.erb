@@ -1,0 +1,19 @@
+<tr>
+  <td>
+    <p>Week: <%= article.week %></p>
+  </td>
+  <td>
+    <strong><%= article.headline %></strong>
+  </td>
+  <td>
+    <%= article.sub_headline %>
+  </td>
+  <td>
+    <%= link_to "Show Article", article_path(article.id), class: "btn btn-sm btn-primary" %>
+  </td>
+
+    <td>
+      <%= link_to "Edit", edit_article_path(article.id), class: "btn btn-sm btn-primary" %>
+    </td>
+
+</tr>
