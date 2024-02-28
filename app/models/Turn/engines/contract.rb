@@ -1,4 +1,4 @@
-class Turn::Engines::ContractEngine
+class Turn::Engines::Contract
   attr_reader :players, :week
 
   def initialize(players, week)

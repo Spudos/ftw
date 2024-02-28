@@ -1,4 +1,4 @@
-class Turn::Engines::FitnessEngine
+class Turn::Engines::Fitness
   attr_reader :players, :week
 
   def initialize(players, week)

@@ -1,4 +1,4 @@
-class Turn::Engines::PlayerAveragePerformanceEngine
+class Turn::Engines::AveragePerformance
   attr_reader :players, :week
 
   def initialize(players, week)

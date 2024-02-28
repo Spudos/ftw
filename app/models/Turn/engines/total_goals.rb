@@ -1,4 +1,4 @@
-class Turn::Engines::PlayerTotalGoalsEngine
+class Turn::Engines::TotalGoals
   attr_reader :players, :week
 
   def initialize(players, week)

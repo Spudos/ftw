@@ -1,4 +1,4 @@
-class Turn::Engines::PlayerWagesEngine
+class Turn::Engines::Value
   attr_reader :players, :week
 
   def initialize(players, week)
@@ -7,21 +7,21 @@ class Turn::Engines::PlayerWagesEngine
   end
 
   def process
-    player_wages
+    player_value
   end
 
   private
 
-  def player_wages
+  def player_value
     players.each do |player|
       if player.total_skill < 77
-        player.wages = player.total_skill * 445
+        player.value = player.total_skill * 259740
       elsif player.total_skill < 99
-        player.wages = player.total_skill * 1025
+        player.value = player.total_skill * 505050
       elsif player.total_skill < 110
-        player.wages = player.total_skill * 1587
+        player.value = player.total_skill * 772727
       else
-        player.wages = player.total_skill * 2181
+        player.value = player.total_skill * 867546
       end
     end
   end
