@@ -106,4 +106,10 @@ Rails.application.routes.draw do
   get '/players/player_view', to: 'players#player_view'
   get '/players/unmanaged_players', to: 'players#unmanaged_players'
   get '/players/listed_players', to: 'players#listed_players'
+
+  get '/help/rulebook', to: 'help#rulebook'
+  get '/help', to: 'help#index'
+  get '/help/faq', to: 'help#faq'
+  get '/help/issues', to: 'help#issues'
+  get '/help/club_creation', to: 'help#club_creation'
 end

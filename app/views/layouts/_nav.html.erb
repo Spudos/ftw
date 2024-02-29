@@ -28,6 +28,9 @@
   </li>
   <% end %>
   <li class="nav-item">
+    <a href="/" class="btn btn-outline-dark">Turns</a>
+  </li>
+  <li class="nav-item">
     <div class="btn-group">
         <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           Leagues
@@ -96,6 +99,9 @@
         </ul>
       </div>
   </li>
+  <li class="nav-item">
+    <a href="<%= help_path %>" class="btn btn-outline-dark">Help</a>
+  </li>
   <% if current_user && current_user.gm? %> 
   <li class="nav-item">
     <div class="btn-group">
@@ -113,8 +119,6 @@
           <li><a class="dropdown-item" href="<%= new_player_path %>">Create A Player</a></li>
           <li><a class="dropdown-item" href="<%= fixtures_path %>">View and Edit Fixtures</a></li>
           <li><a class="dropdown-item" href="<%= new_fixture_path %>">Create A Fixture</a></li>
-          
-          
         </ul>
       </div>
   </li>
@@ -127,6 +131,7 @@
         <ul class="dropdown-menu">
           <% if current_user %> 
             <li><a class="dropdown-item" <%= link_to "Sign out", destroy_user_session_path, 'data-turbo-method': :delete %></a></li>
+            <li><a class="dropdown-item" href="/">My Profile</a></li>
           <% else %>
             <li><a class="dropdown-item" <%= link_to "Sign up", new_user_registration_path %></a></li>
             <li><a class="dropdown-item" <%= link_to "Sign in", new_user_session_path %></a></li>
