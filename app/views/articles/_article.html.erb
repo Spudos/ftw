@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <p>Week: <%= article.week %></p>
+    <p>A Week: <%= article.week %></p>
   </td>
   <td>
     <strong><%= article.headline %></strong>
@@ -11,9 +11,10 @@
   <td>
     <%= link_to "Show Article", article_path(article.id), class: "btn btn-sm btn-primary" %>
   </td>
-
+  <% if current_user || current_user.gm? %>
     <td>
       <%= link_to "Edit", edit_article_path(article.id), class: "btn btn-sm btn-primary" %>
     </td>
+  <% end %>
 
 </tr>

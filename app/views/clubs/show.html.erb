@@ -20,6 +20,29 @@
         <%= render "staff" %>
       </div>
 
+      <div class="text-left">
+        <div class="row text-left">
+          <h3 class="text-center">Income and Expenditure For Week <%= @finance_items[:week] %></h3>
+        <div class="col-md-6">
+          <%= render "income" %>
+        </div>
+        <div class="col-md-6">
+          <%= render "payments" %>
+        </div>
+      </div>
+      <h3 class="text-center">Summary</h3>
+      <%= render 'finance_summary' %>
+      <br>
+      <br>
+      <br>
+      </div>
+
+  <div class="text-left">
+    <div class="row text-left">
+      <%= render "messages_finance" %>
+    </div>
+  </div>
+
     <%= render "normal_skills" %>
 
     <%= render "hidden_skills" %>

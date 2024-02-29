@@ -47,7 +47,11 @@ class TurnsheetPolicy < ApplicationPolicy
     end
 
     def resolve
-      raise NotImplementedError, "You must define #resolve in #{self.class}"
+      if user.admin?
+        scope.all
+      else
+        scope.where(manager_email: current_user.email)
+      end
     end
 
     private

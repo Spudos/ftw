@@ -2,9 +2,11 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: %i[ show edit update destroy ]
 
   def index
-    @articles = Article.all
-    @articles_main = Article.order(week: :desc).limit(6)
-    @articles_other = Article.order(week: :desc).offset(6)
+    highest_week = Article.maximum(:week)
+    @articles = Article.where.not(article_type: 'gm')
+    @articles_main = Article.where.not(article_type: 'gm').order(week: :desc).limit(6)
+    @articles_other = Article.where.not(article_type: 'gm').order(week: :desc).offset(6)
+    @articles_gm = Article.where(article_type: 'gm').where(week: highest_week).order(id: :desc)
   end
 
   def show
@@ -23,7 +25,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @articles.save
-        format.html { redirect_to articles_url(@articles), notice: "Articles was successfully created." }
+        format.html { redirect_to articles_url(@articles), notice: "Article was successfully created." }
         format.json { render :show, status: :created, location: @articles }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,7 +37,7 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @articles.update(articles_params)
-        format.html { redirect_to articles_url(@articles), notice: "Articles was successfully updated." }
+        format.html { redirect_to articles_url(@articles), notice: "Article was successfully updated." }
         format.json { render :show, status: :ok, location: @articles }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -48,7 +50,7 @@ class ArticlesController < ApplicationController
     @articles.destroy
 
     respond_to do |format|
-      format.html { redirect_to articles_index_url, notice: "Articles was successfully destroyed." }
+      format.html { redirect_to articles_path, notice: "Article was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -59,6 +61,6 @@ class ArticlesController < ApplicationController
     end
 
     def articles_params
-      params.require(:article).permit(:week, :club_id, :image, :articles_type, :headline, :sub_headline, :article)
+      params.require(:article).permit(:week, :club_id, :image, :article_type, :headline, :sub_headline, :article)
     end
 end
