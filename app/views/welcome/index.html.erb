@@ -6,7 +6,9 @@
       </div>
       <div class="col-md-4 p-0" id="breaking">
         <h2 class="lead-text">Have you got what it takes to manage a club to success?</h2>
-        <h6 class="sub-text">Have you got what it takes to manage a club to success?</h6>
+        <div class="d-flex justify-content-center">
+          <%= link_to "Create Your Club Now", help_club_creation_path, class: "col-md-5 btn btn-danger" %>
+        </div>
       </div>
     </div>
   </div>
@@ -101,6 +103,12 @@
       <%= image_tag("stadium-tile.jpg", style: "width: 100%; object-fit: cover;") %>   
       <h5>FAQ's</h5>
     </div>
+  </div>
+
+  <div class="container d-flex flex-column col-md-5 blue align-items-center border border-5 shadow">
+    <h2 class="text-center">Prove you can beat the best</h2>
+    <%= image_tag("trophy.jpg", style: "width: 200px; object-fit: cover;") %>
+    <%= link_to "Sign Up To Create Your Club Now", help_club_creation_path, class: "col-md-6 btn btn-danger" %>
   </div>
 
   <div class="row flex justify-content-center">
