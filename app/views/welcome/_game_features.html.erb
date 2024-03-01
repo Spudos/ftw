@@ -1,69 +1,120 @@
 <div class="row mb-5">
-  <div class="row">
-    <div class="blue-body">
-      <button id='playerButton' class="col-md-2 btn btn-sm btn-danger">Players</button>
-      <button id='matchButton' class="col-md-2 btn btn-sm btn-danger">Matches</button>
-      <button id='clubButton' class="col-md-2 btn btn-sm btn-danger">Clubs</button>
-    </div>
-  </div>
-
   <div id='player' class="row">
     <div class="blue-body">
-      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-        <%= image_tag("player.jpg", style: "width: 100%; object-fit: cover;") %>
+      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light" style="height: 600px;">
+        <%= image_tag("statistics.jpg", style: "width: 100%; object-fit: cover;") %>
         <h6>Hidden Stats</h6>
-        <p>turn actions from club screens</p>
+        <p>All players have many different hidden stats</p>
+        <p>They include things like</p>
+        <ul>
+          <li>Consistency</li>
+          <li>Star Rating</li>
+          <li>Potential Skills</li>
+          <li>Loyalty</li>
+        </ul>
+      <p>and many more</p>
+      <p>They affect how a player performs and his decision making and happiness</p>
       </div>
-      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-        <%= image_tag("player.jpg", style: "width: 100%; object-fit: cover;") %>
+      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light" style="height: 600px;">
+        <%= image_tag("training.jpg", style: "width: 100%; object-fit: cover;") %>
         <h6>Training</h6>  
-        <p>sponsorship</p>
+        <p>You can affect most aspects of a players skills and characteristics</p>
+        <p>The most common way of doing this is to train a playing skill</p>
+        <p>For this to be sucessful you need to have a good coach and the player needs to have a good potential in that skill</p>
+        <p>Be careful though, training can also have negative effects on a player and can change the way a player approaches game situations</p>
       </div>
-      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-        <%= image_tag("player.jpg", style: "width: 100%; object-fit: cover;") %> 
+      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light" style="height: 600px;">
+        <%= image_tag("transfers.jpg", style: "width: 100%; object-fit: cover;") %> 
         <h6>Transfers</h6> 
-        <p>turn payment system</p>
+        <p>One of the most enjoyable aspect of the game is the ability to build you playing squad</p>
+        <p>With thousands of players at hundreds of teams plus free agents there are plenty of ways you can build your team</p>
+        <p>Transfer systems include</p>
+        <ul>
+          <li>Buying from unmanaged clubs</li>
+          <li>Selling unwanted players to the transfer circuit</li>
+          <li>Free Agent bids</li>
+          <li>Buying listed players</li>
+          <li>Selling between managed clubs</li>
       </div>
     </div>
   </div>
 
   <div id='matches' class="row">
     <div class="blue-body">
-      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-        <%= image_tag("player.jpg", style: "width: 100%; object-fit: cover;") %> 
+      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light" style="height: 600px;">
+        <%= image_tag("blend.jpg", style: "width: 100%; object-fit: cover;") %> 
         <h6>Blend</h6> 
-        <p>turn actions from club screens</p>
+        <p>One of the really great features of the match engine is how it utilises the blend value of a player</p>
+        <p>The blend value effects how well players gel together, and therefore, how they will perform on the pitch</p>
+        <p>If players have a simililar blend they will perform better together</p>
+        <p>A player with a blend value that is significantly different to other players can effect the balance of that area of the team</p>
       </div>
-      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-        <%= image_tag("player.jpg", style: "width: 100%; object-fit: cover;") %>
+      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light" style="height: 600px;">
+        <%= image_tag("crowds.jpg", style: "width: 100%; object-fit: cover;") %>
         <h6>Crowds</h6>    
-        <p>sponsorship</p>
+        <p>The crowd in a stadium can have a massive effect on your team</p>
+        <p>The match engine takes into account the size of the crowd, the noise they make and the atmosphere they create</p>
+        <p>This can have a big effect on the performance of your team</p>
+        <p>You have a decision to make, do you build a big stadium that will help your team win home games or invest in the squad?</p>
       </div>
-      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-        <%= image_tag("player.jpg", style: "width: 100%; object-fit: cover;") %>
+      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light" style="height: 600px;">
+        <%= image_tag("tactics.jpg", style: "width: 100%; object-fit: cover;") %>
         <h6>Tactics</h6>  
-        <p>turn payment system</p>
+        <p>Everyone likes to regard themselves as a tactical genius!</p>
+        <p>But in this game you can really show off your tactical skills</p>
+        <p>There are many different formations and tactics you can use as well as the levels of agression you employ</p>
+        <p>One unique feature of FTW is the 'pressing' element of the tactics.  Do you go with a high energy, all out press or do you save players legs for later in the game?</p>
       </div>
     </div>
   </div>
 
   <div id='club' class="row">
     <div class="blue-body">
-      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-        <%= image_tag("player.jpg", style: "width: 100%; object-fit: cover;") %> 
-        <h6>Stadium</h6>
-        <p>turn payment system</p>
-      </div>
-      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-        <%= image_tag("player.jpg", style: "width: 100%; object-fit: cover;") %>   
-        <h6>Staff</h6>
-        <p>turn payment system</p>
-      </div>
-      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-        <%= image_tag("player.jpg", style: "width: 100%; object-fit: cover;") %>  
+      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light" style="height: 600px;">
+        <%= image_tag("finance.png", style: "width: 100%; object-fit: cover;") %>  
         <h6>Finances</h6>
-        <p>turn payment system</p>
+        <p>Money is the lifeblood of any club</p>
+        <p>How you deploy your resources is up to you</p>
+        <p>Do you invest in the squad, the stadium or the staff?</p>
+        <p>Do you save for a rainy day or do you spend big to win now?</p>
+        <p>Balancing these factors will help determine how likely you are to achieve success</p>
       </div>
+      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light" style="height: 600px;">
+        <%= image_tag("stadium.jpg", style: "width: 100%; object-fit: cover;") %> 
+        <h6>Stadium</h6>
+        <p>We all love our home ground and in FTW you hve the chance to shape exactly what it looks like</p>
+        <p>The various stadium features affect your teams revenue and performance</p>
+        <p>The stadium includes</p>
+        <ul>
+          <li>Stand Capacity</li>
+          <li>Stand Condition</li>
+          <li>Hospitality</li>
+          <li>Facilities</li>
+          <li>Pitch Condition</li>
+        </ul>
+        <p>With more features to be added in the future</p>
+      </div>
+      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light" style="height: 600px;">
+        <%= image_tag("staff.jpg", style: "width: 100%; object-fit: cover;") %>   
+        <h6>Staff</h6>
+        <p>You control the standard of staff employed by your club</p>
+        <p>Staff include</p>
+        <ul>
+          <li>Coaches for each area of the team</li>
+          <li>Scouts</li>
+          <li>Physios</li>
+        </ul>
+        <p>You backroom team is vitaly important to you.  They can be used to improve players and get them ready for the next match</p>
+        <p>Scouts can be used to gain vital tactical advantages over your opponents</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="blue-body">
+      <button id='playerButton' class="col-md-2 btn btn-sm btn-danger">Players</button>
+      <button id='matchButton' class="col-md-2 btn btn-sm btn-danger">Matches</button>
+      <button id='clubButton' class="col-md-2 btn btn-sm btn-danger">Clubs</button>
     </div>
   </div>
 </div>
