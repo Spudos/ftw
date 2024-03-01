@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :matches
   resources :fixtures
   resources :clubs, param: :club_id
-  resources :leagues, param: :competition
+  #resources :leagues, param: :competition
   resources :admin
   resources :messages
   resources :tactics
@@ -35,42 +35,7 @@ Rails.application.routes.draw do
   get '/clubs/manager/fixtures', to: 'clubs#fixtures'
   get '/clubs/manager/history', to: 'clubs#history'
 
-  get '/leagues/premier/table', to: 'leagues#premier_league_table'
-  get '/leagues/premier/statistics', to: 'leagues#premier_league_statistics'
-  get '/leagues/premier/fixtures', to: 'leagues#premier_league_fixtures'
-  get '/leagues/championship/table', to: 'leagues#championship_league_table'
-  get '/leagues/championship/statistics', to: 'leagues#championship_league_statistics'
-  get '/leagues/championship/fixtures', to: 'leagues#championship_league_fixtures'
-  get '/leagues/ligue_1/table', to: 'leagues#ligue_1_league_table'
-  get '/leagues/ligue_1/statistics', to: 'leagues#ligue_1_statistics'
-  get '/leagues/ligue_1/fixtures', to: 'leagues#ligue_1_fixtures'
-  get '/leagues/ligue_2/table', to: 'leagues#ligue_2_league_table'
-  get '/leagues/ligue_2/statistics', to: 'leagues#ligue_2_statistics'
-  get '/leagues/ligue_2/fixtures', to: 'leagues#ligue_2_fixtures'
-  get '/leagues/bundesliga_1/table', to: 'leagues#bundesliga_1_league_table'
-  get '/leagues/bundesliga_1/statistics', to: 'leagues#bundesliga_1_statistics'
-  get '/leagues/bundesliga_1/fixtures', to: 'leagues#bundesliga_1_fixtures'
-  get '/leagues/bundesliga_2/table', to: 'leagues#bundesliga_2_league_table'
-  get '/leagues/bundesliga_2/statistics', to: 'leagues#bundesliga_2_statistics'
-  get '/leagues/bundesliga_2/fixtures', to: 'leagues#bundesliga_2_fixtures'
-  get '/leagues/la_liga/table', to: 'leagues#la_liga_league_table'
-  get '/leagues/la_liga/statistics', to: 'leagues#la_liga_statistics'
-  get '/leagues/la_liga/fixtures', to: 'leagues#la_liga_fixtures'
-  get '/leagues/segunda_division/table', to: 'leagues#segunda_division_league_table'
-  get '/leagues/segunda_division/statistics', to: 'leagues#segunda_division_statistics'
-  get '/leagues/segunda_division/fixtures', to: 'leagues#segunda_division_fixtures'
-  get '/leagues/serie_a/table', to: 'leagues#serie_a_league_table'
-  get '/leagues/serie_a/statistics', to: 'leagues#serie_a_statistics'
-  get '/leagues/serie_a/fixtures', to: 'leagues#serie_a_fixtures'
-  get '/leagues/serie_b/table', to: 'leagues#serie_b_league_table'
-  get '/leagues/serie_b/statistics', to: 'leagues#serie_b_statistics'
-  get '/leagues/serie_b/fixtures', to: 'leagues#serie_b_fixtures'
-  get '/leagues/brasileiro_serie_a/table', to: 'leagues#brasileiro_serie_a_league_table'
-  get '/leagues/brasileiro_serie_a/statistics', to: 'leagues#brasileiro_serie_a_statistics'
-  get '/leagues/brasileiro_serie_a/fixtures', to: 'leagues#brasileiro_serie_a_fixtures'
-  get '/leagues/brasileiro_serie_b/table', to: 'leagues#brasileiro_serie_b_league_table'
-  get '/leagues/brasileiro_serie_b/statistics', to: 'leagues#brasileiro_serie_b_statistics'
-  get '/leagues/brasileiro_serie_b/fixtures', to: 'leagues#brasileiro_serie_b_fixtures'
+  get '/leagues', to: 'leagues#index'
 
   get '/leagues/league_cup/league', to: 'leagues#league_cup'
   get '/leagues/wcc/league', to: 'leagues#wcc'

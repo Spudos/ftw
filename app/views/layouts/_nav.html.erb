@@ -26,6 +26,7 @@
         </ul>
       </div>
   </li>
+
   <% end %>
   <li class="nav-item">
     <a href="/" class="btn btn-outline-dark">Turns</a>
@@ -36,42 +37,18 @@
           Leagues
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="<%= leagues_premier_table_path %>">Premier League Table</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_premier_statistics_path %>">Premier League Statistics</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_premier_fixtures_path %>">Premier League Fixtures</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_championship_table_path %>">Championship Table</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_championship_statistics_path %>">Championship Statistics</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_championship_fixtures_path %>">Championship Fixtures</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_ligue_1_table_path %>">Ligue 1 League Table</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_ligue_1_statistics_path %>">Ligue 1 Statistics</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_ligue_1_fixtures_path %>">Ligue 1 Fixtures</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_ligue_2_table_path %>">Ligue 2 League Table</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_ligue_2_statistics_path %>">Ligue 2 Statistics</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_ligue_2_fixtures_path %>">Ligue 2 Fixtures</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_bundesliga_1_table_path %>">Bundesliga 1 League Table</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_bundesliga_1_statistics_path %>">Bundesliga 1 Statistics</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_bundesliga_1_fixtures_path %>">Bundesliga 1 Fixtures</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_bundesliga_2_table_path %>">Bundesliga 2 League Table</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_bundesliga_2_statistics_path %>">Bundesliga 2 Statistics</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_bundesliga_2_fixtures_path %>">Bundesliga 2 Fixtures</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_la_liga_table_path %>">La Liga League Table</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_la_liga_statistics_path %>">La Liga Statistics</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_la_liga_fixtures_path %>">La Liga Fixtures</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_segunda_division_table_path %>">Segunda Division League Table</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_segunda_division_statistics_path %>">Segunda Division Statistics</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_segunda_division_fixtures_path %>">Segunda Division Fixtures</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_serie_a_table_path %>">Serie A League Table</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_serie_a_statistics_path %>">Serie A Statistics</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_serie_a_fixtures_path %>">Serie A Fixtures</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_serie_b_table_path %>">Serie B League Table</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_serie_b_statistics_path %>">Serie B Statistics</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_serie_b_fixtures_path %>">Serie B Fixtures</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_brasileiro_serie_a_table_path %>">Brasileiro Serie A League Table</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_brasileiro_serie_a_statistics_path %>">Brasileiro Serie A Statistics</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_brasileiro_serie_a_fixtures_path %>">Brasileiro Serie A Fixtures</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_brasileiro_serie_b_table_path %>">Brasileiro Serie B League Table</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_brasileiro_serie_b_statistics_path %>">Brasileiro Serie B Statistics</a></li>
-          <li><a class="dropdown-item" href="<%= leagues_brasileiro_serie_b_fixtures_path %>">Brasileiro Serie B Fixtures</a></li>
+          <li><a class="dropdown-item" href="<%= leagues_path(league: 'Premier League') %>">Premier League</a></li>
+          <li><a class="dropdown-item" href="<%= leagues_path(league: 'Championship') %>">Championship</a></li>
+          <li><a class="dropdown-item" href="<%= leagues_path(league: 'Ligue 1') %>">Ligue 1</a></li>
+          <li><a class="dropdown-item" href="<%= leagues_path(league: 'Ligue 2') %>">Ligue 2</a></li>
+          <li><a class="dropdown-item" href="<%= leagues_path(league: 'Bundesliga 1') %>">Bundesliga 1</a></li>
+          <li><a class="dropdown-item" href="<%= leagues_path(league: 'Bundesliga 2') %>">Bundesliga 2</a></li>
+          <li><a class="dropdown-item" href="<%= leagues_path(league: 'La Liga') %>">La Liga</a></li>
+          <li><a class="dropdown-item" href="<%= leagues_path(league: 'Segunda Division') %>">Segunda Division</a></li>
+          <li><a class="dropdown-item" href="<%= leagues_path(league: 'Serie A') %>">Serie A</a></li>
+          <li><a class="dropdown-item" href="<%= leagues_path(league: 'Serie B') %>">Serie B</a></li>
+          <li><a class="dropdown-item" href="<%= leagues_path(league: 'Brasileiro Serie A') %>">Brasileiro Serie A</a></li>
+          <li><a class="dropdown-item" href="<%= leagues_path(league: 'Brasileiro Serie B') %>">Brasileiro Serie B</a></li>
         </ul>
       </div>
   </li>

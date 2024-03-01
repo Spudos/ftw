@@ -1,1 +1,68 @@
-leagues index
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <button class="btn btn-sm btn-primary" onclick="toggleTableVisibility()">Table</button>
+  </li>
+  <li class="nav-item">
+    <button class="btn btn-sm btn-primary" onclick="toggleStatisticsVisibility()">Statistics</button>
+  </li>
+  <li class="nav-item">
+    <button class="btn btn-sm btn-primary" onclick="toggleFixturesVisibility()">Fixtures</button>
+  </li>
+</ul>
+
+<div id='table'>
+  <%= render 'table' %>
+</div>
+
+<div id='statistics'>
+  <div class="grid-container">
+    <div class="stats"><%= render 'leagues/top_total_skill' %></div>
+    <div class="stats"><%= render 'leagues/top_performance' %></div>
+    <div class="stats"><%= render 'leagues/top_assists' %></div>
+    <div class="stats"><%= render 'leagues/top_goals' %></div>
+    <div class="stats"><%= render 'leagues/top_total_skill_gkp' %></div>
+    <div class="stats"><%= render 'leagues/top_total_skill_dfc' %></div>
+    <div class="stats"><%= render 'leagues/top_total_skill_mid' %></div>
+    <div class="stats"><%= render 'leagues/top_total_skill_att' %></div>
+  </div>
+</div>
+
+<div id='fixtures'>
+  <form action="" method="get">
+    <label for="week_number">Select Week Number:</label>
+    <select name="week_number" id="week_number">
+      <% @weeks.each do |week_number| %>
+        <option value="<%= week_number %>"><%= week_number %></option>
+      <% end %>
+    </select>
+    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+  </form>
+
+  <h3>Week <%= params[:week_number]%></h3>
+
+  <%= render 'fixture_list' %>
+</div>
+
+<script>
+  const table = document.getElementById("table");
+  const statistics = document.getElementById("statistics");
+  const fixtures = document.getElementById("fixtures");
+
+function toggleTableVisibility() {
+  table.style.display = "block";
+  statistics.style.display = "none";
+  fixtures.style.display = "none";
+}
+
+function toggleStatisticsVisibility() {
+  table.style.display = "none";
+  statistics.style.display = "block";
+  fixtures.style.display = "none";
+}
+
+function toggleFixturesVisibility() {
+  table.style.display = "none";
+  statistics.style.display = "none";
+  fixtures.style.display = "block";
+}
+</script>

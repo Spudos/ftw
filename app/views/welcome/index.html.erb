@@ -1,144 +1,24 @@
 <div id="home-container" class='container flex align-items-center col-md-12 shadow'>
-  <div class='container col-md-10 mb-4 yellow border border-5 shadow'>
-    <div class="row">
-      <div class="col-md-8 p-0">
-      <%= image_tag("winners.jpg", style: "width: 100%; object-fit: cover;") %>
-      </div>
-      <div class="col-md-4 p-0" id="breaking">
-        <h2 class="lead-text">Have you got what it takes to manage a club to success?</h2>
-        <div class="d-flex justify-content-center">
-          <%= link_to "Create Your Club Now", help_club_creation_path, class: "col-md-5 btn btn-danger" %>
-        </div>
-      </div>
-    </div>
-  </div>
-<% if @latest_article.count == 3 %>
-  <div class="row flex justify-content-center">
-    <h3 class="text-left">Latest Articles</h3>
-    <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-      <p><%= @latest_article[0][:articles_type] %></p>
-      <%= image_tag(@latest_article[0][:image], style: "width: 100%; object-fit: cover;") %>
-      <h5><%= @latest_article[0][:headline] %></h5>
-      <%= link_to "Show Article", article_path(@latest_article[0][:id]), class: "btn btn-sm btn-primary" %>
-    </div>
-    <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-      <p><%= @latest_article[1][:articles_type] %></p>
-      <%= image_tag(@latest_article[1][:image], style: "width: 100%; object-fit: cover;") %>  
-      <h5><%= @latest_article[1][:headline] %></h5>
-      <%= link_to "Show Article", article_path(@latest_article[1][:id]), class: "btn btn-sm btn-primary" %>
-    </div>
-    <div class="col-md-3 m-3 border border-5 border-border shadow p-0 bg-light">
-      <p><%= @latest_article[2][:articles_type] %></p>
-      <%= image_tag(@latest_article[2][:image], style: "width: 100%; object-fit: cover;") %> 
-      <h5><%= @latest_article[2][:headline] %></h5>
-      <%= link_to "Show Article", article_path(@latest_article[2][:id]), class: "btn btn-sm btn-primary" %>
-    </div>
-  </div>
-<% end %>
 
-  <div class="row flex justify-content-center">
-    <h3 class="text-left">Game Features</h3>
-    <div class="blue m-3 flex justify-content-center"> 
-      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-        <p>turn actions from club screens</p>
-        <%= image_tag("stadium-tile.jpg", style: "width: 100%; object-fit: cover;") %> 
-        <p>turn actions from club screens</p>
-      </div>
-      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-        <p>turn actions from club screens</p>
-        <%= image_tag("stadium-tile.jpg", style: "width: 100%; object-fit: cover;") %>   
-        <p>sponsorship</p>
-      </div>
-      <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-        <p>turn actions from club screens</p>
-        <%= image_tag("stadium-tile.jpg", style: "width: 100%; object-fit: cover;") %>  
-        <p>turn payment system</p>
-      </div>
-    </div>
-  </div>
+<%= render 'hero' %>
 
-  <div class="row flex justify-content-center">
-    <h3 class="text-left">Popular Sections</h3>
-    <div class="col-md-2 m-3 border border-5 shadow p-0 bg-light">
-      <%= image_tag("stadium-tile.jpg", style: "width: 100%; object-fit: cover;") %> 
-      <p>turn actions from club screens</p>
-      <p>colour code skills if trained to pot</p>
-      <p>special events like community chance in monopoly</p>
-      <p>loan</p>
-    </div>
-    <div class="col-md-2 m-3 border border-5 shadow p-0 bg-light">
-      <%= image_tag("stadium-tile.jpg", style: "width: 100%; object-fit: cover;") %>   
-      <p>sponsorship</p>
-      <p>ticket price</p>
-      <p>cards</p>
-      <p>substitutions</p>
-      <p>board interactions</p>
-    </div>
-    <div class="col-md-2 m-3 border border-5 shadow p-0 bg-light">
-      <%= image_tag("stadium-tile.jpg", style: "width: 100%; object-fit: cover;") %>  
-      <p>turn payment system</p>
-      <p>player emails/comms</p>
-      <p>international management</p>
-      <p>manager rating</p>
-      <p>generate youth player</p>
-    </div>
-    <div class="col-md-2 m-3 border border-5 shadow p-0 bg-light">
-      <%= image_tag("stadium-tile.jpg", style: "width: 100%; object-fit: cover;") %>  
-      <p>turn payment system</p>
-      <p>player emails/comms</p>
-      <p>international management</p>
-      <p>manager rating</p>
-      <p>generate youth player</p>
-    </div>
-  </div>
+<h3 class="text-left">Latest Articles</h3>
+<%= render 'articles' %>
 
+<h3 class="text-left">Game Features</h3>
+<%= render 'game_features' %>
 
-  <div class="row flex justify-content-center"> 
-    <h3 class="text-left">Help Pages</h3> 
-    <div class="col-md-5 m-3 border border-5 shadow p-0 bg-light">
-      <%= image_tag("stadium-tile.jpg", style: "width: 100%; object-fit: cover;") %> 
-      <h5>Rules of the Game</h5>
-    </div>
-    <div class="col-md-5 m-3 border border-5 shadow p-0 bg-light">
-      <%= image_tag("stadium-tile.jpg", style: "width: 100%; object-fit: cover;") %>   
-      <h5>FAQ's</h5>
-    </div>
-  </div>
+<h3 class="text-left">Popular Sections</h3>
+<%= render 'popular_sections' %>
 
-  <div class="container d-flex flex-column col-md-5 blue align-items-center border border-5 shadow">
-    <h2 class="text-center">Prove you can beat the best</h2>
-    <%= image_tag("trophy.jpg", style: "width: 200px; object-fit: cover;") %>
-    <%= link_to "Sign Up To Create Your Club Now", help_club_creation_path, class: "col-md-6 btn btn-danger" %>
-  </div>
+<h3 class="text-left">Help Pages</h3>
+<%= render 'help' %>
 
-  <div class="row flex justify-content-center">
-    <h3 class="text-left">Contact and Links</h3>   
-    <div class="col-md-2 m-3 border border-5 shadow p-0 bg-light"> 
-      <p>FAQ's</p>
-      <p>colour code skills if trained to pot</p>
-      <p>special events like community chance in monopoly</p>
-      <p>loan</p>
-    </div>
-    <div class="col-md-2 m-3 border border-5 shadow p-0 bg-light">  
-      <p>sponsorship</p>
-      <p>ticket price</p>
-      <p>cards</p>
-      <p>substitutions</p>
-      <p>board interactions</p>
-    </div>
-    <div class="col-md-2 m-3 border border-5 shadow p-0 bg-light">  
-      <p>turn payment system</p>
-      <p>player emails/comms</p>
-      <p>international management</p>
-      <p>manager rating</p>
-      <p>generate youth player</p>
-    </div>
-    <div class="col-md-2 m-3 border border-5 shadow p-0 bg-light"> 
-      <p>turn payment system</p>
-      <p>player emails/comms</p>
-      <p>international management</p>
-      <p>manager rating</p>
-      <p>generate youth player</p>
-    </div>
-  </div>
+<%= render 'signup' %> 
+
+<h3 class="text-left">Contact and Links</h3>
+<%= render 'contacts' %>
+
 </div>
+
+<%= javascript_pack_tag 'welcome' %>
