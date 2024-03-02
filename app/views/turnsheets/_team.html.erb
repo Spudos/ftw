@@ -1,0 +1,72 @@
+
+<div class='row'>
+  <h1 style="text-align: center">Team</h1>
+  <div class='col'>
+    <h4 style="text-align: center">Selection</h4>
+    <table class="table table-hover table-bordered">
+      <tr>
+        <th scope="col">Shirt</th>
+        <th scope="col">Player</th>
+      <tr scope="row">
+        <td>Player 1</td>
+        <td>
+          <%= form.select :player_1, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+        </td>
+      </tr>
+      <tr scope="row">
+        <td>Player 2</td>
+        <td>
+          <%= form.select :player_2, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+        </td>
+      </tr>
+      <tr scope="row">
+        <td>Player 3</td>
+        <td>
+          <%= form.select :player_3, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+        </td>
+      </tr>
+      <tr scope="row">
+        <td>Player 4</td>
+        <td>
+          <%= form.select :player_4, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+        </td>
+      </tr>
+      <td>Player 5</td>
+        <td>
+          <%= form.select :player_5, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+        </td>
+      </tr>
+      <td>Player 6</td>
+        <td>
+          <%= form.select :player_6, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+        </td>
+      </tr>
+      <td>Player 7</td>
+        <td>
+          <%= form.select :player_7, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+        </td>
+      </tr>
+      <td>Player 8</td>
+        <td>
+          <%= form.select :player_8, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+        </td>
+      </tr>
+      <td>Player 9</td>
+        <td>
+          <%= form.select :player_9, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+        </td>
+      </tr>
+      <td>Player 10</td>
+        <td>
+          <%= form.select :player_10, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+        </td>
+      </tr>
+      <td>Player 11</td>
+        <td>
+          <%= form.select :player_11, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <%= javascript_pack_tag 'turnsheet' %>

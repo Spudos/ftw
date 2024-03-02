@@ -274,4 +274,12 @@ tr.chance {
   margin-bottom: 30px;
 }
 
-
+.item {
+  cursor: pointer;
+  padding: 5px;
+  margin-bottom: 5px;
+  background-color: lightgray;
+}
+.selected {
+  background-color: lightblue;
+}

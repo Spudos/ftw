@@ -1,44 +1,38 @@
 <h3 class="text-center">Team Selection</h3>
 <div id="form-container">
-  <%= form_tag selections_path(club: @club.id), method: :post do %>
-    <table class="table table-hover">
-      <thead>
-        <tr style="border: 1px <%= @primary %> solid;">
-          <th scope="col">Name</th>
-          <th scope="col">Position</th>
-          <th scope="col">Age</th>
-          <th scope="col">Total Skill</th>
-          <th scope="col">Selected</th>
-          <th scope="col">Pick</th>          
-          <th scope="col">Fitness</th>
-          <th scope="col">Played</th>
-          <th scope="col">Goals</th>
-          <th scope="col">Assists</th>
-          <th scope="col">Av. Perf</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Available Players</h3>
+      <div id="availableItems">
         <% Player.where(club: @club.id).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
-          <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
-            <td><%= player.name %></td>
-            <td><%= (player.position + player.player_position_detail).upcase %></td>
-            <td><%= player.age %></td>
-            <td><%= player.total_skill %></td>
-            <td><strong><%= Selection.exists?(player_id: player.id) ? 'Yes' : 'No' %></strong></td>
-            <td><%= check_box_tag "player_ids[]", player.id %></td>
-            <td><%= player.fitness %></td>
-            <td><%= Performance.where(player_id: player.id).count(:match_performance) %></td>
-            <td><%= Goal.where(assist_id: player.id).count(:assist_id) %></td>
-            <td><%= Goal.where(scorer_id: player.id).count(:scorer_id) %></td>
-            <td><%= Performance.where(player_id: player.id).average(:match_performance).to_i %></td>
-            <td><%= link_to "Show", player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>
-          </tr>
+          <div class="item">
+            <%= player.name %>
+            <%= (player.position + player.player_position_detail).upcase %>
+            <%= player.total_skill %>
+            <%= player.fitness %>
+            <%= player.average_performance %>
+            <%= hidden_field_tag 'player_ids[]', player.id, class: 'player-id' %> <!-- Add a hidden field with the player ID -->
+          </div>
         <% end %>
-      </tbody>
-    </table>
-    <div class="text-center">
-    <%= submit_tag "Save Selection", class: "btn btn-sm btn-danger"%>
+      </div>
     </div>
-  <% end %>
+
+    <div class="col-md-6">
+      <%= form_tag selections_path(club: @club.id), method: :post do %>
+        <h3>Selected Players</h3>
+        <div id="selectedItems"></div>
+        
+        </div>
+        </div class="text-center">
+          <%= submit_tag "Save Selection", class: "btn btn-sm btn-danger"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
+
+
+
+
+
+<%= javascript_pack_tag 'selection' %>

@@ -15,8 +15,8 @@ class SelectionsController < ApplicationController
   def create
     club = Club.find_by(id: params[:club])
     if params[:player_ids].nil? || params[:player_ids].size != 11
-      flash[:alert] = 'You must select 11 players.'
-      redirect_to club_path(params[:club])
+      flash[:alert] = "You must select 11 players, you selected #{params[:player_ids].count} players."
+      redirect_to request.referrer
     else
       player_ids = params[:player_ids].map(&:to_i)
 
@@ -26,7 +26,7 @@ class SelectionsController < ApplicationController
         Selection.create(club_id: club.id, player_id:)
       end
       flash[:notice] = 'Selection saved successfully.'
-      redirect_to club_path(params[:club])
+      redirect_to request.referrer
     end
   end
 

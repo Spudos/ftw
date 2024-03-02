@@ -80,7 +80,7 @@ class Turn::ArticleUpdates
       club_id: clubs[0][:id],
       image: 'fans.jpg',
       article_type: 'Club',
-      headline: "#{clubs[0][:name]} the biggest in the World?!",
+      headline: "World Giants #{clubs[0][:name]}?!",
       sub_headline: "#{clubs[0][:name]} estimated to have the biggest fanbase in the world",
       article: "#{clubs[0][:name]} are the most popular team in the world with a fanbase of #{clubs[0][:fanbase]}.  The club will be looking at how they can utilise their popularity and are considering stadium increases.  Other well supported clubs include #{clubs[1][:name]} from #{clubs[1][:league]}, #{clubs[2][:name]} from #{clubs[2][:league]} and #{clubs[3][:name]} from #{clubs[3][:league]}."
       )
