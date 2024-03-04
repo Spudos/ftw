@@ -1,4 +1,4 @@
-console.log("selection.js loaded successfully");
+console.log("turnsheet.js loaded successfully");
 
 document.addEventListener("DOMContentLoaded", function() {
   var availableItems = document.getElementById("availableItems");
@@ -72,39 +72,4 @@ document.addEventListener("DOMContentLoaded", function() {
   for (var i = 0; i < selectedItemElements.length; i++) {
     selectedItemElements[i].addEventListener("click", removeItem);
   }
-
-// Function to handle form submission
-function handleSubmit(event) {
-  event.preventDefault();
-
-  // Get the selected items from the selectedItems div
-  var selectedItems = document.querySelectorAll('#selectedItems .item');
-  var playerIds = [];
-
-  // Extract the player IDs from the selected items
-  selectedItems.forEach(function(item) {
-    var playerId = item.querySelector('.player_id').value;
-    playerIds.push(playerId);
-  });
-  
-  // Assign the player IDs to the player_1, player_2, etc. fields
-  playerIds.forEach(function(playerId, index) {
-    var fieldName = 'player_' + (index + 1);
-    var inputField = document.querySelector('input[name="' + fieldName + '"]');
-    if (inputField) {
-      inputField.value = playerId;
-    } else {
-      // If the input field doesn't exist, create a new hidden input field
-      var newInputField = document.createElement('input');
-      newInputField.type = 'hidden';
-      newInputField.name = fieldName;
-      newInputField.value = playerId;
-      document.querySelector('form').appendChild(newInputField);
-    }
-  });
-
-  // Submit the form
-  event.target.submit();
-}
-
 });

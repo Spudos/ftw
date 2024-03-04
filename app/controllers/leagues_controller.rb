@@ -15,20 +15,24 @@ class LeaguesController < ApplicationController
     @top_goals = Player.compile_top_goals_view(league)
     @top_assists = Player.compile_top_assists_view(league)
 
+    week_fixtures
+  end
+
+  def league_cup
+    week_fixtures
+  end
+
+  def wcc
+    week_fixtures
+  end
+
+  private
+
+  def week_fixtures
     weeks = Fixture.distinct.pluck(:week_number).uniq
     @weeks = weeks.sort!
 
     week_number = params[:week_number].presence || 1
     @fixtures = Fixture.where(comp: params[:league], week_number: week_number)
-  end
-
-  def league_cup
-    initialize_fixtures('League Cup')
-    render 'leagues/league_cup/league'
-  end
-
-  def wcc
-    initialize_fixtures('WCC')
-    render 'leagues/wcc/league'
   end
 end

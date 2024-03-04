@@ -1,58 +1,56 @@
-
 <h3 style="text-align: center">Club Upgrades</h3>
 <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
-<table class="table table-hover table-bordered">
-  <tr>
-    <th scope="col">Type</th>
-    <th scope="col">Area</th>
-    <th scope="col">Amount</th>
-    <th scope="col">Cost</th>
-  <tr scope="row">
-    <td>Stand</td>
-    <td>
-      <%= form.select :stadium_upgrade, options_for_select({ "North Stand" => "stand_n_capacity", "South Stand" => "stand_s_capacity", "East Stand" => "stand_e_capacity", "West Stand" => "stand_w_capacity" }), prompt: "Select a stand" %>
-    </td>
-    <td>
-      <%= form.select :stadium_amount, options_for_select([2000, 4000, 6000, 8000, 10000]), prompt: "How many seats?" %>
-    </td>
-    <td>
-      <p>£1000 per seat</p>
-    </td>
-  </tr>
-  <tr scope="row">
-    <td>Stand Condition</td>
-    <td>
-      <%= form.select :stadium_condition_upgrade, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }), prompt: "Select a stand" %>
-    </td>
-    <td>
-      <p></p>
-    </td> 
-    <td>
-      <p>£100,000</p>
-    </td>
-  </tr>
-  <tr scope="row">
-    <td>Coach</td>
-    <td>
-      <%= form.select :coach_upgrade, options_for_select({ "Fitness" => "staff_fitness", "Scout" => "staff_scouts", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }), prompt: 'Select a coach' %>
-    </td>  
-    <td>
-      <p></p>
-    </td> 
-    <td>
-      <p>£500,000</p>
-    </td>
-  <tr scope="row">
-    <td>Property</td>
-    <td>
-      <%= form.select :property_upgrade, options_for_select({ "Pitch" => "pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }), prompt: 'Select a property' %>
-    </td>  
-    <td>
-      <p></p>
-    </td>    
-    <td>
-      <p>£250,000</p>
-    </td>
-</table>
-</div>
+  <table class="table table-hover table-bordered">
+    <tr>
+      <th scope="col">Type</th>
+      <th scope="col">Area</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Cost</th>
+    <tr scope="row">
+      <td>Stand</td>
+      <td>
+        <%= form.select :stadium_upgrade, options_for_select({ "North Stand" => "stand_n_capacity", "South Stand" => "stand_s_capacity", "East Stand" => "stand_e_capacity", "West Stand" => "stand_w_capacity" }), prompt: "Select a stand" %>
+      </td>
+      <td>
+        <%= form.select :stadium_amount, options_for_select([2000, 4000, 6000, 8000, 10000]), prompt: "How many seats?" %>
+      </td>
+      <td>
+        <p>£1000 per seat</p>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>Stand Condition</td>
+      <td>
+        <%= form.select :stadium_condition_upgrade, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }), prompt: "Select a stand" %>
+      </td>
+      <td>
+        <p></p>
+      </td> 
+      <td>
+        <p>£100,000</p>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>Coach</td>
+      <td>
+        <%= form.select :coach_upgrade, options_for_select({ "Fitness" => "staff_fitness", "Scout" => "staff_scouts", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }), prompt: 'Select a coach' %>
+      </td>  
+      <td>
+        <p></p>
+      </td> 
+      <td>
+        <p>£500,000</p>
+      </td>
+    <tr scope="row">
+      <td>Property</td>
+      <td>
+        <%= form.select :property_upgrade, options_for_select({ "Pitch" => "pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }), prompt: 'Select a property' %>
+      </td>  
+      <td>
+        <p></p>
+      </td>    
+      <td>
+        <p>£250,000</p>
+      </td>
+  </table>
 </div>

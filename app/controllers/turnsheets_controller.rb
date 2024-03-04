@@ -28,6 +28,7 @@ class TurnsheetsController < ApplicationController
 
   # POST /turnsheets or /turnsheets.json
   def create
+    binding.pry
     @turnsheet = Turnsheet.new(turnsheet_params)
     authorize @turnsheet
 

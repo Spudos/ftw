@@ -1,5 +1,6 @@
 <h3 class="text-center">Team Selection</h3>
-<div id="form-container"> 
+<div id="form-container">
+
   <div class="row justify-content-center">
     <div class="col-md-6">
       <table class="table table-hover">
@@ -20,6 +21,8 @@
       </table>
     </div>
   </div>
+
+
   <div class="row">
     <div class="col-md-6">
       <h6>Available Players</h6>
@@ -40,16 +43,14 @@
     <div class="col-md-6">
       <%= form_tag selections_path(club: @club.id), method: :post do %>
         <h6>Selected Players</h6>
-        <div>
-          
-        </div>
+        <div></div>
         <div id="selectedItems"></div>
-        </div>
-        </div class="text-center">
+        <div class="text-center">
           <%= submit_tag "Save Selection", class: "btn btn-sm btn-danger"%>
         </div>
       <% end %>
     </div>
   </div>
 </div>
+
 <%= javascript_pack_tag 'selection' %>

@@ -1,12 +1,12 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <button class="btn btn-sm btn-primary" onclick="toggleTableVisibility()">Table</button>
+    <button id="tableButton" class="btn btn-sm btn-primary">Table</button>
   </li>
   <li class="nav-item">
-    <button class="btn btn-sm btn-primary" onclick="toggleStatisticsVisibility()">Statistics</button>
+    <button id="statisticsButton" class="btn btn-sm btn-primary">Statistics</button>
   </li>
   <li class="nav-item">
-    <button class="btn btn-sm btn-primary" onclick="toggleFixturesVisibility()">Fixtures</button>
+    <button id="fixturesButton" class="btn btn-sm btn-primary">Fixtures</button>
   </li>
 </ul>
 
@@ -43,26 +43,4 @@
   <%= render 'fixture_list' %>
 </div>
 
-<script>
-  const table = document.getElementById("table");
-  const statistics = document.getElementById("statistics");
-  const fixtures = document.getElementById("fixtures");
-
-function toggleTableVisibility() {
-  table.style.display = "block";
-  statistics.style.display = "none";
-  fixtures.style.display = "none";
-}
-
-function toggleStatisticsVisibility() {
-  table.style.display = "none";
-  statistics.style.display = "block";
-  fixtures.style.display = "none";
-}
-
-function toggleFixturesVisibility() {
-  table.style.display = "none";
-  statistics.style.display = "none";
-  fixtures.style.display = "block";
-}
-</script>
+<%= javascript_pack_tag 'league' %>
