@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_04_155101) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_04_171559) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -223,6 +223,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_04_155101) do
     t.boolean "potential_flair_coached", default: false
     t.boolean "potential_strength_coached", default: false
     t.boolean "potential_creativity_coached", default: false
+    t.integer "available"
   end
 
   create_table "selections", force: :cascade do |t|

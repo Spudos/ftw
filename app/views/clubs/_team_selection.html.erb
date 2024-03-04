@@ -27,7 +27,7 @@
     <div class="col-md-6">
       <h6>Available Players</h6>
       <div id="availableItems">
-        <% Player.where(club: @club.id).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
+        <% Player.where(club: @club.id).where(available: 0).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
           <div class="item <%= player.position %>">
             <%= player.name %>
             <%= (player.position + player.player_position_detail).upcase %>
