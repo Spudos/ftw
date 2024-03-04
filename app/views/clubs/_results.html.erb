@@ -3,27 +3,27 @@
   <thead>
     <tr style="border: 1px <%= @primary %> solid;">
       <th scope="col">Match ID</th>
-      <th scope="col">Competition</th>
+      <th scope="col">Comp</th>
       <th scope="col">Home</th>
       <th scope="col">Away</th>
-      <th scope="col">Attendance</th>
-      <th scope="col">Home Tactic</th>
-      <th scope="col">Away Tactic</th>
-      <th scope="col">Home possession</th>
-      <th scope="col">Away possession</th>
-      <th scope="col">Home Chances</th>
-      <th scope="col">Away Chances</th>
-      <th scope="col">Home On Tar</th>
-      <th scope="col">Away On Tar</th>
-      <th scope="col">Home Goals</th>
-      <th scope="col">Away Goals</th>
+      <th scope="col">Crowd</th>
+      <th scope="col">Hm Tactic</th>
+      <th scope="col">Aw Tactic</th>
+      <th scope="col">Hm poss</th>
+      <th scope="col">Aw poss</th>
+      <th scope="col">Hm Cha</th>
+      <th scope="col">Aw Cha</th>
+      <th scope="col">Hm On Tar</th>
+      <th scope="col">Aw On Tar</th>
+      <th scope="col">Hm Gls</th>
+      <th scope="col">Aw Gls</th>
       <th scope="col">Result</th>
     </tr>
   </thead>
   <tbody>
     <% @club_matches.each do |match| %>
       <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
-        <td><%= match.id %></td>
+        <td><%= match.match_id %></td>
         <td><%= match.competition %></td>
         <td><%= Club.find_by(id: match.home_team)&.name %></td>
         <td><%= Club.find_by(id: match.away_team)&.name %></td>
@@ -87,7 +87,7 @@
             <% end %>
           <% end %>
         </td>
-        <td><%= link_to "Show", match_path(match[:id]), class: "btn btn-sm btn-primary" %></td>
+        <td><%= link_to "Show", match_path(match[:match_id]), class: "btn btn-sm btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>
