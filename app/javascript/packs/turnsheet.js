@@ -73,36 +73,38 @@ document.addEventListener("DOMContentLoaded", function() {
     selectedItemElements[i].addEventListener("click", removeItem);
   }
 
-  // Function to handle form submission
-  function handleSubmit(event) {
-    event.preventDefault();
+// Function to handle form submission
+function handleSubmit(event) {
+  event.preventDefault();
 
-    // Get the count values
-    var gkpCount = parseInt(document.getElementById("gkpCount").textContent);
-    var dfcCount = parseInt(document.getElementById("dfcCount").textContent);
-    var midCount = parseInt(document.getElementById("midCount").textContent);
-    var attCount = parseInt(document.getElementById("attCount").textContent);
+  // Get the selected items from the selectedItems div
+  var selectedItems = document.querySelectorAll('#selectedItems .item');
+  var playerIds = [];
 
-    // Calculate the total number of players
-    var totalPlayers = gkpCount + dfcCount + midCount + attCount;
-
-    // Check if all counts are at least 1 and the total number of players is 11
-    if (gkpCount < 1 || dfcCount < 1 || midCount < 1 || attCount < 1 || totalPlayers !== 11) {
-      var errorMessage = "Error: At least one position must have at least 1 player, and the total number of players must be 11.";
-      var errorElement = document.createElement("div");
-      errorElement.classList.add("error-message");
-      errorElement.textContent = errorMessage;
-      // Append the error message to a suitable location in the user interface
-      var formContainer = document.getElementById("form-container");
-      formContainer.insertBefore(errorElement, formContainer.firstChild);
+  // Extract the player IDs from the selected items
+  selectedItems.forEach(function(item) {
+    var playerId = item.querySelector('.player_id').value;
+    playerIds.push(playerId);
+  });
+  
+  // Assign the player IDs to the player_1, player_2, etc. fields
+  playerIds.forEach(function(playerId, index) {
+    var fieldName = 'player_' + (index + 1);
+    var inputField = document.querySelector('input[name="' + fieldName + '"]');
+    if (inputField) {
+      inputField.value = playerId;
     } else {
-      // Proceed with the form submission
-      event.target.submit();
+      // If the input field doesn't exist, create a new hidden input field
+      var newInputField = document.createElement('input');
+      newInputField.type = 'hidden';
+      newInputField.name = fieldName;
+      newInputField.value = playerId;
+      document.querySelector('form').appendChild(newInputField);
     }
-  }
+  });
 
-  // Add event listener to the form for submission
-  var form = document.querySelector('form');
-  form.addEventListener("submit", handleSubmit);
+  // Submit the form
+  event.target.submit();
+}
 
 });

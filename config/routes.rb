@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   resources :matches
   resources :fixtures
   resources :clubs, param: :club_id
-  #resources :leagues, param: :competition
   resources :admin
   resources :messages
   resources :tactics

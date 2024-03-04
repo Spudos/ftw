@@ -1,0 +1,90 @@
+<h1 style="text-align: center">Transfers</h1>
+<div class="col-md-12 align-top d-flex justify-content-center"> 
+  <table class="table table-hover table-bordered">
+    <tr scope="row">
+      <td>Type</td>
+      <td>
+        <%= form.label :transfer_type, style: "display: none" %>
+        <%= form.select :transfer_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), prompt: "Select a transfer type?" %>
+      </td>
+      <td>Player ID</td>
+      <td>
+        <%= form.label :transfer_player_id, style: "display: none" %>
+        <%= form.text_field :transfer_player_id %>
+      </td>
+      <td>Amount</td>
+      <td>
+        <%= form.label :transfer_amount, style: "display: none" %>
+        <%= form.text_field :transfer_amount %>
+      </td>
+      <td>Other club</td>
+      <td>
+        <%= form.label :transfer_club, style: "display: none" %>
+        <%= form.text_field :transfer_club %>
+    </tr>
+    <tr scope="row">
+      <td>Type</td>
+      <td>
+        <%= form.label :transfer1_type, style: "display: none" %>
+        <%= form.select :transfer1_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), prompt: "Select a transfer type?" %>
+      </td>
+      <td>Player ID</td>
+      <td>
+        <%= form.label :transfer1_player_id, style: "display: none" %>
+        <%= form.text_field :transfer1_player_id %>
+      </td>
+      <td>Amount</td>
+      <td>
+        <%= form.label :transfer1_amount, style: "display: none" %>
+        <%= form.text_field :transfer1_amount %>
+      </td>
+      <td>Other club</td>
+      <td>
+        <%= form.label :transfer1_club, style: "display: none" %>
+        <%= form.text_field :transfer1_club %>
+    </tr>
+    <tr scope="row">
+      <td>Type</td>
+      <td>
+        <%= form.label :transfer2_type, style: "display: none" %>
+        <%= form.select :transfer2_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), prompt: "Select a transfer type?" %>
+      </td>
+      <td>Player ID</td>
+      <td>
+        <%= form.label :transfer2_player_id, style: "display: none" %>
+        <%= form.text_field :transfer2_player_id %>
+      </td>
+      <td>Amount</td>
+      <td>
+        <%= form.label :transfer2_amount, style: "display: none" %>
+        <%= form.text_field :transfer2_amount %>
+      </td>
+      <td>Other club</td>
+      <td>
+        <%= form.label :transfer2_club, style: "display: none" %>
+        <%= form.text_field :transfer2_club %>
+    </tr>
+    <tr scope="row">
+      <td>Type</td>
+      <td>
+        <%= form.label :transfer3_type, style: "display: none" %>
+        <%= form.select :transfer3_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), prompt: "Select a transfer type?" %>
+      </td>
+      <td>Player ID</td>
+      <td>
+        <%= form.label :transfer3_player_id, style: "display: none" %>
+        <%= form.text_field :transfer3_player_id %>
+      </td>
+      <td>Amount</td>
+      <td>
+        <%= form.label :transfer3_amount, style: "display: none" %>
+        <%= form.text_field :transfer3_amount %>
+      </td>
+      <td>Other club</td>
+      <td>
+        <%= form.label :transfer3_club, style: "display: none" %>
+        <%= form.text_field :transfer3_club %>
+      </td>
+    </tr>
+  </table>
+</div>

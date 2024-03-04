@@ -1,72 +1,47 @@
-
-<div class='row'>
-  <h1 style="text-align: center">Team</h1>
-  <div class='col'>
-    <h4 style="text-align: center">Selection</h4>
-    <table class="table table-hover table-bordered">
-      <tr>
-        <th scope="col">Shirt</th>
-        <th scope="col">Player</th>
-      <tr scope="row">
-        <td>Player 1</td>
-        <td>
-          <%= form.select :player_1, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-        </td>
-      </tr>
-      <tr scope="row">
-        <td>Player 2</td>
-        <td>
-          <%= form.select :player_2, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-        </td>
-      </tr>
-      <tr scope="row">
-        <td>Player 3</td>
-        <td>
-          <%= form.select :player_3, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-        </td>
-      </tr>
-      <tr scope="row">
-        <td>Player 4</td>
-        <td>
-          <%= form.select :player_4, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-        </td>
-      </tr>
-      <td>Player 5</td>
-        <td>
-          <%= form.select :player_5, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-        </td>
-      </tr>
-      <td>Player 6</td>
-        <td>
-          <%= form.select :player_6, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-        </td>
-      </tr>
-      <td>Player 7</td>
-        <td>
-          <%= form.select :player_7, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-        </td>
-      </tr>
-      <td>Player 8</td>
-        <td>
-          <%= form.select :player_8, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-        </td>
-      </tr>
-      <td>Player 9</td>
-        <td>
-          <%= form.select :player_9, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-        </td>
-      </tr>
-      <td>Player 10</td>
-        <td>
-          <%= form.select :player_10, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-        </td>
-      </tr>
-      <td>Player 11</td>
-        <td>
-          <%= form.select :player_11, @selection.map { |record| ["#{record[:name]} - Fit #{record[:fitness]} - TS #{record[:ts]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-        </td>
-      </tr>
-    </table>
+<h4 class="text-center">Team Selection</h4>
+  <div class="col-md-12 align-top d-flex justify-content-center">
+    <div class="col-md-4">
+      <table class="table table-hover">
+        <tr>
+          <th colspan="4">Formation</th>
+        <tr>
+          <th>GKP</th>
+          <th>DFC</th>
+          <th>MID</th>
+          <th>ATT</th>
+        </tr>
+        <tr>
+          <td><span id="gkpCount">0</span></td>
+          <td><span id="dfcCount">0</span></td>
+          <td><span id="midCount">0</span></td>
+          <td><span id="attCount">0</span></td>
+        </tr>
+      </table>  
+    </div>
   </div>
 
-  <%= javascript_pack_tag 'turnsheet' %>
+  <div class="col-md-12 align-top d-flex justify-content-center">
+    <div class="col-md-4">
+      <h6>Available Players</h6>
+      <div id="availableItems">
+        <% Player.where(club: @club.id).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
+          <div class="item <%= player.position %>">
+            <%= player.name %>
+            <%= (player.position + player.player_position_detail).upcase %>
+            TS: <%= player.total_skill %>
+            Fit: <%= player.fitness %>
+            Perf: <%= player.average_performance %>
+            <%= hidden_field_tag 'player_ids[]', player.id, class: 'player-id' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-4">
+        <h6>Selected Players</h6>
+        <div id="selectedItems"></div>
+    </div>
+  </div>

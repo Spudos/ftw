@@ -2,53 +2,53 @@
 <table class="table table-hover">
   <tr style="border: 1px <%= @primary %> solid;">
     <td scope="col">Stand</td>
-    <td scope="col">Stand Name</td>
-    <td scope="col">Stand Condition</td>
-    <td scope="col">Stand Capacity</td>
+    <td scope="col">Name</td>
+    <td scope="col">Condition</td>
+    <td scope="col">Capacity</td>
   </tr>
   <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
-    <td>North Stand</td>
+    <td>North</td>
     <td><%= @club.stand_n_name %></td>  
     <td><%= @club.stand_n_condition %></td> 
     <td><%= @club.stand_n_capacity %></td> 
   </tr>       
   <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
-    <td>South Stand</td>
+    <td>South</td>
     <td><%= @club.stand_s_name %></td>  
     <td><%= @club.stand_s_condition %></td> 
     <td><%= @club.stand_s_capacity %></td> 
   </tr>
   <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
-    <td>East Stand</td>
+    <td>East</td>
     <td><%= @club.stand_e_name %></td>  
     <td><%= @club.stand_e_condition %></td> 
     <td><%= @club.stand_e_capacity %></td> 
   <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
-    <td>West Stand</td>
+    <td>West</td>
     <td><%= @club.stand_w_name %></td>  
     <td><%= @club.stand_w_condition %></td> 
     <td><%= @club.stand_w_capacity %></td>  
   </tr>
   <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
-    <td><strong>Total Capacity</strong></td>
+    <td><strong>Capacity</strong></td>
     <td></td>
     <td></td>
     <td><strong><%= @club.stand_n_capacity + @club.stand_s_capacity + @club.stand_e_capacity + @club.stand_w_capacity %></strong></td>  
   </tr>
   <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
-    <td><strong>Fan Happiness Rating</strong></td>
+    <td><strong>Fan Happiness</strong></td>
     <td></td>
     <td></td>
     <td><strong><%= @club.fan_happiness %></strong></td>   
   </tr>
   <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
-    <td><strong>Potential Fanbase Size</strong></td>
+    <td><strong>Potential Fanbase</strong></td>
     <td></td>
     <td></td>
     <td><strong><%= @club.fanbase %></strong></td>   
   </tr>
   <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
-    <td>Pitch Condition</td>
+    <td>Pitch</td>
     <td><%= @club.pitch %></td>   
   </tr>
   <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">

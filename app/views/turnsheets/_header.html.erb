@@ -1,0 +1,25 @@
+<div class="col-md-12 align-top d-flex align-items-center justify-content-center">
+  <h3>New Turnsheet for <%=  @club.name %></h3> 
+</div>
+
+<div class="col-md-12 align-top d-flex align-items-center justify-content-center">   
+  <div class="turnsheet_headers">
+    <%= form.label :Id, style: "display: inline-block" %>
+    <%= form.text_field :club_id, value: @club.id, readonly: true %>
+  </div>
+  <div class="turnsheet_headers">
+    <%= form.label :manager, style: "display: inline-block" %>
+    <%= form.text_field :manager, value: @club.manager, readonly: true %>
+  </div>
+  <div class="turnsheet_headers">
+    <%= form.label :email, style: "display: inline-block" %>
+    <%= form.text_field :email, value: @club.manager_email, readonly: true %>
+  </div>
+</div>
+
+<div class="col-md-12 align-top d-flex align-items-center justify-content-center">   
+  <div class="turnsheet_headers bg-danger">
+    <%= form.label :week, style: "display: inline-block" %>
+    <%= form.number_field :week %>
+  </div>
+</div>

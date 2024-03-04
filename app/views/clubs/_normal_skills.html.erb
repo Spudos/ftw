@@ -5,8 +5,7 @@
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Age</th>
-      <th scope="col">Nationality</th>
-      <th scope="col">Position</th>
+      <th scope="col">Pos</th>
       <th scope="col">PA</th>
       <th scope="col">CO</th>
       <th scope="col">TA</th>
@@ -28,7 +27,6 @@
         <td><%= player.id %></td>
         <td><%= player.name %></td>
         <td><%= player.age %></td>
-        <td><%= player.nationality %></td>
         <td><%= (player.position + player.player_position_detail).upcase %></td>
         <td><%= player.passing %></td>
         <td><%= player.control %></td>
@@ -43,7 +41,7 @@
         <td><%= player.creativity %></td>
         <td><%= player.total_skill %></td>
         <td><%= player.fitness %></td>
-        <td><%= link_to "Show", player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>
+        <td><%= link_to "Show", player_path(player[:id]) %></td>
       </tr>
     <% end %>
   </tbody>

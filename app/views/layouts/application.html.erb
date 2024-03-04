@@ -27,15 +27,12 @@
     <%= render 'layouts/nav' %>
   </div>
 
-  <div class="row">
-    <aside-l class="col-sm-1">
-      <!-- Left sidebar content here -->
-    </aside-l>
-    <div class="col-sm-1">
+  <div id="content">
+    <div class="aside-l">
       <!-- Left sidebar content here -->
     </div>
     
-    <main class="col-sm-8">
+    <main>
       <% if notice.present? %>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
             <%= notice %>
@@ -53,12 +50,9 @@
         <%= yield %>
     </main>
     
-    <div class="col-sm-1">
+    <div class="aside-r">
       <!-- Right sidebar content here -->
     </div>
-    <aside-r class="col-sm-1">
-      <!-- Right sidebar content here -->
-    </aside-r>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

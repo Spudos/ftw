@@ -1,17 +1,37 @@
 <h3 class="text-center">Team Selection</h3>
-<div id="form-container">
+<div id="form-container"> 
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <table class="table table-hover">
+        <tr>
+          <th colspan="4">Formation</th>
+        <tr>
+          <th>GKP</th>
+          <th>DFC</th>
+          <th>MID</th>
+          <th>ATT</th>
+        </tr>
+        <tr>
+          <td><span id="gkpCount">0</span></td>
+          <td><span id="dfcCount">0</span></td>
+          <td><span id="midCount">0</span></td>
+          <td><span id="attCount">0</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-6">
-      <h3>Available Players</h3>
+      <h6>Available Players</h6>
       <div id="availableItems">
         <% Player.where(club: @club.id).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
-          <div class="item">
+          <div class="item <%= player.position %>">
             <%= player.name %>
             <%= (player.position + player.player_position_detail).upcase %>
             <%= player.total_skill %>
             <%= player.fitness %>
             <%= player.average_performance %>
-            <%= hidden_field_tag 'player_ids[]', player.id, class: 'player-id' %> <!-- Add a hidden field with the player ID -->
+            <%= hidden_field_tag 'player_ids[]', player.id, class: 'player-id' %>
           </div>
         <% end %>
       </div>
@@ -19,9 +39,11 @@
 
     <div class="col-md-6">
       <%= form_tag selections_path(club: @club.id), method: :post do %>
-        <h3>Selected Players</h3>
+        <h6>Selected Players</h6>
+        <div>
+          
+        </div>
         <div id="selectedItems"></div>
-        
         </div>
         </div class="text-center">
           <%= submit_tag "Save Selection", class: "btn btn-sm btn-danger"%>
@@ -30,9 +52,4 @@
     </div>
   </div>
 </div>
-
-
-
-
-
 <%= javascript_pack_tag 'selection' %>

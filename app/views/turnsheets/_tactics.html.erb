@@ -1,0 +1,40 @@
+<h4 style="text-align: center">Tactics</h4>
+<div class="col-md-12 align-top d-flex justify-content-center">
+  <table class="table table-hover table-bordered">
+    <tr scope="row">
+      <td scope="col">Tactic:</td>
+      <td>
+        <%= form.label :tactic, style: "display: none" %>
+        <%= form.select :tactic, options_for_select({ "Normal" => 1, "Passing" => 1, "Defensive" => 2, "Attacking" => 3, "Wide" => 4, "Narrow" => 5, "Direct" => 6 }), prompt: "Select a tactic" %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td scope="col">Pressing style:</td>
+      <td>
+        <%= form.label :press, style: "display: none"  %>
+        <%= form.select :press, options_for_select({"Select a pressing style" => 0, "Heavy Metal Football" => 10, "Strong Press" => 6, "Normal Press" => 3, "No Press" => 0, "Late Press" => -5, "Late Heavy Metal Footy" => -8 }) %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td scope="col">Defence aggression:</td>
+      <td>
+        <%= form.label :dfc_aggression, style: "display: none" %>
+        <%= form.select :dfc_aggression, options_for_select( 1..10 ), prompt: "Select agression" %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td scope="col">Midfield aggression:</td>
+      <td>
+        <%= form.label :mid_aggression, style: "display: none" %>
+        <%= form.select :mid_aggression, options_for_select( 1..10 ), prompt: "Select agression" %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td scope="col">Attack aggression:</td>
+      <td>
+        <%= form.label :att_aggression, style: "display: none" %>
+        <%= form.select :att_aggression, options_for_select( 1..10 ), prompt: "Select agression" %>
+      </td>
+    </tr>
+  </table>
+</div>

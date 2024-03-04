@@ -35,26 +35,30 @@ $theme-colors: map-merge($theme-colors, ("primary": $primary, "danger": $danger,
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: white;
+}
+
+#content {
+  width: 100%;
   min-height: 2000px;
+  display: flex;
 }
 
 main {
-  padding: 50px;
+  width: 80%;
   min-height: 2000px;
+  padding: 50px;
 }
 
-aside-l {
+.aside-l {
+  width: 10%;
   background-color: #bebebe;
   box-shadow: 4px 0px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
-aside-r {
+.aside-r {
+  width: 10%;
   background-color: #bebebe;
   box-shadow: -4px 0px 8px 0px rgba(0, 0, 0, 0.2);
-}
-
-.welcome_div {
-  text-align: center;
 }
 
 /** header **/
@@ -110,6 +114,8 @@ aside-r {
   padding-right: 5px;
 }
 
+/** welcome **/
+
 #home-container {
   padding-top: 20px;
   background-color: whitesmoke;
@@ -124,12 +130,6 @@ aside-r {
   font-family: 'Kanit', sans-serif;
   padding: 20px;
   align-self: flex-start;
-}
-
-.sub-text {
-  font-family: 'Kanit', sans-serif;
-  padding: 20px;
-  align-self: flex-end;
 }
 
 /** nav **/
@@ -183,19 +183,19 @@ aside-r {
     .apple_pagination a:hover, .apple_pagination a:focus {
       text-decoration: underline; }
 
-
 /** table **/
 
 th {
   width: fit-content;
+  padding: 3px !important;
 }
 
 table {
-  margin: 50px;
+  width: 80% !important;
 }
 
 .turnsheet_headers {
-  padding: 10px;
+  padding: 20px;
 }
 
 tr.goal {
@@ -204,6 +204,11 @@ tr.goal {
 
 tr.chance {
   color: orange;
+}
+
+td {
+  font-size: smaller;
+  padding: 3px !important;
 }
 
 /** fixtures **/
@@ -227,6 +232,7 @@ tr.chance {
 
 #match_details {
   margin-right: 20px;
+  padding: 20px;
 }
 
 /** turn **/
@@ -237,6 +243,12 @@ tr.chance {
   align-items: center;
   border: #aaaaaa 1px solid;
   border-radius: 10px;
+}
+
+/** turnsheet **/
+.row-turnsheet {
+  margin: 20px;
+  padding: 20px;
 }
 
 /** other **/
@@ -278,8 +290,20 @@ tr.chance {
   cursor: pointer;
   padding: 5px;
   margin-bottom: 5px;
-  background-color: lightgray;
 }
-.selected {
+
+.gkp {
+  background-color: lightgreen;
+}
+
+.dfc {
   background-color: lightblue;
+}
+
+.mid {
+  background-color: lightyellow;
+}
+
+.att {
+  background-color: lightcoral;
 }

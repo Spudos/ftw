@@ -1,0 +1,55 @@
+<h3 style="text-align: center">Players</h3>
+<h4 style="text-align: center">Training</h4>
+<div class="col-md-12 align-top d-flex justify-content-center">  
+  <table class="table table-hover table-bordered">
+    <tr>
+      <th scope="col">Position</th>
+      <th scope="col">Player</th>
+      <th scope="col">skill</th>
+    </tr>
+    <tr scope="row">
+      <td>Goalkeeper</td>
+      <td>
+        <%= form.label :train_goalkeeper, style: "display: none" %>
+        <%= form.select :train_goalkeeper, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
+      </td>
+      <td>
+        <%= form.label :train_goalkeeper_skill, style: "display: none" %>
+        <%= form.select :train_goalkeeper_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>Defender</td>
+      <td>
+        <%= form.label :train_defender, style: "display: none" %>
+        <%= form.select :train_defender, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
+      </td>
+      <td>
+        <%= form.label :train_defender_skill, style: "display: none" %>
+        <%= form.select :train_defender_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td>Midfield</td>
+      <td>
+        <%= form.label :train_midfielder, style: "display: none" %>
+        <%= form.select :train_midfielder, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
+      </td>
+      <td>
+        <%= form.label :train_midfielder_skill, style: "display: none" %>
+        <%= form.select :train_midfielder_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
+        </td>
+    </tr>
+    <tr scope="row">
+      <td>Attack</td>
+      <td>
+        <%= form.label :train_attacker, style: "display: none" %>
+        <%= form.select :train_attacker, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
+      </td>
+      <td>
+        <%= form.label :train_attacker_skill, style: "display: none" %>
+        <%= form.select :train_attacker_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
+      </td>
+    </tr>
+  </table>
+</div>
