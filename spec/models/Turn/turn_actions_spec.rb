@@ -29,11 +29,12 @@ RSpec.describe Turn, type: :model do
       week = 1
       create(:turn, club_id: 1, var1: 'train', var2: 'Woolley', var3: 'tackling', date_completed: nil)
       create(:club, id: 1, staff_dfc: 10)
-      create(:player, name: 'Woolley', position: 'dfc', potential_tackling: 2)
+      create(:player, name: 'Woolley', position: 'dfc', potential_tackling: 2, potential_tackling_coached: false)
 
       Turn::TurnActions.new(week).call
 
       expect(Player.first.tackling).to eq(5)
+      expect(Player.first.potential_tackling_coached).to eq(true)
     end
   end
 

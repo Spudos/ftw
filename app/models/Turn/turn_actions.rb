@@ -54,6 +54,8 @@ class Turn::TurnActions
           Message.create(action_id:, week:, club_id:, var1: "Training #{player} in #{skill} failed - this coach isn't good enough to train #{skill} for #{player}")  
         end
       else
+        player_data["potential_#{skill}_coached"] = true
+        player_data.save
         Message.create(action_id:, week:, club_id:, var1: "Training #{player} in #{skill} failed due to reaching potential")
       end
     end

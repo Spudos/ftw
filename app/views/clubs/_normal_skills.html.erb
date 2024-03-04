@@ -28,17 +28,17 @@
         <td><%= player.name %></td>
         <td><%= player.age %></td>
         <td><%= (player.position + player.player_position_detail).upcase %></td>
-        <td><%= player.passing %></td>
-        <td><%= player.control %></td>
-        <td><%= player.tackling %></td>
-        <td><%= player.running %></td>
-        <td><%= player.shooting %></td>
-        <td><%= player.dribbling %></td>
-        <td><%= player.defensive_heading %></td>
-        <td><%= player.offensive_heading %></td>
-        <td><%= player.flair %></td>
-        <td><%= player.strength %></td>
-        <td><%= player.creativity %></td>
+        <td style="<%= 'color: lightcoral; font-weight: bolder;' if player.potential_passing_coached %>"><%= player.passing %></td>
+        <td style="<%= 'color: lightcoral; font-weight: bolder;' if player.potential_control_coached %>"><%= player.control %></td>
+        <td style="<%= 'color: lightcoral; font-weight: bolder;' if player.potential_tackling_coached %>"><%= player.tackling %></td>
+        <td style="<%= 'color: lightcoral; font-weight: bolder;' if player.potential_running_coached %>"><%= player.running %></td>
+        <td style="<%= 'color: lightcoral; font-weight: bolder;' if player.potential_shooting_coached %>"><%= player.shooting %></td>
+        <td style="<%= 'color: lightcoral; font-weight: bolder;' if player.potential_dribbling_coached %>"><%= player.dribbling %></td>
+        <td style="<%= 'color: lightcoral; font-weight: bolder;' if player.potential_defensive_heading_coached %>"><%= player.defensive_heading %></td>
+        <td style="<%= 'color: lightcoral; font-weight: bolder;' if player.potential_offensive_heading_coached %>"><%= player.offensive_heading %></td>
+        <td style="<%= 'color: lightcoral; font-weight: bolder;' if player.potential_flair_coached %>"><%= player.flair %></td>
+        <td style="<%= 'color: lightcoral; font-weight: bolder;' if player.potential_strength_coached %>"><%= player.strength %></td>
+        <td style="<%= 'color: lightcoral; font-weight: bolder;' if player.potential_creativity_coached %>"><%= player.creativity %></td>
         <td><%= player.total_skill %></td>
         <td><%= player.fitness %></td>
         <td><%= link_to "Show", player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>

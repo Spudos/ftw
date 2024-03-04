@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_27_162828) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_04_155101) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -212,6 +212,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_27_162828) do
     t.integer "total_assists", default: 0, null: false
     t.integer "average_performance", default: 0, null: false
     t.boolean "listed"
+    t.boolean "potential_passing_coached", default: false
+    t.boolean "potential_control_coached", default: false
+    t.boolean "potential_tackling_coached", default: false
+    t.boolean "potential_running_coached", default: false
+    t.boolean "potential_shooting_coached", default: false
+    t.boolean "potential_dribbling_coached", default: false
+    t.boolean "potential_defensive_heading_coached", default: false
+    t.boolean "potential_offensive_heading_coached", default: false
+    t.boolean "potential_flair_coached", default: false
+    t.boolean "potential_strength_coached", default: false
+    t.boolean "potential_creativity_coached", default: false
   end
 
   create_table "selections", force: :cascade do |t|
