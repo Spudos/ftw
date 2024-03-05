@@ -1,0 +1,21 @@
+<h3 class="text-center mb-1"><%= @matches[0].competition %> game played on week <%= @matches[0].week_number %></h3>
+<h4 class="text-center mb-1">Played at <%= Club.find_by(id: @matches[0].home_team)&.ground_name %></h4>
+<h5 class="text-center mb-5">Match attendance: <%= @matches[0].attendance %></h5>
+
+<div class="row d-flex justify-content-center ms-5 mb-5">
+  <div class="col-md-4">
+    <table>
+      <tr>
+        <th class="colspan-2 text-center"><h5>Final Score</h5></th>
+      </tr>
+      <tr>
+        <td><h4><%= Club.find_by(id: @matches[0].home_team)&.name %></h4></td>
+        <td><h4><%= @matches[0].home_goals %></h4></td>
+      </tr>
+      <tr>
+        <td><h4><%= Club.find_by(id: @matches[0].away_team)&.name %></h4></td>
+        <td><h4><%= @matches[0].away_goals %></h4></td>
+      </tr>
+    </table>
+  </div>
+</div>

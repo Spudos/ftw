@@ -10,7 +10,7 @@
     <% @player_match_data.each do |player| %>
       <% if player.club_id == @matches[0].home_team %>
         <tr>
-          <td><%= player.id %></td>
+          <td><%= player.player_id %></td>
           <td><%= player.name %></td>
           <td><%= (player.player_position + player.player_position_detail).upcase %></td>
           <td><%=  player.match_performance %></td>
