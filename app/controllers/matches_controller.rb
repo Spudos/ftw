@@ -1,5 +1,6 @@
 class MatchesController < ApplicationController
   rescue_from StandardError, with: :handle_error
+  include MatchesHelper
 
   def index; end
 

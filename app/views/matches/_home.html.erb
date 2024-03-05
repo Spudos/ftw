@@ -1,0 +1,21 @@
+<div class="col-md-4">
+  <h3><%= Club.find_by(id: @matches[0].home_team)&.name %></h3>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Position</th>
+      <th>Match Perf</th>
+    </tr>
+    <% @player_match_data.each do |player| %>
+      <% if player.club_id == @matches[0].home_team %>
+        <tr>
+          <td><%= player.id %></td>
+          <td><%= player.name %></td>
+          <td><%= (player.player_position + player.player_position_detail).upcase %></td>
+          <td><%=  player.match_performance %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>
