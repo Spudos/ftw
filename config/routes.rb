@@ -24,6 +24,10 @@ Rails.application.routes.draw do
     collection { post :import }
   end
 
+  get '/feedback/new', to: 'feedback#new', as: 'new_feedback'
+  post '/feedback', to: 'feedback#create', as: 'create_feedback'
+  get '/feedback/close_feedback', to: 'feedback#close_feedback'
+
   get '/clubs/manager/club_view', to: 'clubs#club_view'
   get '/clubs/manager/finance', to: 'clubs#finance'
   get '/clubs/manager/first_team', to: 'clubs#first_team'

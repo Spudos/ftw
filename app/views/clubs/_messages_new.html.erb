@@ -1,7 +1,6 @@
 <div>
   <h3 class="text-center">New Messages</h3>
   <div id="messages">
-    <% if @messages_new.present? %>
       <table class="table table-hover">
         <tbody>
           <tr>
@@ -16,8 +15,5 @@
           <% end %>
         </tbody>
       </table>
-    <% else %>
-      <p>No messages found.</p>
-    <% end %>
   </div>
 </div>

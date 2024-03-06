@@ -51,6 +51,9 @@ class TurnsController < ApplicationController
 
     @turn_actions_processed = Turn.where(week: params[:week]).where.not(date_completed: nil).count
     @turn_actions_submitted = Turn.where(week: params[:week]).count
+
+    @feedback = Feedback.where(outstanding: true)
+    @last_turn_processed = Message.maximum(:week)
   end
 
   def show

@@ -1,0 +1,40 @@
+<%= form_with(model: @feedback, url: create_feedback_path, class: "needs-validation") do |form| %>
+  <% if @feedback.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(@feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
+
+      <ul>
+        <% @feedback.errors.each do |attribute, message| %>
+          <li><%= "#{attribute.to_s.humanize} #{message}" %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row d-flex justify-content-center">
+    <h3 class="text-center mb-3">Feedback Form</h3>
+    <h6 class="text-center">Please submit as much information as you can about the issue you would like to raise</h6>
+    <h6 class="text-center mb-5">You do not have to submit a club id number if you are not a manager</h6>
+    <div class="col-md-6">
+      <div class="mb-3">
+        <%= form.label :name, class: "form-label" %>
+        <%= form.text_field :name, class: "form-control", required: true, value: Club.find_by(manager_email: current_user&.email)&.manager %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :email, class: "form-label" %>
+        <%= form.email_field :email, class: "form-control", required: true, value: current_user&.email %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :club, class: "form-label" %>
+        <%= form.number_field :club, class: "form-control", value: Club.find_by(manager_email: current_user&.email)&.id %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :message, class: "form-label" %>
+        <%= form.text_area :message, class: "form-control", rows: 10, required: true %>
+      </div>
+      <%= form.hidden_field :feedback_type, value: "issue" %>
+      <%= form.hidden_field :outstanding, value: true %>
+      <%= form.submit 'Submit', class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+

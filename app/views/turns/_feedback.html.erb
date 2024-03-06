@@ -1,0 +1,27 @@
+<div class="col-md-10 mb-5">
+  <table class="table table-hover">
+    <tr>
+      <td colspan="7"><h6>Outstanding Feedback</h6></td>
+    </tr>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>EMail</th>
+      <th>Club Id</th>
+      <th>Type</th>
+      <th>Message</th>
+      <th>Action</th>
+    </tr>
+    <% @feedback.each do |feedback| %>
+    <tr>
+      <td><%= feedback.id %></td>
+      <td><%= feedback.name %></td>
+      <td><%= feedback.email %></td>
+      <td><%= feedback.club %></td>
+      <td><%= feedback.feedback_type %></td>
+      <td><%= feedback.message %></td>
+      <td><%= link_to "Close", feedback_close_feedback_path(feedback[:id]), class: "btn btn-sm btn-danger" %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>

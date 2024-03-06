@@ -1,11 +1,19 @@
 <div class="container align-items-start">
-  <div class="row text-center">
+  <div class="row text-center mb-5">
     <div class="col-md-12">
       <h2><%= @club.name %></h2>
       <h5>Primary Club Color: <%= @club.color_primary %></h5>             
       <h5>Secondary Club Color: <%= @club.color_secondary %></h5>
     </div>
   </div>
+
+  <% if @messages_new.present? %>
+  <div class="row d-flex justify-content-center mt-5 mb-5">
+    <div class="col-md-8">
+      <%= render "messages_new" %>
+    </div>
+  </div>
+  <% end %>
 
   <div class="text-left">
     <div class="row text-left">
@@ -15,7 +23,7 @@
       <div class="col-md-6">
         <%= render "staff" %>
       </div>
-    <%= render "messages_new" %>
+    
     </div>
   </div>
 </div>

@@ -1,7 +1,16 @@
-
 <div class="container">
-  <h1>Turn Processing</h1>
-  <div class="row">
+  <h3 class="text-center mb-5">Last Turn Processed: Week <%= @last_turn_processed %></h3>
+  
+  <% if @feedback.present? %>
+  <h3 class="text-center">Issue System</h3>
+  <%= render 'feedback' %>
+  <% end %>
+
+  <h3 class="text-center">Club Messaging</h3>
+  <%= render 'gm_message' %>
+
+  <h3 class="text-center">Turn Processing</h3>
+  <div class="row mb-5">
     <div class="col-3">
       <h2>Step 1</h2>
       <h6>Select the week to be processed</h6>
@@ -204,8 +213,8 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-8">
-      <h2>Turn Actions</h2>
+    <div class="col-10">
+      <h3 class="text-center mb-5">Turn Actions</h3>
       <%= link_to "Click here a create a new turn action", new_turn_path, class: "btn btn-sm btn-primary" %>
       <div id="turns">
         <table class="table table-hover">
