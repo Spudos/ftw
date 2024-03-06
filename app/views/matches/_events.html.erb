@@ -1,19 +1,21 @@
 <div class="col-md-6">
-  <h3 class="text-center">Match Events</h3>
-  <table class="table table-hover ms-5">
-    <tr>
-      <th>Minute</th>
-      <th>Club</th>
-      <th>Assist</th>
-      <th>Scorer</th>
-    </tr>
-      <% @goal_information.each do |event| %>
-        <tr>
-          <td><%= event[:minute] %></td>
-          <td><%= Player.find_by(id: event[:assist_id])&.club.name %></td>
-          <td><%= Player.find_by(id: event[:assist_id])&.name %></td>
-          <td><%= Player.find_by(id: event[:scorer_id])&.name %></td>
-        </tr>
-      <% end %>
-  </table>
+  <div class="row d-flex justify-content-center">
+    <h3 class="text-center">Match Events</h3>
+    <table class="table table-hover ms-5">
+      <tr>
+        <th>Minute</th>
+        <th>Club</th>
+        <th>Assist</th>
+        <th>Scorer</th>
+      </tr>
+        <% @goal_information.each do |event| %>
+          <tr>
+            <td><%= event[:minute] %></td>
+            <td><%= Player.find_by(id: event[:assist_id])&.club.name %></td>
+            <td><%= Player.find_by(id: event[:assist_id])&.name %></td>
+            <td><%= Player.find_by(id: event[:scorer_id])&.name %></td>
+          </tr>
+        <% end %>
+    </table>
+  </div>
 </div>

@@ -1,58 +1,56 @@
 <div class="col-md-4">
-  <h5 class="ms-5">Match Statistics</h5>
-  <table class="table table-hover">
-    <tr>
-      <th>Home</th>
-      <th>Stat</th>
-      <th>Away</th>
-    </tr>
-    <tr>
-    <% if current_user.gm? || current_user.email == Club.find_by(id: @matches[0].home_team)&.manager_email || Club.find_by(id: @matches[0].away_team)&.manager_email %>
+  <div class="row d-flex justify-content-center">
+    <h5 class="text-center">Match Statistics</h5>
+    <table class="table table-hover">
       <tr>
-        <td><%= tactic(@matches[0].tactic_home) %></td>
-        <td>Tactic</td>
-        <td><%= tactic(@matches[0].tactic_away) %></td>
+        <th>Home</th>
+        <th>Stat</th>
+        <th>Away</th>
       </tr>
       <tr>
-        <td><%= @matches[0].dfc_blend_home %>-<%= @matches[0].mid_blend_home %>-<%= @matches[0].att_blend_home %></td>
-        <td>Blend</td>
-        <td><%= @matches[0].dfc_blend_away %>-<%= @matches[0].mid_blend_away %>-<%= @matches[0].att_blend_away %></td>
-      </tr>
+      <% if current_user.gm? || current_user.email == Club.find_by(id: @matches[0].home_team)&.manager_email || Club.find_by(id: @matches[0].away_team)&.manager_email %>
+        <tr>
+          <td><%= tactic(@matches[0].tactic_home) %></td>
+          <td>Tactic</td>
+          <td><%= tactic(@matches[0].tactic_away) %></td>
+        </tr>
+        <tr>
+          <td><%= @matches[0].dfc_blend_home %>-<%= @matches[0].mid_blend_home %>-<%= @matches[0].att_blend_home %></td>
+          <td>Blend</td>
+          <td><%= @matches[0].dfc_blend_away %>-<%= @matches[0].mid_blend_away %>-<%= @matches[0].att_blend_away %></td>
+        </tr>
+        <tr>
+          <td><%= @matches[0].dfc_aggression_home %>-<%= @matches[0].mid_aggression_home %>-<%= @matches[0].att_aggression_home %></td>
+          <td>Aggression</td>
+          <td><%= @matches[0].dfc_aggression_away %>-<%= @matches[0].mid_aggression_away %>-<%= @matches[0].att_aggression_away %></td>
+        </tr>
+        <tr>
+          <td><%= press(@matches[0].home_press) %></td>
+          <td>Press style</td>
+          <td><%= press(@matches[0].away_press) %></td>
+        </tr>
+        <tr>
+      <% end %>
       <tr>
-        <td><%= @matches[0].dfc_aggression_home %>-<%= @matches[0].mid_aggression_home %>-<%= @matches[0].att_aggression_home %></td>
-        <td>Aggression</td>
-        <td><%= @matches[0].dfc_aggression_away %>-<%= @matches[0].mid_aggression_away %>-<%= @matches[0].att_aggression_away %></td>
-      </tr>
-      <tr>
-        <td><%= press(@matches[0].home_press) %></td>
-        <td>Press style</td>
-        <td><%= press(@matches[0].away_press) %></td>
-      </tr>
-      <tr>
-    <% end %>
-      <td><%= @matches[0].home_possession %></td>
-      <td>possession</td>
-      <td><%= @matches[0].away_possession %></td>
-    </tr>
-    <tr>
-      <td><%= @matches[0].home_chance %></td>
-      <td>Chances</td>
-      <td><%= @matches[0].away_chance %></td>
-    </tr>
-    <tr>
-      <td><%= @matches[0].home_chance_on_target %></td>
-      <td>On Target</td>
-      <td><%= @matches[0].away_chance_on_target %></td>
-    </tr>
-    <tr>
-      <td><%= @matches[0].home_goals %></td>
-      <td>Goals</td>
-      <td><%= @matches[0].away_goals %></td>
-    </tr>  
-    <tr>
-      <td><%= Player.find_by(id: @matches[0].home_man_of_the_match)&.name %></td>
-      <td>MOTM</td>
-      <td><%= Player.find_by(id: @matches[0].away_man_of_the_match)&.name %></td>
-    </tr> 
-  </table>
+        <td><%= Player.find_by(id: @matches[0].home_man_of_the_match)&.name %></td>
+        <td>MOTM</td>
+        <td><%= Player.find_by(id: @matches[0].away_man_of_the_match)&.name %></td>
+      </tr> 
+    </table>
+
+  </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-4">
+      <h6 class="text-center">Possession</h6>
+      <%= pie_chart [["Home", @matches[0].home_possession], ["Away", @matches[0].away_possession]], width: "150px", height: "150px", donut: true %>
+    </div>
+      <div class="col-md-4">
+      <h6 class="text-center">Chances</h6>
+      <%= pie_chart [["Home", @matches[0].home_chance], ["Away", @matches[0].away_chance]], width: "150px", height: "150px", donut: true %> 
+    </div>
+      <div class="col-md-4">
+      <h6 class="text-center">On target</h6>
+      <%= pie_chart [["Home", @matches[0].home_chance_on_target], ["Away", @matches[0].away_chance_on_target]], width: "150px", height: "150px", donut: true %>
+    </div>    
+  </div>
 </div>

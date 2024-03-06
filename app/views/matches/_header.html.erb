@@ -2,11 +2,11 @@
 <h4 class="text-center mb-1">Played at <%= Club.find_by(id: @matches[0].home_team)&.ground_name %></h4>
 <h5 class="text-center mb-5">Match attendance: <%= @matches[0].attendance %></h5>
 
-<div class="row d-flex justify-content-center ms-5 mb-5">
-  <div class="col-md-4">
-    <table>
+<div class="row d-flex justify-content-center mb-5">
+  <div class="col-md-4 d-flex justify-content-center">
+    <table id="result">
       <tr>
-        <th class="colspan-2 text-center"><h5>Final Score</h5></th>
+        <th colspan="2" class="text-center"><h5>Final Score</h5></th>
       </tr>
       <tr>
         <td><h4><%= Club.find_by(id: @matches[0].home_team)&.name %></h4></td>
