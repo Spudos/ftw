@@ -8,7 +8,7 @@
             <th scope="col">Week</th>
             <th scope="col">Message</th>
           </tr>
-          <% @messages_finance.each do |message| %>
+          <% @messages_finance.sort_by { |message| message.week.to_i }.reverse.each do |message| %>
             <tr scope="row">
               <td><%= message.week %></td>
               <td><%= message.var1 %></td>
