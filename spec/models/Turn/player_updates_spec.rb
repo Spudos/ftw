@@ -21,9 +21,10 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
       create(:goal, assist_id: 1)
       create(:goal, assist_id: 1)
       create(:goal, assist_id: 1)
-
+      create(:selection, player_id: 1, club_id: 1)
+      
       allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
-      allow_any_instance_of(Kernel).to receive(:rand).with(1..6).and_return(3)
+      allow_any_instance_of(Kernel).to receive(:rand).with(1..9).and_return(3)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(3)
 
       Turn::PlayerUpdates.new(week).call
@@ -38,6 +39,7 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
       expect(Player.first.total_goals).to eq(2)
       expect(Player.first.total_assists).to eq(3)
       expect(Player.first.average_performance).to eq(50)
+      expect(Selection.exists?(player_id: 1)).to eq(false)
     end
 
     it 'no contract decrease as it is an unmagaed club' do
@@ -50,7 +52,7 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
               )
 
       allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
-      allow_any_instance_of(Kernel).to receive(:rand).with(1..6).and_return(3)
+      allow_any_instance_of(Kernel).to receive(:rand).with(1..9).and_return(3)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(3)
 
       Turn::PlayerUpdates.new(week).call
@@ -68,7 +70,7 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
               )
 
       allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
-      allow_any_instance_of(Kernel).to receive(:rand).with(1..6).and_return(3)
+      allow_any_instance_of(Kernel).to receive(:rand).with(1..9).and_return(3)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(3)
 
       Turn::PlayerUpdates.new(week).call
@@ -86,7 +88,7 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
               )
 
       allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
-      allow_any_instance_of(Kernel).to receive(:rand).with(1..6).and_return(3)
+      allow_any_instance_of(Kernel).to receive(:rand).with(1..9).and_return(3)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(3)
 
       Turn::PlayerUpdates.new(week).call
@@ -106,7 +108,7 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
       allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(1)
       allow_any_instance_of(Kernel).to receive(:rand).with(20..40).and_return(35)
-      allow_any_instance_of(Kernel).to receive(:rand).with(1..6).and_return(3)
+      allow_any_instance_of(Kernel).to receive(:rand).with(1..9).and_return(3)
 
       Turn::PlayerUpdates.new(week).call
 
@@ -124,7 +126,7 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
               )
 
       allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
-      allow_any_instance_of(Kernel).to receive(:rand).with(1..6).and_return(3)
+      allow_any_instance_of(Kernel).to receive(:rand).with(1..9).and_return(3)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(3)
 
       Turn::PlayerUpdates.new(week).call
@@ -145,7 +147,7 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
             )
 
       allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
-      allow_any_instance_of(Kernel).to receive(:rand).with(1..6).and_return(3)
+      allow_any_instance_of(Kernel).to receive(:rand).with(1..9).and_return(3)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(3)
 
       Turn::PlayerUpdates.new(week).call

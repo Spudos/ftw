@@ -18,12 +18,12 @@ class Turn::Engines::Fitness
   def availability
     players.each do |player|
       if player.available.positive?
-      player.available -= 1
+        player.available -= 1
         if player.available.zero?
           Message.create(week:,
-                        action_id: "#{week}#{player.club_id}fitness",
-                        club_id: player.club_id,
-                        var1: "#{player.name} is now available for selection after injury")
+                         action_id: "#{week}#{player.club_id}fitness",
+                         club_id: player.club_id,
+                         var1: "#{player.name} is now available for selection after injury")
         end
       end
     end
@@ -51,11 +51,14 @@ class Turn::Engines::Fitness
   def injury
     players.each do |player|
       if player.fitness < 60
-        player.available = rand(1..6)
+        player.available = rand(1..9)
         Message.create(week:,
-                      action_id: "#{week}#{player.club_id}fitness",
-                      club_id: player.club_id,
-                      var1: "#{player.name} has been injured and will be out for #{player.available} weeks")
+                       action_id: "#{week}#{player.club_id}fitness",
+                       club_id: player.club_id,
+                       var1: "#{player.name} has been injured and will be out for #{player.available} weeks")
+        if Selection.exists?(player_id: player.id)
+          Selection.find_by(player_id: player.id).destroy
+        end
       end
     end
   end
