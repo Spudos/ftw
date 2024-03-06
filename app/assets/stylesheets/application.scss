@@ -240,6 +240,13 @@ td {
   padding: 20px;
 }
 
+#result {
+  background-color: #00043b;
+  color: #f1f1f1;
+  border: #d42321 3px solid;
+  padding: 10px;
+}
+
 /** turn **/
 
 .col-3 {
@@ -297,6 +304,8 @@ td {
   margin-bottom: 5px;
 }
 
+/** selection **/
+
 .gkp {
   background-color: lightgreen;
 }
@@ -313,6 +322,8 @@ td {
   background-color: lightcoral;
 }
 
+/** league **/
+
 #fixtures {
   display: none;
 }
@@ -321,9 +332,12 @@ td {
   display: none;
 }
 
-#result {
-  background-color: #00043b;
-  color: #f1f1f1;
-  border: #d42321 3px solid;
-  padding: 10px;
+/** game_features section **/
+
+#club {
+  display: none;
+}
+
+#matches {
+  display: none;
 }
