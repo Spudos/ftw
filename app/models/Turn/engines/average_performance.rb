@@ -13,9 +13,11 @@ class Turn::Engines::AveragePerformance
   private
 
   def player_average_perfomance
+    result = Player.joins('INNER JOIN performances ON performances.player_id = players.id GROUP BY players.id')
+                   .select('players.id, AVG(match_performance) AS cnt')
+
     players.each do |player|
-      performances = Performance.where(player_id: player.id)
-      player.average_performance = performances.average(:match_performance).to_i
+      player.average_performance = result.find { |record| record.id == player.id }&.cnt || 0
     end
   end
 end

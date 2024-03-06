@@ -13,9 +13,11 @@ class Turn::Engines::TotalGoals
   private
 
   def player_total_goals
+    result = Player.joins('INNER JOIN goals ON goals.scorer_id = players.id GROUP BY players.id')
+                   .select('players.id, COUNT(players.id) AS cnt')
+
     players.each do |player|
-      goals = Goal.where(scorer_id: player.id)
-      player.total_goals = goals.count(:scorer_id)
+      player.total_goals = result.find { |record| record.id == player.id }&.cnt || 0
     end
   end
 end

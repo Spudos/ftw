@@ -17,11 +17,13 @@ class Turn::Engines::Fitness
 
   def availability
     players.each do |player|
-      if player.available > 0
-        player.available -= 1
-        player.save
-        if player.available == 0
-        Message.create(week:, action_id: week.to_s + player.club_id.to_s + 'fitness' ,club_id: player.club_id, var1: "#{player.name} is now available for selection after injury")
+      if player.available.positive?
+      player.available -= 1
+        if player.available.zero?
+          Message.create(week:,
+                        action_id: "#{week}#{player.club_id}fitness",
+                        club_id: player.club_id,
+                        var1: "#{player.name} is now available for selection after injury")
         end
       end
     end
@@ -29,11 +31,8 @@ class Turn::Engines::Fitness
 
   def fitness_increase
     players.each do |player|
-      if player.fitness != 100
-        player.fitness += rand(0..5)
-        player.fitness = 100 if player.fitness > 100
-        player.save
-      end
+      player.fitness += rand(0..5)
+      player.fitness = 100 if player.fitness > 100
     end
   end
 
@@ -41,8 +40,10 @@ class Turn::Engines::Fitness
     players.each do |player|
       if rand(1..100) <= 2
         player.fitness -= rand(20..40)
-        player.save
-        Message.create(week:, action_id: week.to_s + player.club_id.to_s + 'fitness' ,club_id: player.club_id, var1: "#{player.name} took a bad knock in training this week")
+        Message.create(week:,
+                       action_id: "#{week}#{player.club_id}fitness",
+                       club_id: player.club_id,
+                       var1: "#{player.name} took a bad knock in training this week")
       end
     end
   end
@@ -51,8 +52,10 @@ class Turn::Engines::Fitness
     players.each do |player|
       if player.fitness < 60
         player.available = rand(1..6)
-        player.save
-        Message.create(week:, action_id: week.to_s + player.club_id.to_s + 'fitness' ,club_id: player.club_id, var1: "#{player.name} has been injured and will be out for #{player.available} weeks")
+        Message.create(week:,
+                      action_id: "#{week}#{player.club_id}fitness",
+                      club_id: player.club_id,
+                      var1: "#{player.name} has been injured and will be out for #{player.available} weeks")
       end
     end
   end
