@@ -8,6 +8,10 @@ class PlayersController < ApplicationController
 
   def show
     @player = Player.find_by(id: params[:format])
+    @highest_performance = Player.order(average_performance: :desc).first&.average_performance
+    @high_performance = Performance.where(player_id: params[:format]).maximum(:match_performance)
+    @low_performance = Performance.where(player_id: params[:format]).minimum(:match_performance)
+    @performance_data = Performance.where(player_id: params[:format]).pluck(:match_id, :match_performance)
   end
 
   def player_view

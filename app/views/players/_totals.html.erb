@@ -1,0 +1,14 @@
+<div class="row d-flex justify-content-center mt-5">
+  <div class="col-md-4">
+    <h4 class="text-center">Match Totals</h4>
+    <%= column_chart [["Games Played", @player.games_played],
+                      ["Assists", @player.total_assists],
+                      ["Goals", @player.total_goals],
+                      ], colors: ["#b00", "#666"] %>
+    
+    <h4 class="text-center mt-5">Average Perfromance</h4>
+    <p class="text-center">(compared to the current top performer in the world)</p>
+    <%= bar_chart [["", @player.average_performance],
+                      ], max: @highest_performance, height: "200", colors: ["#b00", "#666"] %>
+  </div>
+</div>

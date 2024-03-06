@@ -1,0 +1,41 @@
+<div class="col-md-6">
+  <table class="table table-hover">
+    <tr>
+    <td colspan="2"><h6>Basic Information</h6></td>
+  </tr>
+    <tr>
+      <td><h5>Player id:</h5></td>
+      <td><h5><%= @player.id %></h5></td>
+    </tr>
+    <tr>
+      <td><h5>Age:</h5></td>
+      <td><h5><%= @player.age %></h5></td>
+    </tr>
+    <tr>
+      <td><h5>Position:</h5></td>
+      <td><h5><%= @player.position.upcase %><%= @player.player_position_detail.upcase %></h5></td>
+    </tr>
+    <tr>
+      <td><h5>Total Skill:</h5></td>
+      <td><h5><%= @player.total_skill %></h5></td>
+    </tr>
+  </table>
+
+  <table class="table table-hover">
+    <tr>
+      <td colspan="2"><h6>Financial Information</h6></td>
+    </tr>
+    <tr>
+      <td><h5>Value:</h5></td>
+      <td><h5 ><%= @player.value %></h5></td>
+    </tr>
+    <tr>
+      <td><h5>Wage:</h5></td>
+      <td><h5><%= @player.wages %></h5></td>
+    </tr>
+    <tr>
+      <td><h5>Contract:</h5></td>
+      <td><h5><%= @player.contract %></h5></td>
+    </tr>
+  </table>
+</div>

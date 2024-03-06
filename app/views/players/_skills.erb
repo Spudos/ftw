@@ -1,0 +1,17 @@
+<div class="row d-flex justify-content-center mt-5">
+  <div class="col-md-8">
+  <h4 class="text-center">Player Skills</h4>
+  <%= column_chart [["Passing", @player.passing],
+                    ["Control", @player.control],
+                    ["Tackling", @player.tackling],
+                    ["Running", @player.running],
+                    ["Shooting", @player.shooting],
+                    ["Dribbling", @player.dribbling],
+                    ["Def heading", @player.defensive_heading],
+                    ["Off heading", @player.offensive_heading],
+                    ["Flair", @player.flair],
+                    ["Strength", @player.strength],
+                    ["Creativitiy", @player.creativity]
+                    ], colors: ["#b00", "#666"] %>
+  </div>
+</div>
