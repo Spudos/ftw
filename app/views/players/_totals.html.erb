@@ -5,6 +5,12 @@
                       ["Assists", @player.total_assists],
                       ["Goals", @player.total_goals],
                       ], colors: ["#b00", "#666"] %>
+
+  <div>
+      <h4 class="text-center mt-5">Best and Worst Performances</h4>
+      <h6 class="text-center">Best Match Perfromance Rating: <%= @high_performance %></h6>
+      <h6 class="text-center mb-5">Worst Match Perfromance Rating: <%= @low_performance %></h6>
+  </div>
     
     <h4 class="text-center mt-5">Average Perfromance</h4>
     <p class="text-center">(compared to the current top performer in the world)</p>
