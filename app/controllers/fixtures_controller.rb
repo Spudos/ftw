@@ -2,7 +2,11 @@ class FixturesController < ApplicationController
   require 'csv'
 
   def index
-    @fixtures = Fixture.all
+    fixtures = Fixture.all
+    @weeks = fixtures.map(&:week_number).uniq.sort
+    @comps = fixtures.map(&:comp).uniq.sort
+    @fixtures = Fixture.where(comp: params[:comp], week_number: params[:week_number])
+    @results = Match.where(competition: params[:comp], week_number: params[:week_number])
   end
 
   def show
@@ -22,7 +26,7 @@ class FixturesController < ApplicationController
 
     respond_to do |format|
       if @fixtures.save
-        format.html { redirect_to fixtures_path, notice: "Fixture was successfully created." }
+        format.html { redirect_to fixtures_path, notice: 'Fixture was successfully created.' }
         format.json { render :show, status: :created, location: @fixtures }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -36,7 +40,7 @@ class FixturesController < ApplicationController
 
     respond_to do |format|
       if @fixtures.update(fixtures_params)
-        format.html { redirect_to fixtures_path, notice: "Fixture was successfully updated." }
+        format.html { redirect_to fixtures_path, notice: 'Fixture was successfully updated.' }
         format.json { render :show, status: :ok, location: @fixtures }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +55,7 @@ class FixturesController < ApplicationController
     fixture.destroy
 
     respond_to do |format|
-      format.html { redirect_to fixtures_url, notice: "Fixture was successfully destroyed." }
+      format.html { redirect_to fixtures_url, notice: 'Fixture was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -59,10 +63,13 @@ class FixturesController < ApplicationController
   def import
     begin
       CSV.foreach(params[:file].path, headers: true) do |row|
-        fixture = Fixture.find_or_initialize_by(week_number: row["week_number"], home: row["home"], away: row["away"], comp: row["comp"])
+        fixture = Fixture.find_or_initialize_by(week_number: row['week_number'],
+                                                home: row['home'],
+                                                away: row['away'],
+                                                comp: row['comp'])
         fixture.save unless fixture.persisted?
       end
-      redirect_to request.referrer, notice: "CSV imported successfully!"
+      redirect_to request.referrer, notice: 'CSV imported successfully!'
     rescue StandardError => e
       redirect_to request.referrer, alert: "Error importing CSV: #{e.message}"
     end

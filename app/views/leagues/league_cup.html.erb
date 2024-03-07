@@ -30,13 +30,60 @@
 <form action="" method="get">
   <label for="week_number">Select Week Number:</label>
   <select name="week_number" id="week_number">
-    <% @weeks.each do |week_number| %>
+    <% @lc_weeks.each do |week_number| %>
       <option value="<%= week_number %>"><%= week_number %></option>
     <% end %>
   </select>
   <button type="submit" class="btn btn-primary btn-sm">Submit</button>
 </form>
 
-<h3>Week <%= params[:week_number]%></h3>
 
-<%= render 'leagues/fixture_list' %>
+
+<% if @lc_fixtures.present? %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Week</th>
+      <th scope="col">HM Id</th>
+      <th scope="col">Home</th>
+      <th scope="col">AW Id</th>
+      <th scope="col">Away</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+    <tbody>
+      <% @lc_fixtures.each do |fixture| %>
+          <tr scope="row">
+            <td><%= fixture.id %></td>
+            <td><%= fixture.week_number %></td>
+            <td><%= fixture.home %></td>
+            <td>
+              <%= Club.find_by(id: fixture.home)&.name %>
+            </td>
+            <td><%= fixture.away %></td>
+            <td>
+              <%= Club.find_by(id: fixture.away)&.name %>
+            </td>
+              <% if Match.exists?(match_id: fixture.id) %>
+              <td>
+                <strong>Score:</strong> <%= Match.find_by(match_id: fixture.id)&.home_goals %>
+              </td>
+              <td>
+                <%= Match.find_by(match_id: fixture.id)&.away_goals %>
+              </td>
+              <td>  
+                <%= link_to 'Show Match', show_match_path(fixture.id), class: "btn btn-sm btn-primary" %>
+              </td>   
+              <% else %>
+              <td>
+                <%= link_to 'Show Match', '#', class: "btn btn-sm btn-primary disabled", disabled: true %>
+              </td>    
+            <% end %>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

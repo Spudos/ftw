@@ -1,4 +1,3 @@
-<h3>Fixtures</h3>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -8,52 +7,40 @@
       <th scope="col">Home</th>
       <th scope="col">AW Id</th>
       <th scope="col">Away</th>
-      <th scope="col">Comp</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <% @fixtures.each do |fixture| %>
-      <% match_exists = Match.exists?(id: fixture.id) %>
-      <% home_selection_exists = Selection.exists?(club_id: fixture.home) %>
-      <% away_selection_exists = Selection.exists?(club_id: fixture.away) %>
-      <% if fixture.week_number.to_s == params[:week_number] %>
         <tr scope="row">
           <td><%= fixture.id %></td>
           <td><%= fixture.week_number %></td>
           <td><%= fixture.home %></td>
           <td>
-            <% if home_selection_exists %>
-              <span id="exists"><%= Club.find_by(id: fixture.home)&.name %></span>
-              <%= link_to 'Show', club_path(fixture.home) %>
-            <% else %>
-              <span id="not_exists"><%= Club.find_by(id: fixture.home)&.name %></span>
-              <%= link_to 'Show', club_path(fixture.home) %>
-            <% end %>
+            <%= Club.find_by(id: fixture.home)&.name %>
           </td>
           <td><%= fixture.away %></td>
           <td>
-            <% if away_selection_exists %>
-              <span id="exists"><%= Club.find_by(id: fixture.away)&.name %></span>
-              <%= link_to 'Show', club_path(fixture.away) %>
-            <% else %>
-              <span id="not_exists"><%= Club.find_by(id: fixture.away)&.name %></span>
-              <%= link_to 'Show', club_path(fixture.away) %>
-            <% end %>
+            <%= Club.find_by(id: fixture.away)&.name %>
           </td>
-          <td><%= fixture.comp %></td>
-          <td>
             <% if Match.exists?(match_id: fixture.id) %>
-              <%= link_to 'Show Result', show_match_path(fixture.id), class: "btn btn-sm btn-primary" %>
+            <td>
+              <strong>Score:</strong> <%= Match.find_by(match_id: fixture.id)&.home_goals %>
+            </td>
+            <td>
+              <%= Match.find_by(match_id: fixture.id)&.away_goals %>
+            </td>
+            <td>  
+              <%= link_to 'Show Match', show_match_path(fixture.id), class: "btn btn-sm btn-primary" %>
+            </td>   
             <% else %>
-              <%= link_to 'Show Result', '#', class: "btn btn-sm btn-primary disabled", disabled: true %>
-            <% end %>
-          </td>
-          <td>
-            <%= button_to 'Delete fixture', fixture, method: :delete, form: { data: { turbo_confirm: 'Are you sure you want to delete this fixture?' } }, class: "btn btn-sm btn-danger" %>
-          </td>
+            <td>
+              <%= link_to 'Show Match', '#', class: "btn btn-sm btn-primary disabled", disabled: true %>
+            </td>    
+          <% end %>
         </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>

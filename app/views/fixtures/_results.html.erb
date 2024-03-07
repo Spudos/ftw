@@ -13,7 +13,7 @@
     </tr>
   </thead>
   <tbody>
-    <% Match.where(week_number: params[:week_number]).each do |match| %>
+    <% @results.each do |match| %>
       <tr scope="row">
         <td><%= match.id %></td>
         <td><%= match.competition %></td>

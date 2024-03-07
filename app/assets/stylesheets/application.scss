@@ -269,27 +269,6 @@ td {
   align-self: flex-start;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
-  justify-content: center;
-  width: 90%;
-  margin: 0 auto;
-  font-size: 80%;
-}
-
-.stats {
-  border: 1px solid green;
-  padding: 10px;
-  border-radius: 10px;
-  display: flex;
-  margin: auto;
-  width: 100%;
-  justify-content: center;
-  font-size: large;
-}
-
 #form-container {
   margin-bottom: 50px;
 }

@@ -1,15 +1,23 @@
 <form action="/fixtures" method="get">
   <label for="week_number">Select Week Number:</label>
   <select name="week_number" id="week_number">
-    <% @fixtures.map(&:week_number).uniq.sort.each do |week_number| %>
+    <% @weeks.each do |week_number| %>
       <option value="<%= week_number %>">Week <%= week_number %></option>
+    <% end %>
+  </select>
+  <label for="comp">Select Competition:</label>
+  <select name="comp" id="comp">
+    <% @comps.each do |comp| %>
+      <option value="<%= comp %>"><%= comp %></option>
     <% end %>
   </select>
   <button type="submit" class="btn btn-primary btn-sm">Submit</button>
 </form>
 
-<h3>Week <%= params[:week_number]%></h3>
+<h3 class="mb-5 mt-5">Week: <%= params[:week_number]%> - Competition: <%= params[:comp]%></h3>
 
-<%= render 'fixtures/results'%>
-
+<% if @fixtures.present? %>
 <%= render 'fixtures/fixtures'%>
+<% else %>
+<h5 class="mb-5 mt-5">No fixtures this week for the selected competition</h5>
+<% end %>

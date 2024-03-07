@@ -17,7 +17,13 @@ class Turn::TransferUpdates
   def listed_player_bids
     bids = Transfer.where(status: "bid").group_by { |record| record.player_id }.map do |group, records|
       sorted_records = records.sort_by { |record| -record.bid }
-      { group: group, records: sorted_records.map { |record| { player_id: record.player_id, sell_club: record.sell_club, buy_club: record.buy_club, week: record.week, bid: record.bid } } }
+      { group:, records: sorted_records.map { |record|
+                                               { player_id: record.player_id,
+                                                 sell_club: record.sell_club,
+                                                 buy_club: record.buy_club,
+                                                 week: record.week,
+                                                 bid: record.bid }
+                                             } }
     end
 
     bids.each do |bid|
@@ -31,14 +37,19 @@ class Turn::TransferUpdates
           player.contract = 24
           player.save
 
-          Message.create(action_id:, week: record[:week], club_id: record[:buy_club], var1: "Your #{record[:bid]} bid for #{player.name} suceeded!  The player has joined your club")
+          Message.create(action_id:, week: record[:week], club_id: record[:buy_club],
+                         var1: "Your #{record[:bid]} bid for #{player.name} suceeded!  The player has joined your club")
 
-          Turn::BankAdjustment.new(action_id, record[:week], record[:sell_club].to_i, 'listed_sale', player.name, record[:bid] * -1).call
-          Turn::BankAdjustment.new(action_id, record[:week], record[:buy_club].to_i, 'listed_purchase', player.name, record[:bid]).call
+          Turn::BankAdjustment.new(action_id, record[:week], record[:sell_club].to_i,
+                                   'listed_sale', player.name, record[:bid] * -1).call
+          Turn::BankAdjustment.new(action_id, record[:week], record[:buy_club].to_i,
+                                   'listed_purchase', player.name, record[:bid]).call
 
-          Transfer.find_by(player_id: record[:player_id], buy_club: record[:buy_club]).update(status: 'transfer_completed')
+          Transfer.find_by(player_id: record[:player_id],
+                           buy_club: record[:buy_club]).update(status: 'transfer_completed')
         else
-          Message.create(action_id:, week: record[:week], club_id: record[:buy_club], var1: "Your #{record[:bid]} bid for #{player.name} failed due to being outbid by another club")
+          Message.create(action_id:, week: record[:week], club_id: record[:buy_club],
+                         var1: "Your #{record[:bid]} bid for #{player.name} failed due to being outbid by another club")
           Transfer.find_by(player_id: record[:player_id], buy_club: record[:buy_club]).update(status: 'bid_failed')
         end
       end
@@ -46,10 +57,15 @@ class Turn::TransferUpdates
   end
 
   def complete_deals
-    deals = Transfer.where(status: "deal").group_by { |record| record.player_id }.map do |group, records|
+    deals = Transfer.where(status: 'deal').group_by { |record| record.player_id }.map do |group, records|
       {
         group:,
-        records: records.map { |record| { player_id: record.player_id, sell_club: record.sell_club, buy_club: record.buy_club, week: record.week, bid: record.bid } } 
+        records: records.map { |record| { 
+                                          player_id: record.player_id,
+                                          sell_club: record.sell_club,
+                                          buy_club: record.buy_club,
+                                          week: record.week,
+                                          bid: record.bid } } 
       }
     end
 
@@ -82,17 +98,24 @@ class Turn::TransferUpdates
         Turn::BankAdjustment.new(action_id, week, sell_club_id.to_i, 'deal_sale', player.name, bid * -1).call
         Turn::BankAdjustment.new(action_id, week, buy_club_id.to_i, 'deal_purchase', player.name, bid).call
 
-        Message.create(action_id:, week:, club_id: buy_club_id, var1: "Your deal to buy #{player.name} from #{sell_club.name} was completed successfully")
-        Message.create(action_id:, week:, club_id: sell_club_id, var1: "Your deal to sell #{player.name} to #{buy_club.name} was completed successfully")
+        Message.create(action_id:, week:, club_id: buy_club_id,
+                       var1: "Your deal to buy #{player.name} from #{sell_club.name} was completed successfully")
+        Message.create(action_id:, week:, club_id: sell_club_id,
+                       var1: "Your deal to sell #{player.name} to #{buy_club.name} was completed successfully")
         Transfer.where(player_id:, buy_club:, sell_club:, week:).update(status: 'deal_completed')
       else
-        Message.create(action_id:, week:, club_id: buy_club, var1: "Your deal to buy #{player.name} from #{sell_club.name} failed as the the player value is higher than the agreed amount")
-        Message.create(action_id:, week:, club_id: sell_club, var1: "Your deal to sell #{player.name} to #{buy_club.name} failed as the the player value is higher than the agreed amount")
+        Message.create(action_id:, week:, club_id: buy_club,
+                       var1: "Your deal to buy #{player.name} from #{sell_club.name} failed as the the player value is higher than the agreed amount")
+        Message.create(action_id:, week:, club_id: sell_club,
+                       var1: "Your deal to sell #{player.name} to #{buy_club.name} failed as the the player value is higher than the agreed amount")
         Transfer.where(player_id:, buy_club:, sell_club:, week:).update(status: 'deal_failed')
       end
     else
-      Message.create(action_id:, week:, club_id: buy_club, var1: "Your deal to buy #{player.name} from #{sell_club.name} failed as the the player is not owned by the selling club")
-      Message.create(action_id:, week:, club_id: sell_club, var1: "Your deal to sell #{player.name} to #{buy_club.name} failed as the the player is not owned by your club")
+      Message.create(action_id:, week:, club_id: buy_club,
+                     var1: "Your deal to buy #{player.name} from #{sell_club.name}
+                     failed as the the player is not owned by the selling club")
+      Message.create(action_id:, week:, club_id: sell_club, 
+                     var1: "Your deal to sell #{player.name} to #{buy_club.name} failed as the the player is not owned by your club")
       Transfer.where(player_id:, buy_club:, sell_club:, week:).update(status: 'deal_failed')
     end
   end
@@ -107,8 +130,10 @@ class Turn::TransferUpdates
     sell_club_name = Club.find_by(id: sell_club)&.name
     action_id = week.to_s + sell_club.to_s + buy_club.to_s
 
-    Message.create(action_id:, week:, club_id: buy_club, var1: "Your deal to buy #{player_name} from #{sell_club_name} failed as the details provided by both clubs did not agree")
-    Message.create(action_id:, week:, club_id: sell_club, var1: "Your deal to sell #{player_name} to #{buy_club_name} failed as the details provided by both clubs did not agree")
+    Message.create(action_id:, week:, club_id: buy_club,
+                   var1: "Your deal to buy #{player_name} from #{sell_club_name} failed as the details provided by both clubs did not agree")
+    Message.create(action_id:, week:, club_id: sell_club,
+                   var1: "Your deal to sell #{player_name} to #{buy_club_name} failed as the details provided by both clubs did not agree")
     Transfer.where(player_id:, buy_club:, sell_club:, week:).update(status: 'deal_failed')
   end
 end

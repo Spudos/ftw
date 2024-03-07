@@ -5,9 +5,6 @@
   <li class="nav-item">
     <button id="statisticsButton" class="btn btn-sm btn-primary">Statistics</button>
   </li>
-  <li class="nav-item">
-    <button id="fixturesButton" class="btn btn-sm btn-primary">Fixtures</button>
-  </li>
 </ul>
 
 <div id='table'>
@@ -25,22 +22,6 @@
     <div class="stats"><%= render 'leagues/top_total_skill_mid' %></div>
     <div class="stats"><%= render 'leagues/top_total_skill_att' %></div>
   </div>
-</div>
-
-<div id='fixtures'>
-  <form action="" method="get">
-    <label for="week_number">Select Week Number:</label>
-    <select name="week_number" id="week_number">
-      <% @weeks.each do |week_number| %>
-        <option value="<%= week_number %>"><%= week_number %></option>
-      <% end %>
-    </select>
-    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-  </form>
-
-  <h3>Week <%= params[:week_number]%></h3>
-
-  <%= render 'fixture_list' %>
 </div>
 
 <%= javascript_pack_tag 'league' %>
