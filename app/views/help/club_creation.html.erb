@@ -1,5 +1,6 @@
-Club Creation
-
+<h3 class="text-center mb-5">Club Creation</h3>
+<h6 class="text-center">In the first section you decide what you want to call your club and the stadium</h6>
+      <p class="text-center">You can use any names you want, we just ask that you avoid anything rude and offensive.</p>
 <%= form_with(model: @club_creation, url: help_club_submission_path) do |form| %>
   <% if @club_creation.errors.any? %>
     <div style="color: red">
@@ -13,82 +14,100 @@ Club Creation
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :manager, style: "display: block" %>
-    <%= form.text_field :manager %>
+  <div class="row d-flex justify-content-center mb-5">
+    <div class="col-md-3">
+      <div>
+        <%= form.label :manager, "Your Name", style: "display: block" %>
+        <%= form.text_field :manager %>
+      </div>
+
+      <div>
+        <%= form.label :manager_email, "Your Email", style: "display: block" %>
+        <%= form.email_field :manager_email, value: current_user.email %>
+      </div>
+
+      <div>
+        <%= form.label :name, "New Club Name", style: "display: block" %>
+        <%= form.text_field :name %>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div>
+        <%= form.label :ground_name, "Name Your Ground", style: "display: block" %>
+        <%= form.text_field :ground_name %>
+      </div>
+
+      <div>
+        <%= form.label :stand_n_name, "Name the North Stand", style: "display: block" %>
+        <%= form.text_field :stand_n_name %>
+      </div>
+
+      <div>
+        <%= form.label :stand_s_name, "Name the South Stand", style: "display: block" %>
+        <%= form.text_field :stand_s_name %>
+      </div>
+
+      <div>
+        <%= form.label :stand_e_name, "Name the East Stand", style: "display: block" %>
+        <%= form.text_field :stand_e_name %>
+      </div>
+
+      <div>
+        <%= form.label :stand_w_name, "Name the West Stand", style: "display: block" %>
+        <%= form.text_field :stand_w_name %>
+      </div>
+
+      <div>
+        <%= form.label :color_primary, "Club Primary Color", style: "display: block" %>
+        <%= form.text_field :color_primary %>
+      </div>
+
+      <div>
+        <%= form.label :color_secondary, "Club Secondary Color", style:  "display: block" %>
+        <%= form.text_field :color_secondary %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :manager_email, style: "display: block" %>
-    <%= form.email_field :manager_email %>
+
+  <div class="row d-flex justify-content-center mt-5 mb-5">
+    <div class="col-md-6">
+      <h6>In this section you select what league you will play in and what type of club you will have</h6>
+      <p>You have 15 points to allocate across 3 areas.  How many points you put in stadium will determine 
+        how big your ground is and how good you coaches and facilities are.</p>
+      <p>How many points you put in bank will determine how much money you start with</p>
+      <p>How many points you put in fanbase will determine how many potential fans you start with</p>
+      <p>Finally, you get to choose what type of team you have.  Will it be a young team with loads of potential
+        or a older team that will have better current skills but less potential.</p>
+      <p>Remember, you can only spend 15 points in total</p>
+      <p>When you create your club a club that is unmanaged in the requested division will be replaced by your new team.</p>
+      <table>
+        <td>
+          <%= form.label :league, "League?", style: "font-weight: bold" %>
+          <%= form.select :league, options_for_select(['Premier League', 'Championship'], selected: 'Premier League') %>
+        </td>
+        <td>
+          <%= form.label :stadium_points, "Stadium", style: "font-weight: bold"  %>
+          <%= form.select :stadium_points, (1..10) %>
+        </td>
+        <td>
+          <%= form.label :bank_points, "Bank", style: "font-weight: bold"  %>
+          <%= form.select :bank_points, (1..10) %>
+        </td>
+        <td>
+          <%= form.label :fanbase_points, "Fanbase", style: "font-weight: bold"  %>
+          <%= form.select :fanbase_points, (1..10) %>
+        </td>
+        <td>
+          <%= form.label :player_type, "Type of Playing Squad", style: "font-weight: bold"  %>
+          <%= form.select :player_type, options_for_select({ 'Young with potential' => 'junior', 'Older with higher skills' => 'senior' }) %>
+        </td>
+      </table>
+    </div>  
   </div>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-  
-  <div>
-    <%= form.label :league %>
-    <%= form.select :league, options_for_select(['Premier League', 'Championship'], selected: 'Premier League') %>
-  </div>
-
-  <div>
-    <%= form.label :ground_name, style: "display: block" %>
-    <%= form.text_field :ground_name %>
-  </div>
-
-  <div>
-    <%= form.label :stand_n_name, style: "display: block" %>
-    <%= form.text_field :stand_n_name %>
-  </div>
-
-  <div>
-    <%= form.label :stand_s_name, style: "display: block" %>
-    <%= form.text_field :stand_s_name %>
-  </div>
-
-  <div>
-    <%= form.label :stand_e_name, style: "display: block" %>
-    <%= form.text_field :stand_e_name %>
-  </div>
-
-  <div>
-    <%= form.label :stand_w_name, style: "display: block" %>
-    <%= form.text_field :stand_w_name %>
-  </div>
-
-  <div>
-    <%= form.label :color_primary, style: "display: block" %>
-    <%= form.text_field :color_primary %>
-  </div>
-
-  <div>
-    <%= form.label :color_secondary, style:  "display: block" %>
-    <%= form.text_field :color_secondary %>
-  </div>
-
-  <div>
-    <%= form.label :stadium_points %>
-    <%= form.select :stadium_points, (1..10) %>
-  </div>
-
-  <div>
-    <%= form.label :bank_points %>
-    <%= form.select :bank_points, (1..10) %>
-  </div>
-
-  <div>
-    <%= form.label :fanbase_points %>
-    <%= form.select :fanbase_points, (1..10) %>
-  </div>
-
-  <div>
-    <%= form.label :player_type %>
-    <%= form.select :player_type, options_for_select({ 'Young with potential' => 'junior', 'Older with higher skills' => 'senior' }) %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="text-center">
+    <%= form.submit 'Create my Club', class: 'btn btn-sm btn-danger' %>
   </div>
 <% end %>

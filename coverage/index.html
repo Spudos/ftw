@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-03-08T14:07:24+00:00">2024-03-08T14:07:24+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-03-08T14:21:29+00:00">2024-03-08T14:21:29+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  90.91%
+  90.93%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         3.89
+         3.88
        </span>
     </span> hits/line
     )
@@ -39,15 +39,15 @@
   <a name="AllFiles"></a>
 
   <div>
-    <b>116</b> files in total.
+    <b>117</b> files in total.
   </div>
 
   <div class="t-line-summary">
-    <b>3268</b> relevant lines,
-    <span class="green"><b>2971</b> lines covered</span> and
+    <b>3275</b> relevant lines,
+    <span class="green"><b>2978</b> lines covered</span> and
     <span class="red"><b>297</b> lines missed. </span>
     (<span class="green">
-  90.91%
+  90.93%
 </span>
 )
   </div>
@@ -325,12 +325,23 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#023ca79860523807515c7837729dc5b6b714a716" class="src_link" title="app/models/club.rb">app/models/club.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">42.05 %</td>
-            <td class="cell--number">576</td>
-            <td class="cell--number">176</td>
-            <td class="cell--number">74</td>
-            <td class="cell--number">102</td>
-            <td class="cell--number">0.53</td>
+            <td class="red strong cell--number t-file__coverage">35.29 %</td>
+            <td class="cell--number">52</td>
+            <td class="cell--number">17</td>
+            <td class="cell--number">6</td>
+            <td class="cell--number">11</td>
+            <td class="cell--number">0.35</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#3e470fb48913a2e973bec5da8c089247f7ea2d96" class="src_link" title="app/models/club/club_creation.rb">app/models/club/club_creation.rb</a></td>
+            <td class="red strong cell--number t-file__coverage">45.18 %</td>
+            <td class="cell--number">537</td>
+            <td class="cell--number">166</td>
+            <td class="cell--number">75</td>
+            <td class="cell--number">91</td>
+            <td class="cell--number">0.57</td>
             
           </tr>
         
@@ -19054,7 +19065,7 @@
     <h3>app/models/club.rb</h3>
     <h4>
       <span class="red">
-  42.05%
+  35.29%
 </span>
 
       lines covered
@@ -19063,9 +19074,9 @@
     
 
     <div class="t-line-summary">
-      <b>176</b> relevant lines.
-      <span class="green"><b>74</b> lines covered</span> and
-      <span class="red"><b>102</b> lines missed.</span>
+      <b>17</b> relevant lines.
+      <span class="green"><b>6</b> lines covered</span> and
+      <span class="red"><b>11</b> lines missed.</span>
     </div>
 
     
@@ -19148,29 +19159,29 @@
 
             
 
-            <code class="ruby">    club_creation_details(club, params)</code>
+            <code class="ruby">    Club::ClubCreation.new(club, params).call</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="8">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="8">
+            
             
 
             
 
-            <code class="ruby">    club_creation_stadium(club, params)</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="9">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="9">
+            
             
 
             
 
-            <code class="ruby">    club_creation_departments(club, params)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -19181,29 +19192,29 @@
 
             
 
-            <code class="ruby">    club_creation_bank(club, params)</code>
+            <code class="ruby">  def finance_items(club)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="11">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="11">
+            
             
 
             
 
-            <code class="ruby">    club_creation_fanbase(club, params)</code>
+            <code class="ruby">    highest_week_number = Message.maximum(:week)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="12">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="12">
+            
             
 
             
 
-            <code class="ruby">    player_removal(club)</code>
+            <code class="ruby">    messages = Message.where(club_id: club, week: highest_week_number)</code>
           </li>
         </div>
       
@@ -19219,24 +19230,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="14">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="14">
+            
             
 
             
 
-            <code class="ruby">    if params[:club][:player_type] == &#39;junior&#39;</code>
+            <code class="ruby">    total_income = 0</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="15">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="15">
+            
             
 
             
 
-            <code class="ruby">      player_create_junior(club)</code>
+            <code class="ruby">    total_expenditure = 0</code>
           </li>
         </div>
       
@@ -19247,7 +19258,7 @@
 
             
 
-            <code class="ruby">    else</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -19258,73 +19269,73 @@
 
             
 
-            <code class="ruby">      player_create_senior(club)</code>
+            <code class="ruby">    messages.each do |message|</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="18">
+          <li class="missed" data-hits="0" data-linenumber="18">
+            
+            
+
+            
+
+            <code class="ruby">      if message.var2.present? &amp;&amp; message.var2.start_with?(&quot;inc&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="19">
+            
+            
+
+            
+
+            <code class="ruby">        total_income += message.var3</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="20">
+            
+            
+
+            
+
+            <code class="ruby">      elsif message.var2.present?</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="21">
+            
+            
+
+            
+
+            <code class="ruby">        total_expenditure += message.var3</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="22">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="23">
             
             
 
             
 
             <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="19">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="20">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="21">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  def finance_items(club)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="22">
-            
-            
-
-            
-
-            <code class="ruby">    highest_week_number = Message.maximum(:week)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="23">
-            
-            
-
-            
-
-            <code class="ruby">    messages = Message.where(club_id: club, week: highest_week_number)</code>
           </li>
         </div>
       
@@ -19340,128 +19351,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="25">
-            
-            
-
-            
-
-            <code class="ruby">    total_income = 0</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="26">
-            
-            
-
-            
-
-            <code class="ruby">    total_expenditure = 0</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="27">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="28">
-            
-            
-
-            
-
-            <code class="ruby">    messages.each do |message|</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="29">
-            
-            
-
-            
-
-            <code class="ruby">      if message.var2.present? &amp;&amp; message.var2.start_with?(&quot;inc&quot;)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="30">
-            
-            
-
-            
-
-            <code class="ruby">        total_income += message.var3</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="31">
-            
-            
-
-            
-
-            <code class="ruby">      elsif message.var2.present?</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="32">
-            
-            
-
-            
-
-            <code class="ruby">        total_expenditure += message.var3</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="33">
-            
-            
-
-            
-
-            <code class="ruby">      end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="34">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="35">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="36">
+          <li class="never" data-hits="" data-linenumber="25">
             
             
 
@@ -19472,7 +19362,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="37">
+          <li class="missed" data-hits="0" data-linenumber="26">
             
             
 
@@ -19483,7 +19373,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="38">
+          <li class="never" data-hits="" data-linenumber="27">
             
             
 
@@ -19494,7 +19384,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="39">
+          <li class="never" data-hits="" data-linenumber="28">
             
             
 
@@ -19505,7 +19395,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="40">
+          <li class="never" data-hits="" data-linenumber="29">
             
             
 
@@ -19516,7 +19406,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="41">
+          <li class="never" data-hits="" data-linenumber="30">
             
             
 
@@ -19527,7 +19417,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="42">
+          <li class="never" data-hits="" data-linenumber="31">
             
             
 
@@ -19538,7 +19428,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="43">
+          <li class="never" data-hits="" data-linenumber="32">
             
             
 
@@ -19549,7 +19439,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="44">
+          <li class="never" data-hits="" data-linenumber="33">
             
             
 
@@ -19560,7 +19450,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="45">
+          <li class="never" data-hits="" data-linenumber="34">
             
             
 
@@ -19571,7 +19461,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="46">
+          <li class="never" data-hits="" data-linenumber="35">
             
             
 
@@ -19582,7 +19472,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="47">
+          <li class="never" data-hits="" data-linenumber="36">
             
             
 
@@ -19593,7 +19483,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="48">
+          <li class="never" data-hits="" data-linenumber="37">
             
             
 
@@ -19604,7 +19494,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="49">
+          <li class="never" data-hits="" data-linenumber="38">
             
             
 
@@ -19615,7 +19505,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="50">
+          <li class="never" data-hits="" data-linenumber="39">
             
             
 
@@ -19626,7 +19516,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="51">
+          <li class="never" data-hits="" data-linenumber="40">
             
             
 
@@ -19637,7 +19527,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="52">
+          <li class="never" data-hits="" data-linenumber="41">
             
             
 
@@ -19648,7 +19538,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="53">
+          <li class="never" data-hits="" data-linenumber="42">
             
             
 
@@ -19659,7 +19549,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="54">
+          <li class="never" data-hits="" data-linenumber="43">
             
             
 
@@ -19670,7 +19560,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="55">
+          <li class="never" data-hits="" data-linenumber="44">
             
             
 
@@ -19681,7 +19571,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="56">
+          <li class="never" data-hits="" data-linenumber="45">
             
             
 
@@ -19692,7 +19582,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="57">
+          <li class="never" data-hits="" data-linenumber="46">
             
             
 
@@ -19703,7 +19593,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="58">
+          <li class="never" data-hits="" data-linenumber="47">
             
             
 
@@ -19714,7 +19604,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="59">
+          <li class="never" data-hits="" data-linenumber="48">
             
             
 
@@ -19725,7 +19615,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="60">
+          <li class="never" data-hits="" data-linenumber="49">
             
             
 
@@ -19736,7 +19626,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="61">
+          <li class="missed" data-hits="0" data-linenumber="50">
             
             
 
@@ -19747,7 +19637,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="62">
+          <li class="never" data-hits="" data-linenumber="51">
             
             
 
@@ -19758,7 +19648,71 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="63">
+          <li class="never" data-hits="" data-linenumber="52">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="3e470fb48913a2e973bec5da8c089247f7ea2d96">
+  <div class="header">
+    <h3>app/models/club/club_creation.rb</h3>
+    <h4>
+      <span class="red">
+  45.18%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>166</b> relevant lines.
+      <span class="green"><b>75</b> lines covered</span> and
+      <span class="red"><b>91</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">class Club::ClubCreation</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="2">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  attr_reader :club, :params</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="3">
             
             
 
@@ -19769,172 +19723,40 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="64">
+          <li class="covered" data-hits="1" data-linenumber="4">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  private</code>
+            <code class="ruby">  def initialize(club, params)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="65">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="66">
+          <li class="covered" data-hits="1" data-linenumber="5">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def club_creation_details(club, params)</code>
+            <code class="ruby">    @club = club</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="67">
+          <li class="covered" data-hits="1" data-linenumber="6">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    club.manager = params[:club][:manager]</code>
+            <code class="ruby">    @params = params</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="68">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.manager_email = params[:club][:manager_email]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="69">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.managed = true</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="70">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.name = params[:club][:name]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="71">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.ground_name = params[:club][:ground_name]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="72">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.stand_n_name = params[:club][:stand_n_name]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="73">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.stand_e_name = params[:club][:stand_e_name]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="74">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.stand_s_name = params[:club][:stand_s_name]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="75">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.stand_w_name = params[:club][:stand_w_name]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="76">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.color_primary = params[:club][:color_primary]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="77">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.color_secondary = params[:club][:color_secondary]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="78">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.save</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="79">
+          <li class="never" data-hits="" data-linenumber="7">
             
             
 
@@ -19945,7 +19767,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="80">
+          <li class="never" data-hits="" data-linenumber="8">
             
             
 
@@ -19956,623 +19778,117 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="81">
+          <li class="covered" data-hits="1" data-linenumber="9">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def club_creation_stadium(club, params)</code>
+            <code class="ruby">  def call</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="82">
+          <li class="covered" data-hits="1" data-linenumber="10">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    case params[:club][:stadium_points].to_i</code>
+            <code class="ruby">    club_creation_details</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="83">
-            
-            
-
-            
-
-            <code class="ruby">    when 1</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="84">
-            
-            
-
-            
-
-            <code class="ruby">      random = 3250..3750</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="85">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="86">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="87">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="88">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="89">
-            
-            
-
-            
-
-            <code class="ruby">    when 2</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="90">
-            
-            
-
-            
-
-            <code class="ruby">      random = 4500..5000</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="91">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="92">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="93">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="94">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="95">
-            
-            
-
-            
-
-            <code class="ruby">    when 3</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="96">
-            
-            
-
-            
-
-            <code class="ruby">      random = 5750..6250</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="97">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="98">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="99">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="100">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="101">
-            
-            
-
-            
-
-            <code class="ruby">    when 4</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="102">
-            
-            
-
-            
-
-            <code class="ruby">      random = 7000..7500</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="103">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="104">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="105">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="106">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="107">
-            
-            
-
-            
-
-            <code class="ruby">    when 5</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="108">
+          <li class="covered" data-hits="1" data-linenumber="11">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      random = 8250..8750</code>
+            <code class="ruby">    club_creation_stadium</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="109">
+          <li class="covered" data-hits="1" data-linenumber="12">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
+            <code class="ruby">    club_creation_departments</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="110">
+          <li class="covered" data-hits="1" data-linenumber="13">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
+            <code class="ruby">    club_creation_bank</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="111">
+          <li class="covered" data-hits="1" data-linenumber="14">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
+            <code class="ruby">    club_creation_fanbase</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="112">
+          <li class="covered" data-hits="1" data-linenumber="15">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
+            <code class="ruby">    player_removal</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="113">
+          <li class="never" data-hits="" data-linenumber="16">
             
             
 
             
 
-            <code class="ruby">    when 6</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="114">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="17">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">      random = 9500..10000</code>
+            
+
+            <code class="ruby">    if params[:club][:player_type] == &#39;junior&#39;</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="115">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="18">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
+            
+
+            <code class="ruby">      player_create_junior</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="116">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="117">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="118">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="119">
-            
-            
-
-            
-
-            <code class="ruby">    when 7</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="120">
-            
-            
-
-            
-
-            <code class="ruby">      random = 10750..11250</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="121">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="122">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="123">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="124">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="125">
-            
-            
-
-            
-
-            <code class="ruby">    when 8</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="126">
-            
-            
-
-            
-
-            <code class="ruby">      random = 12000.12500</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="127">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="128">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="129">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="130">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="131">
-            
-            
-
-            
-
-            <code class="ruby">    when 9</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="132">
-            
-            
-
-            
-
-            <code class="ruby">      random = 13250..13750</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="133">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="134">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="135">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="136">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="137">
+          <li class="never" data-hits="" data-linenumber="19">
             
             
 
@@ -20583,62 +19899,18 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="138">
+          <li class="missed" data-hits="0" data-linenumber="20">
             
             
 
             
 
-            <code class="ruby">      random = 14500..15000</code>
+            <code class="ruby">      player_create_senior</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="139">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="140">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="141">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="142">
-            
-            
-
-            
-
-            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="143">
+          <li class="never" data-hits="" data-linenumber="21">
             
             
 
@@ -20649,18 +19921,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="144">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.save</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="145">
+          <li class="never" data-hits="" data-linenumber="22">
             
             
 
@@ -20671,7 +19932,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="146">
+          <li class="never" data-hits="" data-linenumber="23">
             
             
 
@@ -20682,18 +19943,216 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="147">
+          <li class="covered" data-hits="1" data-linenumber="24">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def club_creation_departments(club, params)</code>
+            <code class="ruby">  private</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="148">
+          <li class="never" data-hits="" data-linenumber="25">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="26">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="27">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def club_creation_details</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="28">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.manager = params[:club][:manager]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="29">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.manager_email = params[:club][:manager_email]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="30">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.managed = true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="31">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.name = params[:club][:name]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="32">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.ground_name = params[:club][:ground_name]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="33">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.stand_n_name = params[:club][:stand_n_name]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="34">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.stand_e_name = params[:club][:stand_e_name]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="35">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.stand_s_name = params[:club][:stand_s_name]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="36">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.stand_w_name = params[:club][:stand_w_name]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="37">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.color_primary = params[:club][:color_primary]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="38">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.color_secondary = params[:club][:color_secondary]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="39">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.save</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="40">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="41">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="42">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def club_creation_stadium</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="43">
             <span class="hits">1</span>
             
 
@@ -20704,315 +20163,601 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="149">
+          <li class="never" data-hits="" data-linenumber="44">
             
             
 
             
 
-            <code class="ruby">    when 1..3</code>
+            <code class="ruby">    when 1</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="150">
+          <li class="missed" data-hits="0" data-linenumber="45">
             
             
 
             
 
-            <code class="ruby">      club.stand_n_condition = rand(2..4)</code>
+            <code class="ruby">      random = 3250..3750</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="151">
+          <li class="missed" data-hits="0" data-linenumber="46">
             
             
 
             
 
-            <code class="ruby">      club.stand_e_condition = rand(2..4)</code>
+            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="152">
+          <li class="missed" data-hits="0" data-linenumber="47">
             
             
 
             
 
-            <code class="ruby">      club.stand_s_condition = rand(2..4)</code>
+            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="153">
+          <li class="missed" data-hits="0" data-linenumber="48">
             
             
 
             
 
-            <code class="ruby">      club.stand_w_condition = rand(2..4)</code>
+            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="154">
+          <li class="missed" data-hits="0" data-linenumber="49">
             
             
 
             
 
-            <code class="ruby">      club.pitch = rand(2..4)</code>
+            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="155">
+          <li class="never" data-hits="" data-linenumber="50">
             
             
 
             
 
-            <code class="ruby">      club.facilities = rand(2..4)</code>
+            <code class="ruby">    when 2</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="156">
+          <li class="missed" data-hits="0" data-linenumber="51">
             
             
 
             
 
-            <code class="ruby">      club.hospitality = rand(2..4)</code>
+            <code class="ruby">      random = 4500..5000</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="157">
+          <li class="missed" data-hits="0" data-linenumber="52">
             
             
 
             
 
-            <code class="ruby">      club.staff_fitness = rand(2..4)</code>
+            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="158">
+          <li class="missed" data-hits="0" data-linenumber="53">
             
             
 
             
 
-            <code class="ruby">      club.staff_gkp = rand(2..4)</code>
+            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="159">
+          <li class="missed" data-hits="0" data-linenumber="54">
             
             
 
             
 
-            <code class="ruby">      club.staff_dfc = rand(2..4)</code>
+            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="160">
+          <li class="missed" data-hits="0" data-linenumber="55">
             
             
 
             
 
-            <code class="ruby">      club.staff_mid = rand(2..4)</code>
+            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="161">
+          <li class="never" data-hits="" data-linenumber="56">
             
             
 
             
 
-            <code class="ruby">      club.staff_att = rand(2..4)</code>
+            <code class="ruby">    when 3</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="162">
+          <li class="missed" data-hits="0" data-linenumber="57">
             
             
 
             
 
-            <code class="ruby">      club.staff_scouts = rand(2..4)</code>
+            <code class="ruby">      random = 5750..6250</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="163">
+          <li class="missed" data-hits="0" data-linenumber="58">
             
             
 
             
 
-            <code class="ruby">    when 4..6</code>
+            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="164">
+          <li class="missed" data-hits="0" data-linenumber="59">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="60">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="61">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="62">
+            
+            
+
+            
+
+            <code class="ruby">    when 4</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="63">
+            
+            
+
+            
+
+            <code class="ruby">      random = 7000..7500</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="64">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="65">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="66">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="67">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="68">
+            
+            
+
+            
+
+            <code class="ruby">    when 5</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="69">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      club.stand_n_condition = rand(5..8)</code>
+            <code class="ruby">      random = 8250..8750</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="165">
+          <li class="covered" data-hits="1" data-linenumber="70">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      club.stand_e_condition = rand(5..8)</code>
+            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="166">
+          <li class="covered" data-hits="1" data-linenumber="71">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      club.stand_s_condition = rand(5..8)</code>
+            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="167">
+          <li class="covered" data-hits="1" data-linenumber="72">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      club.stand_w_condition = rand(5..8)</code>
+            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="168">
+          <li class="covered" data-hits="1" data-linenumber="73">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      club.pitch = rand(5..8)</code>
+            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="169">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="74">
+            
             
 
             
 
-            <code class="ruby">      club.facilities = rand(5..8)</code>
+            <code class="ruby">    when 6</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="170">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="75">
+            
             
 
             
 
-            <code class="ruby">      club.hospitality = rand(5..8)</code>
+            <code class="ruby">      random = 9500..10000</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="171">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="76">
+            
             
 
             
 
-            <code class="ruby">      club.staff_fitness = rand(5..8)</code>
+            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="172">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="77">
+            
             
 
             
 
-            <code class="ruby">      club.staff_gkp = rand(5..8)</code>
+            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="173">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="78">
+            
             
 
             
 
-            <code class="ruby">      club.staff_dfc = rand(5..8)</code>
+            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="174">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="79">
+            
             
 
             
 
-            <code class="ruby">      club.staff_mid = rand(5..8)</code>
+            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="175">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="80">
+            
             
 
             
 
-            <code class="ruby">      club.staff_att = rand(5..8)</code>
+            <code class="ruby">    when 7</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="176">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="81">
+            
             
 
             
 
-            <code class="ruby">      club.staff_scouts = rand(5..8)</code>
+            <code class="ruby">      random = 10750..11250</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="177">
+          <li class="missed" data-hits="0" data-linenumber="82">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="83">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="84">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="85">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="86">
+            
+            
+
+            
+
+            <code class="ruby">    when 8</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="87">
+            
+            
+
+            
+
+            <code class="ruby">      random = 12000.12500</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="88">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="89">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="90">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="91">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="92">
+            
+            
+
+            
+
+            <code class="ruby">    when 9</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="93">
+            
+            
+
+            
+
+            <code class="ruby">      random = 13250..13750</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="94">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="95">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="96">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="97">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="98">
             
             
 
@@ -21023,7 +20768,447 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="178">
+          <li class="missed" data-hits="0" data-linenumber="99">
+            
+            
+
+            
+
+            <code class="ruby">      random = 14500..15000</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="100">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_n_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="101">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_e_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="102">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_s_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="103">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_w_capacity = rand(random)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="104">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="105">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.save</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="106">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="107">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="108">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def club_creation_departments</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="109">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    case params[:club][:stadium_points].to_i</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="110">
+            
+            
+
+            
+
+            <code class="ruby">    when 1..3</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="111">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_n_condition = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="112">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_e_condition = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="113">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_s_condition = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="114">
+            
+            
+
+            
+
+            <code class="ruby">      club.stand_w_condition = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="115">
+            
+            
+
+            
+
+            <code class="ruby">      club.pitch = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="116">
+            
+            
+
+            
+
+            <code class="ruby">      club.facilities = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="117">
+            
+            
+
+            
+
+            <code class="ruby">      club.hospitality = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="118">
+            
+            
+
+            
+
+            <code class="ruby">      club.staff_fitness = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="119">
+            
+            
+
+            
+
+            <code class="ruby">      club.staff_gkp = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="120">
+            
+            
+
+            
+
+            <code class="ruby">      club.staff_dfc = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="121">
+            
+            
+
+            
+
+            <code class="ruby">      club.staff_mid = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="122">
+            
+            
+
+            
+
+            <code class="ruby">      club.staff_att = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="123">
+            
+            
+
+            
+
+            <code class="ruby">      club.staff_scouts = rand(2..4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="124">
+            
+            
+
+            
+
+            <code class="ruby">    when 4..6</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="125">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.stand_n_condition = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="126">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.stand_e_condition = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="127">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.stand_s_condition = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="128">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.stand_w_condition = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="129">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.pitch = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="130">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.facilities = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="131">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.hospitality = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="132">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.staff_fitness = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="133">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.staff_gkp = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="134">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.staff_dfc = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="135">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.staff_mid = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="136">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.staff_att = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="137">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.staff_scouts = rand(5..8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="138">
+            
+            
+
+            
+
+            <code class="ruby">    else</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="139">
             
             
 
@@ -21034,7 +21219,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="179">
+          <li class="missed" data-hits="0" data-linenumber="140">
             
             
 
@@ -21045,7 +21230,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="180">
+          <li class="missed" data-hits="0" data-linenumber="141">
             
             
 
@@ -21056,7 +21241,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="181">
+          <li class="missed" data-hits="0" data-linenumber="142">
             
             
 
@@ -21067,7 +21252,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="182">
+          <li class="missed" data-hits="0" data-linenumber="143">
             
             
 
@@ -21078,7 +21263,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="183">
+          <li class="missed" data-hits="0" data-linenumber="144">
             
             
 
@@ -21089,7 +21274,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="184">
+          <li class="missed" data-hits="0" data-linenumber="145">
             
             
 
@@ -21100,7 +21285,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="185">
+          <li class="missed" data-hits="0" data-linenumber="146">
             
             
 
@@ -21111,7 +21296,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="186">
+          <li class="missed" data-hits="0" data-linenumber="147">
             
             
 
@@ -21122,7 +21307,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="187">
+          <li class="missed" data-hits="0" data-linenumber="148">
             
             
 
@@ -21133,7 +21318,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="188">
+          <li class="missed" data-hits="0" data-linenumber="149">
             
             
 
@@ -21144,7 +21329,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="189">
+          <li class="missed" data-hits="0" data-linenumber="150">
             
             
 
@@ -21155,13 +21340,442 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="190">
+          <li class="missed" data-hits="0" data-linenumber="151">
             
             
 
             
 
             <code class="ruby">      club.staff_scouts = rand(9..12)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="152">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="153">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.save</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="154">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="155">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="156">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def club_creation_bank</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="157">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.bank_bal = params[:club][:bank_points].to_i * 100_000_000</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="158">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.save</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="159">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="160">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="161">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def club_creation_fanbase</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="162">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    case params[:club][:fanbase_points].to_i</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="163">
+            
+            
+
+            
+
+            <code class="ruby">    when 1</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="164">
+            
+            
+
+            
+
+            <code class="ruby">      club.fanbase = 30_000</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="165">
+            
+            
+
+            
+
+            <code class="ruby">    when 2</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="166">
+            
+            
+
+            
+
+            <code class="ruby">      club.fanbase = 40_000</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="167">
+            
+            
+
+            
+
+            <code class="ruby">    when 3</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="168">
+            
+            
+
+            
+
+            <code class="ruby">      club.fanbase = 50_000</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="169">
+            
+            
+
+            
+
+            <code class="ruby">    when 4</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="170">
+            
+            
+
+            
+
+            <code class="ruby">      club.fanbase = 60_000</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="171">
+            
+            
+
+            
+
+            <code class="ruby">    when 5</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="172">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      club.fanbase = 70_000</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="173">
+            
+            
+
+            
+
+            <code class="ruby">    when 6</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="174">
+            
+            
+
+            
+
+            <code class="ruby">      club.fanbase = 80_000</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="175">
+            
+            
+
+            
+
+            <code class="ruby">    when 7</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="176">
+            
+            
+
+            
+
+            <code class="ruby">      club.fanbase = 90_000</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="177">
+            
+            
+
+            
+
+            <code class="ruby">    when 8</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="178">
+            
+            
+
+            
+
+            <code class="ruby">      club.fanbase = 100_000</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="179">
+            
+            
+
+            
+
+            <code class="ruby">    when 9</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="180">
+            
+            
+
+            
+
+            <code class="ruby">      club.fanbase = 110_000</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="181">
+            
+            
+
+            
+
+            <code class="ruby">    else</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="182">
+            
+            
+
+            
+
+            <code class="ruby">      club.fanbase = 120_000</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="183">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="184">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.save</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="185">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="186">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="187">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def player_removal</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="188">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club.players.each do |player|</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="189">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">      player.club_id = 242</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="190">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">      player.save</code>
           </li>
         </div>
       
@@ -21177,13 +21791,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="192">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="192">
+            
             
 
             
 
-            <code class="ruby">    club.save</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -21194,18 +21808,18 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="194">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="194">
+            <span class="hits">1</span>
             
 
-            <code class="ruby"></code>
+            
+
+            <code class="ruby">  def player_create_junior</code>
           </li>
         </div>
       
@@ -21216,29 +21830,29 @@
 
             
 
-            <code class="ruby">  def club_creation_bank(club, params)</code>
+            <code class="ruby">    countries = [&#39;England&#39;, &#39;England&#39;, &#39;England&#39;, &#39;England&#39;, &#39;Scotland&#39;, &#39;Wales&#39;,</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="196">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="196">
+            
             
 
             
 
-            <code class="ruby">    club.bank_bal = params[:club][:bank_points].to_i * 100_000_000</code>
+            <code class="ruby">                 &#39;NI&#39;, &#39;RoI&#39;, &#39;Brazil&#39;, &#39;Argentina&#39;, &#39;Spain&#39;, &#39;France&#39;, &#39;Germany&#39;,</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="197">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="197">
+            
             
 
             
 
-            <code class="ruby">    club.save</code>
+            <code class="ruby">                 &#39;Poland&#39;, &#39;Portugal&#39;, &#39;USA&#39;, &#39;Belgium&#39;, &#39;Mexico&#39;, &#39;Uruguay&#39;,&#39;Brazil&#39;,</code>
           </li>
         </div>
       
@@ -21249,7 +21863,7 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">                 &#39;England&#39;, &#39;Mexico&#39;, &#39;Germany&#39;, &#39;Italy&#39;, &#39;Spain&#39;, &#39;France&#39;, &#39;Argentina&#39;,</code>
           </li>
         </div>
       
@@ -21260,29 +21874,29 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">                 &#39;Netherlands&#39;, &#39;Portugal&#39;, &#39;Belgium&#39;, &#39;Uruguay&#39;, &#39;Colombia&#39;, &#39;Croatia&#39;,</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="200">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="200">
+            
             
 
             
 
-            <code class="ruby">  def club_creation_fanbase(club, params)</code>
+            <code class="ruby">                 &#39;Sweden&#39;, &#39;Switzerland&#39;, &#39;Poland&#39;, &#39;Denmark&#39;, &#39;Chile&#39;, &#39;Austria&#39;,</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="201">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="201">
+            
             
 
             
 
-            <code class="ruby">    case params[:club][:fanbase_points].to_i</code>
+            <code class="ruby">                 &#39;Turkey&#39;, &#39;Russia&#39;, &#39;Japan&#39;, &#39;South Korea&#39;, &#39;Australia&#39;]</code>
           </li>
         </div>
       
@@ -21293,18 +21907,18 @@
 
             
 
-            <code class="ruby">    when 1</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="203">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="203">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">      club.fanbase = 30_000</code>
+            
+
+            <code class="ruby">    position_detail = [&#39;c&#39;, &#39;c&#39;, &#39;c&#39;, &#39;l&#39;, &#39;r&#39;]</code>
           </li>
         </div>
       
@@ -21315,441 +21929,12 @@
 
             
 
-            <code class="ruby">    when 2</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="205">
-            
-            
-
-            
-
-            <code class="ruby">      club.fanbase = 40_000</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="206">
-            
-            
-
-            
-
-            <code class="ruby">    when 3</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="207">
-            
-            
-
-            
-
-            <code class="ruby">      club.fanbase = 50_000</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="208">
-            
-            
-
-            
-
-            <code class="ruby">    when 4</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="209">
-            
-            
-
-            
-
-            <code class="ruby">      club.fanbase = 60_000</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="210">
-            
-            
-
-            
-
-            <code class="ruby">    when 5</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="211">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      club.fanbase = 70_000</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="212">
-            
-            
-
-            
-
-            <code class="ruby">    when 6</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="213">
-            
-            
-
-            
-
-            <code class="ruby">      club.fanbase = 80_000</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="214">
-            
-            
-
-            
-
-            <code class="ruby">    when 7</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="215">
-            
-            
-
-            
-
-            <code class="ruby">      club.fanbase = 90_000</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="216">
-            
-            
-
-            
-
-            <code class="ruby">    when 8</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="217">
-            
-            
-
-            
-
-            <code class="ruby">      club.fanbase = 100_000</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="218">
-            
-            
-
-            
-
-            <code class="ruby">    when 9</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="219">
-            
-            
-
-            
-
-            <code class="ruby">      club.fanbase = 110_000</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="220">
-            
-            
-
-            
-
-            <code class="ruby">    else</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="221">
-            
-            
-
-            
-
-            <code class="ruby">      club.fanbase = 120_000</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="222">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="223">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.save</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="224">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="225">
-            
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="226">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  def player_removal(club)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="227">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    club.players.each do |player|</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="228">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      player.club_id = 242</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="229">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      player.save</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="230">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="231">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="232">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="233">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  def player_create_junior(club)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="234">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    countries = [&#39;England&#39;, &#39;England&#39;, &#39;England&#39;, &#39;England&#39;, &#39;Scotland&#39;, &#39;Wales&#39;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="235">
-            
-            
-
-            
-
-            <code class="ruby">                 &#39;NI&#39;, &#39;RoI&#39;, &#39;Brazil&#39;, &#39;Argentina&#39;, &#39;Spain&#39;, &#39;France&#39;, &#39;Germany&#39;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="236">
-            
-            
-
-            
-
-            <code class="ruby">                 &#39;Poland&#39;, &#39;Portugal&#39;, &#39;USA&#39;, &#39;Belgium&#39;, &#39;Mexico&#39;, &#39;Uruguay&#39;,&#39;Brazil&#39;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="237">
-            
-            
-
-            
-
-            <code class="ruby">                 &#39;England&#39;, &#39;Mexico&#39;, &#39;Germany&#39;, &#39;Italy&#39;, &#39;Spain&#39;, &#39;France&#39;, &#39;Argentina&#39;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="238">
-            
-            
-
-            
-
-            <code class="ruby">                 &#39;Netherlands&#39;, &#39;Portugal&#39;, &#39;Belgium&#39;, &#39;Uruguay&#39;, &#39;Colombia&#39;, &#39;Croatia&#39;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="239">
-            
-            
-
-            
-
-            <code class="ruby">                 &#39;Sweden&#39;, &#39;Switzerland&#39;, &#39;Poland&#39;, &#39;Denmark&#39;, &#39;Chile&#39;, &#39;Austria&#39;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="240">
-            
-            
-
-            
-
-            <code class="ruby">                 &#39;Turkey&#39;, &#39;Russia&#39;, &#39;Japan&#39;, &#39;South Korea&#39;, &#39;Australia&#39;]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="241">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="242">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    position_detail = [&#39;c&#39;, &#39;c&#39;, &#39;c&#39;, &#39;l&#39;, &#39;r&#39;]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="243">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="244">
+          <li class="covered" data-hits="1" data-linenumber="205">
             <span class="hits">1</span>
             
 
@@ -21760,7 +21945,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="245">
+          <li class="covered" data-hits="3" data-linenumber="206">
             <span class="hits">3</span>
             
 
@@ -21771,13 +21956,442 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="246">
+          <li class="never" data-hits="" data-linenumber="207">
             
             
 
             
 
             <code class="ruby">        name: Faker::Name.last_name,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="208">
+            
+            
+
+            
+
+            <code class="ruby">        age: rand(17..24),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="209">
+            
+            
+
+            
+
+            <code class="ruby">        nationality: countries.sample,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="210">
+            
+            
+
+            
+
+            <code class="ruby">        position: &#39;gkp&#39;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="211">
+            
+            
+
+            
+
+            <code class="ruby">        passing: rand(4..7),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="212">
+            
+            
+
+            
+
+            <code class="ruby">        control: rand(4..7),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="213">
+            
+            
+
+            
+
+            <code class="ruby">        tackling: rand(4..7),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="214">
+            
+            
+
+            
+
+            <code class="ruby">        running: rand(3..6),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="215">
+            
+            
+
+            
+
+            <code class="ruby">        shooting: rand(4..7),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="216">
+            
+            
+
+            
+
+            <code class="ruby">        dribbling: rand(3..6),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="217">
+            
+            
+
+            
+
+            <code class="ruby">        defensive_heading: rand(3..6),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="218">
+            
+            
+
+            
+
+            <code class="ruby">        offensive_heading: rand(4..7),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="219">
+            
+            
+
+            
+
+            <code class="ruby">        flair: rand(3..6),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="220">
+            
+            
+
+            
+
+            <code class="ruby">        strength: rand(4..7),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="221">
+            
+            
+
+            
+
+            <code class="ruby">        creativity: rand(3..6),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="222">
+            
+            
+
+            
+
+            <code class="ruby">        fitness: 100,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="223">
+            
+            
+
+            
+
+            <code class="ruby">        contract: rand(13..46),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="224">
+            
+            
+
+            
+
+            <code class="ruby">        club_id: club.id,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="225">
+            
+            
+
+            
+
+            <code class="ruby">        consistency: rand(5..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="226">
+            
+            
+
+            
+
+            <code class="ruby">        blend: rand(0..9),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="227">
+            
+            
+
+            
+
+            <code class="ruby">        star: rand(5..30),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="228">
+            
+            
+
+            
+
+            <code class="ruby">        loyalty: rand(10..50),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="229">
+            
+            
+
+            
+
+            <code class="ruby">        player_position_detail: &#39;p&#39;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="230">
+            
+            
+
+            
+
+            <code class="ruby">        potential_passing: rand(11..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="231">
+            
+            
+
+            
+
+            <code class="ruby">        potential_control: rand(11..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="232">
+            
+            
+
+            
+
+            <code class="ruby">        potential_tackling: rand(11..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="233">
+            
+            
+
+            
+
+            <code class="ruby">        potential_running: rand(8..18),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="234">
+            
+            
+
+            
+
+            <code class="ruby">        potential_shooting: rand(11..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="235">
+            
+            
+
+            
+
+            <code class="ruby">        potential_dribbling: rand(8..18),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="236">
+            
+            
+
+            
+
+            <code class="ruby">        potential_defensive_heading: rand(8..18),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="237">
+            
+            
+
+            
+
+            <code class="ruby">        potential_offensive_heading: rand(11..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="238">
+            
+            
+
+            
+
+            <code class="ruby">        potential_flair: rand(8..18),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="239">
+            
+            
+
+            
+
+            <code class="ruby">        potential_strength: rand(11..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="240">
+            
+            
+
+            
+
+            <code class="ruby">        potential_creativity: rand(8..18),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="241">
+            
+            
+
+            
+
+            <code class="ruby">        available: 0</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="242">
+            
+            
+
+            
+
+            <code class="ruby">      )</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="243">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="244">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="245">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    6.times do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="6" data-linenumber="246">
+            <span class="hits">6</span>
+            
+
+            
+
+            <code class="ruby">      Player.create(</code>
           </li>
         </div>
       
@@ -21788,7 +22402,7 @@
 
             
 
-            <code class="ruby">        age: rand(17..24),</code>
+            <code class="ruby">        name: Faker::Name.last_name,</code>
           </li>
         </div>
       
@@ -21799,7 +22413,7 @@
 
             
 
-            <code class="ruby">        nationality: countries.sample,</code>
+            <code class="ruby">        age: rand(17..24),</code>
           </li>
         </div>
       
@@ -21810,7 +22424,7 @@
 
             
 
-            <code class="ruby">        position: &#39;gkp&#39;,</code>
+            <code class="ruby">        nationality: countries.sample,</code>
           </li>
         </div>
       
@@ -21821,7 +22435,7 @@
 
             
 
-            <code class="ruby">        passing: rand(4..7),</code>
+            <code class="ruby">        position: &#39;dfc&#39;,</code>
           </li>
         </div>
       
@@ -21832,7 +22446,7 @@
 
             
 
-            <code class="ruby">        control: rand(4..7),</code>
+            <code class="ruby">        passing: rand(3..6),</code>
           </li>
         </div>
       
@@ -21843,7 +22457,7 @@
 
             
 
-            <code class="ruby">        tackling: rand(4..7),</code>
+            <code class="ruby">        control: rand(4..7),</code>
           </li>
         </div>
       
@@ -21854,7 +22468,7 @@
 
             
 
-            <code class="ruby">        running: rand(3..6),</code>
+            <code class="ruby">        tackling: rand(4..7),</code>
           </li>
         </div>
       
@@ -21865,7 +22479,7 @@
 
             
 
-            <code class="ruby">        shooting: rand(4..7),</code>
+            <code class="ruby">        running: rand(4..7),</code>
           </li>
         </div>
       
@@ -21876,7 +22490,7 @@
 
             
 
-            <code class="ruby">        dribbling: rand(3..6),</code>
+            <code class="ruby">        shooting: rand(3..6),</code>
           </li>
         </div>
       
@@ -21887,7 +22501,7 @@
 
             
 
-            <code class="ruby">        defensive_heading: rand(3..6),</code>
+            <code class="ruby">        dribbling: rand(3..6),</code>
           </li>
         </div>
       
@@ -21898,7 +22512,7 @@
 
             
 
-            <code class="ruby">        offensive_heading: rand(4..7),</code>
+            <code class="ruby">        defensive_heading: rand(4..7),</code>
           </li>
         </div>
       
@@ -21909,7 +22523,7 @@
 
             
 
-            <code class="ruby">        flair: rand(3..6),</code>
+            <code class="ruby">        offensive_heading: rand(3..6),</code>
           </li>
         </div>
       
@@ -21920,7 +22534,7 @@
 
             
 
-            <code class="ruby">        strength: rand(4..7),</code>
+            <code class="ruby">        flair: rand(3..6),</code>
           </li>
         </div>
       
@@ -21931,7 +22545,7 @@
 
             
 
-            <code class="ruby">        creativity: rand(3..6),</code>
+            <code class="ruby">        strength: rand(4..7),</code>
           </li>
         </div>
       
@@ -21942,7 +22556,7 @@
 
             
 
-            <code class="ruby">        fitness: 100,</code>
+            <code class="ruby">        creativity: rand(4..7),</code>
           </li>
         </div>
       
@@ -21953,7 +22567,7 @@
 
             
 
-            <code class="ruby">        contract: rand(13..46),</code>
+            <code class="ruby">        fitness: 100,</code>
           </li>
         </div>
       
@@ -21964,7 +22578,7 @@
 
             
 
-            <code class="ruby">        club_id: club.id,</code>
+            <code class="ruby">        contract: rand(13..46),</code>
           </li>
         </div>
       
@@ -21975,7 +22589,7 @@
 
             
 
-            <code class="ruby">        consistency: rand(5..20),</code>
+            <code class="ruby">        club_id: club.id,</code>
           </li>
         </div>
       
@@ -21986,7 +22600,7 @@
 
             
 
-            <code class="ruby">        blend: rand(0..9),</code>
+            <code class="ruby">        consistency: rand(5..20),</code>
           </li>
         </div>
       
@@ -21997,7 +22611,7 @@
 
             
 
-            <code class="ruby">        star: rand(5..30),</code>
+            <code class="ruby">        blend: rand(0..9),</code>
           </li>
         </div>
       
@@ -22008,7 +22622,7 @@
 
             
 
-            <code class="ruby">        loyalty: rand(10..50),</code>
+            <code class="ruby">        star: rand(5..30),</code>
           </li>
         </div>
       
@@ -22019,7 +22633,7 @@
 
             
 
-            <code class="ruby">        player_position_detail: &#39;p&#39;,</code>
+            <code class="ruby">        loyalty: rand(10..50),</code>
           </li>
         </div>
       
@@ -22030,7 +22644,7 @@
 
             
 
-            <code class="ruby">        potential_passing: rand(11..20),</code>
+            <code class="ruby">        player_position_detail: position_detail.sample,</code>
           </li>
         </div>
       
@@ -22041,7 +22655,7 @@
 
             
 
-            <code class="ruby">        potential_control: rand(11..20),</code>
+            <code class="ruby">        potential_passing: rand(8..18),</code>
           </li>
         </div>
       
@@ -22052,7 +22666,7 @@
 
             
 
-            <code class="ruby">        potential_tackling: rand(11..20),</code>
+            <code class="ruby">        potential_control: rand(11..20),</code>
           </li>
         </div>
       
@@ -22063,7 +22677,7 @@
 
             
 
-            <code class="ruby">        potential_running: rand(8..18),</code>
+            <code class="ruby">        potential_tackling: rand(11..20),</code>
           </li>
         </div>
       
@@ -22074,7 +22688,7 @@
 
             
 
-            <code class="ruby">        potential_shooting: rand(11..20),</code>
+            <code class="ruby">        potential_running: rand(11..20),</code>
           </li>
         </div>
       
@@ -22085,7 +22699,7 @@
 
             
 
-            <code class="ruby">        potential_dribbling: rand(8..18),</code>
+            <code class="ruby">        potential_shooting: rand(8..18),</code>
           </li>
         </div>
       
@@ -22096,7 +22710,7 @@
 
             
 
-            <code class="ruby">        potential_defensive_heading: rand(8..18),</code>
+            <code class="ruby">        potential_dribbling: rand(8..18),</code>
           </li>
         </div>
       
@@ -22107,7 +22721,7 @@
 
             
 
-            <code class="ruby">        potential_offensive_heading: rand(11..20),</code>
+            <code class="ruby">        potential_defensive_heading: rand(11..20),</code>
           </li>
         </div>
       
@@ -22118,7 +22732,7 @@
 
             
 
-            <code class="ruby">        potential_flair: rand(8..18),</code>
+            <code class="ruby">        potential_offensive_heading: rand(8..18),</code>
           </li>
         </div>
       
@@ -22129,7 +22743,7 @@
 
             
 
-            <code class="ruby">        potential_strength: rand(11..20),</code>
+            <code class="ruby">        potential_flair: rand(8..18),</code>
           </li>
         </div>
       
@@ -22140,7 +22754,7 @@
 
             
 
-            <code class="ruby">        potential_creativity: rand(8..18),</code>
+            <code class="ruby">        potential_strength: rand(11..20),</code>
           </li>
         </div>
       
@@ -22151,7 +22765,7 @@
 
             
 
-            <code class="ruby">        available: 0</code>
+            <code class="ruby">        potential_creativity: rand(11..20),</code>
           </li>
         </div>
       
@@ -22162,7 +22776,7 @@
 
             
 
-            <code class="ruby">      )</code>
+            <code class="ruby">        available: 0</code>
           </li>
         </div>
       
@@ -22173,7 +22787,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">      )</code>
           </li>
         </div>
       
@@ -22184,12 +22798,23 @@
 
             
 
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="284">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="284">
+          <li class="covered" data-hits="1" data-linenumber="285">
             <span class="hits">1</span>
             
 
@@ -22200,24 +22825,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="285">
+          <li class="covered" data-hits="6" data-linenumber="286">
             <span class="hits">6</span>
             
 
             
 
             <code class="ruby">      Player.create(</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="286">
-            
-            
-
-            
-
-            <code class="ruby">        name: Faker::Name.last_name,</code>
           </li>
         </div>
       
@@ -22228,7 +22842,7 @@
 
             
 
-            <code class="ruby">        age: rand(17..24),</code>
+            <code class="ruby">        name: Faker::Name.last_name,</code>
           </li>
         </div>
       
@@ -22239,7 +22853,7 @@
 
             
 
-            <code class="ruby">        nationality: countries.sample,</code>
+            <code class="ruby">        age: rand(17..24),</code>
           </li>
         </div>
       
@@ -22250,7 +22864,7 @@
 
             
 
-            <code class="ruby">        position: &#39;dfc&#39;,</code>
+            <code class="ruby">        nationality: countries.sample,</code>
           </li>
         </div>
       
@@ -22261,7 +22875,7 @@
 
             
 
-            <code class="ruby">        passing: rand(3..6),</code>
+            <code class="ruby">        position: &#39;mid&#39;,</code>
           </li>
         </div>
       
@@ -22272,7 +22886,7 @@
 
             
 
-            <code class="ruby">        control: rand(4..7),</code>
+            <code class="ruby">        passing: rand(4..7),</code>
           </li>
         </div>
       
@@ -22283,7 +22897,7 @@
 
             
 
-            <code class="ruby">        tackling: rand(4..7),</code>
+            <code class="ruby">        control: rand(4..7),</code>
           </li>
         </div>
       
@@ -22294,7 +22908,7 @@
 
             
 
-            <code class="ruby">        running: rand(4..7),</code>
+            <code class="ruby">        tackling: rand(3..6),</code>
           </li>
         </div>
       
@@ -22305,7 +22919,7 @@
 
             
 
-            <code class="ruby">        shooting: rand(3..6),</code>
+            <code class="ruby">        running: rand(3..6),</code>
           </li>
         </div>
       
@@ -22316,7 +22930,7 @@
 
             
 
-            <code class="ruby">        dribbling: rand(3..6),</code>
+            <code class="ruby">        shooting: rand(4..7),</code>
           </li>
         </div>
       
@@ -22327,7 +22941,7 @@
 
             
 
-            <code class="ruby">        defensive_heading: rand(4..7),</code>
+            <code class="ruby">        dribbling: rand(4..7),</code>
           </li>
         </div>
       
@@ -22338,7 +22952,7 @@
 
             
 
-            <code class="ruby">        offensive_heading: rand(3..6),</code>
+            <code class="ruby">        defensive_heading: rand(3..6),</code>
           </li>
         </div>
       
@@ -22349,7 +22963,7 @@
 
             
 
-            <code class="ruby">        flair: rand(3..6),</code>
+            <code class="ruby">        offensive_heading: rand(3..6),</code>
           </li>
         </div>
       
@@ -22360,7 +22974,7 @@
 
             
 
-            <code class="ruby">        strength: rand(4..7),</code>
+            <code class="ruby">        flair: rand(4..7),</code>
           </li>
         </div>
       
@@ -22371,7 +22985,7 @@
 
             
 
-            <code class="ruby">        creativity: rand(4..7),</code>
+            <code class="ruby">        strength: rand(3..6),</code>
           </li>
         </div>
       
@@ -22382,7 +22996,7 @@
 
             
 
-            <code class="ruby">        fitness: 100,</code>
+            <code class="ruby">        creativity: rand(4..7),</code>
           </li>
         </div>
       
@@ -22393,7 +23007,7 @@
 
             
 
-            <code class="ruby">        contract: rand(13..46),</code>
+            <code class="ruby">        fitness: 100,</code>
           </li>
         </div>
       
@@ -22404,7 +23018,7 @@
 
             
 
-            <code class="ruby">        club_id: club.id,</code>
+            <code class="ruby">        contract: rand(13..46),</code>
           </li>
         </div>
       
@@ -22415,7 +23029,7 @@
 
             
 
-            <code class="ruby">        consistency: rand(5..20),</code>
+            <code class="ruby">        club_id: club.id,</code>
           </li>
         </div>
       
@@ -22426,7 +23040,7 @@
 
             
 
-            <code class="ruby">        blend: rand(0..9),</code>
+            <code class="ruby">        consistency: rand(5..20),</code>
           </li>
         </div>
       
@@ -22437,7 +23051,7 @@
 
             
 
-            <code class="ruby">        star: rand(5..30),</code>
+            <code class="ruby">        blend: rand(0..9),</code>
           </li>
         </div>
       
@@ -22448,7 +23062,7 @@
 
             
 
-            <code class="ruby">        loyalty: rand(10..50),</code>
+            <code class="ruby">        star: rand(5..30),</code>
           </li>
         </div>
       
@@ -22459,7 +23073,7 @@
 
             
 
-            <code class="ruby">        player_position_detail: position_detail.sample,</code>
+            <code class="ruby">        loyalty: rand(10..50),</code>
           </li>
         </div>
       
@@ -22470,7 +23084,7 @@
 
             
 
-            <code class="ruby">        potential_passing: rand(8..18),</code>
+            <code class="ruby">        player_position_detail: position_detail.sample,</code>
           </li>
         </div>
       
@@ -22481,7 +23095,7 @@
 
             
 
-            <code class="ruby">        potential_control: rand(11..20),</code>
+            <code class="ruby">        potential_passing: rand(11..20),</code>
           </li>
         </div>
       
@@ -22492,7 +23106,7 @@
 
             
 
-            <code class="ruby">        potential_tackling: rand(11..20),</code>
+            <code class="ruby">        potential_control: rand(11..20),</code>
           </li>
         </div>
       
@@ -22503,7 +23117,7 @@
 
             
 
-            <code class="ruby">        potential_running: rand(11..20),</code>
+            <code class="ruby">        potential_tackling: rand(8..18),</code>
           </li>
         </div>
       
@@ -22514,7 +23128,7 @@
 
             
 
-            <code class="ruby">        potential_shooting: rand(8..18),</code>
+            <code class="ruby">        potential_running: rand(8..18),</code>
           </li>
         </div>
       
@@ -22525,7 +23139,7 @@
 
             
 
-            <code class="ruby">        potential_dribbling: rand(8..18),</code>
+            <code class="ruby">        potential_shooting: rand(11..20),</code>
           </li>
         </div>
       
@@ -22536,7 +23150,7 @@
 
             
 
-            <code class="ruby">        potential_defensive_heading: rand(11..20),</code>
+            <code class="ruby">        potential_dribbling: rand(11..20),</code>
           </li>
         </div>
       
@@ -22547,7 +23161,7 @@
 
             
 
-            <code class="ruby">        potential_offensive_heading: rand(8..18),</code>
+            <code class="ruby">        potential_defensive_heading: rand(8..18),</code>
           </li>
         </div>
       
@@ -22558,7 +23172,7 @@
 
             
 
-            <code class="ruby">        potential_flair: rand(8..18),</code>
+            <code class="ruby">        potential_offensive_heading: rand(8..18),</code>
           </li>
         </div>
       
@@ -22569,7 +23183,7 @@
 
             
 
-            <code class="ruby">        potential_strength: rand(11..20),</code>
+            <code class="ruby">        potential_flair: rand(11..20),</code>
           </li>
         </div>
       
@@ -22580,7 +23194,7 @@
 
             
 
-            <code class="ruby">        potential_creativity: rand(11..20),</code>
+            <code class="ruby">        potential_strength: rand(8..18),</code>
           </li>
         </div>
       
@@ -22591,7 +23205,7 @@
 
             
 
-            <code class="ruby">        available: 0</code>
+            <code class="ruby">        potential_creativity: rand(11..20),</code>
           </li>
         </div>
       
@@ -22602,7 +23216,7 @@
 
             
 
-            <code class="ruby">      )</code>
+            <code class="ruby">        available: 0</code>
           </li>
         </div>
       
@@ -22613,7 +23227,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">      )</code>
           </li>
         </div>
       
@@ -22624,12 +23238,23 @@
 
             
 
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="324">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="324">
+          <li class="covered" data-hits="1" data-linenumber="325">
             <span class="hits">1</span>
             
 
@@ -22640,24 +23265,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="325">
+          <li class="covered" data-hits="6" data-linenumber="326">
             <span class="hits">6</span>
             
 
             
 
             <code class="ruby">      Player.create(</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="326">
-            
-            
-
-            
-
-            <code class="ruby">        name: Faker::Name.last_name,</code>
           </li>
         </div>
       
@@ -22668,7 +23282,7 @@
 
             
 
-            <code class="ruby">        age: rand(17..24),</code>
+            <code class="ruby">        name: Faker::Name.last_name,</code>
           </li>
         </div>
       
@@ -22679,7 +23293,7 @@
 
             
 
-            <code class="ruby">        nationality: countries.sample,</code>
+            <code class="ruby">        age: rand(17..24),</code>
           </li>
         </div>
       
@@ -22690,7 +23304,7 @@
 
             
 
-            <code class="ruby">        position: &#39;mid&#39;,</code>
+            <code class="ruby">        nationality: countries.sample,</code>
           </li>
         </div>
       
@@ -22701,7 +23315,7 @@
 
             
 
-            <code class="ruby">        passing: rand(4..7),</code>
+            <code class="ruby">        position: &#39;att&#39;,</code>
           </li>
         </div>
       
@@ -22712,7 +23326,7 @@
 
             
 
-            <code class="ruby">        control: rand(4..7),</code>
+            <code class="ruby">        passing: rand(3..6),</code>
           </li>
         </div>
       
@@ -22723,7 +23337,7 @@
 
             
 
-            <code class="ruby">        tackling: rand(3..6),</code>
+            <code class="ruby">        control: rand(4..7),</code>
           </li>
         </div>
       
@@ -22734,7 +23348,7 @@
 
             
 
-            <code class="ruby">        running: rand(3..6),</code>
+            <code class="ruby">        tackling: rand(3..6),</code>
           </li>
         </div>
       
@@ -22745,7 +23359,7 @@
 
             
 
-            <code class="ruby">        shooting: rand(4..7),</code>
+            <code class="ruby">        running: rand(4..7),</code>
           </li>
         </div>
       
@@ -22756,7 +23370,7 @@
 
             
 
-            <code class="ruby">        dribbling: rand(4..7),</code>
+            <code class="ruby">        shooting: rand(4..7),</code>
           </li>
         </div>
       
@@ -22767,7 +23381,7 @@
 
             
 
-            <code class="ruby">        defensive_heading: rand(3..6),</code>
+            <code class="ruby">        dribbling: rand(4..7),</code>
           </li>
         </div>
       
@@ -22778,7 +23392,7 @@
 
             
 
-            <code class="ruby">        offensive_heading: rand(3..6),</code>
+            <code class="ruby">        defensive_heading: rand(3..6),</code>
           </li>
         </div>
       
@@ -22789,7 +23403,7 @@
 
             
 
-            <code class="ruby">        flair: rand(4..7),</code>
+            <code class="ruby">        offensive_heading: rand(4..7),</code>
           </li>
         </div>
       
@@ -22800,7 +23414,7 @@
 
             
 
-            <code class="ruby">        strength: rand(3..6),</code>
+            <code class="ruby">        flair: rand(4..7),</code>
           </li>
         </div>
       
@@ -22811,7 +23425,7 @@
 
             
 
-            <code class="ruby">        creativity: rand(4..7),</code>
+            <code class="ruby">        strength: rand(3..6),</code>
           </li>
         </div>
       
@@ -22822,7 +23436,7 @@
 
             
 
-            <code class="ruby">        fitness: 100,</code>
+            <code class="ruby">        creativity: rand(3..6),</code>
           </li>
         </div>
       
@@ -22833,7 +23447,7 @@
 
             
 
-            <code class="ruby">        contract: rand(13..46),</code>
+            <code class="ruby">        fitness: 100,</code>
           </li>
         </div>
       
@@ -22844,7 +23458,7 @@
 
             
 
-            <code class="ruby">        club_id: club.id,</code>
+            <code class="ruby">        contract: rand(13..46),</code>
           </li>
         </div>
       
@@ -22855,7 +23469,7 @@
 
             
 
-            <code class="ruby">        consistency: rand(5..20),</code>
+            <code class="ruby">        club_id: club.id,</code>
           </li>
         </div>
       
@@ -22866,7 +23480,7 @@
 
             
 
-            <code class="ruby">        blend: rand(0..9),</code>
+            <code class="ruby">        consistency: rand(5..20),</code>
           </li>
         </div>
       
@@ -22877,7 +23491,7 @@
 
             
 
-            <code class="ruby">        star: rand(5..30),</code>
+            <code class="ruby">        blend: rand(0..9),</code>
           </li>
         </div>
       
@@ -22888,7 +23502,7 @@
 
             
 
-            <code class="ruby">        loyalty: rand(10..50),</code>
+            <code class="ruby">        star: rand(5..30),</code>
           </li>
         </div>
       
@@ -22899,7 +23513,7 @@
 
             
 
-            <code class="ruby">        player_position_detail: position_detail.sample,</code>
+            <code class="ruby">        loyalty: rand(10..50),</code>
           </li>
         </div>
       
@@ -22910,7 +23524,7 @@
 
             
 
-            <code class="ruby">        potential_passing: rand(11..20),</code>
+            <code class="ruby">        player_position_detail: position_detail.sample,</code>
           </li>
         </div>
       
@@ -22921,7 +23535,7 @@
 
             
 
-            <code class="ruby">        potential_control: rand(11..20),</code>
+            <code class="ruby">        potential_passing: rand(8..18),</code>
           </li>
         </div>
       
@@ -22932,7 +23546,7 @@
 
             
 
-            <code class="ruby">        potential_tackling: rand(8..18),</code>
+            <code class="ruby">        potential_control: rand(11..20),</code>
           </li>
         </div>
       
@@ -22943,7 +23557,7 @@
 
             
 
-            <code class="ruby">        potential_running: rand(8..18),</code>
+            <code class="ruby">        potential_tackling: rand(8..18),</code>
           </li>
         </div>
       
@@ -22954,7 +23568,7 @@
 
             
 
-            <code class="ruby">        potential_shooting: rand(11..20),</code>
+            <code class="ruby">        potential_running: rand(11..20),</code>
           </li>
         </div>
       
@@ -22965,7 +23579,7 @@
 
             
 
-            <code class="ruby">        potential_dribbling: rand(11..20),</code>
+            <code class="ruby">        potential_shooting: rand(11..20),</code>
           </li>
         </div>
       
@@ -22976,7 +23590,7 @@
 
             
 
-            <code class="ruby">        potential_defensive_heading: rand(8..18),</code>
+            <code class="ruby">        potential_dribbling: rand(11..20),</code>
           </li>
         </div>
       
@@ -22987,7 +23601,7 @@
 
             
 
-            <code class="ruby">        potential_offensive_heading: rand(8..18),</code>
+            <code class="ruby">        potential_defensive_heading: rand(8..18),</code>
           </li>
         </div>
       
@@ -22998,7 +23612,7 @@
 
             
 
-            <code class="ruby">        potential_flair: rand(11..20),</code>
+            <code class="ruby">        potential_offensive_heading: rand(11..20),</code>
           </li>
         </div>
       
@@ -23009,7 +23623,7 @@
 
             
 
-            <code class="ruby">        potential_strength: rand(8..18),</code>
+            <code class="ruby">        potential_flair: rand(11..20),</code>
           </li>
         </div>
       
@@ -23020,7 +23634,7 @@
 
             
 
-            <code class="ruby">        potential_creativity: rand(11..20),</code>
+            <code class="ruby">        potential_strength: rand(8..18),</code>
           </li>
         </div>
       
@@ -23031,7 +23645,7 @@
 
             
 
-            <code class="ruby">        available: 0</code>
+            <code class="ruby">        potential_creativity: rand(8..18),</code>
           </li>
         </div>
       
@@ -23042,7 +23656,7 @@
 
             
 
-            <code class="ruby">      )</code>
+            <code class="ruby">        available: 0</code>
           </li>
         </div>
       
@@ -23053,7 +23667,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">      )</code>
           </li>
         </div>
       
@@ -23064,441 +23678,12 @@
 
             
 
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="364">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    6.times do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="6" data-linenumber="365">
-            <span class="hits">6</span>
-            
-
-            
-
-            <code class="ruby">      Player.create(</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="366">
-            
-            
-
-            
-
-            <code class="ruby">        name: Faker::Name.last_name,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="367">
-            
-            
-
-            
-
-            <code class="ruby">        age: rand(17..24),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="368">
-            
-            
-
-            
-
-            <code class="ruby">        nationality: countries.sample,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="369">
-            
-            
-
-            
-
-            <code class="ruby">        position: &#39;att&#39;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="370">
-            
-            
-
-            
-
-            <code class="ruby">        passing: rand(3..6),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="371">
-            
-            
-
-            
-
-            <code class="ruby">        control: rand(4..7),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="372">
-            
-            
-
-            
-
-            <code class="ruby">        tackling: rand(3..6),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="373">
-            
-            
-
-            
-
-            <code class="ruby">        running: rand(4..7),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="374">
-            
-            
-
-            
-
-            <code class="ruby">        shooting: rand(4..7),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="375">
-            
-            
-
-            
-
-            <code class="ruby">        dribbling: rand(4..7),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="376">
-            
-            
-
-            
-
-            <code class="ruby">        defensive_heading: rand(3..6),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="377">
-            
-            
-
-            
-
-            <code class="ruby">        offensive_heading: rand(4..7),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="378">
-            
-            
-
-            
-
-            <code class="ruby">        flair: rand(4..7),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="379">
-            
-            
-
-            
-
-            <code class="ruby">        strength: rand(3..6),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="380">
-            
-            
-
-            
-
-            <code class="ruby">        creativity: rand(3..6),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="381">
-            
-            
-
-            
-
-            <code class="ruby">        fitness: 100,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="382">
-            
-            
-
-            
-
-            <code class="ruby">        contract: rand(13..46),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="383">
-            
-            
-
-            
-
-            <code class="ruby">        club_id: club.id,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="384">
-            
-            
-
-            
-
-            <code class="ruby">        consistency: rand(5..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="385">
-            
-            
-
-            
-
-            <code class="ruby">        blend: rand(0..9),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="386">
-            
-            
-
-            
-
-            <code class="ruby">        star: rand(5..30),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="387">
-            
-            
-
-            
-
-            <code class="ruby">        loyalty: rand(10..50),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="388">
-            
-            
-
-            
-
-            <code class="ruby">        player_position_detail: position_detail.sample,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="389">
-            
-            
-
-            
-
-            <code class="ruby">        potential_passing: rand(8..18),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="390">
-            
-            
-
-            
-
-            <code class="ruby">        potential_control: rand(11..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="391">
-            
-            
-
-            
-
-            <code class="ruby">        potential_tackling: rand(8..18),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="392">
-            
-            
-
-            
-
-            <code class="ruby">        potential_running: rand(11..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="393">
-            
-            
-
-            
-
-            <code class="ruby">        potential_shooting: rand(11..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="394">
-            
-            
-
-            
-
-            <code class="ruby">        potential_dribbling: rand(11..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="395">
-            
-            
-
-            
-
-            <code class="ruby">        potential_defensive_heading: rand(8..18),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="396">
-            
-            
-
-            
-
-            <code class="ruby">        potential_offensive_heading: rand(11..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="397">
-            
-            
-
-            
-
-            <code class="ruby">        potential_flair: rand(11..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="398">
-            
-            
-
-            
-
-            <code class="ruby">        potential_strength: rand(8..18),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="399">
-            
-            
-
-            
-
-            <code class="ruby">        potential_creativity: rand(8..18),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="400">
-            
-            
-
-            
-
-            <code class="ruby">        available: 0</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="401">
-            
-            
-
-            
-
-            <code class="ruby">      )</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="402">
-            
-            
-
-            
-
             <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="403">
+          <li class="never" data-hits="" data-linenumber="364">
             
             
 
@@ -23509,7 +23694,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="404">
+          <li class="never" data-hits="" data-linenumber="365">
             
             
 
@@ -23520,18 +23705,18 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="405">
+          <li class="covered" data-hits="1" data-linenumber="366">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def player_create_senior(club)</code>
+            <code class="ruby">  def player_create_senior</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="406">
+          <li class="missed" data-hits="0" data-linenumber="367">
             
             
 
@@ -23542,7 +23727,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="407">
+          <li class="never" data-hits="" data-linenumber="368">
             
             
 
@@ -23553,7 +23738,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="408">
+          <li class="never" data-hits="" data-linenumber="369">
             
             
 
@@ -23564,7 +23749,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="409">
+          <li class="never" data-hits="" data-linenumber="370">
             
             
 
@@ -23575,7 +23760,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="410">
+          <li class="never" data-hits="" data-linenumber="371">
             
             
 
@@ -23586,7 +23771,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="411">
+          <li class="never" data-hits="" data-linenumber="372">
             
             
 
@@ -23597,7 +23782,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="412">
+          <li class="never" data-hits="" data-linenumber="373">
             
             
 
@@ -23608,7 +23793,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="413">
+          <li class="never" data-hits="" data-linenumber="374">
             
             
 
@@ -23619,7 +23804,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="414">
+          <li class="missed" data-hits="0" data-linenumber="375">
             
             
 
@@ -23630,7 +23815,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="415">
+          <li class="never" data-hits="" data-linenumber="376">
             
             
 
@@ -23641,7 +23826,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="416">
+          <li class="missed" data-hits="0" data-linenumber="377">
             
             
 
@@ -23652,7 +23837,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="417">
+          <li class="missed" data-hits="0" data-linenumber="378">
             
             
 
@@ -23663,7 +23848,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="418">
+          <li class="never" data-hits="" data-linenumber="379">
             
             
 
@@ -23674,7 +23859,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="419">
+          <li class="never" data-hits="" data-linenumber="380">
             
             
 
@@ -23685,7 +23870,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="420">
+          <li class="never" data-hits="" data-linenumber="381">
             
             
 
@@ -23696,7 +23881,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="421">
+          <li class="never" data-hits="" data-linenumber="382">
             
             
 
@@ -23707,7 +23892,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="422">
+          <li class="never" data-hits="" data-linenumber="383">
             
             
 
@@ -23718,7 +23903,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="423">
+          <li class="never" data-hits="" data-linenumber="384">
             
             
 
@@ -23729,7 +23914,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="424">
+          <li class="never" data-hits="" data-linenumber="385">
             
             
 
@@ -23740,7 +23925,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="425">
+          <li class="never" data-hits="" data-linenumber="386">
             
             
 
@@ -23751,7 +23936,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="426">
+          <li class="never" data-hits="" data-linenumber="387">
             
             
 
@@ -23762,7 +23947,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="427">
+          <li class="never" data-hits="" data-linenumber="388">
             
             
 
@@ -23773,7 +23958,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="428">
+          <li class="never" data-hits="" data-linenumber="389">
             
             
 
@@ -23784,7 +23969,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="429">
+          <li class="never" data-hits="" data-linenumber="390">
             
             
 
@@ -23795,7 +23980,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="430">
+          <li class="never" data-hits="" data-linenumber="391">
             
             
 
@@ -23806,7 +23991,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="431">
+          <li class="never" data-hits="" data-linenumber="392">
             
             
 
@@ -23817,7 +24002,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="432">
+          <li class="never" data-hits="" data-linenumber="393">
             
             
 
@@ -23828,7 +24013,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="433">
+          <li class="never" data-hits="" data-linenumber="394">
             
             
 
@@ -23839,7 +24024,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="434">
+          <li class="never" data-hits="" data-linenumber="395">
             
             
 
@@ -23850,7 +24035,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="435">
+          <li class="never" data-hits="" data-linenumber="396">
             
             
 
@@ -23861,7 +24046,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="436">
+          <li class="never" data-hits="" data-linenumber="397">
             
             
 
@@ -23872,7 +24057,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="437">
+          <li class="never" data-hits="" data-linenumber="398">
             
             
 
@@ -23883,7 +24068,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="438">
+          <li class="never" data-hits="" data-linenumber="399">
             
             
 
@@ -23894,7 +24079,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="439">
+          <li class="never" data-hits="" data-linenumber="400">
             
             
 
@@ -23905,7 +24090,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="440">
+          <li class="never" data-hits="" data-linenumber="401">
             
             
 
@@ -23916,7 +24101,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="441">
+          <li class="never" data-hits="" data-linenumber="402">
             
             
 
@@ -23927,7 +24112,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="442">
+          <li class="never" data-hits="" data-linenumber="403">
             
             
 
@@ -23938,7 +24123,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="443">
+          <li class="never" data-hits="" data-linenumber="404">
             
             
 
@@ -23949,7 +24134,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="444">
+          <li class="never" data-hits="" data-linenumber="405">
             
             
 
@@ -23960,7 +24145,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="445">
+          <li class="never" data-hits="" data-linenumber="406">
             
             
 
@@ -23971,7 +24156,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="446">
+          <li class="never" data-hits="" data-linenumber="407">
             
             
 
@@ -23982,7 +24167,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="447">
+          <li class="never" data-hits="" data-linenumber="408">
             
             
 
@@ -23993,7 +24178,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="448">
+          <li class="never" data-hits="" data-linenumber="409">
             
             
 
@@ -24004,7 +24189,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="449">
+          <li class="never" data-hits="" data-linenumber="410">
             
             
 
@@ -24015,7 +24200,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="450">
+          <li class="never" data-hits="" data-linenumber="411">
             
             
 
@@ -24026,7 +24211,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="451">
+          <li class="never" data-hits="" data-linenumber="412">
             
             
 
@@ -24037,7 +24222,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="452">
+          <li class="never" data-hits="" data-linenumber="413">
             
             
 
@@ -24048,7 +24233,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="453">
+          <li class="never" data-hits="" data-linenumber="414">
             
             
 
@@ -24059,7 +24244,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="454">
+          <li class="never" data-hits="" data-linenumber="415">
             
             
 
@@ -24070,7 +24255,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="455">
+          <li class="never" data-hits="" data-linenumber="416">
             
             
 
@@ -24081,7 +24266,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="456">
+          <li class="missed" data-hits="0" data-linenumber="417">
             
             
 
@@ -24092,7 +24277,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="457">
+          <li class="missed" data-hits="0" data-linenumber="418">
             
             
 
@@ -24103,7 +24288,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="458">
+          <li class="never" data-hits="" data-linenumber="419">
             
             
 
@@ -24114,7 +24299,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="459">
+          <li class="never" data-hits="" data-linenumber="420">
             
             
 
@@ -24125,7 +24310,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="460">
+          <li class="never" data-hits="" data-linenumber="421">
             
             
 
@@ -24136,7 +24321,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="461">
+          <li class="never" data-hits="" data-linenumber="422">
             
             
 
@@ -24147,7 +24332,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="462">
+          <li class="never" data-hits="" data-linenumber="423">
             
             
 
@@ -24158,7 +24343,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="463">
+          <li class="never" data-hits="" data-linenumber="424">
             
             
 
@@ -24169,7 +24354,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="464">
+          <li class="never" data-hits="" data-linenumber="425">
             
             
 
@@ -24180,7 +24365,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="465">
+          <li class="never" data-hits="" data-linenumber="426">
             
             
 
@@ -24191,7 +24376,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="466">
+          <li class="never" data-hits="" data-linenumber="427">
             
             
 
@@ -24202,7 +24387,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="467">
+          <li class="never" data-hits="" data-linenumber="428">
             
             
 
@@ -24213,7 +24398,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="468">
+          <li class="never" data-hits="" data-linenumber="429">
             
             
 
@@ -24224,7 +24409,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="469">
+          <li class="never" data-hits="" data-linenumber="430">
             
             
 
@@ -24235,7 +24420,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="470">
+          <li class="never" data-hits="" data-linenumber="431">
             
             
 
@@ -24246,7 +24431,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="471">
+          <li class="never" data-hits="" data-linenumber="432">
             
             
 
@@ -24257,7 +24442,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="472">
+          <li class="never" data-hits="" data-linenumber="433">
             
             
 
@@ -24268,7 +24453,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="473">
+          <li class="never" data-hits="" data-linenumber="434">
             
             
 
@@ -24279,7 +24464,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="474">
+          <li class="never" data-hits="" data-linenumber="435">
             
             
 
@@ -24290,7 +24475,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="475">
+          <li class="never" data-hits="" data-linenumber="436">
             
             
 
@@ -24301,7 +24486,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="476">
+          <li class="never" data-hits="" data-linenumber="437">
             
             
 
@@ -24312,7 +24497,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="477">
+          <li class="never" data-hits="" data-linenumber="438">
             
             
 
@@ -24323,7 +24508,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="478">
+          <li class="never" data-hits="" data-linenumber="439">
             
             
 
@@ -24334,7 +24519,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="479">
+          <li class="never" data-hits="" data-linenumber="440">
             
             
 
@@ -24345,7 +24530,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="480">
+          <li class="never" data-hits="" data-linenumber="441">
             
             
 
@@ -24356,7 +24541,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="481">
+          <li class="never" data-hits="" data-linenumber="442">
             
             
 
@@ -24367,7 +24552,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="482">
+          <li class="never" data-hits="" data-linenumber="443">
             
             
 
@@ -24378,7 +24563,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="483">
+          <li class="never" data-hits="" data-linenumber="444">
             
             
 
@@ -24389,7 +24574,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="484">
+          <li class="never" data-hits="" data-linenumber="445">
             
             
 
@@ -24400,7 +24585,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="485">
+          <li class="never" data-hits="" data-linenumber="446">
             
             
 
@@ -24411,7 +24596,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="486">
+          <li class="never" data-hits="" data-linenumber="447">
             
             
 
@@ -24422,7 +24607,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="487">
+          <li class="never" data-hits="" data-linenumber="448">
             
             
 
@@ -24433,7 +24618,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="488">
+          <li class="never" data-hits="" data-linenumber="449">
             
             
 
@@ -24444,7 +24629,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="489">
+          <li class="never" data-hits="" data-linenumber="450">
             
             
 
@@ -24455,7 +24640,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="490">
+          <li class="never" data-hits="" data-linenumber="451">
             
             
 
@@ -24466,7 +24651,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="491">
+          <li class="never" data-hits="" data-linenumber="452">
             
             
 
@@ -24477,7 +24662,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="492">
+          <li class="never" data-hits="" data-linenumber="453">
             
             
 
@@ -24488,7 +24673,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="493">
+          <li class="never" data-hits="" data-linenumber="454">
             
             
 
@@ -24499,7 +24684,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="494">
+          <li class="never" data-hits="" data-linenumber="455">
             
             
 
@@ -24510,7 +24695,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="495">
+          <li class="never" data-hits="" data-linenumber="456">
             
             
 
@@ -24521,7 +24706,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="496">
+          <li class="missed" data-hits="0" data-linenumber="457">
             
             
 
@@ -24532,7 +24717,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="497">
+          <li class="missed" data-hits="0" data-linenumber="458">
             
             
 
@@ -24543,7 +24728,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="498">
+          <li class="never" data-hits="" data-linenumber="459">
             
             
 
@@ -24554,7 +24739,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="499">
+          <li class="never" data-hits="" data-linenumber="460">
             
             
 
@@ -24565,7 +24750,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="500">
+          <li class="never" data-hits="" data-linenumber="461">
             
             
 
@@ -24576,7 +24761,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="501">
+          <li class="never" data-hits="" data-linenumber="462">
             
             
 
@@ -24587,7 +24772,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="502">
+          <li class="never" data-hits="" data-linenumber="463">
             
             
 
@@ -24598,7 +24783,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="503">
+          <li class="never" data-hits="" data-linenumber="464">
             
             
 
@@ -24609,7 +24794,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="504">
+          <li class="never" data-hits="" data-linenumber="465">
             
             
 
@@ -24620,7 +24805,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="505">
+          <li class="never" data-hits="" data-linenumber="466">
             
             
 
@@ -24631,7 +24816,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="506">
+          <li class="never" data-hits="" data-linenumber="467">
             
             
 
@@ -24642,7 +24827,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="507">
+          <li class="never" data-hits="" data-linenumber="468">
             
             
 
@@ -24653,7 +24838,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="508">
+          <li class="never" data-hits="" data-linenumber="469">
             
             
 
@@ -24664,7 +24849,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="509">
+          <li class="never" data-hits="" data-linenumber="470">
             
             
 
@@ -24675,7 +24860,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="510">
+          <li class="never" data-hits="" data-linenumber="471">
             
             
 
@@ -24686,7 +24871,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="511">
+          <li class="never" data-hits="" data-linenumber="472">
             
             
 
@@ -24697,7 +24882,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="512">
+          <li class="never" data-hits="" data-linenumber="473">
             
             
 
@@ -24708,7 +24893,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="513">
+          <li class="never" data-hits="" data-linenumber="474">
             
             
 
@@ -24719,7 +24904,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="514">
+          <li class="never" data-hits="" data-linenumber="475">
             
             
 
@@ -24730,7 +24915,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="515">
+          <li class="never" data-hits="" data-linenumber="476">
             
             
 
@@ -24741,7 +24926,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="516">
+          <li class="never" data-hits="" data-linenumber="477">
             
             
 
@@ -24752,7 +24937,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="517">
+          <li class="never" data-hits="" data-linenumber="478">
             
             
 
@@ -24763,7 +24948,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="518">
+          <li class="never" data-hits="" data-linenumber="479">
             
             
 
@@ -24774,7 +24959,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="519">
+          <li class="never" data-hits="" data-linenumber="480">
             
             
 
@@ -24785,7 +24970,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="520">
+          <li class="never" data-hits="" data-linenumber="481">
             
             
 
@@ -24796,7 +24981,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="521">
+          <li class="never" data-hits="" data-linenumber="482">
             
             
 
@@ -24807,7 +24992,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="522">
+          <li class="never" data-hits="" data-linenumber="483">
             
             
 
@@ -24818,7 +25003,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="523">
+          <li class="never" data-hits="" data-linenumber="484">
             
             
 
@@ -24829,7 +25014,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="524">
+          <li class="never" data-hits="" data-linenumber="485">
             
             
 
@@ -24840,7 +25025,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="525">
+          <li class="never" data-hits="" data-linenumber="486">
             
             
 
@@ -24851,7 +25036,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="526">
+          <li class="never" data-hits="" data-linenumber="487">
             
             
 
@@ -24862,7 +25047,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="527">
+          <li class="never" data-hits="" data-linenumber="488">
             
             
 
@@ -24873,7 +25058,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="528">
+          <li class="never" data-hits="" data-linenumber="489">
             
             
 
@@ -24884,7 +25069,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="529">
+          <li class="never" data-hits="" data-linenumber="490">
             
             
 
@@ -24895,7 +25080,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="530">
+          <li class="never" data-hits="" data-linenumber="491">
             
             
 
@@ -24906,7 +25091,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="531">
+          <li class="never" data-hits="" data-linenumber="492">
             
             
 
@@ -24917,7 +25102,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="532">
+          <li class="never" data-hits="" data-linenumber="493">
             
             
 
@@ -24928,7 +25113,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="533">
+          <li class="never" data-hits="" data-linenumber="494">
             
             
 
@@ -24939,7 +25124,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="534">
+          <li class="never" data-hits="" data-linenumber="495">
             
             
 
@@ -24950,7 +25135,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="535">
+          <li class="never" data-hits="" data-linenumber="496">
             
             
 
@@ -24961,7 +25146,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="536">
+          <li class="missed" data-hits="0" data-linenumber="497">
             
             
 
@@ -24972,7 +25157,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="537">
+          <li class="missed" data-hits="0" data-linenumber="498">
             
             
 
@@ -24983,7 +25168,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="538">
+          <li class="never" data-hits="" data-linenumber="499">
             
             
 
@@ -24994,7 +25179,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="539">
+          <li class="never" data-hits="" data-linenumber="500">
             
             
 
@@ -25005,7 +25190,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="540">
+          <li class="never" data-hits="" data-linenumber="501">
             
             
 
@@ -25016,7 +25201,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="541">
+          <li class="never" data-hits="" data-linenumber="502">
             
             
 
@@ -25027,7 +25212,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="542">
+          <li class="never" data-hits="" data-linenumber="503">
             
             
 
@@ -25038,7 +25223,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="543">
+          <li class="never" data-hits="" data-linenumber="504">
             
             
 
@@ -25049,7 +25234,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="544">
+          <li class="never" data-hits="" data-linenumber="505">
             
             
 
@@ -25060,7 +25245,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="545">
+          <li class="never" data-hits="" data-linenumber="506">
             
             
 
@@ -25071,7 +25256,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="546">
+          <li class="never" data-hits="" data-linenumber="507">
             
             
 
@@ -25082,7 +25267,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="547">
+          <li class="never" data-hits="" data-linenumber="508">
             
             
 
@@ -25093,7 +25278,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="548">
+          <li class="never" data-hits="" data-linenumber="509">
             
             
 
@@ -25104,7 +25289,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="549">
+          <li class="never" data-hits="" data-linenumber="510">
             
             
 
@@ -25115,7 +25300,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="550">
+          <li class="never" data-hits="" data-linenumber="511">
             
             
 
@@ -25126,7 +25311,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="551">
+          <li class="never" data-hits="" data-linenumber="512">
             
             
 
@@ -25137,7 +25322,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="552">
+          <li class="never" data-hits="" data-linenumber="513">
             
             
 
@@ -25148,7 +25333,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="553">
+          <li class="never" data-hits="" data-linenumber="514">
             
             
 
@@ -25159,7 +25344,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="554">
+          <li class="never" data-hits="" data-linenumber="515">
             
             
 
@@ -25170,7 +25355,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="555">
+          <li class="never" data-hits="" data-linenumber="516">
             
             
 
@@ -25181,7 +25366,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="556">
+          <li class="never" data-hits="" data-linenumber="517">
             
             
 
@@ -25192,7 +25377,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="557">
+          <li class="never" data-hits="" data-linenumber="518">
             
             
 
@@ -25203,7 +25388,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="558">
+          <li class="never" data-hits="" data-linenumber="519">
             
             
 
@@ -25214,7 +25399,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="559">
+          <li class="never" data-hits="" data-linenumber="520">
             
             
 
@@ -25225,7 +25410,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="560">
+          <li class="never" data-hits="" data-linenumber="521">
             
             
 
@@ -25236,7 +25421,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="561">
+          <li class="never" data-hits="" data-linenumber="522">
             
             
 
@@ -25247,7 +25432,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="562">
+          <li class="never" data-hits="" data-linenumber="523">
             
             
 
@@ -25258,7 +25443,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="563">
+          <li class="never" data-hits="" data-linenumber="524">
             
             
 
@@ -25269,7 +25454,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="564">
+          <li class="never" data-hits="" data-linenumber="525">
             
             
 
@@ -25280,7 +25465,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="565">
+          <li class="never" data-hits="" data-linenumber="526">
             
             
 
@@ -25291,7 +25476,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="566">
+          <li class="never" data-hits="" data-linenumber="527">
             
             
 
@@ -25302,7 +25487,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="567">
+          <li class="never" data-hits="" data-linenumber="528">
             
             
 
@@ -25313,7 +25498,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="568">
+          <li class="never" data-hits="" data-linenumber="529">
             
             
 
@@ -25324,7 +25509,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="569">
+          <li class="never" data-hits="" data-linenumber="530">
             
             
 
@@ -25335,7 +25520,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="570">
+          <li class="never" data-hits="" data-linenumber="531">
             
             
 
@@ -25346,7 +25531,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="571">
+          <li class="never" data-hits="" data-linenumber="532">
             
             
 
@@ -25357,7 +25542,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="572">
+          <li class="never" data-hits="" data-linenumber="533">
             
             
 
@@ -25368,7 +25553,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="573">
+          <li class="never" data-hits="" data-linenumber="534">
             
             
 
@@ -25379,7 +25564,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="574">
+          <li class="never" data-hits="" data-linenumber="535">
             
             
 
@@ -25390,7 +25575,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="575">
+          <li class="never" data-hits="" data-linenumber="536">
             
             
 
@@ -25401,7 +25586,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="576">
+          <li class="never" data-hits="" data-linenumber="537">
             
             
 
@@ -39839,8 +40024,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="9" data-linenumber="61">
-            <span class="hits">9</span>
+          <li class="covered" data-hits="8" data-linenumber="61">
+            <span class="hits">8</span>
             
 
             
@@ -39916,8 +40101,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="8" data-linenumber="68">
-            <span class="hits">8</span>
+          <li class="covered" data-hits="6" data-linenumber="68">
+            <span class="hits">6</span>
             
 
             
@@ -39993,8 +40178,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="75">
-            <span class="hits">3</span>
+          <li class="covered" data-hits="6" data-linenumber="75">
+            <span class="hits">6</span>
             
 
             
