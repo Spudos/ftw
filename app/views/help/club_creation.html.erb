@@ -84,6 +84,11 @@ Club Creation
   </div>
 
   <div>
+    <%= form.label :player_type %>
+    <%= form.select :player_type, options_for_select({ 'Young with potential' => 'junior', 'Older with higher skills' => 'senior' }) %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

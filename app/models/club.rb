@@ -9,6 +9,13 @@ class Club < ApplicationRecord
     club_creation_departments(club, params)
     club_creation_bank(club, params)
     club_creation_fanbase(club, params)
+    player_removal(club)
+
+    if params[:club][:player_type] == 'junior'
+      player_create_junior(club)
+    else
+      player_create_senior(club)
+    end
   end
 
   def finance_items(club)
@@ -214,5 +221,356 @@ class Club < ApplicationRecord
       club.fanbase = 120_000
     end
     club.save
+  end
+
+  def player_removal(club)
+    club.players.each do |player|
+      player.club_id = 242
+      player.save
+    end
+  end
+
+  def player_create_junior(club)
+    countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales',
+                 'NI', 'RoI', 'Brazil', 'Argentina', 'Spain', 'France', 'Germany',
+                 'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay','Brazil',
+                 'England', 'Mexico', 'Germany', 'Italy', 'Spain', 'France', 'Argentina',
+                 'Netherlands', 'Portugal', 'Belgium', 'Uruguay', 'Colombia', 'Croatia',
+                 'Sweden', 'Switzerland', 'Poland', 'Denmark', 'Chile', 'Austria',
+                 'Turkey', 'Russia', 'Japan', 'South Korea', 'Australia']
+
+    position_detail = ['c', 'c', 'c', 'l', 'r']
+
+    3.times do
+      Player.create(
+        name: Faker::Name.last_name,
+        age: rand(17..24),
+        nationality: countries.sample,
+        position: 'gkp',
+        passing: rand(4..7),
+        control: rand(4..7),
+        tackling: rand(4..7),
+        running: rand(3..6),
+        shooting: rand(4..7),
+        dribbling: rand(3..6),
+        defensive_heading: rand(3..6),
+        offensive_heading: rand(4..7),
+        flair: rand(3..6),
+        strength: rand(4..7),
+        creativity: rand(3..6),
+        fitness: 100,
+        contract: rand(13..46),
+        club_id: club.id,
+        consistency: rand(5..20),
+        blend: rand(0..9),
+        star: rand(5..30),
+        loyalty: rand(10..50),
+        player_position_detail: 'p',
+        potential_passing: rand(11..20),
+        potential_control: rand(11..20),
+        potential_tackling: rand(11..20),
+        potential_running: rand(8..18),
+        potential_shooting: rand(11..20),
+        potential_dribbling: rand(8..18),
+        potential_defensive_heading: rand(8..18),
+        potential_offensive_heading: rand(11..20),
+        potential_flair: rand(8..18),
+        potential_strength: rand(11..20),
+        potential_creativity: rand(8..18),
+        available: 0
+      )
+    end
+
+    6.times do
+      Player.create(
+        name: Faker::Name.last_name,
+        age: rand(17..24),
+        nationality: countries.sample,
+        position: 'dfc',
+        passing: rand(3..6),
+        control: rand(4..7),
+        tackling: rand(4..7),
+        running: rand(4..7),
+        shooting: rand(3..6),
+        dribbling: rand(3..6),
+        defensive_heading: rand(4..7),
+        offensive_heading: rand(3..6),
+        flair: rand(3..6),
+        strength: rand(4..7),
+        creativity: rand(4..7),
+        fitness: 100,
+        contract: rand(13..46),
+        club_id: club.id,
+        consistency: rand(5..20),
+        blend: rand(0..9),
+        star: rand(5..30),
+        loyalty: rand(10..50),
+        player_position_detail: position_detail.sample,
+        potential_passing: rand(8..18),
+        potential_control: rand(11..20),
+        potential_tackling: rand(11..20),
+        potential_running: rand(11..20),
+        potential_shooting: rand(8..18),
+        potential_dribbling: rand(8..18),
+        potential_defensive_heading: rand(11..20),
+        potential_offensive_heading: rand(8..18),
+        potential_flair: rand(8..18),
+        potential_strength: rand(11..20),
+        potential_creativity: rand(11..20),
+        available: 0
+      )
+    end
+
+    6.times do
+      Player.create(
+        name: Faker::Name.last_name,
+        age: rand(17..24),
+        nationality: countries.sample,
+        position: 'mid',
+        passing: rand(4..7),
+        control: rand(4..7),
+        tackling: rand(3..6),
+        running: rand(3..6),
+        shooting: rand(4..7),
+        dribbling: rand(4..7),
+        defensive_heading: rand(3..6),
+        offensive_heading: rand(3..6),
+        flair: rand(4..7),
+        strength: rand(3..6),
+        creativity: rand(4..7),
+        fitness: 100,
+        contract: rand(13..46),
+        club_id: club.id,
+        consistency: rand(5..20),
+        blend: rand(0..9),
+        star: rand(5..30),
+        loyalty: rand(10..50),
+        player_position_detail: position_detail.sample,
+        potential_passing: rand(11..20),
+        potential_control: rand(11..20),
+        potential_tackling: rand(8..18),
+        potential_running: rand(8..18),
+        potential_shooting: rand(11..20),
+        potential_dribbling: rand(11..20),
+        potential_defensive_heading: rand(8..18),
+        potential_offensive_heading: rand(8..18),
+        potential_flair: rand(11..20),
+        potential_strength: rand(8..18),
+        potential_creativity: rand(11..20),
+        available: 0
+      )
+    end
+
+    6.times do
+      Player.create(
+        name: Faker::Name.last_name,
+        age: rand(17..24),
+        nationality: countries.sample,
+        position: 'att',
+        passing: rand(3..6),
+        control: rand(4..7),
+        tackling: rand(3..6),
+        running: rand(4..7),
+        shooting: rand(4..7),
+        dribbling: rand(4..7),
+        defensive_heading: rand(3..6),
+        offensive_heading: rand(4..7),
+        flair: rand(4..7),
+        strength: rand(3..6),
+        creativity: rand(3..6),
+        fitness: 100,
+        contract: rand(13..46),
+        club_id: club.id,
+        consistency: rand(5..20),
+        blend: rand(0..9),
+        star: rand(5..30),
+        loyalty: rand(10..50),
+        player_position_detail: position_detail.sample,
+        potential_passing: rand(8..18),
+        potential_control: rand(11..20),
+        potential_tackling: rand(8..18),
+        potential_running: rand(11..20),
+        potential_shooting: rand(11..20),
+        potential_dribbling: rand(11..20),
+        potential_defensive_heading: rand(8..18),
+        potential_offensive_heading: rand(11..20),
+        potential_flair: rand(11..20),
+        potential_strength: rand(8..18),
+        potential_creativity: rand(8..18),
+        available: 0
+      )
+    end
+  end
+
+  def player_create_senior(club)
+    countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales',
+                 'NI', 'RoI', 'Brazil', 'Argentina', 'Spain', 'France', 'Germany',
+                 'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay','Brazil',
+                 'England', 'Mexico', 'Germany', 'Italy', 'Spain', 'France', 'Argentina',
+                 'Netherlands', 'Portugal', 'Belgium', 'Uruguay', 'Colombia', 'Croatia',
+                 'Sweden', 'Switzerland', 'Poland', 'Denmark', 'Chile', 'Austria',
+                 'Turkey', 'Russia', 'Japan', 'South Korea', 'Australia']
+
+    position_detail = ['c', 'c', 'c', 'l', 'r']
+
+    3.times do
+      Player.create(
+        name: Faker::Name.last_name,
+        age: rand(25..34),
+        nationality: countries.sample,
+        position: 'gkp',
+        passing: rand(5..9),
+        control: rand(5..9),
+        tackling: rand(5..9),
+        running: rand(5..7),
+        shooting: rand(5..9),
+        dribbling: rand(5..7),
+        defensive_heading: rand(5..7),
+        offensive_heading: rand(5..9),
+        flair: rand(5..7),
+        strength: rand(5..9),
+        creativity: rand(5..7),
+        fitness: 100,
+        contract: rand(13..46),
+        club_id: club.id,
+        consistency: rand(5..20),
+        blend: rand(0..9),
+        star: rand(5..30),
+        loyalty: rand(10..50),
+        player_position_detail: 'p',
+        potential_passing: rand(9..11),
+        potential_control: rand(9..11),
+        potential_tackling: rand(9..11),
+        potential_running: rand(8..10),
+        potential_shooting: rand(9..11),
+        potential_dribbling: rand(8..10),
+        potential_defensive_heading: rand(8..10),
+        potential_offensive_heading: rand(9..11),
+        potential_flair: rand(8..10),
+        potential_strength: rand(9..11),
+        potential_creativity: rand(8..10),
+        available: 0
+      )
+    end
+
+    6.times do
+      Player.create(
+        name: Faker::Name.last_name,
+        age: rand(25..34),
+        nationality: countries.sample,
+        position: 'dfc',
+        passing: rand(5..7),
+        control: rand(5..9),
+        tackling: rand(5..9),
+        running: rand(5..9),
+        shooting: rand(5..7),
+        dribbling: rand(5..7),
+        defensive_heading: rand(5..9),
+        offensive_heading: rand(5..7),
+        flair: rand(5..7),
+        strength: rand(5..9),
+        creativity: rand(5..9),
+        fitness: 100,
+        contract: rand(13..46),
+        club_id: club.id,
+        consistency: rand(5..20),
+        blend: rand(0..9),
+        star: rand(5..30),
+        loyalty: rand(10..50),
+        player_position_detail: position_detail.sample,
+        potential_passing: rand(8..10),
+        potential_control: rand(9..11),
+        potential_tackling: rand(9..11),
+        potential_running: rand(9..11),
+        potential_shooting: rand(8..10),
+        potential_dribbling: rand(8..10),
+        potential_defensive_heading: rand(9..11),
+        potential_offensive_heading: rand(8..10),
+        potential_flair: rand(8..10),
+        potential_strength: rand(9..11),
+        potential_creativity: rand(9..11),
+        available: 0
+      )
+    end
+
+    6.times do
+      Player.create(
+        name: Faker::Name.last_name,
+        age: rand(25..34),
+        nationality: countries.sample,
+        position: 'mid',
+        passing: rand(5..9),
+        control: rand(5..9),
+        tackling: rand(5..7),
+        running: rand(5..7),
+        shooting: rand(5..9),
+        dribbling: rand(5..9),
+        defensive_heading: rand(5..7),
+        offensive_heading: rand(5..7),
+        flair: rand(5..9),
+        strength: rand(5..7),
+        creativity: rand(5..9),
+        fitness: 100,
+        contract: rand(13..46),
+        club_id: club.id,
+        consistency: rand(5..20),
+        blend: rand(0..9),
+        star: rand(5..30),
+        loyalty: rand(10..50),
+        player_position_detail: position_detail.sample,
+        potential_passing: rand(9..11),
+        potential_control: rand(9..11),
+        potential_tackling: rand(8..10),
+        potential_running: rand(8..10),
+        potential_shooting: rand(9..11),
+        potential_dribbling: rand(9..11),
+        potential_defensive_heading: rand(8..10),
+        potential_offensive_heading: rand(8..10),
+        potential_flair: rand(9..11),
+        potential_strength: rand(8..10),
+        potential_creativity: rand(9..11),
+        available: 0
+      )
+    end
+
+    6.times do
+      Player.create(
+        name: Faker::Name.last_name,
+        age: rand(25..34),
+        nationality: countries.sample,
+        position: 'att',
+        passing: rand(5..7),
+        control: rand(5..9),
+        tackling: rand(5..7),
+        running: rand(5..9),
+        shooting: rand(5..9),
+        dribbling: rand(5..9),
+        defensive_heading: rand(5..7),
+        offensive_heading: rand(5..9),
+        flair: rand(5..9),
+        strength: rand(5..7),
+        creativity: rand(5..7),
+        fitness: 100,
+        contract: rand(13..46),
+        club_id: club.id,
+        consistency: rand(5..20),
+        blend: rand(0..9),
+        star: rand(5..30),
+        loyalty: rand(10..50),
+        player_position_detail: position_detail.sample,
+        potential_passing: rand(8..10),
+        potential_control: rand(9..11),
+        potential_tackling: rand(8..10),
+        potential_running: rand(9..11),
+        potential_shooting: rand(9..11),
+        potential_dribbling: rand(9..11),
+        potential_defensive_heading: rand(8..10),
+        potential_offensive_heading: rand(9..11),
+        potential_flair: rand(9..11),
+        potential_strength: rand(8..10),
+        potential_creativity: rand(8..10),
+        available: 0
+      )
+    end
   end
 end

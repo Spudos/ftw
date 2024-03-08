@@ -5,19 +5,22 @@ RSpec.describe Player, type: :model do
     context 'with valid club data' do
       it 'update an existing club to show the new values' do
         create(:club,
-                     manager: 'Testy000',
-                     manager_email: 'test000@email.com',
-                     managed: false,
-                     league: 'Premier League',
-                     name: 'Test Club000',
-                     ground_name: 'Test Ground000',
-                     stand_n_name: 'Test Stand N000',
-                     stand_e_name: 'Test Stand E000',
-                     stand_s_name: 'Test Stand S000',
-                     stand_w_name: 'Test Stand W000',
-                     color_primary: 'Test Color Primary000',
-                     color_secondary: 'Test Color Secondary000'
-                     )
+               manager: 'Testy000',
+               manager_email: 'test000@email.com',
+               managed: false,
+               league: 'Premier League',
+               name: 'Test Club000',
+               ground_name: 'Test Ground000',
+               stand_n_name: 'Test Stand N000',
+               stand_e_name: 'Test Stand E000',
+               stand_s_name: 'Test Stand S000',
+               stand_w_name: 'Test Stand W000',
+               color_primary: 'Test Color Primary000',
+               color_secondary: 'Test Color Secondary000')
+
+        create(:club, id: 242)
+        create(:player)
+        create(:player)
 
         params = { club: { manager: 'Testy',
                            manager_email: 'test@email.com',
@@ -33,7 +36,8 @@ RSpec.describe Player, type: :model do
                            color_secondary: 'Test Color Secondary',
                            stadium_points: 5,
                            bank_points: 5,
-                           fanbase_points: 5 } }
+                           fanbase_points: 5,
+                           player_type: 'junior' } }
 
         Club.new.submission(params)
 
@@ -66,6 +70,9 @@ RSpec.describe Player, type: :model do
         expect(Club.first.staff_scouts).to be_between(5, 8)
         expect(Club.first.bank_bal).to eq(500_000_000)
         expect(Club.first.fanbase).to eq(70_000)
+        expect(Player.first.club_id).to eq(242)
+        expect(Player.second.club_id).to eq(242)
+        expect(Player.where(club_id: 1).count).to eq(21)
       end
     end
   end
