@@ -6,7 +6,7 @@
   <li class="nav-item">
     <a href="<%= articles_path %>" class="btn btn-outline-dark">Articles</a>
   </li>
-  <% if current_user %> 
+  <% if Club.exists?(manager_email: current_user.email) %> 
   <li class="nav-item">
     <div class="btn-group">
         <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
