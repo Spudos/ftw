@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pry'
 
 RSpec.describe Player, type: :model do
   describe 'perform club creation' do
@@ -73,6 +74,9 @@ RSpec.describe Player, type: :model do
         expect(Player.first.club_id).to eq(242)
         expect(Player.second.club_id).to eq(242)
         expect(Player.where(club_id: 1).count).to eq(21)
+        expect(Player.last.total_skill).to_not be(0)
+        expect(Player.last.wages).to_not be(0)
+        expect(Player.last.value).to_not be(0)
       end
     end
   end

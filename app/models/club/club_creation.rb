@@ -20,6 +20,8 @@ class Club::ClubCreation
       player_create_senior
     end
 
+    player_values
+
     Feedback.create(name: params[:club][:manager],
                     email: params[:club][:manager_email], club: club.id,
                     message: 'A new club has been created', feedback_type: 'NewClub', outstanding: 'true')
@@ -535,6 +537,18 @@ class Club::ClubCreation
         potential_creativity: rand(7..9),
         available: 0
       )
+    end
+  end
+
+  def player_values
+    players = Player.where(club_id: club.id)
+
+    Turn::Engines::Wages.new(players, 1).process
+    Turn::Engines::Value.new(players, 1).process
+
+    players.each do |player|
+      player.total_skill = player.total_skill_calc
+      player.save
     end
   end
 end

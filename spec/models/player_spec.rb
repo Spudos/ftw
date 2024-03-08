@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pry'
 
 RSpec.describe Player, type: :model do
   describe 'perform basic skill calculations' do
