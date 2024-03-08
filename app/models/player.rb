@@ -68,12 +68,46 @@ class Player < ApplicationRecord
     end
   end
 
-  def self.compile_top_total_skill_view(league, position, detail)
-    Player::TopSkill.new(league, position, detail).process
+  def self.compile_top_total_skill_view(league)
+    players = player_data.map do |player|
+      unless player.club.league == league
+        next
+      end
+      info = {
+        id: player.id,
+        name: player.name,
+        club: player.club.name,
+        position: (player.position + player.player_position_detail).upcase,
+        total_skill: player.total_skill
+      }
+    end
+
+    players.compact!
+
+    players.sort_by! { |player| -player[:total_skill] }
+
+    return players
   end
 
-  def self.compile_top_performance_view(league, position, detail)
-    Player::TopPerformance.new(league, position, detail).process
+  def self.compile_top_performance_view(league)
+    players = player_data.map do |player|
+      unless player.club.league == league
+        next
+      end
+      {
+        id: player.id,
+        name: player.name,
+        club: player.club.name,
+        position: (player.position + player.player_position_detail).upcase,
+        performance: player.average_performance
+      }
+    end
+
+    players.compact!
+
+    players.sort_by! { |player| -player[:performance] }
+
+    return players
   end
 
   def self.compile_top_goals_view(league)

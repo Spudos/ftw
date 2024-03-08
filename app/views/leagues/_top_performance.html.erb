@@ -9,7 +9,7 @@
     <th scope="col">Position</th>
     <th scope="col">Perf</th>
   </tr>
-  <% @top_performance.each do |player| %>
+  <% @top_performance.take(10).each do |player| %>
     <tr scope="row">
       <td><%= player[:id] %></td>
       <td><%= player[:name] %></td>

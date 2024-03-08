@@ -9,7 +9,7 @@
       <th scope="col">Club</th>
       <th scope="col">Perf</th>
     </tr>
-    <% @top_performance_attl.each do |player| %>
+    <% @top_performance.select { |player| player[:position] == 'ATTL' }.take(10).each do |player| %>
       <tr scope="row">
         <td><%= player[:id] %></td>
         <td><%= player[:name] %></td>
@@ -31,7 +31,7 @@
       <th scope="col">Club</th>
       <th scope="col">Perf</th>
     </tr>
-    <% @top_performance_attc.each do |player| %>
+    <% @top_performance.select { |player| player[:position] == 'ATTC' }.take(10).each do |player| %>
       <tr scope="row">
         <td><%= player[:id] %></td>
         <td><%= player[:name] %></td>
@@ -53,7 +53,7 @@
       <th scope="col">Club</th>
       <th scope="col">Perf</th>
     </tr>
-    <% @top_performance_attr.each do |player| %>
+    <% @top_performance.select { |player| player[:position] == 'ATTR' }.take(10).each do |player| %>
       <tr scope="row">
         <td><%= player[:id] %></td>
         <td><%= player[:name] %></td>

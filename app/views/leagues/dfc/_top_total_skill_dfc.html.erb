@@ -9,7 +9,7 @@
     <th scope="col">Position</th>
     <th scope="col">Skill</th>
   </tr>
-  <% @top_total_skill_dfc.each do |player| %>
+  <% @top_total_skill.select { |player| player[:position].start_with?('DFC') }.take(10).each do |player| %>
     <tr scope="row">
       <td><%= player[:id] %></td>
       <td><%= player[:name] %></td>

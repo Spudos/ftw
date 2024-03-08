@@ -1,5 +1,5 @@
 <div class="col-md-4">
-  <table class="table-sm table-hover">
+  <table class="table table-hover">
     <tr>
       <th colspan="5" scope="col"><h5>MIDL by Skill</h5><th>
     </tr>
@@ -9,7 +9,7 @@
       <th scope="col">Club</th>
       <th scope="col">Skill</th>
     </tr>
-    <% @top_total_skill_midl.each do |player| %>
+    <% @top_total_skill.select { |player| player[:position] == 'MIDL' }.take(10).each do |player| %>
       <tr scope="row">
         <td><%= player[:id] %></td>
         <td><%= player[:name] %></td>
@@ -21,7 +21,7 @@
 </div>
 
 <div class="col-md-4">
-  <table class="table-sm table-hover">
+  <table class="table table-hover">
     <tr>
       <th colspan="5" scope="col"><h5>MIDC by Skill</h5><th>
     </tr>
@@ -31,7 +31,7 @@
       <th scope="col">Club</th>
       <th scope="col">Skill</th>
     </tr>
-    <% @top_total_skill_midc.each do |player| %>
+    <% @top_total_skill.select { |player| player[:position] == 'MIDC' }.take(10).each do |player| %>
       <tr scope="row">
         <td><%= player[:id] %></td>
         <td><%= player[:name] %></td>
@@ -43,7 +43,7 @@
 </div>
 
 <div class="col-md-4">
-  <table class="table-sm table-hover">
+  <table class="table table-hover">
     <tr>
       <th colspan="5" scope="col"><h5>MIDR by Skill</h5><th>
     </tr>
@@ -53,7 +53,7 @@
       <th scope="col">Club</th>
       <th scope="col">Skill</th>
     </tr>
-    <% @top_total_skill_midr.each do |player| %>
+    <% @top_total_skill.select { |player| player[:position] == 'MIDR' }.take(10).each do |player| %>
       <tr scope="row">
         <td><%= player[:id] %></td>
         <td><%= player[:name] %></td>
