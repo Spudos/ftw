@@ -216,16 +216,6 @@ td {
   padding: 5px !important;
 }
 
-/** fixtures **/
-
-#exists {
-  background-color: lightgreen;
-}
-
-#not_exists {
-  background-color: red;
-}
-
 /** match **/
 
 #match, #match_commentary {
@@ -303,12 +293,28 @@ td {
 
 /** league **/
 
-#fixtures {
+#gkp {
   display: none;
 }
 
-#statistics {
+#dfc {
   display: none;
+}
+
+#mid {
+  display: none;
+}
+
+#att {
+  display: none;
+}
+
+#players {
+  display: none;
+}
+
+.league_stats {
+  font-size: small;
 }
 
 /** game_features section **/

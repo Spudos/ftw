@@ -1,21 +1,21 @@
 <table class="table table-hover">
   <tr>
-    <th colspan="5" scope="col"><h5>Top Players by Assists</h5><th>
+    <th colspan="5" scope="col"><h5>Top Midfielders by Skill</h5><th>
   </tr>
   <tr>
     <th scope="col">id</th>
     <th scope="col">Name</th>
     <th scope="col">Club</th>
     <th scope="col">Position</th>
-    <th scope="col">Assists</th>
+    <th scope="col">Skill</th>
   </tr>
-  <% @top_assists.each do |player| %>
+  <% @top_total_skill_mid.each do |player| %>
     <tr scope="row">
       <td><%= player[:id] %></td>
       <td><%= player[:name] %></td>
       <td><%= player[:club] %></td>
       <td><%= player[:position] %></td>
-      <td><%= player[:assists] %></td>
+      <td><%= player[:total_skill] %></td>
     </tr>
   <% end %>
 </table>

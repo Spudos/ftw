@@ -1,13 +1,13 @@
-<table class="table-sm table-hover">
+<table class="table table-hover">
   <tr>
-    <th colspan="5" scope="col"><h4>Top Players by Performance</h4><th>
+    <th colspan="5" scope="col"><h5>Top Players by Perf</h5><th>
   </tr>
   <tr>
     <th scope="col">id</th>
     <th scope="col">Name</th>
     <th scope="col">Club</th>
     <th scope="col">Position</th>
-    <th scope="col">Performance</th>
+    <th scope="col">Perf</th>
   </tr>
   <% @top_performance.each do |player| %>
     <tr scope="row">
@@ -15,7 +15,7 @@
       <td><%= player[:name] %></td>
       <td><%= player[:club] %></td>
       <td><%= player[:position] %></td>
-      <td><%= player[:average_match_performance] %></td>
+      <td><%= player[:performance] %></td>
     </tr>
   <% end %>
 </table>

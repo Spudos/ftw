@@ -1,26 +1,89 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <button id="tableButton" class="btn btn-sm btn-primary">Table</button>
-  </li>
-  <li class="nav-item">
-    <button id="statisticsButton" class="btn btn-sm btn-primary">Statistics</button>
-  </li>
-</ul>
-
-<div id='table'>
-  <%= render 'table' %>
+<h3 class="text-center"><%= params[:league] %></h3>
+<div class="row d-flex justify-content-center mb-5">
+  <div class="col-md-8 d-flex justify-content-center">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <button id="tableButton" class="btn btn-sm btn-primary">Table</button>
+      </li>
+      <li class="nav-item">
+        <button id="playersButton" class="btn btn-sm btn-primary">All Players</button>
+      </li>
+      <li class="nav-item">
+        <button id="gkpButton" class="btn btn-sm btn-primary">GoalKeepers</button>
+      </li>
+      <li class="nav-item">
+        <button id="dfcButton" class="btn btn-sm btn-primary">Defenders</button>
+      </li>
+      <li class="nav-item">
+        <button id="midButton" class="btn btn-sm btn-primary">Midfielders</button>
+      </li>
+      <li class="nav-item">
+        <button id="attButton" class="btn btn-sm btn-primary">Attackers</button>
+      </li>
+    </ul>
+  </div>
 </div>
 
-<div id='statistics'>
-  <div class="grid-container">
-    <div class="stats"><%= render 'leagues/top_total_skill' %></div>
-    <div class="stats"><%= render 'leagues/top_performance' %></div>
-    <div class="stats"><%= render 'leagues/top_assists' %></div>
-    <div class="stats"><%= render 'leagues/top_goals' %></div>
-    <div class="stats"><%= render 'leagues/top_total_skill_gkp' %></div>
-    <div class="stats"><%= render 'leagues/top_total_skill_dfc' %></div>
-    <div class="stats"><%= render 'leagues/top_total_skill_mid' %></div>
-    <div class="stats"><%= render 'leagues/top_total_skill_att' %></div>
+<div id='table'>
+  <div class="row d-flex justify-content-center m-5">
+  <%= render 'table' %>
+  </div>
+</div>
+
+<div id='players'>
+  <div class="row d-flex justify-content-center m-5">
+    <div class="col-md-5"><%= render 'leagues/top_total_skill' %></div>
+    <div class="col-md-5"><%= render 'leagues/top_performance' %></div>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <div class="col-md-5"><%= render 'leagues/top_assists' %></div>
+    <div class="col-md-5"><%= render 'leagues/top_goals' %></div>
+  </div>
+</div>
+
+<div id='gkp'>
+  <div class="row d-flex justify-content-center m-5">
+    <div class="col-md-6"><%= render 'leagues/gkp/top_total_skill_gkp' %></div>
+    <div class="col-md-6"><%= render 'leagues/gkp/top_performance_gkp' %></div>
+  </div>
+</div>
+
+<div id='dfc'>
+  <div class="row d-flex justify-content-center m-5">
+    <div class="col-md-6"><%= render 'leagues/dfc/top_total_skill_dfc' %></div>
+    <div class="col-md-6"><%= render 'leagues/dfc/top_performance_dfc' %></div>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <%= render 'leagues/dfc/top_total_skill_dfc_pos' %>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <%= render 'leagues/dfc/top_performance_dfc_pos' %>
+  </div>
+</div>
+
+<div id='mid'>
+<div class="row d-flex justify-content-center m-5">
+    <div class="col-md-6"><%= render 'leagues/mid/top_total_skill_mid' %></div>
+    <div class="col-md-6"><%= render 'leagues/mid/top_performance_mid' %></div>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <%= render 'leagues/mid/top_total_skill_mid_pos' %>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <%= render 'leagues/mid/top_performance_mid_pos' %>
+  </div>
+</div>
+
+<div id='att'>
+<div class="row d-flex justify-content-center m-5">
+    <div class="col-md-6"><%= render 'leagues/att/top_total_skill_att' %></div>
+    <div class="col-md-6"><%= render 'leagues/att/top_performance_att' %></div>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <%= render 'leagues/att/top_total_skill_att_pos' %>
+  </div>
+  <div class="row d-flex justify-content-center m-5">
+    <%= render 'leagues/att/top_performance_att_pos' %>
   </div>
 </div>
 

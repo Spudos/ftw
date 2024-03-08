@@ -68,65 +68,12 @@ class Player < ApplicationRecord
     end
   end
 
-  def self.compile_top_total_skill_view(league, position)
-    if position == 'all'
-      players = player_data.map do |player|
-        unless player.club.league == league
-          next
-        end
-        info = {
-          id: player.id,
-          name: player.name,
-          club: player.club.name,
-          position: (player.position + player.player_position_detail).upcase,
-          total_skill: player.total_skill
-        }
-      end
-    else
-      players = player_data.where(position:).map do |player|
-        unless player.club.league == league
-          next
-        end
-        info = {
-          id: player.id,
-          name: player.name,
-          club: player.club.name,
-          position: (player.position + player.player_position_detail).upcase,
-          total_skill: player.total_skill
-        }
-      end
-    end
-
-    players.compact!
-
-    players.sort_by! { |player| -player[:total_skill] }
-
-    top_skill_players = players.take(15)
-
-    return top_skill_players
+  def self.compile_top_total_skill_view(league, position, detail)
+    Player::TopSkill.new(league, position, detail).process
   end
 
-  def self.compile_top_performance_view(league)
-    players = player_data.map do |player|
-      unless player.club.league == league
-        next
-      end
-      {
-        id: player.id,
-        name: player.name,
-        club: player.club.name,
-        position: (player.position + player.player_position_detail).upcase,
-        average_match_performance: player.average_performance
-      }
-    end
-
-    players.compact!
-
-    players.sort_by! { |player| -player[:average_match_performance] }
-
-    top_perf_players = players.take(15)
-
-    return top_perf_players
+  def self.compile_top_performance_view(league, position, detail)
+    Player::TopPerformance.new(league, position, detail).process
   end
 
   def self.compile_top_goals_view(league)
@@ -147,7 +94,7 @@ class Player < ApplicationRecord
 
     players.sort_by! { |player| -player[:goals] }
 
-    top_goals_players = players.take(15)
+    top_goals_players = players.take(10)
 
     return top_goals_players
   end
@@ -170,7 +117,7 @@ class Player < ApplicationRecord
 
     players.sort_by! { |record| -record[:assists] }
 
-    top_assists_players = players.take(15)
+    top_assists_players = players.take(10)
 
     return top_assists_players
   end
@@ -192,47 +139,3 @@ class Player < ApplicationRecord
     random_number = rand(-consistency..consistency)
   end
 end
-
-#------------------------------------------------------------------------------
-# Player
-#
-# Name                        SQL Type             Null    Primary Default
-# --------------------------- -------------------- ------- ------- ----------
-# id                          INTEGER              false   true              
-# name                        varchar              true    false             
-# age                         INTEGER              true    false             
-# nationality                 varchar              true    false             
-# position                    varchar              true    false             
-# passing                     INTEGER              true    false             
-# control                     INTEGER              true    false             
-# tackling                    INTEGER              true    false             
-# running                     INTEGER              true    false             
-# shooting                    INTEGER              true    false             
-# dribbling                   INTEGER              true    false             
-# defensive_heading           INTEGER              true    false             
-# offensive_heading           INTEGER              true    false             
-# flair                       INTEGER              true    false             
-# strength                    INTEGER              true    false             
-# creativity                  INTEGER              true    false             
-# fitness                     INTEGER              true    false             
-# created_at                  datetime(6)          false   false             
-# updated_at                  datetime(6)          false   false             
-# club                        varchar              true    false             
-# consistency                 INTEGER              true    false             
-# potential_passing           INTEGER              true    false             
-# potential_control           INTEGER              true    false             
-# potential_tackling          INTEGER              true    false             
-# potential_running           INTEGER              true    false             
-# potential_shooting          INTEGER              true    false             
-# potential_dribbling         INTEGER              true    false             
-# potential_defensive_heading INTEGER              true    false             
-# potential_offensive_heading INTEGER              true    false             
-# potential_flair             INTEGER              true    false             
-# potential_strength          INTEGER              true    false             
-# potential_creativity        INTEGER              true    false             
-# player_position_detail      varchar              true    false             
-# blend                       INTEGER              true    false             
-# contract                    INTEGER              true    false   24        
-# star                        INTEGER              true    false             
-#
-#------------------------------------------------------------------------------

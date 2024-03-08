@@ -1,0 +1,65 @@
+<div class="col-md-4">
+  <table class="table-sm table-hover">
+    <tr>
+      <th colspan="5" scope="col"><h5>DFCL by Skill</h5><th>
+    </tr>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Club</th>
+      <th scope="col">Skill</th>
+    </tr>
+    <% @top_total_skill_dfcl.each do |player| %>
+      <tr scope="row">
+        <td><%= player[:id] %></td>
+        <td><%= player[:name] %></td>
+        <td><%= player[:club] %></td>
+        <td><%= player[:total_skill] %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class="col-md-4">
+  <table class="table-sm table-hover">
+    <tr>
+      <th colspan="5" scope="col"><h5>DFCC by Skill</h5><th>
+    </tr>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Club</th>
+      <th scope="col">Skill</th>
+    </tr>
+    <% @top_total_skill_dfcc.each do |player| %>
+      <tr scope="row">
+        <td><%= player[:id] %></td>
+        <td><%= player[:name] %></td>
+        <td><%= player[:club] %></td>
+        <td><%= player[:total_skill] %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class="col-md-4">
+  <table class="table-sm table-hover">
+    <tr>
+      <th colspan="5" scope="col"><h5>DFCR by Skill</h5><th>
+    </tr>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Club</th>
+      <th scope="col">Skill</th>
+    </tr>
+    <% @top_total_skill_dfcr.each do |player| %>
+      <tr scope="row">
+        <td><%= player[:id] %></td>
+        <td><%= player[:name] %></td>
+        <td><%= player[:club] %></td>
+        <td><%= player[:total_skill] %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
