@@ -1,1 +1,89 @@
 Club Creation
+
+<%= form_with(model: @club_creation, url: help_club_submission_path) do |form| %>
+  <% if @club_creation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@club_creation.errors.count, "error") %> prohibited this club from being saved:</h2>
+
+      <ul>
+        <% @club_creation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :manager, style: "display: block" %>
+    <%= form.text_field :manager %>
+  </div>
+
+  <div>
+    <%= form.label :manager_email, style: "display: block" %>
+    <%= form.email_field :manager_email %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+  
+  <div>
+    <%= form.label :league %>
+    <%= form.select :league, options_for_select(['Premier League', 'Championship'], selected: 'Premier League') %>
+  </div>
+
+  <div>
+    <%= form.label :ground_name, style: "display: block" %>
+    <%= form.text_field :ground_name %>
+  </div>
+
+  <div>
+    <%= form.label :stand_n_name, style: "display: block" %>
+    <%= form.text_field :stand_n_name %>
+  </div>
+
+  <div>
+    <%= form.label :stand_s_name, style: "display: block" %>
+    <%= form.text_field :stand_s_name %>
+  </div>
+
+  <div>
+    <%= form.label :stand_e_name, style: "display: block" %>
+    <%= form.text_field :stand_e_name %>
+  </div>
+
+  <div>
+    <%= form.label :stand_w_name, style: "display: block" %>
+    <%= form.text_field :stand_w_name %>
+  </div>
+
+  <div>
+    <%= form.label :color_primary, style: "display: block" %>
+    <%= form.text_field :color_primary %>
+  </div>
+
+  <div>
+    <%= form.label :color_secondary, style:  "display: block" %>
+    <%= form.text_field :color_secondary %>
+  </div>
+
+  <div>
+    <%= form.label :stadium_points %>
+    <%= form.select :stadium_points, (1..10) %>
+  </div>
+
+  <div>
+    <%= form.label :bank_points %>
+    <%= form.select :bank_points, (1..10) %>
+  </div>
+
+  <div>
+    <%= form.label :fanbase_points %>
+    <%= form.select :fanbase_points, (1..10) %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

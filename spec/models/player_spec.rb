@@ -19,7 +19,7 @@ RSpec.describe Player, type: :model do
       it 'should return the total skill of a gkp' do
         player = build(:player)
 
-        total_skill = player.send(:total_skill)
+        total_skill = player.send(:total_skill_calc)
 
         expect(total_skill).to be == 85
       end
@@ -27,7 +27,7 @@ RSpec.describe Player, type: :model do
       it 'should return the total skill of a dfc' do
         player = build(:player, position: 'dfc')
 
-        total_skill = player.send(:total_skill)
+        total_skill = player.send(:total_skill_calc)
 
         expect(total_skill).to be == 85
       end
@@ -35,7 +35,7 @@ RSpec.describe Player, type: :model do
       it 'should return the total skill of a mid' do
         player = build(:player, position: 'mid')
 
-        total_skill = player.send(:total_skill)
+        total_skill = player.send(:total_skill_calc)
 
         expect(total_skill).to be == 85
       end
@@ -43,7 +43,7 @@ RSpec.describe Player, type: :model do
       it 'should return the total skill of a att' do
         player = build(:player, position: 'att')
 
-        total_skill = player.send(:total_skill)
+        total_skill = player.send(:total_skill_calc)
 
         expect(total_skill).to be == 85
       end

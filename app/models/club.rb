@@ -1,47 +1,15 @@
-#------------------------------------------------------------------------------
-# Club
-#
-# Name              SQL Type             Null    Primary Default
-# ----------------- -------------------- ------- ------- ----------
-# id                INTEGER              false   true              
-# name              varchar              true    false             
-# club_id      varchar              true    false             
-# created_at        datetime(6)          false   false             
-# updated_at        datetime(6)          false   false             
-# ground_name       varchar              true    false             
-# stand_n_name      varchar              true    false             
-# stand_n_condition INTEGER              true    false             
-# stand_n_capacity  INTEGER              true    false             
-# stand_s_name      varchar              true    false             
-# stand_s_condition INTEGER              true    false             
-# stand_s_capacity  INTEGER              true    false             
-# stand_e_name      varchar              true    false             
-# stand_e_condition INTEGER              true    false             
-# stand_e_capacity  INTEGER              true    false             
-# stand_w_name      varchar              true    false             
-# stand_w_condition INTEGER              true    false             
-# stand_w_capacity  INTEGER              true    false             
-# pitch             INTEGER              true    false             
-# hospitality       INTEGER              true    false             
-# facilities        INTEGER              true    false             
-# staff_fitness     INTEGER              true    false             
-# staff_gkp         INTEGER              true    false             
-# staff_dfc         INTEGER              true    false             
-# staff_mid         INTEGER              true    false             
-# staff_att         INTEGER              true    false             
-# staff_scouts      INTEGER              true    false             
-# color_primary     varchar              true    false             
-# color_secondary   varchar              true    false             
-# bank_bal          INTEGER              true    false             
-# managed           boolean              true    false             
-# manager           varchar              true    false             
-# manager_email     varchar              true    false             
-# league            varchar              true    false             
-#
-#------------------------------------------------------------------------------
-
 class Club < ApplicationRecord
   has_many :players
+
+  def submission(params)
+    club = Club.where(managed: false, league: params[:club][:league])&.first
+
+    club_creation_details(club, params)
+    club_creation_stadium(club, params)
+    club_creation_departments(club, params)
+    club_creation_bank(club, params)
+    club_creation_fanbase(club, params)
+  end
 
   def finance_items(club)
     highest_week_number = Message.maximum(:week)
@@ -84,5 +52,167 @@ class Club < ApplicationRecord
     }
 
     return items
+  end
+
+  private
+
+  def club_creation_details(club, params)
+    club.manager = params[:club][:manager]
+    club.manager_email = params[:club][:manager_email]
+    club.managed = true
+    club.name = params[:club][:name]
+    club.ground_name = params[:club][:ground_name]
+    club.stand_n_name = params[:club][:stand_n_name]
+    club.stand_e_name = params[:club][:stand_e_name]
+    club.stand_s_name = params[:club][:stand_s_name]
+    club.stand_w_name = params[:club][:stand_w_name]
+    club.color_primary = params[:club][:color_primary]
+    club.color_secondary = params[:club][:color_secondary]
+    club.save
+  end
+
+  def club_creation_stadium(club, params)
+    case params[:club][:stadium_points].to_i
+    when 1
+      random = 3250..3750
+      club.stand_n_capacity = rand(random)
+      club.stand_e_capacity = rand(random)
+      club.stand_s_capacity = rand(random)
+      club.stand_w_capacity = rand(random)
+    when 2
+      random = 4500..5000
+      club.stand_n_capacity = rand(random)
+      club.stand_e_capacity = rand(random)
+      club.stand_s_capacity = rand(random)
+      club.stand_w_capacity = rand(random)
+    when 3
+      random = 5750..6250
+      club.stand_n_capacity = rand(random)
+      club.stand_e_capacity = rand(random)
+      club.stand_s_capacity = rand(random)
+      club.stand_w_capacity = rand(random)
+    when 4
+      random = 7000..7500
+      club.stand_n_capacity = rand(random)
+      club.stand_e_capacity = rand(random)
+      club.stand_s_capacity = rand(random)
+      club.stand_w_capacity = rand(random)
+    when 5
+      random = 8250..8750
+      club.stand_n_capacity = rand(random)
+      club.stand_e_capacity = rand(random)
+      club.stand_s_capacity = rand(random)
+      club.stand_w_capacity = rand(random)
+    when 6
+      random = 9500..10000
+      club.stand_n_capacity = rand(random)
+      club.stand_e_capacity = rand(random)
+      club.stand_s_capacity = rand(random)
+      club.stand_w_capacity = rand(random)
+    when 7
+      random = 10750..11250
+      club.stand_n_capacity = rand(random)
+      club.stand_e_capacity = rand(random)
+      club.stand_s_capacity = rand(random)
+      club.stand_w_capacity = rand(random)
+    when 8
+      random = 12000.12500
+      club.stand_n_capacity = rand(random)
+      club.stand_e_capacity = rand(random)
+      club.stand_s_capacity = rand(random)
+      club.stand_w_capacity = rand(random)
+    when 9
+      random = 13250..13750
+      club.stand_n_capacity = rand(random)
+      club.stand_e_capacity = rand(random)
+      club.stand_s_capacity = rand(random)
+      club.stand_w_capacity = rand(random)
+    else
+      random = 14500..15000
+      club.stand_n_capacity = rand(random)
+      club.stand_e_capacity = rand(random)
+      club.stand_s_capacity = rand(random)
+      club.stand_w_capacity = rand(random)
+    end
+    club.save
+  end
+
+  def club_creation_departments(club, params)
+    case params[:club][:stadium_points].to_i
+    when 1..3
+      club.stand_n_condition = rand(2..4)
+      club.stand_e_condition = rand(2..4)
+      club.stand_s_condition = rand(2..4)
+      club.stand_w_condition = rand(2..4)
+      club.pitch = rand(2..4)
+      club.facilities = rand(2..4)
+      club.hospitality = rand(2..4)
+      club.staff_fitness = rand(2..4)
+      club.staff_gkp = rand(2..4)
+      club.staff_dfc = rand(2..4)
+      club.staff_mid = rand(2..4)
+      club.staff_att = rand(2..4)
+      club.staff_scouts = rand(2..4)
+    when 4..6
+      club.stand_n_condition = rand(5..8)
+      club.stand_e_condition = rand(5..8)
+      club.stand_s_condition = rand(5..8)
+      club.stand_w_condition = rand(5..8)
+      club.pitch = rand(5..8)
+      club.facilities = rand(5..8)
+      club.hospitality = rand(5..8)
+      club.staff_fitness = rand(5..8)
+      club.staff_gkp = rand(5..8)
+      club.staff_dfc = rand(5..8)
+      club.staff_mid = rand(5..8)
+      club.staff_att = rand(5..8)
+      club.staff_scouts = rand(5..8)
+    else
+      club.stand_n_condition = rand(9..12)
+      club.stand_e_condition = rand(9..12)
+      club.stand_s_condition = rand(9..12)
+      club.stand_w_condition = rand(9..12)
+      club.pitch = rand(9..12)
+      club.facilities = rand(9..12)
+      club.hospitality = rand(9..12)
+      club.staff_fitness = rand(9..12)
+      club.staff_gkp = rand(9..12)
+      club.staff_dfc = rand(9..12)
+      club.staff_mid = rand(9..12)
+      club.staff_att = rand(9..12)
+      club.staff_scouts = rand(9..12)
+    end
+    club.save
+  end
+
+  def club_creation_bank(club, params)
+    club.bank_bal = params[:club][:bank_points].to_i * 100_000_000
+    club.save
+  end
+
+  def club_creation_fanbase(club, params)
+    case params[:club][:fanbase_points].to_i
+    when 1
+      club.fanbase = 30_000
+    when 2
+      club.fanbase = 40_000
+    when 3
+      club.fanbase = 50_000
+    when 4
+      club.fanbase = 60_000
+    when 5
+      club.fanbase = 70_000
+    when 6
+      club.fanbase = 80_000
+    when 7
+      club.fanbase = 90_000
+    when 8
+      club.fanbase = 100_000
+    when 9
+      club.fanbase = 110_000
+    else
+      club.fanbase = 120_000
+    end
+    club.save
   end
 end

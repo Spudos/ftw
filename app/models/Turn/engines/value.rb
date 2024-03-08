@@ -14,14 +14,15 @@ class Turn::Engines::Value
 
   def player_value
     players.each do |player|
-      if player.total_skill < 77
-        player.value = player.total_skill * 259740
-      elsif player.total_skill < 99
-        player.value = player.total_skill * 505050
+      player_skill = player.total_skill_calc
+      if player_skill < 77
+        player.value = player_skill * 259740
+      elsif player_skill < 99
+        player.value = player_skill * 505050
       elsif player.total_skill < 110
-        player.value = player.total_skill * 772727
+        player.value = player_skill * 772727
       else
-        player.value = player.total_skill * 867546
+        player.value = player_skill * 867546
       end
     end
   end

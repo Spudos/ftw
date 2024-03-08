@@ -38,7 +38,6 @@ class ClubsController < ApplicationController
   end
 
   def update
-    binding.pry
     @club = Club.find_by(id: params[:id])
     respond_to do |format|
       if @club.update(club_params)

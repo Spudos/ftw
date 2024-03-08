@@ -27,23 +27,39 @@ class Player < ApplicationRecord
   end
 
   def base_skill
-    passing + control + tackling + running + shooting + dribbling + defensive_heading + offensive_heading + flair + strength + creativity
+    if passing.present? && control.present? &&
+       tackling.present? && running.present? &&
+       shooting.present? && dribbling.present? &&
+       defensive_heading.present? && offensive_heading.present? &&
+       flair.present? && strength.present? &&
+       creativity.present?
+
+      passing + control + tackling + running +
+        shooting + dribbling + defensive_heading +
+        offensive_heading + flair + strength + creativity
+    else
+      0
+    end
   end
 
   def gkp_skill
-    passing + control + tackling + shooting + offensive_heading + strength
+    passing + control + tackling +
+      shooting + offensive_heading + strength
   end
 
   def dfc_skill
-    control + tackling + running + defensive_heading + strength + creativity
+    control + tackling + running +
+      defensive_heading + strength + creativity
   end
 
   def mid_skill
-    passing + control + shooting + dribbling + flair + creativity
+    passing + control + shooting +
+      dribbling + flair + creativity
   end
 
   def att_skill
-    control + running + shooting + dribbling + offensive_heading + flair
+    control + running + shooting +
+      dribbling + offensive_heading + flair
   end
 
   def self.player_data

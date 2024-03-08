@@ -33,7 +33,6 @@ Rails.application.routes.draw do
   get '/clubs/manager/first_team', to: 'clubs#first_team'
   get '/clubs/manager/players_contract', to: 'clubs#players_contract'
   get '/clubs/manager/team_statistics', to: 'clubs#team_statistics'
-  get '/clubs/manager/team_selection', to: 'clubs#team_selection'
   get '/clubs/manager/results', to: 'clubs#results'
   get '/clubs/manager/fixtures', to: 'clubs#fixtures'
   get '/clubs/manager/history', to: 'clubs#history'
@@ -80,4 +79,5 @@ Rails.application.routes.draw do
   get '/help/faq', to: 'help#faq'
   get '/help/issues', to: 'help#issues'
   get '/help/club_creation', to: 'help#club_creation'
+  post '/help/club_submission', to: 'help#club_submission'
 end

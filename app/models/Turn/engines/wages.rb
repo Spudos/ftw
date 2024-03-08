@@ -14,14 +14,15 @@ class Turn::Engines::Wages
 
   def player_wages
     players.each do |player|
-      if player.total_skill < 77
-        player.wages = player.total_skill * 445
-      elsif player.total_skill < 99
-        player.wages = player.total_skill * 1025
-      elsif player.total_skill < 110
-        player.wages = player.total_skill * 1587
+      player_skill = player.total_skill_calc
+      if player_skill < 77
+        player.wages = player_skill * 445
+      elsif player_skill < 99
+        player.wages = player_skill * 1025
+      elsif player_skill < 110
+        player.wages = player_skill * 1587
       else
-        player.wages = player.total_skill * 2181
+        player.wages = player_skill * 2181
       end
     end
   end

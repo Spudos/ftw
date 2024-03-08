@@ -19,7 +19,7 @@ class Match::PlayerPerformance
         id: @id,
         club_id: player.club_id,
         player_name: player.name,
-        total_skill: player.total_skill,
+        total_skill: player.total_skill_calc,
         tactic:,
         player_position: player.position,
         player_position_detail: player.player_position_detail,
