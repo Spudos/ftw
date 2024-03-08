@@ -19,7 +19,9 @@ class ClubsController < ApplicationController
     @club = Club.new
   end
 
-  def edit; end
+  def edit
+    @club = Club.find_by(id: params[:id])
+  end
 
   def create
     @club = Club.new(club_params)
@@ -36,7 +38,8 @@ class ClubsController < ApplicationController
   end
 
   def update
-    @club = Club.find_by(id: params[:club][:club_id])
+    binding.pry
+    @club = Club.find_by(id: params[:id])
     respond_to do |format|
       if @club.update(club_params)
         format.html { redirect_to clubs_path, notice: "Club was successfully updated." }

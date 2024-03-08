@@ -14,7 +14,7 @@ class Turn::Engines::TotalSkill
 
   def player_total_skill
     players.each do |player|
-      player.total_skill = player.total_skill
+      player.total_skill = player.total_skill_calc
     end
   end
 end

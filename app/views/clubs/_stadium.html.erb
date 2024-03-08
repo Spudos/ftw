@@ -36,16 +36,22 @@
     <td><strong><%= @club.stand_n_capacity + @club.stand_s_capacity + @club.stand_e_capacity + @club.stand_w_capacity %></strong></td>  
   </tr>
   <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
-    <td><strong>Fan Happiness</strong></td>
+    <td>Ticket Price</td>
     <td></td>
     <td></td>
-    <td><strong><%= @club.fan_happiness %></strong></td>   
+    <td><%= @club.ticket_price %></td>  
   </tr>
   <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
-    <td><strong>Potential Fanbase</strong></td>
+    <td>Fan Happiness</td>
     <td></td>
     <td></td>
-    <td><strong><%= @club.fanbase %></strong></td>   
+    <td><%= @club.fan_happiness %></td>   
+  </tr>
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+    <td>Potential Fanbase</td>
+    <td></td>
+    <td></td>
+    <td><%= @club.fanbase %></td>   
   </tr>
   <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
     <td>Pitch</td>

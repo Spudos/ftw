@@ -4,7 +4,7 @@ class Player < ApplicationRecord
   has_many :assists, foreign_key: :assist_id, class_name: 'Goal'
   belongs_to :club
 
-  def total_skill
+  def total_skill_calc
     if position == 'gkp'
       base_skill + gkp_skill
     elsif position == 'dfc'

@@ -12,6 +12,10 @@
   <% end %>
 
   <div>
+    <%= form.hidden_field :id, value: club.id %>
+  </div>
+
+  <div>
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
   </div>
@@ -154,6 +158,26 @@
   <div>
     <%= form.label :bank_bal, style: "display: block" %>
     <%= form.text_field :bank_bal %>
+  </div>
+
+  <div>
+    <%= form.label :league, style: "display: block" %>
+    <%= form.text_field :league %>
+  </div>
+
+  <div>
+    <%= form.label :fan_happiness, style: "display: block" %>
+    <%= form.text_field :fan_happiness %>
+  </div>
+
+  <div>
+    <%= form.label :fanbase, style: "display: block" %>
+    <%= form.text_field :fanbase %>
+  </div>
+
+  <div>
+    <%= form.label :ticket_price, style: "display: block" %>
+    <%= form.text_field :ticket_price %>
   </div>
 
   <div>

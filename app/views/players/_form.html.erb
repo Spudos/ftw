@@ -67,6 +67,7 @@
         <% if current_user.gm? %>
           <td><%= form.text_field :passing %></td>
           <td><%= form.text_field :potential_passing %></td>
+          <td><%= form.text_field :potential_passing_coached %></td>
         <% else%>
           <td><%= form.text_field :passing, readonly: true %></td>
         <% end %>
@@ -76,6 +77,7 @@
         <% if current_user.gm? %>
           <td><%= form.text_field :control %></td>
           <td><%= form.text_field :potential_control %></td>
+          <td><%= form.text_field :potential_control_coached %></td>
         <% else%>
           <td><%= form.text_field :control, readonly: true %></td>
         <% end %>
@@ -85,6 +87,7 @@
         <% if current_user.gm? %>
           <td><%= form.text_field :tackling %></td>
           <td><%= form.text_field :potential_tackling %></td>
+          <td><%= form.text_field :potential_tackling_coached %></td>
         <% else%>
           <td><%= form.text_field :tackling, readonly: true %></td>
         <% end %>
@@ -94,6 +97,7 @@
         <% if current_user.gm? %>
           <td><%= form.text_field :running %></td>
           <td><%= form.text_field :potential_running %></td>
+          <td><%= form.text_field :potential_running_coached %></td>
         <% else%>
           <td><%= form.text_field :running, readonly: true %></td>
         <% end %>
@@ -103,6 +107,7 @@
         <% if current_user.gm? %>
           <td><%= form.text_field :shooting %></td>
           <td><%= form.text_field :potential_shooting %></td>
+          <td><%= form.text_field :potential_shooting_coached %></td>
         <% else%>
           <td><%= form.text_field :shooting, readonly: true %></td>
         <% end %>
@@ -112,6 +117,7 @@
         <% if current_user.gm? %>
           <td><%= form.text_field :dribbling %></td>
           <td><%= form.text_field :potential_dribbling %></td>
+          <td><%= form.text_field :potential_dribbling_coached %></td>
         <% else%>
           <td><%= form.text_field :dribbling, readonly: true %></td>
         <% end %>
@@ -121,6 +127,7 @@
         <% if current_user.gm? %>
           <td><%= form.text_field :defensive_heading %></td>
           <td><%= form.text_field :potential_defensive_heading %></td>
+          <td><%= form.text_field :potential_defensive_heading_coached %></td>
         <% else%>
           <td><%= form.text_field :defensive_heading, readonly: true %></td>
         <% end %>
@@ -130,6 +137,7 @@
         <% if current_user.gm? %>
           <td><%= form.text_field :offensive_heading %></td>
           <td><%= form.text_field :potential_offensive_heading %></td>
+          <td><%= form.text_field :potential_offensive_heading_coached %></td>
         <% else%>
           <td><%= form.text_field :offensive_heading, readonly: true %></td>
         <% end %>
@@ -139,6 +147,7 @@
         <% if current_user.gm? %>
           <td><%= form.text_field :flair %></td>
           <td><%= form.text_field :potential_flair %></td>
+          <td><%= form.text_field :potential_flair_coached %></td>
         <% else%>
           <td><%= form.text_field :flair, readonly: true %></td>
         <% end %>
@@ -148,6 +157,7 @@
         <% if current_user.gm? %>
           <td><%= form.text_field :strength %></td>
           <td><%= form.text_field :potential_strength %></td>
+          <td><%= form.text_field :potential_strength_coached %></td>
         <% else%>
           <td><%= form.text_field :strength, readonly: true %></td>
         <% end %>
@@ -157,6 +167,7 @@
         <% if current_user.gm? %>
           <td><%= form.text_field :creativity %></td>
           <td><%= form.text_field :potential_creativity %></td>
+          <td><%= form.text_field :potential_creativity_coached %></td>
         <% else%>
           <td><%= form.text_field :creativity, readonly: true %></td>
         <% end %>
@@ -202,6 +213,14 @@
       <tr scope="row">
         <td><%= form.label :loyalty, style: "display: block" %></td>
         <td><%= form.text_field :loyalty %></td>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :listed, style: "display: block" %></td>
+        <td><%= form.text_field :listed %></td>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :available, style: "display: block" %></td>
+        <td><%= form.text_field :available %></td>
       </tr>
       <% end %>
     </tbody>
