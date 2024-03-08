@@ -1,5 +1,5 @@
 <div class="container d-flex flex-column col-md-5 align-items-center">
-  <% if current_user || current_user.gm? %>
+  <% if current_user && current_user.gm? %>
     <%= link_to "Create New Article", new_article_path, class: "btn btn-sm btn-primary" %>
   <% end %>
 </div>
@@ -15,7 +15,7 @@
           <td>
             <strong><%= article_gm.article %></strong>
           </td>
-          <% if current_user || current_user.gm? %>
+          <% if current_user && current_user.gm? %>
             <td>
               <%= link_to "Edit", edit_article_path(article_gm.id), class: "btn btn-sm btn-primary" %>
             </td>
@@ -35,7 +35,7 @@
       <h5><%= @articles_main[0][:headline] %></h5>
       <p><%= @articles_main[0][:sub_headline] %></p>
       <%= link_to "Show Article", article_path(@articles_main[0][:id]), class: "btn btn-sm btn-primary" %>
-      <% if current_user || current_user.gm? %>
+      <% if current_user && current_user.gm? %>
         <%= link_to "Edit", edit_article_path(@articles_main[0][:id]), class: "btn btn-sm btn-primary" %>
       <% end %>
     </div>
@@ -45,7 +45,7 @@
       <h5><%= @articles_main[1][:headline] %></h5>
       <p><%= @articles_main[1][:sub_headline] %></p>
       <%= link_to "Show Article", article_path(@articles_main[1][:id]), class: "btn btn-sm btn-primary" %>
-      <% if current_user || current_user.gm? %>
+      <% if current_user && current_user.gm? %>
         <%= link_to "Edit", edit_article_path(@articles_main[1][:id]), class: "btn btn-sm btn-primary" %>
       <% end %>
     </div>
@@ -55,7 +55,7 @@
       <h5><%= @articles_main[2][:headline] %></h5>
       <p><%= @articles_main[2][:sub_headline] %></p>
       <%= link_to "Show Article", article_path(@articles_main[2][:id]), class: "btn btn-sm btn-primary" %>
-      <% if current_user || current_user.gm? %>
+      <% if current_user && current_user.gm? %>
         <%= link_to "Edit", edit_article_path(@articles_main[2][:id]), class: "btn btn-sm btn-primary" %>
       <% end %>
     </div>
@@ -68,7 +68,7 @@
       <h5><%= @articles_main[3][:headline] %></h5>
       <p><%= @articles_main[3][:sub_headline] %></p>
       <%= link_to "Show Article", article_path(@articles_main[3][:id]), class: "btn btn-sm btn-primary" %>
-      <% if current_user || current_user.gm? %>
+      <% if current_user && current_user.gm? %>
         <%= link_to "Edit", edit_article_path(@articles_main[3][:id]), class: "btn btn-sm btn-primary" %>
       <% end %>
     </div>
@@ -78,7 +78,7 @@
       <h5><%= @articles_main[4][:headline] %></h5>
       <p><%= @articles_main[4][:sub_headline] %></p>
       <%= link_to "Show Article", article_path(@articles_main[4][:id]), class: "btn btn-sm btn-primary" %>
-      <% if current_user || current_user.gm? %>
+      <% if current_user && current_user.gm? %>
         <%= link_to "Edit", edit_article_path(@articles_main[4][:id]), class: "btn btn-sm btn-primary" %>
       <% end %>
     </div>
@@ -88,7 +88,7 @@
       <h5><%= @articles_main[5][:headline] %></h5>
       <p><%= @articles_main[5][:sub_headline] %></p>
       <%= link_to "Show Article", article_path(@articles_main[5][:id]), class: "btn btn-sm btn-primary" %>
-      <% if current_user || current_user.gm? %>
+      <% if current_user && current_user.gm? %>
         <%= link_to "Edit", edit_article_path(@articles_main[5][:id]), class: "btn btn-sm btn-primary" %>
       <% end %>
     </div>

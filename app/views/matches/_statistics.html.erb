@@ -8,7 +8,6 @@
         <th>Away</th>
       </tr>
       <tr>
-      <% if current_user.gm? || current_user.email == Club.find_by(id: @matches[0].home_team)&.manager_email || Club.find_by(id: @matches[0].away_team)&.manager_email %>
         <tr>
           <td><%= tactic(@matches[0].tactic_home) %></td>
           <td>Tactic</td>
@@ -30,7 +29,6 @@
           <td><%= press(@matches[0].away_press) %></td>
         </tr>
         <tr>
-      <% end %>
       <tr>
         <td><%= Player.find_by(id: @matches[0].home_man_of_the_match)&.name %></td>
         <td>MOTM</td>
