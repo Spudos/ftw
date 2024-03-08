@@ -1,7 +1,217 @@
-<h1>Editing player</h1>
+<h3>Edit a player</h3>
 
-<%= render 'form', player: @player %>
+<%= form_with(model: @player) do |form| %>
+  <% if @player.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(player.errors.count, "error") %> prohibited this player from being saved:</h2>
 
-<div>
-  <%= link_to "Back", request.referrer, class: "btn btn-sm btn-primary" %>
-</div>
+      <ul>
+        <% @player.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table class="table table-hover">
+      <tr>
+        <th scope="col">Attribute</th>
+        <th scope="col">Value</th>
+        <% if current_user.gm? %>
+        <th scope="col">Potential</th>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :id, style: "display: block" %></td>
+        <td><%= form.text_field :id, readonly: true %></td>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :name, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :name %></td>
+        <% else%>
+          <td><%= form.text_field :name, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :age, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :age %></td>
+        <% else%>
+          <td><%= form.text_field :age, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :nationality, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :nationality %></td>
+        <% else%>
+          <td><%= form.text_field :nationality, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :position, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :position %></td>
+        <% else%>
+          <td><%= form.text_field :position, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :player_position_detail, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :player_position_detail %></td>
+        <% else%>
+          <td><%= form.text_field :player_position_detail, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :passing, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :passing %></td>
+          <td><%= form.text_field :potential_passing %></td>
+        <% else%>
+          <td><%= form.text_field :passing, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :control, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :control %></td>
+          <td><%= form.text_field :potential_control %></td>
+        <% else%>
+          <td><%= form.text_field :control, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :tackling, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :tackling %></td>
+          <td><%= form.text_field :potential_tackling %></td>
+        <% else%>
+          <td><%= form.text_field :tackling, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :running, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :running %></td>
+          <td><%= form.text_field :potential_running %></td>
+        <% else%>
+          <td><%= form.text_field :running, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :shooting, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :shooting %></td>
+          <td><%= form.text_field :potential_shooting %></td>
+        <% else%>
+          <td><%= form.text_field :shooting, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :dribbling, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :dribbling %></td>
+          <td><%= form.text_field :potential_dribbling %></td>
+        <% else%>
+          <td><%= form.text_field :dribbling, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :defensive_heading, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :defensive_heading %></td>
+          <td><%= form.text_field :potential_defensive_heading %></td>
+        <% else%>
+          <td><%= form.text_field :defensive_heading, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :offensive_heading, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :offensive_heading %></td>
+          <td><%= form.text_field :potential_offensive_heading %></td>
+        <% else%>
+          <td><%= form.text_field :offensive_heading, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :flair, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :flair %></td>
+          <td><%= form.text_field :potential_flair %></td>
+        <% else%>
+          <td><%= form.text_field :flair, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :strength, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :strength %></td>
+          <td><%= form.text_field :potential_strength %></td>
+        <% else%>
+          <td><%= form.text_field :strength, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :creativity, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :creativity %></td>
+          <td><%= form.text_field :potential_creativity %></td>
+        <% else%>
+          <td><%= form.text_field :creativity, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :club, style: "display: block" %></td>
+        <% if current_user.gm? %>
+          <td><%= form.text_field :club_id %></td>
+        <% else%>
+          <td><%= form.text_field :club_id, readonly: true %></td>
+        <% end %>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :wages, style: "display: block" %></td>
+        <td><%= form.text_field :wages, readonly: true %></td>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :value, style: "display: block" %></td>
+        <td><%= form.text_field :value, readonly: true %></td>
+      </tr>
+      <% if current_user.gm? %>
+      <tr scope="row">
+        <td><%= form.label :fitness, style: "display: block" %></td>
+        <td><%= form.text_field :fitness %></td>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :contract, style: "display: block" %></td>
+        <td><%= form.text_field :contract %></td>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :consistency, style: "display: block" %></td>
+        <td><%= form.text_field :consistency %></td>
+      </tr>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :blend, style: "display: block" %></td>
+        <td><%= form.text_field :blend %></td>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :star, style: "display: block" %></td>
+        <td><%= form.text_field :star %></td>
+      </tr>
+      <tr scope="row">
+        <td><%= form.label :loyalty, style: "display: block" %></td>
+        <td><%= form.text_field :loyalty %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% if current_user.gm? %>
+    <div>
+      <%= button_to 'Delete player', @player, method: :destroy, form: { data: { turbo_confirm: 'Are you sure you want to delete this player?' } }, class: "btn btn-sm btn-danger" %>
+      <%= form.submit 'Save Changes', class: "btn btn-sm btn-danger"%>
+    </div>
+  <% end %>  
+<% end %>

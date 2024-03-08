@@ -55,7 +55,9 @@ class PlayersController < ApplicationController
     @player = Player.new
   end
 
-  def edit; end
+  def edit
+    @player = Player.find_by(id: params[:format])
+  end
 
   def create
     @player = Player.new(player_params)

@@ -40,6 +40,7 @@
       <th scope="col">Ast</th>
       <th scope="col">Perf</th>
       <th scope="col">Action</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -58,6 +59,9 @@
         <td><%= player[:assists] %></td>
         <td><%= player[:average_match_performance] %></td>
         <td><%= link_to "Show", player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>
+        <% if current_user && current_user.gm? %>
+        <td><%= link_to "Edit", edit_player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
