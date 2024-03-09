@@ -1,8 +1,8 @@
 <h3 class="text-center">Team Statistics</h3>
 <div id="form-container">
-  <table class="table table-hover">
+  <table class="table table-hover align-middle">
     <thead>
-      <tr style="border: 1px <%= @primary %> solid;">
+      <tr style="border: 2px <%= @primary %> solid;">
         <th scope="col">Name</th>
         <th scope="col">Position</th>
         <th scope="col">Age</th>
@@ -15,17 +15,25 @@
       </tr>
     </thead>
     <tbody>
-      <% Player.where(club: @club.id).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
-        <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+      <% @players.each do |player| %>
+        <% if player.position == 'gkp' %>
+          <tr scope="row" style="border-bottom: 2px <%= @secondary %> solid;"  class="table-secondary">
+        <% elsif player.position == 'dfc' %>
+          <tr scope="row" style="border-bottom: 2px <%= @secondary %> solid;"  class="table-success">
+        <% elsif player.position == 'mid' %>
+          <tr scope="row" style="border-bottom: 2px <%= @secondary %> solid;"  class="table-warning">
+        <% else %>
+          <tr scope="row" style="border-bottom: 2px <%= @secondary %> solid;"  class="table-danger">
+        <% end %>
           <td><%= player.name %></td>
           <td><%= (player.position + player.player_position_detail).upcase %></td>
           <td><%= player.age %></td>
           <td><%= player.total_skill %></td>
           <td><%= player.fitness %></td>
-          <td><%= Performance.where(player_id: player.id).count(:match_performance) %></td>
-          <td><%= Goal.where(assist_id: player.id).count(:assist_id) %></td>
-          <td><%= Goal.where(scorer_id: player.id).count(:scorer_id) %></td>
-          <td><%= Performance.where(player_id: player.id).average(:match_performance).to_i %></td>
+          <td><%= player.games_played %></td>
+          <td><%= player.total_assists %></td>
+          <td><%= player.total_goals %></td>
+          <td><%= player.average_performance %></td>
           <td><%= link_to "Show", player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>
         </tr>
       <% end %>

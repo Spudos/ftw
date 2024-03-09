@@ -1,67 +1,67 @@
 <h3 class="text-center">The Stadium</h3>
-<table class="table table-hover">
-  <tr style="border: 1px <%= @primary %> solid;">
+<table class="table table-hover align-middle">
+  <tr style="border: 2px <%= @primary %> solid;">
     <td scope="col">Stand</td>
     <td scope="col">Name</td>
     <td scope="col">Condition</td>
     <td scope="col">Capacity</td>
   </tr>
-  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
     <td>North</td>
     <td><%= @club.stand_n_name %></td>  
     <td><%= @club.stand_n_condition %></td> 
     <td><%= @club.stand_n_capacity %></td> 
   </tr>       
-  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
     <td>South</td>
     <td><%= @club.stand_s_name %></td>  
     <td><%= @club.stand_s_condition %></td> 
     <td><%= @club.stand_s_capacity %></td> 
   </tr>
-  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
     <td>East</td>
     <td><%= @club.stand_e_name %></td>  
     <td><%= @club.stand_e_condition %></td> 
     <td><%= @club.stand_e_capacity %></td> 
-  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
     <td>West</td>
     <td><%= @club.stand_w_name %></td>  
     <td><%= @club.stand_w_condition %></td> 
     <td><%= @club.stand_w_capacity %></td>  
   </tr>
-  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
     <td><strong>Capacity</strong></td>
     <td></td>
     <td></td>
     <td><strong><%= @club.stand_n_capacity + @club.stand_s_capacity + @club.stand_e_capacity + @club.stand_w_capacity %></strong></td>  
   </tr>
-  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
     <td>Ticket Price</td>
     <td></td>
     <td></td>
     <td><%= @club.ticket_price %></td>  
   </tr>
-  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
     <td>Fan Happiness</td>
     <td></td>
     <td></td>
     <td><%= @club.fan_happiness %></td>   
   </tr>
-  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
     <td>Potential Fanbase</td>
     <td></td>
     <td></td>
     <td><%= @club.fanbase %></td>   
   </tr>
-  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
     <td>Pitch</td>
     <td><%= @club.pitch %></td>   
   </tr>
-  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
     <td>Hospitality</td>
     <td><%= @club.hospitality %></td> 
   </tr>
-  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
     <td>Facilities</td>
     <td><%= @club.facilities %></td> 
   </tr>

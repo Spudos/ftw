@@ -118,6 +118,7 @@ class ClubsController < ApplicationController
     @messages_new = Message.where(club_id: Club.find_by(manager_email: current_user[:email])&.id).where(var2: nil).where(week: highest_week)
     @messages_finance = Message.where(club_id: Club.find_by(manager_email: current_user[:email])&.id).where(week: highest_week).where.not(var2: nil)
     @finance_items = Club.new.finance_items(@club.id)
+    @players = player_position_sort
   end
 
   def set_club_theme
@@ -127,5 +128,24 @@ class ClubsController < ApplicationController
 
   def club_params
     params.require(:club).permit!
+  end
+
+  def player_position_sort
+    players = Player.where(club_id: @club.id).order(Arel.sql(
+                                                      "CASE 
+                                                        WHEN position = 'gkp' AND player_position_detail = 'p' THEN 1
+                                                        WHEN position = 'dfc' AND player_position_detail = 'l' THEN 2
+                                                        WHEN position = 'dfc' AND player_position_detail = 'r' THEN 3
+                                                        WHEN position = 'dfc' AND player_position_detail = 'c' THEN 4
+                                                        WHEN position = 'mid' AND player_position_detail = 'l' THEN 5
+                                                        WHEN position = 'mid' AND player_position_detail = 'r' THEN 6
+                                                        WHEN position = 'mid' AND player_position_detail = 'c' THEN 7
+                                                        WHEN position = 'att' AND player_position_detail = 'l' THEN 8
+                                                        WHEN position = 'att' AND player_position_detail = 'r' THEN 9
+                                                        ELSE 10
+                                                        END"
+                                                    ))
+
+    return players
   end
 end

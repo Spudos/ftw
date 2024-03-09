@@ -1,7 +1,7 @@
 <h3 class="text-center">Fixtures</h3>
-<table class="table table-hover">
+<table class="table table-hover align-middle">
   <thead>
-    <tr style="border: 1px <%= @primary %> solid;">
+    <tr style="border: 2px <%= @primary %> solid;">
       <th scope="col">Match ID</th>
       <th scope="col">Competition</th>
       <th scope="col">Week</th>
@@ -13,7 +13,7 @@
   </thead>
   <tbody>
     <% @club_fixtures.sort_by(&:week_number).each do |match| %>
-      <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
+      <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
         <td><%= match.id %></td>
         <td><%= match.comp %></td>
         <td><%= match.week_number %></td>
