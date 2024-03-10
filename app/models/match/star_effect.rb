@@ -9,11 +9,11 @@ class Match::StarEffect
     if @squads_tactics.nil?
       raise StandardError, "There was an error in the #{self.class.name} class"
     end
-    
+
     players = squads_tactics
 
     players.each do |player|
-      if rand(100) > 50
+      if rand(1..100) > 50
         player[:match_performance] += player[:star]
       end
 

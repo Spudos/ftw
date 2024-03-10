@@ -4,7 +4,7 @@ require 'pry'
 RSpec.describe Match::StarEffect, type: :model do
   describe 'star effect should amend the performance' do
     it 'should return the performance with star effect of 70' do
-      allow_any_instance_of(Kernel).to receive(:rand).with(100).and_return(51)
+      allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(51)
       squads_with_tactics = [
         {
           match_performance: 50,
@@ -16,7 +16,7 @@ RSpec.describe Match::StarEffect, type: :model do
       expect(adjusted_player[0][:match_performance]).to eq(70)
     end
     it 'should return the performance without star effect of 50' do
-      allow_any_instance_of(Kernel).to receive(:rand).with(100).and_return(49)
+      allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(49)
       squads_with_tactics = [
         {
           match_performance: 50,

@@ -36,7 +36,7 @@ class Match::PlayerFitness
         end
       end
 
-      player_fitness = 50 if player_fitness < 50
+      player_fitness = 10 if player_fitness < 10
 
       player_record.update(fitness: player_fitness) if player_record
     end
