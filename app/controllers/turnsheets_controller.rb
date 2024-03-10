@@ -17,9 +17,8 @@ class TurnsheetsController < ApplicationController
     @turnsheet = Turnsheet.new
     authorize @turnsheet
     @club = Club.find_by(manager_email: current_user.email)
-    players = @club&.players
 
-    @selection = players.map(&:player_selection_information)
+    @selection = player_position_sort
   end
 
   # GET /turnsheets/1/edit
@@ -28,7 +27,6 @@ class TurnsheetsController < ApplicationController
 
   # POST /turnsheets or /turnsheets.json
   def create
-    binding.pry
     @turnsheet = Turnsheet.new(turnsheet_params)
     authorize @turnsheet
 
@@ -88,5 +86,25 @@ class TurnsheetsController < ApplicationController
 
   def turnsheet_params
     params.require(:turnsheet).permit!
+  end
+
+  def player_position_sort
+    players = Player.where(club_id: @club.id,
+                           available: 0).order(Arel.sql(
+                                                 "CASE
+                                                        WHEN position = 'gkp' AND player_position_detail = 'p' THEN 1
+                                                        WHEN position = 'dfc' AND player_position_detail = 'l' THEN 2
+                                                        WHEN position = 'dfc' AND player_position_detail = 'r' THEN 3
+                                                        WHEN position = 'dfc' AND player_position_detail = 'c' THEN 4
+                                                        WHEN position = 'mid' AND player_position_detail = 'l' THEN 5
+                                                        WHEN position = 'mid' AND player_position_detail = 'r' THEN 6
+                                                        WHEN position = 'mid' AND player_position_detail = 'c' THEN 7
+                                                        WHEN position = 'att' AND player_position_detail = 'l' THEN 8
+                                                        WHEN position = 'att' AND player_position_detail = 'r' THEN 9
+                                                        ELSE 10
+                                                        END"
+                                               ))
+
+    return players
   end
 end

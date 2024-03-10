@@ -10,7 +10,7 @@
       <td>Player ID</td>
       <td>
         <%= form.label :player_action_1_player_id, style: "display: none" %>
-        <%= form.select :player_action_1_player_id, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
+        <%= form.select :player_action_1_player_id, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
       </td>
       <td>Amount</td>
       <td>
@@ -27,7 +27,7 @@
       <td>Player ID</td>
       <td>
         <%= form.label :player_action_2_player_id, style: "display: none" %>
-        <%= form.select :player_action_2_player_id, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
+        <%= form.select :player_action_2_player_id, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
       </td>
       <td>Amount</td>
       <td>
@@ -44,7 +44,7 @@
       <td>Player ID</td>
       <td>
         <%= form.label :player_action_3_player_id, style: "display: none" %>
-        <%= form.select :player_action_3_player_id, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
+        <%= form.select :player_action_3_player_id, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
       </td>
       <td>Amount</td>
       <td>
@@ -61,7 +61,7 @@
       <td>Player ID</td>
       <td>
         <%= form.label :player_action_4_player_id, style: "display: none" %>
-        <%= form.select :player_action_4_player_id, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
+        <%= form.select :player_action_4_player_id, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
       </td>
       <td>Amount</td>
       <td>

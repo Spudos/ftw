@@ -1,47 +1,97 @@
 <h4 class="text-center">Team Selection</h4>
-  <div class="col-md-12 align-top d-flex justify-content-center">
-    <div class="col-md-4">
-      <table class="table table-hover align-middle">
-        <tr>
-          <th colspan="4">Formation</th>
-        <tr>
-          <th>GKP</th>
-          <th>DFC</th>
-          <th>MID</th>
-          <th>ATT</th>
+<div class="row d-flex justify-content-center">
+  <div class="col-md-6">
+    <h6 class="text-center">Available Players</h6>  
+    <table class="table table-hover align-middle">
+      <tr>
+        <th>
+          ID
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Position
+        </th>
+        <th>
+          Fitness
+        </th>
+        <th>
+          TS
+        </th>
+      </tr>
+      <% @selection.each do |player| %>
+        <tr class="player-row" data-player-id="<%= player[:id] %>">
+          <td>
+            <%= player[:id] %>
+          </td>
+          <td>
+            <%= player[:name] %>
+          </td>
+          <td>
+            <%= (player[:position]+player[:player_position_detail]).upcase %>
+          </td>
+          <td>
+            <%= player[:fitness] %>
+          </td>
+          <td>
+            <%= player[:total_skill] %>
+          </td>
+
         </tr>
-        <tr>
-          <td><span id="gkpCount">0</span></td>
-          <td><span id="dfcCount">0</span></td>
-          <td><span id="midCount">0</span></td>
-          <td><span id="attCount">0</span></td>
-        </tr>
-      </table>  
-    </div>
+      <% end %>
+    </table>  
   </div>
 
-  <div class="col-md-12 align-top d-flex justify-content-center">
-    <div class="col-md-4">
-      <h6>Available Players</h6>
-      <div id="availableItems">
-        <% Player.where(club: @club.id).where(available: 0).order(Arel.sql("CASE position WHEN 'gkp' THEN 1 WHEN 'dfc' THEN 2 WHEN 'mid' THEN 3 WHEN 'att' THEN 4 ELSE 5 END")).each do |player| %>
-          <div class="item <%= player.position %>">
-            <%= player.name %>
-            <%= (player.position + player.player_position_detail).upcase %>
-            TS: <%= player.total_skill %>
-            Fit: <%= player.fitness %>
-            Perf: <%= player.average_performance %>
-            <%= hidden_field_tag 'player_ids[]', player.id, class: 'player-id' %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="col-md-1">
-    </div>
-
-    <div class="col-md-4">
-        <h6>Selected Players</h6>
-        <div id="selectedItems"></div>
-    </div>
+  <div class="col-md-3">
+    <h6 class="text-center">Selected Players</h6>
+    <table class="table table-hover align-middle">
+      <% (1..11).each do |index| %>
+        <tr>
+          <td>
+            <%= form.label "player_#{index}".to_sym, style: "display: block" %>
+            <%= form.text_field "player_#{index}".to_sym, class: "player-input" %>
+          </td>
+        </tr>
+      <% end %>
+    </table>  
   </div>
+</div>
+
+<script>
+  const playerRows = document.querySelectorAll('.player-row');
+  const playerInputs = document.querySelectorAll('.player-input');
+
+  playerRows.forEach((row) => {
+    row.addEventListener('click', () => {
+      const playerId = row.dataset.playerId;
+      const selectedPlayerIndex = Array.from(playerInputs).findIndex(input => input.value === playerId);
+      if (selectedPlayerIndex !== -1) {
+        playerInputs[selectedPlayerIndex].value = '';
+        row.classList.remove('table-success');
+      } else {
+        const emptyInput = Array.from(playerInputs).find(input => input.value === '');
+        if (emptyInput) {
+          emptyInput.value = playerId;
+          row.classList.add('table-success');
+        }
+      }
+    });
+  });
+
+  playerInputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      const playerId = input.value;
+      if (playerId === '') {
+        const row = Array.from(playerRows).find(row => row.dataset.playerId === playerId);
+        if (row) {
+          row.classList.remove('table-success'); // Remove the table-success class
+        }
+      }
+    });
+  });
+</script>
+
+
+
+
