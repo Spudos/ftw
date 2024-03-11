@@ -39,6 +39,9 @@ Rails.application.routes.draw do
 
   get '/leagues', to: 'leagues#index'
 
+  get '/users', to: 'users#index'
+  get '/users/resign', to: 'users#resign'
+
   get '/leagues/league_cup/league', to: 'leagues#league_cup'
   get '/leagues/wcc/league', to: 'leagues#wcc'
 

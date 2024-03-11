@@ -17,15 +17,15 @@
     <div class="col-md-6">
       <div class="mb-3">
         <%= form.label :name, class: "form-label" %>
-        <%= form.text_field :name, class: "form-control", required: true, value: Club.find_by(manager_email: current_user&.email)&.manager %>
+        <%= form.text_field :name, class: "form-control", required: true, value: current_user.fname %>
       </div>
       <div class="mb-3">
         <%= form.label :email, class: "form-label" %>
-        <%= form.email_field :email, class: "form-control", required: true, value: current_user&.email %>
+        <%= form.email_field :email, class: "form-control", required: true, value: current_user.email %>
       </div>
       <div class="mb-3">
         <%= form.label :club, class: "form-label" %>
-        <%= form.number_field :club, class: "form-control", value: Club.find_by(manager_email: current_user&.email)&.id %>
+        <%= form.number_field :club, class: "form-control", value: current_user.club %>
       </div>
       <div class="mb-3">
         <%= form.label :message, class: "form-label" %>
@@ -33,7 +33,7 @@
       </div>
       <%= form.hidden_field :feedback_type, value: "issue" %>
       <%= form.hidden_field :outstanding, value: true %>
-      <%= form.submit 'Submit', class: "btn btn-primary" %>
+      <%= form.submit 'Submit', class: "btn btn-sm btn-primary" %>
     </div>
   </div>
 <% end %>

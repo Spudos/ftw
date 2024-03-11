@@ -16,7 +16,7 @@ class TurnsheetsController < ApplicationController
   def new
     @turnsheet = Turnsheet.new
     authorize @turnsheet
-    @club = Club.find_by(manager_email: current_user.email)
+    @club = Club.find_by(id: current_user.club)
 
     @selection = player_position_sort
   end

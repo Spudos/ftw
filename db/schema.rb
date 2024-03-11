@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_06_154612) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_11_181321) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -53,8 +53,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_06_154612) do
     t.string "color_secondary"
     t.integer "bank_bal"
     t.boolean "managed"
-    t.string "manager"
-    t.string "manager_email"
     t.string "league"
     t.integer "fan_happiness", default: 53
     t.integer "fanbase", default: 40980
@@ -105,8 +103,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_06_154612) do
 
   create_table "matches", force: :cascade do |t|
     t.integer "match_id"
-    t.integer "week"
-    t.string "comp"
     t.string "home_team"
     t.string "away_team"
     t.integer "home_possession"
@@ -377,6 +373,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_06_154612) do
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "fname"
+    t.string "lname"
+    t.integer "club"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

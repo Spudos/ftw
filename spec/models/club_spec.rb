@@ -6,8 +6,6 @@ RSpec.describe Player, type: :model do
     context 'with valid club data' do
       it 'update an existing club to show the new values' do
         create(:club,
-               manager: 'Testy000',
-               manager_email: 'test000@email.com',
                managed: false,
                league: 'Premier League',
                name: 'Test Club000',
@@ -23,9 +21,7 @@ RSpec.describe Player, type: :model do
         create(:player)
         create(:player)
 
-        params = { club: { manager: 'Testy',
-                           manager_email: 'test@email.com',
-                           managed: false,
+        params = { club: { managed: false,
                            league: 'Premier League',
                            name: 'Test Club',
                            ground_name: 'Test Ground',
@@ -43,8 +39,6 @@ RSpec.describe Player, type: :model do
         Club.new.submission(params)
 
         expect(Club.first.name).to be == 'Test Club'
-        expect(Club.first.manager).to be == 'Testy'
-        expect(Club.first.manager_email).to be == 'test@email.com'
         expect(Club.first.managed).to be == true
         expect(Club.first.ground_name).to be == 'Test Ground'
         expect(Club.first.stand_n_name).to be == 'Test Stand N'

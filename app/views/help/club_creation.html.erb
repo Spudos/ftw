@@ -20,7 +20,7 @@
       <div class="col-md-3">
         <div>
           <%= form.label :manager, "Your Name", style: "display: block" %>
-          <%= form.text_field :manager %>
+          <%= form.text_field :manager, value: current_user.fname %>
         </div>
 
         <div>

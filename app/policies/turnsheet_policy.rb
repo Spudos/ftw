@@ -50,7 +50,7 @@ class TurnsheetPolicy < ApplicationPolicy
       if user.admin?
         scope.all
       else
-        scope.where(manager_email: current_user.email)
+        scope.where(id: current_user.club)
       end
     end
 

@@ -9,11 +9,11 @@
   </div>
   <div class="turnsheet_headers">
     <%= form.label :manager, style: "display: inline-block" %>
-    <%= form.text_field :manager, value: @club.manager, readonly: true %>
+    <%= form.text_field :manager, value: User.find_by(club: @club.id)&.fname, readonly: true %>
   </div>
   <div class="turnsheet_headers">
     <%= form.label :email, style: "display: inline-block" %>
-    <%= form.text_field :email, value: @club.manager_email, readonly: true %>
+    <%= form.text_field :email, value: User.find_by(club: @club.id)&.email, readonly: true %>
   </div>
 </div>
 

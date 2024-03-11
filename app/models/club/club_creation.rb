@@ -22,16 +22,14 @@ class Club::ClubCreation
 
     player_values
 
-    Feedback.create(name: params[:club][:manager],
-                    email: params[:club][:manager_email], club: club.id,
+    Feedback.create(name: User.find_by(club: params[:club][:id])&.fname,
+                    email: User.find_by(club: params[:club][:id])&.email, club: club.id,
                     message: 'A new club has been created', feedback_type: 'NewClub', outstanding: 'true')
   end
 
   private
 
   def club_creation_details
-    club.manager = params[:club][:manager]
-    club.manager_email = params[:club][:manager_email]
     club.managed = true
     club.name = params[:club][:name]
     club.ground_name = params[:club][:ground_name]

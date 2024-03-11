@@ -111,19 +111,19 @@ class ClubsController < ApplicationController
 
   def set_club
     highest_week = Message.maximum(:week)
-    @club = Club.find_by(manager_email: current_user[:email])
+    @club = Club.find_by(id: current_user[:club])
     @club_matches = Match.where('home_team = ? OR away_team = ?', @club.id, @club.id)
     @club_fixtures = Fixture.where('home= ? OR away = ?', @club.id, @club.id)
-    @messages = Message.where(club_id: Club.find_by(manager_email: current_user[:email])&.id)
-    @messages_new = Message.where(club_id: Club.find_by(manager_email: current_user[:email])&.id).where(var2: nil).where(week: highest_week)
-    @messages_finance = Message.where(club_id: Club.find_by(manager_email: current_user[:email])&.id).where(week: highest_week).where.not(var2: nil)
+    @messages = Message.where(club_id: Club.find_by(id: current_user[:club])&.id)
+    @messages_new = Message.where(club_id: Club.find_by(id: current_user[:club])&.id).where(var2: nil).where(week: highest_week)
+    @messages_finance = Message.where(club_id: Club.find_by(id: current_user[:club])&.id).where(week: highest_week).where.not(var2: nil)
     @finance_items = Club.new.finance_items(@club.id)
     @players = player_position_sort
   end
 
   def set_club_theme
-    @primary = Club.find_by(manager_email: current_user[:email]).color_primary
-    @secondary = Club.find_by(manager_email: current_user[:email]).color_secondary
+    @primary = Club.find_by(id: current_user.club).color_primary
+    @secondary = Club.find_by(id: current_user.club).color_secondary
   end
 
   def club_params
