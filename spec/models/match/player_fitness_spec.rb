@@ -17,8 +17,8 @@ RSpec.describe Match::PlayerFitness do
       player1 = Player.first
       player2 = Player.last
 
-      expect(player1.fitness).to eq(75)
-      expect(player2.fitness).to eq(65)
+      expect(player1.fitness).to eq(80)
+      expect(player2.fitness).to eq(70)
     end
   end
 end

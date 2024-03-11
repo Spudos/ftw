@@ -19,9 +19,9 @@ class Match::ChanceCreated
       chance_outcome = 'home'
     elsif chance.negative? && rand(0..100) < 16
       chance_outcome = 'away'
-    elsif random_number <= 5
+    elsif random_number <= 6
       chance_outcome = 'home'
-    elsif random_number > 5 && random_number <= 10
+    elsif random_number > 6 && random_number <= 11
       chance_outcome = 'away'
     else
       chance_outcome = 'none'
