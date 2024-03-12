@@ -43,7 +43,20 @@ blend = [1,2,3,4,5,6,7,8,9]
       potential_offensive_heading: random_number(8, 15),
       potential_flair: random_number(5, 12),
       potential_strength: random_number(8, 15),
-      potential_creativity: random_number(5, 12)
+      potential_creativity: random_number(5, 12),
+      listed: false,
+      potential_passing_coached: false,
+      potential_control_coached: false,
+      potential_tackling_coached: false,
+      potential_running_coached: false,
+      potential_shooting_coached: false,
+      potential_dribbling_coached: false,
+      potential_defensive_heading_coached: false,
+      potential_offensive_heading_coached: false,
+      potential_flair_coached: false,
+      potential_strength_coached: false,
+      potential_creativity_coached: false,
+      available: 0
     )
   end
 end
@@ -84,7 +97,20 @@ end
       potential_offensive_heading: random_number(5, 12),
       potential_flair: random_number(5, 12),
       potential_strength: random_number(8, 15),
-      potential_creativity: random_number(8, 15)
+      potential_creativity: random_number(8, 15),
+      listed: false,
+      potential_passing_coached: false,
+      potential_control_coached: false,
+      potential_tackling_coached: false,
+      potential_running_coached: false,
+      potential_shooting_coached: false,
+      potential_dribbling_coached: false,
+      potential_defensive_heading_coached: false,
+      potential_offensive_heading_coached: false,
+      potential_flair_coached: false,
+      potential_strength_coached: false,
+      potential_creativity_coached: false,
+      available: 0
     )
   end
 end
@@ -125,7 +151,20 @@ end
       potential_offensive_heading: random_number(5, 12),
       potential_flair: random_number(8, 15),
       potential_strength: random_number(5, 12),
-      potential_creativity: random_number(8, 15)
+      potential_creativity: random_number(8, 15),
+      listed: false,
+      potential_passing_coached: false,
+      potential_control_coached: false,
+      potential_tackling_coached: false,
+      potential_running_coached: false,
+      potential_shooting_coached: false,
+      potential_dribbling_coached: false,
+      potential_defensive_heading_coached: false,
+      potential_offensive_heading_coached: false,
+      potential_flair_coached: false,
+      potential_strength_coached: false,
+      potential_creativity_coached: false,
+      available: 0
     )
   end
 end
@@ -166,7 +205,20 @@ end
       potential_offensive_heading: random_number(8, 15),
       potential_flair: random_number(8, 15),
       potential_strength: random_number(5, 12),
-      potential_creativity: random_number(5, 12)
+      potential_creativity: random_number(5, 12),
+      listed: false,
+      potential_passing_coached: false,
+      potential_control_coached: false,
+      potential_tackling_coached: false,
+      potential_running_coached: false,
+      potential_shooting_coached: false,
+      potential_dribbling_coached: false,
+      potential_defensive_heading_coached: false,
+      potential_offensive_heading_coached: false,
+      potential_flair_coached: false,
+      potential_strength_coached: false,
+      potential_creativity_coached: false,
+      available: 0
     )
   end
 end

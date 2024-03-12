@@ -39,7 +39,8 @@ countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales', 'N
 position_detail = ['c', 'c', 'c', 'l', 'r']
 blend = [1,2,3,4,5,6,7,8,9]
 
-100.times do
+30.times do
+  club_code.each do |code|
     Player.create(
       name: Faker::Name.last_name,
       age: random_number(18, 35),
@@ -58,11 +59,11 @@ blend = [1,2,3,4,5,6,7,8,9]
       creativity: random_number(3, 5),
       fitness: 100,
       contract: random_number(3, 24),
+      club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
       blend: blend.sample,
       star: random_number(10, 30),
-      club_id: 242,
       player_position_detail: 'p',
       potential_passing: random_number(8, 15),
       potential_control: random_number(8, 15),
@@ -74,11 +75,26 @@ blend = [1,2,3,4,5,6,7,8,9]
       potential_offensive_heading: random_number(8, 15),
       potential_flair: random_number(5, 12),
       potential_strength: random_number(8, 15),
-      potential_creativity: random_number(5, 12)
+      potential_creativity: random_number(5, 12),
+      listed: false,
+      potential_passing_coached: false,
+      potential_control_coached: false,
+      potential_tackling_coached: false,
+      potential_running_coached: false,
+      potential_shooting_coached: false,
+      potential_dribbling_coached: false,
+      potential_defensive_heading_coached: false,
+      potential_offensive_heading_coached: false,
+      potential_flair_coached: false,
+      potential_strength_coached: false,
+      potential_creativity_coached: false,
+      available: 0
     )
   end
+end
 
-200.times do
+70.times do
+  club_code.each do |code|
     Player.create(
       name: Faker::Name.last_name,
       age: random_number(18, 35),
@@ -97,11 +113,11 @@ blend = [1,2,3,4,5,6,7,8,9]
       creativity: random_number(3, 8),
       fitness: 100,
       contract: random_number(3, 24),
+      club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
       blend: blend.sample,
       star: random_number(10, 30),
-      club_id: 242,
       player_position_detail: position_detail.sample,
       potential_passing: random_number(5, 12),
       potential_control: random_number(8, 15),
@@ -113,11 +129,26 @@ blend = [1,2,3,4,5,6,7,8,9]
       potential_offensive_heading: random_number(5, 12),
       potential_flair: random_number(5, 12),
       potential_strength: random_number(8, 15),
-      potential_creativity: random_number(8, 15)
+      potential_creativity: random_number(8, 15),
+      listed: false,
+      potential_passing_coached: false,
+      potential_control_coached: false,
+      potential_tackling_coached: false,
+      potential_running_coached: false,
+      potential_shooting_coached: false,
+      potential_dribbling_coached: false,
+      potential_defensive_heading_coached: false,
+      potential_offensive_heading_coached: false,
+      potential_flair_coached: false,
+      potential_strength_coached: false,
+      potential_creativity_coached: false,
+      available: 0
     )
   end
+end
 
-200.times do
+70.times do
+  club_code.each do |code|
     Player.create(
       name: Faker::Name.last_name,
       age: random_number(18, 35),
@@ -136,11 +167,11 @@ blend = [1,2,3,4,5,6,7,8,9]
       creativity: random_number(3, 8),
       fitness: 100,
       contract: random_number(3, 24),
+      club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
       blend: blend.sample,
       star: random_number(10, 30),
-      club_id: 242,
       player_position_detail: position_detail.sample,
       potential_passing: random_number(8, 15),
       potential_control: random_number(8, 15),
@@ -152,11 +183,26 @@ blend = [1,2,3,4,5,6,7,8,9]
       potential_offensive_heading: random_number(5, 12),
       potential_flair: random_number(8, 15),
       potential_strength: random_number(5, 12),
-      potential_creativity: random_number(8, 15)
+      potential_creativity: random_number(8, 15),
+      listed: false,
+      potential_passing_coached: false,
+      potential_control_coached: false,
+      potential_tackling_coached: false,
+      potential_running_coached: false,
+      potential_shooting_coached: false,
+      potential_dribbling_coached: false,
+      potential_defensive_heading_coached: false,
+      potential_offensive_heading_coached: false,
+      potential_flair_coached: false,
+      potential_strength_coached: false,
+      potential_creativity_coached: false,
+      available: 0
     )
   end
+end
 
-200.times do
+60.times do
+  club_code.each do |code|
     Player.create(
       name: Faker::Name.last_name,
       age: random_number(18, 35),
@@ -175,11 +221,11 @@ blend = [1,2,3,4,5,6,7,8,9]
       creativity: random_number(3, 5),
       fitness: 100,
       contract: random_number(3, 24),
+      club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
       blend: blend.sample,
       star: random_number(10, 30),
-      club_id: 242,
       player_position_detail: position_detail.sample,
       potential_passing: random_number(5, 12),
       potential_control: random_number(8, 15),
@@ -191,6 +237,20 @@ blend = [1,2,3,4,5,6,7,8,9]
       potential_offensive_heading: random_number(8, 15),
       potential_flair: random_number(8, 15),
       potential_strength: random_number(5, 12),
-      potential_creativity: random_number(5, 12)
+      potential_creativity: random_number(5, 12),
+      listed: false,
+      potential_passing_coached: false,
+      potential_control_coached: false,
+      potential_tackling_coached: false,
+      potential_running_coached: false,
+      potential_shooting_coached: false,
+      potential_dribbling_coached: false,
+      potential_defensive_heading_coached: false,
+      potential_offensive_heading_coached: false,
+      potential_flair_coached: false,
+      potential_strength_coached: false,
+      potential_creativity_coached: false,
+      available: 0
     )
   end
+end

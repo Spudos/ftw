@@ -257,10 +257,10 @@ hash.each do |hash|
     stand_s_condition: random_number(3, 10),
     stand_e_condition: random_number(3, 10),
     stand_w_condition: random_number(3, 10),
-    stand_n_capacity: random_number(5000, 10000),
-    stand_s_capacity: random_number(5000, 10000),
-    stand_e_capacity: random_number(5000, 10000),
-    stand_w_capacity: random_number(5000, 10000),
+    stand_n_capacity: random_number(5000, 10_000),
+    stand_s_capacity: random_number(5000, 10_000),
+    stand_e_capacity: random_number(5000, 10_000),
+    stand_w_capacity: random_number(5000, 10_000),
     pitch: random_number(3, 10),
     hospitality: random_number(3, 10),
     facilities: random_number(3, 10),
@@ -272,10 +272,11 @@ hash.each do |hash|
     staff_scouts: random_number(4, 12),
     color_primary: 'green',
     color_secondary: 'yellow',
-    bank_bal: random_number(50000000, 120000000),
+    bank_bal: random_number(50_000_000, 120_000_000),
     league: hash[:league],
     ticket_price: random_number(30, 50),
     fan_happiness: random_number(50, 90),
-    fanbase: random_number(10000, 150000)
+    fanbase: random_number(10_000, 150_000),
+    managed: false
   )
 end

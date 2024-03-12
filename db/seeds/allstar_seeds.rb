@@ -31,11 +31,12 @@ Club.create(
   staff_scouts: random_number(8, 12),
   color_primary: 'Black',
   color_secondary: 'Red',
-  bank_bal: random_number(500000000, 1200000000),
+  bank_bal: 0,
   league: 'Allstar',
   fan_happiness: 100,
+  managed: false,
   ticket_price: random_number(30, 50),
-  fanbase: 150000
+  fanbase: 150
 )
 
 3.times do
@@ -73,7 +74,20 @@ Club.create(
     potential_offensive_heading: random_number(11, 20),
     potential_flair: random_number(8, 18),
     potential_strength: random_number(11, 20),
-    potential_creativity: random_number(8, 18)
+    potential_creativity: random_number(8, 18),
+    listed: false,
+    potential_passing_coached: false,
+    potential_control_coached: false,
+    potential_tackling_coached: false,
+    potential_running_coached: false,
+    potential_shooting_coached: false,
+    potential_dribbling_coached: false,
+    potential_defensive_heading_coached: false,
+    potential_offensive_heading_coached: false,
+    potential_flair_coached: false,
+    potential_strength_coached: false,
+    potential_creativity_coached: false,
+    available: 0
   )
 end
 
@@ -112,7 +126,20 @@ end
     potential_offensive_heading: random_number(8, 18),
     potential_flair: random_number(8, 18),
     potential_strength: random_number(11, 20),
-    potential_creativity: random_number(11, 20)
+    potential_creativity: random_number(11, 20),
+    listed: false,
+    potential_passing_coached: false,
+    potential_control_coached: false,
+    potential_tackling_coached: false,
+    potential_running_coached: false,
+    potential_shooting_coached: false,
+    potential_dribbling_coached: false,
+    potential_defensive_heading_coached: false,
+    potential_offensive_heading_coached: false,
+    potential_flair_coached: false,
+    potential_strength_coached: false,
+    potential_creativity_coached: false,
+    available: 0
   )
 end
 
@@ -151,7 +178,20 @@ end
     potential_offensive_heading: random_number(8, 18),
     potential_flair: random_number(11, 20),
     potential_strength: random_number(8, 18),
-    potential_creativity: random_number(11, 20)
+    potential_creativity: random_number(11, 20),
+    listed: false,
+    potential_passing_coached: false,
+    potential_control_coached: false,
+    potential_tackling_coached: false,
+    potential_running_coached: false,
+    potential_shooting_coached: false,
+    potential_dribbling_coached: false,
+    potential_defensive_heading_coached: false,
+    potential_offensive_heading_coached: false,
+    potential_flair_coached: false,
+    potential_strength_coached: false,
+    potential_creativity_coached: false,
+    available: 0
   )
 end
 
@@ -190,6 +230,19 @@ end
     potential_offensive_heading: random_number(11, 20),
     potential_flair: random_number(11, 20),
     potential_strength: random_number(8, 18),
-    potential_creativity: random_number(8, 18)
+    potential_creativity: random_number(8, 18),
+    listed: false,
+    potential_passing_coached: false,
+    potential_control_coached: false,
+    potential_tackling_coached: false,
+    potential_running_coached: false,
+    potential_shooting_coached: false,
+    potential_dribbling_coached: false,
+    potential_defensive_heading_coached: false,
+    potential_offensive_heading_coached: false,
+    potential_flair_coached: false,
+    potential_strength_coached: false,
+    potential_creativity_coached: false,
+    available: 0
   )
 end

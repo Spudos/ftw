@@ -3,7 +3,7 @@
   <% if current_user && current_user.club != 0 %>
     <h5 class="text-center"><%= "You are already managing #{Club.find_by(id: current_user.club)&.name}" %></h5>
     <h6 class="text-center">Currently, only one club per user is allowed</h6>
-    <h6 class="text-center">To manage another club, please create another user with a different email address</h6>
+    <h6 class="text-center">To manage another club, please create another user with a different email address or resign from your current club</h6>
   <% else%>
     <h6 class="text-center">Select a club that you would like to manage</h6>
     <div class="row d-flex justify-content-center">

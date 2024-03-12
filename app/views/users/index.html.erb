@@ -16,8 +16,8 @@
         <div>
         <% @clubs.each do |club| %>
           <p>You are currently the manager of <strong><%= club.name %></strong>
-          who play in <strong><%= club.league %></strong>
-          <%= link_to "Resign from club", users_resign_path(club_id: club.id), class: "btn btn-sm btn-danger", onclick: "return confirm('Are you sure you want to resign?')" %></p>
+          who play in <strong><%= club.league %></strong></p>
+          <%= link_to "Resign from club", users_resign_path(club_id: club.id), class: "btn btn-sm btn-danger", onclick: "return confirm('Are you sure you want to resign?')" %>
         <% end %>
         </div>
       <% else %>
