@@ -77,6 +77,7 @@ Rails.application.routes.draw do
   get '/players/player_view', to: 'players#player_view'
   get '/players/unmanaged_players', to: 'players#unmanaged_players'
   get '/players/listed_players', to: 'players#listed_players'
+  get '/players/player_value_update', to: 'players#player_value_update'
 
   get '/help/rulebook', to: 'help#rulebook'
   get '/help', to: 'help#index'

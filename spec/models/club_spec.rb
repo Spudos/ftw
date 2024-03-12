@@ -20,8 +20,10 @@ RSpec.describe Player, type: :model do
         create(:club, id: 242)
         create(:player)
         create(:player)
+        create(:user)
 
         params = { club: { managed: false,
+                           manager_email: 'test@email.com',
                            league: 'Premier League',
                            name: 'Test Club',
                            ground_name: 'Test Ground',

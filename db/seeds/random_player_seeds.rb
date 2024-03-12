@@ -32,12 +32,15 @@ Club.create(
   bank_bal: 0,
   league: 'unmanaged',
   fan_happiness: 1,
-  fanbase: 10000
+  fanbase: 10000,
+  managed: false
 )
 
 countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales', 'NI', 'RoI', 'Brazil', 'Argentina', 'Spain', 'France', 'Germany', 'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay','Brazil', 'England', 'Mexico', 'Germany', 'Italy', 'Spain', 'France', 'Argentina', 'Netherlands', 'Portugal', 'Belgium', 'Uruguay', 'Colombia', 'Croatia', 'Sweden', 'Switzerland', 'Poland', 'Denmark', 'Chile', 'Austria', 'Turkey', 'Russia', 'Japan', 'South Korea', 'Australia']
 position_detail = ['c', 'c', 'c', 'l', 'r']
-blend = [1,2,3,4,5,6,7,8,9]
+blend = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+
+club_code = [242]
 
 30.times do
   club_code.each do |code|
@@ -58,7 +61,7 @@ blend = [1,2,3,4,5,6,7,8,9]
       strength: random_number(3, 8),
       creativity: random_number(3, 5),
       fitness: 100,
-      contract: random_number(3, 24),
+      contract: random_number(7, 57),
       club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
@@ -112,7 +115,7 @@ end
       strength: random_number(3, 8),
       creativity: random_number(3, 8),
       fitness: 100,
-      contract: random_number(3, 24),
+      contract: random_number(7, 57),
       club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
@@ -166,7 +169,7 @@ end
       strength: random_number(3, 5),
       creativity: random_number(3, 8),
       fitness: 100,
-      contract: random_number(3, 24),
+      contract: random_number(7, 57),
       club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),
@@ -220,7 +223,7 @@ end
       strength: random_number(3, 5),
       creativity: random_number(3, 5),
       fitness: 100,
-      contract: random_number(3, 24),
+      contract: random_number(7, 57),
       club_id: code,
       consistency: random_number(1, 20),
       loyalty: random_number(1, 50),

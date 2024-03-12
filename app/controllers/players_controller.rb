@@ -14,6 +14,12 @@ class PlayersController < ApplicationController
     @performance_data = Performance.where(player_id: params[:format]).pluck(:match_id, :match_performance)
   end
 
+  def player_value_update
+    Player.player_value_update
+
+    redirect_to request.referrer, notice: 'Players were successfully updated.'
+  end
+
   def player_view
     @players = Player.compile_player_view
 

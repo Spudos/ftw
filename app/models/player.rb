@@ -16,6 +16,25 @@ class Player < ApplicationRecord
     end
   end
 
+  def self.player_value_update
+    objects = [Turn::Engines::Value,
+               Turn::Engines::Wages,
+               Turn::Engines::TotalSkill]
+
+    week = Message.maximum(:week) || 0
+
+    player_data.in_batches do |batch|
+      players = batch.load
+
+      objects.each do |object|
+        players = object.new(players, week).process
+      end
+
+      attributes = players.to_a.map(&:as_json)
+      Player.upsert_all(attributes)
+    end
+  end
+
   def player_selection_information
     {
       id:,
