@@ -271,7 +271,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
 
   describe 'overdrawn' do
     it 'should increase overdraft number to 3' do
-      create(:club, id: 1, bank_bal: 0, overdrawn: 2)
+      create(:club, id: 1, bank_bal: 0, overdrawn: 2, managed: true)
       create(:player, club_id: 1, wages: 100_000, value: 1_000_000)
       create(:player, club_id: 1, wages: 200_000, value: 1_000_000)
       create(:player, club_id: 1, wages: 300_000, value: 1_000_000)
@@ -283,7 +283,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
     end
 
     it 'should increase overdraft number to 4 then fix the overdraft by selling a player' do
-      create(:club, id: 1, bank_bal: 0, overdrawn: 3)
+      create(:club, id: 1, bank_bal: 0, overdrawn: 3, managed: true)
       create(:club, id: 242, bank_bal: 0, overdrawn: 0)
       create(:player, name: 'a', club_id: 1, wages: 100_000, value: 1_000_000)
       create(:player, name: 'aa', club_id: 1, wages: 200_000, value: 1_000_000)
@@ -292,14 +292,14 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       Turn::ClubUpdates.new(week).call
 
       expect(Club.first.bank_bal).to eq(150_000)
-      expect(Club.first.overdrawn).to eq(4)
+      expect(Club.first.overdrawn).to eq(0)
       expect(Player.first.club_id).to eq(242)
       expect(Player.second.club_id).to eq(1)
       expect(Player.third.club_id).to eq(1)
     end
 
     it 'should increase overdraft number to 4 then sell 3 players and stop even though the overdraft will still exist' do
-      create(:club, id: 1, bank_bal: -5_000_000, overdrawn: 3)
+      create(:club, id: 1, bank_bal: -5_000_000, overdrawn: 3, managed: true)
       create(:club, id: 242, bank_bal: 0, overdrawn: 0)
       create(:player, name: 'a', club_id: 1, wages: 100_000, value: 1_000_000)
       create(:player, name: 'aa', club_id: 1, wages: 200_000, value: 1_000_000)

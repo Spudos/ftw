@@ -239,7 +239,7 @@ class Turn::ClubUpdates
   end
 
   def overdrawn
-    clubs = Club.where.not(id: [241, 242])
+    clubs = Club.where.not(id: [241, 242]).where(managed: true)
 
     clubs.each do |club|
       if club.bank_bal.negative?
@@ -256,7 +256,7 @@ class Turn::ClubUpdates
   end
 
   def fix_overdraft
-    clubs = Club.where.not(id: [241, 242])
+    clubs = Club.where.not(id: [241, 242]).where(managed: true)
 
     clubs.each do |club|
       if club.overdrawn > 3 && club.bank_bal.negative?
