@@ -13,6 +13,8 @@ class Turn::ClubUpdates
     match_day_income
     fan_happiness_match
     fan_happiness_signings
+    fan_happiness_bank
+    fan_happiness_random
   end
 
   private
