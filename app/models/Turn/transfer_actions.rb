@@ -71,7 +71,7 @@ class Turn::TransferActions
         Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id],
                        var1: "Your player, #{player.name}, was removed from the transfer list.  However, he is unhappy with the way he has been treated by you")
       elsif player.listed == false
-        Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id], 
+        Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id],
                        var1: "Player #{player.name} could not be unlisted as he is not listed at present")
       else
         Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id],
@@ -114,9 +114,6 @@ class Turn::TransferActions
             player.club = Club.find_by(id: value[:club_id].to_i)
             player[:contract] = 24
             player.save
-
-            Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
-                           var1: "Your bid for #{player.name} succeeded!  The player has joined your club for #{value[:var3]}")
 
             Turn::BankAdjustment.new(value[:action_id],
                                      value[:week],
@@ -185,9 +182,6 @@ class Turn::TransferActions
           player[:club_id] = 242
           player.save
 
-          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
-                         var1: "#{player.name} was sold to the free agent circuit for #{proceeds_positive}")
-
           Turn::BankAdjustment.new(value[:action_id],
                                    value[:week],
                                    value[:club_id].to_i,
@@ -197,7 +191,7 @@ class Turn::TransferActions
 
           transfer_save(value[:week], 242, club.id, value[:var2], proceeds_positive, 'completed')
         else
-          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, 
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
                          var1: "#{player.name} could not be sold to the free agent circuit due to not being at your club")
 
           transfer_save(value[:week], 242, player.club_id, value[:var2], proceeds, 'sale_failed')
