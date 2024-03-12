@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_11_181321) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_12_132747) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -57,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_11_181321) do
     t.integer "fan_happiness", default: 53
     t.integer "fanbase", default: 40980
     t.integer "ticket_price"
+    t.integer "overdrawn", default: 0
   end
 
   create_table "commentaries", force: :cascade do |t|

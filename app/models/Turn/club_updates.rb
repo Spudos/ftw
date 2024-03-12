@@ -15,6 +15,8 @@ class Turn::ClubUpdates
     fan_happiness_signings
     fan_happiness_bank
     fan_happiness_random
+    overdrawn
+    fix_overdraft
   end
 
   private
@@ -29,9 +31,12 @@ class Turn::ClubUpdates
       new_bal = club.bank_bal.to_i - wage_bill.to_i
       club.update(bank_bal: new_bal)
 
-      Message.create(action_id:, week:, club_id: club.id,
+      Message.create(action_id:,
+                     week:,
+                     club_id: club.id,
                      var1: "Your bank account was charged with #{wage_bill} due to this weeks player wages",
-                     var2: 'dec-player_wages', var3: wage_bill)
+                     var2: 'dec-player_wages',
+                     var3: wage_bill)
     end
   end
 
@@ -50,9 +55,12 @@ class Turn::ClubUpdates
       new_bal = club.bank_bal.to_i - staff_costs_total.to_i
       club.update(bank_bal: new_bal)
 
-      Message.create(action_id:, week:, club_id: club.id,
+      Message.create(action_id:,
+                     week:,
+                     club_id: club.id,
                      var1: "Your bank account was charged with #{staff_costs_total} due to this weeks staff wages",
-                     var2: 'dec-staff_wages', var3: staff_costs_total)
+                     var2: 'dec-staff_wages',
+                     var3: staff_costs_total)
     end
   end
 
@@ -74,9 +82,12 @@ class Turn::ClubUpdates
       new_bal = club.bank_bal.to_i - ground_upkeep_total.to_i
       club.update(bank_bal: new_bal)
 
-      Message.create(action_id:, week:, club_id: club.id,
+      Message.create(action_id:,
+                     week:,
+                     club_id: club.id,
                      var1: "Your bank account was charged with #{ground_upkeep_total} due to this weeks stadium upkeep",
-                     var2: 'dec-stadium_upkeep', var3: ground_upkeep_total)
+                     var2: 'dec-stadium_upkeep',
+                     var3: ground_upkeep_total)
     end
   end
 
@@ -90,9 +101,12 @@ class Turn::ClubUpdates
       new_bal = club.bank_bal.to_i + club_shop_income.to_i
       club.update(bank_bal: new_bal)
 
-      Message.create(action_id:, week:, club_id: club.id,
+      Message.create(action_id:,
+                     week:,
+                     club_id: club.id,
                      var1: "Your bank account was credited with #{club_shop_income} due to this weeks club shop income",
-                     var2: 'inc-club_shop_online', var3: club_shop_income)
+                     var2: 'inc-club_shop_online',
+                     var3: club_shop_income)
     end
   end
 
@@ -118,7 +132,12 @@ class Turn::ClubUpdates
       programme_receipts = (attendance * 10.2465).to_i
       club_shop_match_income = (attendance * 15.2465).to_i
       tv_income = (attendance * 29.3456).to_i
-      match_day_income = gate_receipts + facilities_receipts + programme_receipts + club_shop_match_income + hospitality_receipts + tv_income
+      match_day_income = gate_receipts +
+                         facilities_receipts +
+                         programme_receipts +
+                         club_shop_match_income +
+                         hospitality_receipts +
+                         tv_income
 
       policing_cost = (attendance * 3.5683).to_i
       stewarding_cost = (attendance * 2.3245).to_i
@@ -161,9 +180,9 @@ class Turn::ClubUpdates
   end
 
   def fan_happiness_match
-    match = Match.where(week_number: week)
+    match_info = Match.where(week_number: week)
 
-    match.each do |match|
+    match_info.each do |match|
       home_team = Club.find_by(id: match.home_team)
       away_team = Club.find_by(id: match.away_team)
 
@@ -216,6 +235,82 @@ class Turn::ClubUpdates
         club.fan_happiness = 0
       end
       club.save
+    end
+  end
+
+  def overdrawn
+    clubs = Club.where.not(id: [241, 242])
+
+    clubs.each do |club|
+      if club.bank_bal.negative?
+        club.overdrawn += 1
+        club.save
+        action_id = "#{week}#{club.id}OD"
+
+        Message.create(action_id:,
+                       week:,
+                       club_id: club.id,
+                       var1: 'Your club is overdrawn. If you do not fix the problems quickly the directors will step in and sell players to clear the debt')
+      end
+    end
+  end
+
+  def fix_overdraft
+    clubs = Club.where.not(id: [241, 242])
+
+    clubs.each do |club|
+      if club.overdrawn > 3 && club.bank_bal.negative?
+        action_id = "#{week}#{club.id}OD"
+
+        counter = 0
+
+        while club.bank_bal.negative? && counter < 3
+          player = Player.where(club_id: club.id).order(total_skill: :asc).first
+
+          proceeds = (player.value * 0.75).to_i
+
+          player.club_id = 242
+          player.save
+
+          club.bank_bal += proceeds
+          club.save
+
+          Message.create(action_id:,
+                         week:,
+                         club_id: club.id,
+                         var1: "Your bank account was credited with #{proceeds} due a player sale (#{player.name})",
+                         var2: 'inc-transfers_out',
+                         var3: proceeds)
+
+          Transfer.create(week:,
+                          buy_club: 242,
+                          sell_club: club.id,
+                          player_id: player.id,
+                          bid: proceeds,
+                          status: 'completed')
+
+          counter += 1
+        end
+
+        Article.create(week:,
+                       club_id: club.id,
+                       image: 'club.jpg',
+                       article_type: 'Club',
+                       headline: "#{club.name} Financial Crisis!",
+                       sub_headline: "Players Sold to Clear Debts!",
+                       article: "Directors have taken over the financial affairs of the club after they were found to be overdrawn for three weeks.  Up to three players will be sold each week until the debt is cleared.  The club is in crisis and the fans are in uproar.  The board are considering looking for a new manager to take over the club and lead them to a brighter future although no change is imminent.")
+
+        Message.create(action_id:,
+                       week:,
+                       club_id: club.id,
+                       var1: 'Your club has been overdrawn for three weeks now and the directors have stepped in to rectify the problem.  Up to three players will be sold each week until the debt is cleared')
+      end
+
+      if club.bank_bal.positive?
+        club.overdrawn = 0
+        club.save
+      end
+
     end
   end
 end
