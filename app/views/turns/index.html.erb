@@ -1,13 +1,5 @@
 <div class="container">
   <h3 class="text-center mb-5">Last Turn Processed: Week <%= @last_turn_processed %></h3>
-  
-  <% if @feedback.present? %>
-  <h3 class="text-center">Issue System</h3>
-  <%= render 'feedback' %>
-  <% end %>
-
-  <h3 class="text-center">Club Messaging</h3>
-  <%= render 'gm_message' %>
 
   <h3 class="text-center">Turn Processing</h3>
   <div class="row mb-5">
@@ -26,7 +18,7 @@
     </div>
     <% if params[:week].present? %>
       <div class="col-3">
-        <h2>Step 2</h2>
+        <h3>Step 2</h3>
         <h6>Process Turnsheets</h6>
         <form action="/turnsheets/process_turnsheet" method="post">
           <% if @turnsheets_processed == @turnsheets_submitted %>
@@ -59,7 +51,7 @@
       </div>
 
       <div class="col-3">
-        <h2>Step 3</h2>
+        <h3>Step 3</h3>
         <h6>Run Matches</h6>
         <form action="/matches/match_multiple" method="post">
           <input type="hidden" name="selected_week" value="<%= params[:week] %>">
@@ -166,7 +158,7 @@
       </div>
 
       <div class="col-3">
-        <h2>Step 4</h2>
+        <h3>Step 4</h3>
         <h6>Process End of Turn Player Updates</h6>
         <form action="/turns/process_player_updates" method="post">
           <input type="hidden" name="week" value="<%= params[:week] %>">
@@ -210,6 +202,14 @@
     <% end %>
   </div>
 </div>
+
+<% if @feedback.present? %>
+  <h3 class="text-center">Issue System</h3>
+  <%= render 'feedback' %>
+  <% end %>
+
+  <h3 class="text-center">Club Messaging</h3>
+  <%= render 'gm_message' %>
 
 <div class="container">
   <div class="row">

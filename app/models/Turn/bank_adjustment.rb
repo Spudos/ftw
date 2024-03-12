@@ -44,8 +44,8 @@ class Turn::BankAdjustment
       Message.create(action_id:,
                      week:,
                      club_id:,
-                     var1: "Your bank account was creditied with #{amount_positive} due a player sale (#{dept})",
-                     var2: 'inc-receipt', var3: amount.to_i)
+                     var1: "Your bank account was credited with #{amount_positive} due a player sale (#{dept})",
+                     var2: 'inc-transfers_out', var3: amount_positive.to_i)
     elsif reason.end_with?('condition')
       Message.create(action_id:,
                      week:,
@@ -69,15 +69,15 @@ class Turn::BankAdjustment
       Message.create(action_id:,
                      week:,
                      club_id:,
-                     var1: "Your bank account was creditied with #{amount_positive} due a player sale (#{dept})",
-                     var2: 'inc-transfers_out', var3: amount.to_i)
+                     var1: "Your bank account was credited with #{amount_positive} due a player sale (#{dept})",
+                     var2: 'inc-transfers_out', var3: amount_positive.to_i)
     elsif reason == 'deal_sale'
       amount_positive = (amount * -1).to_i
       Message.create(action_id:,
                      week:,
                      club_id:,
-                     var1: "Your bank account was creditied with #{amount_positive} due a player sale (#{dept})",
-                     var2: 'inc-transfers_out', var3: amount.to_i)
+                     var1: "Your bank account was credited with #{amount_positive} due a player sale (#{dept})",
+                     var2: 'inc-transfers_out', var3: amount_positive.to_i)
     elsif reason == 'listed_purchase'
       Message.create(action_id:,
                      week:,

@@ -137,7 +137,7 @@ class Turn::TransferActions
 
         else
           Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
-                         var1: "Your #{value[:var3]} bid for #{player.name} failed due to not meet an acceptable valuation for the player")
+                         var1: "Your #{value[:var3]} bid for #{player.name} failed due to not meeting an acceptable valuation for the player")
           transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'club_refusal')
         end
       end
@@ -195,7 +195,7 @@ class Turn::TransferActions
                                    player.name,
                                    proceeds).call
 
-          transfer_save(value[:week], 242, club.id, value[:var2], proceeds, 'completed')
+          transfer_save(value[:week], 242, club.id, value[:var2], proceeds_positive, 'completed')
         else
           Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, 
                          var1: "#{player.name} could not be sold to the free agent circuit due to not being at your club")
