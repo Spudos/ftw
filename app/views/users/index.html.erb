@@ -8,22 +8,29 @@
       <p>First Name: <%= current_user.fname %></p>
       <p>Last Name: <%= current_user.lname %></p>
       <p>Email: <%= current_user.email %></p>
-      <a <%= link_to "Edit these details", edit_user_registration_path, class: "btn btn-sm btn-primary" %></a>
+      <%= link_to "Edit these details", edit_user_registration_path, class: "btn btn-sm btn-primary" %><br>
       <br>
       <br>
-      <% if current_user.club >= 1%>
+      <h5>Your Club</h5>
+      <% if @clubs.present? %>
         <div>
-        <p>You are currently the manager of <strong><%= Club.find_by(id: current_user.club)&.name %></strong>
-        who play in <strong><%= Club.find_by(id: current_user.club)&.league %></strong></p>
-        <a <%= link_to "Resign from club", users_resign_path, class: "btn btn-sm btn-danger" %></a>
+        <% @clubs.each do |club| %>
+          <p>You are currently the manager of <strong><%= club.name %></strong>
+          who play in <strong><%= club.league %></strong>
+          <%= link_to "Resign from club", users_resign_path(club_id: club.id), class: "btn btn-sm btn-danger", onclick: "return confirm('Are you sure you want to resign?')" %></p>
+        <% end %>
         </div>
       <% else %>
         <div>
-        <p>You are not currently managing a club</p>
-        <a <%= link_to "Manage a club", help_club_creation_path, class: "btn btn-sm btn-success" %></a>
+        <h6>You are not currently managing a club, you have two choices:</h6>
+        <p>You can create a new club that will replace an existing club</p>
+        <%= link_to "Create a club", help_club_creation_path, class: "btn btn-sm btn-success mb-3" %>
+        <p>You can choose an existing club to manage</p>
+        <%= link_to "Choose a club", help_manage_path, class: "btn btn-sm btn-success" %>
         </div>
       <% end%>
       <br>
+      <h5>Data Deletion</h5>
       <p>If you would like us to remove your account please raise an issue from our help page</p>
       <a <%= link_to "Raise an issue", new_feedback_path, class: "btn btn-sm btn-primary" %></a>
   </div>

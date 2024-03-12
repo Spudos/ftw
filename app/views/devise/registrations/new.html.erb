@@ -12,12 +12,12 @@
 
       <div class="field">
         <%= f.label :fname, "First Name" %><br />
-        <%= f.email_field :fname, autofocus: true, autocomplete: "email" %>
+        <%= f.text_field :fname, autofocus: true, autocomplete: "email" %>
       </div>
 
       <div class="field">
         <%= f.label :lname, "Last Name" %><br />
-        <%= f.email_field :lname, autofocus: true, autocomplete: "email" %>
+        <%= f.text_field :lname, autofocus: true, autocomplete: "email" %>
       </div>
 
       <div class="field">
@@ -33,6 +33,8 @@
         <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
       </div>
 
+      <%= f.hidden_field :club, value: 0 %>
+      
       <div class="actions">
         <%= f.submit "Sign up", data: {turbo: false}, class: "btn btn-sm btn-success" %>
       </div>

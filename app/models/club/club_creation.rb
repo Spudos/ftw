@@ -7,6 +7,7 @@ class Club::ClubCreation
   end
 
   def call
+    set_club_in_user
     club_creation_details
     club_creation_stadium
     club_creation_departments
@@ -22,12 +23,29 @@ class Club::ClubCreation
 
     player_values
 
-    Feedback.create(name: User.find_by(club: params[:club][:id])&.fname,
-                    email: User.find_by(club: params[:club][:id])&.email, club: club.id,
-                    message: 'A new club has been created', feedback_type: 'NewClub', outstanding: 'true')
+    Feedback.create(name: User.find_by(email: params[:club][:manager_email])&.fname,
+                    email: User.find_by(email: params[:club][:manager_email])&.email,
+                    club: club.id,
+                    message: 'A new club has been created',
+                    feedback_type: 'NewClub',
+                    outstanding: 'true')
+
+    Article.create(
+      week: Message.maximum(:week),
+      club_id: params[:club][:id],
+      image: 'club.jpg',
+      article_type: 'Club',
+      headline: 'New Club Joins The League!',
+      sub_headline: "#{params[:club][:name]} has joined the league",
+      article: "#{params[:club][:name]} has joined the #{club.league} and are looking to make an impact.  The board and fans are excited about the future."
+    )
   end
 
   private
+
+  def set_club_in_user
+    User.find_by(email: params[:club][:manager_email]).update(club: club.id)
+  end
 
   def club_creation_details
     club.managed = true

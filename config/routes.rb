@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   get '/users', to: 'users#index'
   get '/users/resign', to: 'users#resign'
+  get '/users/new_manager', to: 'users#new_manager'
 
   get '/leagues/league_cup/league', to: 'leagues#league_cup'
   get '/leagues/wcc/league', to: 'leagues#wcc'
@@ -82,5 +83,6 @@ Rails.application.routes.draw do
   get '/help/faq', to: 'help#faq'
   get '/help/issues', to: 'help#issues'
   get '/help/club_creation', to: 'help#club_creation'
+  get '/help/manage', to: 'help#manage'
   post '/help/club_submission', to: 'help#club_submission'
 end

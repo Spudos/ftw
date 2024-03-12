@@ -1,0 +1,35 @@
+<h3 class="text-center mb-5">Manage an Existing Club</h3>
+<% if current_user %>
+  <% if current_user && current_user.club != 0 %>
+    <h5 class="text-center"><%= "You are already managing #{Club.find_by(id: current_user.club)&.name}" %></h5>
+    <h6 class="text-center">Currently, only one club per user is allowed</h6>
+    <h6 class="text-center">To manage another club, please create another user with a different email address</h6>
+  <% else%>
+    <h6 class="text-center">Select a club that you would like to manage</h6>
+    <div class="row d-flex justify-content-center">
+      <table class="table table-hover align-middle m-5">
+        <tr>
+          <th>Name</th>
+          <th>League</th>
+          <th>Bank</th>
+          <th>Fanbase</th>
+          <th>Stadium</th>
+          <th class="text-center">Manage</th>
+        </tr>
+        <% @available_clubs.each do |club| %>
+        <tr>
+            <td><%= club.name %></td>
+            <td><%= club.league %></td>
+            <td><%= club.bank_bal %></td>
+            <td><%= club.fanbase %></td>
+            <td><%= club.stand_n_capacity + club.stand_s_capacity + club.stand_e_capacity + club.stand_w_capacity %></td>
+            <td class="text-center"><%= link_to "Manage this club", users_new_manager_path(club_id: club.id), class: "btn btn-sm btn-success", onclick: "return confirm('Are you sure you want to manage this club?')" %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>    
+  <% end%>
+<% else %>
+  <h5 class="text-center">You must be logged in to manage a club.</h5>
+  <h6 class="text-center">To Sign In or Sign Up please use the 'user' button above</h6>
+<% end %>

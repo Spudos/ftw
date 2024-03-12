@@ -5,6 +5,10 @@ class HelpController < ApplicationController
     @club_creation = Club.new
   end
 
+  def manage
+    @available_clubs = Club.where(managed: false, league: ['Premier League', 'Championship'])
+  end
+
   def club_submission
     new_club = Club.new
     points = params[:club][:stadium_points].to_i +

@@ -110,6 +110,7 @@
       </div>  
     </div>
 
+    <%= form.hidden_field :current_user_email, value: current_user.email %>
   
     <div class="text-center">
       <%= form.submit 'Create my Club', class: 'btn btn-sm btn-danger' %>
