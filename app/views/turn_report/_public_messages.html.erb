@@ -1,0 +1,23 @@
+<div>
+  <h3 class="text-center">Public Messages</h3>
+  <div id="messages">
+    <% if @public_messages.present? %>
+      <table class="table table-hover align-middle">
+        <tbody>
+          <tr>
+            <th scope="col">Club</th>
+            <th scope="col">Message</th>
+          </tr>
+          <% @public_messages.sort_by { |message| message.week.to_i }.reverse.each do |message| %>
+            <tr scope="row">
+              <td><%= Club.find_by(id: message.club_id)&.name %></td>
+              <td><%= message.var1 %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No messages found.</p>
+    <% end %>
+  </div>
+</div>

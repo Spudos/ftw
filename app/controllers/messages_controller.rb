@@ -8,10 +8,10 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     if @message.save
-      redirect_to turns_path, notice: 'Message sent to club successfully.'
+      redirect_to request.referrer, notice: 'Message sent successfully.'
     else
       flash.now[:alert] = 'Error sending message. Please check the form.'
-      redirect_to turns_path
+      redirect_to request.referrer
     end
   end
 

@@ -28,7 +28,7 @@
   <% end %>
   
   <li class="nav-item">
-    <a href="/" class="btn btn-outline-dark">Turns</a>
+    <a href="<%= turn_report_path %>" class="btn btn-outline-dark">Turns</a>
   </li>
   <li class="nav-item">
     <div class="btn-group">
@@ -88,6 +88,7 @@
           Admin
         </button>
         <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="<%= turns_gm_admin_path %>">GM Admin</a></li>
           <li><a class="dropdown-item" href="<%= turns_path %>">Turn Processing</a></li>
           <li><a class="dropdown-item" href="<%= turnsheets_path %>">Turnsheets</a></li>
           <li><a class="dropdown-item" href="<%= articles_path %>">View and Edit Articles</a></li>

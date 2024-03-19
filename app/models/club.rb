@@ -15,9 +15,9 @@ class Club < ApplicationRecord
     total_expenditure = 0
 
     messages.each do |message|
-      if message.var2.present? && message.var2.start_with?("inc")
+      if message.var2.present? && message.var2.start_with?('inc')
         total_income += message.var3
-      elsif message.var2.present?
+      elsif message.var2.present? && message.var2.start_with?('dec')
         total_expenditure += message.var3
       end
     end

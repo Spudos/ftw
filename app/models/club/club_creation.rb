@@ -23,12 +23,14 @@ class Club::ClubCreation
 
     player_values
 
-    Feedback.create(name: User.find_by(email: params[:club][:manager_email])&.fname,
-                    email: User.find_by(email: params[:club][:manager_email])&.email,
-                    club: club.id,
-                    message: 'A new club has been created',
-                    feedback_type: 'NewClub',
-                    outstanding: 'true')
+    Feedback.create(
+      name: User.find_by(email: params[:club][:manager_email])&.fname,
+      email: User.find_by(email: params[:club][:manager_email])&.email,
+      club: club.id,
+      message: 'A new club has been created',
+      feedback_type: 'NewClub',
+      outstanding: 'true'
+    )
 
     Article.create(
       week: Message.maximum(:week),
@@ -37,7 +39,15 @@ class Club::ClubCreation
       article_type: 'Club',
       headline: 'New Club Joins The League!',
       sub_headline: "#{params[:club][:name]} has joined the league",
-      article: "#{params[:club][:name]} has joined the #{club.league} and are looking to make an impact.  The board and fans are excited about the future."
+      article: "#{params[:club][:name]} has joined the #{club.league} and are looking to make an impact. The board and fans are excited about the future."
+    )
+
+    Message.create(
+      week: Message.maximum(:week),
+      club_id: club.id,
+      var1: "#{params[:club][:name]} has joined the league and will be managed by #{User.find_by(email: params[:club][:manager_email])&.fname} #{User.find_by(email: params[:club][:manager_email])&.lname}",
+      var2: 'game',
+      action_id: "#{params[:club][:name]}new"
     )
   end
 
@@ -93,31 +103,31 @@ class Club::ClubCreation
       club.stand_s_capacity = rand(random)
       club.stand_w_capacity = rand(random)
     when 6
-      random = 9500..10000
+      random = 9500..10_000
       club.stand_n_capacity = rand(random)
       club.stand_e_capacity = rand(random)
       club.stand_s_capacity = rand(random)
       club.stand_w_capacity = rand(random)
     when 7
-      random = 10750..11250
+      random = 10_750..11_250
       club.stand_n_capacity = rand(random)
       club.stand_e_capacity = rand(random)
       club.stand_s_capacity = rand(random)
       club.stand_w_capacity = rand(random)
     when 8
-      random = 12000.12500
+      random = 12_000.12_500
       club.stand_n_capacity = rand(random)
       club.stand_e_capacity = rand(random)
       club.stand_s_capacity = rand(random)
       club.stand_w_capacity = rand(random)
     when 9
-      random = 13250..13750
+      random = 13_250..13_750
       club.stand_n_capacity = rand(random)
       club.stand_e_capacity = rand(random)
       club.stand_s_capacity = rand(random)
       club.stand_w_capacity = rand(random)
     else
-      random = 14500..15000
+      random = 14_500..15_000
       club.stand_n_capacity = rand(random)
       club.stand_e_capacity = rand(random)
       club.stand_s_capacity = rand(random)

@@ -13,12 +13,39 @@
     <div class="col-md-8">
       <%= form.label :var1, class: "form-label" %>
       <%= form.text_area :var1, class: "form-control", rows: 3 %>
+      <%= form.hidden_field :var2, value: "gm_club" %>
       <%= form.hidden_field :action_id, value: "gm_message" %>
     </div>
   </div>
   <div class="row d-flex justify-content-center mb-5">
     <div class="text-center col-md-2">
         <%= form.submit 'Submit Club Message', class: "btn btn-danger" %>
+    </div>
+  </div>
+<% end %>
+
+<%= form_with(model: @message, url: messages_path ) do |form| %>
+  <div class="row d-flex justify-content-center">
+    <div  class="col-md-2">
+      <div class="col-md-12">
+        <%= form.label :week, class: "form-label" %>
+        <%= form.text_field :week, class: "form-control" %>
+      </div>
+      <div class="col-md-12">
+        <%= form.label :club_id, class: "form-label" %>
+        <%= form.text_field :club_id, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <%= form.label :var1, class: "form-label" %>
+      <%= form.text_area :var1, class: "form-control", rows: 3 %>
+      <%= form.hidden_field :var2, value: "gm" %>
+      <%= form.hidden_field :action_id, value: "gm_message" %>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center mb-5">
+    <div class="text-center col-md-2">
+        <%= form.submit 'Submit Public GM Message', class: "btn btn-danger" %>
     </div>
   </div>
 <% end %>

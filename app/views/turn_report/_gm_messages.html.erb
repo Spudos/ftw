@@ -1,0 +1,21 @@
+<div>
+  <h3 class="text-center">GM Messages</h3>
+  <div id="messages">
+    <% if @gm_messages.present? %>
+      <table class="table table-hover align-middle">
+        <tbody>
+          <tr>
+            <th scope="col">Message</th>
+          </tr>
+          <% @gm_messages.sort_by { |message| message.week.to_i }.reverse.each do |message| %>
+            <tr scope="row">
+              <td><%= message.var1 %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No GM messages found.</p>
+    <% end %>
+  </div>
+</div>

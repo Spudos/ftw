@@ -1,6 +1,6 @@
 class TurnsController < ApplicationController
   rescue_from StandardError, with: :handle_error
-  before_action :set_turn, only: %i[ show edit update destroy ]
+  before_action :set_turn, only: %i[show edit update destroy]
 
   def index
     @turns = Turn.all
@@ -52,19 +52,16 @@ class TurnsController < ApplicationController
     @turn_actions_processed = Turn.where(week: params[:week]).where.not(date_completed: nil).count
     @turn_actions_submitted = Turn.where(week: params[:week]).count
 
-    @feedback = Feedback.where(outstanding: true)
     @last_turn_processed = Message.maximum(:week)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @turn = Turn.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @turn = Turn.new(turn_params)
@@ -101,6 +98,10 @@ class TurnsController < ApplicationController
     end
   end
 
+  def gm_admin
+    @feedback = Feedback.where(outstanding: true)
+  end
+
   def process_turn
     errors = []
 
@@ -114,7 +115,7 @@ class TurnsController < ApplicationController
       notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
     end
 
-    redirect_to request.referrer, notice: notice
+    redirect_to request.referrer, notice:
   end
 
   def process_player_updates
@@ -130,7 +131,7 @@ class TurnsController < ApplicationController
       notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
     end
 
-    redirect_to request.referrer, notice: notice
+    redirect_to request.referrer, notice:
   end
 
   def process_upgrade_admin
@@ -146,7 +147,7 @@ class TurnsController < ApplicationController
       notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
     end
 
-    redirect_to request.referrer, notice: notice
+    redirect_to request.referrer, notice:
   end
 
   def process_club_updates
@@ -162,7 +163,7 @@ class TurnsController < ApplicationController
       notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
     end
 
-    redirect_to request.referrer, notice: notice
+    redirect_to request.referrer, notice:
   end
 
   def process_article_updates
@@ -178,13 +179,13 @@ class TurnsController < ApplicationController
       notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
     end
 
-    redirect_to request.referrer, notice: notice
+    redirect_to request.referrer, notice:
   end
 
   private
 
   def set_turn
-    @turn = Turn.find(params[:id])
+    @turn = Turn.find_by(id: params[:id])
   end
 
   def turn_params

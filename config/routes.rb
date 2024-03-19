@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   resources :articles
   devise_for :users
   resources :turnsheets
-  resources :turns
   resources :selections
   resources :clubs
   resources :matches
@@ -56,6 +55,16 @@ Rails.application.routes.draw do
   post '/turns/process_club_updates', to: 'turns#process_club_updates'
   post '/turns/process_article_updates', to: 'turns#process_article_updates'
 
+  get '/turns/gm_admin', to: 'turns#gm_admin'
+  get '/turns', to: 'turns#index'
+  post '/turns', to: 'turns#create'
+  get 'new_turn', to: 'turns#new'
+  get 'edit_turn', to: 'turns#edit'
+  get 'turn', to: 'turns#show'
+  patch '/turn', to: 'turns#update'
+  put '/turn/', to: 'turns#update'
+  delete '/turns/', to: 'turns#destroy'
+
   post '/matches/match', to: 'matches#match'
   get '/matches/outcome', to: 'matches#outcome'
   post '/matches/save', to: 'matches#save', as: 'save_match'
@@ -87,4 +96,6 @@ Rails.application.routes.draw do
   get '/help/manage', to: 'help#manage'
   get '/help/roadmap', to: 'help#roadmap'
   post '/help/club_submission', to: 'help#club_submission'
+
+  get '/turn_report', to: 'turn_report#index'
 end

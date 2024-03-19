@@ -20,7 +20,7 @@ class FeedbackController < ApplicationController
     else
       flash[:alert] = 'Error closing feedback.'
     end
-    redirect_to turns_path
+    redirect_to turns_gm_admin_path
   end
 
   private
