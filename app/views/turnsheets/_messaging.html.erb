@@ -1,0 +1,29 @@
+<h4 style="text-align: center">Messages</h4>
+<div class="col-md-12 align-top d-flex justify-content-center"> 
+  <table class="table table-hover align-middle table-bordered">
+    <tr scope="row">
+      <td scope="col">Club</td>
+      <td>
+        <%= form.label :club_message, style: "display: none" %>
+        <%= form.text_field :club_message %>
+      </td>
+    </tr>
+    <tr scope="row">
+      <td scope="col">Message:</td>
+      <td>
+        <%= form.label :message_text, style: "display: none" %>
+        <%= form.text_area :message_club %>
+      </td>
+    </tr>
+  </table>
+
+  <table class="table table-hover align-middle table-bordered">
+    <tr scope="row">
+      <td scope="col">Public Message:</td>
+      <td>
+        <%= form.label :public_message, style: "display: none" %>
+        <%= form.text_area :public_message %>
+      </td>
+    </tr>
+  </table>
+</div>

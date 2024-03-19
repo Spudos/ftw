@@ -240,3 +240,7 @@ club_id: 239
 club_id: 240
 club_id: 241
 club_id: 242
+club_id: 1
+club_id: 1
+club_id: 1
+club_id: 1

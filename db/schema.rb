@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_12_132747) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_19_084024) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -352,6 +352,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_12_132747) do
     t.string "article_headline"
     t.string "article_sub_headline"
     t.string "article"
+    t.integer "club_message"
+    t.string "message_text"
+    t.string "public_message"
   end
 
   create_table "upgrades", force: :cascade do |t|
