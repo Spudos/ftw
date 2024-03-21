@@ -26,6 +26,6 @@ module Ftw
         helper_specs: false,
         routing_specs: false
       )
-    end 
+    end
   end
 end
