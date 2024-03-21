@@ -117,7 +117,7 @@ class ClubsController < ApplicationController
     @messages = Message.where(club_id: Club.find_by(id: current_user[:club])&.id)
     @messages_new = Message.where(club_id: Club.find_by(id: current_user[:club])&.id)
                            .where(week: highest_week)
-                           .where.not("var2 LIKE 'inc%' OR var2 LIKE 'dec%' OR var2 LIKE 'public%'")
+                           .where("var2 IS NULL OR var2 LIKE 'public%'")
     @messages_finance = Message.where(club_id: Club.find_by(id: current_user[:club])&.id)
                                .where(week: highest_week)
                                .where("var2 LIKE 'inc%' OR var2 LIKE 'dec%'")
