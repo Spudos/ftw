@@ -17,15 +17,27 @@
     <div class="col-md-6">
       <div class="mb-3">
         <%= form.label :name, class: "form-label" %>
-        <%= form.text_field :name, class: "form-control", required: true, value: current_user.fname %>
+        <% if current_user %>
+          <%= form.text_field :name, class: "form-control", required: true, value: current_user.fname %>
+        <% else %>
+          <%= form.text_field :name, class: "form-control", required: true %>
+        <% end %>
       </div>
       <div class="mb-3">
         <%= form.label :email, class: "form-label" %>
-        <%= form.email_field :email, class: "form-control", required: true, value: current_user.email %>
+        <% if current_user %>
+          <%= form.email_field :name, class: "form-control", required: true, value: current_user.email %>
+        <% else %>
+          <%= form.email_field :name, class: "form-control", required: true %>
+        <% end %>
       </div>
       <div class="mb-3">
         <%= form.label :club, class: "form-label" %>
-        <%= form.number_field :club, class: "form-control", value: current_user.club %>
+        <% if current_user %>
+          <%= form.number_field :name, class: "form-control", required: true, value: current_user.club %>
+        <% else %>
+          <%= form.number_field :name, class: "form-control", required: true %>
+        <% end %>
       </div>
       <div class="mb-3">
         <%= form.label :message, class: "form-label" %>
