@@ -50,6 +50,13 @@
           </div>
         <% end %>
 
+        <% if Feedback.where(outstanding: true).present? && current_user && current_user.gm? %>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= "There are outstanding Feedback messages for GM review" %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
+
         <%= yield %>
     </main>
     
