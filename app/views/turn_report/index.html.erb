@@ -23,12 +23,14 @@
 <%= render 'public_messages' %>
 <% end %>
 
-<% if @turn_present.present? %>
- <h6>Your turnsheet was received in time to be processed this week</h6>
-<% else %>
-  <h6>You did not submit a turnsheet for processing this week</h6>
-<% end %>
+<% if current_user %>
+  <% if @turn_present.present? %>
+  <h6>Your turnsheet was received in time to be processed this week</h6>
+  <% else %>
+    <h6>You did not submit a turnsheet for processing this week</h6>
+  <% end %>
 
-<% if @club_matches.present? %>
-<%= render '/clubs/results' %>
+  <% if @club_matches.present? %>
+  <%= render '/clubs/results' %>
+  <% end %>
 <% end %>

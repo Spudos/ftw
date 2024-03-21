@@ -115,8 +115,12 @@ class ClubsController < ApplicationController
     @club_matches = Match.where('home_team = ? OR away_team = ?', @club.id, @club.id)
     @club_fixtures = Fixture.where('home= ? OR away = ?', @club.id, @club.id)
     @messages = Message.where(club_id: Club.find_by(id: current_user[:club])&.id)
-    @messages_new = Message.where(club_id: Club.find_by(id: current_user[:club])&.id).where(var2: nil).where(week: highest_week)
-    @messages_finance = Message.where(club_id: Club.find_by(id: current_user[:club])&.id).where(week: highest_week).where.not(var2: nil)
+    @messages_new = Message.where(club_id: Club.find_by(id: current_user[:club])&.id)
+                           .where(week: highest_week)
+                           .where.not("var2 LIKE 'inc%' OR var2 LIKE 'dec%' OR var2 LIKE 'public%'")
+    @messages_finance = Message.where(club_id: Club.find_by(id: current_user[:club])&.id)
+                               .where(week: highest_week)
+                               .where("var2 LIKE 'inc%' OR var2 LIKE 'dec%'")
     @finance_items = Club.new.finance_items(@club.id)
     @players = player_position_sort
   end
