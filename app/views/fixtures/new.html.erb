@@ -57,7 +57,7 @@
         <li>comp - the competition name eg Premier League</li>
       <ul>
       <br>
-      <%= form_tag import_fixtures_path, multipart: true do %>
+      <%= form_tag({ action: :import }, multipart: true) do %>
         <%= file_field_tag :file %>
         <%= submit_tag "Import", class: "btn btn-sm btn-danger" %>
       <% end %>

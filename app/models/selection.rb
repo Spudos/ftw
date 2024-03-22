@@ -51,10 +51,6 @@ class Selection < ApplicationRecord
   end
 
   def pick_gkp(club)
-    File.open('log.txt', 'a') do |file|
-      file.puts "club_id: #{club.id}"
-    end
-
     gkp = Player.where(club_id: club.id, position: 'gkp').order(total_skill: :desc).first
     Selection.create(club_id: club.id, player_id: gkp.id)
   end
