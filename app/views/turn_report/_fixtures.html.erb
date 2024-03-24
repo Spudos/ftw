@@ -1,0 +1,52 @@
+<div>
+  <h3 class="text-center">Next Weeks Fixtures</h3>
+  <div class="row mb-5">
+    <div class="col-md-6 d-flex flex-column align-items-center">
+      <% if @week_premier_fixtures.present? %>
+      <h5 class="text-center">Premier League</h5>
+        <table class="table table-hover align-middle">
+          <tbody>
+            <tr class="small text-center align-middle">
+              <th scope="col">Home</th>
+              <th></th>
+              <th scope="col">Away</th>
+            </tr>
+            <% @week_premier_fixtures.each do |fixture| %>
+              <tr scope="row" class="small text-center align-middle">
+                <td><%= Club.find_by(id: fixture[:home])&.name %></td>
+                <td>v</td>
+                <td><%= Club.find_by(id: fixture[:away])&.name %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>No games are arranged for next week.</p>
+      <% end %>
+    </div>
+
+    <div class="col-md-6 d-flex flex-column align-items-center">
+    <% if @week_championship_fixtures.present? %>
+    <h5 class="text-center">Championship</h5>
+      <table class="table table-hover align-middle">
+        <tbody>
+          <tr class="small text-center align-middle">
+            <th scope="col">Home</th>
+            <th></th>
+            <th scope="col">Away</th>
+          </tr>
+          <% @week_championship_fixtures.each do |fixture| %>
+            <tr scope="row" class="small text-center align-middle">
+              <td><%= Club.find_by(id: fixture[:home])&.name %></td>
+              <td>v</td>
+              <td><%= Club.find_by(id: fixture[:away])&.name %></td>     
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No games are arranged for next week.</p>
+    <% end %>
+    </div>
+  </div>
+</div>

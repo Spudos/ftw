@@ -1,0 +1,33 @@
+<div>
+  <h3 class="text-center">This Weeks Transfers</h3>
+  <div class="row mb-5">
+    <div class="col-md-6 d-flex flex-column align-items-center">
+    <% if @transfers.present? %>
+      <table class="table table-hover align-middle">
+        <tbody>
+          <tr class="small text-center alig7n-middle">
+            <th scope="col">Player ID</th>
+            <th scope="col">Name
+            <th scope="col">Buying Club</th>
+            <th scope="col">Selling Club</th>
+            <th scope="col">Fee</th>
+            <th scope="col">Status</th>
+          </tr>
+          <% @transfers.each do |transfer| %>
+            <tr scope="row" class="small text-center align-middle">
+              <td><%= transfer[:player_id] %></td>
+              <td><%= Player.find_by(id: transfer[:player_id])&.name %></td>
+              <td><%= Club.find_by(id: transfer[:buy_club])&.name %></td>
+              <td><%= Club.find_by(id: transfer[:sell_club])&.name %></td>
+              <td><%= transfer[:bid] %></td>
+              <td><%= transfer[:status] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No transfers were completed this week.</p>
+    <% end %>
+    </div>
+  </div>
+</div>

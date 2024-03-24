@@ -15,12 +15,18 @@
 <%= render 'gm_messages' %>
 <% end %>
 
-<% if @game_messages.present? %>
 <%= render 'game_messages' %>
-<% end %>
 
-<% if @public_messages.present? %>
 <%= render 'public_messages' %>
-<% end %>
+
+<%= render 'results' %>
+
+<%= render 'fixtures' %>
+
+<%= render 'mini_table' %>
+
+<%= render 'transfers' %>
+
+<%= render 'injured' %>
 
 
