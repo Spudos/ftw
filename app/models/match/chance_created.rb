@@ -11,17 +11,20 @@ class Match::ChanceCreated
       raise StandardError, "There was an error in the #{self.class.name} class"
     end
 
-    random_number = rand(1..100)
-    chance = final_team.first[:midfield] - final_team.last[:midfield]
+    home_mid_rating = final_team.first[:midfield]
+    away_mid_rating = final_team.last[:midfield]
+    random_chance_roll = rand(1..100)
+    team_chance_roll = rand(0..100)
+    chance = home_mid_rating - away_mid_rating
     chance_outcome = ''
 
-    if chance >= 0 && rand(0..100) < 16
+    if chance >= 0 && team_chance_roll < 16
       chance_outcome = 'home'
-    elsif chance.negative? && rand(0..100) < 16
+    elsif chance.negative? && team_chance_roll < 16
       chance_outcome = 'away'
-    elsif random_number <= 6
+    elsif random_chance_roll <= 6
       chance_outcome = 'home'
-    elsif random_number > 6 && random_number <= 11
+    elsif random_chance_roll > 6 && random_chance_roll <= 11
       chance_outcome = 'away'
     else
       chance_outcome = 'none'
@@ -29,6 +32,11 @@ class Match::ChanceCreated
 
     chance_result = {
       minute: i,
+      home_mid_rating:,
+      away_mid_rating:,
+      chance:,
+      team_chance_roll:,
+      random_chance_roll:,
       chance_outcome:
     }
     chance_result

@@ -44,5 +44,6 @@ class Match::SaveDetailedMatchSummary
       home_man_of_the_match: match_data[:home_man_of_the_match],
       away_man_of_the_match: match_data[:away_man_of_the_match],
     )
+    match.save
   end
 end

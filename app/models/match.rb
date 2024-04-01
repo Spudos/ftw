@@ -1,6 +1,6 @@
 class Match < ApplicationRecord
-  def run_matches(params)
-    fixture_list = Match::CreateFixtures.new(params).call
+  def run_matches(selected_week, competition)
+    fixture_list = Match::CreateFixtures.new(selected_week, competition).call
 
     fixture_list.each do |fixture|
       final_squad, match_info = squad(fixture)
@@ -46,7 +46,12 @@ class Match < ApplicationRecord
       goal_scored = Match::GoalScored.new(chance_on_target_result, match_team).call
       assist, scorer = Match::Names.new(goal_scored, home_top, away_top).call
 
-      minute_by_minute << { **match_info, **chance_result, **chance_on_target_result, **goal_scored, **assist, **scorer }
+      minute_by_minute << { **match_info,
+                            **chance_result,
+                            **chance_on_target_result,
+                            **goal_scored,
+                            **assist,
+                            **scorer }
     end
 
     return minute_by_minute, home_list, away_list
@@ -66,5 +71,6 @@ class Match < ApplicationRecord
     Match::SaveDetailedMatchSummary.new(detailed_match_summary).call
     Match::SaveGoalAndAssistInformation.new(minute_by_minute).call
     Match::SaveMatchCommentary.new(home_list, away_list, minute_by_minute).call
+    Match::MatchLogging.new(minute_by_minute).call
   end
 end

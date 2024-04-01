@@ -1,15 +1,16 @@
 class Match::CreateFixtures
-  attr_reader :params
+  attr_reader :selected_week, :competition
 
-  def initialize(params)
-    @params = params
+  def initialize(selected_week, competition)
+    @selected_week = selected_week
+    @competition = competition
   end
 
   def call
-    if params[:competition] == nil
-      fixtures = Fixture.where(week_number: params[:selected_week])
+    if competition == nil
+      fixtures = Fixture.where(week_number: selected_week)
     else
-      fixtures = Fixture.where(week_number: params[:selected_week], comp: params[:competition])
+      fixtures = Fixture.where(week_number: selected_week, comp: competition)
     end
 
     fixture_list = []
