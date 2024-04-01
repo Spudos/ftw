@@ -1,12 +1,31 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/andypierce/Desktop/ftw/spec/jobs/message_job_spec.rb": {
+      "/Users/andypierce/Desktop/ftw/spec/models/Turn/articles_updates_spec.rb": {
         "lines": [
+          1,
           1,
           null,
           1,
+          2,
           1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
           null
         ]
       },
@@ -1038,77 +1057,6 @@
       "/Users/andypierce/Desktop/ftw/app/helpers/tactics_helper.rb": {
         "lines": [
           1,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/app/jobs/message_job.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          0,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/app/jobs/application_job.rb": {
-        "lines": [
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/spec/jobs/run_matches_job_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/app/jobs/run_matches_job.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/spec/models/Turn/articles_updates_spec.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          2,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
           null
         ]
       },
@@ -6124,7 +6072,7 @@
           1,
           2,
           2,
-          7,
+          9,
           null,
           null,
           null,
@@ -6138,7 +6086,7 @@
           1,
           2,
           2,
-          6,
+          4,
           null,
           null,
           null,
@@ -8002,6 +7950,6 @@
         ]
       }
     },
-    "timestamp": 1712009538
+    "timestamp": 1712009614
   }
 }
