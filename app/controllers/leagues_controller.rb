@@ -2,10 +2,9 @@ class LeaguesController < ApplicationController
   require_relative '../services/team_statistics_calculator'
 
   def index
-    league_information = TeamStatisticsCalculator.new
-    @table = league_information.compile_league_table(params[:league])
-
     league = params[:league]
+
+    @table = League.where(competition: league).order(points: :desc, goal_difference: :desc, goals_for: :desc)
     @top_total_skill = Player.compile_top_total_skill_view(league)
     @top_performance = Player.compile_top_performance_view(league)
     @top_goals = Player.compile_top_goals_view(league)

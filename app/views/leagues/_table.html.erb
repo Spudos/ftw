@@ -7,27 +7,28 @@
     <th scope="col">#</th>
     <th scope="col">Id</th>
     <th scope="col">Name</th>
-    <th scope="col">Played</th>
-    <th scope="col">Won</th>
-    <th scope="col">Drawn</th>    
-    <th scope="col">Lost</th>
+    <th scope="col">P</th>
+    <th scope="col">W</th>
+    <th scope="col">D</th>    
+    <th scope="col">L</th>
     <th scope="col">For</th>
-    <th scope="col">Against</th>
-    <th scope="col">Goal diff</th>
-    <th scope="col">Points</th>
+    <th scope="col">Ag</th>
+    <th scope="col">GD</th>
+    <th scope="col">Pts</th>
   </tr>
-  <% @table.sort_by { |team, statistics| [-statistics[:points], -(statistics[:goals_scored] - statistics[:goals_conceded]), -statistics[:goals_scored]] }.each.with_index(1) do |(team, statistics), index| %>
+
+  <% @table.each_with_index do |statistics, index| %>
     <tr scope="row">
-      <td><%= index %></td>
-      <td><%= team %></td>
-      <td><%= Club.find_by(id: team)&.name %></td>
+      <td><%= index + 1 %>
+      <td><%= statistics[:club_id] %></td>
+      <td><%= statistics[:name] %></td>
       <td><%= statistics[:played] %></td>
       <td><%= statistics[:won] %></td>
       <td><%= statistics[:drawn] %></td>
       <td><%= statistics[:lost] %></td>
-      <td><%= statistics[:goals_scored] %></td>
-      <td><%= statistics[:goals_conceded] %></td>
-      <td><%= statistics[:goals_scored] - statistics[:goals_conceded] %></td>
+      <td><%= statistics[:goals_for] %></td>
+      <td><%= statistics[:goals_against] %></td>
+      <td><%= statistics[:goal_difference] %></td>
       <td><%= statistics[:points] %></td>
     </tr>
   <% end %>
