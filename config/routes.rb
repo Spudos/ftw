@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
   get '/leagues/league_cup/league', to: 'leagues#league_cup'
   get '/leagues/wcc/league', to: 'leagues#wcc'
+  post '/leagues/create_tables', to: 'leagues#create_tables'
 
   post '/turnsheets/process_turnsheet', to: 'turnsheets#process_turnsheet'
 

@@ -159,6 +159,15 @@
 
       <div class="col-3">
         <h3>Step 4</h3>
+        <h6>Calculate and Save League Tables</h6>
+        <form action="/leagues/create_tables" method="post">
+          <% if Message.exists?(action_id: "#{params[:week]}CLT") %>
+            <button type="submit" class="btn btn-danger disabled">League Tables Created</button><br>
+          <% else %>
+            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to create the league tables?')">Create Tables</button><br>
+          <% end %>
+        </form>
+
         <h6>Process End of Turn Player Updates</h6>
         <form action="/turns/process_player_updates" method="post">
           <input type="hidden" name="week" value="<%= params[:week] %>">

@@ -1,7 +1,7 @@
 class TeamStatisticsCalculator
   def compile_league_table(params)
     league_table_information = Hash.new { |hash, key|
-      hash[key] =
+          hash[key] =
         { played: 0,
           won: 0,
           lost: 0,

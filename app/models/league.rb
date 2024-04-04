@@ -1,0 +1,74 @@
+class League < ApplicationRecord
+  def create_tables
+    League.delete_all
+
+    teams = teams_from_matches
+    calculate_and_save_tables(teams)
+  end
+
+  def teams_from_matches
+    home = Match.pluck(:home_team).uniq
+    away = Match.pluck(:away_team).uniq
+    (home + away).uniq
+  end
+
+  def calculate_and_save_tables(teams)
+    teams.each do |t|
+      competition = Club.find_by(id: t)&.league
+      name = Club.find_by(id: t)&.name
+
+      record = {
+        club_id: t,
+        name:,
+        played: 0,
+        won: 0,
+        drawn: 0,
+        lost: 0,
+        goals_for: 0,
+        goals_against: 0,
+        goal_difference: 0,
+        points: 0,
+        competition:
+      }
+
+      Match.where(home_team: t, competition: competition).or(Match.where(away_team: t, competition: competition)).each do |m|
+        record[:played] += 1
+
+        if m.home_team == t
+          record[:goals_for] += m.home_goals
+          record[:goals_against] += m.away_goals
+        else
+          record[:goals_for] += m.away_goals
+          record[:goals_against] += m.home_goals
+        end
+
+        if m.home_team == t
+          if m.home_goals > m.away_goals
+            record[:won] += 1
+            record[:points] += 3
+          elsif m.home_goals == m.away_goals
+            record[:drawn] += 1
+            record[:points] += 1
+          else
+            record[:lost] += 1
+          end
+        else
+          if m.away_goals > m.home_goals
+            record[:won] += 1
+            record[:points] += 3
+          else
+            record[:lost] += 1
+          end
+        end
+
+        if m.home_team == t
+          record[:goal_difference] += m.home_goals - m.away_goals
+        else
+          record[:goal_difference] += m.away_goals - m.home_goals
+        end
+      end
+      league_record = League.new(record)
+      league_record.save!
+    end
+  end
+end

@@ -21,4 +21,9 @@ class LeaguesController < ApplicationController
     @wcc_weeks = Fixture.where(comp: 'WCC').map(&:week_number).uniq.sort
     @wcc_fixtures = Fixture.where(comp: 'WCC', week_number: params[:week_number])
   end
+
+  def create_tables
+    league = League.new
+    league.create_tables
+  end
 end
