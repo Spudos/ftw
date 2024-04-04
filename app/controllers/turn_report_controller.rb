@@ -9,9 +9,8 @@ class TurnReportController < ApplicationController
     @week_premier_fixtures = Fixture.where(week_number: params[:week_number].to_i + 1, comp: 'Premier League')
     @week_championship_fixtures = Fixture.where(week_number: params[:week_number].to_i + 1, comp: 'Championship')
 
-    league_information = TeamStatisticsCalculator.new
-    @premier_table = league_information.compile_league_table('Premier League')
-    @championship_table = league_information.compile_league_table('Championship')
+    @premier_table = League.where(competition: 'Premier League').order(points: :desc, goal_difference: :desc, goals_for: :desc)
+    @championship_table = League.where(competition: 'Championship').order(points: :desc, goal_difference: :desc, goals_for: :desc)
 
     @transfers = Transfer.where(week: params[:week_number]).order('player_id')
 
