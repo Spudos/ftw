@@ -26,4 +26,8 @@ class HelpController < ApplicationController
       redirect_to request.referrer, alert: 'Some params are missing or incorrect.'
     end
   end
+
+  def manager_list
+    @managers = User.where.not(club: 0)
+  end
 end

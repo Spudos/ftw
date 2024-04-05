@@ -54,7 +54,7 @@ class Club::ClubCreation
   private
 
   def set_club_in_user
-    User.find_by(email: params[:club][:manager_email]).update(club: club.id)
+    User.find_by(email: params[:club][:manager_email]).update(club: club.id, appointed: Date.today)
   end
 
   def club_creation_details

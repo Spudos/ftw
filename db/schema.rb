@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_05_220028) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_05_222557) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -397,6 +397,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_05_220028) do
     t.string "lname"
     t.integer "club"
     t.integer "club_count", default: 0
+    t.date "appointed"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

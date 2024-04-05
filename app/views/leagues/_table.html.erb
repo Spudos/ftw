@@ -15,6 +15,7 @@
     <th scope="col">Ag</th>
     <th scope="col">GD</th>
     <th scope="col">Pts</th>
+    <th scope="col">Managed</th>
   </tr>
 
   <% @table.each_with_index do |statistics, index| %>
@@ -30,6 +31,7 @@
       <td><%= statistics[:goals_against] %></td>
       <td><%= statistics[:goal_difference] %></td>
       <td><%= statistics[:points] %></td>
+      <td><%= Club.find_by(id: statistics[:club_id])&.managed %></td>
     </tr>
   <% end %>
 </table>

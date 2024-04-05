@@ -95,6 +95,7 @@ Rails.application.routes.draw do
   get '/help/issues', to: 'help#issues'
   get '/help/club_creation', to: 'help#club_creation'
   get '/help/manage', to: 'help#manage'
+  get '/help/manager_list', to: 'help#manager_list'
   get '/help/roadmap', to: 'help#roadmap'
   post '/help/club_submission', to: 'help#club_submission'
 

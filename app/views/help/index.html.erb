@@ -1,5 +1,18 @@
 <div class="row flex justify-content-center">
   <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
+    <h4 class="text-center"><strong>Issue Reporting</strong></h4>
+    <%= image_tag("club.jpg", style: "width: 100%; object-fit: cover;") %>
+    <%= link_to "Report an Issue", new_feedback_path, class: "btn btn-sm btn-primary" %>
+  </div>
+  
+    <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
+    <h4 class="text-center"><strong>Manager List</strong></h4>
+    <%= image_tag("club.jpg", style: "width: 100%; object-fit: cover;") %>
+    <%= link_to "View Current Managers", help_manager_list_path, class: "btn btn-sm btn-primary" %>
+  </div>
+</div> 
+<div class="row flex justify-content-center">
+  <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
     <h4 class="text-center"><strong>FAQs</strong></h4>
     <%= image_tag("club.jpg", style: "width: 100%; object-fit: cover;") %>
     <%= link_to "View the FAQs", help_faq_path, class: "btn btn-sm btn-primary" %>
@@ -16,19 +29,16 @@
   </div>
 </div>
 <div class="row flex justify-content-center">
-  <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-    <h4 class="text-center"><strong>Issue Reporting</strong></h4>
+    <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
+    <h4 class="text-center"><strong>Manage a Club</strong></h4>
     <%= image_tag("club.jpg", style: "width: 100%; object-fit: cover;") %>
-    <%= link_to "Report an Issue", new_feedback_path, class: "btn btn-sm btn-primary" %>
+    <%= link_to "Manage an Existing Club", help_manage_path, class: "btn btn-sm btn-primary" %>
   </div>
   <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
     <h4 class="text-center"><strong>Club Creation</strong></h4>
     <%= image_tag("club.jpg", style: "width: 100%; object-fit: cover;") %>
     <%= link_to "Create a New Club", help_club_creation_path, class: "btn btn-sm btn-primary" %>
   </div>
-  <div class="col-md-3 m-3 border border-5 shadow p-0 bg-light">
-    <h4 class="text-center"><strong>Manage a Club</strong></h4>
-    <%= image_tag("club.jpg", style: "width: 100%; object-fit: cover;") %>
-    <%= link_to "Manage an Existing Club", help_manage_path, class: "btn btn-sm btn-primary" %>
-  </div>
-</div>  
+  
+</div> 
+ 

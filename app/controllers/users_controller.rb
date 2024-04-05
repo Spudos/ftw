@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     club.save
 
     current_user.club = 0
+    current_user.appointed = 0
     current_user.save
 
     Feedback.create(
@@ -45,6 +46,7 @@ class UsersController < ApplicationController
     club.save
 
     current_user.club = club.id
+    current_user.appointed = Date.today
     current_user.club_count += 1
     current_user.save
 

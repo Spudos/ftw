@@ -1,0 +1,25 @@
+<div class="text-center">
+  <h2>Current Manager Listing</h2>
+</div>
+
+<table class="table table-hover align-middle">
+  <tr class="table-header">
+    <th scope="col">Name</th>
+    <th scope="col">Surname</th>
+    <th scope="col">Club Id</th>
+    <th scope="col">Club Name</th>
+    <th scope="col">League</th>
+    <th scope="col">Appointed</th>
+  </tr>
+
+  <% @managers.each do |manager| %>
+    <tr scope="row">
+      <td><%= manager[:fname] %></td>
+      <td><%= manager[:lname] %></td>
+      <td><%= manager[:club] %></td>
+      <td><%= Club.find_by(id: manager[:club])&.name %></td>
+      <td><%= Club.find_by(id: manager[:club])&.league %></td>
+      <td><%= manager[:appointed] %></td>
+    </tr>
+  <% end %>
+</table>
