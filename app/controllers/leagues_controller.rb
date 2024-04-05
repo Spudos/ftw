@@ -22,7 +22,18 @@ class LeaguesController < ApplicationController
   end
 
   def create_tables
-    league = League.new
-    league.create_tables
+    errors = []
+
+    begin
+      league = League.new
+      league.create_tables(params)
+
+      notice = 'League Tables updated sucessfully.'
+    rescue StandardError => e
+      errors << "Error occurred during processing: #{e.message}"
+      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
+    end
+
+    redirect_to request.referrer, notice:
   end
 end

@@ -17,9 +17,9 @@
     <th scope="col">Pts</th>
   </tr>
 
-  <% @table.each_with_index(1) do |statistics, index| %>
+  <% @table.each_with_index do |statistics, index| %>
     <tr scope="row">
-      <td><%= index %>
+      <td><%= index + 1 %>
       <td><%= statistics[:club_id] %></td>
       <td><%= statistics[:name] %></td>
       <td><%= statistics[:played] %></td>

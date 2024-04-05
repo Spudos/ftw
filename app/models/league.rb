@@ -1,9 +1,14 @@
 class League < ApplicationRecord
-  def create_tables
+  def create_tables(params)
     League.delete_all
 
     teams = teams_from_matches
     calculate_and_save_tables(teams)
+
+    Message.create(action_id: "#{params[:week]}CLT",
+                   week: params[:week],
+                   club_id: '999',
+                   var1: "week #{params[:week]} League tables created")
   end
 
   def teams_from_matches

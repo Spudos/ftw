@@ -161,6 +161,7 @@
         <h3>Step 4</h3>
         <h6>Calculate and Save League Tables</h6>
         <form action="/leagues/create_tables" method="post">
+          <input type="hidden" name="week" value="<%= params[:week] %>">
           <% if Message.exists?(action_id: "#{params[:week]}CLT") %>
             <button type="submit" class="btn btn-danger disabled">League Tables Created</button><br>
           <% else %>
