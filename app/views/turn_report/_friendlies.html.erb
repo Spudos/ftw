@@ -1,0 +1,33 @@
+<div>
+  <div class="row mb-5">
+    <div class="d-flex flex-column align-items-center">
+      <% if @friendly_results.present? %>
+      <h5 class="text-center">Friendlies</h5>
+        <table class="table table-hover align-middle">
+          <tbody>
+            <tr class="small text-center align-middle">
+              <th scope="col">Home</th>
+              <th scope="col">Score</th>
+              <th></th>
+              <th scope="col">Away</th>
+              <th scope="col">Score</th>
+              <th scope="col">Crowd</th>
+            </tr>
+            <% @friendly_results.each do |result| %>
+              <tr scope="row" class="small text-center align-middle">
+                <td><%= Club.find_by(id: result[:home_team])&.name %></td>
+                <td><%= result[:home_goals] %></td>
+                <td>v</td>
+                <td><%= result[:away_goals] %></td>
+                <td><%= Club.find_by(id: result[:away_team])&.name %></td>
+                <td><%= result[:attendance] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>No friendly games were played this week.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

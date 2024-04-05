@@ -4,6 +4,7 @@ class TurnReportController < ApplicationController
     @gm_messages = Message.where(var2: 'gm', week: params[:week_number])
     @public_messages = Message.where(var2: 'public', week: params[:week_number])
     @game_messages = Message.where(var2: 'game', week: params[:week_number])
+    @friendly_results = Match.where(week_number: params[:week_number], competition: 'Friendly')
     @week_premier_results = Match.where(week_number: params[:week_number], competition: 'Premier League')
     @week_championship_results = Match.where(week_number: params[:week_number], competition: 'Championship')
     @week_premier_fixtures = Fixture.where(week_number: params[:week_number].to_i + 1, comp: 'Premier League')
