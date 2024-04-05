@@ -3,7 +3,7 @@ def random_number(min, max)
 end
 
 hash = [
-  { name: 'Alveley Wolves FC', league: 'Premier League' },
+  { name: 'Glorrwest', league: 'Premier League' },
   { name: 'Liverwolves', league: 'Premier League' },
   { name: 'Dublin FC', league: 'Premier League' },
   { name: 'Munich Rovers', league: 'Premier League' },
@@ -23,7 +23,7 @@ hash = [
   { name: 'London Town FC', league: 'Premier League' },
   { name: 'Notttingham Utd', league: 'Premier League' },
   { name: 'Birmingham Town', league: 'Premier League' },
-  { name: 'Wycombe Wolves FC', league: 'Championship' },
+  { name: 'Alveley Wolves FC', league: 'Championship' },
   { name: 'Arsenspurs FC', league: 'Championship' },
   { name: 'Gloucester FC', league: 'Championship' },
   { name: 'Kidderminter Rovers', league: 'Championship' },
