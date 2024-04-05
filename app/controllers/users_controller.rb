@@ -45,6 +45,7 @@ class UsersController < ApplicationController
     club.save
 
     current_user.club = club.id
+    current_user.club_count += 1
     current_user.save
 
     Feedback.create(

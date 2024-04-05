@@ -4,7 +4,10 @@
     <h5 class="text-center"><%= "You are already managing #{Club.find_by(id: current_user.club)&.name}" %></h5>
     <h6 class="text-center">Currently, only one club per user is allowed</h6>
     <h6 class="text-center">To manage another club, please create another user with a different email address or resign from your current club</h6>
-  <% else%>
+  <% elsif current_user && current_user.club_count >= 3 %>
+    <h5 class="text-center">You have tried to manage too many clubs with this account</h5>
+    <h6 class="text-center">If you want to take on another club please contact the GM by raising an issue</h6>
+  <% else %>
     <h6 class="text-center">Select a club that you would like to manage</h6>
     <div class="row d-flex justify-content-center">
       <table class="table table-hover align-middle m-5">

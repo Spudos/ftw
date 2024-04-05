@@ -17,6 +17,10 @@ class HelpController < ApplicationController
 
     if params[:club].values.all?(&:present?) && points == 15
       new_club.submission(params)
+
+      current_user.club_count += 1
+      current_user.save
+
       redirect_to root_path, notice: 'Club was successfully created.'
     else
       redirect_to request.referrer, alert: 'Some params are missing or incorrect.'
