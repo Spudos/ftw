@@ -2,6 +2,7 @@
 <div class="row d-flex justify-content-center">
   <div class="col-md-6">
     <h6 class="text-center">Available Players</h6>  
+    <h6 class="text-center">Click on a player to add them to the team list</h6> 
     <table class="table table-hover align-middle">
       <tr>
         <th>
@@ -50,7 +51,7 @@
         <tr>
           <td>
             <%= form.label "player_#{index}".to_sym, style: "display: block" %>
-            <%= form.text_field "player_#{index}".to_sym, class: "player-input" %>
+            <%= form.text_field "player_#{index}".to_sym, { class: "player-input", readonly: true } %>
           </td>
         </tr>
       <% end %>
