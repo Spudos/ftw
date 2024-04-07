@@ -5,64 +5,64 @@
       <td>Type</td>
       <td>
         <%= form.label :transfer_type, style: "display: none" %>
-        <%= form.select :transfer_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), prompt: "Select a transfer type?" %>
+        <%= form.select :transfer_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), {prompt: "Select a transfer type?"}, { id: "transfer_type" }  %>
       </td>
       <td>Player ID</td>
       <td>
         <%= form.label :transfer_player_id, style: "display: none" %>
-        <%= form.text_field :transfer_player_id, disabled: true %>
+        <%= form.text_field :transfer_player_id, disabled: true, id: 'transfer_player_id' %>
       </td>
       <td>Amount</td>
       <td>
         <%= form.label :transfer_amount, style: "display: none" %>
-        <%= form.text_field :transfer_amount, disabled: true %>
+        <%= form.text_field :transfer_amount, disabled: true, id: 'transfer_amount' %>
       </td>
       <td>Other club</td>
       <td>
         <%= form.label :transfer_club, style: "display: none" %>
-        <%= form.text_field :transfer_club, disabled: true %>
+        <%= form.text_field :transfer_club, disabled: true, id: 'transfer_club' %>
     </tr>
     <tr scope="row">
       <td>Type</td>
       <td>
         <%= form.label :transfer1_type, style: "display: none" %>
-        <%= form.select :transfer1_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), prompt: "Select a transfer type?" %>
+        <%= form.select :transfer1_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), {prompt: "Select a transfer type?"}, { id: "transfer1_type" }  %>
       </td>
       <td>Player ID</td>
       <td>
         <%= form.label :transfer1_player_id, style: "display: none" %>
-        <%= form.text_field :transfer1_player_id, disabled: true %>
+        <%= form.text_field :transfer1_player_id, disabled: true, id: 'transfer1_player_id' %>
       </td>
       <td>Amount</td>
       <td>
         <%= form.label :transfer1_amount, style: "display: none" %>
-        <%= form.text_field :transfer1_amount, disabled: true %>
+        <%= form.text_field :transfer1_amount, disabled: true, id: 'transfer1_amount' %>
       </td>
       <td>Other club</td>
       <td>
         <%= form.label :transfer1_club, style: "display: none" %>
-        <%= form.text_field :transfer1_club, disabled: true %>
+        <%= form.text_field :transfer1_club, disabled: true, id: 'transfer1_club' %>
     </tr>
     <tr scope="row">
       <td>Type</td>
       <td>
         <%= form.label :transfer2_type, style: "display: none" %>
-        <%= form.select :transfer2_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), prompt: "Select a transfer type?" %>
+        <%= form.select :transfer2_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), {prompt: "Select a transfer type?"}, { id: "transfer2_type" }  %>
       </td>
       <td>Player ID</td>
       <td>
         <%= form.label :transfer2_player_id, style: "display: none" %>
-        <%= form.text_field :transfer2_player_id, disabled: true %>
+        <%= form.text_field :transfer2_player_id, disabled: true, id: 'transfer2_player_id' %>
       </td>
       <td>Amount</td>
       <td>
         <%= form.label :transfer2_amount, style: "display: none" %>
-        <%= form.text_field :transfer2_amount, disabled: true %>
+        <%= form.text_field :transfer2_amount, disabled: true, id: 'transfer2_amount' %>
       </td>
       <td>Other club</td>
       <td>
         <%= form.label :transfer2_club, style: "display: none" %>
-        <%= form.text_field :transfer2_club, disabled: true %>
+        <%= form.text_field :transfer2_club, disabled: true, id: 'transfer2_club' %>
     </tr>
     <tr scope="row">
       <td>Type</td>
@@ -89,14 +89,107 @@
   </table>
 </div>
 
-<script defer>
-  const transferThreeType = document.getElementById('transfer3_type');
-  const transferThreePlayerId = document.getElementById('transfer3_player_id');
-  const transferThreeAmount = document.getElementById('transfer3_amount');
-  const transferThreeClub = document.getElementById('transfer3_club');
-  
-  transferThreeType.addEventListener('input', function() {
-  if (transferThreeType.value.trim() == "unmanaged bid") {
+<script>
+
+const transferType = document.getElementById('transfer_type');
+const transferPlayerId = document.getElementById('transfer_player_id');
+const transferAmount = document.getElementById('transfer_amount');
+const transferClub = document.getElementById('transfer_club');
+
+transferType.addEventListener('input', function() {
+  if (transferType.value.trim() === "unmanaged_bid") {
+    transferPlayerId.removeAttribute('disabled');
+    transferAmount.removeAttribute('disabled');
+  } else if (transferType.value.trim() === "circuit") {
+    transferPlayerId.removeAttribute('disabled');
+    transferAmount.setAttribute('disabled', 'disabled');
+    transferClub.setAttribute('disabled', 'disabled');
+  } else if (transferType.value.trim() === "listed_bid") {
+    transferPlayerId.removeAttribute('disabled');
+    transferAmount.removeAttribute('disabled');
+  } else if (transferType.value.trim() === "deal") {
+    transferPlayerId.removeAttribute('disabled');
+    transferAmount.removeAttribute('disabled');
+    transferClub.removeAttribute('disabled');
+  } else {
+    transferPlayerId.setAttribute('disabled', 'disabled');
+    transferAmount.setAttribute('disabled', 'disabled');
+    transferClub.setAttribute('disabled', 'disabled');
+  }
+});
+
+const transferOneType = document.getElementById('transfer1_type');
+const transferOnePlayerId = document.getElementById('transfer1_player_id');
+const transferOneAmount = document.getElementById('transfer1_amount');
+const transferOneClub = document.getElementById('transfer1_club');
+
+transferOneType.addEventListener('input', function() {
+  if (transferOneType.value.trim() === "unmanaged_bid") {
+    transferOnePlayerId.removeAttribute('disabled');
+    transferOneAmount.removeAttribute('disabled');
+  } else if (transferOneType.value.trim() === "circuit") {
+    transferOnePlayerId.removeAttribute('disabled');
+    transferOneAmount.setAttribute('disabled', 'disabled');
+    transferOneClub.setAttribute('disabled', 'disabled');
+  } else if (transferOneType.value.trim() === "listed_bid") {
+    transferOnePlayerId.removeAttribute('disabled');
+    transferOneAmount.removeAttribute('disabled');
+  } else if (transferOneType.value.trim() === "deal") {
+    transferOnePlayerId.removeAttribute('disabled');
+    transferOneAmount.removeAttribute('disabled');
+    transferOneClub.removeAttribute('disabled');
+  } else {
+    transferOnePlayerId.setAttribute('disabled', 'disabled');
+    transferOneAmount.setAttribute('disabled', 'disabled');
+    transferOneClub.setAttribute('disabled', 'disabled');
+  }
+});
+
+const transferTwoType = document.getElementById('transfer2_type');
+const transferTwoPlayerId = document.getElementById('transfer2_player_id');
+const transferTwoAmount = document.getElementById('transfer2_amount');
+const transferTwoClub = document.getElementById('transfer2_club');
+
+transferTwoType.addEventListener('input', function() {
+  if (transferTwoType.value.trim() === "unmanaged_bid") {
+    transferTwoPlayerId.removeAttribute('disabled');
+    transferTwoAmount.removeAttribute('disabled');
+  } else if (transferTwoType.value.trim() === "circuit") {
+    transferTwoPlayerId.removeAttribute('disabled');
+    transferTwoAmount.setAttribute('disabled', 'disabled');
+    transferTwoClub.setAttribute('disabled', 'disabled');
+  } else if (transferTwoType.value.trim() === "listed_bid") {
+    transferTwoPlayerId.removeAttribute('disabled');
+    transferTwoAmount.removeAttribute('disabled');
+  } else if (transferTwoType.value.trim() === "deal") {
+    transferTwoPlayerId.removeAttribute('disabled');
+    transferTwoAmount.removeAttribute('disabled');
+    transferTwoClub.removeAttribute('disabled');
+  } else {
+    transferTwoPlayerId.setAttribute('disabled', 'disabled');
+    transferTwoAmount.setAttribute('disabled', 'disabled');
+    transferTwoClub.setAttribute('disabled', 'disabled');
+  }
+});
+
+const transferThreeType = document.getElementById('transfer3_type');
+const transferThreePlayerId = document.getElementById('transfer3_player_id');
+const transferThreeAmount = document.getElementById('transfer3_amount');
+const transferThreeClub = document.getElementById('transfer3_club');
+
+
+transferThreeType.addEventListener('input', function() {
+  if (transferThreeType.value.trim() === "unmanaged_bid") {
+    transferThreePlayerId.removeAttribute('disabled');
+    transferThreeAmount.removeAttribute('disabled');
+  } else if (transferThreeType.value.trim() === "circuit") {
+    transferThreePlayerId.removeAttribute('disabled');
+    transferThreeAmount.setAttribute('disabled', 'disabled');
+    transferThreeClub.setAttribute('disabled', 'disabled');
+  } else if (transferThreeType.value.trim() === "listed_bid") {
+    transferThreePlayerId.removeAttribute('disabled');
+    transferThreeAmount.removeAttribute('disabled');
+  } else if (transferThreeType.value.trim() === "deal") {
     transferThreePlayerId.removeAttribute('disabled');
     transferThreeAmount.removeAttribute('disabled');
     transferThreeClub.removeAttribute('disabled');
@@ -104,5 +197,7 @@
     transferThreePlayerId.setAttribute('disabled', 'disabled');
     transferThreeAmount.setAttribute('disabled', 'disabled');
     transferThreeClub.setAttribute('disabled', 'disabled');
-  }});
+  }
+});
+
 </script>
