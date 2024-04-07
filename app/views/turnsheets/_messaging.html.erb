@@ -2,17 +2,17 @@
 <div class="col-md-12 align-top d-flex justify-content-center"> 
   <table class="table table-hover align-middle table-bordered">
     <tr scope="row">
-      <td scope="col">Club</td>
+      <td scope="col">Club Id</td>
       <td>
         <%= form.label :club_message, style: "display: none" %>
-        <%= form.text_field :club_message %>
+        <%= form.text_field :club_message, id: "club_message"  %>
       </td>
     </tr>
     <tr scope="row">
       <td scope="col">Message:</td>
       <td>
         <%= form.label :message_text, style: "display: none" %>
-        <%= form.text_area :message_text %>
+        <%= form.text_area :message_text, disabled: true, id: "message_text"   %>
       </td>
     </tr>
   </table>
@@ -27,3 +27,27 @@
     </tr>
   </table>
 </div>
+
+<script defer>
+  const clubMessageInput = document.getElementById('club_message');
+  const messageInput = document.getElementById('message_text');
+
+  clubMessageInput.addEventListener('input', function() {
+    
+    if (!isNaN(clubMessageInput.value.trim()) && clubMessageInput.value.trim() !== "") {
+      messageInput.removeAttribute('disabled');
+      messageInput.setAttribute('required', 'required');
+      clubMessageInput.style.border = '1px solid #66FF00';
+      messageInput.style.border = '1px solid #d42321';
+    } else {
+      messageInput.setAttribute('disabled', 'disabled');
+      messageInput.removeAttribute('required');
+      clubMessageInput.style.border = '1px solid #d42321';
+    }
+  });
+
+  messageInput.addEventListener('input', function() {
+      messageInput.style.border = '1px solid #66FF00';
+    });
+</script>
+

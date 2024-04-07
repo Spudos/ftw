@@ -5,22 +5,56 @@
       <td scope="col">Headline:</td>
       <td>
         <%= form.label :article_headline, style: "display: none" %>
-        <%= form.text_field :article_headline %>
+        <%= form.text_field :article_headline, id: "article_headline" %>
       </td>
     </tr>
     <tr scope="row">
       <td scope="col">Sub Headline:</td>
       <td>
         <%= form.label :article_sub_headline, style: "display: none" %>
-        <%= form.text_field :article_sub_headline %>
+        <%= form.text_field :article_sub_headline, id: "article_sub_headline", disabled: true %>
       </td>
     </tr>
     <tr scope="row">
       <td scope="col">Article:</td>
       <td>
         <%= form.label :article, style: "display: none" %>
-        <%= form.text_area :article %>
+        <%= form.text_area :article, id: "article", disabled: true %>
       </td>
     </tr>
   </table>
 </div>
+
+<script defer>
+  const headlineInput = document.getElementById('article_headline');
+  const subHeadlineInput = document.getElementById('article_sub_headline');
+  const articleInput = document.getElementById('article');
+
+  headlineInput.addEventListener('input', function() {
+  if (headlineInput.value.trim() !== "") {
+    headlineInput.style.border = '1px solid #66FF00';
+    subHeadlineInput.style.border = '1px solid #d42321';
+    subHeadlineInput.removeAttribute('disabled');
+  } else {
+    headlineInput.style.border = '1px solid #d42321';
+    subHeadlineInput.setAttribute('disabled', 'disabled');
+    subHeadlineInput.style.border = '1px solid #ced4da';
+  }
+  });
+
+  subHeadlineInput.addEventListener('input', function() {
+  if (subHeadlineInput.value.trim() !== "") {
+    subHeadlineInput.style.border = '1px solid #66FF00';
+    articleInput.style.border = '1px solid #d42321';
+    articleInput.removeAttribute('disabled');
+  } else {
+    subHeadlineInput.style.border = '1px solid #d42321';
+    articleInput.setAttribute('disabled', 'disabled');
+    articleInput.style.border = '1px solid #ced4da';
+  }
+  });
+
+  articleInput.addEventListener('input', function() {
+    articleInput.style.border = '1px solid #66FF00';
+  });
+</script>
