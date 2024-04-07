@@ -10,17 +10,17 @@
       <td>Player ID</td>
       <td>
         <%= form.label :transfer_player_id, style: "display: none" %>
-        <%= form.text_field :transfer_player_id %>
+        <%= form.text_field :transfer_player_id, disabled: true %>
       </td>
       <td>Amount</td>
       <td>
         <%= form.label :transfer_amount, style: "display: none" %>
-        <%= form.text_field :transfer_amount %>
+        <%= form.text_field :transfer_amount, disabled: true %>
       </td>
       <td>Other club</td>
       <td>
         <%= form.label :transfer_club, style: "display: none" %>
-        <%= form.text_field :transfer_club %>
+        <%= form.text_field :transfer_club, disabled: true %>
     </tr>
     <tr scope="row">
       <td>Type</td>
@@ -31,17 +31,17 @@
       <td>Player ID</td>
       <td>
         <%= form.label :transfer1_player_id, style: "display: none" %>
-        <%= form.text_field :transfer1_player_id %>
+        <%= form.text_field :transfer1_player_id, disabled: true %>
       </td>
       <td>Amount</td>
       <td>
         <%= form.label :transfer1_amount, style: "display: none" %>
-        <%= form.text_field :transfer1_amount %>
+        <%= form.text_field :transfer1_amount, disabled: true %>
       </td>
       <td>Other club</td>
       <td>
         <%= form.label :transfer1_club, style: "display: none" %>
-        <%= form.text_field :transfer1_club %>
+        <%= form.text_field :transfer1_club, disabled: true %>
     </tr>
     <tr scope="row">
       <td>Type</td>
@@ -52,39 +52,57 @@
       <td>Player ID</td>
       <td>
         <%= form.label :transfer2_player_id, style: "display: none" %>
-        <%= form.text_field :transfer2_player_id %>
+        <%= form.text_field :transfer2_player_id, disabled: true %>
       </td>
       <td>Amount</td>
       <td>
         <%= form.label :transfer2_amount, style: "display: none" %>
-        <%= form.text_field :transfer2_amount %>
+        <%= form.text_field :transfer2_amount, disabled: true %>
       </td>
       <td>Other club</td>
       <td>
         <%= form.label :transfer2_club, style: "display: none" %>
-        <%= form.text_field :transfer2_club %>
+        <%= form.text_field :transfer2_club, disabled: true %>
     </tr>
     <tr scope="row">
       <td>Type</td>
       <td>
         <%= form.label :transfer3_type, style: "display: none" %>
-        <%= form.select :transfer3_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), prompt: "Select a transfer type?" %>
+        <%= form.select :transfer3_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), {prompt: "Select a transfer type?"}, { id: "transfer3_type" } %>
       </td>
       <td>Player ID</td>
       <td>
         <%= form.label :transfer3_player_id, style: "display: none" %>
-        <%= form.text_field :transfer3_player_id %>
+        <%= form.text_field :transfer3_player_id, disabled: true, id: "transfer3_player_id" %>
       </td>
       <td>Amount</td>
       <td>
         <%= form.label :transfer3_amount, style: "display: none" %>
-        <%= form.text_field :transfer3_amount %>
+        <%= form.text_field :transfer3_amount, disabled: true, id: "transfer3_amount" %>
       </td>
       <td>Other club</td>
       <td>
         <%= form.label :transfer3_club, style: "display: none" %>
-        <%= form.text_field :transfer3_club %>
+        <%= form.text_field :transfer3_club, disabled: true, id: "transfer3_club" %>
       </td>
     </tr>
   </table>
 </div>
+
+<script defer>
+  const transferThreeType = document.getElementById('transfer3_type');
+  const transferThreePlayerId = document.getElementById('transfer3_player_id');
+  const transferThreeAmount = document.getElementById('transfer3_amount');
+  const transferThreeClub = document.getElementById('transfer3_club');
+  
+  transferThreeType.addEventListener('input', function() {
+  if (transferThreeType.value.trim() == "unmanaged bid") {
+    transferThreePlayerId.removeAttribute('disabled');
+    transferThreeAmount.removeAttribute('disabled');
+    transferThreeClub.removeAttribute('disabled');
+  } else {
+    transferThreePlayerId.setAttribute('disabled', 'disabled');
+    transferThreeAmount.setAttribute('disabled', 'disabled');
+    transferThreeClub.setAttribute('disabled', 'disabled');
+  }});
+</script>
