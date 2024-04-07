@@ -13,23 +13,23 @@ class TurnsheetPolicy < ApplicationPolicy
   end
 
   def show?
-    user.gm?
+    true
   end
 
   def create?
-    user.gm?
+    true
   end
 
   def new?
-    create?
+    true
   end
 
   def update?
-    user.gm?
+    true
   end
 
   def edit?
-    update?
+    true
   end
 
   def destroy?
