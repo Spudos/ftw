@@ -19,6 +19,8 @@ class TurnsheetsController < ApplicationController
     @club = Club.find_by(id: current_user.club)
 
     @selection = player_position_sort
+
+    @next_turn_week = Turnsheet.where(club_id: current_user.club).maximum(:week).to_i + 1
   end
 
   # GET /turnsheets/1/edit

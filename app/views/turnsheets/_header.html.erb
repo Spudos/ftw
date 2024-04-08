@@ -20,6 +20,6 @@
 <div class="col-md-12 align-top d-flex align-items-center justify-content-center">   
   <div class="turnsheet_headers bg-danger">
     <%= form.label :week, style: "display: inline-block" %>
-    <%= form.number_field :week %>
+    <%= form.number_field :week, value: @next_turn_week %>
   </div>
 </div>
