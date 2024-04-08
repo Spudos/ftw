@@ -2,7 +2,7 @@
   <h2><%= params[:competition] %></h2>
 </div>
 
-<table class="table table-hover align-middle">
+<table class="table table-hover align-middle mb-5">
   <tr class="table-header">
     <th scope="col">#</th>
     <th scope="col">Id</th>
@@ -35,3 +35,115 @@
     </tr>
   <% end %>
 </table>
+
+<div class="row mb-5">
+  <div class="col-md-4">
+    <table class="table table-hover align-middle">
+      <tr>
+        <th colspan="5" scope="col"><h5 class="text-center">Biggest Stadiums</h5><th>
+      </tr>
+      <tr>
+        <th scope="col">Club</th>
+        <th scope="col">Total Seats</th>
+      </tr>
+      <% @club_biggest_stadiums.each do |club| %>
+        <tr scope="row">
+          <td><%= club[:name] %></td>
+          <td><%= club[:stadium_size] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-md-4">
+    <table class="table table-hover align-middle">
+      <tr>
+        <th colspan="5" scope="col"><h5 class="text-center">Biggest Fanbase</h5><th>
+      </tr>
+      <tr>
+        <th scope="col">Club</th>
+        <th scope="col">Fanbase</th>
+      </tr>
+      <% @club_biggest_fanbase.each do |club| %>
+        <tr scope="row">
+          <td><%= club[:name] %></td>
+          <td><%= club[:fanbase] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-md-4">
+  <table class="table table-hover align-middle">
+    <tr>
+      <th colspan="5" scope="col"><h5 class="text-center">Biggest Bank Balances</h5><th>
+    </tr>
+    <tr>
+      <th scope="col">Club</th>
+      <th scope="col">Bank Balance</th>
+    </tr>
+    <% @club_biggest_banks.each do |club| %>
+      <tr scope="row">
+        <td><%= club[:name] %></td>
+        <td><%= club[:bank] %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div>
+
+<div class="row mb-5">
+  <div class="col-md-4">
+    <table class="table table-hover align-middle">
+      <tr>
+        <th colspan="5" scope="col"><h5 class="text-center">Biggest Coaching Team</h5><th>
+      </tr>
+      <tr>
+        <th scope="col">Club</th>
+        <th scope="col">Coaches</th>
+      </tr>
+      <% @club_biggest_coaches.each do |club| %>
+        <tr scope="row">
+          <td><%= club[:name] %></td>
+          <td><%= club[:coaches] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-md-4">
+    <table class="table table-hover align-middle">
+      <tr>
+        <th colspan="5" scope="col"><h5 class="text-center">Biggest Medical Team</h5><th>
+      </tr>
+      <tr>
+        <th scope="col">Club</th>
+        <th scope="col">Medical Team</th>
+      </tr>
+      <% @club_biggest_fitness.each do |club| %>
+        <tr scope="row">
+          <td><%= club[:name] %></td>
+          <td><%= club[:staff_fitness] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-md-4">
+  <table class="table table-hover align-middle">
+    <tr>
+      <th colspan="5" scope="col"><h5 class="text-center">Happiest Fans</h5><th>
+    </tr>
+    <tr>
+      <th scope="col">Club</th>
+      <th scope="col">Happiest Fans</th>
+    </tr>
+    <% @club_biggest_fan_happiness.each do |club| %>
+      <tr scope="row">
+        <td><%= club[:name] %></td>
+        <td><%= club[:fan_happiness] %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div>

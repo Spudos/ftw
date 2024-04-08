@@ -9,6 +9,13 @@ class LeaguesController < ApplicationController
     @top_performance = Player.compile_top_performance_view(league)
     @top_goals = Player.compile_top_goals_view(league)
     @top_assists = Player.compile_top_assists_view(league)
+
+    @club_biggest_stadiums = League.compile_biggest_stadiums(league)
+    @club_biggest_banks = League.compile_biggest_banks(league)
+    @club_biggest_fanbase = League.compile_biggest_fanbase(league)
+    @club_biggest_coaches = League.compile_biggest_coaches(league)
+    @club_biggest_fitness = League.compile_biggest_fitness(league)
+    @club_biggest_fan_happiness = League.compile_biggest_fan_happiness(league)
   end
 
   def league_cup
