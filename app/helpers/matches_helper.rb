@@ -20,17 +20,15 @@ module MatchesHelper
 
   def press(number)
     case number
-    when 0
+    when 10
       "Heavy Metal"
-    when 1
+    when 6
       "Strong"
-    when 2
-      "Normal"
     when 3
+      "Normal"
+    when 0
       "None"
-    when 4
-      "Wide"
-    when 5
+    when -5
       "Late"
     else
       "Late Heavy Metal"
