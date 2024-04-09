@@ -2,4 +2,8 @@
 //= link_directory ../stylesheets .css
 //= link_tree ../../javascript .js
 //= link_tree ../../../vendor/javascript .js
-//= link homepage_test.mov
+//= link articles.mp4
+//= link my_club.mp4
+//= link players.mp4
+//= link turn_report.mp4
+//= link turnsheet.mp4

@@ -3,13 +3,11 @@
     <h3>Rulebook</h3>
     <div class="row">
       <div>
-        <button id="introduction" class="btn btn-sm btn-primary">Introduction</button>
         <button id="articles" class="btn btn-sm btn-primary">Articles</button>
-        <button id="my_club" class="btn btn-sm btn-primary">My CLub</button>
-        <button id="turns" class="btn btn-sm btn-primary">Turns</button>
-        <button id="cups" class="btn btn-sm btn-primary">Cups</button>
+        <button id="my_club" class="btn btn-sm btn-primary">My Club</button>
+        <button id="turns" class="btn btn-sm btn-primary">Turn Report</button>
         <button id="player" class="btn btn-sm btn-primary">Players</button>
-        <button id="transfers" class="btn btn-sm btn-primary">Transfers</button>
+        <button id="turnsheet" class="btn btn-sm btn-primary">Turnsheet</button>
       </div>
     </div>
     <div class="row mt-3">
@@ -21,27 +19,19 @@
 </div>
 
 <script>
-    const introductionButton = document.getElementById("introduction");
     const articlesButton = document.getElementById("articles");
     const myClubButton = document.getElementById("my_club");
     const turnsButton = document.getElementById("turns");
-    const cupsButton = document.getElementById("cups");
     const playerButton = document.getElementById("player");
-    const transfersButton = document.getElementById("transfers");
+    const turnsheetButton = document.getElementById("turnsheet");
 
     const video = document.getElementById("video");
 
-    introductionButton.addEventListener("click", showIntroduction);
     articlesButton.addEventListener("click", showArticles);
     myClubButton.addEventListener("click", showMyClub);
     turnsButton.addEventListener("click", showTurns);
-    cupsButton.addEventListener("click", showCups);
     playerButton.addEventListener("click", showPlayer);
-    transfersButton.addEventListener("click", showTransfers);
-
-    function showIntroduction() {
-      video.innerHTML = "<%= j render 'introduction' %>";
-    }
+    turnsheetButton.addEventListener("click", showTurnsheet);
 
     function showArticles() {
       video.innerHTML = "<%= j render 'articles' %>";
@@ -52,18 +42,14 @@
     }
 
     function showTurns() {
-      video.innerHTML = "<%= j render 'turns' %>";
-    }
-
-    function showCups() {
-      video.innerHTML = "<%= j render 'cups' %>";
+      video.innerHTML = "<%= j render 'turn_report' %>";
     }
 
     function showPlayer() {
       video.innerHTML = "<%= j render 'player' %>";
     }
 
-    function showTransfers() {
-      video.innerHTML = "<%= j render 'transfers' %>";
+    function showTurnsheet() {
+      video.innerHTML = "<%= j render 'turnsheet' %>";
     }
   </script>
