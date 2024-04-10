@@ -60,11 +60,11 @@ Rails.application.routes.draw do
   get '/turns', to: 'turns#index'
   post '/turns', to: 'turns#create'
   get 'new_turn', to: 'turns#new'
-  get 'edit_turn', to: 'turns#edit'
+  get 'edit_turn/:id', to: 'turns#edit', as: 'edit_turn'
   get 'turn', to: 'turns#show'
-  patch '/turn', to: 'turns#update'
-  put '/turn/', to: 'turns#update'
-  delete '/turns/', to: 'turns#destroy'
+  patch 'turn', to: 'turns#update'
+  put 'turn', to: 'turns#update'
+  delete 'turn/:id', to: 'turns#destroy'
 
   post '/matches/match', to: 'matches#match'
   get '/matches/outcome', to: 'matches#outcome'
@@ -88,6 +88,7 @@ Rails.application.routes.draw do
   get '/players/unmanaged_players', to: 'players#unmanaged_players'
   get '/players/listed_players', to: 'players#listed_players'
   get '/players/player_value_update', to: 'players#player_value_update'
+  get '/players/adjust_duplicate_names', to: 'players#adjust_duplicate_names'
 
   get '/help/rulebook', to: 'help#rulebook'
   get '/help', to: 'help#index'

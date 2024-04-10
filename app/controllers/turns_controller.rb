@@ -189,7 +189,7 @@ class TurnsController < ApplicationController
   end
 
   def turn_params
-    params.require(:turn).permit!
+    params.require(:turn).permit(:week, :club_id, :var1, :var2, :var3, :var4)
   end
 
   def handle_error(exception)

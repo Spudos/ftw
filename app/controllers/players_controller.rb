@@ -101,6 +101,12 @@ class PlayersController < ApplicationController
     end
   end
 
+  def adjust_duplicate_names
+    Player.adjust_duplicate_names
+
+    redirect_to request.referrer, notice: 'Player names were successfully appended.'
+  end
+
   private
 
   def set_player

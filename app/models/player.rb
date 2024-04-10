@@ -207,4 +207,14 @@ class Player < ApplicationRecord
     consistency = player.consistency
     random_number = rand(-consistency..consistency)
   end
+
+  def self.adjust_duplicate_names
+    players = Player.all
+    alphabet = ('A'..'Z').to_a
+
+    players.each_with_index do |player, index|
+      capital_letter = alphabet[index % 26]
+      player.update(name: "#{player.name} #{capital_letter}")
+    end
+  end
 end

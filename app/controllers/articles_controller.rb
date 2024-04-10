@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show edit update destroy ]
+  before_action :set_article, only: %i[show edit update destroy]
 
   def index
     highest_week = Article.maximum(:week)
@@ -17,8 +17,7 @@ class ArticlesController < ApplicationController
     @articles = Article.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @articles = Article.new(articles_params)
@@ -50,17 +49,18 @@ class ArticlesController < ApplicationController
     @articles.destroy
 
     respond_to do |format|
-      format.html { redirect_to articles_path, notice: "Article was successfully destroyed." }
+      format.html { redirect_to articles_path, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    def set_article
-      @articles = Article.find(params[:id])
-    end
 
-    def articles_params
-      params.require(:article).permit(:week, :club_id, :image, :article_type, :headline, :sub_headline, :article)
-    end
+  def set_article
+    @articles = Article.find(params[:id])
+  end
+
+  def articles_params
+    params.require(:article).permit(:week, :club_id, :image, :article_type, :headline, :sub_headline, :article)
+  end
 end
