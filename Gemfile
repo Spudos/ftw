@@ -85,4 +85,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
+group :development, :production do
+  gem 'rails_performance', '~> 1.2'
+end
+
 gem "devise", "~> 4.9"
