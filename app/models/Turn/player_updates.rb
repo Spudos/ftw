@@ -16,13 +16,8 @@ class Turn::PlayerUpdates
   def process
     objects = [Turn::Engines::Fitness,
                Turn::Engines::Contract,
-               Turn::Engines::Value,
-               Turn::Engines::Wages,
-               Turn::Engines::GamesPlayed,
-               Turn::Engines::TotalSkill,
-               Turn::Engines::TotalGoals,
-               Turn::Engines::TotalAssists,
-               Turn::Engines::AveragePerformance]
+               Turn::Engines::ValueWages,
+               Turn::Engines::PlayerTotals]
 
     player_data.in_batches do |batch|
       players = batch.load
