@@ -46,12 +46,12 @@ class Player < ApplicationRecord
   end
 
   def base_skill
-    if passing.present? && control.present? &&
-       tackling.present? && running.present? &&
-       shooting.present? && dribbling.present? &&
-       defensive_heading.present? && offensive_heading.present? &&
-       flair.present? && strength.present? &&
-       creativity.present?
+    if passing && control &&
+       tackling && running &&
+       shooting && dribbling &&
+       defensive_heading && offensive_heading &&
+       flair && strength &&
+       creativity
 
       passing + control + tackling + running +
         shooting + dribbling + defensive_heading +

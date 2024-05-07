@@ -1,12 +1,19 @@
 class Turn::Engines::PlayerTotals
   attr_reader :players, :week
 
-  def initialize(players, week)
+  def initialize(players, week, x)
     @players = players
     @week = week
+    @x = x
   end
 
   def process
+    @x.report('whatever') { whatever }
+  end
+
+  private
+
+  def whatever
     result = Player.joins('INNER JOIN performances ON performances.player_id = players.id GROUP BY players.id')
                    .select('players.id, COUNT(players.id) AS cnt')
 
@@ -18,8 +25,6 @@ class Turn::Engines::PlayerTotals
       player_average_perfomance(result, player)
     end
   end
-
-  private
 
   def player_games_played(result, player)
     player.games_played = result.find { |record| record.id == player.id }&.cnt || 0
