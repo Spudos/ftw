@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/andypierce/Desktop/ftw/spec/models/Turn/articles_updates_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/Turn/articles_updates_spec.rb": {
         "lines": [
           1,
           1,
@@ -29,7 +29,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/rails_helper.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/rails_helper.rb": {
         "lines": [
           null,
           1,
@@ -96,7 +96,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/config/environment.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -105,7 +105,7 @@
           1
         ]
       },
-      "/Users/andypierce/Desktop/ftw/config/application.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/config/application.rb": {
         "lines": [
           1,
           null,
@@ -140,7 +140,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/config/boot.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -148,7 +148,7 @@
           1
         ]
       },
-      "/Users/andypierce/Desktop/ftw/config/environments/test.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -212,7 +212,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/config/initializers/assets.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
@@ -228,7 +228,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/config/initializers/content_security_policy.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/config/initializers/content_security_policy.rb": {
         "lines": [
           null,
           null,
@@ -239,355 +239,6 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/config/initializers/devise.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/config/initializers/filter_parameter_logging.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/config/initializers/inflections.rb": {
-        "lines": [
           null,
           null,
           null,
@@ -606,7 +257,356 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/config/initializers/permissions_policy.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/config/initializers/devise.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/andypierce/Desktop/Development/ftw/config/initializers/filter_parameter_logging.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/andypierce/Desktop/Development/ftw/config/initializers/inflections.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/andypierce/Desktop/Development/ftw/config/initializers/permissions_policy.rb": {
         "lines": [
           null,
           null,
@@ -621,7 +621,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/club.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/club.rb": {
         "lines": [
           1,
           1,
@@ -650,7 +650,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/feedbacks.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/feedbacks.rb": {
         "lines": [
           1,
           1,
@@ -662,7 +662,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/fixture.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/fixture.rb": {
         "lines": [
           1,
           1,
@@ -675,7 +675,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/goal.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/goal.rb": {
         "lines": [
           1,
           1,
@@ -690,7 +690,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/matches.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/matches.rb": {
         "lines": [
           1,
           1,
@@ -702,7 +702,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/news.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/news.rb": {
         "lines": [
           1,
           1,
@@ -717,7 +717,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/performance.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/performance.rb": {
         "lines": [
           1,
           1,
@@ -732,7 +732,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/players.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/players.rb": {
         "lines": [
           1,
           1,
@@ -762,7 +762,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/selection.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/selection.rb": {
         "lines": [
           1,
           1,
@@ -773,7 +773,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/tactic.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/tactic.rb": {
         "lines": [
           1,
           1,
@@ -788,7 +788,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/transfer.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/transfer.rb": {
         "lines": [
           1,
           1,
@@ -803,7 +803,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/turns.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/turns.rb": {
         "lines": [
           1,
           1,
@@ -817,7 +817,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/turnsheets.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/turnsheets.rb": {
         "lines": [
           1,
           1,
@@ -826,7 +826,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/upgrade.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/upgrade.rb": {
         "lines": [
           1,
           1,
@@ -840,7 +840,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/factories/user.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/factories/user.rb": {
         "lines": [
           1,
           1,
@@ -853,7 +853,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/config/routes.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/config/routes.rb": {
         "lines": [
           1,
           1,
@@ -901,25 +901,10 @@
           null,
           1,
           1,
-          null,
           1,
           null,
           1,
           null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
           1,
           null,
           1,
@@ -937,6 +922,23 @@
           1,
           1,
           1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
           1,
           1,
           1,
@@ -945,6 +947,7 @@
           1,
           1,
           null,
+          1,
           1,
           1,
           1,
@@ -958,7 +961,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/user.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/user.rb": {
         "lines": [
           1,
           null,
@@ -992,26 +995,26 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/application_record.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/helpers/application_helper.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/helpers/feedback_helper.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/helpers/feedback_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/helpers/matches_helper.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/helpers/matches_helper.rb": {
         "lines": [
           1,
           1,
@@ -1034,8 +1037,6 @@
           null,
           null,
           1,
-          0,
-          null,
           0,
           null,
           0,
@@ -1054,13 +1055,13 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/helpers/tactics_helper.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/helpers/tactics_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/turn.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/turn.rb": {
         "lines": [
           1,
           1,
@@ -1125,119 +1126,119 @@
           0,
           null,
           0,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/article_updates.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           null,
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/Turn/club_updates_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/Turn/article_updates.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/Turn/club_updates_spec.rb": {
         "lines": [
           1,
           1,
@@ -1560,7 +1561,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/club_updates.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/Turn/club_updates.rb": {
         "lines": [
           1,
           1,
@@ -1880,7 +1881,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/Turn/player_updates_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/Turn/player_updates_spec.rb": {
         "lines": [
           1,
           1,
@@ -1898,7 +1899,6 @@
           null,
           null,
           null,
-          null,
           1,
           1,
           1,
@@ -2043,7 +2043,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/player_updates.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/Turn/player_updates.rb": {
         "lines": [
           1,
           1,
@@ -2066,16 +2066,11 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
           7,
           7,
           null,
           7,
-          63,
+          28,
           null,
           null,
           7,
@@ -2089,7 +2084,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/Turn/transfer_actions_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/Turn/transfer_actions_spec.rb": {
         "lines": [
           1,
           1,
@@ -2334,7 +2329,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/Turn/transfer_updates_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/Turn/transfer_updates_spec.rb": {
         "lines": [
           1,
           1,
@@ -2475,7 +2470,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/transfer_updates.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/Turn/transfer_updates.rb": {
         "lines": [
           1,
           1,
@@ -2618,7 +2613,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/Turn/turn_actions_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/Turn/turn_actions_spec.rb": {
         "lines": [
           1,
           1,
@@ -2790,7 +2785,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/Turn/upgrade_admin_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/Turn/upgrade_admin_spec.rb": {
         "lines": [
           1,
           1,
@@ -2865,7 +2860,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/upgrade_admin.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/Turn/upgrade_admin.rb": {
         "lines": [
           1,
           1,
@@ -2921,7 +2916,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/club_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/club_spec.rb": {
         "lines": [
           1,
           1,
@@ -3004,7 +2999,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/player.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/player.rb": {
         "lines": [
           1,
           1,
@@ -3013,79 +3008,79 @@
           1,
           null,
           1,
-          91,
-          34,
-          57,
-          19,
-          38,
-          19,
+          62,
+          23,
+          39,
+          13,
+          26,
+          13,
           null,
-          19,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
+          13,
           null,
           null,
           null,
           1,
-          null,
-          0,
-          null,
           0,
           null,
           null,
           null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
           null,
           null,
-          1,
-          92,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          92,
-          null,
-          null,
-          null,
+          0,
           0,
           null,
           null,
           null,
           1,
-          37,
+          null,
+          0,
+          null,
+          0,
           null,
           null,
-          null,
-          1,
-          20,
-          null,
-          null,
-          null,
-          1,
-          20,
           null,
           null,
           null,
           1,
-          20,
+          63,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          63,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          26,
+          null,
+          null,
+          null,
+          1,
+          14,
+          null,
+          null,
+          null,
+          1,
+          14,
+          null,
+          null,
+          null,
+          1,
+          14,
           null,
           null,
           null,
@@ -3215,10 +3210,20 @@
           6,
           6,
           null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/aggression_effect_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/aggression_effect_spec.rb": {
         "lines": [
           1,
           1,
@@ -3251,7 +3256,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match.rb": {
         "lines": [
           1,
           1,
@@ -3331,7 +3336,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/aggression_effect.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/aggression_effect.rb": {
         "lines": [
           1,
           1,
@@ -3361,7 +3366,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/assissted_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/assissted_spec.rb": {
         "lines": [
           1,
           1,
@@ -3417,7 +3422,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/assisted.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/assisted.rb": {
         "lines": [
           1,
           1,
@@ -3443,7 +3448,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/blend_adjustemnt_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/blend_adjustemnt_spec.rb": {
         "lines": [
           1,
           1,
@@ -3491,7 +3496,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/blend_adjustment.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/blend_adjustment.rb": {
         "lines": [
           1,
           1,
@@ -3534,7 +3539,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/chance_created_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/chance_created_spec.rb": {
         "lines": [
           1,
           1,
@@ -3608,7 +3613,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/chance_created.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/chance_created.rb": {
         "lines": [
           1,
           1,
@@ -3666,7 +3671,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/chance_on_target_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/chance_on_target_spec.rb": {
         "lines": [
           1,
           1,
@@ -3722,175 +3727,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/chance_on_target.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          4,
-          4,
-          null,
-          null,
-          1,
-          4,
-          0,
-          null,
-          null,
-          4,
-          4,
-          4,
-          4,
-          null,
-          4,
-          4,
-          4,
-          4,
-          null,
-          4,
-          4,
-          null,
-          4,
-          1,
-          3,
-          1,
-          null,
-          2,
-          null,
-          null,
-          null,
-          4,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/create_fixtures_spec.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/app/models/match/create_fixtures.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          0,
-          null,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/goal_scored_spec.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          1,
-          3,
-          3,
-          3,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          1,
-          3,
-          3,
-          3,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/app/models/match/goal_scored.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/chance_on_target.rb": {
         "lines": [
           1,
           1,
@@ -3912,6 +3749,174 @@
           null,
           4,
           4,
+          4,
+          4,
+          null,
+          4,
+          4,
+          null,
+          4,
+          1,
+          3,
+          1,
+          null,
+          2,
+          null,
+          null,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/create_fixtures_spec.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/create_fixtures.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          0,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/goal_scored_spec.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          3,
+          3,
+          3,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          3,
+          3,
+          3,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/goal_scored.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          4,
+          4,
+          null,
+          null,
+          1,
+          4,
+          0,
+          null,
+          null,
+          4,
+          4,
+          4,
+          4,
+          null,
+          4,
+          4,
           null,
           4,
           4,
@@ -3936,7 +3941,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/man_of_the_match_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/man_of_the_match_spec.rb": {
         "lines": [
           1,
           1,
@@ -3958,7 +3963,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/man_of_the_match.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/man_of_the_match.rb": {
         "lines": [
           1,
           1,
@@ -3981,7 +3986,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/match_lists_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/match_lists_spec.rb": {
         "lines": [
           1,
           1,
@@ -4191,7 +4196,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/match_lists.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/match_lists.rb": {
         "lines": [
           1,
           1,
@@ -4213,7 +4218,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/names_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/names_spec.rb": {
         "lines": [
           1,
           1,
@@ -4304,7 +4309,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/names.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/names.rb": {
         "lines": [
           1,
           1,
@@ -4333,7 +4338,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/player_fitness_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/player_fitness_spec.rb": {
         "lines": [
           1,
           1,
@@ -4361,7 +4366,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/player_fitness.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/player_fitness.rb": {
         "lines": [
           1,
           1,
@@ -4409,7 +4414,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/player_performance_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/player_performance_spec.rb": {
         "lines": [
           1,
           1,
@@ -4441,7 +4446,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/player_performance.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/player_performance.rb": {
         "lines": [
           1,
           1,
@@ -4480,7 +4485,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/possession_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/possession_spec.rb": {
         "lines": [
           1,
           1,
@@ -4560,7 +4565,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/possession.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/possession.rb": {
         "lines": [
           1,
           1,
@@ -4590,7 +4595,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/pressing_effect_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/pressing_effect_spec.rb": {
         "lines": [
           1,
           1,
@@ -4750,7 +4755,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/pressing_effect.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/pressing_effect.rb": {
         "lines": [
           1,
           1,
@@ -4822,7 +4827,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/scored_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/scored_spec.rb": {
         "lines": [
           1,
           1,
@@ -4880,7 +4885,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/scored.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/scored.rb": {
         "lines": [
           1,
           1,
@@ -4916,7 +4921,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/squad_creator_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/squad_creator_spec.rb": {
         "lines": [
           1,
           1,
@@ -5070,7 +5075,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/squad_creator.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/squad_creator.rb": {
         "lines": [
           1,
           1,
@@ -5154,7 +5159,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/stadium_effect_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/stadium_effect_spec.rb": {
         "lines": [
           1,
           1,
@@ -5380,7 +5385,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/stadium_effect.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/stadium_effect.rb": {
         "lines": [
           1,
           1,
@@ -5422,7 +5427,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/stadium_size_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/stadium_size_spec.rb": {
         "lines": [
           1,
           1,
@@ -5447,7 +5452,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/stadium_size.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/stadium_size.rb": {
         "lines": [
           1,
           1,
@@ -5469,7 +5474,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/star_effect_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/star_effect_spec.rb": {
         "lines": [
           1,
           1,
@@ -5515,7 +5520,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/star_effect.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/star_effect.rb": {
         "lines": [
           1,
           1,
@@ -5533,7 +5538,7 @@
           null,
           3,
           3,
-          1,
+          2,
           null,
           null,
           3,
@@ -5546,7 +5551,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/tactic_adjustment_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/tactic_adjustment_spec.rb": {
         "lines": [
           1,
           1,
@@ -5600,7 +5605,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/tactic_adjustment.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/tactic_adjustment.rb": {
         "lines": [
           1,
           null,
@@ -5663,7 +5668,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/match/team_totals_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/match/team_totals_spec.rb": {
         "lines": [
           1,
           1,
@@ -5754,7 +5759,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/team_totals.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/team_totals.rb": {
         "lines": [
           1,
           1,
@@ -5840,7 +5845,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/player_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/player_spec.rb": {
         "lines": [
           1,
           1,
@@ -5933,7 +5938,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/spec/models/selection_spec.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/spec/models/selection_spec.rb": {
         "lines": [
           1,
           1,
@@ -6010,7 +6015,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/selection.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/selection.rb": {
         "lines": [
           1,
           1,
@@ -6072,21 +6077,21 @@
           1,
           2,
           2,
-          9,
+          10,
           null,
           null,
           null,
           1,
           2,
           2,
-          7,
+          8,
           null,
           null,
           null,
           1,
           2,
           2,
-          4,
+          2,
           null,
           null,
           null,
@@ -6105,7 +6110,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/club.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/club.rb": {
         "lines": [
           1,
           1,
@@ -6160,34 +6165,13 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/article.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/article.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/message.rb": {
-        "lines": [
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/app/models/transfer.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/message.rb": {
         "lines": [
           1,
           null,
@@ -6208,7 +6192,28 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/performance.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/transfer.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/andypierce/Desktop/Development/ftw/app/models/performance.rb": {
         "lines": [
           1,
           1,
@@ -6233,7 +6238,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/goal.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/goal.rb": {
         "lines": [
           1,
           1,
@@ -6257,7 +6262,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/engines/fitness.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/Turn/engines/fitness.rb": {
         "lines": [
           1,
           1,
@@ -6269,15 +6274,16 @@
           null,
           1,
           7,
-          7,
-          7,
-          7,
+          8,
+          8,
+          8,
+          8,
+          null,
           null,
           null,
           1,
           null,
           1,
-          7,
           8,
           0,
           0,
@@ -6289,16 +6295,12 @@
           null,
           null,
           null,
-          null,
           1,
-          7,
           8,
           8,
           null,
           null,
-          null,
           1,
-          7,
           8,
           1,
           1,
@@ -6308,9 +6310,7 @@
           null,
           null,
           null,
-          null,
           1,
-          7,
           8,
           3,
           3,
@@ -6319,14 +6319,13 @@
           null,
           3,
           1,
-          null,
           null,
           null,
           null,
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/engines/contract.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/Turn/engines/contract.rb": {
         "lines": [
           1,
           1,
@@ -6364,7 +6363,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/engines/value.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/Turn/engines/value_wages.rb": {
         "lines": [
           1,
           1,
@@ -6385,44 +6384,15 @@
           29,
           29,
           17,
-          12,
-          12,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/engines/wages.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          8,
-          8,
-          null,
-          null,
-          1,
-          8,
-          null,
-          null,
-          1,
-          null,
-          1,
-          8,
-          29,
-          29,
           17,
           12,
           12,
+          12,
+          0,
           0,
           0,
           null,
+          0,
           0,
           null,
           null,
@@ -6430,7 +6400,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/engines/games_played.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/Turn/engines/player_totals.rb": {
         "lines": [
           1,
           1,
@@ -6439,130 +6409,54 @@
           7,
           7,
           null,
-          null,
-          1,
-          7,
-          null,
-          null,
-          1,
-          null,
-          1,
-          7,
-          null,
-          null,
-          7,
-          10,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/engines/total_skill.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          7,
-          7,
-          null,
-          null,
-          1,
-          7,
-          null,
-          null,
-          1,
           null,
           1,
           7,
           8,
+          8,
+          8,
+          8,
+          8,
           null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/engines/total_goals.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          7,
-          7,
-          null,
-          null,
-          1,
-          7,
           null,
           null,
           1,
           null,
           1,
-          7,
+          8,
           null,
           null,
-          7,
-          11,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/engines/total_assists.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          7,
-          7,
-          null,
-          null,
-          1,
-          7,
-          null,
-          null,
-          1,
-          null,
-          1,
-          7,
-          null,
-          null,
-          7,
-          11,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/engines/average_performance.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          7,
-          7,
-          null,
-          null,
-          1,
-          7,
-          null,
-          null,
-          1,
-          null,
-          1,
-          7,
-          null,
-          null,
-          7,
           10,
           null,
           null,
+          1,
+          8,
+          null,
+          null,
+          11,
+          null,
+          null,
+          1,
+          8,
+          null,
+          null,
+          11,
+          null,
+          null,
+          1,
+          8,
+          null,
+          null,
+          1,
+          8,
+          null,
+          null,
+          10,
+          null,
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/transfer_actions.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/Turn/transfer_actions.rb": {
         "lines": [
           1,
           1,
@@ -6849,7 +6743,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/bank_adjustment.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/Turn/bank_adjustment.rb": {
         "lines": [
           1,
           1,
@@ -6954,7 +6848,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/Turn/turn_actions.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/Turn/turn_actions.rb": {
         "lines": [
           1,
           1,
@@ -7241,7 +7135,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/upgrade.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/upgrade.rb": {
         "lines": [
           1,
           null,
@@ -7263,7 +7157,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/club/club_creation.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/club/club_creation.rb": {
         "lines": [
           1,
           1,
@@ -7836,7 +7730,6 @@
           1,
           1,
           null,
-          1,
           1,
           null,
           1,
@@ -7847,13 +7740,13 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/feedback.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/feedback.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/tactic.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/tactic.rb": {
         "lines": [
           1,
           null,
@@ -7874,7 +7767,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/fixture.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/fixture.rb": {
         "lines": [
           null,
           null,
@@ -7894,7 +7787,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/player_list.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/player_list.rb": {
         "lines": [
           1,
           1,
@@ -7923,7 +7816,7 @@
           null
         ]
       },
-      "/Users/andypierce/Desktop/ftw/app/models/match/top_five.rb": {
+      "/Users/andypierce/Desktop/Development/ftw/app/models/match/top_five.rb": {
         "lines": [
           1,
           1,
@@ -7950,6 +7843,6 @@
         ]
       }
     },
-    "timestamp": 1712009614
+    "timestamp": 1715079587
   }
 }
