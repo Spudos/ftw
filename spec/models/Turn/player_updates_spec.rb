@@ -9,11 +9,12 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
       create(:club, id: 1, managed: true)
       create(:player, id: 100, available: 0)
       create(:player,
-             id: 1,
-             club_id: 1,
-             fitness: 50,
-             contract: 24,
-             available: 0)
+              id: 1,
+              club_id: 1,
+              fitness: 50,
+              contract: 24,
+              available: 0
+              )
       create(:performance, player_id: 1)
       create(:goal, scorer_id: 1)
       create(:goal, scorer_id: 1)
@@ -21,7 +22,7 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
       create(:goal, assist_id: 1)
       create(:goal, assist_id: 1)
       create(:selection, player_id: 1, club_id: 1)
-
+      
       allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..9).and_return(3)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(3)

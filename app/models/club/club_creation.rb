@@ -569,7 +569,8 @@ class Club::ClubCreation
   def player_values
     players = Player.where(club_id: club.id)
 
-    Turn::Engines::ValueWages.new(players, 1).process
+    Turn::Engines::Wages.new(players, 1).process
+    Turn::Engines::Value.new(players, 1).process
 
     players.each do |player|
       player.total_skill = player.total_skill_calc
