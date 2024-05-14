@@ -26,7 +26,7 @@ class Turn::PlayerUpdates
                Turn::Engines::ValueWages,
                Turn::Engines::PlayerTotals]
 
-    player_data.in_batches do |batch|
+    player_data.in_batches(of: 1000) do |batch|
       players = batch.load
 
       objects.each do |object|
