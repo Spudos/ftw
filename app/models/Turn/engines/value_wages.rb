@@ -1,13 +1,14 @@
 class Turn::Engines::ValueWages
   attr_reader :players, :week
 
-  def initialize(players, week)
+  def initialize(players, week, x)
     @players = players
     @week = week
+    @x = x
   end
 
   def process
-    player_value_wages
+    @x.report('player_value_wages') { player_value_wages }
   end
 
   private

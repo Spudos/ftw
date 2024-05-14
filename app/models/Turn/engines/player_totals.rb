@@ -1,25 +1,43 @@
 class Turn::Engines::PlayerTotals
   attr_reader :players, :week
 
-  def initialize(players, week)
+  def initialize(players, week, x)
     @players = players
     @week = week
+    @x = x
   end
 
   def process
-    result = Player.joins('INNER JOIN performances ON performances.player_id = players.id GROUP BY players.id')
-                   .select('players.id, COUNT(players.id) AS cnt')
-
-    players.each do |player|
-      player_games_played(result, player)
-      player_total_assists(result, player)
-      player_total_goals(result, player)
-      player_total_skill(player)
-      player_average_perfomance(result, player)
-    end
+    @x.report('whatever') { whatever }
   end
 
   private
+
+  def whatever
+    performances = Performance.select('player_id, COUNT(player_id) AS cnt').where("player_id IN (#{players.pluck(:id).join(',')})").group(:player_id)
+
+    games_played = [].tap do |array|
+      performances.as_json.each do |performance|
+        array << { id: performance['player_id'], games_played: performance['cnt'] }
+      end
+    end
+
+    games_played = games_played.reject(&:empty?)
+
+    Player.upsert_all(games_played) if games_played.present?
+    Player.upsert_all(games_played) if games_played.present?
+    Player.upsert_all(games_played) if games_played.present?
+    Player.upsert_all(games_played) if games_played.present?
+    Player.upsert_all(games_played) if games_played.present?
+
+    # players.each do |player|
+    #   player_games_played(result, player)
+    #   player_total_assists(result, player)
+    #   player_total_goals(result, player)
+    #   player_total_skill(player)
+    #   player_average_perfomance(result, player)
+    # end
+  end
 
   def player_games_played(result, player)
     player.games_played = result.find { |record| record.id == player.id }&.cnt || 0
