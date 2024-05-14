@@ -1,17 +1,18 @@
 class Turn::Engines::Fitness
   attr_reader :players, :week
 
-  def initialize(players, week)
+  def initialize(players, week, x)
     @players = players
     @week = week
+    @x = x
   end
 
   def process
     players.each do |player|
-      availability(player)
-      fitness_increase(player)
-      random_injury(player)
-      injury(player)
+      @x.report('availability') { availability(player) }
+      @x.report('fitness_increase') { fitness_increase(player) }
+      @x.report('random_injury') { random_injury(player) }
+      @x.report('injury') { injury(player) }
     end
   end
 

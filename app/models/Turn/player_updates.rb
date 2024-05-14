@@ -8,12 +8,19 @@ class Turn::PlayerUpdates
   end
 
   def call
-    process
+    result = Benchmark.bm do |x|
+      process(x)
+    end
+    File.open('measurement.log', 'w') do |file|
+      result.each do |r|
+        file.puts("#{r.label} - #{r.total}")
+      end
+    end
   end
 
   private
 
-  def process
+  def process(x)
     objects = [Turn::Engines::Fitness,
                Turn::Engines::Contract,
                Turn::Engines::ValueWages,
@@ -23,7 +30,7 @@ class Turn::PlayerUpdates
       players = batch.load
 
       objects.each do |object|
-        players = object.new(players, week).process
+        object.new(players, week, x).process
       end
 
       attributes = players.to_a.map(&:as_json)

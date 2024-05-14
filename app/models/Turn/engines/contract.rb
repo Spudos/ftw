@@ -1,13 +1,14 @@
 class Turn::Engines::Contract
   attr_reader :players, :week
 
-  def initialize(players, week)
+  def initialize(players, week, x)
     @players = players
     @week = week
+    @x = x
   end
 
   def process
-    contract_decrease
+    @x.report('contract_decrease') { contract_decrease }
   end
 
   private
