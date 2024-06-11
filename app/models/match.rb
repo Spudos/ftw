@@ -1,4 +1,14 @@
 class Match < ApplicationRecord
+  # validates :step2_validator
+
+  # def step2_validator
+  #   if Turn.validate_whatever
+  #     'ok'
+  #   else
+  #     raise error
+  #   end
+  # end
+
   def run_matches(selected_week, competition)
     fixture_list = Match::CreateFixtures.new(selected_week, competition).call
 

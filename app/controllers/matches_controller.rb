@@ -11,6 +11,7 @@ class MatchesController < ApplicationController
   end
 
   def match_multiple
+    # check if step 2 is already running. if it does head :status_error
     if params[:selected_week].nil? || params[:selected_week].empty?
       return redirect_to request.referrer, alert: "Please select a week before attempting to run fixtures. class:#{self.class.name}"
     end

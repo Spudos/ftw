@@ -1,4 +1,8 @@
 class Turn < ApplicationRecord
+  # def initialize
+  #   @actions = Message.where("action_id IN (\"#{params[:week]}TTA\", \"#{params[:week]}PU\")")
+  # end
+
   def process_turn_actions(params)
     if params[:week].present? && Message.find_by(action_id: "#{params[:week]}TTA").nil?
       Turn::TurnActions.new(params[:week]).call
@@ -14,7 +18,7 @@ class Turn < ApplicationRecord
   end
 
   def process_player_updates(params)
-    if params[:week].present? && Message.find_by(action_id: "#{params[:week]}PU").nil?
+    if params[:week].present? && Message.find_by(action_id: "#{params[:week]}PU").nil? # TODO: refactor
       Turn::PlayerUpdates.new(params[:week]).call
       Message.create(action_id: "#{params[:week]}PU", week: params[:week], club_id: '999', var1: "week #{params[:week]} Player Updates processed")
     else
@@ -64,4 +68,7 @@ class Turn < ApplicationRecord
       end
     end
   end
+
+  # def validate_whatever
+  # end
 end
