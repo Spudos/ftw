@@ -4,7 +4,8 @@ class Turn::Engines::Fitness
   def initialize(players, week)
     @players = players
     @week = week
-    @fitness_messages = {}
+    @fitness_messages = []
+    @destroyable_player_ids = []
   end
 
   def process
@@ -13,10 +14,10 @@ class Turn::Engines::Fitness
       fitness_increase(player)
       random_injury(player)
       injury(player)
-
-      message = Message.new(fitness_messages)
-      message.save
     end
+    Message.insert_all(@fitness_messages)
+    destroy_selection
+    players
   end
 
   private
@@ -25,12 +26,12 @@ class Turn::Engines::Fitness
     if player.available.positive?
       player.available -= 1
       if player.available.zero?
-        @fitness_messages = {
+        @fitness_messages << {
           week:,
           action_id: "#{week}#{player.club_id}fitness",
           club_id: player.club_id,
           var1: "#{player.name} is now available for selection after injury"
-          }
+        }
       end
     end
   end
@@ -43,27 +44,34 @@ class Turn::Engines::Fitness
   def random_injury(player)
     if rand(1..100) <= 2
       player.fitness -= rand(20..40)
-      @fitness_messages.merge!({
+      @fitness_messages << {
         week:,
         action_id: "#{week}#{player.club_id}fitness",
         club_id: player.club_id,
         var1: "#{player.name} took a bad knock in training this week"
-        })
+      }
     end
   end
 
   def injury(player)
     if player.fitness < 60
       player.available = rand(1..9)
-      @fitness_messages.merge!({
+      @fitness_messages << {
         week:,
         action_id: "#{week}#{player.club_id}fitness",
         club_id: player.club_id,
         var1: "#{player.name} has been injured and will be out for #{player.available} weeks"
-      })
-      if Selection.exists?(player_id: player.id)
-        Selection.find_by(player_id: player.id).destroy
-      end
+      }
+
+      @destroyable_player_ids << player.id if selections.select { |p| p.id == player.id }.present?
     end
+  end
+
+  def selections
+    @selections ||= Selection.where(player_id: players.pluck(:id)).load
+  end
+
+  def destroy_selection
+    Selection.where(player_id: @destroyable_player_ids).destroy_all
   end
 end
