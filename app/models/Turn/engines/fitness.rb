@@ -25,7 +25,7 @@ class Turn::Engines::Fitness
     if player.available.positive?
       player.available -= 1
       if player.available.zero?
-        fitness_messages = {
+        @fitness_messages = {
           week:,
           action_id: "#{week}#{player.club_id}fitness",
           club_id: player.club_id,
@@ -43,7 +43,7 @@ class Turn::Engines::Fitness
   def random_injury(player)
     if rand(1..100) <= 2
       player.fitness -= rand(20..40)
-      fitness_messages.merge!({
+      @fitness_messages.merge!({
         week:,
         action_id: "#{week}#{player.club_id}fitness",
         club_id: player.club_id,
@@ -55,7 +55,7 @@ class Turn::Engines::Fitness
   def injury(player)
     if player.fitness < 60
       player.available = rand(1..9)
-      fitness_messages.merge!({
+      @fitness_messages.merge!({
         week:,
         action_id: "#{week}#{player.club_id}fitness",
         club_id: player.club_id,
