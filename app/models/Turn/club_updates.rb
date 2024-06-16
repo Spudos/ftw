@@ -3,111 +3,106 @@ class Turn::ClubUpdates
 
   def initialize(week)
     @week = week
+    @club_messages = []
   end
 
   def call
-    wage_bill
-    staff_costs
-    ground_upkeep
-    club_shop_income
+    clubs = Club.all
+    clubs.each do |club|
+      wage_bill(club)
+      staff_costs(club)
+      ground_upkeep(club)
+      club_shop_income(club)
+      fan_happiness_bank(club)
+      fan_happiness_random(club)
+    end
+
     match_day_income
     fan_happiness_match
     fan_happiness_signings
-    fan_happiness_bank
-    fan_happiness_random
     overdrawn
     fix_overdraft
+
+    Message.insert_all(@club_messages) unless @club_messages.empty?
   end
 
   private
 
-  def wage_bill
-    clubs = Club.all
-    clubs.each do |club|
-      action_id = "#{week}#{club.id}wage"
+  def wage_bill(club)
+    action_id = "#{week}#{club.id}wage"
 
-      wage_bill = Player.where(club_id: club.id).sum(:wages)
+    wage_bill = Player.where(club_id: club.id).sum(:wages)
 
-      new_bal = club.bank_bal.to_i - wage_bill.to_i
-      club.update(bank_bal: new_bal)
+    new_bal = club.bank_bal.to_i - wage_bill.to_i
+    club.update(bank_bal: new_bal)
 
-      Message.create(action_id:,
-                     week:,
-                     club_id: club.id,
-                     var1: "Your bank account was charged with #{wage_bill} due to this weeks player wages",
-                     var2: 'dec-player_wages',
-                     var3: wage_bill)
-    end
+    @club_messages << { action_id:,
+                        week:,
+                        club_id: club.id,
+                        var1: "Your bank account was charged with #{wage_bill} due to this weeks player wages",
+                        var2: 'dec-player_wages',
+                        var3: wage_bill }
   end
 
-  def staff_costs
-    clubs = Club.all
-    clubs.each do |club|
-      action_id = "#{week}#{club.id}upkeep"
+  def staff_costs(club)
+    action_id = "#{week}#{club.id}upkeep"
 
-      staff_costs_total = ((club.staff_gkp +
-                            club.staff_dfc +
-                            club.staff_mid +
-                            club.staff_att +
-                            club.staff_fitness +
-                            club.staff_scouts)) * rand(9234..11234)
+    staff_costs_total = ((club.staff_gkp +
+                          club.staff_dfc +
+                          club.staff_mid +
+                          club.staff_att +
+                          club.staff_fitness +
+                          club.staff_scouts)) * rand(9234..11234)
 
-      new_bal = club.bank_bal.to_i - staff_costs_total.to_i
-      club.update(bank_bal: new_bal)
+    new_bal = club.bank_bal.to_i - staff_costs_total.to_i
+    club.update(bank_bal: new_bal)
 
-      Message.create(action_id:,
-                     week:,
-                     club_id: club.id,
-                     var1: "Your bank account was charged with #{staff_costs_total} due to this weeks staff wages",
-                     var2: 'dec-staff_wages',
-                     var3: staff_costs_total)
-    end
+    @club_messages << { action_id:,
+                        week:,
+                        club_id: club.id,
+                        var1: "Your bank account was charged with #{staff_costs_total} due to this weeks staff wages",
+                        var2: 'dec-staff_wages',
+                        var3: staff_costs_total }
   end
 
-  def ground_upkeep
-    clubs = Club.all
-    clubs.each do |club|
-      action_id = "#{week}#{club.id}upkeep"
+  def ground_upkeep(club)
+    action_id = "#{week}#{club.id}upkeep"
 
-      stadium_cost = ((club.stand_n_capacity * club.stand_n_condition) +
-                      (club.stand_s_capacity * club.stand_s_condition) +
-                      (club.stand_e_capacity * club.stand_e_condition) +
-                      (club.stand_w_capacity * club.stand_w_condition)) * 3
-      pitch_cost = club.pitch * rand(1845..2434)
-      facilities_cost = club.facilities * rand(1845..2434)
-      hospitality_cost = club.hospitality * rand(1845..2434)
+    stadium_cost = ((club.stand_n_capacity * club.stand_n_condition) +
+                    (club.stand_s_capacity * club.stand_s_condition) +
+                    (club.stand_e_capacity * club.stand_e_condition) +
+                    (club.stand_w_capacity * club.stand_w_condition)) * 3
+    pitch_cost = club.pitch * rand(1845..2434)
+    facilities_cost = club.facilities * rand(1845..2434)
+    hospitality_cost = club.hospitality * rand(1845..2434)
 
-      ground_upkeep_total = stadium_cost + pitch_cost + facilities_cost + hospitality_cost
+    ground_upkeep_total = stadium_cost + pitch_cost + facilities_cost + hospitality_cost
 
-      new_bal = club.bank_bal.to_i - ground_upkeep_total.to_i
-      club.update(bank_bal: new_bal)
+    new_bal = club.bank_bal.to_i - ground_upkeep_total.to_i
+    club.update(bank_bal: new_bal)
 
-      Message.create(action_id:,
-                     week:,
-                     club_id: club.id,
-                     var1: "Your bank account was charged with #{ground_upkeep_total} due to this weeks stadium upkeep",
-                     var2: 'dec-stadium_upkeep',
-                     var3: ground_upkeep_total)
-    end
+    @club_messages << { action_id:,
+                        week:,
+                        club_id: club.id,
+                        var1: "Your bank account was charged with #{ground_upkeep_total} due to this weeks stadium upkeep",
+                        var2: 'dec-stadium_upkeep',
+                        var3: ground_upkeep_total }
   end
 
-  def club_shop_income
-    clubs = Club.all
-    clubs.each do |club|
-      action_id = "#{week}#{club.id}shop"
+  def club_shop_income(club)
+    action_id = "#{week}#{club.id}shop"
 
-      club_shop_income = (club.fanbase * rand(1.07123..1.12123)).to_i
+    club_shop_income = (club.fanbase * rand(1.07123..1.12123)).to_i
 
-      new_bal = club.bank_bal.to_i + club_shop_income.to_i
-      club.update(bank_bal: new_bal)
+    new_bal = club.bank_bal.to_i + club_shop_income.to_i
+    club.update(bank_bal: new_bal)
 
-      Message.create(action_id:,
-                     week:,
-                     club_id: club.id,
-                     var1: "Your bank account was credited with #{club_shop_income} due to this weeks club shop income",
-                     var2: 'inc-club_shop_online',
-                     var3: club_shop_income)
-    end
+    @club_messages << { action_id:,
+                        week:,
+                        club_id: club.id,
+                        var1: "Your bank account was credited with #{club_shop_income} due to this weeks club shop income",
+                        var2: 'inc-club_shop_online',
+                        var3: club_shop_income }
   end
 
   def match_day_income
@@ -149,33 +144,33 @@ class Turn::ClubUpdates
       new_bal = club.bank_bal.to_i + net_match_day
       club.update(bank_bal: new_bal)
 
-      Message.create(action_id:, week:, club_id: club.id,
-                     var1: "You had a home match this week; This generated #{gate_receipts} in gate receipts",
-                     var2: 'inc-gate_receipts', var3: gate_receipts)
-      Message.create(action_id:, week:, club_id: club.id,
-                     var1: "You had a home match this week; This generated #{hospitality_receipts} in hospitality receipts",
-                     var2: 'inc-hospitality', var3: hospitality_receipts)
-      Message.create(action_id:, week:, club_id: club.id,
-                     var1: "You had a home match this week; This generated #{facilities_receipts} in facilities receipts",
-                     var2: 'inc-facilities', var3: facilities_receipts)
-      Message.create(action_id:, week:, club_id: club.id,
-                     var1: "You had a home match this week; This generated #{programme_receipts} in programme receipts",
-                     var2: 'inc-programs', var3: programme_receipts)
-      Message.create(action_id:, week:, club_id: club.id,
-                     var1: "You had a home match this week; This generated #{club_shop_match_income} in club shop receipts",
-                     var2: 'inc-club_shop_match', var3: club_shop_match_income)
-      Message.create(action_id:, week:, club_id: club.id,
-                     var1: "You had a home match this week; This generated #{tv_income} in world wide entertainment and TV rights",
-                     var2: 'inc-tv_income', var3: tv_income)
-      Message.create(action_id:, week:, club_id: club.id,
-                     var1: "You had a home match this week; This cost you #{policing_cost} in policing costs",
-                     var2: 'dec-policing', var3: policing_cost)
-      Message.create(action_id:, week:, club_id: club.id,
-                     var1: "You had a home match this week; This cost you #{stewarding_cost} in stewarding costs",
-                     var2: 'dec-stewards', var3: stewarding_cost)
-      Message.create(action_id:, week:, club_id: club.id,
-                     var1: "You had a home match this week; This cost you #{medical_cost} in medical costs",
-                     var2: 'dec-medical', var3: medical_cost)
+      @club_messages << { action_id:, week:, club_id: club.id,
+                          var1: "You had a home match this week; This generated #{gate_receipts} in gate receipts",
+                          var2: 'inc-gate_receipts', var3: gate_receipts }
+      @club_messages << { action_id:, week:, club_id: club.id,
+                          var1: "You had a home match this week; This generated #{hospitality_receipts} in hospitality receipts",
+                          var2: 'inc-hospitality', var3: hospitality_receipts }
+      @club_messages << { action_id:, week:, club_id: club.id,
+                          var1: "You had a home match this week; This generated #{facilities_receipts} in facilities receipts",
+                          var2: 'inc-facilities', var3: facilities_receipts }
+      @club_messages << { action_id:, week:, club_id: club.id,
+                          var1: "You had a home match this week; This generated #{programme_receipts} in programme receipts",
+                          var2: 'inc-programs', var3: programme_receipts }
+      @club_messages << { action_id:, week:, club_id: club.id,
+                          var1: "You had a home match this week; This generated #{club_shop_match_income} in club shop receipts",
+                          var2: 'inc-club_shop_match', var3: club_shop_match_income }
+      @club_messages << { action_id:, week:, club_id: club.id,
+                          var1: "You had a home match this week; This generated #{tv_income} in world wide entertainment and TV rights",
+                          var2: 'inc-tv_income', var3: tv_income }
+      @club_messages << { action_id:, week:, club_id: club.id,
+                          var1: "You had a home match this week; This cost you #{policing_cost} in policing costs",
+                          var2: 'dec-policing', var3: policing_cost }
+      @club_messages << { action_id:, week:, club_id: club.id,
+                          var1: "You had a home match this week; This cost you #{stewarding_cost} in stewarding costs",
+                          var2: 'dec-stewards', var3: stewarding_cost }
+      @club_messages << { action_id:, week:, club_id: club.id,
+                          var1: "You had a home match this week; This cost you #{medical_cost} in medical costs",
+                          var2: 'dec-medical', var3: medical_cost }
     end
   end
 
@@ -211,31 +206,23 @@ class Turn::ClubUpdates
     end
   end
 
-  def fan_happiness_bank
-    clubs = Club.all
-
-    clubs.each do |club|
-      if club.bank_bal > 80_000_000
-        club.fan_happiness += 3
-      elsif club.bank_bal < 20_000_000
-        club.fan_happiness -= 5
-      end
-      club.save
+  def fan_happiness_bank(club)
+    if club.bank_bal > 80_000_000
+      club.fan_happiness += 3
+    elsif club.bank_bal < 20_000_000
+      club.fan_happiness -= 5
     end
+    club.save
   end
 
-  def fan_happiness_random
-    clubs = Club.all
-
-    clubs.each do |club|
-      club.fan_happiness = club.fan_happiness + rand(-3..3)
-      if club.fan_happiness > 100
-        club.fan_happiness = 100
-      elsif club.fan_happiness.negative?
-        club.fan_happiness = 0
-      end
-      club.save
+  def fan_happiness_random(club)
+    club.fan_happiness = club.fan_happiness + rand(-3..3)
+    if club.fan_happiness > 100
+      club.fan_happiness = 100
+    elsif club.fan_happiness.negative?
+      club.fan_happiness = 0
     end
+    club.save
   end
 
   def overdrawn
@@ -247,10 +234,10 @@ class Turn::ClubUpdates
         club.save
         action_id = "#{week}#{club.id}OD"
 
-        Message.create(action_id:,
-                       week:,
-                       club_id: club.id,
-                       var1: 'Your club is overdrawn. If you do not fix the problems quickly the directors will step in and sell players to clear the debt')
+        @club_messages << { action_id:,
+                            week:,
+                            club_id: club.id,
+                            var1: 'Your club is overdrawn. If you do not fix the problems quickly the directors will step in and sell players to clear the debt' }
       end
     end
   end
@@ -275,12 +262,12 @@ class Turn::ClubUpdates
           club.bank_bal += proceeds
           club.save
 
-          Message.create(action_id:,
-                         week:,
-                         club_id: club.id,
-                         var1: "Your bank account was credited with #{proceeds} due a player sale (#{player.name})",
-                         var2: 'inc-transfers_out',
-                         var3: proceeds)
+          @club_messages << { action_id:,
+                              week:,
+                              club_id: club.id,
+                              var1: "Your bank account was credited with #{proceeds} due a player sale (#{player.name})",
+                              var2: 'inc-transfers_out',
+                              var3: proceeds }
 
           Transfer.create(week:,
                           buy_club: 242,
@@ -298,19 +285,18 @@ class Turn::ClubUpdates
                        article_type: 'Club',
                        headline: "#{club.name} Financial Crisis!",
                        sub_headline: "Players Sold to Clear Debts!",
-                       article: "Directors have taken over the financial affairs of the club after they were found to be overdrawn for three weeks.  Up to three players will be sold each week until the debt is cleared.  The club is in crisis and the fans are in uproar.  The board are considering looking for a new manager to take over the club and lead them to a brighter future although no change is imminent.")
+                       article: 'Directors have taken over the financial affairs of the club after they were found to be overdrawn for three weeks.  Up to three players will be sold each week until the debt is cleared.  The club is in crisis and the fans are in uproar.  The board are considering looking for a new manager to take over the club and lead them to a brighter future although no change is imminent.')
 
-        Message.create(action_id:,
-                       week:,
-                       club_id: club.id,
-                       var1: 'Your club has been overdrawn for three weeks now and the directors have stepped in to rectify the problem.  Up to three players will be sold each week until the debt is cleared')
+        @club_messages << { action_id:,
+                            week:,
+                            club_id: club.id,
+                            var1: 'Your club has been overdrawn for three weeks now and the directors have stepped in to rectify the problem.  Up to three players will be sold each week until the debt is cleared' }
       end
 
       if club.bank_bal.positive?
         club.overdrawn = 0
         club.save
       end
-
     end
   end
 end
