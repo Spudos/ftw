@@ -15,7 +15,7 @@ class Turn::Engines::Fitness
       random_injury(player)
       injury(player)
     end
-    Message.insert_all(@fitness_messages)
+    Message.insert_all(@fitness_messages) unless @fitness_messages.empty?
     destroy_selection
     players
   end
