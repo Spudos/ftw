@@ -25,7 +25,6 @@ class Turn::Engines::Contract
     return unless player.contract == 3 || player.contract < 1
 
     if player.contract < 1
-      binding.pry
       @contract_messages << { week:,
                               club_id: player.club_id,
                               var1: "#{player.name} has been released at the end of his contract with the club." }

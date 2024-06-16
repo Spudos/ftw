@@ -21,6 +21,6 @@ class Match::AggressionEffect
       }
       totals_aggression << hash
     end
-    return totals_aggression
+    totals_aggression
   end
 end
