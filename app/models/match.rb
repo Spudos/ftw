@@ -13,6 +13,7 @@ class Match < ApplicationRecord
     fixture_list = Match::CreateFixtures.new(selected_week, competition).call
 
     fixture_list.each do |fixture|
+      # binding.pry
       final_squad, match_info = squad(fixture)
       final_team, match_info = teams(final_squad, match_info)
       minute_by_minute, home_list, away_list = match(final_team, final_squad, match_info)

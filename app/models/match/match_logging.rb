@@ -12,7 +12,7 @@ class Match::MatchLogging
 
     filename = "Week_#{minute_by_minute.first[:week]}_MatchId_#{minute_by_minute.first[:id]}_Processed#{Time.now.strftime('%Y%m%d%H%M%S')}"
 
-    match_logging_folder = File.join(Dir.pwd, 'match_logging')
+    match_logging_folder = File.join(Dir.pwd, 'match_logging') # TODO: create if doesn't exist
 
     File.open(File.join(match_logging_folder, "#{filename}.txt"), 'w') do |file|
       file.puts minute_by_minute.first.keys.join(', ')

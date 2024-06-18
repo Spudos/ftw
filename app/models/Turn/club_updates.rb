@@ -171,7 +171,12 @@ class Turn::ClubUpdates
       @club_messages << { action_id:, week:, club_id: club.id,
                           var1: "You had a home match this week; This cost you #{medical_cost} in medical costs",
                           var2: 'dec-medical', var3: medical_cost }
+      add_message(club_id, "You had a home match this week; This cost you #{medical_cost} in medical costs", 'dec-medical', medical_cost)
     end
+  end
+
+  def add_message(club_id, var1, var2, var3)
+    @club_messages << { action_id: @action_id, week: @week, club_id:, var1:, var2:, var3: }
   end
 
   def fan_happiness_match
@@ -249,9 +254,9 @@ class Turn::ClubUpdates
       if club.overdrawn > 3 && club.bank_bal.negative?
         action_id = "#{week}#{club.id}OD"
 
-        counter = 0
+        3.times do
+          break unless club.bank_bal.negative?
 
-        while club.bank_bal.negative? && counter < 3
           player = Player.where(club_id: club.id).order(total_skill: :asc).first
 
           proceeds = (player.value * 0.75).to_i
@@ -275,8 +280,6 @@ class Turn::ClubUpdates
                           player_id: player.id,
                           bid: proceeds,
                           status: 'completed')
-
-          counter += 1
         end
 
         Article.create(week:,
