@@ -15,7 +15,7 @@ class Match::CreateFixtures
 
     fixture_list = []
     fixtures.each do |fixture|
-      unless Match.exists?(match_id: fixture.id)
+      unless Match.exists?(match_id: fixture.id) # DB call, optimise
         fixture_list << {
           id: fixture.id,
           club_home: fixture.home,
