@@ -107,19 +107,14 @@ class Turn::ClubUpdates
 
   def match_day_income
     home_games = Match.where(week_number: week).pluck(:home_team)
+    clubs = Club.where(id: home_games)
+    match_attendance = {}
 
     home_games.each do |team|
-      club = Club.find_by(id: team)
+      club = clubs.select { |current_club| current_club.id == team.to_i }
       action_id = "#{week}#{club.id}shop"
-      stadium_size = club.stand_n_capacity + club.stand_s_capacity + club.stand_e_capacity + club.stand_w_capacity
 
-      if club.fanbase > stadium_size
-        attendance = (stadium_size * rand(0.9756..0.9923)).to_i
-      else
-        attendance = (club.fanbase * club.fan_happiness) / 100
-      end
-
-      Match.find_by(week_number: week, home_team: team).update(attendance:)
+      match_attendance[team] = MatchAttendanceCalculator.new(club).attendance
 
       gate_receipts = attendance * club.ticket_price
       hospitality_receipts = club.hospitality * rand(102_345..119_234)
@@ -172,6 +167,12 @@ class Turn::ClubUpdates
                           var1: "You had a home match this week; This cost you #{medical_cost} in medical costs",
                           var2: 'dec-medical', var3: medical_cost }
     end
+
+    all_matches = Match.where(week:).where(home_team: match_attendance.keys)
+    all_matches.each do |match|
+      match.attendance = match_attendance[match.home_team]
+    end
+    Match.upsert_all(all_matches.as_json) if all_matches.present?
   end
 
   def fan_happiness_match

@@ -9,6 +9,9 @@ class Match < ApplicationRecord
   #   end
   # end
 
+  has_many :home_teams, class_name: 'Clubs', foreign_key: 'home_team_id'
+  has_many :away_teams, class_name: 'Clubs', foreign_key: 'home_team_id'
+
   def run_matches(selected_week, competition)
     fixture_list = Match::CreateFixtures.new(selected_week, competition).call
 
