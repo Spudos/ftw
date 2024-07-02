@@ -112,9 +112,10 @@ class Turn::ClubUpdates
 
     home_games.each do |team|
       club = clubs.select { |current_club| current_club.id == team.to_i }
-      action_id = "#{week}#{club.id}shop"
 
-      match_attendance[team] = MatchAttendanceCalculator.new(club).attendance
+      action_id = "#{week}#{club[0].id}shop"
+
+      match_attendance[team] = MatchAttendanceCalculator.new(club[0]).attendance
 
       gate_receipts = attendance * club.ticket_price
       hospitality_receipts = club.hospitality * rand(102_345..119_234)
@@ -233,12 +234,14 @@ class Turn::ClubUpdates
       if club.bank_bal.negative?
         club.overdrawn += 1
         club.save
+
         action_id = "#{week}#{club.id}OD"
 
         @club_messages << { action_id:,
                             week:,
                             club_id: club.id,
-                            var1: 'Your club is overdrawn. If you do not fix the problems quickly the directors will step in and sell players to clear the debt' }
+                            var1: 'Your club is overdrawn. If you do not fix the problems quickly the directors will step in and sell players to clear the debt',
+                            var2: 'warn-od', var3: club.bank_bal }
       end
     end
   end
@@ -291,7 +294,8 @@ class Turn::ClubUpdates
         @club_messages << { action_id:,
                             week:,
                             club_id: club.id,
-                            var1: 'Your club has been overdrawn for three weeks now and the directors have stepped in to rectify the problem.  Up to three players will be sold each week until the debt is cleared' }
+                            var1: 'Your club has been overdrawn for three weeks now and the directors have stepped in to rectify the problem.  Up to three players will be sold each week until the debt is cleared',
+                            var2: 'fix-od', var3: club.bank_bal }
       end
 
       if club.bank_bal.positive?

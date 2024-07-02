@@ -9,8 +9,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       create(:player, club_id: 1, wages: 100_000)
       create(:player, club_id: 1, wages: 200_000)
       create(:player, club_id: 1, wages: 300_000)
+      club = Club.first
 
-      Turn::ClubUpdates.new(week).call
+      Turn::ClubUpdates.new(week).send(:wage_bill, club)
 
       expect(Club.first.bank_bal).to eq(400_000)
       expect(Club.first.overdrawn).to eq(0)
@@ -18,8 +19,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
 
     it 'should not affect bank if the club has no players' do
       create(:club, id: 1, bank_bal: 0)
+      club = Club.first
 
-      Turn::ClubUpdates.new(week).call
+      Turn::ClubUpdates.new(week).send(:wage_bill, club)
 
       expect(Club.first.bank_bal).to eq(0)
     end
@@ -37,7 +39,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              staff_mid: 1,
              staff_att: 1)
 
-      Turn::ClubUpdates.new(week).call
+      club = Club.first
+
+      Turn::ClubUpdates.new(week).send(:staff_costs, club)
 
       expect(Club.first.bank_bal).to be_between(-67_404, -55_404)
     end
@@ -64,8 +68,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
 
       allow_any_instance_of(Kernel).to receive(:rand).with(62..69).and_return(65)
       allow_any_instance_of(Kernel).to receive(:rand).with(1845..2434).and_return(2200)
+      club = Club.first
 
-      Turn::ClubUpdates.new(week).send(:ground_upkeep)
+      Turn::ClubUpdates.new(week).send(:ground_upkeep, club)
 
       expect(Club.first.bank_bal).to eq(-66_600)
     end
@@ -208,7 +213,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              bank_bal: 100_000_000,
              fan_happiness: 50)
 
-      Turn::ClubUpdates.new(week).send(:fan_happiness_bank)
+      club = Club.first
+
+      Turn::ClubUpdates.new(week).send(:fan_happiness_bank, club)
 
       expect(Club.first.fan_happiness).to eq(53)
     end
@@ -219,7 +226,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              bank_bal: 1_000_000,
              fan_happiness: 50)
 
-      Turn::ClubUpdates.new(week).send(:fan_happiness_bank)
+      club = Club.first
+
+      Turn::ClubUpdates.new(week).send(:fan_happiness_bank, club)
 
       expect(Club.first.fan_happiness).to eq(45)
     end
@@ -229,8 +238,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              id: 2,
              bank_bal: 50_000_000,
              fan_happiness: 50)
+      club = Club.first
 
-      Turn::ClubUpdates.new(week).send(:fan_happiness_bank)
+      Turn::ClubUpdates.new(week).send(:fan_happiness_bank, club)
 
       expect(Club.first.fan_happiness).to eq(50)
     end
@@ -241,9 +251,11 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       create(:club,
              id: 2,
              fan_happiness: 50)
+             
+      club = Club.first
 
       allow_any_instance_of(Kernel).to receive(:rand).with(-3..3).and_return(1)
-      Turn::ClubUpdates.new(week).send(:fan_happiness_random)
+      Turn::ClubUpdates.new(week).send(:fan_happiness_random, club)
 
       expect(Club.first.fan_happiness).to eq(51)
     end
@@ -253,7 +265,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              id: 2,
              fan_happiness: 250)
 
-      Turn::ClubUpdates.new(week).send(:fan_happiness_random)
+      club = Club.first
+
+      Turn::ClubUpdates.new(week).send(:fan_happiness_random, club)
 
       expect(Club.first.fan_happiness).to eq(100)
     end
@@ -263,7 +277,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              id: 2,
              fan_happiness: -50)
 
-      Turn::ClubUpdates.new(week).send(:fan_happiness_random)
+      club = Club.first
+
+      Turn::ClubUpdates.new(week).send(:fan_happiness_random, club)
 
       expect(Club.first.fan_happiness).to eq(0)
     end
