@@ -9,7 +9,7 @@ class Turn::ClubUpdates
   def call
     clubs = Club.all
     clubs.each do |club|
-      wage_bill(club)
+      Turn::Engines::ClubWageBill.new(week, club).process
       staff_costs(club)
       ground_upkeep(club)
       club_shop_income(club)
@@ -113,9 +113,9 @@ class Turn::ClubUpdates
     home_games.each do |team|
       club = clubs.select { |current_club| current_club.id == team.to_i }
 
-      action_id = "#{week}#{club[0].id}shop"
+      action_id = "#{week}#{club.id}shop"
 
-      match_attendance[team] = MatchAttendanceCalculator.new(club[0]).attendance
+      match_attendance[team] = Turn::MatchAttendanceCalculator.new(club).attendance
 
       gate_receipts = attendance * club.ticket_price
       hospitality_receipts = club.hospitality * rand(102_345..119_234)

@@ -11,7 +11,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       create(:player, club_id: 1, wages: 300_000)
       club = Club.first
 
-      Turn::ClubUpdates.new(week).send(:wage_bill, club)
+      Turn::Engines::ClubWageBill.new(week, club).process
 
       expect(Club.first.bank_bal).to eq(400_000)
       expect(Club.first.overdrawn).to eq(0)
@@ -21,7 +21,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       create(:club, id: 1, bank_bal: 0)
       club = Club.first
 
-      Turn::ClubUpdates.new(week).send(:wage_bill, club)
+      Turn::Engines::ClubWageBill.new(week, club).process
 
       expect(Club.first.bank_bal).to eq(0)
     end
@@ -41,7 +41,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
 
       club = Club.first
 
-      Turn::ClubUpdates.new(week).send(:staff_costs, club)
+      Turn::Engines::ClubStaffCosts.new(week, club).process
 
       expect(Club.first.bank_bal).to be_between(-67_404, -55_404)
     end
@@ -70,7 +70,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       allow_any_instance_of(Kernel).to receive(:rand).with(1845..2434).and_return(2200)
       club = Club.first
 
-      Turn::ClubUpdates.new(week).send(:ground_upkeep, club)
+      Turn::Engines::ClubGroundUpkeep.new(week, club).process
 
       expect(Club.first.bank_bal).to eq(-66_600)
     end
@@ -82,8 +82,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              id: 1,
              bank_bal: 0,
              fanbase: 100_000)
-
-      Turn::ClubUpdates.new(week).call
+      club = Club.first
+      
+      Turn::Engines::ClubShopIncome.new(week, club).process
 
       expect(Club.first.bank_bal).to be_between(107_123, 112_123)
     end
