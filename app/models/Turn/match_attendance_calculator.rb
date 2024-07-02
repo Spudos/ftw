@@ -1,11 +1,9 @@
 class Turn::MatchAttendanceCalculator
-  attr_reader :club
-
   def initialize(club)
     @club = club
   end
 
-  def process
+  def attendance
     stadium_size = club.stand_n_capacity + club.stand_s_capacity + club.stand_e_capacity + club.stand_w_capacity
 
     if club.fanbase > stadium_size

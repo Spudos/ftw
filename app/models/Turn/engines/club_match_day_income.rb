@@ -13,10 +13,9 @@ class Turn::Engines::ClubMatchDayIncome
 
     home_games.each do |team|
       club = clubs.select { |current_club| current_club.id == team.to_i }
+      action_id = "#{week}#{club.id}shop"
 
-      action_id = "#{week}#{team}income"
-
-      attendance = Turn::MatchAttendanceCalculator.new(club).process
+      match_attendance[team] = MatchAttendanceCalculator.new(club).attendance
 
       gate_receipts = attendance * club.ticket_price
       hospitality_receipts = club.hospitality * rand(102_345..119_234)
@@ -25,11 +24,11 @@ class Turn::Engines::ClubMatchDayIncome
       club_shop_match_income = (attendance * 15.2465).to_i
       tv_income = (attendance * 29.3456).to_i
       match_day_income = gate_receipts +
-                         facilities_receipts +
-                         programme_receipts +
-                         club_shop_match_income +
-                         hospitality_receipts +
-                         tv_income
+                          facilities_receipts +
+                          programme_receipts +
+                          club_shop_match_income +
+                          hospitality_receipts +
+                          tv_income
 
       policing_cost = (attendance * 3.5683).to_i
       stewarding_cost = (attendance * 2.3245).to_i
