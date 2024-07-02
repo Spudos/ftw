@@ -1,21 +1,25 @@
 class Turn::Engines::ClubMatchDayIncome
   attr_reader :week
 
-  def initialize(week)
+  def initialize(week) # pass messages
     @week = week
     @club_messages = []
   end
 
   def process
-    home_games = Match.where(week_number: week).pluck(:home_team)
-    clubs = Club.where(id: home_games)
-    match_attendance = {}
+    update_matches
+    calculate_match_game_income
+  end
 
-    home_games.each do |team|
-      club = clubs.select { |current_club| current_club.id == team.to_i }
+  private
+
+  def calculate_match_game_income
+    home_games.each do |team, attendance|
+      club = clubs.find { |current_club| current_club.id == team.to_i }
+
+      next if club.nil?
+
       action_id = "#{week}#{club.id}shop"
-
-      match_attendance[team] = MatchAttendanceCalculator.new(club).attendance
 
       gate_receipts = attendance * club.ticket_price
       hospitality_receipts = club.hospitality * rand(102_345..119_234)
@@ -40,6 +44,7 @@ class Turn::Engines::ClubMatchDayIncome
       new_bal = club.bank_bal.to_i + net_match_day
       club.update(bank_bal: new_bal)
 
+      # @messages.add({ action_id:, week:, club_id:, var1: var1_message(gate_receipts, 'gate') })
       @club_messages << { action_id:, week:, club_id: club.id,
                           var1: "You had a home match this week; This generated #{gate_receipts} in gate receipts",
                           var2: 'inc-gate_receipts', var3: gate_receipts }
@@ -68,11 +73,33 @@ class Turn::Engines::ClubMatchDayIncome
                           var1: "You had a home match this week; This cost you #{medical_cost} in medical costs",
                           var2: 'dec-medical', var3: medical_cost }
     end
+  end
 
-    all_matches = Match.where(week:).where(home_team: match_attendance.keys)
+  def var1_message(value, type)
+    "You had a home match this week; This cost you #{value} in #{type} costs"
+  end
+
+  def clubs
+    @clubs = Club.where(id: home_games)
+  end
+
+  def home_games
+    @home_games = Match.where(week_number: week).pluck(:home_team, :attendance)
+  end
+
+  def update_matches
+    all_matches = Match.where(week_number: week).where(home_team: attendances.keys)
     all_matches.each do |match|
-      match.attendance = match_attendance[match.home_team]
+      match.attendance = attendances[match.home_team.to_i]
     end
     Match.upsert_all(all_matches.as_json) if all_matches.present?
+  end
+
+  def attendances
+    @attendances ||= {}.tap do |match_attendance|
+      clubs.each do |club|
+        match_attendance[club.id] = Turn::MatchAttendanceCalculator.new(club).process
+      end
+    end
   end
 end
