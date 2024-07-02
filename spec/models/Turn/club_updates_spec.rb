@@ -115,9 +115,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       allow_any_instance_of(Kernel).to receive(:rand).with(102_345..119_234).and_return(105_000)
       allow_any_instance_of(Kernel).to receive(:rand).with(12_345..19_234).and_return(15_000)
 
-      club = Club.first
-
-      Turn::Engines::ClubMatchDayIncome.new(week, club).process
+      Turn::Engines::ClubMatchDayIncome.new(week).process
 
       expect(Club.first.bank_bal).to eq(1_278_439)
     end
@@ -141,9 +139,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              fanbase: 100_000,
              ticket_price: 10)
 
-      club = Club.first
-
-      Turn::Engines::ClubMatchDayIncome.new(week, club).process
+      Turn::Engines::ClubMatchDayIncome.new(week).process
 
       expect(Club.first.bank_bal).to eq(0)
     end
@@ -158,11 +154,8 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              id: 2,
              fan_happiness: 50)
       create(:match, home_goals: 3, away_goals: 1)
-      club_1 = Club.first
-      club_2 = Club.last
 
-      Turn::Engines::ClubFanHappinessMatch.new(week, club_1).process
-      Turn::Engines::ClubFanHappinessMatch.new(week, club_2).process
+      Turn::Engines::ClubFanHappinessMatch.new(week).process
 
       expect(Club.first.fan_happiness).to eq(59)
       expect(Club.last.fan_happiness).to eq(45)
@@ -177,7 +170,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              fan_happiness: 50)
       create(:match, home_goals: 3, away_goals: 4)
 
-      Turn::Engines::ClubFanHappinessMatch.new(week, club).process
+      Turn::Engines::ClubFanHappinessMatch.new(week).process
 
       expect(Club.first.fan_happiness).to eq(45)
       expect(Club.last.fan_happiness).to eq(59)
@@ -193,7 +186,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
 
       create(:match, home_goals: 3, away_goals: 3)
 
-      Turn::Engines::ClubFanHappinessMatch.new(week, club).process
+      Turn::Engines::ClubFanHappinessMatch.new(week).process
 
       expect(Club.first.fan_happiness).to eq(53)
       expect(Club.last.fan_happiness).to eq(53)
@@ -207,9 +200,8 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              fan_happiness: 50)
 
       create(:transfer, player_id: 1, status: 'completed', week: 1)
-      club = Club.first
 
-      Turn::Engines::ClubFanHappinessSignings.new(week, club).process
+      Turn::Engines::ClubFanHappinessSignings.new(week).process
 
       expect(Club.first.fan_happiness).to eq(56)
     end
@@ -302,9 +294,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       create(:player, club_id: 1, wages: 200_000, value: 1_000_000)
       create(:player, club_id: 1, wages: 300_000, value: 1_000_000)
 
-      club = Club.first
-
-      Turn::Engines::ClubOverdrawn.new(week, club).process
+      Turn::Engines::ClubOverdrawn.new(week).process
 
       expect(Club.first.bank_bal).to eq(-600_000)
       expect(Club.first.overdrawn).to eq(3)
@@ -317,9 +307,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       create(:player, name: 'aa', club_id: 1, wages: 200_000, value: 1_000_000)
       create(:player, name: 'aaa', club_id: 1, wages: 300_000, value: 1_000_000)
 
-      club = Club.first
-
-      Turn::Engines::ClubFixOverdraft.new(week, club).process
+      Turn::Engines::ClubFixOverdraft.new(week).process
 
       expect(Club.first.bank_bal).to eq(150_000)
       expect(Club.first.overdrawn).to eq(0)
@@ -336,9 +324,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       create(:player, name: 'aaa', club_id: 1, wages: 300_000, value: 1_000_000)
       create(:player, name: 'aaaa', club_id: 1, wages: 300_000, value: 1_000_000)
 
-      club = Club.first
-
-      Turn::Engines::ClubFixOverdraft.new(week, club).process
+      Turn::Engines::ClubFixOverdraft.new(week).process
 
       expect(Club.first.bank_bal).to eq(-2_750_000)
       expect(Club.first.overdrawn).to eq(4)

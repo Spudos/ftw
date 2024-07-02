@@ -1,9 +1,8 @@
 class Turn::Engines::ClubOverdrawn
-  attr_reader :week, :club
+  attr_reader :week
 
-  def initialize(week, club)
+  def initialize(week)
     @week = week
-    @club = club
     @club_messages = []
   end
 
