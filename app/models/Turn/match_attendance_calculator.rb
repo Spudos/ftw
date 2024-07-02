@@ -5,7 +5,7 @@ class Turn::MatchAttendanceCalculator
     @club = club
   end
 
-  def attendance
+  def process
     stadium_size = club.stand_n_capacity + club.stand_s_capacity + club.stand_e_capacity + club.stand_w_capacity
 
     if club.fanbase > stadium_size

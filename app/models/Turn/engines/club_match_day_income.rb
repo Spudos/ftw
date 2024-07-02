@@ -14,9 +14,9 @@ class Turn::Engines::ClubMatchDayIncome
     home_games.each do |team|
       club = clubs.select { |current_club| current_club.id == team.to_i }
 
-      action_id = "#{week}#{team}shop"
+      action_id = "#{week}#{team}income"
 
-      attendance = Turn::MatchAttendanceCalculator.new(club).attendance
+      attendance = Turn::MatchAttendanceCalculator.new(club).process
 
       gate_receipts = attendance * club.ticket_price
       hospitality_receipts = club.hospitality * rand(102_345..119_234)
