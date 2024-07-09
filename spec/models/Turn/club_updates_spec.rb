@@ -143,7 +143,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       allow_any_instance_of(Kernel).to receive(:rand).with(102_345..119_234).and_return(105_000)
       allow_any_instance_of(Kernel).to receive(:rand).with(12_345..19_234).and_return(15_000)
 
-      Turn::Engines::ClubMatchDayIncome.new(week).process
+      club_updates = []
+      resolver = Turn::Engines::MessageTypeResolver.new(club_updates)
+      Turn::Engines::ClubMatchDayIncome.new(week, resolver).process
 
       expect(Club.first.bank_bal).to eq(705_071)
     end
