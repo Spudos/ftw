@@ -17,6 +17,7 @@ class Turn::ClubUpdates
       Turn::Engines::ClubFanHappinessRandom.new(week, club).process
     end
 
+    Turn::Engines::CalculateAttendances.new(week).process
     Turn::Engines::ClubMatchDayIncome.new(week).process
     Turn::Engines::ClubFanHappinessMatch.new(week).process
     Turn::Engines::ClubFanHappinessSignings.new(week).process

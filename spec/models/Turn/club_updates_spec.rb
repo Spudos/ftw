@@ -117,7 +117,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
 
       Turn::Engines::ClubMatchDayIncome.new(week).process
 
-      expect(Club.first.bank_bal).to eq(1_278_439)
+      expect(Club.first.bank_bal).to eq(705_071)
     end
 
     it 'does not effect bank as no home game' do
