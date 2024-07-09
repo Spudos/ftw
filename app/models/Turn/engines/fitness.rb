@@ -63,7 +63,7 @@ class Turn::Engines::Fitness
         var1: "#{player.name} has been injured and will be out for #{player.available} weeks"
       }
 
-      @destroyable_player_ids << player.id if selections.select { |p| p.id == player.id }.present?
+      @destroyable_player_ids << player.id if selections.select { |p| p.player_id == player.id }.present?
     end
   end
 

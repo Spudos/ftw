@@ -9,6 +9,7 @@ class Turn::Engines::PlayerTotals
   def process
     result = Player.joins('INNER JOIN performances ON performances.player_id = players.id GROUP BY players.id')
                    .select('players.id, COUNT(players.id) AS cnt')
+                   .select('players.id, AVG(match_performance) AS perf') # join does not include the goals table so total_goal and total_assist wont work
 
     players.each do |player|
       player_games_played(result, player)
@@ -30,7 +31,6 @@ class Turn::Engines::PlayerTotals
   end
 
   def player_total_goals(result, player)
-    binding.pry
     player.total_goals = result.find { |record| record.id == player.id }&.cnt || 0
   end
 
@@ -39,6 +39,6 @@ class Turn::Engines::PlayerTotals
   end
 
   def player_average_perfomance(result, player)
-    player.average_performance = result.find { |record| record.id == player.id }&.cnt || 0
+    player.average_performance = result.find { |record| record.id == player.id }&.perf || 0
   end
 end

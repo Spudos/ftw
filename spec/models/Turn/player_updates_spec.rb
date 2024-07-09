@@ -27,28 +27,27 @@ RSpec.describe Turn::PlayerUpdates, type: :model do
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(3)
 
       Turn::PlayerUpdates.new(week).call
-binding.pry
+
       expect(Player.first.fitness).to eq(53)
       expect(Player.first.available).to eq(3)
       expect(Player.first.contract).to eq(23)
-      expect(Player.first.value).to eq(42929250)
-      expect(Player.first.wages).to eq(87125)
+      expect(Player.first.value).to eq(42_929_250)
+      expect(Player.first.wages).to eq(87_125)
       expect(Player.first.total_skill).to eq(85)
       expect(Player.first.games_played).to eq(1)
+      expect(Player.first.average_performance).to eq(50)
       expect(Player.first.total_goals).to eq(2)
       expect(Player.first.total_assists).to eq(3)
-      expect(Player.first.average_performance).to eq(50)
       expect(Selection.exists?(player_id: 1)).to eq(false)
     end
 
     it 'no contract decrease as it is an unmagaed club' do
       create(:club, id: 1, managed: false)
       create(:player,
-              club_id: 1,
-              fitness: 50,
-              contract: 24,
-              available: 0
-              )
+             club_id: 1,
+             fitness: 50,
+             contract: 24,
+             available: 0)
 
       allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..9).and_return(3)
