@@ -13,8 +13,8 @@ class Turn::Engines::PlayerTotals
 
     players.each do |player|
       player_games_played(result, player)
-      player_total_assists(result, player)
-      player_total_goals(result, player)
+      player_total_assists(player)
+      player_total_goals(player)
       player_total_skill(player)
       player_average_perfomance(result, player)
     end
@@ -26,12 +26,12 @@ class Turn::Engines::PlayerTotals
     player.games_played = result.find { |record| record.id == player.id }&.cnt || 0
   end
 
-  def player_total_assists(result, player)
-    player.total_assists = result.find { |record| record.id == player.id }&.cnt || 0
+  def player_total_assists(player)
+    player.total_assists = player.assists.count || 0 # CHECK
   end
 
-  def player_total_goals(result, player)
-    player.total_goals = result.find { |record| record.id == player.id }&.cnt || 0
+  def player_total_goals(player)
+    player.total_goals = player.goals.count || 0 # CHECK
   end
 
   def player_total_skill(player)
