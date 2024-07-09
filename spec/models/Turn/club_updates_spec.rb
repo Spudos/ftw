@@ -90,6 +90,34 @@ RSpec.describe Turn::ClubUpdates, type: :model do
     end
   end
 
+  describe 'calcualte attendance' do
+    it 'calculate the attandance for the match and update it in the matches table' do
+      create(:match)
+      create(:club,
+             id: 1,
+             bank_bal: 0,
+             stand_n_capacity: 5000,
+             stand_s_capacity: 5000,
+             stand_e_capacity: 5000,
+             stand_w_capacity: 5000,
+             stand_n_condition: 1,
+             stand_s_condition: 1,
+             stand_e_condition: 1,
+             stand_w_condition: 1,
+             facilities: 1,
+             hospitality: 1,
+             pitch: 1,
+             fanbase: 30_000,
+             ticket_price: 10)
+
+      allow_any_instance_of(Kernel).to receive(:rand).with(0.9756..0.9923).and_return(0.99)
+
+      Turn::Engines::CalculateAttendances.new(week).process
+
+      expect(Match.first.attendance).to eq(19800)
+    end
+  end
+
   describe 'Match_income' do
     it 'should increase the bank balance all streams of income for a match day' do
       create(:match)

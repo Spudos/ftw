@@ -30,6 +30,7 @@ class Turn::Engines::PlayerTotals
   end
 
   def player_total_goals(result, player)
+    binding.pry
     player.total_goals = result.find { |record| record.id == player.id }&.cnt || 0
   end
 
