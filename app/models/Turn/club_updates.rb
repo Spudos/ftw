@@ -17,8 +17,10 @@ class Turn::ClubUpdates
       Turn::Engines::ClubFanHappinessRandom.new(week, club).process
     end
 
+    message_type_resolver = Turn::Engines::MessageTypeResolver.new(@club_messages)
+
     Turn::Engines::CalculateAttendances.new(week).process
-    Turn::Engines::ClubMatchDayIncome.new(week).process
+    Turn::Engines::ClubMatchDayIncome.new(week, message_type_resolver).process
     Turn::Engines::ClubFanHappinessMatch.new(week).process
     Turn::Engines::ClubFanHappinessSignings.new(week).process
     Turn::Engines::ClubOverdrawn.new(week).process
