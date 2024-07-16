@@ -12,11 +12,11 @@ class Turn::Engines::CalculateAttendances
   private
 
   def clubs
-    @clubs = Club.where(id: home_games.flatten.compact)
+    @clubs = Club.where(id: home_games)
   end
 
   def home_games
-    @home_games = Match.where(week_number: week).pluck(:home_team, :attendance)
+    Match.where(week_number: week).pluck(:home_team)
   end
 
   def update_matches
