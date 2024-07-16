@@ -4,7 +4,6 @@ class Turn::Engines::ClubFanHappinessBank
   def initialize(week, club)
     @week = week
     @club = club
-    @club_messages = []
   end
 
   def process

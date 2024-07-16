@@ -12,7 +12,7 @@ class Turn::Engines::CalculateAttendances
   private
 
   def clubs
-    @clubs = Club.where(id: home_games)
+    @clubs = Club.where(id: home_games.flatten.compact)
   end
 
   def home_games
@@ -21,9 +21,11 @@ class Turn::Engines::CalculateAttendances
 
   def update_matches
     all_matches = Match.where(week_number: week).where(home_team: attendances.keys)
+
     all_matches.each do |match|
       match.attendance = attendances[match.home_team.to_i]
     end
+
     Match.upsert_all(all_matches.as_json) if all_matches.present?
   end
 
@@ -43,7 +45,6 @@ class Turn::Engines::CalculateAttendances
     else
       attendance = (club.fanbase * club.fan_happiness) / 100
     end
-
     attendance
   end
 end

@@ -1,10 +1,10 @@
 class Turn::Engines::ClubShopIncome
-  attr_reader :week, :club
+  attr_reader :week, :club, :club_messages
 
-  def initialize(week, club)
+  def initialize(week, club, club_messages)
     @week = week
     @club = club
-    @club_messages = []
+    @club_messages = club_messages
   end
 
   def process

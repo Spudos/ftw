@@ -9,10 +9,10 @@ class Turn::ClubUpdates
   def call
     clubs = Club.all
     clubs.each do |club|
-      Turn::Engines::ClubWageBill.new(week, club).process
-      Turn::Engines::ClubStaffCosts.new(week, club).process
-      Turn::Engines::ClubGroundUpkeep.new(week, club).process
-      Turn::Engines::ClubShopIncome.new(week, club).process
+      Turn::Engines::ClubWageBill.new(week, club, @club_messages).process
+      Turn::Engines::ClubStaffCosts.new(week, club, @club_messages).process
+      Turn::Engines::ClubGroundUpkeep.new(week, club, @club_messages).process
+      Turn::Engines::ClubShopIncome.new(week, club, @club_messages).process
       Turn::Engines::ClubFanHappinessBank.new(week, club).process
       Turn::Engines::ClubFanHappinessRandom.new(week, club).process
     end

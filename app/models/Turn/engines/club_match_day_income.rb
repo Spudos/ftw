@@ -26,7 +26,7 @@ class Turn::Engines::ClubMatchDayIncome
 
       new_bal = club.bank_bal.to_i + net_match_day
       club.update(bank_bal: new_bal)
-
+binding.pry
       @message_type_resolver.message(club.id, action_id, week, expenses)
     end
   end
@@ -64,7 +64,7 @@ class Turn::Engines::ClubMatchDayIncome
   end
 
   def clubs
-    @clubs = Club.where(id: home_games)
+    @clubs = Club.where(id: home_games.flatten.compact)
   end
 
   def home_games

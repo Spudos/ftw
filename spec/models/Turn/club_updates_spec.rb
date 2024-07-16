@@ -3,6 +3,7 @@ require 'pry'
 
 RSpec.describe Turn::ClubUpdates, type: :model do
   let(:week) { 1 }
+
   describe 'wage_bill' do
     it 'should reduce the bank balance by the total wages of the players' do
       create(:club, id: 1, bank_bal: 1_000_000)
@@ -10,8 +11,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       create(:player, club_id: 1, wages: 200_000)
       create(:player, club_id: 1, wages: 300_000)
       club = Club.first
+      club_messages = []
 
-      Turn::Engines::ClubWageBill.new(week, club).process
+      Turn::Engines::ClubWageBill.new(week, club, club_messages).process
 
       expect(Club.first.bank_bal).to eq(400_000)
       expect(Club.first.overdrawn).to eq(0)
@@ -20,8 +22,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
     it 'should not affect bank if the club has no players' do
       create(:club, id: 1, bank_bal: 0)
       club = Club.first
+      club_messages = []
 
-      Turn::Engines::ClubWageBill.new(week, club).process
+      Turn::Engines::ClubWageBill.new(week, club, club_messages).process
 
       expect(Club.first.bank_bal).to eq(0)
     end
@@ -40,8 +43,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              staff_att: 1)
 
       club = Club.first
+      club_messages = []
 
-      Turn::Engines::ClubStaffCosts.new(week, club).process
+      Turn::Engines::ClubStaffCosts.new(week, club, club_messages).process
 
       expect(Club.first.bank_bal).to be_between(-67_404, -55_404)
     end
@@ -69,8 +73,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       allow_any_instance_of(Kernel).to receive(:rand).with(62..69).and_return(65)
       allow_any_instance_of(Kernel).to receive(:rand).with(1845..2434).and_return(2200)
       club = Club.first
+      club_messages = []
 
-      Turn::Engines::ClubGroundUpkeep.new(week, club).process
+      Turn::Engines::ClubGroundUpkeep.new(week, club, club_messages).process
 
       expect(Club.first.bank_bal).to eq(-66_600)
     end
@@ -83,8 +88,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              bank_bal: 0,
              fanbase: 100_000)
       club = Club.first
+      club_messages = []
 
-      Turn::Engines::ClubShopIncome.new(week, club).process
+      Turn::Engines::ClubShopIncome.new(week, club, club_messages).process
 
       expect(Club.first.bank_bal).to be_between(107_123, 112_123)
     end
@@ -114,7 +120,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
 
       Turn::Engines::CalculateAttendances.new(week).process
 
-      expect(Match.first.attendance).to eq(19800)
+      expect(Match.first.attendance).to eq(19_800)
     end
   end
 

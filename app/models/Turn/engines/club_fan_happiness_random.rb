@@ -4,7 +4,6 @@ class Turn::Engines::ClubFanHappinessRandom
   def initialize(week, club)
     @week = week
     @club = club
-    @club_messages = []
   end
 
   def process
