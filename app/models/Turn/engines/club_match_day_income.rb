@@ -22,12 +22,7 @@ class Turn::Engines::ClubMatchDayIncome
 
       @action_id = "#{week}#{club.id}shop"
 
-      @policing_cost = (attendance * 3.5683).to_i
-      @stewarding_cost = (attendance * 2.3245).to_i
-      @medical_cost = (attendance * 0.4387).to_i
-      match_day_costs = policing_cost + stewarding_cost + medical_cost
-
-      net_match_day = match_day_income(club, attendance) - match_day_costs
+      net_match_day = match_day_income(club, attendance) - match_day_costs(attendance)
 
       new_bal = club.bank_bal.to_i + net_match_day
       club.update(bank_bal: new_bal)
@@ -47,10 +42,24 @@ class Turn::Engines::ClubMatchDayIncome
       club_shop_match_income + hospitality_receipts + tv_income
   end
 
+  def match_day_costs(attendance)
+    @policing_cost = (attendance * 3.5683).to_i
+    @stewarding_cost = (attendance * 2.3245).to_i
+    @medical_cost = (attendance * 0.4387).to_i
+    policing_cost + stewarding_cost + medical_cost
+  end
+
   def expenses
     {
       gate_receipts:,
-      hospitality_receipts:
+      hospitality_receipts:,
+      facilities_receipts:,
+      programme_receipts:,
+      club_shop_match_income:,
+      tv_income:,
+      policing_cost:,
+      stewarding_cost:,
+      medical_cost:
     }
   end
 

@@ -26,6 +26,6 @@ class Turn::ClubUpdates
     Turn::Engines::ClubOverdrawn.new(week).process
     Turn::Engines::ClubFixOverdraft.new(week).process
 
-    Message.insert_all(@club_messages) unless @club_messages.empty?
+    Message.insert_all(@club_messages) unless @club_messages.empty? # check
   end
 end

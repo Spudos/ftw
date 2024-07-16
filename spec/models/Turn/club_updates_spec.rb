@@ -169,7 +169,9 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              fanbase: 100_000,
              ticket_price: 10)
 
-      Turn::Engines::ClubMatchDayIncome.new(week).process
+      club_updates = []
+      resolver = Turn::Engines::MessageTypeResolver.new(club_updates)
+      Turn::Engines::ClubMatchDayIncome.new(week, resolver).process
 
       expect(Club.first.bank_bal).to eq(0)
     end

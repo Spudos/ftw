@@ -33,19 +33,42 @@ class Turn::Engines::MessageTypeResolver
         category: 'hospitality income',
         var2: 'inc-hospitality',
         type: 'received'
+      },
+      facilities_receipts: {
+        category: 'facilities income',
+        var2: 'inc-facilities',
+        type: 'received'
+      },
+      programme_receipts: {
+        category: 'programme sales',
+        var2: 'inc-programs',
+        type: 'received'
+      },
+      club_shop_match_income: {
+        category: 'club shop match day',
+        var2: 'inc-club_shop_match',
+        type: 'received'
+      },
+      tv_income: {
+        category: 'TV revenue',
+        var2: 'inc-tv_income',
+        type: 'received'
+      },
+      policing_cost: {
+        category: 'policing costs',
+        var2: 'dec-policing',
+        type: 'paid'
+      },
+      stewarding_cost: {
+        category: 'stewarding costs',
+        var2: 'dec-stewards',
+        type: 'paid'
+      },
+      medical_cost: {
+        category: 'medical costs',
+        var2: 'dec-medical',
+        type: 'paid'
       }
     }
   end
-
-  # def message_types
-  #   [['gate receipts', gate_receipts, 'inc-gate_receipts', 'received'],
-  #    ['hospitality income', hospitality_receipts, 'inc-hospitality', 'received'],
-  #    ['facilities income', facilities_receipts, 'inc-facilities', 'received'],
-  #    ['programme sales', programme_receipts, 'inc-programs', 'received'],
-  #    ['club shop match day', club_shop_match_income, 'inc-club_shop_match', 'received'],
-  #    ['TV revenue', tv_income, 'inc-tv_income', 'received'],
-  #    ['policing costs', policing_cost, 'dec-policing', 'paid'],
-  #    ['stewarding costs', stewarding_cost, 'dec-stewards', 'paid'],
-  #    ['medical costs', medical_cost, 'dec-medical', 'paid']]
-  # end
 end
