@@ -64,10 +64,10 @@ class Turn::Engines::ClubMatchDayIncome
   end
 
   def clubs
-    @clubs = Club.where(id: home_games.flatten.compact)
+    @clubs = Club.where(id: home_games.map(&:first))
   end
 
   def home_games
-    @home_games = Match.where(week_number: week).pluck(:home_team, :attendance)
+    Match.where(week_number: week).pluck(:home_team, :attendance)
   end
 end

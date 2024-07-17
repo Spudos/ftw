@@ -29,18 +29,9 @@ class LeaguesController < ApplicationController
   end
 
   def create_tables
-    errors = []
+    CreateLeagueTablesJob.perform_later(params[:week])
 
-    begin
-      league = League.new
-      league.create_tables(params)
-
-      notice = 'League Tables updated sucessfully.'
-    rescue StandardError => e
-      errors << "Error occurred during processing: #{e.message}"
-      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
-    end
-
+    notice = 'The create tables job has been sent for processing.'
     redirect_to request.referrer, notice:
   end
 end

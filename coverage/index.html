@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-07-16T15:44:22+01:00">2024-07-16T15:44:22+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-07-17T10:30:19+01:00">2024-07-17T10:30:19+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -330,7 +330,7 @@
             <td class="cell--number">22</td>
             <td class="cell--number">17</td>
             <td class="cell--number">5</td>
-            <td class="cell--number">7.50</td>
+            <td class="cell--number">7.68</td>
             
           </tr>
         
@@ -693,7 +693,7 @@
             <td class="cell--number">14</td>
             <td class="cell--number">13</td>
             <td class="cell--number">1</td>
-            <td class="cell--number">1.93</td>
+            <td class="cell--number">2.00</td>
             
           </tr>
         
@@ -1001,7 +1001,7 @@
             <td class="cell--number">7</td>
             <td class="cell--number">7</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">4.57</td>
+            <td class="cell--number">4.43</td>
             
           </tr>
         
@@ -4935,7 +4935,7 @@
 
             
 
-            <code class="ruby">    @clubs = Club.where(id: home_games.flatten.compact)</code>
+            <code class="ruby">    @clubs = Club.where(id: home_games)</code>
           </li>
         </div>
       
@@ -4979,7 +4979,7 @@
 
             
 
-            <code class="ruby">    @home_games = Match.where(week_number: week).pluck(:home_team, :attendance)</code>
+            <code class="ruby">    Match.where(week_number: week).pluck(:home_team)</code>
           </li>
         </div>
       
@@ -8287,7 +8287,7 @@
 
             
 
-            <code class="ruby">    @clubs = Club.where(id: home_games)</code>
+            <code class="ruby">    @clubs = Club.where(id: home_games.map(&amp;:first))</code>
           </li>
         </div>
       
@@ -8331,7 +8331,7 @@
 
             
 
-            <code class="ruby">    @home_games = Match.where(week_number: week).pluck(:home_team, :attendance)</code>
+            <code class="ruby">    Match.where(week_number: week).pluck(:home_team, :attendance)</code>
           </li>
         </div>
       
@@ -12586,8 +12586,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="18" data-linenumber="19">
-            <span class="hits">18</span>
+          <li class="covered" data-hits="14" data-linenumber="19">
+            <span class="hits">14</span>
             
 
             
@@ -12597,8 +12597,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="18" data-linenumber="20">
-            <span class="hits">18</span>
+          <li class="covered" data-hits="14" data-linenumber="20">
+            <span class="hits">14</span>
             
 
             
@@ -12608,8 +12608,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="11" data-linenumber="21">
-            <span class="hits">11</span>
+          <li class="covered" data-hits="15" data-linenumber="21">
+            <span class="hits">15</span>
             
 
             
@@ -12619,8 +12619,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="11" data-linenumber="22">
-            <span class="hits">11</span>
+          <li class="covered" data-hits="15" data-linenumber="22">
+            <span class="hits">15</span>
             
 
             
@@ -12630,8 +12630,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="11" data-linenumber="23">
-            <span class="hits">11</span>
+          <li class="covered" data-hits="15" data-linenumber="23">
+            <span class="hits">15</span>
             
 
             
@@ -38623,8 +38623,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="17">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="17">
+            <span class="hits">2</span>
             
 
             
@@ -44329,8 +44329,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="7" data-linenumber="68">
-            <span class="hits">7</span>
+          <li class="covered" data-hits="8" data-linenumber="68">
+            <span class="hits">8</span>
             
 
             
@@ -44406,8 +44406,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="7" data-linenumber="75">
-            <span class="hits">7</span>
+          <li class="covered" data-hits="6" data-linenumber="75">
+            <span class="hits">6</span>
             
 
             
@@ -54088,8 +54088,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="7">
-            <span class="hits">6</span>
+          <li class="covered" data-hits="5" data-linenumber="7">
+            <span class="hits">5</span>
             
 
             
@@ -57392,7 +57392,7 @@
 
             
 
-            <code class="ruby">      create(:match)</code>
+            <code class="ruby">      create(:match, attendance: 19_800)</code>
           </li>
         </div>
       
@@ -57568,7 +57568,7 @@
 
             
 
-            <code class="ruby">             fanbase: 100000,</code>
+            <code class="ruby">             fanbase: 100_000,</code>
           </li>
         </div>
       
@@ -57689,7 +57689,7 @@
 
             
 
-            <code class="ruby">      expect(Club.first.bank_bal).to eq(705_071)</code>
+            <code class="ruby">      expect(Club.first.bank_bal).to eq(1_278_439)</code>
           </li>
         </div>
       

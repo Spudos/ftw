@@ -126,7 +126,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
 
   describe 'Match_income' do
     it 'should increase the bank balance all streams of income for a match day' do
-      create(:match)
+      create(:match, attendance: 19_800)
       create(:club,
              id: 1,
              bank_bal: 0,
@@ -142,7 +142,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
              hospitality: 1,
              pitch: 1,
              fan_happiness: 50,
-             fanbase: 100000,
+             fanbase: 100_000,
              ticket_price: 10)
 
       allow_any_instance_of(Kernel).to receive(:rand).with(0.9756..0.9923).and_return(0.99)
@@ -153,7 +153,7 @@ RSpec.describe Turn::ClubUpdates, type: :model do
       resolver = Turn::Engines::MessageTypeResolver.new(club_updates)
       Turn::Engines::ClubMatchDayIncome.new(week, resolver).process
 
-      expect(Club.first.bank_bal).to eq(705_071)
+      expect(Club.first.bank_bal).to eq(1_278_439)
     end
 
     it 'does not effect bank as no home game' do
