@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   post '/matches/save', to: 'matches#save', as: 'save_match'
   get '/matches/:id', to: 'matches#show', as: 'show_match'
   post '/matches/match_multiple', to: 'matches#match_multiple'
+  post '/matches/selection_and_matches', to: 'matches#selection_and_matches'
 
   get '/players', to: 'players#index'
   post '/players', to: 'players#create'
@@ -102,4 +103,9 @@ Rails.application.routes.draw do
   post '/help/club_submission', to: 'help#club_submission'
 
   get '/turn_report', to: 'turn_report#index'
+
+  require 'sidekiq/web'
+  authenticate :user, lambda { |u| u.gm? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

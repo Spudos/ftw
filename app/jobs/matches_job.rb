@@ -1,10 +1,15 @@
-class RunMatchesJob < ApplicationJob
+class MatchesJob < ApplicationJob
   queue_as :default
 
-  def perform(selected_week, competition)
+  def perform(selected_week)
     begin
+      Processing.create(message: "#{selected_week}FM")
+
+      selection = Selection.new
+      selection.auto_selection(selected_week)
+
       match = Match.new
-      match.run_matches(selected_week, competition)
+      match.run_matches(selected_week, nil)
     rescue StandardError => e
       logger = Logger.new('error.log')
       logger.error(e.message)

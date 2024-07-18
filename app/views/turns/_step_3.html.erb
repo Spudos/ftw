@@ -1,5 +1,15 @@
 <div class="col-3">
   <h3>Step 3</h3>
+  <h6>Auto Selections and Matches</h6>
+  <form action="/matches/selection_and_matches" method="post">
+    <input type="hidden" name="selected_week" value="<%= params[:week] %>">
+    <% if Processing.exists?(message: "#{params[:week]}FM") %>
+      <button type="submit" class="btn btn-danger disabled">Selections and matches job processed</button><br>
+    <% else %>
+      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run all selections and games?')">All Selections and Games</button><br>
+    <% end %>
+  </form>
+
   <h6>Auto Selections</h6>
   <form action="/selections/auto_selection" method="post">
     <input type="hidden" name="week" value="<%= params[:week] %>">
