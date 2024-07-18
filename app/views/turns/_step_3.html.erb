@@ -1,0 +1,116 @@
+<div class="col-3">
+  <h3>Step 3</h3>
+  <h6>Auto Selections</h6>
+  <form action="/selections/auto_selection" method="post">
+    <input type="hidden" name="week" value="<%= params[:week] %>">
+    <% if Processing.exists?(message: "#{params[:week]}AS") %>
+      <button type="submit" class="btn btn-danger disabled">Run Auto Select</button><br>
+    <% else %>
+      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process Auto Select?')">Auto Select</button><br>
+    <% end %>
+  </form>
+
+  <h6>Run Matches</h6>
+  <form action="/matches/match_multiple" method="post">
+    <input type="hidden" name="selected_week" value="<%= params[:week] %>">
+    <% if @games_completed == @games_scheduled %>
+      <button type="submit" class="btn btn-danger disabled">All Games <%= @games_completed %>/<%= @games_scheduled %></button><br>
+    <% else %>
+      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run all games?')">All Games <%= @games_completed %>/<%= @games_scheduled %></button><br>
+    <% end %>
+
+    <h6>League</h6>
+    <% if @premier_completed == @premier_scheduled %>
+      <button type="submit" name="competition" value="Premier League" class="btn btn-danger disabled">Premier League <%= @premier_completed %>/<%= @premier_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="Premier League" class="btn btn-success" onclick="return confirm('Are you sure you want to run Premier League games?')">Premier League <%= @premier_completed %>/<%= @premier_scheduled %></button><br>
+    <% end %>
+    
+    <% if @championship_completed == @championship_scheduled %>
+      <button type="submit" name="competition" value="Championship" class="btn btn-danger disabled">Championship <%= @championship_completed %>/<%= @championship_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="Championship" class="btn btn-success" onclick="return confirm('Are you sure you want to run Championship games?')">Championship <%= @championship_completed %>/<%= @championship_scheduled %></button><br>
+    <% end %>
+
+    <% if @ligue_1_completed == @ligue_1_scheduled %>
+      <button type="submit" name="competition" value="Ligue 1" class="btn btn-danger disabled">Ligue 1 <%= @ligue_1_completed %>/<%= @ligue_1_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="Ligue 1" class="btn btn-success" onclick="return confirm('Are you sure you want to run Ligue 1 games?')">Ligue 1 <%= @ligue_1_completed %>/<%= @ligue_1_scheduled %></button><br>
+    <% end %>
+
+    <% if @ligue_2_completed == @ligue_2_scheduled %>
+      <button type="submit" name="competition" value="Ligue 2" class="btn btn-danger disabled">Ligue 2 <%= @ligue_2_completed %>/<%= @ligue_2_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="Ligue 2" class="btn btn-success" onclick="return confirm('Are you sure you want to run Ligue 2 games?')">Ligue 2 <%= @ligue_2_completed %>/<%= @ligue_2_scheduled %></button><br>
+    <% end %>
+
+    <% if @serie_a_completed == @serie_a_scheduled %>
+      <button type="submit" name="competition" value="Serie A" class="btn btn-danger disabled">Serie A <%= @serie_a_completed %>/<%= @serie_a_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="Serie A" class="btn btn-success" onclick="return confirm('Are you sure you want to run Serie A games?')">Serie A <%= @serie_a_completed %>/<%= @serie_a_scheduled %></button><br>
+    <% end %>
+
+    <% if @serie_b_completed == @serie_b_scheduled %>
+      <button type="submit" name="competition" value="Serie B" class="btn btn-danger disabled">Serie B <%= @serie_b_completed %>/<%= @serie_b_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="Serie B" class="btn btn-success" onclick="return confirm('Are you sure you want to run Serie B games?')">Serie B <%= @serie_b_completed %>/<%= @serie_b_scheduled %></button><br>
+    <% end %>
+
+    <% if @bundesliga_1_completed == @bundesliga_1_scheduled %>
+      <button type="submit" name="competition" value="Bundesliga 1" class="btn btn-danger disabled">Bundesliga 1 <%= @bundesliga_1_completed %>/<%= @bundesliga_1_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="Bundesliga 1" class="btn btn-success" onclick="return confirm('Are you sure you want to run Bundesliga 1 games?')">Bundesliga 1 <%= @bundesliga_1_completed %>/<%= @bundesliga_1_scheduled %></button><br>
+    <% end %>
+
+    <% if @bundesliga_2_completed == @bundesliga_2_scheduled %>
+      <button type="submit" name="competition" value="Bundesliga 2" class="btn btn-danger disabled">Bundesliga 2 <%= @bundesliga_2_completed %>/<%= @bundesliga_2_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="Bundesliga 2" class="btn btn-success" onclick="return confirm('Are you sure you want to run Bundesliga 2 games?')">Bundesliga 2 <%= @bundesliga_2_completed %>/<%= @bundesliga_2_scheduled %></button><br>
+    <% end %>
+
+    <% if @la_liga_completed == @la_liga_scheduled %>
+      <button type="submit" name="competition" value="La Liga" class="btn btn-danger disabled">La Liga <%= @la_liga_completed %>/<%= @la_liga_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="La Liga" class="btn btn-success" onclick="return confirm('Are you sure you want to run La Liga games?')">La Liga <%= @la_liga_completed %>/<%= @la_liga_scheduled %></button><br>
+    <% end %>
+
+    <% if @segunda_division_completed == @segunda_division_scheduled %>
+      <button type="submit" name="competition" value="Segunda Division" class="btn btn-danger disabled">Segunda Division <%= @segunda_division_completed %>/<%= @segunda_division_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="Segunda Division" class="btn btn-success" onclick="return confirm('Are you sure you want to run Segunda Division games?')">Segunda Division <%= @segunda_division_completed %>/<%= @segunda_division_scheduled %></button><br>
+    <% end %>
+
+    <% if @brasileiro_serie_a_completed == @brasileiro_serie_a_scheduled %>
+      <button type="submit" name="competition" value="Brasileiro Serie A" class="btn btn-danger disabled">Brasil Serie A <%= @brasileiro_serie_a_completed %>/<%= @brasileiro_serie_a_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="Brasileiro Serie A" class="btn btn-success" onclick="return confirm('Are you sure you want to run Brasileiro Serie A games?')">Brasil Serie A <%= @brasileiro_serie_a_completed %>/<%= @brasileiro_serie_a_scheduled %></button><br>
+    <% end %>
+
+    <% if @brasileiro_serie_b_completed == @brasileiro_serie_b_scheduled %>
+      <button type="submit" name="competition" value="Brasileiro Serie B" class="btn btn-danger disabled">Brasil Serie B <%= @brasileiro_serie_b_completed %>/<%= @brasileiro_serie_b_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="Brasileiro Serie B" class="btn btn-success" onclick="return confirm('Are you sure you want to run Brasileiro Serie B games?')">Brasil Serie B <%= @brasileiro_serie_b_completed %>/<%= @brasileiro_serie_b_scheduled %></button><br>
+    <% end %>
+
+    <h6>League Cup</h6>
+    <% if @league_cup_completed == @league_cup_scheduled %>
+      <button type="submit" name="competition" value="League Cup" class="btn btn-danger disabled">Cup <%= @league_cup_completed %>/<%= @league_cup_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="League Cup" class="btn btn-success" onclick="return confirm('Are you sure you want to run League Cup games?')">Cup <%= @league_cup_completed %>/<%= @league_cup_scheduled %></button><br>
+    <% end %>
+
+    <h6>World Club Cup</h6>
+    <% if @wcc_completed == @wcc_scheduled %>
+      <button type="submit" name="competition" value="WCC" class="btn btn-danger disabled">Cup <%= @wcc_completed %>/<%= @wcc_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="WCC" class="btn btn-success" onclick="return confirm('Are you sure you want to run WCC games?')">Cup <%= @wcc_completed %>/<%= @wcc_scheduled %></button><br>
+    <% end %>
+    
+    <h6>Other</h6>
+    <% if @friendlies_completed == @friendlies_scheduled %>
+      <button type="submit" name="competition" value="Friendly" class="btn btn-danger disabled">Friendlies <%= @friendlies_completed %>/<%= @friendlies_scheduled %></button><br>
+    <% else %>
+      <button type="submit" name="competition" value="Friendly" class="btn btn-success" onclick="return confirm('Are you sure you want to run Friendly games?')">Friendlies <%= @friendlies_completed %>/<%= @friendlies_scheduled %></button><br>
+    <% end %>
+  </form>
+</div>

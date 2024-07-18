@@ -1,6 +1,6 @@
 class Selection < ApplicationRecord
   def auto_selection(params)
-    if params[:week].present? && Message.find_by(action_id: "#{params[:week]}AS").nil?
+    if params.present? && Processing.find_by(message: "#{params}AS").nil?
       Club.all.each do |club|
         if Selection.where(club_id: club.id).size == 11 && club.managed == true
           next
@@ -8,9 +8,9 @@ class Selection < ApplicationRecord
           run_auto_selection(club)
         end
       end
-      Message.create(action_id: "#{params[:week]}AS", week: params[:week], club_id: '999', var1: "week #{params[:week]} Auto Select processed")
+      Processing.create(message: "#{params}AS")
     else
-      if params[:week].nil?
+      if params.nil?
         raise 'Please select a week before trying to process Auto Selections.'
       else
         raise 'Auto Selections for that week have already been processed.'

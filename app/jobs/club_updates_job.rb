@@ -1,10 +1,10 @@
-class TurnEndAdminJob < ApplicationJob
+class ClubUpdatesJob < ApplicationJob
   queue_as :default
 
   def perform(params)
     begin
-      league = League.new
-      league.create_tables(params)
+      turn = Turn.new
+      turn.process_club_updates(params)
     rescue StandardError => e
       logger = Logger.new('error.log')
       logger.error(e.message)

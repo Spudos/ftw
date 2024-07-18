@@ -5,10 +5,7 @@ class League < ApplicationRecord
     teams = teams_from_matches
     calculate_and_save_tables(teams)
 
-    Message.create(action_id: "#{params}CLT",
-                   week: params,
-                   club_id: '999',
-                   var1: "week #{params} League tables created")
+    Processing.create(message: "#{params}CLT")
   end
 
   def teams_from_matches

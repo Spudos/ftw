@@ -118,67 +118,38 @@ class TurnsController < ApplicationController
     redirect_to request.referrer, notice:
   end
 
+  def end_of_turn
+    EndOfTurnJob.perform_later(params[:week])
+
+    notice = 'The end of turn job has been sent for processing.'
+    redirect_to request.referrer, notice:
+  end
+
   def process_player_updates
-    errors = []
+    PlayerUpdatesJob.perform_later(params[:week])
 
-    begin
-      turn = Turn.new
-      turn.process_player_updates(params)
-
-      notice = 'Player Updates ran successfully.'
-    rescue StandardError => e
-      errors << "Error occurred during processing: #{e.message}"
-      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
-    end
-
+    notice = 'The player updates job has been sent for processing.'
     redirect_to request.referrer, notice:
   end
 
   def process_upgrade_admin
-    errors = []
+    UpgradeAdminJob.perform_later(params[:week])
 
-    begin
-      turn = Turn.new
-      turn.process_upgrade_admin(params)
-
-      notice = 'Upgrade Admin ran successfully.'
-    rescue StandardError => e
-      errors << "Error occurred during processing: #{e.message}"
-      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
-    end
-
+    notice = 'The upgrade admin job has been sent for processing.'
     redirect_to request.referrer, notice:
   end
 
   def process_club_updates
-    errors = []
+    ClubUpdatesJob.perform_later(params[:week])
 
-    begin
-      turn = Turn.new
-      turn.process_club_updates(params)
-
-      notice = 'Club Updates ran successfully.'
-    rescue StandardError => e
-      errors << "Error occurred during processing: #{e.message}"
-      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
-    end
-
+    notice = 'The club updates job has been sent for processing.'
     redirect_to request.referrer, notice:
   end
 
   def process_article_updates
-    errors = []
+    ArticleUpdatesJob.perform_later(params[:week])
 
-    begin
-      turn = Turn.new
-      turn.process_article_updates(params)
-
-      notice = 'Article Updates ran successfully.'
-    rescue StandardError => e
-      errors << "Error occurred during processing: #{e.message}"
-      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
-    end
-
+    notice = 'The article updates job has been sent for processing.'
     redirect_to request.referrer, notice:
   end
 

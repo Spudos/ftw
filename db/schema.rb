@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_05_222557) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_18_142937) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -248,6 +248,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_05_222557) do
     t.boolean "potential_strength_coached", default: false
     t.boolean "potential_creativity_coached", default: false
     t.integer "available"
+  end
+
+  create_table "processings", force: :cascade do |t|
+    t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "selections", force: :cascade do |t|

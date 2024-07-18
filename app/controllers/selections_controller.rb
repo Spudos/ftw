@@ -52,19 +52,10 @@ class SelectionsController < ApplicationController
   end
 
   def auto_selection
-    errors = []
+    AutoSelectionJob.perform_later(params[:week])
 
-    begin
-      selection = Selection.new
-      selection.auto_selection(params)
-
-      notice = 'Auto Selection ran successfully.'
-    rescue StandardError => e
-      errors << "Error occurred during processing: #{e.message}"
-      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
-    end
-
-    redirect_to request.referrer, notice: notice
+    notice = 'The auto selection job has been sent for processing.'
+    redirect_to request.referrer, notice:
   end
 
   private

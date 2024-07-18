@@ -22,6 +22,7 @@ class Match < ApplicationRecord
       detailed_match_summary = match_end(home_list, away_list, minute_by_minute)
       save_match(detailed_match_summary, home_list, away_list, minute_by_minute)
     end
+    Processing.create(message: "#{selected_week}RM")
   end
 
   private
