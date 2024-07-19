@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_18_142937) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_19_073444) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -69,6 +69,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_18_142937) do
     t.string "event"
     t.integer "home_score"
     t.integer "away_score"
+  end
+
+  create_table "errors", force: :cascade do |t|
+    t.string "error_type"
+    t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "feedbacks", force: :cascade do |t|

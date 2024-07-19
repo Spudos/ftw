@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :messages
   resources :tactics
   resources :transfers
+  resources :errors
 
   root 'welcome#index'
 

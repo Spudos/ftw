@@ -17,6 +17,7 @@
       </form>
     </div>
 
+
     <% if params[:week].present? %>
     <%= render 'step_2' %>
     <% end %>
@@ -29,6 +30,8 @@
     <%= render 'step_4' %>
     <% end %>
 
-    </div>
-  <%= render 'turn_actions' %>
+    <%= render 'turn_actions' %>
+
+    <%=render 'errors' %>
+  </div>
 </div>

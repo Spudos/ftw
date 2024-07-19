@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10">
+      <h3 class="text-center mb-5">Error log</h3>
+      <div id="turns">
+        <table class="table table-hover align-middle">
+          <tbody>
+            <tr>
+              <th scope="col">Type</th>
+              <th scope="col">Message</th>
+              <th scope="col">Date</th>
+            </tr>
+            <% @errors.each do |error| %>
+              <tr scope="row">
+                <td><%= error.error_type %></td>
+                <td><%= error.message %></td>
+                <td><%= error.created_at %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
