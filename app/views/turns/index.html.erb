@@ -26,7 +26,7 @@
     <%= render 'step_3' %>
     <% end %>
 
-    <% if Processing.find_by(message: "#{params[:week]}RM").present? %>
+    <% if Processing.find_by(message: "#{params[:week]}RM").present? || params[:week].present? && @games_scheduled == 0 %>
     <%= render 'step_4' %>
     <% end %>
 
