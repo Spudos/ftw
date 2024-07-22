@@ -1,9 +1,9 @@
-<%= form_with(model: turnsheet, id: 'turnsheet') do |form| %>
-  <% if turnsheet.errors.any? %>
+<%= form_with(model: @turnsheet, id: 'turnsheet') do |form| %>
+  <% if @turnsheet.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(turnsheet.errors.count, "error") %> prohibited this turnsheet from being saved:</h2>
       <ul>
-      <% turnsheet.errors.each do |error| %>
+      <% @turnsheet.errors.each do |error| %>
         <li><%= error.full_message %></li>
       <% end %>
       </ul>

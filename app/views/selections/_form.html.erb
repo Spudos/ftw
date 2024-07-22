@@ -1,27 +1,10 @@
-<%= form_with(model: selection) do |form| %>
-  <% if selection.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(selection.errors.count, "error") %> prohibited this selection from being saved:</h2>
-
-      <ul>
-        <% selection.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+<% @selected_club.each do |selected_club| %>
+  <%= form_with(model: selected_club, local: true) do |form| %>
+    <table>
+    <tr>
+      <td><%= form.text_field :player_id, value: selected_club.player_id %></td>
+      <td><%= form.submit "Update" %></td>
+    </tr>
+  </table>
   <% end %>
-
-  <div>
-    <%= form.label :club, style: "display: block" %>
-    <%= form.text_field :club %>
-  </div>
-
-  <div>
-    <%= form.label :player_id, style: "display: block" %>
-    <%= form.number_field :player_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>

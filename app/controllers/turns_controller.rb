@@ -54,7 +54,7 @@ class TurnsController < ApplicationController
 
     @last_turn_processed = Message.maximum(:week)
 
-    @errors = Errors.all.sort_by { |error| error.created_at }.reverse
+    @errors = Error.all.sort_by(&:created_at).reverse
   end
 
   def show; end

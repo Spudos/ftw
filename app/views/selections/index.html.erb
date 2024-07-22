@@ -1,12 +1,17 @@
 <h1>Selections</h1>
 
-<div id="selections">
-  <% @selections.each do |selection| %>
-    <%= render selection %>
-    <p>
-      <%= link_to "Show this selection", selection %>
-    </p>
-  <% end %>
-</div>
+<form action="/selections" method="get">
+  <label for="club_id">Select club id:</label>
+  <select name="club_id" id="club_id">
+    <% @clubs.each do |club| %>
+      <option value="<%= club.id %>">club_id <%= club.id %> - <%= club.name %></option>
+    <% end %>
+  </select>
+  <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+</form>
 
-<%= link_to "New selection", new_selection_path %>
+<h3 class="mb-5 mt-5">Club: <%= params[:club_id]%> </h3>
+
+<% if params[:club_id].present? %>
+  <%= render 'form', club_id: params[:club_id], selected_clubs: @selected_clubs %>
+<% end %>

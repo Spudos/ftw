@@ -2,6 +2,11 @@ class SelectionsController < ApplicationController
   before_action :set_selection, only: %i[show edit update destroy]
   def index
     @selections = Selection.all
+    @clubs = Club.all
+
+    return unless params[:club_id].present?
+
+    @selected_club = Selection.where(club_id: params[:club_id])
   end
 
   def show; end
@@ -13,13 +18,13 @@ class SelectionsController < ApplicationController
   def edit; end
 
   def create
-    club = Club.find_by(id: params[:club])
-    if params[:player_ids].nil? || params[:player_ids].size != 11
-      flash[:alert] = "You must select 11 players, you selected #{params[:player_ids].count} players."
+    club = Club.find_by(id: params[:selection]["club_id"])
+    player_ids = (1..11).map { |index| params[:selection]["player_#{index}"].to_i }.reject { |id| id.zero? }
+
+    if player_ids.nil? || player_ids.size != 11
+      flash[:alert] = "You must select 11 players, you selected #{player_ids.count}."
       redirect_to request.referrer
     else
-      player_ids = params[:player_ids].map(&:to_i)
-
       Selection.where(club_id: club.id).delete_all
 
       player_ids.each do |player_id|

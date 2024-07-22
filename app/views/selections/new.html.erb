@@ -1,7 +1,22 @@
-<h1>New selection</h1>
-
-<%= render "form", selection: @selection %>
-
-<div>
-  <%= link_to "Back to selections", selections_path %>
+<%= form_with model: @selection do |form| %>
+<div class="col-md-3">
+  <h6 class="text-center">Selected Players</h6>
+  <table class="table table-hover align-middle">
+    <tr>
+      <td>
+        <%= form.label :club_id, style: "display: block" %>
+        <%= form.text_field :club_id %>
+      </td>
+    </tr>
+    <% (1..11).each do |index| %>
+      <tr>
+        <td>
+          <%= form.label "player_#{index}".to_sym, style: "display: block" %>
+          <%= form.text_field "player_#{index}".to_sym, { class: "player-input"} %>
+        </td>
+      </tr>
+    <% end %>
+  </table>  
 </div>
+<%= form.submit %>
+<% end %>
