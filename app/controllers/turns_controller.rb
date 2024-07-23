@@ -2,8 +2,14 @@ class TurnsController < ApplicationController
   rescue_from StandardError, with: :handle_error
   before_action :set_turn, only: %i[show edit update destroy]
 
+  # def leagues
+  #   ['Premier League', 'Championship', ...]
+  # end
+
   def index
     @turns = Turn.all
+    # Match.where(week_number: params[:week], competition: ['Premier League', 'Championship']).pluck(&:count).each_with_index.map { |cnt, index| { leagues[index] => cnt } }
+
     @premier_completed = Match.where(week_number: params[:week], competition: 'Premier League').count
     @premier_scheduled = Fixture.where(week_number: params[:week], comp: 'Premier League').count
     @championship_completed = Match.where(week_number: params[:week], competition: 'Championship').count
