@@ -1,41 +1,27 @@
 <div class="col-3">
-        <h3>Step 2</h3>
-        <h6>Process pre turn admin</h6>
-          <form action="/turns/process_pre_turn_admin" method="post">
-            <input type="hidden" name="week" value="<%= params[:week] %>">
-            <% if @turn && @turn.turnsheets && @turn.turn_actions && @turn.transfer_actions %>
-              <button type="submit" class="btn btn-danger disabled">Pre Turn Admin Processed</button><br>
-            <% else %>
-              <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process the pre turn admin?')">End of Turn Updates</button><br>
-            <% end %>
-          </form>
-
-        <h6>Process Turnsheets</h6>
-        <form action="/turnsheets/process_turnsheet" method="post">
-          <% if @turn && @turn.turnsheets %>
-            <button type="submit" class="btn btn-danger disabled">Turnsheets <%= @turnsheets_processed %>/<%= @turnsheets_submitted %></button><br>
-          <% else %>
-            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process Turnsheets?')">Turnsheets <%= @turnsheets_processed %>/<%= @turnsheets_submitted %></button><br>
-          <% end %>
-        </form>
-
-        <h6>Process Turn Actions</h6>
-        <form action="/turns/process_turn" method="post">
-          <input type="hidden" name="week" value="<%= params[:week] %>">
-          <% if @turn && @turn.turn_actions %>
-            <button type="submit" class="btn btn-danger disabled">Turn & Transfer Actions <%= @turn_actions_processed %>/<%= @turn_actions_submitted %></button><br>
-          <% else %>
-            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process Turn Actions?')">Turn Actions <%= @turn_actions_processed %>/<%= @turn_actions_submitted %></button><br>
-          <% end %>
-        </form>
-
-        <h6>Process Transfer Actions</h6>
-        <form action="/turns/process_turn" method="post">
-          <input type="hidden" name="week" value="<%= params[:week] %>">
-          <% if @turn && @turn.transfer_actions %>
-            <button type="submit" class="btn btn-danger disabled">Transfer Actions <%= @turn_actions_processed %>/<%= @turn_actions_submitted %></button><br>
-          <% else %>
-            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process Transfer Actions?')">Transfer Actions <%= @turn_actions_processed %>/<%= @turn_actions_submitted %></button><br>
-          <% end %>
-        </form>
-      </div>
+  <h3>Step 2</h3>
+  <h6>Process pre turn admin</h6>
+  <form action="/turns/process_pre_turn_admin" method="post">
+    <input type="hidden" name="week" value="<%= params[:week] %>">
+    <% if @turn && @turn.turnsheets && @turn.turn_actions && @turn.transfer_actions %>
+      <button type="submit" class="btn btn-danger disabled">Pre Turn Admin Processed</button><br>
+    <% else %>
+      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process the pre turn admin?')">End of Turn Updates</button><br>
+    <% end %>
+  </form>
+  
+  <table class="table table-striped">
+    <tr>
+      <td>Turnsheets</td>
+      <td><%= @turnsheets_processed %>/<%= @turnsheets_submitted %></td>
+    </tr>
+    <tr>
+      <td>Turn Actions</td>
+      <td><%= @turn_actions_processed %>/<%= @turn_actions_submitted %></td>
+    </tr>
+    <tr>
+      <td>Transfer Actions</td>
+      <td><%= @turn_actions_processed %>/<%= @turn_actions_submitted %></td>
+    </tr>
+  </table>
+</div>

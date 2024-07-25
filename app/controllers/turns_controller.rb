@@ -3,60 +3,35 @@ class TurnsController < ApplicationController
   before_action :set_turn, only: %i[show edit update destroy]
 
   def index
-    @turn_actions = TurnActions.all
-    @premier_completed = Match.where(week_number: params[:week], competition: 'Premier League').count
-    @premier_scheduled = Fixture.where(week_number: params[:week], comp: 'Premier League').count
-    @championship_completed = Match.where(week_number: params[:week], competition: 'Championship').count
-    @championship_scheduled = Fixture.where(week_number: params[:week], comp: 'Championship').count
+    @games_completed = Match.where(week_number: params[:week])
+                            .pluck(:competition)
+                            .group_by(&:itself)
+                            .transform_values(&:count)
+    @games_scheduled = Fixture.where(week_number: params[:week])
+                              .pluck(:comp)
+                              .group_by(&:itself)
+                              .transform_values(&:count)
 
-    @ligue_1_completed = Match.where(week_number: params[:week], competition: 'Ligue 1').count
-    @ligue_1_scheduled = Fixture.where(week_number: params[:week], comp: 'Ligue 1').count
-    @ligue_2_completed = Match.where(week_number: params[:week], competition: 'Ligue 2').count
-    @ligue_2_scheduled = Fixture.where(week_number: params[:week], comp: 'Ligue 2').count
+    @turnsheets_processed = Turnsheet.where(week: params[:week])
+                                     .where.not(processed: nil)
+                                     .count
+    @turnsheets_submitted = Turnsheet.where(week: params[:week])
+                                     .count
 
-    @serie_a_completed = Match.where(week_number: params[:week], competition: 'Serie A').count
-    @serie_a_scheduled = Fixture.where(week_number: params[:week], comp: 'Serie A').count
-    @serie_b_completed = Match.where(week_number: params[:week], competition: 'Serie B').count
-    @serie_b_scheduled = Fixture.where(week_number: params[:week], comp: 'Serie B').count
-
-    @bundesliga_1_completed = Match.where(week_number: params[:week], competition: 'Bundesliga 1').count
-    @bundesliga_1_scheduled = Fixture.where(week_number: params[:week], comp: 'Bundesliga 1').count
-    @bundesliga_2_completed = Match.where(week_number: params[:week], competition: 'Bundesliga 2').count
-    @bundesliga_2_scheduled = Fixture.where(week_number: params[:week], comp: 'Bundesliga 2').count
-
-    @la_liga_completed = Match.where(week_number: params[:week], competition: 'La Liga').count
-    @la_liga_scheduled = Fixture.where(week_number: params[:week], comp: 'La Liga').count
-    @segunda_division_completed = Match.where(week_number: params[:week], competition: 'Segunda Division').count
-    @segunda_division_scheduled = Fixture.where(week_number: params[:week], comp: 'Segunda Division').count
-
-    @brasileiro_serie_a_completed = Match.where(week_number: params[:week], competition: 'Brasileiro Serie A').count
-    @brasileiro_serie_a_scheduled = Fixture.where(week_number: params[:week], comp: 'Brasileiro Serie A').count
-    @brasileiro_serie_b_completed = Match.where(week_number: params[:week], competition: 'Brasileiro Serie B').count
-    @brasileiro_serie_b_scheduled = Fixture.where(week_number: params[:week], comp: 'Brasileiro Serie B').count
-
-    @league_cup_completed = Match.where(week_number: params[:week], competition: 'League Cup').count
-    @league_cup_scheduled = Fixture.where(week_number: params[:week], comp: 'League Cup').count
-
-    @wcc_completed = Match.where(week_number: params[:week], competition: 'WCC').count
-    @wcc_scheduled = Fixture.where(week_number: params[:week], comp: 'WCC').count
-
-    @friendlies_completed = Match.where(week_number: params[:week], competition: 'Friendly').count
-    @friendlies_scheduled = Fixture.where(week_number: params[:week], comp: 'Friendly').count
-
-    @games_completed = Match.where(week_number: params[:week]).count
-    @games_scheduled = Fixture.where(week_number: params[:week]).count
-
-    @turnsheets_processed = Turnsheet.where(week: params[:week]).where.not(processed: nil).count
-    @turnsheets_submitted = Turnsheet.where(week: params[:week]).count
-
-    @turn_actions_processed = TurnActions.where(week: params[:week]).where.not(date_completed: nil).count
+    @turn_actions_processed = TurnActions.where(week: params[:week])
+                                         .where.not(date_completed: nil)
+                                         .count
     @turn_actions_submitted = TurnActions.where(week: params[:week]).count
 
     @last_turn_processed = Message.maximum(:week)
 
     @errors = Error.all.sort_by(&:created_at).reverse
 
+    @turn_actions = TurnActions.where(week: params[:week]).order(:club_id)
+
     @turn = Turn.find_by(week: params[:week])
+
+    @auto_selection = Turn.find_by(week: params[:week])&.auto_selections
   end
 
   def show; end

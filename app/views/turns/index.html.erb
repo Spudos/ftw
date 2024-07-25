@@ -26,7 +26,7 @@
     <%= render 'step_3' %>
     <% end %>
 
-    <% if @turn && @turn.run_matches || @turn && @games_scheduled == 0 %>
+    <% if @turn && @turn.run_matches || @turn && @games_scheduled.empty? %>
     <%= render 'step_4' %>
     <% end %>
 

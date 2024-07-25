@@ -9,64 +9,30 @@
       <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process the end of turn updates?')">End of Turn Updates</button><br>
     <% end %>
   </form>
-
-  <h6>Calculate and Save League Tables</h6>
-  <form action="/leagues/create_tables" method="post">
-    <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if @turn && @turn.create_tables %>
-      <button type="submit" class="btn btn-danger disabled">League Tables Created</button><br>
-    <% else %>
-      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to create the league tables?')">Create Tables</button><br>
-    <% end %>
-  </form>
-
-  <h6>Process End of Turn Player Updates</h6>
-  <form action="/turns/process_player_updates" method="post">
-    <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if @turn && @turn.player_update %>
-      <button type="submit" class="btn btn-danger disabled">Player Updates Completed</button><br>
-    <% else %>
-      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Player Updates?')">Player Updates</button><br>
-    <% end %>
-  </form>
-
-  <h6>Process End of Turn Transfer Updates</h6>
-  <form action="/turns/process_transfer_updates" method="post">
-    <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if @turn && @turn.transfer_update %>
-      <button type="submit" class="btn btn-danger disabled">Transfer Updates Completed</button><br>
-    <% else %>
-      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Transfer Updates?')">Transfer Updates</button><br>
-    <% end %>
-  </form>
-
-  <h6>Process End of Turn Upgrade Admin</h6>
-  <form action="/turns/process_upgrade_admin" method="post">
-    <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if @turn && @turn.upgrade_admin %>
-      <button type="submit" class="btn btn-danger disabled">Upgrade Admin Completed</button><br>
-    <% else %>
-      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Upgrade Admin?')">Upgrade Admin</button><br>
-    <% end %>
-  </form>
-
-  <h6>Process End of Turn Club Updates</h6>
-  <form action="/turns/process_club_updates" method="post">
-    <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if @turn && @turn.club_update %>
-      <button type="submit" class="btn btn-danger disabled">Club Updates Completed</button><br>
-    <% else %>
-      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Club Updates?')">Club updates</button><br>
-    <% end %>
-  </form>
-
-  <h6>Process End of Turn Article Updates</h6>
-  <form action="/turns/process_article_updates" method="post">
-    <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if @turn && @turn.article_update %>
-      <button type="submit" class="btn btn-danger disabled">Article Updates Completed</button><br>
-    <% else %>
-      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Article Updates?')">Article updates</button><br>
-    <% end %>
-  </form>
+  <table class="table table-striped">
+    <tr>
+      <td>Create Tables</td>
+      <td><%= @turn.create_tables %></td>
+    </tr>
+    <tr>
+      <td>Player Updates</td>
+      <td><%= @turn.player_update %></td>
+    </tr>
+    <tr>
+      <td>Transfer Updates</td>
+      <td><%= @turn.transfer_update %></td>
+    </tr>
+    <tr>
+      <td>Upgrade Admin</td>
+      <td><%= @turn.upgrade_admin %></td>
+    </tr>
+    <tr>
+      <td>Club Updates</td>
+      <td><%= @turn.club_update %></td>
+    </tr>
+    <tr>
+      <td>Article Updates</td>
+      <td><%= @turn.article_update %></td>
+    </tr>
+  </table>
 </div>
