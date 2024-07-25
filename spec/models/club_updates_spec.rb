@@ -118,7 +118,7 @@ RSpec.describe Club::ClubUpdates, type: :model do
 
       allow_any_instance_of(Kernel).to receive(:rand).with(0.9756..0.9923).and_return(0.99)
 
-      Turn::Engines::CalculateAttendances.new(week).process
+      Club::Engines::CalculateAttendances.new(week).process
 
       expect(Match.first.attendance).to eq(19_800)
     end

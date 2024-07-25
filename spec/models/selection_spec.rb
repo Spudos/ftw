@@ -9,8 +9,9 @@ RSpec.describe Selection, type: :model do
       end
     create(:club, managed: true)
     params = {week: 1}
+    turn = Turn.new(week: 1)
 
-    Selection.new.auto_selection(params)
+    Selection.new.auto_selection(params, turn)
 
     club_selection = Selection.where(club_id: 1).count
 
@@ -37,8 +38,9 @@ RSpec.describe Selection, type: :model do
       end
 
     params = {week: 1}
+    turn = Turn.new(week: 1)
 
-    Selection.new.auto_selection(params)
+    Selection.new.auto_selection(params, turn)
 
     club_selection = Selection.where(club_id: 1).count
 
@@ -60,8 +62,9 @@ RSpec.describe Selection, type: :model do
       6.times do |n|
         create(:player, position: 'att')
       end
+      turn = Turn.new(week: 1)
 
-    Selection.new.auto_selection(params)
+      Selection.new.auto_selection(params, turn)
 
     club_selection = Selection.where(club_id: 1)
     player_1_position = Player.find_by(id: club_selection[0].player_id)&.position

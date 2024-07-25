@@ -13,8 +13,6 @@ class TurnActions::TurnActionMethods
     coach_upgrade
     contract_renewal
     loyalty_increase
-
-    Turn.find_by(week:).update(turn_actions: true)
   end
 
   private

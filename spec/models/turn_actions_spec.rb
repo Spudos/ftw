@@ -8,6 +8,7 @@ RSpec.describe TurnActions, type: :model do
       create(:turn_actions, club_id: 1, var1: 'train', var2: 'Woolley', var3: 'tackling', date_completed: nil)
       create(:club, id: 1, staff_dfc: 10)
       create(:player, name: 'Woolley', position: 'dfc')
+      turn = Turn.new(week: 1)
 
       TurnActions::TurnActionMethods.new(week).call
 
