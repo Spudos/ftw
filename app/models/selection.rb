@@ -1,20 +1,16 @@
 class Selection < ApplicationRecord
-  def auto_selection(params)
-    if params.present? && Processing.find_by(message: "#{params}AS").nil?
+  def auto_selection(params, turn)
+    if params.present? && !turn.auto_selections
       Club.all.each do |club|
-        if Selection.where(club_id: club.id).size == 11 && club.managed == true
-          next
-        else
-          run_auto_selection(club)
-        end
+        next if Selection.where(club_id: club.id).size == 11 && club.managed == true
+
+        run_auto_selection(club)
       end
-      Processing.create(message: "#{params}AS")
+      turn.update(auto_selections: true)
+    elsif params.nil?
+      Error.create(error_type: 'auto_selection', message: 'Please select a week before trying to process Auto Selections.')
     else
-      if params.nil?
-        raise 'Please select a week before trying to process Auto Selections.'
-      else
-        raise 'Auto Selections for that week have already been processed.'
-      end
+      Error.create(error_type: 'auto_selection', message: 'Auto Selections for that week have already been processed.')
     end
   end
 
@@ -30,17 +26,6 @@ class Selection < ApplicationRecord
   end
 
   def formation_picker
-    formations = [
-      [4, 4, 2],
-      [4, 3, 3],
-      [4, 5, 1],
-      [3, 5, 2],
-      [3, 4, 3],
-      [3, 3, 4],
-      [5, 3, 2],
-      [5, 4, 1],
-      [5, 2, 3]
-    ]
     selected_formation = formations.sample
 
     dfc_number = selected_formation[0]
@@ -74,6 +59,18 @@ class Selection < ApplicationRecord
     att.each do |player|
       Selection.create(club_id: club.id, player_id: player.id)
     end
+  end
+
+  def formations
+    [[4, 4, 2],
+     [4, 3, 3],
+     [4, 5, 1],
+     [3, 5, 2],
+     [3, 4, 3],
+     [3, 3, 4],
+     [5, 3, 2],
+     [5, 4, 1],
+     [5, 2, 3]]
   end
 end
 

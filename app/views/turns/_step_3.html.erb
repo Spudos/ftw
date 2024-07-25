@@ -1,9 +1,9 @@
 <div class="col-3">
   <h3>Step 3</h3>
   <h6>Auto Selections and Matches</h6>
-  <form action="/matches/selection_and_matches" method="post">
+  <form action="/turns/process_matches" method="post">
     <input type="hidden" name="selected_week" value="<%= params[:week] %>">
-    <% if Processing.exists?(message: "#{params[:week]}FM") %>
+    <% if @turn && @turn.auto_selections && @turn.run_matches %>
       <button type="submit" class="btn btn-danger disabled">Selections and matches job processed</button><br>
     <% else %>
       <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run all selections and games?')">All Selections and Games</button><br>
@@ -13,7 +13,7 @@
   <h6>Auto Selections</h6>
   <form action="/selections/auto_selection" method="post">
     <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if Processing.exists?(message: "#{params[:week]}AS") %>
+    <% if @turn && @turn.auto_selections %>
       <button type="submit" class="btn btn-danger disabled">Run Auto Select</button><br>
     <% else %>
       <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process Auto Select?')">Auto Select</button><br>
@@ -23,7 +23,7 @@
   <h6>Run Matches</h6>
   <form action="/matches/match_multiple" method="post">
     <input type="hidden" name="selected_week" value="<%= params[:week] %>">
-    <% if @games_completed == @games_scheduled %>
+    <% if @turn  && @turn.run_matches %>
       <button type="submit" class="btn btn-danger disabled">All Games <%= @games_completed %>/<%= @games_scheduled %></button><br>
     <% else %>
       <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run all games?')">All Games <%= @games_completed %>/<%= @games_scheduled %></button><br>

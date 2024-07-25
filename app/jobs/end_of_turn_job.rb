@@ -3,25 +3,27 @@ class EndOfTurnJob < ApplicationJob
 
   def perform(params)
     begin
-      Processing.create(message: "#{params}ET")
+      turn = Turn.find_by(week: params)
+
       league = League.new
-      league.create_tables(params)
+      league.create_tables(turn)
 
-      turn = Turn.new
-      turn.process_player_updates(params)
+      player = Player.new
+      player.process_player_updates(params, turn)
 
-      turn.process_upgrade_admin(params)
+      transfer = Transfer.new
+      transfer.process_transfer_updates(params, turn)
 
-      turn.process_club_updates(params)
+      club = Club.new
+      club.process_upgrade_admin(params, turn)
+      club.process_club_updates(params, turn)
 
-      turn.process_article_updates(params)
+      article = Article.new
+      article.process_article_updates(params, turn)
     rescue StandardError => e
-      logger = Logger.new('error.log')
-      logger.error(e.message)
-      puts "ERROR: An error occurred while processing the job: #{e.message}"
       Error.create(
         error_type: 'EndOfTurnJob',
-        error: e.message
+        message: e.message
       )
     end
   end

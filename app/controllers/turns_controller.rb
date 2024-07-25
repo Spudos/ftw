@@ -3,7 +3,7 @@ class TurnsController < ApplicationController
   before_action :set_turn, only: %i[show edit update destroy]
 
   def index
-    @turns = Turn.all
+    @turn_actions = TurnActions.all
     @premier_completed = Match.where(week_number: params[:week], competition: 'Premier League').count
     @premier_scheduled = Fixture.where(week_number: params[:week], comp: 'Premier League').count
     @championship_completed = Match.where(week_number: params[:week], competition: 'Championship').count
@@ -49,12 +49,14 @@ class TurnsController < ApplicationController
     @turnsheets_processed = Turnsheet.where(week: params[:week]).where.not(processed: nil).count
     @turnsheets_submitted = Turnsheet.where(week: params[:week]).count
 
-    @turn_actions_processed = Turn.where(week: params[:week]).where.not(date_completed: nil).count
-    @turn_actions_submitted = Turn.where(week: params[:week]).count
+    @turn_actions_processed = TurnActions.where(week: params[:week]).where.not(date_completed: nil).count
+    @turn_actions_submitted = TurnActions.where(week: params[:week]).count
 
     @last_turn_processed = Message.maximum(:week)
 
     @errors = Error.all.sort_by(&:created_at).reverse
+
+    @turn = Turn.find_by(week: params[:week])
   end
 
   def show; end
@@ -104,65 +106,35 @@ class TurnsController < ApplicationController
     @feedback = Feedback.where(outstanding: true)
   end
 
-  def process_turn
-    errors = []
+  def process_pre_turn_admin
+    PreTurnAdminJob.perform_later(params[:week])
 
-    begin
-      turn = Turn.new
-      turn.process_turn_actions(params)
-
-      notice = 'Turn Actions ran successfully.'
-    rescue StandardError => e
-      errors << "Error occurred during processing: #{e.message}"
-      notice = "Errors occurred during processing:\n\n#{errors.join("\n")}"
-    end
-
+    notice = 'The pre turn admin job has been sent for processing.'
     redirect_to request.referrer, notice:
   end
 
-  def end_of_turn
+  def process_matches
+    MatchesJob.perform_later(params[:selected_week])
+
+    notice = 'The run matches job has been sent for processing.'
+    redirect_to request.referrer, notice:
+  end
+
+  def process_end_of_turn
     EndOfTurnJob.perform_later(params[:week])
 
     notice = 'The end of turn job has been sent for processing.'
     redirect_to request.referrer, notice:
   end
 
-  def process_player_updates
-    PlayerUpdatesJob.perform_later(params[:week])
-
-    notice = 'The player updates job has been sent for processing.'
-    redirect_to request.referrer, notice:
-  end
-
-  def process_upgrade_admin
-    UpgradeAdminJob.perform_later(params[:week])
-
-    notice = 'The upgrade admin job has been sent for processing.'
-    redirect_to request.referrer, notice:
-  end
-
-  def process_club_updates
-    ClubUpdatesJob.perform_later(params[:week])
-
-    notice = 'The club updates job has been sent for processing.'
-    redirect_to request.referrer, notice:
-  end
-
-  def process_article_updates
-    ArticleUpdatesJob.perform_later(params[:week])
-
-    notice = 'The article updates job has been sent for processing.'
-    redirect_to request.referrer, notice:
-  end
-
   private
 
   def set_turn
-    @turn = Turn.find_by(id: params[:id])
+    @turn = TurnActions.find_by(id: params[:id])
   end
 
   def turn_params
-    params.require(:turn).permit(:week, :club_id, :var1, :var2, :var3, :var4)
+    params.require(:turn).permit!
   end
 
   def handle_error(exception)

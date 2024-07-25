@@ -1,18 +1,8 @@
 class Match < ApplicationRecord
-  # validates :step2_validator
-
-  # def step2_validator
-  #   if Turn.validate_whatever
-  #     'ok'
-  #   else
-  #     raise error
-  #   end
-  # end
-
   has_many :home_teams, class_name: 'Clubs', foreign_key: 'home_team_id'
   has_many :away_teams, class_name: 'Clubs', foreign_key: 'home_team_id'
 
-  def run_matches(selected_week, competition)
+  def run_matches(selected_week, competition, turn)
     fixture_list = Match::CreateFixtures.new(selected_week, competition).call
 
     fixture_list.each do |fixture|
@@ -22,7 +12,7 @@ class Match < ApplicationRecord
       detailed_match_summary = match_end(home_list, away_list, minute_by_minute)
       save_match(detailed_match_summary, home_list, away_list, minute_by_minute)
     end
-    Processing.create(message: "#{selected_week}RM")
+    turn.update(run_matches: true)
   end
 
   private

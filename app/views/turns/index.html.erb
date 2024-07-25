@@ -22,11 +22,11 @@
     <%= render 'step_2' %>
     <% end %>
 
-    <% if Processing.find_by(message: "#{params[:week]}TA").present? %>
+    <% if @turn && @turn.transfer_actions %>
     <%= render 'step_3' %>
     <% end %>
 
-    <% if Processing.find_by(message: "#{params[:week]}RM").present? || params[:week].present? && @games_scheduled == 0 %>
+    <% if @turn && @turn.run_matches || @turn && @games_scheduled == 0 %>
     <%= render 'step_4' %>
     <% end %>
 

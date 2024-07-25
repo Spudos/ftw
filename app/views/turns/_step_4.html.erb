@@ -1,9 +1,9 @@
 <div class="col-3">
   <h3>Step 4</h3>
   <h6>Process end of turn</h6>
-  <form action="/turns/end_of_turn" method="post">
+  <form action="/turns/process_end_of_turn" method="post">
     <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if Processing.exists?(message: "#{params[:week]}ET") %>
+    <% if @turn && @turn.create_tables && @turn.player_update && @turn.transfer_update && @turn.upgrade_admin && @turn.club_update && @turn.article_update %>
       <button type="submit" class="btn btn-danger disabled">End of Turn Processed</button><br>
     <% else %>
       <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process the end of turn updates?')">End of Turn Updates</button><br>
@@ -13,7 +13,7 @@
   <h6>Calculate and Save League Tables</h6>
   <form action="/leagues/create_tables" method="post">
     <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if Processing.exists?(message: "#{params[:week]}CLT") %>
+    <% if @turn && @turn.create_tables %>
       <button type="submit" class="btn btn-danger disabled">League Tables Created</button><br>
     <% else %>
       <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to create the league tables?')">Create Tables</button><br>
@@ -23,17 +23,27 @@
   <h6>Process End of Turn Player Updates</h6>
   <form action="/turns/process_player_updates" method="post">
     <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if Processing.exists?(message: "#{params[:week]}PU") %>
+    <% if @turn && @turn.player_update %>
       <button type="submit" class="btn btn-danger disabled">Player Updates Completed</button><br>
     <% else %>
       <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Player Updates?')">Player Updates</button><br>
     <% end %>
   </form>
 
+  <h6>Process End of Turn Transfer Updates</h6>
+  <form action="/turns/process_transfer_updates" method="post">
+    <input type="hidden" name="week" value="<%= params[:week] %>">
+    <% if @turn && @turn.transfer_update %>
+      <button type="submit" class="btn btn-danger disabled">Transfer Updates Completed</button><br>
+    <% else %>
+      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Transfer Updates?')">Transfer Updates</button><br>
+    <% end %>
+  </form>
+
   <h6>Process End of Turn Upgrade Admin</h6>
   <form action="/turns/process_upgrade_admin" method="post">
     <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if Processing.exists?(message: "#{params[:week]}UA") %>
+    <% if @turn && @turn.upgrade_admin %>
       <button type="submit" class="btn btn-danger disabled">Upgrade Admin Completed</button><br>
     <% else %>
       <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Upgrade Admin?')">Upgrade Admin</button><br>
@@ -43,7 +53,7 @@
   <h6>Process End of Turn Club Updates</h6>
   <form action="/turns/process_club_updates" method="post">
     <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if Processing.exists?(message: "#{params[:week]}CU") %>
+    <% if @turn && @turn.club_update %>
       <button type="submit" class="btn btn-danger disabled">Club Updates Completed</button><br>
     <% else %>
       <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Club Updates?')">Club updates</button><br>
@@ -53,7 +63,7 @@
   <h6>Process End of Turn Article Updates</h6>
   <form action="/turns/process_article_updates" method="post">
     <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if Processing.exists?(message: "#{params[:week]}AU") %>
+    <% if @turn && @turn.article_update %>
       <button type="submit" class="btn btn-danger disabled">Article Updates Completed</button><br>
     <% else %>
       <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to run Article Updates?')">Article updates</button><br>

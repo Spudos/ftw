@@ -16,6 +16,17 @@ class Player < ApplicationRecord
     end
   end
 
+  def process_player_updates(params, turn)
+    if params.present? && !turn.player_update
+      Player::PlayerUpdates.new(params).call
+      turn.update(player_update: true)
+    elsif params.nil?
+      Error.create(error_type: 'player_update', message: 'Please select a week before trying to process Player Updates.')
+    else
+      Error.create(error_type: 'player_update', message: 'Player Updates for that week have already been processed.')
+    end
+  end
+
   def self.player_value_update
     objects = [Turn::Engines::Value,
                Turn::Engines::Wages,

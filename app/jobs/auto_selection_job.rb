@@ -6,12 +6,9 @@ class AutoSelectionJob < ApplicationJob
       selection = Selection.new
       selection.auto_selection(params)
     rescue StandardError => e
-      logger = Logger.new('error.log')
-      logger.error(e.message)
-      puts "ERROR: An error occurred while processing the job: #{e.message}"
       Error.create(
         error_type: 'AutoSelectionJob',
-        error: e.message
+        message: e.message
       )
     end
   end

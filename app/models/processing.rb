@@ -1,2 +1,2 @@
-class Processing < ApplicationRecord
+class Turn < ApplicationRecord
 end

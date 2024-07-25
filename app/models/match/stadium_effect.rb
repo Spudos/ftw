@@ -10,7 +10,7 @@ class Match::StadiumEffect
     if @totals_blend.nil? || @home_stadium_size.nil?
       raise StandardError, "There was an error in the #{self.class.name} class"
     end
-    
+
     if home_stadium_size <= 10000
       stadium_effect = 0
     elsif home_stadium_size <= 20000

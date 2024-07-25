@@ -1,5 +1,5 @@
 class Turnsheet < ApplicationRecord
-  def process_turnsheet
+  def process_turnsheet(params)
     Turnsheet.find_each do |turnsheet|
       next if turnsheet.processed.present?
 
@@ -167,7 +167,7 @@ class Turnsheet < ApplicationRecord
         errors << "Error processing turnsheet: #{e.message}"
       end
     end
-
+    Turn.create({ week: params, turnsheets: true })
     errors.empty? ? true : errors
   end
 

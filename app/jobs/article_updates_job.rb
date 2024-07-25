@@ -3,15 +3,12 @@ class ArticleUpdatesJob < ApplicationJob
 
   def perform(params)
     begin
-      turn = Turn.new
-      turn.process_article_updates(params)
+      article = Article.new
+      article.process_article_updates(params)
     rescue StandardError => e
-      logger = Logger.new('error.log')
-      logger.error(e.message)
-      puts "ERROR: An error occurred while processing the job: #{e.message}"
       Error.create(
         error_type: 'ArticleUpdatesJob',
-        error: e.message
+        message: e.message
       )
     end
   end

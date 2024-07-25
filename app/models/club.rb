@@ -7,6 +7,28 @@ class Club < ApplicationRecord
     Club::ClubCreation.new(club, params).call
   end
 
+  def process_upgrade_admin(params, turn)
+    if params.present? && !turn.upgrade_admin
+      Club::UpgradeAdmin.new(params).call
+      turn.update(upgrade_admin: true)
+    elsif params.nil?
+      Error.create(error_type: 'club_update', message: 'Please select a week before trying to process Upgrade Admin.')
+    else
+      Error.create(error_type: 'club_update', message: 'Upgrade Admin for that week has already been processed.')
+    end
+  end
+
+  def process_club_updates(params, turn)
+    if params.present? && !turn.club_update
+      Club::ClubUpdates.new(params).call
+      turn.update(club_update: true)
+    elsif params.nil?
+      Error.create(error_type: 'club_update', message: 'Please select a week before trying to process Upgrade Admin.')
+    else
+      Error.create(error_type: 'club_update', message: 'Club Updates for that week has already been processed.')
+    end
+  end
+
   def finance_items(club)
     highest_week_number = Message.maximum(:week)
     messages = Message.where(club_id: club, week: highest_week_number)

@@ -1,11 +1,11 @@
 class League < ApplicationRecord
-  def create_tables(params)
+  def create_tables(turn)
     League.delete_all
 
     teams = teams_from_matches
     calculate_and_save_tables(teams)
 
-    Processing.create(message: "#{params}CLT")
+    turn.update(create_tables: true)
   end
 
   def teams_from_matches

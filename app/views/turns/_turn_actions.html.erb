@@ -17,7 +17,7 @@
               <th scope="col">Date Processed</th>
             </tr>
             <tr scope="row">
-              <% @turns.each do |turn| %>
+              <% @turn_actions.each do |turn| %>
                 <% if turn.week.to_s == params[:week] %>
                 <%= render turn %>
                 <% end %>

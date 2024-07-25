@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_19_073444) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_25_103557) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -257,12 +257,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_19_073444) do
     t.integer "available"
   end
 
-  create_table "processings", force: :cascade do |t|
-    t.string "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "selections", force: :cascade do |t|
     t.string "club_id"
     t.integer "player_id"
@@ -299,16 +293,33 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_19_073444) do
     t.string "status"
   end
 
-  create_table "turns", force: :cascade do |t|
+  create_table "turn_actions", force: :cascade do |t|
     t.integer "week"
     t.string "club_id"
     t.string "var1"
     t.string "var2"
     t.string "var3"
+    t.string "var4"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date_completed"
-    t.string "var4"
+  end
+
+  create_table "turns", force: :cascade do |t|
+    t.integer "week"
+    t.boolean "turnsheets", default: false
+    t.boolean "turn_actions", default: false
+    t.boolean "transfer_actions", default: false
+    t.boolean "auto_selections", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "run_matches", default: false
+    t.boolean "create_tables", default: false
+    t.boolean "player_update", default: false
+    t.boolean "transfer_update", default: false
+    t.boolean "upgrade_admin", default: false
+    t.boolean "club_update", default: false
+    t.boolean "article_update", default: false
   end
 
   create_table "turnsheets", force: :cascade do |t|

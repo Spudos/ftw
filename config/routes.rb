@@ -50,8 +50,10 @@ Rails.application.routes.draw do
   post '/turnsheets/process_turnsheet', to: 'turnsheets#process_turnsheet'
 
   post '/selections/auto_selection', to: 'selections#auto_selection'
-  
-  post '/turns/end_of_turn', to: 'turns#end_of_turn'
+
+  post '/turns/process_pre_turn_admin', to: 'turns#process_pre_turn_admin'
+  post '/turns/process_matches', to: 'turns#process_matches'
+  post '/turns/process_end_of_turn', to: 'turns#process_end_of_turn'
   post '/turns/process_turn', to: 'turns#process_turn'
   post '/turns/process_player_updates', to: 'turns#process_player_updates'
   post '/turns/process_upgrade_admin', to: 'turns#process_upgrade_admin'
