@@ -6,7 +6,7 @@
     <% if @turn && @turn.turnsheets && @turn.turn_actions && @turn.transfer_actions %>
       <button type="submit" class="btn btn-danger disabled">Pre Turn Admin Processed</button><br>
     <% else %>
-      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process the pre turn admin?')">End of Turn Updates</button><br>
+      <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process the pre turn admin?')">Process Pre Turn Admin</button><br>
     <% end %>
   </form>
   
