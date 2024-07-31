@@ -10,8 +10,11 @@ class Player::Engines::Fitness
 
   def process
     players.each do |player|
-      availability(player)
       fitness_increase(player)
+
+      next unless player.club.managed?
+
+      availability(player)
       random_injury(player)
       injury(player)
     end
@@ -21,6 +24,15 @@ class Player::Engines::Fitness
   end
 
   private
+
+  def fitness_increase(player)
+    if player.club.managed?
+      player.fitness += rand(0..5)
+      player.fitness = 100 if player.fitness > 100
+    else
+      player.fitness = 100
+    end
+  end
 
   def availability(player)
     if player.available.positive?
@@ -36,11 +48,6 @@ class Player::Engines::Fitness
     end
   end
 
-  def fitness_increase(player)
-    player.fitness += rand(0..5)
-    player.fitness = 100 if player.fitness > 100
-  end
-
   def random_injury(player)
     if rand(1..100) <= 2
       player.fitness -= rand(20..40)
@@ -54,7 +61,7 @@ class Player::Engines::Fitness
   end
 
   def injury(player)
-    if player.fitness < 60
+    if player.fitness < 60 && player.available.zero?
       player.available = rand(1..9)
       @fitness_messages << {
         week:,
