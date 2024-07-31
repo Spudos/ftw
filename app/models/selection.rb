@@ -36,26 +36,26 @@ class Selection < ApplicationRecord
   end
 
   def pick_gkp(club)
-    gkp = Player.where(club_id: club.id, position: 'gkp').order(total_skill: :desc).first
+    gkp = Player.where(club_id: club.id, position: 'gkp', available: 0).order(total_skill: :desc).first
     Selection.create(club_id: club.id, player_id: gkp.id)
   end
 
   def pick_dfc(club, dfc_number)
-    dfc = Player.where(club_id: club.id, position: 'dfc').order(total_skill: :desc).limit(dfc_number)
+    dfc = Player.where(club_id: club.id, position: 'dfc', available: 0).order(total_skill: :desc).limit(dfc_number)
     dfc.each do |player|
       Selection.create(club_id: club.id, player_id: player.id)
     end
   end
 
   def pick_mid(club, mid_number)
-    mid = Player.where(club_id: club.id, position: 'mid').order(total_skill: :desc).limit(mid_number)
+    mid = Player.where(club_id: club.id, position: 'mid', available: 0).order(total_skill: :desc).limit(mid_number)
     mid.each do |player|
       Selection.create(club_id: club.id, player_id: player.id)
     end
   end
 
   def pick_att(club, att_number)
-    att = Player.where(club_id: club.id, position: 'att').order(total_skill: :desc).limit(att_number)
+    att = Player.where(club_id: club.id, position: 'att', available: 0).order(total_skill: :desc).limit(att_number)
     att.each do |player|
       Selection.create(club_id: club.id, player_id: player.id)
     end
@@ -64,10 +64,7 @@ class Selection < ApplicationRecord
   def formations
     [[4, 4, 2],
      [4, 3, 3],
-     [4, 5, 1],
-     [3, 5, 2],
      [3, 4, 3],
-     [3, 3, 4],
      [5, 3, 2],
      [5, 4, 1],
      [5, 2, 3]]

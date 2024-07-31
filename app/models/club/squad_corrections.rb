@@ -17,7 +17,7 @@ class Club::SquadCorrections
   def player_defecit(players)
     defecit = {
       gkp: (players.where(position: 'gkp').count - 1) * -1,
-      dfc: (players.where(position: 'dfc').count - 4) * -1,
+      dfc: (players.where(position: 'dfc').count - 5) * -1,
       mid: (players.where(position: 'mid').count - 4) * -1,
       att: (players.where(position: 'att').count - 3) * -1,
     }
