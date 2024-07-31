@@ -29,6 +29,15 @@ class Club < ApplicationRecord
     end
   end
 
+  def process_squad_corrections(turn)
+    if !turn.squad_correction
+      Club::SquadCorrections.new.call
+      turn.update(squad_correction: true)
+    else
+      Error.create(error_type: 'club_update', message: 'Squad Corrections for that week has already been processed.')
+    end
+  end
+
   def finance_items(club)
     highest_week_number = Message.maximum(:week)
     messages = Message.where(club_id: club, week: highest_week_number)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_25_103557) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_31_093047) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -320,6 +320,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_25_103557) do
     t.boolean "upgrade_admin", default: false
     t.boolean "club_update", default: false
     t.boolean "article_update", default: false
+    t.boolean "squad_correction", default: false
   end
 
   create_table "turnsheets", force: :cascade do |t|

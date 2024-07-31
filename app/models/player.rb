@@ -5,11 +5,12 @@ class Player < ApplicationRecord
   belongs_to :club
 
   def total_skill_calc
-    if position == 'gkp'
+    case position
+    when 'gkp'
       base_skill + gkp_skill
-    elsif position == 'dfc'
+    when 'dfc'
       base_skill + dfc_skill
-    elsif position == 'mid'
+    when 'mid'
       base_skill + mid_skill
     else
       base_skill + att_skill
@@ -28,9 +29,8 @@ class Player < ApplicationRecord
   end
 
   def self.player_value_update
-    objects = [Turn::Engines::Value,
-               Turn::Engines::Wages,
-               Turn::Engines::TotalSkill]
+    objects = [Player::Engines::ValueWages,
+               Player::Engines::PlayerTotals]
 
     week = Message.maximum(:week) || 0
 
@@ -119,6 +119,7 @@ class Player < ApplicationRecord
       unless player.club.league == league
         next
       end
+
       info = {
         id: player.id,
         name: player.name,

@@ -3,7 +3,7 @@
   <h6>Process end of turn</h6>
   <form action="/turns/process_end_of_turn" method="post">
     <input type="hidden" name="week" value="<%= params[:week] %>">
-    <% if @turn && @turn.create_tables && @turn.player_update && @turn.transfer_update && @turn.upgrade_admin && @turn.club_update && @turn.article_update %>
+    <% if @turn && @turn.create_tables && @turn.player_update && @turn.transfer_update && @turn.upgrade_admin && @turn.club_update && @turn.squad_correction && @turn.article_update %>
       <button type="submit" class="btn btn-danger disabled">End of Turn Processed</button><br>
     <% else %>
       <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to process the end of turn updates?')">End of Turn Updates</button><br>
@@ -29,6 +29,10 @@
     <tr>
       <td>Club Updates</td>
       <td><%= @turn.club_update %></td>
+    </tr>
+    <tr>
+      <td>Squad Corrections</td>
+      <td><%= @turn.squad_correction %></td>
     </tr>
     <tr>
       <td>Article Updates</td>
