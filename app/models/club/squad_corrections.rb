@@ -61,7 +61,11 @@ class Club::SquadCorrections
             blend: rand(0..9),
             star: rand(5..30),
             loyalty: rand(10..50),
-            player_position_detail: position_detail.sample,
+            player_position_detail: if position == :gkp
+                                      'p'
+                                    else
+                                      position_detail.sample
+                                    end,
             potential_passing: rand(6..20),
             potential_control: rand(6..20),
             potential_tackling: rand(6..20),
@@ -75,7 +79,6 @@ class Club::SquadCorrections
             potential_creativity: rand(6..20),
             available: 0
           )
-
         player_total_skill_and_wages
       end
     end
