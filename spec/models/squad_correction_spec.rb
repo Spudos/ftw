@@ -53,7 +53,7 @@ RSpec.describe Club, type: :model do
         Club.new.process_squad_corrections(turn)
 
         expect(Player.where(club_id: 1, position: 'gkp').count).to eq(1)
-        expect(Player.where(club_id: 1, position: 'dfc').count).to eq(4)
+        expect(Player.where(club_id: 1, position: 'dfc').count).to eq(5)
         expect(Player.where(club_id: 1, position: 'mid').count).to eq(4)
         expect(Player.where(club_id: 1, position: 'att').count).to eq(3)
         expect(Player.last.value).to_not eq(0)

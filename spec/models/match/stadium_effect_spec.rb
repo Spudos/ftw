@@ -4,7 +4,7 @@ require 'pry'
 RSpec.describe Match::StadiumEffect, type: :model do
   describe 'stadium effect' do
     it 'should adjust the home totals based on a 9000 stadium size' do
-      home_stadium_size = 9000
+      attendance_size = 9000
       totals_blend = [
         {
           team: 1,
@@ -20,7 +20,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
         }
       ]
 
-      stadium_effect = Match::StadiumEffect.new(totals_blend, home_stadium_size).call
+      stadium_effect = Match::StadiumEffect.new(totals_blend, attendance_size).call
 
       expect(stadium_effect[0][:defense]).to eq(200)
       expect(stadium_effect[0][:midfield]).to eq(150)
@@ -31,7 +31,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
     end
 
     it 'should adjust the home totals based on a 15000 stadium size' do
-      home_stadium_size = 15_000
+      attendance_size = 15_000
       totals_blend = [
         {
           team: 1,
@@ -47,7 +47,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
         }
       ]
 
-      stadium_effect = Match::StadiumEffect.new(totals_blend, home_stadium_size).call
+      stadium_effect = Match::StadiumEffect.new(totals_blend, attendance_size).call
 
       expect(stadium_effect[0][:defense]).to eq(202)
       expect(stadium_effect[0][:midfield]).to eq(152)
@@ -58,7 +58,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
     end
 
     it 'should adjust the home totals based on a 25000 stadium size' do
-      home_stadium_size = 25_000
+      attendance_size = 25_000
       totals_blend = [
         {
           team: 1,
@@ -74,7 +74,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
         }
       ]
 
-      stadium_effect = Match::StadiumEffect.new(totals_blend, home_stadium_size).call
+      stadium_effect = Match::StadiumEffect.new(totals_blend, attendance_size).call
 
       expect(stadium_effect[0][:defense]).to eq(205)
       expect(stadium_effect[0][:midfield]).to eq(155)
@@ -85,7 +85,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
     end
 
     it 'should adjust the home totals based on a 35000 stadium size' do
-      home_stadium_size = 35_000
+      attendance_size = 35_000
       totals_blend = [
         {
           team: 1,
@@ -101,7 +101,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
         }
       ]
 
-      stadium_effect = Match::StadiumEffect.new(totals_blend, home_stadium_size).call
+      stadium_effect = Match::StadiumEffect.new(totals_blend, attendance_size).call
 
       expect(stadium_effect[0][:defense]).to eq(208)
       expect(stadium_effect[0][:midfield]).to eq(158)
@@ -112,7 +112,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
     end
 
     it 'should adjust the home totals based on a 45000 stadium size' do
-      home_stadium_size = 45_000
+      attendance_size = 45_000
       totals_blend = [
         {
           team: 1,
@@ -128,7 +128,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
         }
       ]
 
-      stadium_effect = Match::StadiumEffect.new(totals_blend, home_stadium_size).call
+      stadium_effect = Match::StadiumEffect.new(totals_blend, attendance_size).call
 
       expect(stadium_effect[0][:defense]).to eq(210)
       expect(stadium_effect[0][:midfield]).to eq(160)
@@ -139,7 +139,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
     end
 
     it 'should adjust the home totals based on a 55000 stadium size' do
-      home_stadium_size = 55_000
+      attendance_size = 55_000
       totals_blend = [
         {
           team: 1,
@@ -155,7 +155,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
         }
       ]
 
-      stadium_effect = Match::StadiumEffect.new(totals_blend, home_stadium_size).call
+      stadium_effect = Match::StadiumEffect.new(totals_blend, attendance_size).call
 
       expect(stadium_effect[0][:defense]).to eq(212)
       expect(stadium_effect[0][:midfield]).to eq(162)
@@ -166,7 +166,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
     end
 
     it 'should adjust the home totals based on a 65000 stadium size' do
-      home_stadium_size = 65_000
+      attendance_size = 65_000
       totals_blend = [
         {
           team: 1,
@@ -182,7 +182,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
         }
       ]
 
-      stadium_effect = Match::StadiumEffect.new(totals_blend, home_stadium_size).call
+      stadium_effect = Match::StadiumEffect.new(totals_blend, attendance_size).call
 
       expect(stadium_effect[0][:defense]).to eq(215)
       expect(stadium_effect[0][:midfield]).to eq(165)
@@ -193,7 +193,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
     end
 
     it 'should adjust the home totals based on a 100000 stadium size' do
-      home_stadium_size = 100_000
+      attendance_size = 100_000
       totals_blend = [
         {
           team: 1,
@@ -209,7 +209,7 @@ RSpec.describe Match::StadiumEffect, type: :model do
         }
       ]
 
-      stadium_effect = Match::StadiumEffect.new(totals_blend, home_stadium_size).call
+      stadium_effect = Match::StadiumEffect.new(totals_blend, attendance_size).call
 
       expect(stadium_effect[0][:defense]).to eq(220)
       expect(stadium_effect[0][:midfield]).to eq(170)

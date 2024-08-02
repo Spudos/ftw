@@ -19,7 +19,6 @@ class Club::ClubUpdates
 
     message_type_resolver = Club::Engines::MessageTypeResolver.new(@club_messages)
 
-    Club::Engines::CalculateAttendances.new(week).process
     Club::Engines::ClubMatchDayIncome.new(week, message_type_resolver).process
     Club::Engines::ClubFanHappinessMatch.new(week).process
     Club::Engines::ClubFanHappinessSignings.new(week).process

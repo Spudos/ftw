@@ -7,10 +7,10 @@ class Match < ApplicationRecord
 
     fixture_list.each do |fixture|
       final_squad, match_info = squad(fixture)
-      final_team, match_info = teams(final_squad, match_info)
+      final_team, match_info, attendance = teams(final_squad, match_info)
       minute_by_minute, home_list, away_list = match(final_team, final_squad, match_info)
       detailed_match_summary = match_end(home_list, away_list, minute_by_minute)
-      save_match(detailed_match_summary, home_list, away_list, minute_by_minute)
+      save_match(detailed_match_summary, home_list, away_list, minute_by_minute, attendance)
     end
     turn.update(run_matches: true)
   end
@@ -32,11 +32,11 @@ class Match < ApplicationRecord
     totals = Match::TeamTotals.new(final_squad).call
     totals_blend, blend_totals = Match::BlendAdjustment.new(totals).call
     match_info = Match::BlendAdd.new(blend_totals, match_info).call
-    home_stadium = Match::StadiumSize.new(totals_blend).call
-    totals_stadium = Match::StadiumEffect.new(totals_blend, home_stadium).call
+    attendance = Match::StadiumSize.new(totals_blend).call
+    totals_stadium = Match::StadiumEffect.new(totals_blend, attendance).call
     final_team = Match::AggressionEffect.new(totals_stadium).call
 
-    return final_team, match_info
+    return final_team, match_info, attendance
   end
 
   def match(final_team, final_squad, match_info)
@@ -71,8 +71,8 @@ class Match < ApplicationRecord
     return detailed_match_summary
   end
 
-  def save_match(detailed_match_summary, home_list, away_list, minute_by_minute)
-    Match::SaveDetailedMatchSummary.new(detailed_match_summary).call
+  def save_match(detailed_match_summary, home_list, away_list, minute_by_minute, attendance)
+    Match::SaveDetailedMatchSummary.new(detailed_match_summary, attendance).call
     Match::SaveGoalAndAssistInformation.new(minute_by_minute).call
     Match::SaveMatchCommentary.new(home_list, away_list, minute_by_minute).call
     Match::MatchLogging.new(minute_by_minute).call

@@ -14,7 +14,6 @@ class Match::BlendAdjustment
     blend_totals = []
 
     totals.each do |team|
-
       hash = {
         team: team[:team],
         defense: (team[:defense] * (1 - ((team[:defense_blend].to_f) / 10) / 2)).to_i,

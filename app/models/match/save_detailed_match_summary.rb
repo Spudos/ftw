@@ -1,8 +1,9 @@
 class Match::SaveDetailedMatchSummary
-  attr_reader :detailed_match_summary
+  attr_reader :detailed_match_summary, :attendance
 
-  def initialize(detailed_match_summary)
+  def initialize(detailed_match_summary, attendance)
     @detailed_match_summary = detailed_match_summary
+    @attendance = attendance
   end
 
   def call
@@ -43,6 +44,7 @@ class Match::SaveDetailedMatchSummary
       away_goals: match_data[:goal_away].to_i,
       home_man_of_the_match: match_data[:home_man_of_the_match],
       away_man_of_the_match: match_data[:away_man_of_the_match],
+      attendance:
     )
     match.save
   end
