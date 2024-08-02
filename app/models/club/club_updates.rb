@@ -7,6 +7,14 @@ class Club::ClubUpdates
   end
 
   def call
+    message_type_resolver = Club::Engines::MessageTypeResolver.new(@club_messages)
+
+    Club::Engines::ClubMatchDayIncome.new(week, message_type_resolver).process
+    Club::Engines::ClubFanHappinessMatch.new(week).process
+    Club::Engines::ClubFanHappinessSignings.new(week).process
+    Club::Engines::ClubOverdrawn.new(week).process
+    Club::Engines::ClubFixOverdraft.new(week).process
+
     clubs = Club.all
     clubs.each do |club|
       Club::Engines::ClubWageBill.new(week, club, @club_messages).process
@@ -16,14 +24,6 @@ class Club::ClubUpdates
       Club::Engines::ClubFanHappinessBank.new(week, club).process
       Club::Engines::ClubFanHappinessRandom.new(week, club).process
     end
-
-    message_type_resolver = Club::Engines::MessageTypeResolver.new(@club_messages)
-
-    Club::Engines::ClubMatchDayIncome.new(week, message_type_resolver).process
-    Club::Engines::ClubFanHappinessMatch.new(week).process
-    Club::Engines::ClubFanHappinessSignings.new(week).process
-    Club::Engines::ClubOverdrawn.new(week).process
-    Club::Engines::ClubFixOverdraft.new(week).process
 
     Message.insert_all(@club_messages) unless @club_messages.empty? # check
   end

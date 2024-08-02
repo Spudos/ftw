@@ -10,8 +10,8 @@ class Club::Engines::ClubFanHappinessRandom
     club.fan_happiness = club.fan_happiness + rand(-3..3)
     if club.fan_happiness > 100
       club.fan_happiness = 100
-    elsif club.fan_happiness.negative?
-      club.fan_happiness = 0
+    elsif club.fan_happiness < 10
+      club.fan_happiness = rand(5..15)
     end
     club.save
   end

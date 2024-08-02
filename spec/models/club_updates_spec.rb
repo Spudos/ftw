@@ -96,34 +96,6 @@ RSpec.describe Club::ClubUpdates, type: :model do
     end
   end
 
-  describe 'calcualte attendance' do
-    it 'calculate the attandance for the match and update it in the matches table' do
-      create(:match)
-      create(:club,
-             id: 1,
-             bank_bal: 0,
-             stand_n_capacity: 5000,
-             stand_s_capacity: 5000,
-             stand_e_capacity: 5000,
-             stand_w_capacity: 5000,
-             stand_n_condition: 1,
-             stand_s_condition: 1,
-             stand_e_condition: 1,
-             stand_w_condition: 1,
-             facilities: 1,
-             hospitality: 1,
-             pitch: 1,
-             fanbase: 30_000,
-             ticket_price: 10)
-
-      allow_any_instance_of(Kernel).to receive(:rand).with(0.9756..0.9923).and_return(0.99)
-
-      Club::Engines::CalculateAttendances.new(week).process
-
-      expect(Match.first.attendance).to eq(19_800)
-    end
-  end
-
   describe 'Match_income' do
     it 'should increase the bank balance all streams of income for a match day' do
       create(:match, attendance: 19_800)
@@ -286,7 +258,7 @@ RSpec.describe Club::ClubUpdates, type: :model do
   end
 
   describe 'fan_happiness_random' do
-    it 'adjust fan happiness by a randoim amount and make sure it is 0 to 100' do
+    it 'adjust fan happiness by a random amount and make sure it is 0 to 100' do
       create(:club,
              id: 2,
              fan_happiness: 50)
@@ -312,16 +284,19 @@ RSpec.describe Club::ClubUpdates, type: :model do
       expect(Club.first.fan_happiness).to eq(100)
     end
 
-    it 'corrects a minus amount to 0' do
+    it 'corrects a low amount' do
       create(:club,
              id: 2,
              fan_happiness: -50)
 
       club = Club.first
 
+      allow_any_instance_of(Kernel).to receive(:rand).with(-3..3).and_return(0)
+      allow_any_instance_of(Kernel).to receive(:rand).with(5..15).and_return(10)
+
       Club::Engines::ClubFanHappinessRandom.new(week, club).process
 
-      expect(Club.first.fan_happiness).to eq(0)
+      expect(Club.first.fan_happiness).to eq(10)
     end
   end
 
