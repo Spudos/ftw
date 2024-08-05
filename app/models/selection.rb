@@ -2,11 +2,13 @@ class Selection < ApplicationRecord
   def auto_selection(params, turn)
     if params.present? && !turn.auto_selections
       Club.all.each do |club|
-        next if Selection.where(club_id: club.id).size == 11 && club.managed == true
-
-        run_auto_selection(club)
+        if club.managed == true
+          managed_squad_check(club)
+        else
+          run_auto_selection(club)
+        end
+        turn.update(auto_selections: true)
       end
-      turn.update(auto_selections: true)
     elsif params.nil?
       Error.create(error_type: 'auto_selection', message: 'Please select a week before trying to process Auto Selections.')
     else
@@ -14,8 +16,28 @@ class Selection < ApplicationRecord
     end
   end
 
+  def managed_squad_check(club)
+    current_selection = Selection.where(club_id: club.id)
+
+    if current_selection.count < 11
+      current_selection.destroy_all
+      run_auto_selection(club)
+    else
+      current_selection.each do |selection|
+        player = Player.find_by(id: selection.player_id)
+
+        if player.club_id == club.id
+          next
+        else
+          current_selection.destroy_all
+          run_auto_selection(club)
+        end
+      end
+    end
+  end
+
   def run_auto_selection(club)
-    Selection.where(club_id: club.id).destroy_all
+    Selection.where(club_id: club).destroy_all
 
     dfc_number, mid_number, att_number = formation_picker
 

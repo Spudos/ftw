@@ -17,7 +17,7 @@ class EndOfTurnJob < ApplicationJob
       club = Club.new
       club.process_upgrade_admin(params, turn)
       club.process_club_updates(params, turn)
-      club.process_squad_corrections(turn)
+      club.process_squad_corrections(params, turn)
 
       article = Article.new
       article.process_article_updates(params, turn)

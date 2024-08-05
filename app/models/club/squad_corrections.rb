@@ -1,5 +1,8 @@
 class Club::SquadCorrections
-  def initialize
+  attr_reader :week
+
+  def initialize(week)
+    @week = week
     @club_messages = []
   end
 
@@ -8,24 +11,35 @@ class Club::SquadCorrections
     clubs.each do |club|
       players = Player.where(club_id: club.id, available: 0)
 
-      defecit, total_defecit = player_defecit(players)
+      requirement = player_defecit(players)
 
-      create_player(defecit, club.id) if total_defecit.positive?
+      create_player(requirement, club.id) if requirement.present?
     end
   end
 
   def player_defecit(players)
     defecit = {
-      gkp: (players.where(position: 'gkp').count - 1) * -1,
-      dfc: (players.where(position: 'dfc').count - 5) * -1,
-      mid: (players.where(position: 'mid').count - 4) * -1,
-      att: (players.where(position: 'att').count - 3) * -1,
+      gkp: (players.where(position: 'gkp').count - 1),
+      dfc: (players.where(position: 'dfc').count - 5),
+      mid: (players.where(position: 'mid').count - 4),
+      att: (players.where(position: 'att').count - 3)
     }
-    total_defecit = defecit.values.sum
-    return defecit, total_defecit
+
+    requirement(defecit)
   end
 
-  def create_player(defecit, club_id)
+  def requirement(defecit)
+    requirement = []
+
+    requirement << ['gkp', defecit[:gkp].abs] if defecit[:gkp].negative?
+    requirement << ['dfc', defecit[:dfc].abs] if defecit[:dfc].negative?
+    requirement << ['mid', defecit[:mid].abs] if defecit[:mid].negative?
+    requirement << ['att', defecit[:att].abs] if defecit[:att].negative?
+
+    requirement
+  end
+
+  def create_player(requirement, club_id)
     countries = ['England', 'England', 'England', 'England', 'Scotland', 'Wales',
                  'NI', 'RoI', 'Brazil', 'Argentina', 'Spain', 'France', 'Germany',
                  'Poland', 'Portugal', 'USA', 'Belgium', 'Mexico', 'Uruguay','Brazil',
@@ -36,7 +50,7 @@ class Club::SquadCorrections
 
     position_detail = ['c', 'c', 'c', 'l', 'r']
 
-    defecit.each do |position, number|
+    requirement.each do |position, number|
       number.times do
         Player.create(
             name: Faker::Name.last_name,
@@ -61,7 +75,7 @@ class Club::SquadCorrections
             blend: rand(0..9),
             star: rand(5..30),
             loyalty: rand(10..50),
-            player_position_detail: if position == :gkp
+            player_position_detail: if position == 'gkp'
                                       'p'
                                     else
                                       position_detail.sample
@@ -82,6 +96,7 @@ class Club::SquadCorrections
         player_total_skill_and_wages
       end
     end
+    Message.create(week:, club_id:, var1: 'Due to a lack of available players your first team coach has promoted sufficient players from the youth team.')
   end
 
   def player_total_skill_and_wages

@@ -18,15 +18,16 @@ RSpec.describe Club, type: :model do
                color_secondary: 'Test Color Secondary000')
 
         2.times { create(:player) }
-        4.times { create(:player, club_id: 1, position: 'dfc', player_position_detail: 'c') }
-        4.times { create(:player, club_id: 1, position: 'mid', player_position_detail: 'c') }
+        6.times { create(:player, club_id: 1, position: 'dfc', player_position_detail: 'c') }
+        5.times { create(:player, club_id: 1, position: 'mid', player_position_detail: 'c') }
         4.times { create(:player, club_id: 1, position: 'att', player_position_detail: 'c') }
         create(:user)
         turn = Turn.new(week: 1)
+        params = 1
 
-        Club.new.process_squad_corrections(turn)
+        Club.new.process_squad_corrections(params, turn)
 
-        expect(Player.where(club_id: 1).count).to eq(14)
+        expect(Player.where(club_id: 1).count).to eq(17)
       end
     end
 
@@ -49,16 +50,18 @@ RSpec.describe Club, type: :model do
         3.times { create(:player, club_id: 1, position: 'att', player_position_detail: 'c') }
         create(:user)
         turn = Turn.new(week: 1)
+        params = 1
 
-        Club.new.process_squad_corrections(turn)
+        Club.new.process_squad_corrections(params, turn)
 
-        expect(Player.where(club_id: 1, position: 'gkp').count).to eq(1)
+        expect(Player.where(club_id: 1, position: 'gkp', player_position_detail: 'p').count).to eq(1)
         expect(Player.where(club_id: 1, position: 'dfc').count).to eq(5)
         expect(Player.where(club_id: 1, position: 'mid').count).to eq(4)
         expect(Player.where(club_id: 1, position: 'att').count).to eq(3)
         expect(Player.last.value).to_not eq(0)
         expect(Player.last.wages).to_not eq(0)
         expect(Player.last.total_skill).to_not eq(0)
+        expect(Message.first.club_id).to eq('1')
       end
     end
   end

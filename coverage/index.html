@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-08-02T10:39:09+01:00">2024-08-02T10:39:09+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-08-05T13:00:57+01:00">2024-08-05T13:00:57+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  90.63%
+  90.64%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         4.07
+         4.09
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>3575</b> relevant lines,
-    <span class="green"><b>3240</b> lines covered</span> and
-    <span class="red"><b>335</b> lines missed. </span>
+    <b>3599</b> relevant lines,
+    <span class="green"><b>3262</b> lines covered</span> and
+    <span class="red"><b>337</b> lines missed. </span>
     (<span class="green">
-  90.63%
+  90.64%
 </span>
 )
   </div>
@@ -315,11 +315,11 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#2a9464064fb43d46ebe69b4f176cccece83f7671" class="src_link" title="app/models/club/squad_corrections.rb">app/models/club/squad_corrections.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">93</td>
-            <td class="cell--number">31</td>
-            <td class="cell--number">31</td>
+            <td class="cell--number">108</td>
+            <td class="cell--number">40</td>
+            <td class="cell--number">40</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">3.06</td>
+            <td class="cell--number">2.73</td>
             
           </tr>
         
@@ -704,7 +704,7 @@
             <td class="cell--number">22</td>
             <td class="cell--number">17</td>
             <td class="cell--number">5</td>
-            <td class="cell--number">10.05</td>
+            <td class="cell--number">10.18</td>
             
           </tr>
         
@@ -721,12 +721,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#09684ce08580b1819bc43fcbf359aa93f2978336" class="src_link" title="app/models/selection.rb">app/models/selection.rb</a></td>
-            <td class="green strong cell--number t-file__coverage">92.50 %</td>
-            <td class="cell--number">85</td>
-            <td class="cell--number">40</td>
-            <td class="cell--number">37</td>
-            <td class="cell--number">3</td>
-            <td class="cell--number">2.08</td>
+            <td class="green strong cell--number t-file__coverage">90.38 %</td>
+            <td class="cell--number">107</td>
+            <td class="cell--number">52</td>
+            <td class="cell--number">47</td>
+            <td class="cell--number">5</td>
+            <td class="cell--number">2.40</td>
             
           </tr>
         
@@ -1045,7 +1045,7 @@
             <td class="cell--number">25</td>
             <td class="cell--number">25</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">179.16</td>
+            <td class="cell--number">184.08</td>
             
           </tr>
         
@@ -1056,7 +1056,7 @@
             <td class="cell--number">5</td>
             <td class="cell--number">5</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">7.60</td>
+            <td class="cell--number">6.60</td>
             
           </tr>
         
@@ -1426,22 +1426,22 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#39195b6d04811b296bcc93ead5176f147b7d272e" class="src_link" title="spec/models/selection_spec.rb">spec/models/selection_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">76</td>
+            <td class="cell--number">78</td>
             <td class="cell--number">47</td>
             <td class="cell--number">47</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">2.02</td>
+            <td class="cell--number">2.09</td>
             
           </tr>
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#002c0310cdd43a6723321b47d0e9727ca5e6ee1b" class="src_link" title="spec/models/squad_correction_spec.rb">spec/models/squad_correction_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">65</td>
-            <td class="cell--number">31</td>
-            <td class="cell--number">31</td>
+            <td class="cell--number">68</td>
+            <td class="cell--number">34</td>
+            <td class="cell--number">34</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.61</td>
+            <td class="cell--number">1.65</td>
             
           </tr>
         
@@ -3868,7 +3868,7 @@
 
             
 
-            <code class="ruby">  def process_squad_corrections(turn)</code>
+            <code class="ruby">  def process_squad_corrections(params, turn)</code>
           </li>
         </div>
       
@@ -3890,7 +3890,7 @@
 
             
 
-            <code class="ruby">      Club::SquadCorrections.new.call</code>
+            <code class="ruby">      Club::SquadCorrections.new(params).call</code>
           </li>
         </div>
       
@@ -16381,8 +16381,8 @@
     
 
     <div class="t-line-summary">
-      <b>31</b> relevant lines.
-      <span class="green"><b>31</b> lines covered</span> and
+      <b>40</b> relevant lines.
+      <span class="green"><b>40</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -16411,12 +16411,45 @@
 
             
 
-            <code class="ruby">  def initialize</code>
+            <code class="ruby">  attr_reader :week</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="3">
+          <li class="never" data-hits="" data-linenumber="3">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="4">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def initialize(week)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="5">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    @week = week</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="6">
             <span class="hits">2</span>
             
 
@@ -16427,7 +16460,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="4">
+          <li class="never" data-hits="" data-linenumber="7">
             
             
 
@@ -16438,7 +16471,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="5">
+          <li class="never" data-hits="" data-linenumber="8">
             
             
 
@@ -16449,7 +16482,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="6">
+          <li class="covered" data-hits="1" data-linenumber="9">
             <span class="hits">1</span>
             
 
@@ -16460,7 +16493,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="7">
+          <li class="covered" data-hits="2" data-linenumber="10">
             <span class="hits">2</span>
             
 
@@ -16471,7 +16504,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="8">
+          <li class="covered" data-hits="2" data-linenumber="11">
             <span class="hits">2</span>
             
 
@@ -16482,7 +16515,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="9">
+          <li class="covered" data-hits="2" data-linenumber="12">
             <span class="hits">2</span>
             
 
@@ -16493,7 +16526,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="10">
+          <li class="never" data-hits="" data-linenumber="13">
             
             
 
@@ -16504,46 +16537,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="11">
+          <li class="covered" data-hits="2" data-linenumber="14">
             <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">      defecit, total_defecit = player_defecit(players)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="12">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="13">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      create_player(defecit, club.id) if total_defecit.positive?</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="14">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
+            <code class="ruby">      requirement = player_defecit(players)</code>
           </li>
         </div>
       
@@ -16554,29 +16554,29 @@
 
             
 
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="16">
-            
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="17">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="16">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">  def player_defecit(players)</code>
+            <code class="ruby">      create_player(requirement, club.id) if requirement.present?</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="17">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -16587,62 +16587,62 @@
 
             
 
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="19">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="20">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def player_defecit(players)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="21">
+            
+            
+
+            
+
             <code class="ruby">    defecit = {</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="19">
+          <li class="covered" data-hits="4" data-linenumber="22">
             <span class="hits">4</span>
             
 
             
 
-            <code class="ruby">      gkp: (players.where(position: &#39;gkp&#39;).count - 1) * -1,</code>
+            <code class="ruby">      gkp: (players.where(position: &#39;gkp&#39;).count - 1),</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="20">
+          <li class="covered" data-hits="2" data-linenumber="23">
             <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">      dfc: (players.where(position: &#39;dfc&#39;).count - 5) * -1,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="21">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      mid: (players.where(position: &#39;mid&#39;).count - 4) * -1,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="22">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">      att: (players.where(position: &#39;att&#39;).count - 3) * -1,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="23">
-            
-            
-
-            
-
-            <code class="ruby">    }</code>
+            <code class="ruby">      dfc: (players.where(position: &#39;dfc&#39;).count - 5),</code>
           </li>
         </div>
       
@@ -16653,7 +16653,7 @@
 
             
 
-            <code class="ruby">    total_defecit = defecit.values.sum</code>
+            <code class="ruby">      mid: (players.where(position: &#39;mid&#39;).count - 4),</code>
           </li>
         </div>
       
@@ -16664,7 +16664,7 @@
 
             
 
-            <code class="ruby">    return defecit, total_defecit</code>
+            <code class="ruby">      att: (players.where(position: &#39;att&#39;).count - 3)</code>
           </li>
         </div>
       
@@ -16675,7 +16675,7 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    }</code>
           </li>
         </div>
       
@@ -16691,24 +16691,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="28">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="28">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">  def create_player(defecit, club_id)</code>
+            <code class="ruby">    requirement(defecit)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="29">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="29">
+            
             
 
             
 
-            <code class="ruby">    countries = [&#39;England&#39;, &#39;England&#39;, &#39;England&#39;, &#39;England&#39;, &#39;Scotland&#39;, &#39;Wales&#39;,</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -16719,29 +16719,29 @@
 
             
 
-            <code class="ruby">                 &#39;NI&#39;, &#39;RoI&#39;, &#39;Brazil&#39;, &#39;Argentina&#39;, &#39;Spain&#39;, &#39;France&#39;, &#39;Germany&#39;,</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="31">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="31">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                 &#39;Poland&#39;, &#39;Portugal&#39;, &#39;USA&#39;, &#39;Belgium&#39;, &#39;Mexico&#39;, &#39;Uruguay&#39;,&#39;Brazil&#39;,</code>
+            
+
+            <code class="ruby">  def requirement(defecit)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="32">
-            
-            
-
+          <li class="covered" data-hits="2" data-linenumber="32">
+            <span class="hits">2</span>
             
 
-            <code class="ruby">                 &#39;England&#39;, &#39;Mexico&#39;, &#39;Germany&#39;, &#39;Italy&#39;, &#39;Spain&#39;, &#39;France&#39;, &#39;Argentina&#39;,</code>
+            
+
+            <code class="ruby">    requirement = []</code>
           </li>
         </div>
       
@@ -16752,51 +16752,51 @@
 
             
 
-            <code class="ruby">                 &#39;Netherlands&#39;, &#39;Portugal&#39;, &#39;Belgium&#39;, &#39;Uruguay&#39;, &#39;Colombia&#39;, &#39;Croatia&#39;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="34">
-            
-            
-
-            
-
-            <code class="ruby">                 &#39;Sweden&#39;, &#39;Switzerland&#39;, &#39;Poland&#39;, &#39;Denmark&#39;, &#39;Chile&#39;, &#39;Austria&#39;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="35">
-            
-            
-
-            
-
-            <code class="ruby">                 &#39;Turkey&#39;, &#39;Russia&#39;, &#39;Japan&#39;, &#39;South Korea&#39;, &#39;Australia&#39;]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="36">
-            
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="37">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="34">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">    position_detail = [&#39;c&#39;, &#39;c&#39;, &#39;c&#39;, &#39;l&#39;, &#39;r&#39;]</code>
+            <code class="ruby">    requirement &lt;&lt; [&#39;gkp&#39;, defecit[:gkp].abs] if defecit[:gkp].negative?</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="35">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    requirement &lt;&lt; [&#39;dfc&#39;, defecit[:dfc].abs] if defecit[:dfc].negative?</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="36">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    requirement &lt;&lt; [&#39;mid&#39;, defecit[:mid].abs] if defecit[:mid].negative?</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="37">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    requirement &lt;&lt; [&#39;att&#39;, defecit[:att].abs] if defecit[:att].negative?</code>
           </li>
         </div>
       
@@ -16812,513 +16812,18 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="39">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="39">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">    defecit.each do |position, number|</code>
+            <code class="ruby">    requirement</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="40">
-            <span class="hits">4</span>
-            
-
-            
-
-            <code class="ruby">      number.times do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="7" data-linenumber="41">
-            <span class="hits">7</span>
-            
-
-            
-
-            <code class="ruby">        Player.create(</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="42">
-            
-            
-
-            
-
-            <code class="ruby">            name: Faker::Name.last_name,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="43">
-            
-            
-
-            
-
-            <code class="ruby">            age: rand(15..18),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="44">
-            
-            
-
-            
-
-            <code class="ruby">            nationality: countries.sample,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="45">
-            
-            
-
-            
-
-            <code class="ruby">            position:,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="46">
-            
-            
-
-            
-
-            <code class="ruby">            passing: rand(3..4),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="47">
-            
-            
-
-            
-
-            <code class="ruby">            control: rand(3..4),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="48">
-            
-            
-
-            
-
-            <code class="ruby">            tackling: rand(3..4),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="49">
-            
-            
-
-            
-
-            <code class="ruby">            running: rand(3..4),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="50">
-            
-            
-
-            
-
-            <code class="ruby">            shooting: rand(3..4),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="51">
-            
-            
-
-            
-
-            <code class="ruby">            dribbling: rand(3..4),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="52">
-            
-            
-
-            
-
-            <code class="ruby">            defensive_heading: rand(3..4),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="53">
-            
-            
-
-            
-
-            <code class="ruby">            offensive_heading: rand(3..4),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="54">
-            
-            
-
-            
-
-            <code class="ruby">            flair: rand(3..4),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="55">
-            
-            
-
-            
-
-            <code class="ruby">            strength: rand(3..4),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="56">
-            
-            
-
-            
-
-            <code class="ruby">            creativity: rand(3..4),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="57">
-            
-            
-
-            
-
-            <code class="ruby">            fitness: 100,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="58">
-            
-            
-
-            
-
-            <code class="ruby">            contract: rand(13..46),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="59">
-            
-            
-
-            
-
-            <code class="ruby">            club_id:,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="60">
-            
-            
-
-            
-
-            <code class="ruby">            consistency: rand(5..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="61">
-            
-            
-
-            
-
-            <code class="ruby">            blend: rand(0..9),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="62">
-            
-            
-
-            
-
-            <code class="ruby">            star: rand(5..30),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="63">
-            
-            
-
-            
-
-            <code class="ruby">            loyalty: rand(10..50),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="7" data-linenumber="64">
-            <span class="hits">7</span>
-            
-
-            
-
-            <code class="ruby">            player_position_detail: if position == :gkp</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="65">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">                                      &#39;p&#39;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="66">
-            
-            
-
-            
-
-            <code class="ruby">                                    else</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="6" data-linenumber="67">
-            <span class="hits">6</span>
-            
-
-            
-
-            <code class="ruby">                                      position_detail.sample</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="68">
-            
-            
-
-            
-
-            <code class="ruby">                                    end,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="69">
-            
-            
-
-            
-
-            <code class="ruby">            potential_passing: rand(6..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="70">
-            
-            
-
-            
-
-            <code class="ruby">            potential_control: rand(6..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="71">
-            
-            
-
-            
-
-            <code class="ruby">            potential_tackling: rand(6..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="72">
-            
-            
-
-            
-
-            <code class="ruby">            potential_running: rand(6..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="73">
-            
-            
-
-            
-
-            <code class="ruby">            potential_shooting: rand(6..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="74">
-            
-            
-
-            
-
-            <code class="ruby">            potential_dribbling: rand(6..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="75">
-            
-            
-
-            
-
-            <code class="ruby">            potential_defensive_heading: rand(6..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="76">
-            
-            
-
-            
-
-            <code class="ruby">            potential_offensive_heading: rand(6..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="77">
-            
-            
-
-            
-
-            <code class="ruby">            potential_flair: rand(6..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="78">
-            
-            
-
-            
-
-            <code class="ruby">            potential_strength: rand(6..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="79">
-            
-            
-
-            
-
-            <code class="ruby">            potential_creativity: rand(6..20),</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="80">
-            
-            
-
-            
-
-            <code class="ruby">            available: 0</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="81">
-            
-            
-
-            
-
-            <code class="ruby">          )</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="7" data-linenumber="82">
-            <span class="hits">7</span>
-            
-
-            
-
-            <code class="ruby">        player_total_skill_and_wages</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="83">
-            
-            
-
-            
-
-            <code class="ruby">      end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="84">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="85">
+          <li class="never" data-hits="" data-linenumber="40">
             
             
 
@@ -17329,7 +16834,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="86">
+          <li class="never" data-hits="" data-linenumber="41">
             
             
 
@@ -17340,57 +16845,552 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="87">
+          <li class="covered" data-hits="1" data-linenumber="42">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def player_total_skill_and_wages</code>
+            <code class="ruby">  def create_player(requirement, club_id)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="7" data-linenumber="88">
+          <li class="covered" data-hits="1" data-linenumber="43">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    countries = [&#39;England&#39;, &#39;England&#39;, &#39;England&#39;, &#39;England&#39;, &#39;Scotland&#39;, &#39;Wales&#39;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="44">
+            
+            
+
+            
+
+            <code class="ruby">                 &#39;NI&#39;, &#39;RoI&#39;, &#39;Brazil&#39;, &#39;Argentina&#39;, &#39;Spain&#39;, &#39;France&#39;, &#39;Germany&#39;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="45">
+            
+            
+
+            
+
+            <code class="ruby">                 &#39;Poland&#39;, &#39;Portugal&#39;, &#39;USA&#39;, &#39;Belgium&#39;, &#39;Mexico&#39;, &#39;Uruguay&#39;,&#39;Brazil&#39;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="46">
+            
+            
+
+            
+
+            <code class="ruby">                 &#39;England&#39;, &#39;Mexico&#39;, &#39;Germany&#39;, &#39;Italy&#39;, &#39;Spain&#39;, &#39;France&#39;, &#39;Argentina&#39;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="47">
+            
+            
+
+            
+
+            <code class="ruby">                 &#39;Netherlands&#39;, &#39;Portugal&#39;, &#39;Belgium&#39;, &#39;Uruguay&#39;, &#39;Colombia&#39;, &#39;Croatia&#39;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="48">
+            
+            
+
+            
+
+            <code class="ruby">                 &#39;Sweden&#39;, &#39;Switzerland&#39;, &#39;Poland&#39;, &#39;Denmark&#39;, &#39;Chile&#39;, &#39;Austria&#39;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="49">
+            
+            
+
+            
+
+            <code class="ruby">                 &#39;Turkey&#39;, &#39;Russia&#39;, &#39;Japan&#39;, &#39;South Korea&#39;, &#39;Australia&#39;]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="50">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="51">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    position_detail = [&#39;c&#39;, &#39;c&#39;, &#39;c&#39;, &#39;l&#39;, &#39;r&#39;]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="52">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="53">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    requirement.each do |position, number|</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="3" data-linenumber="54">
+            <span class="hits">3</span>
+            
+
+            
+
+            <code class="ruby">      number.times do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="7" data-linenumber="55">
             <span class="hits">7</span>
             
 
             
 
-            <code class="ruby">    player = [Player.last]</code>
+            <code class="ruby">        Player.create(</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="7" data-linenumber="89">
+          <li class="never" data-hits="" data-linenumber="56">
+            
+            
+
+            
+
+            <code class="ruby">            name: Faker::Name.last_name,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="57">
+            
+            
+
+            
+
+            <code class="ruby">            age: rand(15..18),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="58">
+            
+            
+
+            
+
+            <code class="ruby">            nationality: countries.sample,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="59">
+            
+            
+
+            
+
+            <code class="ruby">            position:,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="60">
+            
+            
+
+            
+
+            <code class="ruby">            passing: rand(3..4),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="61">
+            
+            
+
+            
+
+            <code class="ruby">            control: rand(3..4),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="62">
+            
+            
+
+            
+
+            <code class="ruby">            tackling: rand(3..4),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="63">
+            
+            
+
+            
+
+            <code class="ruby">            running: rand(3..4),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="64">
+            
+            
+
+            
+
+            <code class="ruby">            shooting: rand(3..4),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="65">
+            
+            
+
+            
+
+            <code class="ruby">            dribbling: rand(3..4),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="66">
+            
+            
+
+            
+
+            <code class="ruby">            defensive_heading: rand(3..4),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="67">
+            
+            
+
+            
+
+            <code class="ruby">            offensive_heading: rand(3..4),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="68">
+            
+            
+
+            
+
+            <code class="ruby">            flair: rand(3..4),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="69">
+            
+            
+
+            
+
+            <code class="ruby">            strength: rand(3..4),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="70">
+            
+            
+
+            
+
+            <code class="ruby">            creativity: rand(3..4),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="71">
+            
+            
+
+            
+
+            <code class="ruby">            fitness: 100,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="72">
+            
+            
+
+            
+
+            <code class="ruby">            contract: rand(13..46),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="73">
+            
+            
+
+            
+
+            <code class="ruby">            club_id:,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="74">
+            
+            
+
+            
+
+            <code class="ruby">            consistency: rand(5..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="75">
+            
+            
+
+            
+
+            <code class="ruby">            blend: rand(0..9),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="76">
+            
+            
+
+            
+
+            <code class="ruby">            star: rand(5..30),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="77">
+            
+            
+
+            
+
+            <code class="ruby">            loyalty: rand(10..50),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="7" data-linenumber="78">
             <span class="hits">7</span>
             
 
             
 
-            <code class="ruby">    player_total_skill = Player::Engines::PlayerTotals.new(player, 1).process</code>
+            <code class="ruby">            player_position_detail: if position == &#39;gkp&#39;</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="7" data-linenumber="90">
-            <span class="hits">7</span>
+          <li class="covered" data-hits="1" data-linenumber="79">
+            <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    updated_player = Player::Engines::ValueWages.new(player_total_skill, 1).process</code>
+            <code class="ruby">                                      &#39;p&#39;</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="7" data-linenumber="91">
-            <span class="hits">7</span>
+          <li class="never" data-hits="" data-linenumber="80">
+            
             
 
             
 
-            <code class="ruby">    Player.upsert_all(updated_player.to_a.map(&amp;:as_json))</code>
+            <code class="ruby">                                    else</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="6" data-linenumber="81">
+            <span class="hits">6</span>
+            
+
+            
+
+            <code class="ruby">                                      position_detail.sample</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="82">
+            
+            
+
+            
+
+            <code class="ruby">                                    end,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="83">
+            
+            
+
+            
+
+            <code class="ruby">            potential_passing: rand(6..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="84">
+            
+            
+
+            
+
+            <code class="ruby">            potential_control: rand(6..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="85">
+            
+            
+
+            
+
+            <code class="ruby">            potential_tackling: rand(6..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="86">
+            
+            
+
+            
+
+            <code class="ruby">            potential_running: rand(6..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="87">
+            
+            
+
+            
+
+            <code class="ruby">            potential_shooting: rand(6..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="88">
+            
+            
+
+            
+
+            <code class="ruby">            potential_dribbling: rand(6..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="89">
+            
+            
+
+            
+
+            <code class="ruby">            potential_defensive_heading: rand(6..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="90">
+            
+            
+
+            
+
+            <code class="ruby">            potential_offensive_heading: rand(6..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="91">
+            
+            
+
+            
+
+            <code class="ruby">            potential_flair: rand(6..20),</code>
           </li>
         </div>
       
@@ -17401,12 +17401,177 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">            potential_strength: rand(6..20),</code>
           </li>
         </div>
       
         <div>
           <li class="never" data-hits="" data-linenumber="93">
+            
+            
+
+            
+
+            <code class="ruby">            potential_creativity: rand(6..20),</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="94">
+            
+            
+
+            
+
+            <code class="ruby">            available: 0</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="95">
+            
+            
+
+            
+
+            <code class="ruby">          )</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="7" data-linenumber="96">
+            <span class="hits">7</span>
+            
+
+            
+
+            <code class="ruby">        player_total_skill_and_wages</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="97">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="98">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="99">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    Message.create(week:, club_id:, var1: &#39;Due to a lack of available players your first team coach has promoted sufficient players from the youth team.&#39;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="100">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="101">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="102">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def player_total_skill_and_wages</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="7" data-linenumber="103">
+            <span class="hits">7</span>
+            
+
+            
+
+            <code class="ruby">    player = [Player.last]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="7" data-linenumber="104">
+            <span class="hits">7</span>
+            
+
+            
+
+            <code class="ruby">    player_total_skill = Player::Engines::PlayerTotals.new(player, 1).process</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="7" data-linenumber="105">
+            <span class="hits">7</span>
+            
+
+            
+
+            <code class="ruby">    updated_player = Player::Engines::ValueWages.new(player_total_skill, 1).process</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="7" data-linenumber="106">
+            <span class="hits">7</span>
+            
+
+            
+
+            <code class="ruby">    Player.upsert_all(updated_player.to_a.map(&amp;:as_json))</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="107">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="108">
             
             
 
@@ -35057,8 +35222,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="25" data-linenumber="19">
-            <span class="hits">25</span>
+          <li class="covered" data-hits="22" data-linenumber="19">
+            <span class="hits">22</span>
             
 
             
@@ -35068,8 +35233,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="25" data-linenumber="20">
-            <span class="hits">25</span>
+          <li class="covered" data-hits="22" data-linenumber="20">
+            <span class="hits">22</span>
             
 
             
@@ -35079,8 +35244,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="11" data-linenumber="21">
-            <span class="hits">11</span>
+          <li class="covered" data-hits="14" data-linenumber="21">
+            <span class="hits">14</span>
             
 
             
@@ -35090,8 +35255,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="11" data-linenumber="22">
-            <span class="hits">11</span>
+          <li class="covered" data-hits="14" data-linenumber="22">
+            <span class="hits">14</span>
             
 
             
@@ -35101,8 +35266,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="11" data-linenumber="23">
-            <span class="hits">11</span>
+          <li class="covered" data-hits="14" data-linenumber="23">
+            <span class="hits">14</span>
             
 
             
@@ -35669,7 +35834,7 @@
     <h3>app/models/selection.rb</h3>
     <h4>
       <span class="green">
-  92.5%
+  90.38%
 </span>
 
       lines covered
@@ -35678,9 +35843,9 @@
     
 
     <div class="t-line-summary">
-      <b>40</b> relevant lines.
-      <span class="green"><b>37</b> lines covered</span> and
-      <span class="red"><b>3</b> lines missed.</span>
+      <b>52</b> relevant lines.
+      <span class="green"><b>47</b> lines covered</span> and
+      <span class="red"><b>5</b> lines missed.</span>
     </div>
 
     
@@ -35741,34 +35906,67 @@
 
             
 
-            <code class="ruby">        next if Selection.where(club_id: club.id).size == 11 &amp;&amp; club.managed == true</code>
+            <code class="ruby">        if club.managed == true</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="6">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="7">
+          <li class="covered" data-hits="2" data-linenumber="6">
             <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">        run_auto_selection(club)</code>
+            <code class="ruby">          managed_squad_check(club)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="8">
+          <li class="never" data-hits="" data-linenumber="7">
+            
+            
+
+            
+
+            <code class="ruby">        else</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="8">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">          run_auto_selection(club)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="9">
+            
+            
+
+            
+
+            <code class="ruby">        end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="3" data-linenumber="10">
+            <span class="hits">3</span>
+            
+
+            
+
+            <code class="ruby">        turn.update(auto_selections: true)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="11">
             
             
 
@@ -35779,18 +35977,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="9">
-            <span class="hits">3</span>
-            
-
-            
-
-            <code class="ruby">      turn.update(auto_selections: true)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="10">
+          <li class="missed" data-hits="0" data-linenumber="12">
             
             
 
@@ -35801,7 +35988,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="11">
+          <li class="missed" data-hits="0" data-linenumber="13">
             
             
 
@@ -35812,7 +35999,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="12">
+          <li class="never" data-hits="" data-linenumber="14">
             
             
 
@@ -35823,7 +36010,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="13">
+          <li class="missed" data-hits="0" data-linenumber="15">
             
             
 
@@ -35834,7 +36021,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="14">
+          <li class="never" data-hits="" data-linenumber="16">
             
             
 
@@ -35845,7 +36032,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="15">
+          <li class="never" data-hits="" data-linenumber="17">
             
             
 
@@ -35856,7 +36043,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="16">
+          <li class="never" data-hits="" data-linenumber="18">
             
             
 
@@ -35867,35 +36054,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="17">
+          <li class="covered" data-hits="1" data-linenumber="19">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def run_auto_selection(club)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="18">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">    Selection.where(club_id: club.id).destroy_all</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="19">
-            
-            
-
-            
-
-            <code class="ruby"></code>
+            <code class="ruby">  def managed_squad_check(club)</code>
           </li>
         </div>
       
@@ -35906,7 +36071,7 @@
 
             
 
-            <code class="ruby">    dfc_number, mid_number, att_number = formation_picker</code>
+            <code class="ruby">    current_selection = Selection.where(club_id: club.id)</code>
           </li>
         </div>
       
@@ -35928,57 +36093,68 @@
 
             
 
-            <code class="ruby">    pick_gkp(club)</code>
+            <code class="ruby">    if current_selection.count &lt; 11</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="23">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="1" data-linenumber="23">
+            <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    pick_dfc(club, dfc_number)</code>
+            <code class="ruby">      current_selection.destroy_all</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="24">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="1" data-linenumber="24">
+            <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    pick_mid(club, mid_number)</code>
+            <code class="ruby">      run_auto_selection(club)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="25">
-            <span class="hits">2</span>
+          <li class="never" data-hits="" data-linenumber="25">
+            
             
 
             
 
-            <code class="ruby">    pick_att(club, att_number)</code>
+            <code class="ruby">    else</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="26">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="26">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  end</code>
+            
+
+            <code class="ruby">      current_selection.each do |selection|</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="27">
+          <li class="covered" data-hits="11" data-linenumber="27">
+            <span class="hits">11</span>
             
+
+            
+
+            <code class="ruby">        player = Player.find_by(id: selection.player_id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="28">
+            <span class="hits">11</span>
             
 
             
@@ -35988,24 +36164,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="28">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="11" data-linenumber="29">
+            <span class="hits">11</span>
             
 
             
 
-            <code class="ruby">  def formation_picker</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="29">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">    selected_formation = formations.sample</code>
+            <code class="ruby">        if player.club_id == club.id</code>
           </li>
         </div>
       
@@ -36016,40 +36181,40 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">          next</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="31">
-            <span class="hits">2</span>
+          <li class="missed" data-hits="0" data-linenumber="31">
+            
             
 
             
 
-            <code class="ruby">    dfc_number = selected_formation[0]</code>
+            <code class="ruby">        else</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="32">
-            <span class="hits">2</span>
+          <li class="missed" data-hits="0" data-linenumber="32">
+            
             
 
             
 
-            <code class="ruby">    mid_number = selected_formation[1]</code>
+            <code class="ruby">          current_selection.destroy_all</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="33">
-            <span class="hits">2</span>
+          <li class="never" data-hits="" data-linenumber="33">
+            
             
 
             
 
-            <code class="ruby">    att_number = selected_formation[2]</code>
+            <code class="ruby">          run_auto_selection(club)</code>
           </li>
         </div>
       
@@ -36060,18 +36225,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">        end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="35">
-            <span class="hits">2</span>
+          <li class="never" data-hits="" data-linenumber="35">
+            
             
 
             
 
-            <code class="ruby">    return dfc_number, mid_number, att_number</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -36082,13 +36247,24 @@
 
             
 
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="37">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="37">
-            
+          <li class="covered" data-hits="2" data-linenumber="38">
+            <span class="hits">2</span>
             
 
             
@@ -36098,24 +36274,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="38">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="39">
+            
             
 
             
 
-            <code class="ruby">  def pick_gkp(club)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="39">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">    gkp = Player.where(club_id: club.id, position: &#39;gkp&#39;, available: 0).order(total_skill: :desc).first</code>
+            <code class="ruby">  def run_auto_selection(club)</code>
           </li>
         </div>
       
@@ -36126,7 +36291,7 @@
 
             
 
-            <code class="ruby">    Selection.create(club_id: club.id, player_id: gkp.id)</code>
+            <code class="ruby">    Selection.where(club_id: club).destroy_all</code>
           </li>
         </div>
       
@@ -36137,29 +36302,29 @@
 
             
 
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="42">
-            
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="43">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="42">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">  def pick_dfc(club, dfc_number)</code>
+            <code class="ruby">    dfc_number, mid_number, att_number = formation_picker</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="43">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -36170,7 +36335,7 @@
 
             
 
-            <code class="ruby">    dfc = Player.where(club_id: club.id, position: &#39;dfc&#39;, available: 0).order(total_skill: :desc).limit(dfc_number)</code>
+            <code class="ruby">    pick_gkp(club)</code>
           </li>
         </div>
       
@@ -36181,18 +36346,18 @@
 
             
 
-            <code class="ruby">    dfc.each do |player|</code>
+            <code class="ruby">    pick_dfc(club, dfc_number)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="9" data-linenumber="46">
-            <span class="hits">9</span>
+          <li class="never" data-hits="" data-linenumber="46">
+            
             
 
             
 
-            <code class="ruby">      Selection.create(club_id: club.id, player_id: player.id)</code>
+            <code class="ruby">    pick_mid(club, mid_number)</code>
           </li>
         </div>
       
@@ -36203,13 +36368,13 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">    pick_att(club, att_number)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="48">
-            
+          <li class="covered" data-hits="1" data-linenumber="48">
+            <span class="hits">1</span>
             
 
             
@@ -36219,8 +36384,8 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="49">
-            
+          <li class="covered" data-hits="2" data-linenumber="49">
+            <span class="hits">2</span>
             
 
             
@@ -36230,13 +36395,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="50">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="50">
+            
             
 
             
 
-            <code class="ruby">  def pick_mid(club, mid_number)</code>
+            <code class="ruby">  def formation_picker</code>
           </li>
         </div>
       
@@ -36247,7 +36412,7 @@
 
             
 
-            <code class="ruby">    mid = Player.where(club_id: club.id, position: &#39;mid&#39;, available: 0).order(total_skill: :desc).limit(mid_number)</code>
+            <code class="ruby">    selected_formation = formations.sample</code>
           </li>
         </div>
       
@@ -36258,18 +36423,18 @@
 
             
 
-            <code class="ruby">    mid.each do |player|</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="7" data-linenumber="53">
-            <span class="hits">7</span>
+          <li class="covered" data-hits="2" data-linenumber="53">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">      Selection.create(club_id: club.id, player_id: player.id)</code>
+            <code class="ruby">    dfc_number = selected_formation[0]</code>
           </li>
         </div>
       
@@ -36280,18 +36445,18 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">    mid_number = selected_formation[1]</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="55">
-            
-            
-
+          <li class="covered" data-hits="2" data-linenumber="55">
+            <span class="hits">2</span>
             
 
-            <code class="ruby">  end</code>
+            
+
+            <code class="ruby">    att_number = selected_formation[2]</code>
           </li>
         </div>
       
@@ -36307,24 +36472,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="57">
+          <li class="never" data-hits="" data-linenumber="57">
+            
+            
+
+            
+
+            <code class="ruby">    return dfc_number, mid_number, att_number</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="58">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def pick_att(club, att_number)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="58">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">    att = Player.where(club_id: club.id, position: &#39;att&#39;, available: 0).order(total_skill: :desc).limit(att_number)</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -36335,18 +36500,18 @@
 
             
 
-            <code class="ruby">    att.each do |player|</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="60">
-            <span class="hits">4</span>
+          <li class="covered" data-hits="2" data-linenumber="60">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">      Selection.create(club_id: club.id, player_id: player.id)</code>
+            <code class="ruby">  def pick_gkp(club)</code>
           </li>
         </div>
       
@@ -36357,7 +36522,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">    gkp = Player.where(club_id: club.id, position: &#39;gkp&#39;, available: 0).order(total_skill: :desc).first</code>
           </li>
         </div>
       
@@ -36368,29 +36533,29 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    Selection.create(club_id: club.id, player_id: gkp.id)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="63">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="64">
+          <li class="covered" data-hits="1" data-linenumber="63">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def formations</code>
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="64">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -36401,18 +36566,18 @@
 
             
 
-            <code class="ruby">    [[4, 4, 2],</code>
+            <code class="ruby">  def pick_dfc(club, dfc_number)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="66">
-            
-            
-
+          <li class="covered" data-hits="7" data-linenumber="66">
+            <span class="hits">7</span>
             
 
-            <code class="ruby">     [4, 3, 3],</code>
+            
+
+            <code class="ruby">    dfc = Player.where(club_id: club.id, position: &#39;dfc&#39;, available: 0).order(total_skill: :desc).limit(dfc_number)</code>
           </li>
         </div>
       
@@ -36423,7 +36588,7 @@
 
             
 
-            <code class="ruby">     [3, 4, 3],</code>
+            <code class="ruby">    dfc.each do |player|</code>
           </li>
         </div>
       
@@ -36434,7 +36599,7 @@
 
             
 
-            <code class="ruby">     [5, 3, 2],</code>
+            <code class="ruby">      Selection.create(club_id: club.id, player_id: player.id)</code>
           </li>
         </div>
       
@@ -36445,24 +36610,13 @@
 
             
 
-            <code class="ruby">     [5, 4, 1],</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="70">
-            
-            
-
-            
-
-            <code class="ruby">     [5, 2, 3]]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="71">
-            
+          <li class="covered" data-hits="1" data-linenumber="70">
+            <span class="hits">1</span>
             
 
             
@@ -36472,24 +36626,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="72">
-            
-            
-
-            
-
-            <code class="ruby">end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="73">
-            
+          <li class="covered" data-hits="2" data-linenumber="71">
+            <span class="hits">2</span>
             
 
             
 
             <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="72">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">  def pick_mid(club, mid_number)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="8" data-linenumber="73">
+            <span class="hits">8</span>
+            
+
+            
+
+            <code class="ruby">    mid = Player.where(club_id: club.id, position: &#39;mid&#39;, available: 0).order(total_skill: :desc).limit(mid_number)</code>
           </li>
         </div>
       
@@ -36500,7 +36665,7 @@
 
             
 
-            <code class="ruby">#------------------------------------------------------------------------------</code>
+            <code class="ruby">    mid.each do |player|</code>
           </li>
         </div>
       
@@ -36511,7 +36676,7 @@
 
             
 
-            <code class="ruby"># Selection</code>
+            <code class="ruby">      Selection.create(club_id: club.id, player_id: player.id)</code>
           </li>
         </div>
       
@@ -36522,51 +36687,51 @@
 
             
 
-            <code class="ruby">#</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="77">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="77">
+            <span class="hits">1</span>
             
 
-            <code class="ruby"># Name       SQL Type             Null    Primary Default</code>
+            
+
+            <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="78">
-            
-            
-
+          <li class="covered" data-hits="2" data-linenumber="78">
+            <span class="hits">2</span>
             
 
-            <code class="ruby"># ---------- -------------------- ------- ------- ----------</code>
+            
+
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="79">
-            
-            
-
+          <li class="covered" data-hits="2" data-linenumber="79">
+            <span class="hits">2</span>
             
 
-            <code class="ruby"># id         INTEGER              false   true              </code>
+            
+
+            <code class="ruby">  def pick_att(club, att_number)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="80">
-            
-            
-
+          <li class="covered" data-hits="5" data-linenumber="80">
+            <span class="hits">5</span>
             
 
-            <code class="ruby"># club       varchar              true    false             </code>
+            
+
+            <code class="ruby">    att = Player.where(club_id: club.id, position: &#39;att&#39;, available: 0).order(total_skill: :desc).limit(att_number)</code>
           </li>
         </div>
       
@@ -36577,7 +36742,7 @@
 
             
 
-            <code class="ruby"># player_id  INTEGER              true    false             </code>
+            <code class="ruby">    att.each do |player|</code>
           </li>
         </div>
       
@@ -36588,7 +36753,7 @@
 
             
 
-            <code class="ruby"># created_at datetime(6)          false   false             </code>
+            <code class="ruby">      Selection.create(club_id: club.id, player_id: player.id)</code>
           </li>
         </div>
       
@@ -36599,12 +36764,166 @@
 
             
 
-            <code class="ruby"># updated_at datetime(6)          false   false             </code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="84">
+          <li class="covered" data-hits="1" data-linenumber="84">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="85">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="86">
+            
+            
+
+            
+
+            <code class="ruby">  def formations</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="87">
+            
+            
+
+            
+
+            <code class="ruby">    [[4, 4, 2],</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="88">
+            
+            
+
+            
+
+            <code class="ruby">     [4, 3, 3],</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="89">
+            
+            
+
+            
+
+            <code class="ruby">     [3, 4, 3],</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="90">
+            
+            
+
+            
+
+            <code class="ruby">     [5, 3, 2],</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="91">
+            
+            
+
+            
+
+            <code class="ruby">     [5, 4, 1],</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="92">
+            
+            
+
+            
+
+            <code class="ruby">     [5, 2, 3]]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="93">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="94">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="95">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="96">
+            
+            
+
+            
+
+            <code class="ruby">#------------------------------------------------------------------------------</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="97">
+            
+            
+
+            
+
+            <code class="ruby"># Selection</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="98">
             
             
 
@@ -36615,7 +36934,95 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="85">
+          <li class="never" data-hits="" data-linenumber="99">
+            
+            
+
+            
+
+            <code class="ruby"># Name       SQL Type             Null    Primary Default</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="100">
+            
+            
+
+            
+
+            <code class="ruby"># ---------- -------------------- ------- ------- ----------</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="101">
+            
+            
+
+            
+
+            <code class="ruby"># id         INTEGER              false   true              </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="102">
+            
+            
+
+            
+
+            <code class="ruby"># club       varchar              true    false             </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="103">
+            
+            
+
+            
+
+            <code class="ruby"># player_id  INTEGER              true    false             </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="104">
+            
+            
+
+            
+
+            <code class="ruby"># created_at datetime(6)          false   false             </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="105">
+            
+            
+
+            
+
+            <code class="ruby"># updated_at datetime(6)          false   false             </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="106">
+            
+            
+
+            
+
+            <code class="ruby">#</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="107">
             
             
 
@@ -55246,8 +55653,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="105" data-linenumber="3">
-            <span class="hits">105</span>
+          <li class="covered" data-hits="101" data-linenumber="3">
+            <span class="hits">101</span>
             
 
             
@@ -55257,8 +55664,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="193" data-linenumber="4">
-            <span class="hits">193</span>
+          <li class="covered" data-hits="200" data-linenumber="4">
+            <span class="hits">200</span>
             
 
             
@@ -55268,8 +55675,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="140" data-linenumber="5">
-            <span class="hits">140</span>
+          <li class="covered" data-hits="151" data-linenumber="5">
+            <span class="hits">151</span>
             
 
             
@@ -55279,8 +55686,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="62" data-linenumber="6">
-            <span class="hits">62</span>
+          <li class="covered" data-hits="41" data-linenumber="6">
+            <span class="hits">41</span>
             
 
             
@@ -55290,8 +55697,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="7">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="7">
+            <span class="hits">219</span>
             
 
             
@@ -55301,8 +55708,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="8">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="8">
+            <span class="hits">219</span>
             
 
             
@@ -55312,8 +55719,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="9">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="9">
+            <span class="hits">219</span>
             
 
             
@@ -55323,8 +55730,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="10">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="10">
+            <span class="hits">219</span>
             
 
             
@@ -55334,8 +55741,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="11">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="11">
+            <span class="hits">219</span>
             
 
             
@@ -55345,8 +55752,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="12">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="12">
+            <span class="hits">219</span>
             
 
             
@@ -55356,8 +55763,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="13">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="13">
+            <span class="hits">219</span>
             
 
             
@@ -55367,8 +55774,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="14">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="14">
+            <span class="hits">219</span>
             
 
             
@@ -55378,8 +55785,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="15">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="15">
+            <span class="hits">219</span>
             
 
             
@@ -55389,8 +55796,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="16">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="16">
+            <span class="hits">219</span>
             
 
             
@@ -55400,8 +55807,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="17">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="17">
+            <span class="hits">219</span>
             
 
             
@@ -55411,8 +55818,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="202" data-linenumber="18">
-            <span class="hits">202</span>
+          <li class="covered" data-hits="209" data-linenumber="18">
+            <span class="hits">209</span>
             
 
             
@@ -55422,8 +55829,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="19">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="19">
+            <span class="hits">219</span>
             
 
             
@@ -55433,8 +55840,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="194" data-linenumber="20">
-            <span class="hits">194</span>
+          <li class="covered" data-hits="198" data-linenumber="20">
+            <span class="hits">198</span>
             
 
             
@@ -55444,8 +55851,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="212" data-linenumber="21">
-            <span class="hits">212</span>
+          <li class="covered" data-hits="219" data-linenumber="21">
+            <span class="hits">219</span>
             
 
             
@@ -55455,8 +55862,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="211" data-linenumber="22">
-            <span class="hits">211</span>
+          <li class="covered" data-hits="218" data-linenumber="22">
+            <span class="hits">218</span>
             
 
             
@@ -55466,8 +55873,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="199" data-linenumber="23">
-            <span class="hits">199</span>
+          <li class="covered" data-hits="206" data-linenumber="23">
+            <span class="hits">206</span>
             
 
             
@@ -55477,8 +55884,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="211" data-linenumber="24">
-            <span class="hits">211</span>
+          <li class="covered" data-hits="218" data-linenumber="24">
+            <span class="hits">218</span>
             
 
             
@@ -55488,8 +55895,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="204" data-linenumber="25">
-            <span class="hits">204</span>
+          <li class="covered" data-hits="211" data-linenumber="25">
+            <span class="hits">211</span>
             
 
             
@@ -55585,8 +55992,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="17" data-linenumber="4">
-            <span class="hits">17</span>
+          <li class="covered" data-hits="12" data-linenumber="4">
+            <span class="hits">12</span>
             
 
             
@@ -82165,7 +82572,7 @@
 
             
 
-            <code class="ruby">    it &quot;does not select players if a selection exists for a managed club&quot; do</code>
+            <code class="ruby">    it &quot;does not select players if a complete selection exists for a managed club&quot; do</code>
           </li>
         </div>
       
@@ -82203,13 +82610,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="10">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="10">
+            
             
 
             
 
-            <code class="ruby">    create(:club, managed: true)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -82220,23 +82627,12 @@
 
             
 
-            <code class="ruby">    params = {week: 1}</code>
+            <code class="ruby">      create(:club, managed: true)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="12">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    turn = Turn.new(week: 1)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="13">
+          <li class="never" data-hits="" data-linenumber="12">
             
             
 
@@ -82247,13 +82643,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="14">
+          <li class="covered" data-hits="1" data-linenumber="13">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    Selection.new.auto_selection(params, turn)</code>
+            <code class="ruby">      11.times do |n|</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="14">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">        create(:player, id: n + 1, club_id: 1)</code>
           </li>
         </div>
       
@@ -82264,29 +82671,29 @@
 
             
 
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="16">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="16">
+          <li class="covered" data-hits="1" data-linenumber="17">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    club_selection = Selection.where(club_id: 1).count</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="17">
-            
-            
-
-            
-
-            <code class="ruby"></code>
+            <code class="ruby">      params = { week: 1 }</code>
           </li>
         </div>
       
@@ -82297,7 +82704,7 @@
 
             
 
-            <code class="ruby">    expect(club_selection).to eq(11)</code>
+            <code class="ruby">      turn = Turn.new(week: 1)</code>
           </li>
         </div>
       
@@ -82308,29 +82715,29 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="20">
+          <li class="covered" data-hits="1" data-linenumber="20">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      Selection.new.auto_selection(params, turn)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="21">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="21">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    it &quot;selects players if an incomplete selection exists for a managed club&quot; do</code>
           </li>
         </div>
       
@@ -82341,18 +82748,18 @@
 
             
 
-            <code class="ruby">      5.times do |n|</code>
+            <code class="ruby">      expect(Selection.where(club_id: 1).count).to eq(11)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="5" data-linenumber="23">
-            <span class="hits">5</span>
+          <li class="never" data-hits="" data-linenumber="23">
+            
             
 
             
 
-            <code class="ruby">        create(:selection, player_id: n + 1)</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -82363,7 +82770,7 @@
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -82374,12 +82781,56 @@
 
             
 
+            <code class="ruby">    it &quot;selects players if an incomplete selection exists for a managed club&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="26">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      5.times do |n|</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="5" data-linenumber="27">
+            <span class="hits">5</span>
+            
+
+            
+
+            <code class="ruby">        create(:selection, player_id: n + 1, club_id: 1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="28">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="29">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">      create(:club, managed: true)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="26">
+          <li class="never" data-hits="" data-linenumber="30">
             
             
 
@@ -82390,29 +82841,29 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="27">
+          <li class="covered" data-hits="1" data-linenumber="31">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      3.times do |n|</code>
+            <code class="ruby">      2.times do |n|</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="28">
-            <span class="hits">3</span>
+          <li class="covered" data-hits="2" data-linenumber="32">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">        create(:player, position: &#39;gkp&#39;)</code>
+            <code class="ruby">        create(:player, position: &#39;gkp&#39;, club_id: 1)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="29">
+          <li class="never" data-hits="" data-linenumber="33">
             
             
 
@@ -82423,29 +82874,29 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="30">
+          <li class="covered" data-hits="1" data-linenumber="34">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      6.times do |n|</code>
+            <code class="ruby">      5.times do |n|</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="31">
-            <span class="hits">6</span>
+          <li class="covered" data-hits="5" data-linenumber="35">
+            <span class="hits">5</span>
             
 
             
 
-            <code class="ruby">        create(:player, position: &#39;dfc&#39;)</code>
+            <code class="ruby">        create(:player, position: &#39;dfc&#39;, club_id: 1)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="32">
+          <li class="never" data-hits="" data-linenumber="36">
             
             
 
@@ -82456,68 +82907,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="33">
+          <li class="covered" data-hits="1" data-linenumber="37">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      6.times do |n|</code>
+            <code class="ruby">      4.times do |n|</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="34">
-            <span class="hits">6</span>
+          <li class="covered" data-hits="4" data-linenumber="38">
+            <span class="hits">4</span>
             
 
             
 
-            <code class="ruby">        create(:player, position: &#39;mid&#39;)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="35">
-            
-            
-
-            
-
-            <code class="ruby">      end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="36">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      6.times do |n|</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="6" data-linenumber="37">
-            <span class="hits">6</span>
-            
-
-            
-
-            <code class="ruby">        create(:player, position: &#39;att&#39;)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="38">
-            
-            
-
-            
-
-            <code class="ruby">      end</code>
+            <code class="ruby">        create(:player, position: &#39;mid&#39;, club_id: 1)</code>
           </li>
         </div>
       
@@ -82528,7 +82935,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -82539,18 +82946,18 @@
 
             
 
-            <code class="ruby">    params = {week: 1}</code>
+            <code class="ruby">      3.times do |n|</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="41">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="3" data-linenumber="41">
+            <span class="hits">3</span>
             
 
             
 
-            <code class="ruby">    turn = Turn.new(week: 1)</code>
+            <code class="ruby">        create(:player, position: &#39;att&#39;, club_id: 1)</code>
           </li>
         </div>
       
@@ -82561,29 +82968,29 @@
 
             
 
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="43">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="43">
+          <li class="covered" data-hits="1" data-linenumber="44">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    Selection.new.auto_selection(params, turn)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="44">
-            
-            
-
-            
-
-            <code class="ruby"></code>
+            <code class="ruby">      params = { week: 1 }</code>
           </li>
         </div>
       
@@ -82594,7 +83001,7 @@
 
             
 
-            <code class="ruby">    club_selection = Selection.where(club_id: 1).count</code>
+            <code class="ruby">      turn = Turn.new(week: 1)</code>
           </li>
         </div>
       
@@ -82616,7 +83023,7 @@
 
             
 
-            <code class="ruby">    expect(club_selection).to eq(11)</code>
+            <code class="ruby">      Selection.new.auto_selection(params, turn)</code>
           </li>
         </div>
       
@@ -82627,40 +83034,40 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="49">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(Selection.where(club_id: 1).count).to eq(11)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="50">
+            
+            
+
+            
+
             <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="49">
+          <li class="never" data-hits="" data-linenumber="51">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="50">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    it &quot;selects 11 players for the club&quot; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="51">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      params = {week: 1}</code>
           </li>
         </div>
       
@@ -82671,7 +83078,7 @@
 
             
 
-            <code class="ruby">      create(:club)</code>
+            <code class="ruby">    it &quot;selects 11 players for the club&quot; do</code>
           </li>
         </div>
       
@@ -82682,12 +83089,34 @@
 
             
 
+            <code class="ruby">      params = { week: 1 }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="54">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      create(:club)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="55">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">      3.times do |n|</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="54">
+          <li class="covered" data-hits="3" data-linenumber="56">
             <span class="hits">3</span>
             
 
@@ -82698,7 +83127,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="55">
+          <li class="never" data-hits="" data-linenumber="57">
             
             
 
@@ -82709,7 +83138,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="56">
+          <li class="covered" data-hits="1" data-linenumber="58">
             <span class="hits">1</span>
             
 
@@ -82720,7 +83149,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="57">
+          <li class="covered" data-hits="6" data-linenumber="59">
             <span class="hits">6</span>
             
 
@@ -82731,7 +83160,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="58">
+          <li class="never" data-hits="" data-linenumber="60">
             
             
 
@@ -82742,7 +83171,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="59">
+          <li class="covered" data-hits="1" data-linenumber="61">
             <span class="hits">1</span>
             
 
@@ -82753,7 +83182,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="60">
+          <li class="covered" data-hits="6" data-linenumber="62">
             <span class="hits">6</span>
             
 
@@ -82764,7 +83193,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="61">
+          <li class="never" data-hits="" data-linenumber="63">
             
             
 
@@ -82775,7 +83204,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="62">
+          <li class="covered" data-hits="1" data-linenumber="64">
             <span class="hits">1</span>
             
 
@@ -82786,7 +83215,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="63">
+          <li class="covered" data-hits="6" data-linenumber="65">
             <span class="hits">6</span>
             
 
@@ -82797,7 +83226,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="64">
+          <li class="never" data-hits="" data-linenumber="66">
             
             
 
@@ -82808,35 +83237,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="65">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      turn = Turn.new(week: 1)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="66">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
           <li class="covered" data-hits="1" data-linenumber="67">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      Selection.new.auto_selection(params, turn)</code>
+            <code class="ruby">      turn = Turn.new(week: 1)</code>
           </li>
         </div>
       
@@ -82858,23 +83265,12 @@
 
             
 
-            <code class="ruby">    club_selection = Selection.where(club_id: 1)</code>
+            <code class="ruby">      Selection.new.auto_selection(params, turn)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="70">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    player_1_position = Player.find_by(id: club_selection[0].player_id)&amp;.position</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="71">
+          <li class="never" data-hits="" data-linenumber="70">
             
             
 
@@ -82885,7 +83281,40 @@
         </div>
       
         <div>
+          <li class="covered" data-hits="1" data-linenumber="71">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    club_selection = Selection.where(club_id: 1)</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="covered" data-hits="1" data-linenumber="72">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    player_1_position = Player.find_by(id: club_selection[0].player_id)&amp;.position</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="73">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="74">
             <span class="hits">1</span>
             
 
@@ -82896,7 +83325,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="73">
+          <li class="covered" data-hits="1" data-linenumber="75">
             <span class="hits">1</span>
             
 
@@ -82907,7 +83336,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="74">
+          <li class="never" data-hits="" data-linenumber="76">
             
             
 
@@ -82918,7 +83347,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="75">
+          <li class="never" data-hits="" data-linenumber="77">
             
             
 
@@ -82929,7 +83358,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="76">
+          <li class="never" data-hits="" data-linenumber="78">
             
             
 
@@ -82958,8 +83387,8 @@
     
 
     <div class="t-line-summary">
-      <b>31</b> relevant lines.
-      <span class="green"><b>31</b> lines covered</span> and
+      <b>34</b> relevant lines.
+      <span class="green"><b>34</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -83191,24 +83620,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="5" data-linenumber="21">
-            <span class="hits">5</span>
+          <li class="covered" data-hits="7" data-linenumber="21">
+            <span class="hits">7</span>
             
 
             
 
-            <code class="ruby">        4.times { create(:player, club_id: 1, position: &#39;dfc&#39;, player_position_detail: &#39;c&#39;) }</code>
+            <code class="ruby">        6.times { create(:player, club_id: 1, position: &#39;dfc&#39;, player_position_detail: &#39;c&#39;) }</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="5" data-linenumber="22">
-            <span class="hits">5</span>
+          <li class="covered" data-hits="6" data-linenumber="22">
+            <span class="hits">6</span>
             
 
             
 
-            <code class="ruby">        4.times { create(:player, club_id: 1, position: &#39;mid&#39;, player_position_detail: &#39;c&#39;) }</code>
+            <code class="ruby">        5.times { create(:player, club_id: 1, position: &#39;mid&#39;, player_position_detail: &#39;c&#39;) }</code>
           </li>
         </div>
       
@@ -83246,7 +83675,18 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="26">
+          <li class="covered" data-hits="1" data-linenumber="26">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        params = 1</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="27">
             
             
 
@@ -83257,18 +83697,18 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="27">
+          <li class="covered" data-hits="1" data-linenumber="28">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">        Club.new.process_squad_corrections(turn)</code>
+            <code class="ruby">        Club.new.process_squad_corrections(params, turn)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="28">
+          <li class="never" data-hits="" data-linenumber="29">
             
             
 
@@ -83279,24 +83719,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="29">
+          <li class="covered" data-hits="1" data-linenumber="30">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">        expect(Player.where(club_id: 1).count).to eq(14)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="30">
-            
-            
-
-            
-
-            <code class="ruby">      end</code>
+            <code class="ruby">        expect(Player.where(club_id: 1).count).to eq(17)</code>
           </li>
         </div>
       
@@ -83307,7 +83736,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -83318,18 +83747,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="33">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="33">
+            
             
 
             
 
-            <code class="ruby">    context &#39;with less than 11 available players&#39; do</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -83340,7 +83769,7 @@
 
             
 
-            <code class="ruby">      it &#39;adds new players to the club so the club always has 12 to pick from&#39; do</code>
+            <code class="ruby">    context &#39;with less than 11 available players&#39; do</code>
           </li>
         </div>
       
@@ -83351,18 +83780,18 @@
 
             
 
-            <code class="ruby">        create(:club,</code>
+            <code class="ruby">      it &#39;adds new players to the club so the club always has 12 to pick from&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="36">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="36">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">               managed: true,</code>
+            
+
+            <code class="ruby">        create(:club,</code>
           </li>
         </div>
       
@@ -83373,7 +83802,7 @@
 
             
 
-            <code class="ruby">               league: &#39;Premier League&#39;,</code>
+            <code class="ruby">               managed: true,</code>
           </li>
         </div>
       
@@ -83384,7 +83813,7 @@
 
             
 
-            <code class="ruby">               name: &#39;Test Club000&#39;,</code>
+            <code class="ruby">               league: &#39;Premier League&#39;,</code>
           </li>
         </div>
       
@@ -83395,7 +83824,7 @@
 
             
 
-            <code class="ruby">               ground_name: &#39;Test Ground000&#39;,</code>
+            <code class="ruby">               name: &#39;Test Club000&#39;,</code>
           </li>
         </div>
       
@@ -83406,7 +83835,7 @@
 
             
 
-            <code class="ruby">               stand_n_name: &#39;Test Stand N000&#39;,</code>
+            <code class="ruby">               ground_name: &#39;Test Ground000&#39;,</code>
           </li>
         </div>
       
@@ -83417,7 +83846,7 @@
 
             
 
-            <code class="ruby">               stand_e_name: &#39;Test Stand E000&#39;,</code>
+            <code class="ruby">               stand_n_name: &#39;Test Stand N000&#39;,</code>
           </li>
         </div>
       
@@ -83428,7 +83857,7 @@
 
             
 
-            <code class="ruby">               stand_s_name: &#39;Test Stand S000&#39;,</code>
+            <code class="ruby">               stand_e_name: &#39;Test Stand E000&#39;,</code>
           </li>
         </div>
       
@@ -83439,7 +83868,7 @@
 
             
 
-            <code class="ruby">               stand_w_name: &#39;Test Stand W000&#39;,</code>
+            <code class="ruby">               stand_s_name: &#39;Test Stand S000&#39;,</code>
           </li>
         </div>
       
@@ -83450,7 +83879,7 @@
 
             
 
-            <code class="ruby">               color_primary: &#39;Test Color Primary000&#39;,</code>
+            <code class="ruby">               stand_w_name: &#39;Test Stand W000&#39;,</code>
           </li>
         </div>
       
@@ -83461,7 +83890,7 @@
 
             
 
-            <code class="ruby">               color_secondary: &#39;Test Color Secondary000&#39;)</code>
+            <code class="ruby">               color_primary: &#39;Test Color Primary000&#39;,</code>
           </li>
         </div>
       
@@ -83472,12 +83901,23 @@
 
             
 
+            <code class="ruby">               color_secondary: &#39;Test Color Secondary000&#39;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="47">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="47">
+          <li class="covered" data-hits="3" data-linenumber="48">
             <span class="hits">3</span>
             
 
@@ -83488,7 +83928,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="48">
+          <li class="covered" data-hits="1" data-linenumber="49">
             <span class="hits">1</span>
             
 
@@ -83499,7 +83939,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="49">
+          <li class="covered" data-hits="4" data-linenumber="50">
             <span class="hits">4</span>
             
 
@@ -83510,7 +83950,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="50">
+          <li class="covered" data-hits="1" data-linenumber="51">
             <span class="hits">1</span>
             
 
@@ -83521,7 +83961,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="51">
+          <li class="covered" data-hits="1" data-linenumber="52">
             <span class="hits">1</span>
             
 
@@ -83532,24 +83972,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="52">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
           <li class="covered" data-hits="1" data-linenumber="53">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">        Club.new.process_squad_corrections(turn)</code>
+            <code class="ruby">        params = 1</code>
           </li>
         </div>
       
@@ -83571,18 +84000,18 @@
 
             
 
-            <code class="ruby">        expect(Player.where(club_id: 1, position: &#39;gkp&#39;).count).to eq(1)</code>
+            <code class="ruby">        Club.new.process_squad_corrections(params, turn)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="56">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="56">
+            
             
 
             
 
-            <code class="ruby">        expect(Player.where(club_id: 1, position: &#39;dfc&#39;).count).to eq(5)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -83593,7 +84022,7 @@
 
             
 
-            <code class="ruby">        expect(Player.where(club_id: 1, position: &#39;mid&#39;).count).to eq(4)</code>
+            <code class="ruby">        expect(Player.where(club_id: 1, position: &#39;gkp&#39;, player_position_detail: &#39;p&#39;).count).to eq(1)</code>
           </li>
         </div>
       
@@ -83604,7 +84033,7 @@
 
             
 
-            <code class="ruby">        expect(Player.where(club_id: 1, position: &#39;att&#39;).count).to eq(3)</code>
+            <code class="ruby">        expect(Player.where(club_id: 1, position: &#39;dfc&#39;).count).to eq(5)</code>
           </li>
         </div>
       
@@ -83615,7 +84044,7 @@
 
             
 
-            <code class="ruby">        expect(Player.last.value).to_not eq(0)</code>
+            <code class="ruby">        expect(Player.where(club_id: 1, position: &#39;mid&#39;).count).to eq(4)</code>
           </li>
         </div>
       
@@ -83626,7 +84055,7 @@
 
             
 
-            <code class="ruby">        expect(Player.last.wages).to_not eq(0)</code>
+            <code class="ruby">        expect(Player.where(club_id: 1, position: &#39;att&#39;).count).to eq(3)</code>
           </li>
         </div>
       
@@ -83637,12 +84066,45 @@
 
             
 
+            <code class="ruby">        expect(Player.last.value).to_not eq(0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="62">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        expect(Player.last.wages).to_not eq(0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="63">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">        expect(Player.last.total_skill).to_not eq(0)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="62">
+          <li class="covered" data-hits="1" data-linenumber="64">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        expect(Message.first.club_id).to eq(&#39;1&#39;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="65">
             
             
 
@@ -83653,7 +84115,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="63">
+          <li class="never" data-hits="" data-linenumber="66">
             
             
 
@@ -83664,7 +84126,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="64">
+          <li class="never" data-hits="" data-linenumber="67">
             
             
 
@@ -83675,7 +84137,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="65">
+          <li class="never" data-hits="" data-linenumber="68">
             
             
 
