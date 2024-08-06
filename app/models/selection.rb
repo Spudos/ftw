@@ -18,22 +18,30 @@ class Selection < ApplicationRecord
 
   def managed_squad_check(club)
     current_selection = Selection.where(club_id: club.id)
+    run_auto_selection(club) if current_selection.count < 11
 
-    if current_selection.count < 11
-      current_selection.destroy_all
-      run_auto_selection(club)
-    else
-      current_selection.each do |selection|
-        player = Player.find_by(id: selection.player_id)
+    selection_issue = false
 
-        if player.club_id == club.id
-          next
-        else
-          current_selection.destroy_all
-          run_auto_selection(club)
-        end
-      end
+    player_info = get_player_info(current_selection)
+
+    player_info.each do |_player, club_id, available|
+      selection_issue = true if !available.zero?
+      selection_issue = true if club.id != club_id
+
+      break if selection_issue
     end
+
+    run_auto_selection(club) if selection_issue
+  end
+
+  def get_player_info(current_selection)
+    player_info = []
+    current_selection.each do |selected_player|
+      player = Player.find_by(id: selected_player.player_id)
+      player_info << [player.id, player.club_id, player.available] if player
+    end
+
+    player_info
   end
 
   def run_auto_selection(club)
