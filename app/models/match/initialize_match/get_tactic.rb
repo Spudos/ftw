@@ -16,9 +16,11 @@ class Match::InitializeMatch::GetTactic
       tactic << if tactic_record.present?
                   populate_tactic_list(tactic_record)
                 else
-                  standard_tactic
+                  standard_tactic(club)
                 end
     end
+
+    return tactic
   end
 
   private
@@ -32,8 +34,9 @@ class Match::InitializeMatch::GetTactic
       press: tactic_record[0][5] }
   end
 
-  def standard_tactic
-    { tactics: 1,
+  def standard_tactic(club_id)
+    { club_id:,
+      tactics: 1,
       dfc_aggression: 0,
       mid_aggression: 0,
       att_aggression: 0,

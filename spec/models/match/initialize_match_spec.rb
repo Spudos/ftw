@@ -41,11 +41,11 @@ RSpec.describe Match, type: :model do
       selected_week = 1
       competition = 'Premier League'
 
-      fixture_list, selections, tactics = Match.new.send(:initialize_match, selected_week, competition)
+      fixture_list, selection, tactic = Match.new.send(:initialize_match, selected_week, competition)
 
       expect(fixture_list.size).to eq(2)
-      expect(selections.size).to eq(44)
-      expect(tactics.size).to eq(4)
+      expect(selection.size).to eq(44)
+      expect(tactic.size).to eq(4)
     end
   end
 end

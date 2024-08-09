@@ -16,15 +16,15 @@ RSpec.describe Match::InitializeMatch::GetTactic, type: :model do
       ]
 
       tactic = Match::InitializeMatch::GetTactic.new(fixture_list).call
-
+binding.pry
       expect(tactic[0]).to contain_exactly(club_id: '1',
-                                           tactics: 1,
+                                           tactic: 1,
                                            dfc_aggression: 6,
                                            mid_aggression: 6,
                                            att_aggression: 6,
                                            press: 6)
       expect(tactic[1]).to contain_exactly(club_id: '2',
-                                           tactics: 1,
+                                           tactic: 1,
                                            dfc_aggression: 6,
                                            mid_aggression: 6,
                                            att_aggression: 6,
@@ -45,13 +45,13 @@ RSpec.describe Match::InitializeMatch::GetTactic, type: :model do
       tactic = Match::InitializeMatch::GetTactic.new(fixture_list).call
 
       expect(tactic[0]).to contain_exactly(club_id: '1',
-                                           tactics: 1,
+                                           tactic: 1,
                                            dfc_aggression: 6,
                                            mid_aggression: 6,
                                            att_aggression: 6,
                                            press: 6)
       expect(tactic[1]).to contain_exactly(club_id: '2',
-                                           tactics: 1,
+                                           tactic: 1,
                                            dfc_aggression: 0,
                                            mid_aggression: 0,
                                            att_aggression: 0,
