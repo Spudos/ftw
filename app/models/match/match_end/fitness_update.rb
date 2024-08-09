@@ -1,19 +1,16 @@
-class Match::PlayerFitness
-  attr_reader :squads_performance, :match_info
+class Match::InitializePlayer::SelectionFitness
+  attr_reader :selection_star
 
-  def initialize(squads_performance, match_info)
-    @squads_performance = squads_performance
-    @match_info = match_info
+  def initialize(selection_star, tactic)
+    @selection_star = selection_star
+    @tactic = tactic
   end
 
   def call
-    if @squads_performance.nil? || @match_info.nil?
-      raise StandardError, "There was an error in the #{self.class.name} class"
-    end
+    raise StandardError, "There was an error in the #{self.class.name} class" if @selection_star.nil?
 
-    squads_performance.each do |player|
-      player_record = Player.find_by(id: player[:player_id])
-      player_fitness = player_record&.fitness
+    selection_star.each do |player|
+binding.pry
       player_fitness -= rand(3..8)
 
       if player[:player_position] == 'gkp' || player[:player_position] == 'dfc'

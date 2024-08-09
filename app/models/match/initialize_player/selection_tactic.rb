@@ -1,4 +1,4 @@
-class Match::SelectionTactic
+class Match::InitializePlayer::SelectionTactic
   # tactic name       dfc  mid  att  l,r  c
   # 1      passing    -5  +15  -5    0    0
   # 2      defensive  +15 -10  -10   0    0
@@ -17,41 +17,56 @@ class Match::SelectionTactic
   def call
     raise StandardError, "There was an error in the #{self.class.name} class" if selection_performance.nil?
 
+    selection_tactic = []
+
     selection_performance.each do |player|
-      binding.pry
-      performance_by_position_detail(player)
-      performance_by_position(player)
+      player_tactic = get_tactic(player[:club_id])
+
+      player_positiion_detail = performance_by_position_detail(player, player_tactic)
+      selection_tactic << performance_by_position(player_positiion_detail, player_tactic)
     end
 
-    selection_tactic = players
+    return selection_tactic
   end
 
-  def performance_by_position_detail(player)
-    if player[:player_position_detail] == 'c'
-      player[:match_performance] -= 10 if player[:tactic] == 4
-      player[:match_performance] += 10 if player[:tactic] == 5
-    elsif player[:player_position_detail] == 'r' || player[:player_position_detail] == 'l'
-      player[:match_performance] += 10 if player[:tactic] == 4
-      player[:match_performance] -= 10 if player[:tactic] == 5
+  private
+
+  def get_tactic(club)
+    tactic.each do |tactic|
+      return tactic[:tactic] if tactic[:club_id] == club
     end
   end
 
-  def performance_by_position(player)
-    if player[:player_position] == 'dfc'
-      player[:match_performance] -= 5 if player[:tactic] == 1
-      player[:match_performance] += 15 if player[:tactic] == 2
-      player[:match_performance] -= 10 if player[:tactic] == 3
-      player[:match_performance] += 5 if player[:tactic] == 6
-    elsif player[:player_position] == 'mid'
-      player[:match_performance] += 15 if player[:tactic] == 1
-      player[:match_performance] -= 10 if player[:tactic] == 2
-      player[:match_performance] += 5 if player[:tactic] == 3
-      player[:match_performance] -= 5 if player[:tactic] == 6
-    elsif player[:player_position] == 'att'
-      player[:match_performance] -= 5 if player[:tactic] == 1
-      player[:match_performance] -= 10 if player[:tactic] == 2
-      player[:match_performance] += 15 if player[:tactic] == 3
-      player[:match_performance] += 5 if player[:tactic] == 6
+  def performance_by_position_detail(player, player_tactic)
+    if player[:position_detail] == 'c'
+      player[:performance] -= 10 if player_tactic == 4
+      player[:performance] += 10 if player_tactic == 5
+    elsif player[:position_detail] == 'r' || player[:position_detail] == 'l'
+      player[:performance] += 10 if player_tactic == 4
+      player[:performance] -= 10 if player_tactic == 5
     end
+
+    player
+  end
+
+  def performance_by_position(player, player_tactic)
+    if player[:position] == 'dfc'
+      player[:performance] -= 5 if player_tactic == 1
+      player[:performance] += 15 if player_tactic == 2
+      player[:performance] -= 10 if player_tactic == 3
+      player[:performance] += 5 if player_tactic == 6
+    elsif player[:position] == 'mid'
+      player[:performance] += 15 if player_tactic == 1
+      player[:performance] -= 10 if player_tactic == 2
+      player[:performance] += 5 if player_tactic == 3
+      player[:performance] -= 5 if player_tactic == 6
+    elsif player[:position] == 'att'
+      player[:performance] -= 5 if player_tactic == 1
+      player[:performance] -= 10 if player_tactic == 2
+      player[:performance] += 15 if player_tactic == 3
+      player[:performance] += 5 if player_tactic == 6
+    end
+
+    player
   end
 end

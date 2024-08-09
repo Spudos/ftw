@@ -1,33 +1,24 @@
 require 'rails_helper'
 require 'pry'
 
-RSpec.describe Match::StadiumEffect, type: :model do
+RSpec.describe Match::InitializePlayer::SelectionStadium, type: :model do
   describe 'stadium effect' do
-    it 'should adjust the home totals based on a 9000 stadium size' do
-      attendance_size = 9000
-      totals_blend = [
-        {
-          team: 1,
-          defense: 200,
-          midfield: 150,
-          attack: 125
-        },
-        {
-          team: 2,
-          defense: 100,
-          midfield: 100,
-          attack: 100
-        }
-      ]
+    it 'should adjust the home totals based on a 9000 attendance' do
+      selection_star = [{ club_id: '1', player_id: 1, name: 'woolley',
+                          total_skill: 85, position: 'gkp', position_detail: 'p',
+                          blend: 5, star: 20, fitness: 90, performance: 50 }]
 
-      stadium_effect = Match::StadiumEffect.new(totals_blend, attendance_size).call
+      fixture_list = [{id: 1, club_home: '1', club_away: '2',
+                       week_number: 1, competition: 'Premier League'}]
 
-      expect(stadium_effect[0][:defense]).to eq(200)
-      expect(stadium_effect[0][:midfield]).to eq(150)
-      expect(stadium_effect[0][:attack]).to eq(125)
-      expect(stadium_effect[1][:defense]).to eq(100)
-      expect(stadium_effect[1][:midfield]).to eq(100)
-      expect(stadium_effect[1][:attack]).to eq(100)
+      selection_stadium = Match::InitializePlayer::SelectionStadium.new(selection_star, fixture_list).call
+
+      expect(selection_stadium[0][:defense]).to eq(200)
+      expect(selection_stadium[0][:midfield]).to eq(150)
+      expect(selection_stadium[0][:attack]).to eq(125)
+      expect(selection_stadium[1][:defense]).to eq(100)
+      expect(selection_stadium[1][:midfield]).to eq(100)
+      expect(selection_stadium[1][:attack]).to eq(100)
     end
 
     it 'should adjust the home totals based on a 15000 stadium size' do
