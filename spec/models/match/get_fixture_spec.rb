@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'pry'
 
-RSpec.describe Match::InitializeMatch::GetFixtures, type: :model do
+RSpec.describe Match::InitializeMatch::GetFixture, type: :model do
   describe 'with valid params' do
     it 'returns a list of fixtures based on the provided params' do
       create(:fixture)
@@ -9,7 +9,7 @@ RSpec.describe Match::InitializeMatch::GetFixtures, type: :model do
       selected_week = 1
       competition = 'Premier League'
 
-      fixture_list = Match::InitializeMatch::GetFixtures.new(selected_week, competition).call
+      fixture_list = Match::InitializeMatch::GetFixture.new(selected_week, competition).call
 
       expect(fixture_list).to contain_exactly(id: 1,
                                               club_home: '1',

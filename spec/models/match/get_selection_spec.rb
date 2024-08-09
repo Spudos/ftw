@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'pry'
 
-RSpec.describe Match::InitializeMatch::GetSelections, type: :model do
+RSpec.describe Match::InitializeMatch::GetSelection, type: :model do
   describe 'call' do
     it 'Selection exists so is added to variable' do
       create(:club, id: 1)
@@ -24,13 +24,13 @@ RSpec.describe Match::InitializeMatch::GetSelections, type: :model do
         competition: 'Premier League'
       ]
 
-      selections = Match::InitializeMatch::GetSelections.new(fixture_list).call
+      selection = Match::InitializeMatch::GetSelection.new(fixture_list).call
 
       expect(Selection.all.size).to eq(22)
-      expect(selections[0][:club_id]).to eq('1')
-      expect(selections[0][:player_id]).to eq(1)
-      expect(selections[11][:club_id]).to eq('2')
-      expect(selections[11][:player_id]).to eq(12)
+      expect(selection[0][:club_id]).to eq('1')
+      expect(selection[0][:player_id]).to eq(1)
+      expect(selection[11][:club_id]).to eq('2')
+      expect(selection[11][:player_id]).to eq(12)
     end
   end
 end

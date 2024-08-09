@@ -1,4 +1,4 @@
-class Match::InitializeMatch::GetFixtures
+class Match::InitializeMatch::GetFixture
   attr_reader :selected_week, :competition
 
   def initialize(selected_week, competition)

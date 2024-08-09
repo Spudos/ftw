@@ -4,11 +4,8 @@ class Match < ApplicationRecord
 
   def run_matches(selected_week, competition)
     fixture_list, selections, tactics = initialize_match(selected_week, competition)
-
-    binding.pry
-
-    initilize_player(fixture_list, selections, tactics)
-    minute_by_minute(fixture_list, selections, tactics)
+    players = initialize_player(selections, tactics)
+    minute_by_minute(fixture_list, players, tactics)
     match_end(fixture_list, selections, tactics)
 
     turn.update(run_matches: true)
@@ -17,22 +14,20 @@ class Match < ApplicationRecord
   private
 
   def initialize_match(selected_week, competition)
-    fixture_list = Match::InitializeMatch::GetFixtures.new(selected_week, competition).call
-    selections = Match::InitializeMatch::GetSelections.new(fixture_list).call
-    tactics = Match::InitializeMatch::GetTactics.new(fixture_list).call
+    fixture_list = Match::InitializeMatch::GetFixture.new(selected_week, competition).call
+    selection = Match::InitializeMatch::GetSelection.new(fixture_list).call
+    tactic = Match::InitializeMatch::GetTactic.new(fixture_list).call
 
-    return fixture_list, selections, tactics
+    return fixture_list, selection, tactic
   end
 
-  def initilize_player(fixture_list, selections, tactics)
-    selection_performance = Match::InitalizePlayer::PlayerPerformance.new(match_squad).call
-    selection_tactics = Match::InitalizePlayer::TacticAdjustment.new(squads_performance).call
-    selection_star = Match::InitalizePlayer::StarEffect.new(squad_tactics).call
-    selection_fitness = Match::InitalizePlayer::PlayerFitness.new(final_squad, match_info).call
-    selection_stadium = Match::InitalizePlayer::StadiumEffect.new(totals_blend, attendance).call
-    selection_aggression = Match::InitalizePlayer::AggressionEffect.new(totals_stadium).call
-
-    selection_aggression
+  def initialize_player(selection, tactic)
+    selection_performance = Match::InitializePlayer::SelectionPerformance.new(selection).call
+    selection_tactic = Match::InitializePlayer::SelectionTactic.new(selection_performance, tactic).call
+    selection_star = Match::InitializePlayer::StarEffect.new(selection_tactic).call
+    selection_fitness = Match::InitializePlayer::PlayerFitness.new(selection_star).call
+    selection_stadium = Match::InitializePlayer::StadiumEffect.new(selection_fitness).call
+    selection_aggression = Match::InitializePlayer::AggressionEffect.new(selection_stadium).call
   end
 
   def minute_by_minute(fixture_list, selections, tactics)

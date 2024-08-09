@@ -22,6 +22,7 @@ FactoryBot.define do
     potential_tackling { 10 }
     wages { 100 }
     total_skill { 85 }
+    blend { 5 }
     available { 0 }
   end
 end
