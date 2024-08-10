@@ -17,18 +17,18 @@ RSpec.describe Match::InitializeMatch::GetTactic, type: :model do
 
       tactic = Match::InitializeMatch::GetTactic.new(fixture_list).call
 
-      expect(tactic[0]).to contain_exactly(club_id: '1',
-                                           tactic: 1,
-                                           dfc_aggression: 6,
-                                           mid_aggression: 6,
-                                           att_aggression: 6,
-                                           press: 6)
-      expect(tactic[1]).to contain_exactly(club_id: '2',
-                                           tactic: 1,
-                                           dfc_aggression: 6,
-                                           mid_aggression: 6,
-                                           att_aggression: 6,
-                                           press: 6)
+      expect(tactic[0][:club_id]).to eq('1')
+      expect(tactic[0][:tactic]).to eq(1)
+      expect(tactic[0][:dfc_aggression]).to eq(6)
+      expect(tactic[0][:mid_aggression]).to eq(6)
+      expect(tactic[0][:att_aggression]).to eq(6)
+      expect(tactic[0][:press]).to eq(6)
+      expect(tactic[1][:club_id]).to eq('2')
+      expect(tactic[1][:tactic]).to eq(1)
+      expect(tactic[1][:dfc_aggression]).to eq(6)
+      expect(tactic[1][:mid_aggression]).to eq(6)
+      expect(tactic[1][:att_aggression]).to eq(6)
+      expect(tactic[1][:press]).to eq(6)
     end
 
     it 'when valid tactics do not exist it returns standard tactics' do
@@ -44,18 +44,18 @@ RSpec.describe Match::InitializeMatch::GetTactic, type: :model do
 
       tactic = Match::InitializeMatch::GetTactic.new(fixture_list).call
 
-      expect(tactic[0]).to contain_exactly(club_id: '1',
-                                           tactic: 1,
-                                           dfc_aggression: 6,
-                                           mid_aggression: 6,
-                                           att_aggression: 6,
-                                           press: 6)
-      expect(tactic[1]).to contain_exactly(club_id: '2',
-                                           tactic: 1,
-                                           dfc_aggression: 0,
-                                           mid_aggression: 0,
-                                           att_aggression: 0,
-                                           press: 0)
+      expect(tactic[0][:club_id]).to eq('1')
+      expect(tactic[0][:tactic]).to eq(1)
+      expect(tactic[0][:dfc_aggression]).to eq(6)
+      expect(tactic[0][:mid_aggression]).to eq(6)
+      expect(tactic[0][:att_aggression]).to eq(6)
+      expect(tactic[0][:press]).to eq(6)
+      expect(tactic[1][:club_id]).to eq('2')
+      expect(tactic[1][:tactic]).to eq(1)
+      expect(tactic[1][:dfc_aggression]).to eq(0)
+      expect(tactic[1][:mid_aggression]).to eq(0)
+      expect(tactic[1][:att_aggression]).to eq(0)
+      expect(tactic[1][:press]).to eq(0)
     end
   end
 end

@@ -36,7 +36,7 @@ class Match::InitializeMatch::GetTactic
 
   def standard_tactic(club_id)
     { club_id:,
-      tactics: 1,
+      tactic: 1,
       dfc_aggression: 0,
       mid_aggression: 0,
       att_aggression: 0,

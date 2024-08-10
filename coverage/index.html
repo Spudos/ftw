@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script src='./assets/0.12.3/application.js' type='text/javascript'></script>
     <link href='./assets/0.12.3/application.css' media='screen, projection, print' rel='stylesheet' type='text/css' />
-    <link rel="shortcut icon" type="image/png" href="./assets/0.12.3/favicon_red.png" />
+    <link rel="shortcut icon" type="image/png" href="./assets/0.12.3/favicon_yellow.png" />
     <link rel="icon" type="image/png" href="./assets/0.12.3/favicon.png" />
   </head>
 
@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-08-10T20:55:57+01:00">2024-08-10T20:55:57+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-08-10T21:27:55+01:00">2024-08-10T21:27:55+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -22,15 +22,15 @@
   <h2>
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
-      <span class="red">
-  79.42%
+      <span class="yellow">
+  80.4%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.39
+         1.38
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>588</b> relevant lines,
-    <span class="green"><b>467</b> lines covered</span> and
-    <span class="red"><b>121</b> lines missed. </span>
-    (<span class="red">
-  79.42%
+    <b>607</b> relevant lines,
+    <span class="green"><b>488</b> lines covered</span> and
+    <span class="red"><b>119</b> lines missed. </span>
+    (<span class="yellow">
+  80.4%
 </span>
 )
   </div>
@@ -545,12 +545,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#655d5bd20e9ee0e8ddcc900af4f59737864c703a" class="src_link" title="spec/models/match/initialize_match/get_tactic_spec.rb">spec/models/match/initialize_match/get_tactic_spec.rb</a></td>
-            <td class="yellow strong cell--number t-file__coverage">88.89 %</td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">61</td>
-            <td class="cell--number">18</td>
-            <td class="cell--number">16</td>
-            <td class="cell--number">2</td>
-            <td class="cell--number">0.89</td>
+            <td class="cell--number">37</td>
+            <td class="cell--number">37</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.00</td>
             
           </tr>
         
@@ -2878,7 +2878,7 @@
 
             
 
-            <code class="ruby">      minute_by_minute_blend = Match::MinuteByMinute::BlendAdjustment.new(totals).call</code>
+            <code class="ruby">      minute_by_minute_blend = Match::MinuteByMinute::BlendAdjustment.new(minute_by_minute_press).call</code>
           </li>
         </div>
       
@@ -4280,7 +4280,7 @@
 
             
 
-            <code class="ruby">      tactics: 1,</code>
+            <code class="ruby">      tactic: 1,</code>
           </li>
         </div>
       
@@ -16417,8 +16417,8 @@
   <div class="header">
     <h3>spec/models/match/initialize_match/get_tactic_spec.rb</h3>
     <h4>
-      <span class="yellow">
-  88.89%
+      <span class="green">
+  100.0%
 </span>
 
       lines covered
@@ -16427,9 +16427,9 @@
     
 
     <div class="t-line-summary">
-      <b>18</b> relevant lines.
-      <span class="green"><b>16</b> lines covered</span> and
-      <span class="red"><b>2</b> lines missed.</span>
+      <b>37</b> relevant lines.
+      <span class="green"><b>37</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
 
     
@@ -16638,13 +16638,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="19">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="19">
+            
             
 
             
 
-            <code class="ruby">binding.pry</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -16655,128 +16655,128 @@
 
             
 
-            <code class="ruby">      expect(tactic[0]).to contain_exactly(club_id: &#39;1&#39;,</code>
+            <code class="ruby">      expect(tactic[0][:club_id]).to eq(&#39;1&#39;)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="21">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="21">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           tactic: 1,</code>
+            
+
+            <code class="ruby">      expect(tactic[0][:tactic]).to eq(1)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="22">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="22">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           dfc_aggression: 6,</code>
+            
+
+            <code class="ruby">      expect(tactic[0][:dfc_aggression]).to eq(6)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="23">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="23">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           mid_aggression: 6,</code>
+            
+
+            <code class="ruby">      expect(tactic[0][:mid_aggression]).to eq(6)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="24">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="24">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           att_aggression: 6,</code>
+            
+
+            <code class="ruby">      expect(tactic[0][:att_aggression]).to eq(6)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="25">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="25">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           press: 6)</code>
+            
+
+            <code class="ruby">      expect(tactic[0][:press]).to eq(6)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="26">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="26">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">      expect(tactic[1]).to contain_exactly(club_id: &#39;2&#39;,</code>
+            
+
+            <code class="ruby">      expect(tactic[1][:club_id]).to eq(&#39;2&#39;)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="27">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="27">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           tactic: 1,</code>
+            
+
+            <code class="ruby">      expect(tactic[1][:tactic]).to eq(1)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="28">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="28">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           dfc_aggression: 6,</code>
+            
+
+            <code class="ruby">      expect(tactic[1][:dfc_aggression]).to eq(6)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="29">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="29">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           mid_aggression: 6,</code>
+            
+
+            <code class="ruby">      expect(tactic[1][:mid_aggression]).to eq(6)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="30">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="30">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           att_aggression: 6,</code>
+            
+
+            <code class="ruby">      expect(tactic[1][:att_aggression]).to eq(6)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="31">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="31">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           press: 6)</code>
+            
+
+            <code class="ruby">      expect(tactic[1][:press]).to eq(6)</code>
           </li>
         </div>
       
@@ -16952,128 +16952,128 @@
 
             
 
-            <code class="ruby">      expect(tactic[0]).to contain_exactly(club_id: &#39;1&#39;,</code>
+            <code class="ruby">      expect(tactic[0][:club_id]).to eq(&#39;1&#39;)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="48">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="48">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           tactic: 1,</code>
+            
+
+            <code class="ruby">      expect(tactic[0][:tactic]).to eq(1)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="49">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="49">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           dfc_aggression: 6,</code>
+            
+
+            <code class="ruby">      expect(tactic[0][:dfc_aggression]).to eq(6)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="50">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="50">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           mid_aggression: 6,</code>
+            
+
+            <code class="ruby">      expect(tactic[0][:mid_aggression]).to eq(6)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="51">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="51">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           att_aggression: 6,</code>
+            
+
+            <code class="ruby">      expect(tactic[0][:att_aggression]).to eq(6)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="52">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="52">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           press: 6)</code>
+            
+
+            <code class="ruby">      expect(tactic[0][:press]).to eq(6)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="53">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="53">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">      expect(tactic[1]).to contain_exactly(club_id: &#39;2&#39;,</code>
+            
+
+            <code class="ruby">      expect(tactic[1][:club_id]).to eq(&#39;2&#39;)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="54">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="54">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           tactic: 1,</code>
+            
+
+            <code class="ruby">      expect(tactic[1][:tactic]).to eq(1)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="55">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="55">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           dfc_aggression: 0,</code>
+            
+
+            <code class="ruby">      expect(tactic[1][:dfc_aggression]).to eq(0)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="56">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="56">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           mid_aggression: 0,</code>
+            
+
+            <code class="ruby">      expect(tactic[1][:mid_aggression]).to eq(0)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="57">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="57">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           att_aggression: 0,</code>
+            
+
+            <code class="ruby">      expect(tactic[1][:att_aggression]).to eq(0)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="58">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="58">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">                                           press: 0)</code>
+            
+
+            <code class="ruby">      expect(tactic[1][:press]).to eq(0)</code>
           </li>
         </div>
       
