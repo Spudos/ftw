@@ -25,8 +25,8 @@ class Match < ApplicationRecord
     selection_performance = Match::InitializePlayer::SelectionPerformance.new(selection).call
     selection_tactic = Match::InitializePlayer::SelectionTactic.new(selection_performance, tactic).call
     selection_star = Match::InitializePlayer::SelectionStar.new(selection_tactic).call
-    selection_stadium = Match::InitializePlayer::SelectionStadium.new(selection_star).call
-    selection_complete = Match::InitializePlayer::SelectionAggression.new(selection_stadium).call
+    selection_stadium = Match::InitializePlayer::SelectionStadium.new(selection_star, fixture_list).call
+    selection_complete = Match::InitializePlayer::SelectionAggression.new(selection_stadium, tactic).call
   end
 
   def minute_by_minute(fixture_list, selection, tactic)
