@@ -9,27 +9,12 @@ class Match::InitializePlayer::SelectionStadium
   def call
     raise StandardError, "There was an error in the #{self.class.name} class" if @selection_star.nil?
 
-    fixture_list_with_attendance = []
-    selection_stadium = []
-
     home_teams = fixture_list.map { |fixture| fixture[:club_home] }
     home_team_attributes = stands_and_fans(home_teams)
 
-    fixture_list.each do |fixture|
-      attributes = home_team_attributes.find { |hash| hash[:club_id] == fixture[:club_home].to_i }
+    fixture_list_with_attendance = add_attendance_to_fixtures(home_team_attributes)
 
-      fixture[:attendance] = calulate_attendance(attributes)
-
-      fixture_list_with_attendance << fixture
-    end
-
-    selection_star.each do |player|
-      player_adjustment = stadium_effect(fixture_list_with_attendance, player)
-
-      player[:performance] = player[:performance] + player_adjustment
-
-      selection_stadium << player
-    end
+    selection_stadium = add_stadium_effect_to_players(selection_star, fixture_list_with_attendance)
 
     return selection_stadium, fixture_list_with_attendance
   end
@@ -60,6 +45,17 @@ class Match::InitializePlayer::SelectionStadium
       fanbase: club.fanbase }
   end
 
+  def add_attendance_to_fixtures(home_team_attributes)
+    fixture_list_with_attendance = []
+    fixture_list.each do |fixture|
+      attributes = home_team_attributes.find { |hash| hash[:club_id] == fixture[:club_home].to_i }
+
+      fixture[:attendance] = calulate_attendance(attributes)
+
+      fixture_list_with_attendance << fixture
+    end
+  end
+
   def calulate_attendance(attributes)
     stadium_size = attributes[:stand_n_capacity] +
                    attributes[:stand_s_capacity] +
@@ -70,6 +66,17 @@ class Match::InitializePlayer::SelectionStadium
       (stadium_size * rand(0.9756..0.9923)).to_i
     else
       (attributes[:fanbase] * attributes[:fan_happiness]) / 100
+    end
+  end
+
+  def add_stadium_effect_to_players(selection_star, fixture_list_with_attendance)
+    selection_stadium = []
+    selection_star.each do |player|
+      player_adjustment = stadium_effect(fixture_list_with_attendance, player)
+
+      player[:performance] = player[:performance] + player_adjustment
+
+      selection_stadium << player
     end
   end
 

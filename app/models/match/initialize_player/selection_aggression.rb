@@ -1,26 +1,30 @@
-class Match::AggressionEffect
-  attr_reader :totals_stadium
+class Match::InitializePlayer::SelectionAggression
+  attr_reader :selection_stadium, :tactic
 
-  def initialize(totals_stadium)
-    @totals_stadium = totals_stadium
+  def initialize(selection_stadium, tactic)
+    @selection_stadium = selection_stadium
+    @tactic = tactic
   end
 
   def call
-    if totals_stadium.empty?
-      raise StandardError, "There was an error in the #{self.class.name} class"
+    raise StandardError, "There was an error in the #{self.class.name} class" if selection_stadium.empty?
+
+    selection_complete = []
+
+    selection_stadium.each do |player|
+      aggression = tactic.find { |hash| hash[:club_id] == player[:club_id] }
+      case player[:position]
+      when 'dfc'
+        player[:performance] = player[:performance] + aggression[:dfc_aggression]
+      when 'mid'
+        player[:performance] = player[:performance] + aggression[:mid_aggression]
+      when 'att'
+        player[:performance] = player[:performance] + aggression[:att_aggression]
+      end
+
+      selection_complete << player
     end
 
-    totals_aggression = []
-
-    totals_stadium.each do |team|
-      hash = {
-        team: team[:team],
-        defense: team[:defense] + Tactic.find_by(club_id: team[:team])&.dfc_aggression * 5,
-        midfield: team[:midfield] + Tactic.find_by(club_id: team[:team])&.mid_aggression * 5,
-        attack: team[:attack] + Tactic.find_by(club_id: team[:team])&.att_aggression * 5
-      }
-      totals_aggression << hash
-    end
-    totals_aggression
+    return selection_complete
   end
 end

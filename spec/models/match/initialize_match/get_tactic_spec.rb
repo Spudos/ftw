@@ -16,7 +16,7 @@ RSpec.describe Match::InitializeMatch::GetTactic, type: :model do
       ]
 
       tactic = Match::InitializeMatch::GetTactic.new(fixture_list).call
-binding.pry
+
       expect(tactic[0]).to contain_exactly(club_id: '1',
                                            tactic: 1,
                                            dfc_aggression: 6,
