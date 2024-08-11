@@ -1,21 +1,21 @@
 class Match::MinuteByMinute::MinuteByMinuteChance
-  attr_reader :final_team, :i
+  attr_reader :minute_by_minute_press, :i
 
-  def initialize(final_team, i)
-    @final_team = final_team
+  def initialize(minute_by_minute_press, i)
+    @minute_by_minute_press = minute_by_minute_press
     @i = i
   end
 
   def call
-    raise StandardError, "There was an error in the #{self.class.name} class" if @final_team.nil? || @i.nil?
+    raise StandardError, "There was an error in the #{self.class.name} class" if @minute_by_minute_press.nil? || @i.nil?
 
-    home_def_rating = final_team.first[:defense]
-    home_mid_rating = final_team.first[:midfield]
-    home_att_rating = final_team.first[:attack]
+    home_def_rating = minute_by_minute_press.first[:defense]
+    home_mid_rating = minute_by_minute_press.first[:midfield]
+    home_att_rating = minute_by_minute_press.first[:attack]
 
-    away_def_rating = final_team.last[:defense]
-    away_mid_rating = final_team.last[:midfield]
-    away_att_rating = final_team.last[:attack]
+    away_def_rating = minute_by_minute_press.last[:defense]
+    away_mid_rating = minute_by_minute_press.last[:midfield]
+    away_att_rating = minute_by_minute_press.last[:attack]
 
     random_chance_roll = rand(1..100)
     team_chance_roll = rand(0..100)

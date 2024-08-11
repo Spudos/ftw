@@ -1,11 +1,11 @@
 require 'rails_helper'
 require 'pry'
 
-RSpec.describe Match::ChanceCreated, type: :model do
+RSpec.describe Match::MinuteByMinute::MinuteByMinuteChance, type: :model do
   describe 'decides if a home chance was created' do
-    let(:team1) { { team: 001, defense: 200, midfield: 250, attack: 100 } }
-    let(:team2) { { team: 002, defense: 250, midfield: 200, attack: 150 } }
-    let(:final_team) { [team1, team2] }
+    let(:team1) { { team: '1', defense: 200, midfield: 250, attack: 100 } }
+    let(:team2) { { team: '2', defense: 250, midfield: 200, attack: 150 } }
+    let(:minute_by_minute_press) { [team1, team2] }
 
     i = 1
 
@@ -13,7 +13,7 @@ RSpec.describe Match::ChanceCreated, type: :model do
       allow_any_instance_of(Kernel).to receive(:rand).with(0..100).and_return(10)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(50)
 
-      chance = Match::ChanceCreated.new(final_team, i).call
+      chance = Match::MinuteByMinute::MinuteByMinuteChance.new(minute_by_minute_press, i).call
 
       expect(chance[:minute]).to eq(1)
       expect(chance[:chance_outcome]).to eq('home')
@@ -23,7 +23,7 @@ RSpec.describe Match::ChanceCreated, type: :model do
       allow_any_instance_of(Kernel).to receive(:rand).with(0..100).and_return(50)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(3)
 
-      chance = Match::ChanceCreated.new(final_team, i).call
+      chance = Match::MinuteByMinute::MinuteByMinuteChance.new(minute_by_minute_press, i).call
 
       expect(chance[:minute]).to eq(1)
       expect(chance[:chance_outcome]).to eq('home')
@@ -33,7 +33,7 @@ RSpec.describe Match::ChanceCreated, type: :model do
       allow_any_instance_of(Kernel).to receive(:rand).with(0..100).and_return(50)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(50)
 
-      chance = Match::ChanceCreated.new(final_team, i).call
+      chance = Match::MinuteByMinute::MinuteByMinuteChance.new(minute_by_minute_press, i).call
 
       expect(chance[:minute]).to eq(1)
       expect(chance[:chance_outcome]).to eq('none')
@@ -41,9 +41,9 @@ RSpec.describe Match::ChanceCreated, type: :model do
   end
 
   describe 'decides if a away chance was created' do
-    let(:team1) { { team: 001, defense: 200, midfield: 150, attack: 100 } }
-    let(:team2) { { team: 002, defense: 250, midfield: 200, attack: 150 } }
-    let(:final_team) { [team1, team2] }
+    let(:team1) { { team: '1', defense: 200, midfield: 150, attack: 100 } }
+    let(:team2) { { team: '2', defense: 250, midfield: 200, attack: 150 } }
+    let(:minute_by_minute_press) { [team1, team2] }
 
     i = 1
 
@@ -51,7 +51,7 @@ RSpec.describe Match::ChanceCreated, type: :model do
       allow_any_instance_of(Kernel).to receive(:rand).with(0..100).and_return(10)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(50)
 
-      chance = Match::ChanceCreated.new(final_team, i).call
+      chance = Match::MinuteByMinute::MinuteByMinuteChance.new(minute_by_minute_press, i).call
 
       expect(chance[:minute]).to eq(1)
       expect(chance[:chance_outcome]).to eq('away')
@@ -61,7 +61,7 @@ RSpec.describe Match::ChanceCreated, type: :model do
       allow_any_instance_of(Kernel).to receive(:rand).with(0..100).and_return(50)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(7)
 
-      chance = Match::ChanceCreated.new(final_team, i).call
+      chance = Match::MinuteByMinute::MinuteByMinuteChance.new(minute_by_minute_press, i).call
 
       expect(chance[:minute]).to eq(1)
       expect(chance[:chance_outcome]).to eq('away')
