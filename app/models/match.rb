@@ -38,8 +38,8 @@ class Match < ApplicationRecord
   def minute_by_minute(fixture_attendance, selection_complete, tactic)
     minute_by_minute = []
     rand(90..98).times do |i|
-      minute_by_minute_press = Match::MinuteByMinute::PressingEffect.new(selection_complete, tactic, i).call
-      minute_by_minute_blend = Match::MinuteByMinute::BlendAdjustment.new(minute_by_minute_press).call
+      minute_by_minute_blend = Match::MinuteByMinute::BlendAdjustment.new(selection_complete).call
+      minute_by_minute_press = Match::MinuteByMinute::PressingEffect.new(minute_by_minute_blend, tactic, i).call
 
       chance_result = Match::MinuteByMinute::ChanceCreated.new(match_team, i).call
       chance_on_target_result = Match::MinuteByMinute::ChanceOnTarget.new(chance_result, match_team).call

@@ -1,4 +1,4 @@
-class Match::ChanceCreated
+class Match::MinuteByMinute::MinuteByMinuteChance
   attr_reader :final_team, :i
 
   def initialize(final_team, i)
@@ -7,9 +7,7 @@ class Match::ChanceCreated
   end
 
   def call
-    if @final_team.nil? || @i.nil?
-      raise StandardError, "There was an error in the #{self.class.name} class"
-    end
+    raise StandardError, "There was an error in the #{self.class.name} class" if @final_team.nil? || @i.nil?
 
     home_def_rating = final_team.first[:defense]
     home_mid_rating = final_team.first[:midfield]

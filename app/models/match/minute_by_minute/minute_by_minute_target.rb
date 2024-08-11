@@ -1,4 +1,4 @@
-class Match::ChanceOnTarget
+class Match::MinuteByMinute::MinuteByMinuteTarget
   attr_reader :chance_result, :final_team
 
   def initialize(chance_result, final_team)

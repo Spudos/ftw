@@ -1,4 +1,4 @@
-class Match::GoalScored
+class Match::MinuteByMinute::MinuteByMinuteGoal
   attr_reader :chance_on_target_result, :final_team
 
   def initialize(chance_on_target_result, final_team)
