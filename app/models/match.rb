@@ -7,9 +7,9 @@ class Match < ApplicationRecord
 
     selection_complete, fixture_attendance = initialize_player(selection, tactic, fixture_list)
 
-    minute_by_minute(fixture_attendance, selection_complete, tactic)
+    summary = minute_by_minute(fixture_attendance, selection_complete, tactic)
 
-    match_end(fixture_attendance, selection, tactic)
+    match_end(fixture_attendance, selection, tactic, summary)
 
     turn.update(run_matches: true)
   end
@@ -17,52 +17,80 @@ class Match < ApplicationRecord
   private
 
   def initialize_match(selected_week, competition)
-    fixture_list = Match::InitializeMatch::GetFixture.new(selected_week, competition).call
-    selection = Match::InitializeMatch::GetSelection.new(fixture_list).call
-    tactic = Match::InitializeMatch::GetTactic.new(fixture_list).call
+    fixture_list = \
+      Match::InitializeMatch::GetFixture.new(selected_week, competition).call
+
+    selection = \
+      Match::InitializeMatch::GetSelection.new(fixture_list).call
+
+    tactic = \
+      Match::InitializeMatch::GetTactic.new(fixture_list).call
 
     return fixture_list, selection, tactic
   end
 
   def initialize_player(selection, tactic, fixture_list)
-    selection_performance = Match::InitializePlayer::SelectionPerformance.new(selection).call
-    selection_tactic = Match::InitializePlayer::SelectionTactic.new(selection_performance, tactic).call
-    selection_star = Match::InitializePlayer::SelectionStar.new(selection_tactic).call
+    selection_performance = \
+      Match::InitializePlayer::SelectionPerformance.new(selection).call
+
+    selection_tactic = \
+      Match::InitializePlayer::SelectionTactic.new(selection_performance, tactic).call
+
+    selection_star = \
+      Match::InitializePlayer::SelectionStar.new(selection_tactic).call
+
     selection_stadium, fixture_attendance = \
       Match::InitializePlayer::SelectionStadium.new(selection_star, fixture_list).call
-    selection_complete = Match::InitializePlayer::SelectionAggression.new(selection_stadium, tactic).call
+
+    selection_complete = \
+      Match::InitializePlayer::SelectionAggression.new(selection_stadium, tactic).call
 
     return selection_complete, fixture_attendance
   end
 
   def minute_by_minute(fixture_attendance, selection_complete, tactic)
+    summary = []
+
     rand(90..98).times do |i|
       selection_match = Match::MinuteByMinute::MinuteByMinuteBlend.new(selection_complete).call
 
       all_teams = Match::MinuteByMinute::MinuteByMinuteTeams.new(selection_match, fixture_attendance).call
 
       all_teams.each do |match_team|
-        minute_by_minute_press = Match::MinuteByMinute::MinuteByMinutePress.new(match_team, tactic, i).call
-        minute_by_minute_chance = Match::MinuteByMinute::MinuteByMinuteChance.new(minute_by_minute_press, i).call
-        minute_by_minute_target = Match::MinuteByMinute::MinuteByMinuteTarget.new(minute_by_minute_chance, match_team).call
-        minute_by_minute_scored = Match::MinuteByMinute::MinuteByMinuteScored.new(minute_by_minute_target, match_team).call
+        minute_by_minute_press = \
+          Match::MinuteByMinute::MinuteByMinutePress.new(match_team, tactic, i).call
 
-        summary = [match_team,
-                   minute_by_minute_press,
-                   minute_by_minute_chance,
-                   minute_by_minute_target,
-                   minute_by_minute_scored]
-binding.pry
-        assist, scorer = Match::MinuteByMinute::Names.new(minute_by_minute_scored).call
+        minute_by_minute_chance = \
+          Match::MinuteByMinute::MinuteByMinuteChance.new(minute_by_minute_press, i).call
+
+        minute_by_minute_target = \
+          Match::MinuteByMinute::MinuteByMinuteTarget.new(minute_by_minute_chance, match_team).call
+
+        minute_by_minute_scored = \
+          Match::MinuteByMinute::MinuteByMinuteScored.new(minute_by_minute_target, match_team).call
+
+        minute_by_minute_names = \
+          Match::MinuteByMinute::MinuteByMinuteNames.new(minute_by_minute_scored, selection_complete, match_team).call
+
+        minute = [i,
+                  match_team,
+                  minute_by_minute_press,
+                  minute_by_minute_chance,
+                  minute_by_minute_target,
+                  minute_by_minute_scored,
+                  minute_by_minute_names]
+
+        summary << minute
       end
+
+      Match::MinuteByMinute::MinuteByMinuteLogging.new(summary, i).call
     end
   end
 
-  def match_end(fixture_attendance, selection_complete, tactic)
+  def match_end(fixture_attendance, selection_complete, tactic, summary)
     Match::MatchEnd::SaveDetailedMatchSummary.new().call
     Match::MatchEnd::SaveGoalAndAssistInformation.new().call
     Match::MatchEnd::SaveMatchCommentary.new().call
-    Match::MatchEnd::MatchLogging.new().call
     Match::FitnessUpdate.new(selection_complete).call
   end
 end

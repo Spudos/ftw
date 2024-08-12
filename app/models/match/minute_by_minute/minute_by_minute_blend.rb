@@ -87,16 +87,30 @@ class Match::MinuteByMinute::MinuteByMinuteBlend
 
     selection_complete.each do |selection|
       blend_factor = team_blend_factor.find { |team| team[:club_id] == selection[:club_id] }
+
+      adjusted_performance = selection[:performance]
+
       case selection[:position]
       when 'gkp', 'dfc'
-        selection[:performance] += blend_factor[:dfc]
+        adjusted_performance += blend_factor[:dfc]
       when 'mid'
-        selection[:performance] += blend_factor[:mid]
+        adjusted_performance += blend_factor[:mid]
       when 'att'
-        selection[:performance] += blend_factor[:att]
+        adjusted_performance += blend_factor[:att]
       end
 
-      minute_by_minute_blend << selection
+      hash = { club_id: selection[:club_id],
+               player_id: selection[:player_id],
+               name: selection[:name],
+               total_skill: selection[:total_skill],
+               position: selection[:position],
+               position_detail: selection[:position_detail],
+               blend: selection[:blend],
+               star: selection[:star],
+               fitness: selection[:fitness],
+               performance: adjusted_performance }
+
+      minute_by_minute_blend << hash
     end
 
     minute_by_minute_blend

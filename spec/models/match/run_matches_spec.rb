@@ -17,7 +17,7 @@ RSpec.describe Match, type: :model do
       create(:player, id: 2, position: 'dfc')
       create(:player, id: 3, position: 'dfc')
       create(:player, id: 4, position: 'dfc')
-      create(:player, id: 5, position: 'dfc')
+      create(:player, id: 5, position: 'mid')
       create(:player, id: 6, position: 'mid')
       create(:player, id: 7, position: 'mid')
       create(:player, id: 8, position: 'mid')

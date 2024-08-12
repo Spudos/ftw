@@ -8,6 +8,8 @@ class Match::MinuteByMinute::MinuteByMinuteTeams
 
   def call
     raise StandardError, "There was an error in the #{self.class.name} class" if @minute_by_minute_blend.nil?
+    raise StandardError, "There was an error in the #{self.class.name} class" if @fixture_attendance.nil?
+
     all_teams = []
     fixture_attendance.each do |fixture|
       match_teams = match_team_array(fixture[:club_home], fixture[:club_away])
