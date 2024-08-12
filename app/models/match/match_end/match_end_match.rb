@@ -1,4 +1,4 @@
-class Match::SaveDetailedMatchSummary
+class Match::MatchEnd::MatchEndMatch
   attr_reader :fixture_attendance, :selection_complete, :tactic, :summary
 
   def initialize(fixture_attendance, selection_complete, tactic, summary)
