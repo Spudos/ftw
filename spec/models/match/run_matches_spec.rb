@@ -89,9 +89,7 @@ RSpec.describe Match, type: :model do
       selected_week = 1
       competition = 'Premier League'
 
-      fixture_list, selection, tactic = Match.new.run_matches(selected_week, competition)
-
-      binding.pry
+      Match.new.run_matches(selected_week, competition)
     end
   end
 end

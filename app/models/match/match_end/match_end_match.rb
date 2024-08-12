@@ -1,18 +1,28 @@
 class Match::SaveDetailedMatchSummary
-  attr_reader :detailed_match_summary, :attendance
+  attr_reader :fixture_attendance, :selection_complete, :tactic, :summary
 
-  def initialize(detailed_match_summary, attendance)
-    @detailed_match_summary = detailed_match_summary
-    @attendance = attendance
+  def initialize(fixture_attendance, selection_complete, tactic, summary)
+    @summary = summary
+    @fixture_attendance = fixture_attendance
+    @selection = selection_complete
+    @tactic = tactic
   end
 
   def call
-    if detailed_match_summary.nil?
+    if summary.nil? || fixture_attendance.nil? || selection_complete.nil? || tactic.nil?
       raise StandardError, "There was an error in the #{self.class.name} class"
     end
 
-    match_data = detailed_match_summary[0]
-    match = Match.new(
+    fixture_attendance.each do |match|
+      save_match(match)
+    end
+  end
+
+  private
+
+  def save_match(match)
+binding.pry
+    match = {
       match_id: match_data[:id].to_i,
       week_number: match_data[:week].to_i,
       competition: match_data[:competition],
@@ -44,8 +54,7 @@ class Match::SaveDetailedMatchSummary
       away_goals: match_data[:goal_away].to_i,
       home_man_of_the_match: match_data[:home_man_of_the_match],
       away_man_of_the_match: match_data[:away_man_of_the_match],
-      attendance:
-    )
+      attendance: }
     match.save
   end
 end

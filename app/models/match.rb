@@ -84,13 +84,15 @@ class Match < ApplicationRecord
       end
 
       Match::MinuteByMinute::MinuteByMinuteLogging.new(summary, i).call
+
+      summary
     end
   end
 
   def match_end(fixture_attendance, selection_complete, tactic, summary)
-    Match::MatchEnd::SaveDetailedMatchSummary.new().call
-    Match::MatchEnd::SaveGoalAndAssistInformation.new().call
-    Match::MatchEnd::SaveMatchCommentary.new().call
-    Match::FitnessUpdate.new(selection_complete).call
+    Match::MatchEnd::MatchEndMatch.new(fixture_attendance, selection_complete, tactic, summary).call
+    Match::MatchEnd::MatchEndGoal.new(fixture_attendance, summary).call
+    Match::MatchEnd::MatchEndCommentary.new(fixture_attendance, summary).call
+    Match::MatchEnd::MatchEndFitness.new(selection_complete, tactic).call
   end
 end
