@@ -9,13 +9,13 @@ class Match::MinuteByMinute::MinuteByMinuteChance
   def call
     raise StandardError, "There was an error in the #{self.class.name} class" if @minute_by_minute_press.nil? || @i.nil?
 
-    home_def_rating = minute_by_minute_press.first[:defense]
-    home_mid_rating = minute_by_minute_press.first[:midfield]
-    home_att_rating = minute_by_minute_press.first[:attack]
+    home_dfc_rating = minute_by_minute_press.first[:defense_press]
+    home_mid_rating = minute_by_minute_press.first[:midfield_press]
+    home_att_rating = minute_by_minute_press.first[:attack_press]
 
-    away_def_rating = minute_by_minute_press.last[:defense]
-    away_mid_rating = minute_by_minute_press.last[:midfield]
-    away_att_rating = minute_by_minute_press.last[:attack]
+    away_dfc_rating = minute_by_minute_press.last[:defense_press]
+    away_mid_rating = minute_by_minute_press.last[:midfield_press]
+    away_att_rating = minute_by_minute_press.last[:attack_press]
 
     random_chance_roll = rand(1..100)
     team_chance_roll = rand(0..100)
@@ -34,19 +34,9 @@ class Match::MinuteByMinute::MinuteByMinuteChance
       chance_outcome = 'none'
     end
 
-    chance_result = {
-      minute: i,
-      home_def_rating:,
-      home_mid_rating:,
-      home_att_rating:,
-      away_def_rating:,
-      away_mid_rating:,
-      away_att_rating:,
-      chance:,
+    { chance:,
       team_chance_roll:,
       random_chance_roll:,
-      chance_outcome:
-    }
-    chance_result
+      chance_outcome: }
   end
 end

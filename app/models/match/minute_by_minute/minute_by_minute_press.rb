@@ -12,14 +12,14 @@ class Match::MinuteByMinute::MinuteByMinutePress
 
     multiplier = get_multiplier
 
-    minute_by_minute_press = { team: match_teams[0][:team],
-                               defense: match_teams[0][:defense],
-                               midfield: match_teams[0][:midfield] + (pressing[:home_press] * multiplier),
-                               attack: match_teams[0][:attack] + (pressing[:home_press] * multiplier) },
-                             { team: match_teams[1][:team],
-                               defense: match_teams[1][:defense],
-                               midfield: match_teams[1][:midfield] + (pressing[:away_press] * multiplier),
-                               attack: match_teams[1][:attack] + (pressing[:away_press] * multiplier) }
+    minute_by_minute_press = { club_id: match_teams[0][:club_id],
+                               defense_press: match_teams[0][:defense],
+                               midfield_press: match_teams[0][:midfield] + (pressing[:home_press] * multiplier),
+                               attack_press: match_teams[0][:attack] + (pressing[:home_press] * multiplier) },
+                             { club_id: match_teams[1][:club_id],
+                               defense_press: match_teams[1][:defense],
+                               midfield_press: match_teams[1][:midfield] + (pressing[:away_press] * multiplier),
+                               attack_press: match_teams[1][:attack] + (pressing[:away_press] * multiplier) }
 
     return minute_by_minute_press
   end
@@ -27,10 +27,10 @@ class Match::MinuteByMinute::MinuteByMinutePress
   private
 
   def press_information
-    home_tactic = tactic.find { |hash| hash[:club_id] == match_teams[0][:team] }
+    home_tactic = tactic.find { |hash| hash[:club_id] == match_teams[0][:club_id] }
     home_press = home_tactic[:press]
 
-    away_tactic = tactic.find { |hash| hash[:club_id] == match_teams[1][:team] }
+    away_tactic = tactic.find { |hash| hash[:club_id] == match_teams[1][:club_id] }
     away_press = away_tactic[:press]
 
     { home_press:, away_press: }

@@ -27,7 +27,7 @@ class Match::MinuteByMinute::MinuteByMinuteTeams
   end
 
   def build_home_team(home)
-    defence = 0
+    defense = 0
     midfield = 0
     attack = 0
 
@@ -36,18 +36,18 @@ class Match::MinuteByMinute::MinuteByMinuteTeams
 
       case player[:position]
       when 'gkp', 'dfc'
-        defence += player[:performance]
+        defense += player[:performance]
       when 'mid'
         midfield += player[:performance]
       when 'att'
         attack += player[:performance]
       end
     end
-    home_team = { club_id: home, defence:, midfield:, attack:}
+    home_team = { club_id: home, defense:, midfield:, attack:}
   end
 
   def build_away_team(away)
-    defence = 0
+    defense = 0
     midfield = 0
     attack = 0
 
@@ -56,13 +56,13 @@ class Match::MinuteByMinute::MinuteByMinuteTeams
 
       case player[:position]
       when 'gkp', 'dfc'
-        defence += player[:performance]
+        defense += player[:performance]
       when 'mid'
         midfield += player[:performance]
       when 'att'
         attack += player[:performance]
       end
     end
-    away_team = { club_id: away, defence:, midfield:, attack:}
+    away_team = { club_id: away, defense:, midfield:, attack:}
   end
 end

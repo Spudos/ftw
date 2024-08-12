@@ -37,16 +37,22 @@ class Match < ApplicationRecord
 
   def minute_by_minute(fixture_attendance, selection_complete, tactic)
     rand(90..98).times do |i|
-      selection_match = Match::MinuteByMinute::BlendAdjustment.new(selection_complete).call
+      selection_match = Match::MinuteByMinute::MinuteByMinuteBlend.new(selection_complete).call
 
       all_teams = Match::MinuteByMinute::MinuteByMinuteTeams.new(selection_match, fixture_attendance).call
 
       all_teams.each do |match_team|
-        minute_by_minute_press = Match::MinuteByMinute::PressingEffect.new(match_team, tactic, i).call
-        minute_by_minute_chance = Match::MinuteByMinute::ChanceCreated.new(minute_by_minute_press, i).calls
-        minute_by_minute_target = Match::MinuteByMinute::ChanceOnTarget.new(minute_by_minute_chance, selection_match).call
-        minute_by_minute_scored = Match::MinuteByMinute::GoalScored.new(minute_by_minute_target, selection_match).call
+        minute_by_minute_press = Match::MinuteByMinute::MinuteByMinutePress.new(match_team, tactic, i).call
+        minute_by_minute_chance = Match::MinuteByMinute::MinuteByMinuteChance.new(minute_by_minute_press, i).call
+        minute_by_minute_target = Match::MinuteByMinute::MinuteByMinuteTarget.new(minute_by_minute_chance, match_team).call
+        minute_by_minute_scored = Match::MinuteByMinute::MinuteByMinuteScored.new(minute_by_minute_target, match_team).call
 
+        summary = [match_team,
+                   minute_by_minute_press,
+                   minute_by_minute_chance,
+                   minute_by_minute_target,
+                   minute_by_minute_scored]
+binding.pry
         assist, scorer = Match::MinuteByMinute::Names.new(minute_by_minute_scored).call
       end
     end

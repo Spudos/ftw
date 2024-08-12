@@ -103,19 +103,19 @@ RSpec.describe Match::MinuteByMinute::MinuteByMinuteBlend, type: :model do
       all_teams = Match::MinuteByMinute::MinuteByMinuteTeams.new(minute_by_minute_blend, fixture_attendance).call
 
       expect(all_teams[0][0][:club_id]).to eq('1')
-      expect(all_teams[0][0][:defence]).to eq(250)
+      expect(all_teams[0][0][:defense]).to eq(250)
       expect(all_teams[0][0][:midfield]).to eq(200)
       expect(all_teams[0][0][:attack]).to eq(100)
       expect(all_teams[0][1][:club_id]).to eq('2')
-      expect(all_teams[0][1][:defence]).to eq(200)
+      expect(all_teams[0][1][:defense]).to eq(200)
       expect(all_teams[0][1][:midfield]).to eq(200)
       expect(all_teams[0][1][:attack]).to eq(150)
       expect(all_teams[1][0][:club_id]).to eq('3')
-      expect(all_teams[1][0][:defence]).to eq(100)
+      expect(all_teams[1][0][:defense]).to eq(100)
       expect(all_teams[1][0][:midfield]).to eq(50)
       expect(all_teams[1][0][:attack]).to eq(50)
       expect(all_teams[1][1][:club_id]).to eq('4')
-      expect(all_teams[1][1][:defence]).to eq(100)
+      expect(all_teams[1][1][:defense]).to eq(100)
       expect(all_teams[1][1][:midfield]).to eq(50)
       expect(all_teams[1][1][:attack]).to eq(50)
     end

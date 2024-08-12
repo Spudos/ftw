@@ -1,20 +1,20 @@
 class Match::MinuteByMinute::MinuteByMinuteTarget
-  attr_reader :minute_by_minute_chance, :selection_match
+  attr_reader :minute_by_minute_chance, :match_team
 
-  def initialize(minute_by_minute_chance, selection_match)
+  def initialize(minute_by_minute_chance, match_team)
     @minute_by_minute_chance = minute_by_minute_chance
-    @selection_match = selection_match
+    @match_team = match_team
   end
 
   def call
-    if @minute_by_minute_chance.nil? || @selection_match.nil?
+    if @minute_by_minute_chance.nil? || @match_team.nil?
       raise StandardError, "There was an error in the #{self.class.name} class"
     end
 
-    home_attack = selection_match.first[:attack]
-    home_defense = selection_match.first[:defense]
-    away_attack = selection_match.last[:attack]
-    away_defense = selection_match.last[:defense]
+    home_attack = match_team.first[:attack]
+    home_defense = match_team.first[:defense]
+    away_attack = match_team.last[:attack]
+    away_defense = match_team.last[:defense]
 
     on_target_home = ((home_attack.to_f / away_defense) * 60).to_i
     on_target_home = on_target_home.clamp(0, 60)
