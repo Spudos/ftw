@@ -9,7 +9,7 @@ class Match < ApplicationRecord
 
     summary = minute_by_minute(fixture_attendance, selection_complete, tactic)
 
-    match_end(fixture_attendance, selection, tactic, summary)
+    match_end(fixture_attendance, selection_complete, tactic, summary)
 
     turn.update(run_matches: true)
   end
@@ -44,7 +44,7 @@ class Match < ApplicationRecord
 
     selection_complete = \
       Match::InitializePlayer::SelectionAggression.new(selection_stadium, tactic).call
-
+binding.pry
     return selection_complete, fixture_attendance
   end
 
@@ -92,8 +92,8 @@ class Match < ApplicationRecord
     match_summaries = Match::MatchEnd::MatchEndParse.new(summary).call
     Match::MatchEnd::MatchEndMatch.new(fixture_attendance, selection_complete, tactic, match_summaries).call
     Match::MatchEnd::MatchEndGoal.new(fixture_attendance, summary).call
-    binding.pry
     Match::MatchEnd::MatchEndPerformance.new(fixture_attendance, selection_complete).call
+    binding.pry
     Match::MatchEnd::MatchEndCommentary.new(fixture_attendance, summary).call
     Match::MatchEnd::MatchEndFitness.new(selection_complete, tactic).call
   end
