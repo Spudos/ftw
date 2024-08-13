@@ -11,7 +11,13 @@ RSpec.describe Match, type: :model do
                        week_number: 1,
                        comp: 'Premier League')
 
-      create(:club, id: 1)
+      create(:club, id: 1,
+                    stand_n_capacity: 1000,
+                    stand_s_capacity: 1000,
+                    stand_e_capacity: 1000,
+                    stand_w_capacity: 1000,
+                    fanbase: 10_000,
+                    fan_happiness: 100)
 
       create(:player, id: 1)
       create(:player, id: 2, position: 'dfc')
@@ -47,7 +53,13 @@ RSpec.describe Match, type: :model do
         Selection.create(player_id:, club_id: 2)
       end
 
-      create(:club, id: 3)
+      create(:club, id: 3,
+                    stand_n_capacity: 10_000,
+                    stand_s_capacity: 10_000,
+                    stand_e_capacity: 10_000,
+                    stand_w_capacity: 10_000,
+                    fanbase: 100_000,
+                    fan_happiness: 100)
 
       create(:player, id: 23, club_id: 2)
       create(:player, id: 24, position: 'dfc', club_id: 3)
@@ -90,6 +102,8 @@ RSpec.describe Match, type: :model do
       competition = 'Premier League'
 
       Match.new.run_matches(selected_week, competition)
+
+      binding.pry
     end
   end
 end

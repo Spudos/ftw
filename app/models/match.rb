@@ -52,7 +52,7 @@ class Match < ApplicationRecord
     summary = []
 
     rand(90..98).times do |i|
-      selection_match = Match::MinuteByMinute::MinuteByMinuteBlend.new(selection_complete).call
+      selection_match, minute_by_minute_blend = Match::MinuteByMinute::MinuteByMinuteBlend.new(selection_complete).call
 
       all_teams = Match::MinuteByMinute::MinuteByMinuteTeams.new(selection_match, fixture_attendance).call
 
@@ -74,6 +74,7 @@ class Match < ApplicationRecord
 
         minute = [i,
                   match_team,
+                  minute_by_minute_blend,
                   minute_by_minute_press,
                   minute_by_minute_chance,
                   minute_by_minute_target,
@@ -82,15 +83,17 @@ class Match < ApplicationRecord
 
         summary << minute
       end
-
       Match::MinuteByMinute::MinuteByMinuteLogging.new(summary, i).call
 
-      summary
     end
+    summary
   end
 
   def match_end(fixture_attendance, selection_complete, tactic, summary)
-    Match::MatchEnd::MatchEndMatch.new(fixture_attendance, selection_complete, tactic, summary).call
+    match_summaries = Match::MatchEnd::MatchEndParse.new(summary).call
+    Match::MatchEnd::MatchEndMatch.new(fixture_attendance, selection_complete, tactic, match_summaries).call
+
+    binding.pry
     Match::MatchEnd::MatchEndGoal.new(fixture_attendance, summary).call
     Match::MatchEnd::MatchEndCommentary.new(fixture_attendance, summary).call
     Match::MatchEnd::MatchEndFitness.new(selection_complete, tactic).call

@@ -1,60 +1,75 @@
 class Match::MatchEnd::MatchEndMatch
-  attr_reader :fixture_attendance, :selection_complete, :tactic, :summary
+  attr_reader :fixture_attendance, :selection_complete, :tactic, :match_summaries
 
-  def initialize(fixture_attendance, selection_complete, tactic, summary)
-    @summary = summary
+  def initialize(fixture_attendance, selection_complete, tactic, match_summaries)
+    @match_summaries = match_summaries
     @fixture_attendance = fixture_attendance
-    @selection = selection_complete
+    @selection_complete = selection_complete
     @tactic = tactic
   end
 
   def call
-    if summary.nil? || fixture_attendance.nil? || selection_complete.nil? || tactic.nil?
+    if match_summaries.nil? || fixture_attendance.nil? || selection_complete.nil? || tactic.nil?
       raise StandardError, "There was an error in the #{self.class.name} class"
     end
 
+    match_upload = []
+
     fixture_attendance.each do |match|
-      save_match(match)
+      summary = match_summaries.find { |hash| hash[:home_club] == match[:club_home] }
+      match_upload << save_match(match, summary)
     end
+
+    match_attributes = match_upload.to_a.map(&:as_json)
+    Match.upsert_all(match_attributes)
   end
 
   private
 
-  def save_match(match)
-binding.pry
-    match = {
-      match_id: match_data[:id].to_i,
-      week_number: match_data[:week].to_i,
-      competition: match_data[:competition],
-      home_team: match_data[:club_home],
-      tactic_home: match_data[:tactic_home],
-      dfc_blend_home: match_data[:dfc_blend_home],
-      mid_blend_home: match_data[:mid_blend_home],
-      att_blend_home: match_data[:att_blend_home],
-      dfc_aggression_home: match_data[:dfc_aggression_home],
-      mid_aggression_home: match_data[:mid_aggression_home],
-      att_aggression_home: match_data[:att_aggression_home],
-      home_press: match_data[:home_press],
-      away_team: match_data[:club_away],
-      tactic_away: match_data[:tactic_away],
-      dfc_blend_away: match_data[:dfc_blend_away],
-      mid_blend_away: match_data[:mid_blend_away],
-      att_blend_away: match_data[:att_blend_away],
-      dfc_aggression_away: match_data[:dfc_aggression_away],
-      mid_aggression_away: match_data[:mid_aggression_away],
-      att_aggression_away: match_data[:att_aggression_away],
-      away_press: match_data[:away_press],
-      home_possession: match_data[:home_possession].to_i,
-      away_possession: match_data[:away_possession].to_i,
-      home_chance: match_data[:chance_count_home].to_i,
-      away_chance: match_data[:chance_count_away].to_i,
-      home_chance_on_target: match_data[:chance_on_target_home].to_i,
-      away_chance_on_target: match_data[:chance_on_target_away].to_i,
-      home_goals: match_data[:goal_home].to_i,
-      away_goals: match_data[:goal_away].to_i,
-      home_man_of_the_match: match_data[:home_man_of_the_match],
-      away_man_of_the_match: match_data[:away_man_of_the_match],
-      attendance: }
-    match.save
+  def save_match(match, summary)
+    {
+      match_id: match[:id].to_i,
+      week_number: match[:week_number].to_i,
+      competition: match[:competition],
+      home_team: match[:club_home],
+      tactic_home: tactic[0][:tactic],
+      dfc_blend_home: summary[:dfc_blend_home],
+      mid_blend_home: summary[:mid_blend_home],
+      att_blend_home: summary[:att_blend_home],
+      dfc_aggression_home: tactic[0][:dfc_aggression],
+      mid_aggression_home: tactic[0][:mid_aggression],
+      att_aggression_home: tactic[0][:att_aggression],
+      home_press: tactic[0][:press],
+      away_team: match[:club_away],
+      tactic_away: tactic[1][:tactic],
+      dfc_blend_away: summary[:dfc_blend_away],
+      mid_blend_away: summary[:mid_blend_away],
+      att_blend_away: summary[:att_blend_away],
+      dfc_aggression_away: tactic[1][:dfc_aggression],
+      mid_aggression_away: tactic[1][:mid_aggression],
+      att_aggression_away: tactic[1][:att_aggression],
+      away_press: tactic[1][:press],
+      home_possession: summary[:home_possession],
+      away_possession: summary[:away_possession],
+      home_chance: summary[:home_chance],
+      away_chance: summary[:away_chance],
+      home_chance_on_target: summary[:home_target],
+      away_chance_on_target: summary[:away_target],
+      home_goals: summary[:home_goals],
+      away_goals: summary[:away_goals],
+      home_man_of_the_match: man_of_the_match(match[:club_home]),
+      away_man_of_the_match: man_of_the_match(match[:club_away]),
+      attendance: match[:attendance]
+    }
+  end
+
+  def man_of_the_match(team)
+    player_hash = []
+
+    selection_complete.each do |player|
+      player_hash << player if player[:club_id] == team
+    end
+
+    player_hash.max_by { |player| player[:performance] }[:player_id]
   end
 end

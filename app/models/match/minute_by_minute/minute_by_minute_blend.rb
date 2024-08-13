@@ -8,11 +8,11 @@ class Match::MinuteByMinute::MinuteByMinuteBlend
   def call
     raise StandardError, "There was an error in the #{self.class.name} class" if @selection_complete.nil?
 
-    team_blend_factor = team_blend_calculation
+    team_blend_factor, team_blend_varience = team_blend_calculation
 
-    minute_by_minute_blend = apply_blend_factor(team_blend_factor)
+    selection_match = apply_blend_factor(team_blend_factor)
 
-    return minute_by_minute_blend
+    return selection_match, team_blend_varience
   end
 
   private
@@ -24,7 +24,9 @@ class Match::MinuteByMinute::MinuteByMinuteBlend
 
     team_blend_varience = get_blend_varience(team_blend)
 
-    get_blend_factor(team_blend_varience)
+    team_blend_factor = get_blend_factor(team_blend_varience)
+
+    return team_blend_factor, team_blend_varience
   end
 
   def get_blend_values(selections_by_team)

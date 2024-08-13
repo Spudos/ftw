@@ -7,7 +7,7 @@ RSpec.describe Match::MatchEnd::MatchEndMatch, type: :model do
       fixture_attendance = [{ id: 1, club_home: '1', club_away: '2',
                               week_number: 1, competition: 'Premier League', attendance: 10_000 },
                             { id: 2, club_home: '3', club_away: '4',
-                              week_number: 1, competition: 'Premier League', attendance: 20_000 }]
+                              week_number: 1, competition: 'Premier League', attendance: 10_000 }]
 
       selection_complete = [{ club_id: '1', player_id: 1, name: 'woolley',
                               total_skill: 85, position: 'gkp', position_detail: 'p',
@@ -74,34 +74,150 @@ RSpec.describe Match::MatchEnd::MatchEndMatch, type: :model do
                               blend: 5, star: 20, fitness: 90, performance: 30 },
                             { club_id: '2', player_id: 21, name: 'woolley',
                               total_skill: 85, position: 'att', position_detail: 'p',
+                              blend: 5, star: 20, fitness: 90, performance: 32 },
+                            { club_id: '3', player_id: 22, name: 'woolley',
+                              total_skill: 85, position: 'gkp', position_detail: 'p',
+                              blend: 5, star: 20, fitness: 90, performance: 50 },
+                            { club_id: '3', player_id: 23, name: 'woolley',
+                              total_skill: 85, position: 'dfc', position_detail: 'p',
+                              blend: 5, star: 20, fitness: 90, performance: 52 },
+                            { club_id: '3', player_id: 24, name: 'woolley',
+                              total_skill: 85, position: 'dfc', position_detail: 'p',
+                              blend: 5, star: 20, fitness: 90, performance: 58 },
+                            { club_id: '3', player_id: 25, name: 'woolley',
+                              total_skill: 85, position: 'dfc', position_detail: 'p',
+                              blend: 5, star: 20, fitness: 90, performance: 53 },
+                            { club_id: '3', player_id: 26, name: 'woolley',
+                              total_skill: 85, position: 'dfc', position_detail: 'p',
+                              blend: 5, star: 20, fitness: 90, performance: 52 },
+                            { club_id: '3', player_id: 27, name: 'woolley',
+                              total_skill: 85, position: 'mid', position_detail: 'p',
+                              blend: 4, star: 20, fitness: 90, performance: 54 },
+                            { club_id: '3', player_id: 28, name: 'woolley',
+                              total_skill: 85, position: 'mid', position_detail: 'p',
+                              blend: 5, star: 20, fitness: 90, performance: 56 },
+                            { club_id: '3', player_id: 29, name: 'woolley',
+                              total_skill: 85, position: 'mid', position_detail: 'p',
+                              blend: 6, star: 20, fitness: 90, performance: 52 },
+                            { club_id: '3', player_id: 30, name: 'woolley',
+                              total_skill: 85, position: 'mid', position_detail: 'p',
+                              blend: 7, star: 20, fitness: 90, performance: 51 },
+                            { club_id: '3', player_id: 31, name: 'woolley',
+                              total_skill: 85, position: 'att', position_detail: 'p',
+                              blend: 1, star: 20, fitness: 90, performance: 53 },
+                            { club_id: '3', player_id: 32, name: 'woolley',
+                              total_skill: 85, position: 'att', position_detail: 'p',
+                              blend: 9, star: 20, fitness: 90, performance: 59 },
+                            { club_id: '4', player_id: 33, name: 'woolley',
+                              total_skill: 85, position: 'gkp', position_detail: 'p',
+                              blend: 10, star: 20, fitness: 90, performance: 50 },
+                            { club_id: '4', player_id: 34, name: 'woolley',
+                              total_skill: 85, position: 'dfc', position_detail: 'p',
+                              blend: 4, star: 20, fitness: 90, performance: 52 },
+                            { club_id: '4', player_id: 35, name: 'woolley',
+                              total_skill: 85, position: 'dfc', position_detail: 'p',
+                              blend: 8, star: 20, fitness: 90, performance: 53 },
+                            { club_id: '4', player_id: 36, name: 'woolley',
+                              total_skill: 85, position: 'dfc', position_detail: 'p',
+                              blend: 9, star: 20, fitness: 90, performance: 54 },
+                            { club_id: '4', player_id: 37, name: 'woolley',
+                              total_skill: 85, position: 'mid', position_detail: 'p',
+                              blend: 1, star: 20, fitness: 90, performance: 55 },
+                            { club_id: '4', player_id: 38, name: 'woolley',
+                              total_skill: 85, position: 'mid', position_detail: 'p',
+                              blend: 2, star: 20, fitness: 90, performance: 56 },
+                            { club_id: '4', player_id: 39, name: 'woolley',
+                              total_skill: 85, position: 'mid', position_detail: 'p',
+                              blend: 6, star: 20, fitness: 90, performance: 57 },
+                            { club_id: '4', player_id: 40, name: 'woolley',
+                              total_skill: 85, position: 'mid', position_detail: 'p',
+                              blend: 4, star: 20, fitness: 90, performance: 53 },
+                            { club_id: '4', player_id: 41, name: 'woolley',
+                              total_skill: 85, position: 'att', position_detail: 'p',
+                              blend: 5, star: 20, fitness: 90, performance: 40 },
+                            { club_id: '4', player_id: 42, name: 'woolley',
+                              total_skill: 85, position: 'att', position_detail: 'p',
+                              blend: 5, star: 20, fitness: 90, performance: 30 },
+                            { club_id: '4', player_id: 43, name: 'woolley',
+                              total_skill: 85, position: 'att', position_detail: 'p',
                               blend: 5, star: 20, fitness: 90, performance: 32 }]
 
       tactic = [{ club_id: '1', tactic: 1, dfc_aggression: 6,
                   mid_aggression: 6, att_aggression: 6, press: 6 },
                 { club_id: '2', tactic: 2, dfc_aggression: 6,
+                  mid_aggression: 6, att_aggression: 6, press: 6 },
+                { club_id: '3', tactic: 1, dfc_aggression: 6,
+                  mid_aggression: 6, att_aggression: 6, press: 6 },
+                { club_id: '4', tactic: 2, dfc_aggression: 6,
                   mid_aggression: 6, att_aggression: 6, press: 6 }]
 
-      summary = [[0,
-                  [{ club_id: '1', defense: 170, midfield: 281, attack: 78 },
-                   { club_id: '2', defense: 174, midfield: 204, attack: 59 }],
-                  [{ club_id: '1', defense_press: 170, midfield_press: 317, attack_press: 114 },
-                   { club_id: '2', defense_press: 174, midfield_press: 204, attack_press: 59 }],
-                  { chance: 113, team_chance_roll: 62, random_chance_roll: 41, chance_outcome: 'none' },
-                  { on_target_home: 26, on_target_away: 20, on_target_roll: 78, chance_on_target: 'none' },
-                  { goal_home: 17, goal_away: 13, goal_roll: 13, goal_scored: 'none' },
-                  { assist: 'none', scorer: 'none' }],
-                 [0,
-                  [{ club_id: '3', defense: 195, midfield: 225, attack: 71 },
-                   { club_id: '4', defense: 166, midfield: 212, attack: 73 }],
-                  [{ club_id: '3', defense_press: 195, midfield_press: 261, attack_press: 107 },
-                   { club_id: '4', defense_press: 166, midfield_press: 212, attack_press: 73 }],
-                  { chance: 49, team_chance_roll: 40, random_chance_roll: 25, chance_outcome: 'none' },
-                  { on_target_home: 25, on_target_away: 22, on_target_roll: 23, chance_on_target: 'none' },
-                  { goal_home: 17, goal_away: 14, goal_roll: 17, goal_scored: 'none' },
-                  { assist: 'none', scorer: 'none' }]]
+      match_summaries = [{ home_club: '1',
+                           away_club: '2',
+                           dfc_blend_home: 2,
+                           mid_blend_home: 3,
+                           att_blend_home: 8,
+                           dfc_blend_away: 1,
+                           mid_blend_away: 4,
+                           att_blend_away: 5,
+                           home_possession: 75,
+                           away_possession: 25,
+                           home_chance: 10,
+                           away_chance: 5,
+                           home_target: 5,
+                           away_target: 2,
+                           home_goals: 2,
+                           away_goals: 0 },
+                         { home_club: '3',
+                           away_club: '4',
+                           dfc_blend_home: 2,
+                           mid_blend_home: 3,
+                           att_blend_home: 8,
+                           dfc_blend_away: 1,
+                           mid_blend_away: 4,
+                           att_blend_away: 5,
+                           home_possession: 75,
+                           away_possession: 25,
+                           home_chance: 10,
+                           away_chance: 5,
+                           home_target: 5,
+                           away_target: 2,
+                           home_goals: 2,
+                           away_goals: 0 }]
 
-      Match::MatchEnd::MatchEndMatch.new(fixture_attendance, selection_complete, tactic, summary).call
+      Match::MatchEnd::MatchEndMatch.new(fixture_attendance, selection_complete, tactic, match_summaries).call
+
+      match = Match.first
+
+      expect(match.home_team).to eq('1')
+      expect(match.tactic_home).to eq(1)
+      expect(match.dfc_blend_home).to eq(2)
+      expect(match.mid_blend_home).to eq(3)
+      expect(match.att_blend_home).to eq(8)
+      expect(match.dfc_aggression_home).to eq(6)
+      expect(match.mid_aggression_home).to eq(6)
+      expect(match.att_aggression_home).to eq(6)
+      expect(match.home_press).to eq(6)
+      expect(match.away_team).to eq('2')
+      expect(match.tactic_away).to eq(2)
+      expect(match.dfc_blend_away).to eq(1)
+      expect(match.mid_blend_away).to eq(4)
+      expect(match.att_blend_away).to eq(5)
+      expect(match.dfc_aggression_away).to eq(6)
+      expect(match.mid_aggression_away).to eq(6)
+      expect(match.att_aggression_away).to eq(6)
+      expect(match.away_press).to eq(6)
+      expect(match.home_possession).to eq(75)
+      expect(match.away_possession).to eq(25)
+      expect(match.home_chance).to eq(10)
+      expect(match.away_chance).to eq(5)
+      expect(match.home_chance_on_target).to eq(5)
+      expect(match.away_chance_on_target).to eq(2)
+      expect(match.home_goals).to eq(2)
+      expect(match.away_goals).to eq(0)
+      expect(match.attendance).to eq(10_000)
+      expect(match.week_number).to eq(1)
+      expect(match.competition).to eq('Premier League')
+      expect(Match.count).to eq(2)
     end
   end
 end
-
