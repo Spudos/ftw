@@ -44,7 +44,7 @@ class Match < ApplicationRecord
 
     selection_complete = \
       Match::InitializePlayer::SelectionAggression.new(selection_stadium, tactic).call
-binding.pry
+
     return selection_complete, fixture_attendance
   end
 
@@ -93,7 +93,6 @@ binding.pry
     Match::MatchEnd::MatchEndMatch.new(fixture_attendance, selection_complete, tactic, match_summaries).call
     Match::MatchEnd::MatchEndGoal.new(fixture_attendance, summary).call
     Match::MatchEnd::MatchEndPerformance.new(fixture_attendance, selection_complete).call
-    binding.pry
     Match::MatchEnd::MatchEndCommentary.new(fixture_attendance, summary).call
     Match::MatchEnd::MatchEndFitness.new(selection_complete, tactic).call
   end
