@@ -72,7 +72,7 @@ RSpec.describe Match::MinuteByMinute::MinuteByMinuteBlend, type: :model do
                               blend: 5, star: 20, fitness: 90, performance: 50 }]
 
       minute_by_minute_blend = Match::MinuteByMinute::MinuteByMinuteBlend.new(selection_complete).call
-      
+
       expect(selection_complete[0][:performance]).to eq(50)
       expect(minute_by_minute_blend[0][:performance]).to eq(60)
       expect(minute_by_minute_blend[1][:performance]).to eq(60)

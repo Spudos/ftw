@@ -84,7 +84,6 @@ class Match < ApplicationRecord
         summary << minute
       end
       Match::MinuteByMinute::MinuteByMinuteLogging.new(summary, i).call
-
     end
     summary
   end
@@ -92,9 +91,9 @@ class Match < ApplicationRecord
   def match_end(fixture_attendance, selection_complete, tactic, summary)
     match_summaries = Match::MatchEnd::MatchEndParse.new(summary).call
     Match::MatchEnd::MatchEndMatch.new(fixture_attendance, selection_complete, tactic, match_summaries).call
-
-    binding.pry
     Match::MatchEnd::MatchEndGoal.new(fixture_attendance, summary).call
+    binding.pry
+    Match::MatchEnd::MatchEndPerformance.new(fixture_attendance, selection_complete).call
     Match::MatchEnd::MatchEndCommentary.new(fixture_attendance, summary).call
     Match::MatchEnd::MatchEndFitness.new(selection_complete, tactic).call
   end

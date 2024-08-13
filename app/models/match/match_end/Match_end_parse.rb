@@ -10,7 +10,7 @@ class Match::MatchEnd::MatchEndParse
 
     sorted = summary.group_by { |element| element[1][0][:club_id] }
 
-    match_summaries = build_match_summary(sorted)
+    build_match_summary(sorted)
   end
 
   private
@@ -22,7 +22,13 @@ class Match::MatchEnd::MatchEndParse
       home_club = record[1][0][1][0][:club_id]
       away_club = record[1][0][1][1][:club_id]
 
-      dfc_blend_home, mid_blend_home, att_blend_home, dfc_blend_away, mid_blend_away, att_blend_away = blend(record)
+      dfc_blend_home,
+      mid_blend_home,
+      att_blend_home,
+      dfc_blend_away,
+      mid_blend_away,
+      att_blend_away = blend(record, home_club, away_club)
+
       home_chance, away_chance = chance_count(record)
       home_target, away_target = target_count(record)
       home_goals, away_goals = goal_count(record)
@@ -49,7 +55,7 @@ class Match::MatchEnd::MatchEndParse
     return match_summaries
   end
 
-  def blend(record)
+  def blend(record, home_club, away_club)
     dfc_blend_home = 0
     mid_blend_home = 0
     att_blend_home = 0
@@ -58,12 +64,15 @@ class Match::MatchEnd::MatchEndParse
     att_blend_away = 0
 
     record[1].each do |element|
-      dfc_blend_home = element[2][0][:dfc_blend]
-      mid_blend_home = element[2][0][:mid_blend]
-      att_blend_home = element[2][0][:att_blend]
-      dfc_blend_away = element[2][1][:dfc_blend]
-      mid_blend_away = element[2][1][:mid_blend]
-      att_blend_away = element[2][1][:att_blend]
+      home = element[2].find { |hash| hash[:club_id] == home_club }
+      away = element[2].find { |hash| hash[:club_id] == away_club }
+
+      dfc_blend_home = home[:dfc]
+      mid_blend_home = home[:mid]
+      att_blend_home = home[:att]
+      dfc_blend_away = away[:dfc]
+      mid_blend_away = away[:mid]
+      att_blend_away = away[:att]
     end
 
     return dfc_blend_home, mid_blend_home, att_blend_home, dfc_blend_away, mid_blend_away, att_blend_away
