@@ -235,12 +235,24 @@ RSpec.describe Match::MatchEnd::MatchEndCommentary, type: :model do
       Template.create(commentary_type: 'match_chance_tar', text: '{team} have a chance but the keeper saves')
       Template.create(commentary_type: 'match_goal', text: '{team} score a goal, {assister} with the assist and {scorer} with the goal')
 
+      create(:club, id: 1, name: 'club1')
+      create(:club, id: 2, name: 'club2')
+      create(:club, id: 3, name: 'club3')
+      create(:club, id: 4, name: 'club4')
+
       allow_any_instance_of(Kernel).to receive(:rand).with(20..30).and_return(25)
       allow_any_instance_of(Kernel).to receive(:rand).with(70..80).and_return(75)
 
-      Match::MatchEnd::MatchEndCommentary.new(summary, selection_complete, fixture_attendance).call
+      Match::MatchEnd::MatchEndCommentary.new(fixture_attendance, summary, selection_complete).call
 
-      binding.pry
+      commentary = Commentary.all
+      expect(commentary.count).to eq(8)
+      expect(commentary[1].commentary).to eq('club1 have a chance but its off target')
+      expect(commentary[2].commentary).to eq('club1 have a chance but its off target')
+      expect(commentary[3].commentary).to eq('club1 score a goal, woolley with the assist and woolley with the goal')
+      expect(commentary[5].commentary).to eq('club4 have a chance but its off target')
+      expect(commentary[6].commentary).to eq('club4 score a goal, woolley with the assist and woolley with the goal')
+      expect(commentary[7].commentary).to eq('club4 score a goal, woolley with the assist and woolley with the goal')
     end
   end
 end

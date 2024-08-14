@@ -1,7 +1,7 @@
 class Match::MatchEnd::MatchEndCommentary
-  attr_reader :summary, :selection_complete, :fixture_attendance
+  attr_reader :fixture_attendance, :summary, :selection_complete
 
-  def initialize(summary, selection_complete, fixture_attendance)
+  def initialize(fixture_attendance, summary, selection_complete)
     @summary = summary
     @selection_complete = selection_complete
     @fixture_attendance = fixture_attendance
@@ -60,14 +60,17 @@ class Match::MatchEnd::MatchEndCommentary
   private
 
   def generate_commentary(commentary_data, commentary_upload, home_score, away_score)
-    general_commentary, chance_commentary, chance_tar_commentary, goal_commentary = commentary_templates
+    general_commentary, chance_commentary, chance_tar_commentary, goal_commentary, club_names = commentary_templates
+
+    home_name = club_names.find { |element| element[0] == commentary_data[:home_team].to_i }[1]
+    away_name = club_names.find { |element| element[0] == commentary_data[:away_team].to_i }[1]
 
     if commentary_data[:goal_scored] == 'home'
       scorer = selection_complete.find { |element| element[:player_id] == commentary_data[:scorer] }[:name]
       assister = selection_complete.find { |element| element[:player_id] == commentary_data[:assister] }[:name]
       home_score += 1
       event = 'Home Goal'
-      commentary = goal_commentary.gsub('{team}', commentary_data[:home_team])
+      commentary = goal_commentary.gsub('{team}', home_name)
                                   .gsub('{assister}', assister)
                                   .gsub('{scorer}', scorer)
     elsif commentary_data[:goal_scored] == 'away'
@@ -75,28 +78,29 @@ class Match::MatchEnd::MatchEndCommentary
       assister = selection_complete.find { |element| element[:player_id] == commentary_data[:assister] }[:name]
       away_score += 1
       event = 'Away Goal'
-      commentary = goal_commentary.gsub('{team}', commentary_data[:away_team])
+      commentary = goal_commentary.gsub('{team}', away_name)
                                   .gsub('{assister}', assister)
                                   .gsub('{scorer}', scorer)
     elsif commentary_data[:chance_on_target] == 'home'
       event = 'Good chance'
-      commentary = chance_tar_commentary.gsub('{team}', commentary_data[:home_team])
+      commentary = chance_tar_commentary.gsub('{team}', home_name)
                                         .gsub('{player}', commentary_data[:home_name])
     elsif commentary_data[:chance_on_target] == 'away'
       event = 'Good chance'
-      commentary = chance_tar_commentary.gsub('{team}', commentary_data[:away_team])
+      commentary = chance_tar_commentary.gsub('{team}', away_name)
                                         .gsub('{player}', commentary_data[:away_name])
     elsif commentary_data[:chance_outcome] == 'home'
       event = 'Chance'
-      commentary = chance_commentary.gsub('{team}', commentary_data[:home_team])
+      commentary = chance_commentary.gsub('{team}', home_name)
                                     .gsub('{player}', commentary_data[:home_name])
     elsif commentary_data[:chance_outcome] == 'away'
       event = 'Chance'
-      commentary = chance_commentary.gsub('{team}', commentary_data[:away_team])
+      commentary = chance_commentary.gsub('{team}', away_name)
                                     .gsub('{player}', commentary_data[:away_name])
     else
       event = ''
-      team_names = [commentary_data[:away_team], commentary_data[:home_team]]
+      binding.pry
+      team_names = [away_name, home_name]
       selected_team = team_names.sample
       commentary = general_commentary.gsub('{team}', selected_team)
     end
@@ -116,7 +120,8 @@ class Match::MatchEnd::MatchEndCommentary
     chance_commentary = Template.random_match_chance_commentary
     chance_tar_commentary = Template.random_match_chance_tar_commentary
     goal_commentary = Template.random_match_goal_commentary
+    club_names ||= Club.all.pluck(:id, :name)
 
-    return general_commentary, chance_commentary, chance_tar_commentary, goal_commentary
+    return general_commentary, chance_commentary, chance_tar_commentary, goal_commentary, club_names
   end
 end

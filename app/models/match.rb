@@ -93,7 +93,7 @@ class Match < ApplicationRecord
     Match::MatchEnd::MatchEndMatch.new(fixture_attendance, selection_complete, tactic, match_summaries).call
     Match::MatchEnd::MatchEndGoal.new(fixture_attendance, summary).call
     Match::MatchEnd::MatchEndPerformance.new(fixture_attendance, selection_complete).call
-    Match::MatchEnd::MatchEndCommentary.new(fixture_attendance, summary).call
+    Match::MatchEnd::MatchEndCommentary.new(fixture_attendance, summary, selection_complete).call
     Match::MatchEnd::MatchEndFitness.new(selection_complete, tactic).call
   end
 end
