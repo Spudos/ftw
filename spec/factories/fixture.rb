@@ -3,7 +3,7 @@ FactoryBot.define do
     sequence(:id) { 1 }
     sequence(:home) { 1 }
     sequence(:away) { 2 }
-    sequence(:comp) { |n| n }
-    sequence(:week_number) { |n| n }
+    sequence(:comp) { 'Premier League' }
+    sequence(:week_number) { 1 }
   end
 end
