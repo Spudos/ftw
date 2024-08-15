@@ -1,9 +1,8 @@
 class Match::MinuteByMinute::MinuteByMinuteLogging
-  attr_reader :summary, :i
+  attr_reader :summary
 
-  def initialize(summary, i)
+  def initialize(summary)
     @summary = summary
-    @i = i
   end
 
   def call

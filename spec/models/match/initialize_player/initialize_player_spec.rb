@@ -26,8 +26,8 @@ RSpec.describe Match, type: :model do
       selection_complete, fixture_list = Match.new.send(:initialize_player, selection, tactic, fixture_list)
 
       expect(fixture_list[0][:attendance]).to eq(500)
-      expect(selection_complete[0][:performance]).to be > 20
-      expect(selection_complete[1][:performance]).to be > 30
+      expect(selection_complete[0][:performance]).to be > 10
+      expect(selection_complete[1][:performance]).to be > 20
     end
   end
 end

@@ -2,13 +2,12 @@ class Match < ApplicationRecord
   has_many :home_teams, class_name: 'Clubs', foreign_key: 'home_team_id'
   has_many :away_teams, class_name: 'Clubs', foreign_key: 'home_team_id'
 
-  def run_matches(selected_week, competition)
+  def run_matches(selected_week, competition, turn)
+    return if turn.run_matches
+
     fixture_list, selection, tactic = initialize_match(selected_week, competition)
-
     selection_complete, fixture_attendance = initialize_player(selection, tactic, fixture_list)
-
     summary = minute_by_minute(fixture_attendance, selection_complete, tactic)
-
     match_end(fixture_attendance, selection_complete, tactic, summary)
 
     turn.update(run_matches: true)
@@ -19,10 +18,8 @@ class Match < ApplicationRecord
   def initialize_match(selected_week, competition)
     fixture_list = \
       Match::InitializeMatch::GetFixture.new(selected_week, competition).call
-
     selection = \
       Match::InitializeMatch::GetSelection.new(fixture_list).call
-
     tactic = \
       Match::InitializeMatch::GetTactic.new(fixture_list).call
 
@@ -32,16 +29,12 @@ class Match < ApplicationRecord
   def initialize_player(selection, tactic, fixture_list)
     selection_performance = \
       Match::InitializePlayer::SelectionPerformance.new(selection).call
-
     selection_tactic = \
       Match::InitializePlayer::SelectionTactic.new(selection_performance, tactic).call
-
     selection_star = \
       Match::InitializePlayer::SelectionStar.new(selection_tactic).call
-
     selection_stadium, fixture_attendance = \
       Match::InitializePlayer::SelectionStadium.new(selection_star, fixture_list).call
-
     selection_complete = \
       Match::InitializePlayer::SelectionAggression.new(selection_stadium, tactic).call
 
@@ -59,19 +52,14 @@ class Match < ApplicationRecord
       all_teams.each do |match_team|
         minute_by_minute_press = \
           Match::MinuteByMinute::MinuteByMinutePress.new(match_team, tactic, i).call
-
         minute_by_minute_chance = \
           Match::MinuteByMinute::MinuteByMinuteChance.new(minute_by_minute_press, i).call
-
         minute_by_minute_target = \
           Match::MinuteByMinute::MinuteByMinuteTarget.new(minute_by_minute_chance, match_team).call
-
         minute_by_minute_scored = \
           Match::MinuteByMinute::MinuteByMinuteScored.new(minute_by_minute_target, match_team).call
-
         minute_by_minute_names = \
           Match::MinuteByMinute::MinuteByMinuteNames.new(minute_by_minute_scored, selection_complete, match_team).call
-
         minute = [i,
                   match_team,
                   minute_by_minute_blend,
@@ -83,8 +71,10 @@ class Match < ApplicationRecord
 
         summary << minute
       end
-      Match::MinuteByMinute::MinuteByMinuteLogging.new(summary, i).call
     end
+
+    Match::MinuteByMinute::MinuteByMinuteLogging.new(summary).call
+
     summary
   end
 

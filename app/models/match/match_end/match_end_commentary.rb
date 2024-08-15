@@ -99,7 +99,6 @@ class Match::MatchEnd::MatchEndCommentary
                                     .gsub('{player}', commentary_data[:away_name])
     else
       event = ''
-      binding.pry
       team_names = [away_name, home_name]
       selected_team = team_names.sample
       commentary = general_commentary.gsub('{team}', selected_team)

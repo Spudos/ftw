@@ -12,6 +12,7 @@ RSpec.describe Match, type: :model do
                        comp: 'Premier League')
 
       create(:club, id: 1,
+                    name: 'club1',
                     stand_n_capacity: 1000,
                     stand_s_capacity: 1000,
                     stand_e_capacity: 1000,
@@ -35,7 +36,7 @@ RSpec.describe Match, type: :model do
         Selection.create(player_id:, club_id: 1)
       end
 
-      create(:club, id: 2)
+      create(:club, id: 2, name: 'club2')
 
       create(:player, id: 12, club_id: 2)
       create(:player, id: 13, position: 'dfc', club_id: 2)
@@ -54,6 +55,7 @@ RSpec.describe Match, type: :model do
       end
 
       create(:club, id: 3,
+                    name: 'club3',
                     stand_n_capacity: 10_000,
                     stand_s_capacity: 10_000,
                     stand_e_capacity: 10_000,
@@ -77,7 +79,7 @@ RSpec.describe Match, type: :model do
         Selection.create(player_id:, club_id: 3)
       end
 
-      create(:club, id: 4)
+      create(:club, id: 4, name: 'club4')
 
       create(:player, id: 34, club_id: 2)
       create(:player, id: 35, position: 'dfc', club_id: 4)
@@ -98,12 +100,17 @@ RSpec.describe Match, type: :model do
       create(:tactic, club_id: 1)
       create(:tactic, club_id: 3)
 
+      Template.create(commentary_type: 'match_general', text: '{team} applies pressure in the midfield, but fails to find a way through the opponents defense')
+      Template.create(commentary_type: 'match_chance', text: '{team} have a chance but its off target')
+      Template.create(commentary_type: 'match_chance_tar', text: '{team} have a chance but the keeper saves')
+      Template.create(commentary_type: 'match_goal', text: '{team} score a goal, {assister} with the assist and {scorer} with the goal')
+
       selected_week = 1
       competition = 'Premier League'
 
-      Match.new.run_matches(selected_week, competition)
+      turn = Turn.create(week: selected_week)
 
-      binding.pry
+      Match.new.run_matches(selected_week, competition, turn)
     end
   end
 end
