@@ -1,57 +1,64 @@
-<%= form_with(model: @turnsheet, id: 'turnsheet') do |form| %>
-  <% if @turnsheet.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(turnsheet.errors.count, "error") %> prohibited this turnsheet from being saved:</h2>
-      <ul>
-      <% @turnsheet.errors.each do |error| %>
-        <li><%= error.full_message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div id="form_navigation">
+  <button id="club-actions" class="btn btn-sm btn-primary">Club</button>
+  <button id="coaching" class="btn btn-sm btn-primary">Coaching</button>
+  <button id="player-actions" class="btn btn-sm btn-primary">Players</button>
+  <button id="match-actions" class="btn btn-sm btn-primary">Match</button>
+  <button id="transfer" class="btn btn-sm btn-primary">Transfers</button>
+  <button id="messages" class="btn btn-sm btn-primary">Messages</button>
+</div>
 
-  <div class='container'>
-    <div class="row-turnsheet">
-      <%= render partial: 'header', locals: { form: form } %>
-    </div>
+<div id="form-body">
+  <%= form_with(url: turnsheets_path, method: :post, local: false) do |form| %>
+    <%= render "header", turnsheet: @turnsheet, form: form %>
 
-    <div class='row-turnsheet'>
-      <%= render partial: 'team', locals: { form: form } %>
+    <div id="club-actions-form">
+      <%= render "club", turnsheet: @turnsheet, form: form %>
     </div>
 
-    <div class='row-turnsheet'>
-      <%= render partial: 'tactics', locals: { form: form } %>
+    <div id="coaching-form" class="hidden">
+    <%= render "player_training", turnsheet: @turnsheet, form: form %>
     </div>
 
-    <div class='row-turnsheet'>
-      <%= render partial: 'club', locals: { form: form } %>
-    </div> 
-
-    <div class='row-turnsheet'>
-      <%= render partial: 'player_training', locals: { form: form } %>
+    <div id="player-actions-form" class="hidden">
+    <%= render "player_fitness", turnsheet: @turnsheet, form: form %>
+    <%= render "player_actions", turnsheet: @turnsheet, form: form %>
     </div>
 
-    <div class='row-turnsheet'>
-      <%= render partial: 'player_fitness', locals: { form: form } %>
+    <div id="match-actions-form" class="hidden">
+    <h4>Match</h4>
+      <%= render "team", turnsheet: @turnsheet, form: form %>
+      <%= render "tactics", turnsheet: @turnsheet, form: form %>
     </div>
 
-    <div class='row-turnsheet'>
-      <%= render partial: 'player_actions', locals: { form: form } %>
+    <div id="transfer-form" class="hidden">
+    <h4>Transfer</h4>
+      <%= render "transfers", turnsheet: @turnsheet, form: form %>
     </div>
 
-    <div class='row-turnsheet'>
-      <%= render partial: 'transfers', locals: { form: form } %>
-    </div>
-
-    <div class='row-turnsheet'>
-      <%= render partial: 'articles', locals: { form: form } %>    
-    </div>
-
-    <div class='row-turnsheet'>
-      <%= render partial: 'messaging', locals: { form: form } %>    
+    <div id="messages-form" class="hidden">
+      <%= render "articles", turnsheet: @turnsheet, form: form %>
+      <%= render "messaging", turnsheet: @turnsheet, form: form %>
     </div>
 
     <%= form.submit 'Save Turnsheet', class: 'btn btn-sm btn-danger' %>
-  </div>
-<% end %>
+  <% end %>
+</div>
 
+<script>
+  const buttons = document.querySelectorAll('#form_navigation button');
+  const formDivs = document.querySelectorAll('div[id$="-form"]');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+        handleButtonClick(button.id);
+    });
+  });
+
+  function handleButtonClick(buttonId) {
+    formDivs.forEach(div => {
+      div.classList.add('hidden');
+    });
+
+    document.querySelector(`#${buttonId}-form`).classList.remove('hidden');
+  };
+</script>
