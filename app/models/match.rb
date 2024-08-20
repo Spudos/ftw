@@ -1,3 +1,5 @@
+require 'benchmark'
+
 class Match < ApplicationRecord
   has_many :home_teams, class_name: 'Clubs', foreign_key: 'home_team_id'
   has_many :away_teams, class_name: 'Clubs', foreign_key: 'home_team_id'
@@ -16,12 +18,30 @@ class Match < ApplicationRecord
   private
 
   def initialize_match(selected_week, competition)
-    fixture_list = \
-      Match::InitializeMatch::GetFixture.new(selected_week, competition).call
-    selection = \
-      Match::InitializeMatch::GetSelection.new(fixture_list).call
-    tactic = \
-      Match::InitializeMatch::GetTactic.new(fixture_list).call
+    fixture_list = nil
+    selection = nil
+    tactic = nil
+
+    result = Benchmark.bm do |x|
+      x.report('GetFixture') do
+        fixture_list = \
+          Match::InitializeMatch::GetFixture.new(selected_week, competition).call
+      end
+      x.report('GetSelection') do
+        selection = \
+          Match::InitializeMatch::GetSelection.new(fixture_list).call
+      end
+      x.report('GetTactic') do
+        tactic = \
+          Match::InitializeMatch::GetTactic.new(fixture_list).call
+      end
+    end
+
+    File.open('measurement.log', 'w') do |file|
+      result.each do |r|
+        file.puts("#{r.label} - #{r.total}")
+      end
+    end
 
     return fixture_list, selection, tactic
   end
@@ -86,4 +106,12 @@ class Match < ApplicationRecord
     Match::MatchEnd::MatchEndCommentary.new(fixture_attendance, summary, selection_complete).call
     Match::MatchEnd::MatchEndFitness.new(selection_complete, tactic).call
   end
+
+  # def add_info(minute, details)
+  #   match_storage.add_information_point(minute, details)
+  # end
+
+  # def match_storage
+  #   @match_storage ||= Match::MatchEnd::DataStructure.new
+  # end
 end
