@@ -1,3 +1,5 @@
+require 'benchmark'
+
 class Match::InitializePlayer::SelectionPerformance
   attr_reader :selections
 
@@ -10,21 +12,29 @@ class Match::InitializePlayer::SelectionPerformance
 
     selection_performance = []
 
-    selections.each do |selection|
-      player_id = selection[:player_id]
-      player = player_data.find(player_id)
+    player_data = Player.includes(:performances, :goals, :assists, :club).load
 
-      selection_performance << hash(player, selection)
+    result = Benchmark.bm do |x|
+      x.report('build_selection_performance') do
+        selections.each do |selection|
+          player_id = selection[:player_id]
+          player = player_data.find(player_id)
+
+          selection_performance << hash(player, selection)
+        end
+      end
+    end
+
+    File.open('get_selection_performance.log', 'w') do |file|
+      result.each do |r|
+        file.puts("#{r.label} - #{sprintf('%.6f', r.total)} seconds")
+      end
     end
 
     selection_performance
   end
 
   private
-
-  def player_data
-    @player_data ||= Player.includes(:performances, :goals, :assists, :club).load
-  end
 
   def hash(player, selection)
     { club_id: selection[:club_id],
@@ -36,6 +46,6 @@ class Match::InitializePlayer::SelectionPerformance
       blend: player.blend,
       star: player.star,
       fitness: player.fitness,
-      performance: player.match_performance(player) }
+      performance: player.match_performance(player) } # runs method
   end
 end
