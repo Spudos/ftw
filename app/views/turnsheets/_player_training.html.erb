@@ -1,55 +1,63 @@
-<h3 style="text-align: center">Players</h3>
 <h4 style="text-align: center">Training</h4>
-<div class="col-md-12 align-top d-flex justify-content-center">  
-  <table class="table table-hover align-middle table-bordered">
-    <tr>
-      <th scope="col">Position</th>
-      <th scope="col">Player</th>
-      <th scope="col">skill</th>
-    </tr>
-    <tr scope="row">
-      <td>Goalkeeper</td>
-      <td>
-        <%= form.label :train_goalkeeper, style: "display: none" %>
-        <%= form.select :train_goalkeeper, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
-      </td>
-      <td>
-        <%= form.label :train_goalkeeper_skill, style: "display: none" %>
-        <%= form.select :train_goalkeeper_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td>Defender</td>
-      <td>
-        <%= form.label :train_defender, style: "display: none" %>
-        <%= form.select :train_defender, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
-      </td>
-      <td>
-        <%= form.label :train_defender_skill, style: "display: none" %>
-        <%= form.select :train_defender_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td>Midfield</td>
-      <td>
-        <%= form.label :train_midfielder, style: "display: none" %>
-        <%= form.select :train_midfielder, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
-      </td>
-      <td>
-        <%= form.label :train_midfielder_skill, style: "display: none" %>
-        <%= form.select :train_midfielder_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
-        </td>
-    </tr>
-    <tr scope="row">
-      <td>Attack</td>
-      <td>
-        <%= form.label :train_attacker, style: "display: none" %>
-        <%= form.select :train_attacker, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
-      </td>
-      <td>
-        <%= form.label :train_attacker_skill, style: "display: none" %>
-        <%= form.select :train_attacker_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
-      </td>
-    </tr>
-  </table>
-</div>
+
+<% @positions.each do |position| %>
+  <div class="col-md-12 align-top d-flex justify-content-center">
+    <table class="table table-borderless table-hover align-middle align-middle">
+      <thead class="table-header">
+        <%= render 'player_table_header' %>
+      </thead>
+      <tbody class="table-detail">
+        <% @selection.each do |player| %>
+          <% if player.position == position %>
+          <tr class="<%= position %>">
+          <td class="player_id"><%= player.id %></td>
+          <td><%= player.name %></td>
+          <td><%= player.age %></td>
+          <td><%= (player.position + player.player_position_detail).upcase %></td>
+          <td class="skill"><%= player.passing %></td>
+          <td class="skill"><%= player.control %></td>
+          <td class="skill"><%= player.tackling %></td>
+          <td class="skill"><%= player.running %></td>
+          <td class="skill"><%= player.shooting %></td>
+          <td class="skill"><%= player.dribbling %></td>
+          <td class="skill"><%= player.defensive_heading %></td>
+          <td class="skill"><%= player.offensive_heading %></td>
+          <td class="skill"><%= player.flair %></td>
+          <td class="skill"><%= player.strength %></td>
+          <td class="skill"><%= player.creativity %></td>
+          <td><%= player.total_skill %></td>
+        </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<script>
+  const club = <%= @club.to_json.html_safe %>;
+  const rows = document.querySelectorAll('tr[class]');
+  const selection = <%= @selection.to_json.html_safe %>;
+
+  rows.forEach(function(row) {
+    const skillCells = row.querySelectorAll('td.skill'); 
+    const position = row.classList[0];
+    const staffKey = 'staff_' + position;
+
+    skillCells.forEach(function(cell) {
+      if (cell.innerHTML >= club[staffKey]) {
+        cell.classList.add('inferior-coach');
+      }
+    });
+    
+    const playerIdCell = row.querySelector('td.player_id');
+    const playerId = playerIdCell ? playerIdCell.innerHTML : null;
+    const player = selection.find(function(player) {
+      return player.id == playerId;
+    });
+
+    // next job - add a class to a skill if potential reached
+
+    
+  });     
+</script>
