@@ -42,6 +42,7 @@
 
 
 <script>
+// create global variables
   const navigationButtons = document.querySelectorAll('#form_navigation button');
   const stadiumButtons = document.querySelectorAll('#stand_navigation button');
   const standCapacityButtons = document.querySelectorAll('#stand_capacity button');
@@ -53,7 +54,10 @@
   const capacity = document.querySelector('#capacity');
   const condition = document.querySelector('#condition');
   const club = <%= @club.to_json.html_safe %>;
+  const playerTrainingRows = document.querySelectorAll('tr[class]');
+  const squadListing = <%= @selection.to_json.html_safe %>;
 
+// add event listners
   navigationButtons.forEach(button => {
     button.addEventListener('click', function() {
       event.preventDefault();
@@ -97,6 +101,7 @@
     });
   });
 
+// navigation buttons
   function handleNavigationButtonClick(buttonId) {
     const shownDiv = document.querySelector('div.shown');
     if (buttonId === 'back') {
@@ -106,8 +111,8 @@
             shownDiv.classList.add('hidden');
             shownDiv.previousElementSibling.classList.remove('hidden');
             shownDiv.previousElementSibling.classList.add('shown');
-        }
-      }
+        };
+      };
     } else if (buttonId === 'next') {
       if (!shownDiv.classList.contains('end')) {
         if (shownDiv.nextElementSibling) {
@@ -115,11 +120,12 @@
             shownDiv.classList.add('hidden');
             shownDiv.nextElementSibling.classList.remove('hidden');
             shownDiv.nextElementSibling.classList.add('shown');
-        }
-      }
-    }
+        };
+      };
+    };
   };
 
+// club action functions
   function handleStadiumButtonClick(button) {
     const buttonId = button.id;
     const standName = club[`stand_${buttonId}_name`];
@@ -142,7 +148,7 @@
         name.innerText = "Unknown Stand";
         capacity.innerText = "N/A";
         condition.innerText = "N/A";
-    }
+    };
   };
 
   function handleStandCapacityButtonClick(button) {
@@ -158,7 +164,7 @@
       });
 
       button.classList.add('btn-success');
-    }
+    };
   };
 
   function handleStandConditionButtonClick(button) {
@@ -170,7 +176,7 @@
     } else {
         button.classList.remove('btn-outline-primary');
         button.classList.add('btn-success');
-    }
+    };
   };
 
   function handleCoachSelectionButtonClick(button) {
@@ -186,7 +192,7 @@
       });
 
       button.classList.add('btn-success');
-    }
+    };
   };
 
   function handlePropertySelectionButtonClick(button) {
@@ -202,7 +208,57 @@
       });
 
       button.classList.add('btn-success');
-    }
+    };
+  };
+
+// player training functions
+  playerTrainingRows.forEach(function(row) {
+    const playerIdCell = row.querySelector('td.player_id');
+    const playerId = playerIdCell ? playerIdCell.innerHTML : null;
+
+    const player = squadListing.find(function(player) {
+      return player.id == playerId;
+    });
+
+    if (player) {
+      initializeSkillCells(row, player);
+    };
+  });
+
+  function initializeSkillCells(row, player) {
+    const skillCells = row.querySelectorAll('td.skill'); 
+    const position = row.classList[0];
+    const staffKey = 'staff_' + position;
+
+    skillCells.forEach(function(cell) {
+      if (Number(cell.innerHTML) >= club[staffKey]) {
+        cell.classList.add('inferior-coach');
+      };
+
+      const potentialCheck = 'potential_' + cell.id + '_coached';
+
+      if (player[potentialCheck] === true) {
+        cell.classList.add('potential-coached');
+      };
+
+      cell.addEventListener('click', function() {
+        handleSkillCellClick(cell);
+      });
+    });
+  };
+
+  function handleSkillCellClick(cell) {
+    const playerIdCell = cell.closest('tr').querySelector('td.player_id');
+    const playerId = playerIdCell ? playerIdCell.innerHTML : 'Unknown Player ID';
+    const skillId = cell.id;
+
+    console.log(`Skill ID: ${skillId}, Player ID: ${playerId}`);
+
+    if (cell.classList.contains('coached')) {
+      cell.classList.remove('coached');
+    } else {
+      cell.classList.add('coached');
+    };
   };
 </script>
 
