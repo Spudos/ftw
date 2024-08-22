@@ -1,0 +1,386 @@
+document.addEventListener('DOMContentLoaded', function() {
+  const navigationButtons = document.querySelectorAll('#form_navigation button');
+  const stadiumButtons = document.querySelectorAll('#stand_navigation button');
+  const standCapacityButtons = document.querySelectorAll('#stand_capacity button');
+  const standConditionButtons = document.querySelectorAll('#stand_condition button');
+  const coachSelectionButtons = document.querySelectorAll('#coach_selection button');
+  const propertySelectionButtons = document.querySelectorAll('#property_selection button');
+  const formDivs = document.querySelectorAll('div[id$="-form"]');
+  const name = document.querySelector('#name');
+  const capacity = document.querySelector('#capacity');
+  const condition = document.querySelector('#condition');
+  const playerTrainingRows = document.querySelectorAll('tr[class]');
+
+  const club = <%= @club.to_json %>;
+  const squadListing = <%= @selection.to_json %>;
+  const test = <%= @test.to_json %>;
+ 
+  console.log(squadListing);
+  console.log(club);
+  console.log(test);
+
+  addEventListeners(navigationButtons, (button) => {
+    handleNavigationButtonClick(button.id);
+    window.scrollTo(0, 0);
+  });
+
+  function addEventListeners(buttons, handler) {
+    buttons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+        handler(button);
+      });
+    });
+  }
+
+  addEventListeners(stadiumButtons, handleStadiumButtonClick);
+  addEventListeners(standCapacityButtons, handleStandCapacityButtonClick);
+  addEventListeners(standConditionButtons, handleStandConditionButtonClick);
+  addEventListeners(coachSelectionButtons, handleCoachSelectionButtonClick);
+  addEventListeners(propertySelectionButtons, handlePropertySelectionButtonClick);
+
+
+  function handleNavigationButtonClick(buttonId) {
+    const shownDiv = document.querySelector('div.shown');
+    if (buttonId === 'back') {
+      if (!shownDiv.classList.contains('start')) {
+        if (shownDiv.previousElementSibling) {
+            shownDiv.classList.remove('shown');
+            shownDiv.classList.add('hidden');
+            shownDiv.previousElementSibling.classList.remove('hidden');
+            shownDiv.previousElementSibling.classList.add('shown');
+        };
+      };
+    } else if (buttonId === 'next') {
+      if (!shownDiv.classList.contains('end')) {
+        if (shownDiv.nextElementSibling) {
+            shownDiv.classList.remove('shown');
+            shownDiv.classList.add('hidden');
+            shownDiv.nextElementSibling.classList.remove('hidden');
+            shownDiv.nextElementSibling.classList.add('shown');
+        };
+      };
+    };
+  };
+
+
+  function handleStadiumButtonClick(button) {
+    const buttonId = button.id;
+    const standName = club[`stand_${buttonId}_name`];
+    const standCapacity = club[`stand_${buttonId}_capacity`];
+    const standCondition = club[`stand_${buttonId}_condition`];
+
+    stadiumButtons.forEach(function(btn) {
+        btn.classList.remove('btn-success');
+        btn.classList.add('btn-outline-primary');
+    });
+
+    button.classList.remove('btn-outline-primary');
+    button.classList.add('btn-success');
+
+    if (standName && standCapacity && standCondition) {
+        name.innerText = standName;
+        capacity.innerText = standCapacity;
+        condition.innerText = standCondition; 
+    } else {
+        name.innerText = "Unknown Stand";
+        capacity.innerText = "N/A";
+        condition.innerText = "N/A";
+    };
+  };
+
+  function handleStandCapacityButtonClick(button) {
+    const buttonId = button.id;
+
+    if (button.classList.contains('btn-success')) {
+      button.classList.add('btn-outline-primary');
+      button.classList.remove('btn-success');
+    } else {
+      standCapacityButtons.forEach(function(btn) {
+        btn.classList.add('btn-outline-primary');
+        btn.classList.remove('btn-success');
+      });
+
+      button.classList.add('btn-success');
+    };
+  };
+
+  function handleStandConditionButtonClick(button) {
+    const buttonId = button.id;
+    
+    if (button.classList.contains('btn-success')) {
+        button.classList.add('btn-outline-primary');
+        button.classList.remove('btn-success');
+    } else {
+        button.classList.remove('btn-outline-primary');
+        button.classList.add('btn-success');
+    };
+  };
+
+  function handleCoachSelectionButtonClick(button) {
+    const buttonId = button.id;
+
+    if (button.classList.contains('btn-success')) {
+        button.classList.remove('btn-success');
+        button.classList.add('btn-outline-primary');
+    } else {
+      coachSelectionButtons.forEach(function(btn) {
+        btn.classList.add('btn-outline-primary');
+        btn.classList.remove('btn-success');
+      });
+
+      button.classList.add('btn-success');
+    };
+  };
+
+  function handlePropertySelectionButtonClick(button) {
+    const buttonId = button.id;
+
+    if (button.classList.contains('btn-success')) {
+        button.classList.remove('btn-success');
+        button.classList.add('btn-outline-primary');
+    } else {
+      propertySelectionButtons.forEach(function(btn) {
+        btn.classList.add('btn-outline-primary');
+        btn.classList.remove('btn-success');
+      });
+
+      button.classList.add('btn-success');
+    };
+  };
+
+
+  playerTrainingRows.forEach(function(row) {
+    const playerIdCell = row.querySelector('td.player_id');
+    const playerId = playerIdCell ? playerIdCell.innerHTML : null;
+
+    const player = squadListing.find(function(player) {
+      return player.id == playerId;
+    });
+
+    if (player) {
+      initializeSkillCells(row, player);
+    };
+  });
+
+  function initializeSkillCells(row, player) {
+    const skillCells = row.querySelectorAll('td.skill'); 
+    const position = row.classList[0];
+    const staffKey = 'staff_' + position;
+
+    skillCells.forEach(function(cell) {
+      if (Number(cell.innerHTML) >= club[staffKey]) {
+        cell.classList.add('inferior-coach');
+      };
+
+      const potentialCheck = 'potential_' + cell.id + '_coached';
+
+      if (player[potentialCheck] === true) {
+        cell.classList.add('potential-coached');
+      };
+
+      cell.addEventListener('click', function() {
+        handleSkillCellClick(cell);
+      });
+    });
+  };
+
+  function handleSkillCellClick(cell) {
+    const playerIdCell = cell.closest('tr').querySelector('td.player_id');
+    const playerId = playerIdCell ? playerIdCell.innerHTML : 'Unknown Player ID';
+    const skillId = cell.id;
+
+    if (cell.classList.contains('coached')) {
+      cell.classList.remove('coached');
+    } else {
+
+      console.log(cell, playerId, skillId);
+      cell.classList.add('coached');
+      
+    };
+  };
+});
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+//----------------------------------------- data from controller
+  const club = <%= @club.to_json.html_safe %>;
+  const squadListing = <%= @selection.to_json.html_safe  %>;
+
+//----------------------------------------- navigation
+ const navigationButtons = document.querySelectorAll('#form_navigation button');
+
+  addEventListeners(navigationButtons, (button) => {
+    handleNavigationButtonClick(button.id);
+    window.scrollTo(0, 0);
+  });
+
+  function handleNavigationButtonClick(buttonId) {
+    const shownDiv = document.querySelector('div.shown');
+    if (buttonId === 'back') {
+      if (!shownDiv.classList.contains('start')) {
+        if (shownDiv.previousElementSibling) {
+            shownDiv.classList.remove('shown');
+            shownDiv.classList.add('hidden');
+            shownDiv.previousElementSibling.classList.remove('hidden');
+            shownDiv.previousElementSibling.classList.add('shown');
+        };
+      };
+    } else if (buttonId === 'next') {
+      if (!shownDiv.classList.contains('end')) {
+        if (shownDiv.nextElementSibling) {
+            shownDiv.classList.remove('shown');
+            shownDiv.classList.add('hidden');
+            shownDiv.nextElementSibling.classList.remove('hidden');
+            shownDiv.nextElementSibling.classList.add('shown');
+        };
+      };
+    };
+  };
+
+//----------------------------------------- stand selection buttons
+  const stadiumButtons = document.querySelectorAll('#stand_navigation button');
+  const name = document.querySelector('#name');
+  const capacity = document.querySelector('#capacity');
+  const condition = document.querySelector('#condition');
+
+  addEventListeners(stadiumButtons, (button) => {
+      handleStadiumButtonClick(button);
+    });
+
+  function handleStadiumButtonClick(button) {
+    const buttonId = button.id;
+    const standName = club[`stand_${buttonId}_name`];
+    const standCapacity = club[`stand_${buttonId}_capacity`];
+    const standCondition = club[`stand_${buttonId}_condition`];
+
+    stadiumButtons.forEach(function(btn) {
+        btn.classList.remove('btn-success');
+        btn.classList.add('btn-outline-primary');
+    });
+
+    button.classList.remove('btn-outline-primary');
+    button.classList.add('btn-success');
+
+    if (standName && standCapacity && standCondition) {
+        name.innerText = standName;
+        capacity.innerText = standCapacity;
+        condition.innerText = standCondition; 
+    } else {
+        name.innerText = "Unknown Stand";
+        capacity.innerText = "N/A";
+        condition.innerText = "N/A";
+    };
+  };
+
+//----------------------------------------- add listners
+  function addEventListeners(buttons) {
+    buttons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+        handleButtonClick(buttons);
+      });
+    });
+  }
+
+//----------------------------------------- handle button click
+  function handleButtonClick(button) {
+    const buttonId = button.id;
+
+    if (button.classList.contains('btn-success')) {
+        button.classList.add('btn-outline-primary');
+        button.classList.remove('btn-success');
+    } else {
+        buttonGroup.forEach(function(btn) {
+            btn.classList.add('btn-outline-primary');
+            btn.classList.remove('btn-success');
+        });
+
+        button.classList.add('btn-success');
+    }
+  }
+
+//----------------------------------------- button criteria
+  const standCapacityButtons = document.querySelectorAll('#stand_capacity button');
+  const standConditionButtons = document.querySelectorAll('#stand_condition button');
+  const coachSelectionButtons = document.querySelectorAll('#coach_selection button');
+  const propertySelectionButtons = document.querySelectorAll('#property_selection button');
+
+  addEventListeners(standCapacityButtons);
+  addEventListeners(standConditionButtons);
+  addEventListeners(coachSelectionButtons);
+  addEventListeners(propertySelectionButtons);
+
+//----------------------------------------- player training
+  const coachingArray = []; 
+  const playerTrainingRows = document.querySelectorAll('tr[class]');
+
+  playerTrainingRows.forEach(function(row) {
+    const playerIdCell = row.querySelector('td.player_id');
+    const playerId = playerIdCell ? playerIdCell.innerHTML : null;
+
+    const player = squadListing.find(function(player) {
+      return player.id == playerId;
+    });
+
+    if (player) {
+      initializeSkillCells(row, player);
+    };
+  });
+
+  function initializeSkillCells(row, player) {
+    const skillCells = row.querySelectorAll('td.skill'); 
+    const position = row.classList[0];
+    const staffKey = 'staff_' + position;
+
+    skillCells.forEach(function(cell) {
+      if (Number(cell.innerHTML) >= club[staffKey]) {
+        cell.classList.add('inferior-coach');
+      };
+
+      const potentialCheck = 'potential_' + cell.id + '_coached';
+
+      if (player[potentialCheck] === true) {
+        cell.classList.add('potential-coached');
+      };
+
+      cell.addEventListener('click', function() {
+        handleSkillCellClick(cell);
+      });
+    });
+  };
+
+  function handleSkillCellClick(cell) {
+    const playerIdCell = cell.closest('tr').querySelector('td.player_id');
+    const playerId = playerIdCell ? playerIdCell.innerHTML : 'Unknown Player ID';
+    const skillId = cell.id;
+    const classesToCheck = ['inferior-coach', 'potential-coached'];
+
+    if (!classesToCheck.some(className => cell.classList.contains(className))) {
+      buildCoachingArray(playerId, skillId)
+    } else {
+      alert('You cannot coach this skill');
+    };
+  };
+
+  function buildCoachingArray(playerId, skillId) {
+    const player = squadListing.find(function(player) {
+      return player.id == playerId;
+    });
+
+    const playerPosition = player.position;
+
+    coachingArray.push({ playerId: playerId, position: playerPosition, skillId: skillId });
+    console.log(coachingArray);
+
+
+  };
+});

@@ -40,68 +40,24 @@
   <button id="next" class="btn btn-sm btn-primary">Next</button>
 </div>
 
-
 <script>
-// create global variables
-  const navigationButtons = document.querySelectorAll('#form_navigation button');
-  const stadiumButtons = document.querySelectorAll('#stand_navigation button');
-  const standCapacityButtons = document.querySelectorAll('#stand_capacity button');
-  const standConditionButtons = document.querySelectorAll('#stand_condition button');
-  const coachSelectionButtons = document.querySelectorAll('#coach_selection button');
-  const propertySelectionButtons = document.querySelectorAll('#property_selection button');
-  const formDivs = document.querySelectorAll('div[id$="-form"]');
-  const name = document.querySelector('#name');
-  const capacity = document.querySelector('#capacity');
-  const condition = document.querySelector('#condition');
+document.addEventListener('DOMContentLoaded', function() {
+//----------------------------------------- data from turnsheets controller
   const club = <%= @club.to_json.html_safe %>;
-  const playerTrainingRows = document.querySelectorAll('tr[class]');
-  const squadListing = <%= @selection.to_json.html_safe %>;
+  const squadListing = <%= @selection.to_json.html_safe  %>;
 
-// add event listners
-  navigationButtons.forEach(button => {
-    button.addEventListener('click', function() {
+
+//----------------------------------------- navigation
+  const navigationButtons = document.querySelectorAll('#form_navigation button');
+
+  navigationButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
       event.preventDefault();
       handleNavigationButtonClick(button.id);
       window.scrollTo(0, 0);
     });
   });
 
-  stadiumButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      event.preventDefault();
-      handleStadiumButtonClick(button);  
-    });
-  });
-
-  standCapacityButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      event.preventDefault();
-      handleStandCapacityButtonClick(button);  
-    });
-  });
-
-  standConditionButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      event.preventDefault();
-      handleStandConditionButtonClick(button);  
-    });
-  });
-
-  coachSelectionButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      event.preventDefault();
-      handleCoachSelectionButtonClick(button);  
-    });
-  });
-
-  propertySelectionButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      event.preventDefault();
-      handlePropertySelectionButtonClick(button);  
-    });
-  });
-
-// navigation buttons
   function handleNavigationButtonClick(buttonId) {
     const shownDiv = document.querySelector('div.shown');
     if (buttonId === 'back') {
@@ -125,7 +81,20 @@
     };
   };
 
-// club action functions
+
+//----------------------------------------- stand selection buttons on club view
+  const stadiumButtons = document.querySelectorAll('#stand_navigation button');
+  const name = document.querySelector('#name');
+  const capacity = document.querySelector('#capacity');
+  const condition = document.querySelector('#condition');
+
+  stadiumButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
+      handleStadiumButtonClick(button);
+    });
+  });
+
   function handleStadiumButtonClick(button) {
     const buttonId = button.id;
     const standName = club[`stand_${buttonId}_name`];
@@ -151,67 +120,51 @@
     };
   };
 
-  function handleStandCapacityButtonClick(button) {
-    const buttonId = button.id;
 
-    if (button.classList.contains('btn-success')) {
-      button.classList.add('btn-outline-primary');
-      button.classList.remove('btn-success');
-    } else {
-      standCapacityButtons.forEach(function(btn) {
-        btn.classList.add('btn-outline-primary');
-        btn.classList.remove('btn-success');
+//----------------------------------------- add listners for club improvments
+  function addEventListeners(buttons) {
+    buttons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+        handleButtonClick(button, buttons);
       });
+    });
+  }
 
-      button.classList.add('btn-success');
-    };
-  };
-
-  function handleStandConditionButtonClick(button) {
+//----------------------------------------- handle button click for club improvments
+  function handleButtonClick(button, buttons) {
     const buttonId = button.id;
     
     if (button.classList.contains('btn-success')) {
         button.classList.add('btn-outline-primary');
         button.classList.remove('btn-success');
     } else {
-        button.classList.remove('btn-outline-primary');
+        buttons.forEach(function(btn) {
+            btn.classList.add('btn-outline-primary');
+            btn.classList.remove('btn-success');
+        });
+
         button.classList.add('btn-success');
-    };
-  };
+    }
+  }
 
-  function handleCoachSelectionButtonClick(button) {
-    const buttonId = button.id;
+//----------------------------------------- button criteria for club improvments
+  const standCapacityButtons = document.querySelectorAll('#stand_capacity button');
+  const standConditionButtons = document.querySelectorAll('#stand_condition button');
+  const coachSelectionButtons = document.querySelectorAll('#coach_selection button');
+  const propertySelectionButtons = document.querySelectorAll('#property_selection button');
 
-    if (button.classList.contains('btn-success')) {
-        button.classList.remove('btn-success');
-        button.classList.add('btn-outline-primary');
-    } else {
-      coachSelectionButtons.forEach(function(btn) {
-        btn.classList.add('btn-outline-primary');
-        btn.classList.remove('btn-success');
-      });
+  addEventListeners(standCapacityButtons);
+  addEventListeners(standConditionButtons);
+  addEventListeners(coachSelectionButtons);
+  addEventListeners(propertySelectionButtons);
 
-      button.classList.add('btn-success');
-    };
-  };
 
-  function handlePropertySelectionButtonClick(button) {
-    const buttonId = button.id;
+//----------------------------------------- player training
+  const coachingArray = []; 
+  const playerTrainingRows = document.querySelectorAll('tr[class]');
 
-    if (button.classList.contains('btn-success')) {
-        button.classList.remove('btn-success');
-        button.classList.add('btn-outline-primary');
-    } else {
-      propertySelectionButtons.forEach(function(btn) {
-        btn.classList.add('btn-outline-primary');
-        btn.classList.remove('btn-success');
-      });
-
-      button.classList.add('btn-success');
-    };
-  };
-
-// player training functions
+  //------ gets player data and row and passes it into initializeSkillCells
   playerTrainingRows.forEach(function(row) {
     const playerIdCell = row.querySelector('td.player_id');
     const playerId = playerIdCell ? playerIdCell.innerHTML : null;
@@ -225,6 +178,7 @@
     };
   });
 
+  //------ styles a skill based on coachability and adds event listener to all skills
   function initializeSkillCells(row, player) {
     const skillCells = row.querySelectorAll('td.skill'); 
     const position = row.classList[0];
@@ -247,19 +201,59 @@
     });
   };
 
+  //------ if a skill is coachable passes player and skill into buildCoachingArray
   function handleSkillCellClick(cell) {
     const playerIdCell = cell.closest('tr').querySelector('td.player_id');
     const playerId = playerIdCell ? playerIdCell.innerHTML : 'Unknown Player ID';
     const skillId = cell.id;
+    const classesToCheck = ['inferior-coach', 'potential-coached'];
 
-    console.log(`Skill ID: ${skillId}, Player ID: ${playerId}`);
-
-    if (cell.classList.contains('coached')) {
-      cell.classList.remove('coached');
+    if (!classesToCheck.some(className => cell.classList.contains(className))) {
+      buildCoachingArray(playerId, skillId)
     } else {
-      cell.classList.add('coached');
+      alert('You cannot coach this skill');
     };
   };
+
+  //------ builds the training array for one gkp, dfc, mid, att
+  function buildCoachingArray(playerId, skillId) {
+    const player = squadListing.find(function(player) {
+      return player.id == playerId;
+    });
+
+    const playerPosition = player.position;
+
+    const index = coachingArray.findIndex(player => player.position === playerPosition);
+
+    if (index !== -1) {
+        coachingArray.splice(index, 1); 
+        coachingArray.push({ playerId: playerId, position: playerPosition, skillId: skillId });
+    } else {
+        coachingArray.push({ playerId: playerId, position: playerPosition, skillId: skillId });
+    };
+
+    styleSkillsToBeCoached();
+  };
+
+  //------ styles the skills to be coached
+  function styleSkillsToBeCoached() {
+    console.log(coachingArray);
+    const allSkillCells = document.querySelectorAll('td.skill');
+
+    allSkillCells.forEach(function(cell) {
+      cell.classList.remove('coached');
+    });
+
+    coachingArray.forEach(function(player) {
+      const playerRow = Array.from(document.querySelectorAll('tr')).find(row => {
+        const firstCell = row.querySelector('td');
+        return firstCell && firstCell.textContent.trim() === player.playerId;
+      });
+      const playerSkillCell = playerRow.querySelector(`td#${player.skillId}`);
+      playerSkillCell.classList.add('coached');
+    });
+  };
+});
 </script>
 
 

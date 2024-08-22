@@ -16,9 +16,9 @@ class TurnsheetsController < ApplicationController
   def new
     @turnsheet = Turnsheet.new
     authorize @turnsheet
-    @club = Club.find_by(id: current_user.club)
 
-    @positions = ['gkp', 'dfc', 'mid', 'att']
+    @club = Club.find_by(id: current_user.club)
+    @positions = %w(gkp dfc mid att)
     @selection = player_position_sort
 
     @next_turn_week = Turnsheet.where(club_id: current_user.club).maximum(:week).to_i + 1
