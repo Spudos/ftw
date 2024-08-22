@@ -1,8 +1,79 @@
+<div id="form-body">
+  <%= form_with(url: turnsheets_path, method: :post, local: false) do |form| %>
+    <div id="header-form" class="shown start">
+      <%= render "header", turnsheet: @turnsheet, form: form %>
+    </div>
 
-<%= render "form", turnsheet: @turnsheet %>
+    <div id="club-actions-form" class="hidden">
+      <%= render "club", turnsheet: @turnsheet, form: form %>
+    </div>
 
-<div>
-  <%= button_to "Back to turnsheets", turnsheets_path, class: "btn btn-sm btn-primary"  %>
+    <div id="coaching-form" class="hidden">
+    <%= render "player_training", turnsheet: @turnsheet, form: form %>
+    </div>
+
+    <div id="player-actions-form" class="hidden">
+    <%= render "player_fitness", turnsheet: @turnsheet, form: form %>
+    <%= render "player_actions", turnsheet: @turnsheet, form: form %>
+    </div>
+
+    <div id="match-actions-form" class="hidden">
+      <%= render "team", turnsheet: @turnsheet, form: form %>
+      <%= render "tactics", turnsheet: @turnsheet, form: form %>
+    </div>
+
+    <div id="transfer-form" class="hidden">
+      <%= render "transfers", turnsheet: @turnsheet, form: form %>
+    </div>
+
+    <div id="messages-form" class="hidden end">
+      <%= render "articles", turnsheet: @turnsheet, form: form %>
+      <%= render "messaging", turnsheet: @turnsheet, form: form %>
+      <%= form.submit 'Save Turnsheet', class: 'btn btn-sm btn-danger' %>
+    </div>
+  <% end %>
 </div>
+<div id="form_navigation" class="col-md-12 align-top d-flex align-items-center justify-content-center">
+  <button id="back" class="btn btn-sm btn-primary">Back</button>
+  <button id="next" class="btn btn-sm btn-primary">Next</button>
+</div>
+
+
+<script>
+  const buttons = document.querySelectorAll('#form_navigation button');
+  const formDivs = document.querySelectorAll('div[id$="-form"]');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+        handleButtonClick(button.id);
+        window.scrollTo(0, 0);
+    });
+  });
+
+  function handleButtonClick(buttonId) {
+    const shownDiv = document.querySelector('div.shown');
+
+    if (buttonId === 'back') {
+      if (!shownDiv.classList.contains('start')) {
+        if (shownDiv.previousElementSibling) {
+            shownDiv.classList.remove('shown');
+            shownDiv.classList.add('hidden');
+            shownDiv.previousElementSibling.classList.remove('hidden');
+            shownDiv.previousElementSibling.classList.add('shown');
+        }
+      }
+    } else if (buttonId === 'next') {
+      if (!shownDiv.classList.contains('end')) {
+        if (shownDiv.nextElementSibling) {
+            shownDiv.classList.remove('shown');
+            shownDiv.classList.add('hidden');
+            shownDiv.nextElementSibling.classList.remove('hidden');
+            shownDiv.nextElementSibling.classList.add('shown');
+        }
+      }
+    }
+  };
+</script>
+
 
 

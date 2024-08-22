@@ -257,8 +257,24 @@ td {
   display: none;
 }
 
+.skill {
+  color: #047929;
+  font-weight: bold;
+  text-align: center;
+}
+
 .inferior-coach {
-  color: lightcoral !important;
+  color: #fda900;
+}
+
+.potential-coached {
+  color: #d42321;
+}
+
+.coached {
+  background-color: #047929;
+  color: white;
+  border-radius: 30%;
 }
 
 /** other **/
@@ -283,21 +299,21 @@ td {
 
 /** selection **/
 
-.gkp {
-  background-color: lightgreen;
-}
+// .gkp {
+//   background-color: lightgreen;
+// }
 
-.dfc {
-  background-color: lightblue;
-}
+// .dfc {
+//   background-color: lightblue;
+// }
 
-.mid {
-  background-color: lightyellow;
-}
+// .mid {
+//   background-color: lightyellow;
+// }
 
-.att {
-  background-color: lightcoral;
-}
+// .att {
+//   background-color: lightcoral;
+// }
 
 /** league **/
 

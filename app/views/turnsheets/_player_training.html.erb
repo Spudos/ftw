@@ -2,29 +2,29 @@
 
 <% @positions.each do |position| %>
   <div class="col-md-12 align-top d-flex justify-content-center">
-    <table class="table table-borderless table-hover align-middle align-middle">
-      <thead class="table-header">
+    <table>
+      <thead class="turnsheet-table-header">
         <%= render 'player_table_header' %>
       </thead>
-      <tbody class="table-detail">
+      <tbody class="turnsheet-table-detail">
         <% @selection.each do |player| %>
           <% if player.position == position %>
           <tr class="<%= position %>">
-          <td class="player_id"><%= player.id %></td>
-          <td><%= player.name %></td>
-          <td><%= player.age %></td>
-          <td><%= (player.position + player.player_position_detail).upcase %></td>
-          <td class="skill"><%= player.passing %></td>
-          <td class="skill"><%= player.control %></td>
-          <td class="skill"><%= player.tackling %></td>
-          <td class="skill"><%= player.running %></td>
-          <td class="skill"><%= player.shooting %></td>
-          <td class="skill"><%= player.dribbling %></td>
-          <td class="skill"><%= player.defensive_heading %></td>
-          <td class="skill"><%= player.offensive_heading %></td>
-          <td class="skill"><%= player.flair %></td>
-          <td class="skill"><%= player.strength %></td>
-          <td class="skill"><%= player.creativity %></td>
+          <td style="width: 50px !important" class="player_id"><%= player.id %></td>
+          <td style="width: 150px !important"><%= player.name %></td>
+          <td style="width: 50px !important"><%= player.age %></td>
+          <td style="width: 50px !important"><%= (player.position + player.player_position_detail).upcase %></td>
+          <td id="passing" class="skill"><%= player.passing %></td>
+          <td id="control" class="skill"><%= player.control %></td>
+          <td id="tackling" class="skill"><%= player.tackling %></td>
+          <td id="running" class="skill"><%= player.running %></td>
+          <td id="shooting" class="skill"><%= player.shooting %></td>
+          <td id="dribbling" class="skill"><%= player.dribbling %></td>
+          <td id="defensive_heading" class="skill"><%= player.defensive_heading %></td>
+          <td id="offensive_heading" class="skill"><%= player.offensive_heading %></td>
+          <td id="flair" class="skill"><%= player.flair %></td>
+          <td id="strength" class="skill"><%= player.strength %></td>
+          <td id="creativity" class="skill"><%= player.creativity %></td>
           <td><%= player.total_skill %></td>
         </tr>
           <% end %>
@@ -40,6 +40,18 @@
   const selection = <%= @selection.to_json.html_safe %>;
 
   rows.forEach(function(row) {
+    const playerIdCell = row.querySelector('td.player_id');
+    const playerId = playerIdCell ? playerIdCell.innerHTML : null;
+    const player = selection.find(function(player) {
+      return player.id == playerId;
+    });
+
+    if (player) {
+      initializeSkillCells(row, player);
+    }
+  });
+
+  function initializeSkillCells(row, player) {
     const skillCells = row.querySelectorAll('td.skill'); 
     const position = row.classList[0];
     const staffKey = 'staff_' + position;
@@ -48,16 +60,29 @@
       if (cell.innerHTML >= club[staffKey]) {
         cell.classList.add('inferior-coach');
       }
-    });
-    
-    const playerIdCell = row.querySelector('td.player_id');
-    const playerId = playerIdCell ? playerIdCell.innerHTML : null;
-    const player = selection.find(function(player) {
-      return player.id == playerId;
-    });
 
-    // next job - add a class to a skill if potential reached
+      const potentialCheck = 'potential_' + cell.id + '_coached';
+      if (player[potentialCheck] === true) {
+        cell.classList.add('potential-coached');
+      }
 
+      cell.addEventListener('click', function() {
+        handleSkillCellClick(cell);
+      });
+    });
+  }
+
+  function handleSkillCellClick(cell) {
+    const playerIdCell = cell.closest('tr').querySelector('td.player_id');
+    const playerId = playerIdCell ? playerIdCell.innerHTML : 'Unknown Player ID';
+    const skillId = cell.id;
+
+    # needs to find all cells with the same player position that has a class of coach and remove it
     
-  });     
-</script>
+    console.log(`Skill ID: ${skillId}, Player ID: ${playerId}`);
+    cell.classList.add('coached');
+
+    # needs to add the player id and skill id to hidden fields for each coach that can be submitted to the controller via the form
+    
+  }
+</script>   
