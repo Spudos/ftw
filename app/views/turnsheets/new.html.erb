@@ -33,6 +33,8 @@
     </div>
   <% end %>
 </div>
+
+<hr>
 <div id="form_navigation" class="col-md-12 align-top d-flex align-items-center justify-content-center">
   <button id="back" class="btn btn-sm btn-primary">Back</button>
   <button id="next" class="btn btn-sm btn-primary">Next</button>
@@ -40,19 +42,63 @@
 
 
 <script>
-  const buttons = document.querySelectorAll('#form_navigation button');
+  const navigationButtons = document.querySelectorAll('#form_navigation button');
+  const stadiumButtons = document.querySelectorAll('#stand_navigation button');
+  const standCapacityButtons = document.querySelectorAll('#stand_capacity button');
+  const standConditionButtons = document.querySelectorAll('#stand_condition button');
+  const coachSelectionButtons = document.querySelectorAll('#coach_selection button');
+  const propertySelectionButtons = document.querySelectorAll('#property_selection button');
   const formDivs = document.querySelectorAll('div[id$="-form"]');
+  const name = document.querySelector('#name');
+  const capacity = document.querySelector('#capacity');
+  const condition = document.querySelector('#condition');
+  const club = <%= @club.to_json.html_safe %>;
 
-  buttons.forEach(button => {
+  navigationButtons.forEach(button => {
     button.addEventListener('click', function() {
-        handleButtonClick(button.id);
-        window.scrollTo(0, 0);
+      event.preventDefault();
+      handleNavigationButtonClick(button.id);
+      window.scrollTo(0, 0);
     });
   });
 
-  function handleButtonClick(buttonId) {
-    const shownDiv = document.querySelector('div.shown');
+  stadiumButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      event.preventDefault();
+      handleStadiumButtonClick(button);  
+    });
+  });
 
+  standCapacityButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      event.preventDefault();
+      handleStandCapacityButtonClick(button);  
+    });
+  });
+
+  standConditionButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      event.preventDefault();
+      handleStandConditionButtonClick(button);  
+    });
+  });
+
+  coachSelectionButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      event.preventDefault();
+      handleCoachSelectionButtonClick(button);  
+    });
+  });
+
+  propertySelectionButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      event.preventDefault();
+      handlePropertySelectionButtonClick(button);  
+    });
+  });
+
+  function handleNavigationButtonClick(buttonId) {
+    const shownDiv = document.querySelector('div.shown');
     if (buttonId === 'back') {
       if (!shownDiv.classList.contains('start')) {
         if (shownDiv.previousElementSibling) {
@@ -71,6 +117,91 @@
             shownDiv.nextElementSibling.classList.add('shown');
         }
       }
+    }
+  };
+
+  function handleStadiumButtonClick(button) {
+    const buttonId = button.id;
+    const standName = club[`stand_${buttonId}_name`];
+    const standCapacity = club[`stand_${buttonId}_capacity`];
+    const standCondition = club[`stand_${buttonId}_condition`];
+
+    stadiumButtons.forEach(function(btn) {
+        btn.classList.remove('btn-success');
+        btn.classList.add('btn-outline-primary');
+    });
+
+    button.classList.remove('btn-outline-primary');
+    button.classList.add('btn-success');
+
+    if (standName && standCapacity && standCondition) {
+        name.innerText = standName;
+        capacity.innerText = standCapacity;
+        condition.innerText = standCondition; 
+    } else {
+        name.innerText = "Unknown Stand";
+        capacity.innerText = "N/A";
+        condition.innerText = "N/A";
+    }
+  };
+
+  function handleStandCapacityButtonClick(button) {
+    const buttonId = button.id;
+
+    if (button.classList.contains('btn-success')) {
+      button.classList.add('btn-outline-primary');
+      button.classList.remove('btn-success');
+    } else {
+      standCapacityButtons.forEach(function(btn) {
+        btn.classList.add('btn-outline-primary');
+        btn.classList.remove('btn-success');
+      });
+
+      button.classList.add('btn-success');
+    }
+  };
+
+  function handleStandConditionButtonClick(button) {
+    const buttonId = button.id;
+    
+    if (button.classList.contains('btn-success')) {
+        button.classList.add('btn-outline-primary');
+        button.classList.remove('btn-success');
+    } else {
+        button.classList.remove('btn-outline-primary');
+        button.classList.add('btn-success');
+    }
+  };
+
+  function handleCoachSelectionButtonClick(button) {
+    const buttonId = button.id;
+
+    if (button.classList.contains('btn-success')) {
+        button.classList.remove('btn-success');
+        button.classList.add('btn-outline-primary');
+    } else {
+      coachSelectionButtons.forEach(function(btn) {
+        btn.classList.add('btn-outline-primary');
+        btn.classList.remove('btn-success');
+      });
+
+      button.classList.add('btn-success');
+    }
+  };
+
+  function handlePropertySelectionButtonClick(button) {
+    const buttonId = button.id;
+
+    if (button.classList.contains('btn-success')) {
+        button.classList.remove('btn-success');
+        button.classList.add('btn-outline-primary');
+    } else {
+      propertySelectionButtons.forEach(function(btn) {
+        btn.classList.add('btn-outline-primary');
+        btn.classList.remove('btn-success');
+      });
+
+      button.classList.add('btn-success');
     }
   };
 </script>
