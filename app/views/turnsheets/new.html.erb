@@ -42,12 +42,12 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-//----------------------------------------- data from turnsheets controller
+//-------------------------------------------------------------- Data From Rails
   const club = <%= @club.to_json.html_safe %>;
   const squadListing = <%= @selection.to_json.html_safe  %>;
 
 
-//----------------------------------------- navigation
+//-------------------------------------------------------------- Navigation
   const navigationButtons = document.querySelectorAll('#form_navigation button');
 
   navigationButtons.forEach(function(button) {
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
 
-//----------------------------------------- stand selection buttons on club view
+//-------------------------------------------------------------- Stand Selection And Club Upgrades
   const stadiumButtons = document.querySelectorAll('#stand_navigation button');
   const name = document.querySelector('#name');
   const capacity = document.querySelector('#capacity');
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
 
-//----------------------------------------- add listners for club improvments
+//------ Add Event Listeners
   function addEventListeners(buttons) {
     buttons.forEach(button => {
       button.addEventListener('click', function(event) {
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-//----------------------------------------- handle button click for club improvments
+//------ Handle Button Clicks
   function handleButtonClick(button, buttons) {
     const buttonId = button.id;
     
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-//----------------------------------------- button criteria for club improvments
+//------ Run Button Listeners
   const standCapacityButtons = document.querySelectorAll('#stand_capacity button');
   const standConditionButtons = document.querySelectorAll('#stand_condition button');
   const coachSelectionButtons = document.querySelectorAll('#coach_selection button');
@@ -160,11 +160,11 @@ document.addEventListener('DOMContentLoaded', function() {
   addEventListeners(propertySelectionButtons);
 
 
-//----------------------------------------- player training
+//-------------------------------------------------------------- Player Training
   const coachingArray = []; 
   const playerTrainingRows = document.querySelectorAll('tr[class]');
 
-  //------ gets player data and row and passes it into initializeSkillCells
+  //------ Get Player Data
   playerTrainingRows.forEach(function(row) {
     const playerIdCell = row.querySelector('td.player_id');
     const playerId = playerIdCell ? playerIdCell.innerHTML : null;
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   });
 
-  //------ styles a skill based on coachability and adds event listener to all skills
+  //------ Coachability Styling And Add Event Listener
   function initializeSkillCells(row, player) {
     const skillCells = row.querySelectorAll('td.skill'); 
     const position = row.classList[0];
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   };
 
-  //------ if a skill is coachable passes player and skill into buildCoachingArray
+  //------ Check Coachability Of Skill And Add To Coaching Array
   function handleSkillCellClick(cell) {
     const playerIdCell = cell.closest('tr').querySelector('td.player_id');
     const playerId = playerIdCell ? playerIdCell.innerHTML : 'Unknown Player ID';
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   };
 
-  //------ builds the training array for one gkp, dfc, mid, att
+  //------ Builds Training Array
   function buildCoachingArray(playerId, skillId) {
     const player = squadListing.find(function(player) {
       return player.id == playerId;
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
     styleSkillsToBeCoached();
   };
 
-  //------ styles the skills to be coached
+  //------ Styles Skills To Be Coached
   function styleSkillsToBeCoached() {
     console.log(coachingArray);
     const allSkillCells = document.querySelectorAll('td.skill');
@@ -253,6 +253,207 @@ document.addEventListener('DOMContentLoaded', function() {
       playerSkillCell.classList.add('coached');
     });
   };
+
+
+//-------------------------------------------------------------- Team Selection
+  const playerRows = document.querySelectorAll('.player-row');
+  const playerInputs = document.querySelectorAll('.player-input');
+
+  playerRows.forEach((row) => {
+    row.addEventListener('click', () => {
+      const playerId = row.dataset.playerId;
+      const selectedPlayerIndex = Array.from(playerInputs).findIndex(input => input.value === playerId);
+      if (selectedPlayerIndex !== -1) {
+        playerInputs[selectedPlayerIndex].value = '';
+        row.classList.remove('table-success');
+      } else {
+        const emptyInput = Array.from(playerInputs).find(input => input.value === '');
+        if (emptyInput) {
+          emptyInput.value = playerId;
+          row.classList.add('table-success');
+        }
+      }
+    });
+  });
+
+  playerInputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      const playerId = input.value;
+      if (playerId === '') {
+        const row = Array.from(playerRows).find(row => row.dataset.playerId === playerId);
+        if (row) {
+          row.classList.remove('table-success');
+        }
+      }
+    });
+  });
+
+
+//-------------------------------------------------------------- Transfers
+  const transferType = document.getElementById('transfer_type');
+  const transferPlayerId = document.getElementById('transfer_player_id');
+  const transferAmount = document.getElementById('transfer_amount');
+  const transferClub = document.getElementById('transfer_club');
+
+  transferType.addEventListener('input', function() {
+    if (transferType.value.trim() === "unmanaged_bid") {
+      transferPlayerId.removeAttribute('disabled');
+      transferAmount.removeAttribute('disabled');
+    } else if (transferType.value.trim() === "circuit") {
+      transferPlayerId.removeAttribute('disabled');
+      transferAmount.setAttribute('disabled', 'disabled');
+      transferClub.setAttribute('disabled', 'disabled');
+    } else if (transferType.value.trim() === "listed_bid") {
+      transferPlayerId.removeAttribute('disabled');
+      transferAmount.removeAttribute('disabled');
+    } else if (transferType.value.trim() === "deal") {
+      transferPlayerId.removeAttribute('disabled');
+      transferAmount.removeAttribute('disabled');
+      transferClub.removeAttribute('disabled');
+    } else {
+      transferPlayerId.setAttribute('disabled', 'disabled');
+      transferAmount.setAttribute('disabled', 'disabled');
+      transferClub.setAttribute('disabled', 'disabled');
+    }
+  });
+
+  const transferOneType = document.getElementById('transfer1_type');
+  const transferOnePlayerId = document.getElementById('transfer1_player_id');
+  const transferOneAmount = document.getElementById('transfer1_amount');
+  const transferOneClub = document.getElementById('transfer1_club');
+
+  transferOneType.addEventListener('input', function() {
+    if (transferOneType.value.trim() === "unmanaged_bid") {
+      transferOnePlayerId.removeAttribute('disabled');
+      transferOneAmount.removeAttribute('disabled');
+    } else if (transferOneType.value.trim() === "circuit") {
+      transferOnePlayerId.removeAttribute('disabled');
+      transferOneAmount.setAttribute('disabled', 'disabled');
+      transferOneClub.setAttribute('disabled', 'disabled');
+    } else if (transferOneType.value.trim() === "listed_bid") {
+      transferOnePlayerId.removeAttribute('disabled');
+      transferOneAmount.removeAttribute('disabled');
+    } else if (transferOneType.value.trim() === "deal") {
+      transferOnePlayerId.removeAttribute('disabled');
+      transferOneAmount.removeAttribute('disabled');
+      transferOneClub.removeAttribute('disabled');
+    } else {
+      transferOnePlayerId.setAttribute('disabled', 'disabled');
+      transferOneAmount.setAttribute('disabled', 'disabled');
+      transferOneClub.setAttribute('disabled', 'disabled');
+    }
+  });
+
+  const transferTwoType = document.getElementById('transfer2_type');
+  const transferTwoPlayerId = document.getElementById('transfer2_player_id');
+  const transferTwoAmount = document.getElementById('transfer2_amount');
+  const transferTwoClub = document.getElementById('transfer2_club');
+
+  transferTwoType.addEventListener('input', function() {
+    if (transferTwoType.value.trim() === "unmanaged_bid") {
+      transferTwoPlayerId.removeAttribute('disabled');
+      transferTwoAmount.removeAttribute('disabled');
+    } else if (transferTwoType.value.trim() === "circuit") {
+      transferTwoPlayerId.removeAttribute('disabled');
+      transferTwoAmount.setAttribute('disabled', 'disabled');
+      transferTwoClub.setAttribute('disabled', 'disabled');
+    } else if (transferTwoType.value.trim() === "listed_bid") {
+      transferTwoPlayerId.removeAttribute('disabled');
+      transferTwoAmount.removeAttribute('disabled');
+    } else if (transferTwoType.value.trim() === "deal") {
+      transferTwoPlayerId.removeAttribute('disabled');
+      transferTwoAmount.removeAttribute('disabled');
+      transferTwoClub.removeAttribute('disabled');
+    } else {
+      transferTwoPlayerId.setAttribute('disabled', 'disabled');
+      transferTwoAmount.setAttribute('disabled', 'disabled');
+      transferTwoClub.setAttribute('disabled', 'disabled');
+    }
+  });
+
+  const transferThreeType = document.getElementById('transfer3_type');
+  const transferThreePlayerId = document.getElementById('transfer3_player_id');
+  const transferThreeAmount = document.getElementById('transfer3_amount');
+  const transferThreeClub = document.getElementById('transfer3_club');
+
+
+  transferThreeType.addEventListener('input', function() {
+    if (transferThreeType.value.trim() === "unmanaged_bid") {
+      transferThreePlayerId.removeAttribute('disabled');
+      transferThreeAmount.removeAttribute('disabled');
+    } else if (transferThreeType.value.trim() === "circuit") {
+      transferThreePlayerId.removeAttribute('disabled');
+      transferThreeAmount.setAttribute('disabled', 'disabled');
+      transferThreeClub.setAttribute('disabled', 'disabled');
+    } else if (transferThreeType.value.trim() === "listed_bid") {
+      transferThreePlayerId.removeAttribute('disabled');
+      transferThreeAmount.removeAttribute('disabled');
+    } else if (transferThreeType.value.trim() === "deal") {
+      transferThreePlayerId.removeAttribute('disabled');
+      transferThreeAmount.removeAttribute('disabled');
+      transferThreeClub.removeAttribute('disabled');
+    } else {
+      transferThreePlayerId.setAttribute('disabled', 'disabled');
+      transferThreeAmount.setAttribute('disabled', 'disabled');
+      transferThreeClub.setAttribute('disabled', 'disabled');
+    }
+  });
+
+  
+//-------------------------------------------------------------- Articles
+  const headlineInput = document.getElementById('article_headline');
+  const subHeadlineInput = document.getElementById('article_sub_headline');
+  const articleInput = document.getElementById('article');
+
+  headlineInput.addEventListener('input', function() {
+  if (headlineInput.value.trim() !== "") {
+    headlineInput.style.border = '1px solid #66FF00';
+    subHeadlineInput.style.border = '1px solid #d42321';
+    subHeadlineInput.removeAttribute('disabled');
+  } else {
+    headlineInput.style.border = '1px solid #d42321';
+    subHeadlineInput.setAttribute('disabled', 'disabled');
+    subHeadlineInput.style.border = '1px solid #ced4da';
+  }
+  });
+
+  subHeadlineInput.addEventListener('input', function() {
+  if (subHeadlineInput.value.trim() !== "") {
+    subHeadlineInput.style.border = '1px solid #66FF00';
+    articleInput.style.border = '1px solid #d42321';
+    articleInput.removeAttribute('disabled');
+  } else {
+    subHeadlineInput.style.border = '1px solid #d42321';
+    articleInput.setAttribute('disabled', 'disabled');
+    articleInput.style.border = '1px solid #ced4da';
+  }
+  });
+
+  articleInput.addEventListener('input', function() {
+    articleInput.style.border = '1px solid #66FF00';
+  });
+
+//-------------------------------------------------------------- Messaging
+  const clubMessageInput = document.getElementById('club_message');
+  const messageInput = document.getElementById('message_text');
+
+  clubMessageInput.addEventListener('input', function() {
+    
+    if (!isNaN(clubMessageInput.value.trim()) && clubMessageInput.value.trim() !== "") {
+      messageInput.removeAttribute('disabled');
+      messageInput.setAttribute('required', 'required');
+      clubMessageInput.style.border = '1px solid #66FF00';
+      messageInput.style.border = '1px solid #d42321';
+    } else {
+      messageInput.setAttribute('disabled', 'disabled');
+      messageInput.removeAttribute('required');
+      clubMessageInput.style.border = '1px solid #d42321';
+    }
+  });
+
+  messageInput.addEventListener('input', function() {
+    messageInput.style.border = '1px solid #66FF00';
+  });
 });
 </script>
 
