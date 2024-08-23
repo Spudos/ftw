@@ -33,7 +33,7 @@ class TurnsheetsController < ApplicationController
     authorize @turnsheet
 
     existing_turnsheet = Turnsheet.where(week: @turnsheet.week, club_id: @turnsheet.club_id)
-binding.pry
+
     existing_turnsheet.destroy_all if existing_turnsheet.exists?
 
     respond_to do |format|
