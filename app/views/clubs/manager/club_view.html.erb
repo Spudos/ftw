@@ -23,7 +23,11 @@
       <div class="col-md-6">
         <%= render "staff" %>
       </div>
-    
+      <% if @upgrades.present? %>
+        <div class="col-md-6">
+          <%= render "upgrades" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

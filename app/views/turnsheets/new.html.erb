@@ -1,5 +1,5 @@
 <div id="form-body">
-  <%= form_with(url: turnsheets_path, method: :post, local: false) do |form| %>
+  <%= form_with(model: @turnsheet) do |form| %>
     <div id="header-form" class="shown start">
       <%= render "header", turnsheet: @turnsheet, form: form %>
     </div>
@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     button.addEventListener('click', function(event) {
       event.preventDefault();
       handleStadiumButtonClick(button);
+      clearUpgradeValues();
     });
   });
 
@@ -120,8 +121,25 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   };
 
+  //------ Clear Upgrade Values On Stand Change
+  function clearUpgradeValues() {
+    document.getElementById("stadium_upgrade").value = "";
+    document.getElementById("stadium_amount").value = "";
+    document.getElementById("stadium_condition_upgrade").value = "";
 
-//------ Add Event Listeners
+    standConditionButtons.forEach(function(btn) {
+      btn.classList.remove('btn-success');
+      btn.classList.add('btn-outline-primary');
+    });
+
+    standCapacityButtons.forEach(function(btn) {
+      btn.classList.remove('btn-success');
+      btn.classList.add('btn-outline-primary');
+    });
+  };
+
+
+  //------ Add Event Listeners
   function addEventListeners(buttons) {
     buttons.forEach(button => {
       button.addEventListener('click', function(event) {
@@ -131,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-//------ Handle Button Clicks
+  //------ Handle Button Clicks
   function handleButtonClick(button, buttons) {
     const buttonId = button.id;
     
@@ -144,11 +162,80 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.classList.remove('btn-success');
         });
 
+        button.classList.remove('btn-outline-primary');
         button.classList.add('btn-success');
     }
+
+    setStadiumCapacityInputValues(button);
+    setStadiumConditionInputValues(button);
+    setStaffInputValues(button);
+    setPropertyInputValues(button);
   }
 
-//------ Run Button Listeners
+  //------ Set Stadium Capacity Input Values
+  function setStadiumCapacityInputValues(button) {
+    const upgradeValues = ['2000', '4000', '6000', '8000'];
+    const successButton = Array.from(stadiumButtons).find(button => button.classList.contains('btn-success'));
+
+    if (upgradeValues.includes(button.id)) {
+      current_upgrade = document.getElementById("stadium_upgrade").value;
+      current_amount = document.getElementById("stadium_amount").value;
+
+      if (current_upgrade === 'stand_' + successButton.id + '_capacity' && current_amount === button.id) {
+        document.getElementById("stadium_upgrade").value = "";
+        document.getElementById("stadium_amount").value = "";
+      } else {
+        document.getElementById("stadium_upgrade").value = 'stand_' + successButton.id + '_capacity';
+        document.getElementById("stadium_amount").value = button.id;
+      };
+    };
+  };
+
+  //------ Set Stadium Condition Input Values
+  function setStadiumConditionInputValues(button) {
+    const successButton = Array.from(stadiumButtons).find(button => button.classList.contains('btn-success'));
+
+    if (button.id === 'condition') {
+      current_value = document.getElementById("stadium_condition_upgrade").value;
+
+      if (current_value === 'stand_' + successButton.id + '_condition') {
+        document.getElementById("stadium_condition_upgrade").value = "";
+      } else {
+        document.getElementById("stadium_condition_upgrade").value = 'stand_' + successButton.id + '_condition';
+      };
+    };
+  };
+
+  //------ Set Staff Input Values
+  function setStaffInputValues(button) {
+    if (button.id.startsWith("staff")) {
+      current_value = document.getElementById("coach_upgrade").value;
+
+      if (current_value === button.id) {
+        document.getElementById("coach_upgrade").value = "";
+      } else {
+        document.getElementById("coach_upgrade").value = button.id;
+      };
+    };
+  };
+
+  //------ Set Property Input Values
+  function setPropertyInputValues(button) {
+    const propertyToCheck = ['pitch', 'hospitality', 'facilities'];
+
+    if (propertyToCheck.includes(button.id)) {
+      current_value = document.getElementById("property_upgrade").value;
+
+      if (current_value === button.id) {
+        document.getElementById("property_upgrade").value = "";
+      } else {
+        document.getElementById("property_upgrade").value = button.id;
+      };
+    };
+  };
+
+  
+  //------ Run Button Listeners
   const standCapacityButtons = document.querySelectorAll('#stand_capacity button');
   const standConditionButtons = document.querySelectorAll('#stand_condition button');
   const coachSelectionButtons = document.querySelectorAll('#coach_selection button');
@@ -159,9 +246,9 @@ document.addEventListener('DOMContentLoaded', function() {
   addEventListeners(coachSelectionButtons);
   addEventListeners(propertySelectionButtons);
 
-
+  
 //-------------------------------------------------------------- Player Training
-  const coachingArray = []; 
+  var coachingArray = []; 
   const playerTrainingRows = document.querySelectorAll('tr[class]');
 
   //------ Get Player Data
@@ -222,7 +309,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const playerPosition = player.position;
-
     const index = coachingArray.findIndex(player => player.position === playerPosition);
 
     if (index !== -1) {
@@ -233,11 +319,11 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     styleSkillsToBeCoached();
+    submitTrainingArray();
   };
 
   //------ Styles Skills To Be Coached
   function styleSkillsToBeCoached() {
-    console.log(coachingArray);
     const allSkillCells = document.querySelectorAll('td.skill');
 
     allSkillCells.forEach(function(cell) {
@@ -251,6 +337,43 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       const playerSkillCell = playerRow.querySelector(`td#${player.skillId}`);
       playerSkillCell.classList.add('coached');
+    });
+  };
+
+  //------ Submit Training Array To Form
+  function submitTrainingArray() {
+    const trainGoalkeeper = document.getElementById('train_goalkeeper');
+    const trainDefender = document.getElementById('train_defender');
+    const trainMidfielder = document.getElementById('train_midfielder');
+    const trainAttacker = document.getElementById('train_attacker');
+    const trainGoalkeeperSkill = document.getElementById('train_goalkeeper_skill');
+    const trainDefenderSkill = document.getElementById('train_defender_skill');
+    const trainMidfielderSkill = document.getElementById('train_midfielder_skill');
+    const trainAttackerSkill = document.getElementById('train_attacker_skill');
+
+    trainGoalkeeper.value = "";
+    trainDefender.value = "";
+    trainMidfielder.value = "";
+    trainAttacker.value = "";
+    trainGoalkeeperSkill.value = "";
+    trainDefenderSkill.value = "";
+    trainMidfielderSkill.value = "";
+    trainAttackerSkill.value = "";
+
+    coachingArray.forEach(function(player) {
+      if (player.position === 'gkp') {
+        trainGoalkeeper.value = player.playerId;
+        trainGoalkeeperSkill.value = player.skillId;
+      } else if (player.position === 'dfc') {
+        trainDefender.value = player.playerId;
+        trainDefenderSkill.value = player.skillId;
+      } else if (player.position === 'mid') {
+        trainMidfielder.value = player.playerId;
+        trainMidfielderSkill.value = player.skillId;
+      } else if (player.position === 'att') {
+        trainAttacker.value = player.playerId;
+        trainAttackerSkill.value = player.skillId;
+      };
     });
   };
 

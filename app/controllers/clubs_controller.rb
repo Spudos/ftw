@@ -123,6 +123,7 @@ class ClubsController < ApplicationController
                                .where("var2 LIKE 'inc%' OR var2 LIKE 'dec%'")
     @finance_items = Club.new.finance_items(@club.id)
     @players = player_position_sort
+    @upgrades = Upgrade.where(club_id: current_user[:club]).where('var3 < ?', 6)
   end
 
   def set_club_theme

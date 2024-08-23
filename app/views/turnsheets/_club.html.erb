@@ -19,8 +19,8 @@
   <h6 class="col-md-12 align-top d-flex align-items-center justify-content-center">Capacity: <span id="capacity"><%= @club.stand_n_capacity %></span></h6>
   <div id="stand_capacity" class="col-md-12 align-top d-flex align-items-center justify-content-center">  
     <button id="2000" class="btn btn-sm btn-outline-primary">add 2000 seats</button>
-    <button id="3000" class="btn btn-sm btn-outline-primary">add 4000 seats</button>
-    <button id="4000" class="btn btn-sm btn-outline-primary">add 6000 seats</button>
+    <button id="4000" class="btn btn-sm btn-outline-primary">add 4000 seats</button>
+    <button id="6000" class="btn btn-sm btn-outline-primary">add 6000 seats</button>
     <button id="8000" class="btn btn-sm btn-outline-primary">add 8000 seats</button>
   </div>
 
@@ -75,3 +75,9 @@
     <span>Current rating:<%= @club.facilities %></span>
   </button>
 </div>
+
+<%= form.text_field :stadium_upgrade, id: "stadium_upgrade", hidden: true %>
+<%= form.text_field :stadium_amount, id: "stadium_amount", hidden: true  %>
+<%= form.text_field :stadium_condition_upgrade, id: "stadium_condition_upgrade", hidden: true  %>
+<%= form.text_field :coach_upgrade, id: "coach_upgrade", hidden: true  %>
+<%= form.text_field :property_upgrade, id: "property_upgrade", hidden: true %>

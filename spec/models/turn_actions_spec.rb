@@ -5,9 +5,9 @@ RSpec.describe TurnActions, type: :model do
   describe 'call: player_upgrade' do
     it 'upgrades tackling by 1 point' do
       week = 1
-      create(:turn_actions, club_id: 1, var1: 'train', var2: 'Woolley', var3: 'tackling', date_completed: nil)
+      create(:turn_actions, club_id: 1, var1: 'train', var2: 402, var3: 'tackling', date_completed: nil)
       create(:club, id: 1, staff_dfc: 10)
-      create(:player, name: 'Woolley', position: 'dfc')
+      create(:player,  id: 402, position: 'dfc')
       turn = Turn.new(week: 1)
 
       TurnActions::TurnActionMethods.new(week).call
@@ -17,9 +17,9 @@ RSpec.describe TurnActions, type: :model do
 
     it 'does not upgrade tackling by 1 point due to the coach being too low' do
       week = 1
-      create(:turn_actions, club_id: 1, var1: 'train', var2: 'Woolley', var3: 'tackling', date_completed: nil)
+      create(:turn_actions, club_id: 1, var1: 'train', var2: 402, var3: 'tackling', date_completed: nil)
       create(:club, id: 1, staff_dfc: 2)
-      create(:player, name: 'Woolley', position: 'dfc')
+      create(:player,  id: 402, position: 'dfc')
 
       TurnActions::TurnActionMethods.new(week).call
 
@@ -28,9 +28,9 @@ RSpec.describe TurnActions, type: :model do
 
     it 'does not upgrade tackling by 1 point due to lack of potential' do
       week = 1
-      create(:turn_actions, club_id: 1, var1: 'train', var2: 'Woolley', var3: 'tackling', date_completed: nil)
+      create(:turn_actions, club_id: 1, var1: 'train', var2: 402, var3: 'tackling', date_completed: nil)
       create(:club, id: 1, staff_dfc: 10)
-      create(:player, name: 'Woolley', position: 'dfc', potential_tackling: 2, potential_tackling_coached: false)
+      create(:player, id: 402, position: 'dfc', potential_tackling: 2, potential_tackling_coached: false)
 
       TurnActions::TurnActionMethods.new(week).call
 

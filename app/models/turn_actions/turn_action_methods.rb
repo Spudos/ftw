@@ -42,7 +42,7 @@ class TurnActions::TurnActionMethods
   def train_player(action_id, week, club_id, player, skill)
     if Message.find_by(action_id:).nil?
       club_staff = Club.find_by(id: club_id)
-      player_data = Player.find_by(name: player)
+      player_data = Player.find_by(id: player.to_i)
       coach = club_staff.send("staff_#{player_data.position}")
 
       if player_data[skill] < player_data.send("potential_#{skill}")
@@ -50,15 +50,15 @@ class TurnActions::TurnActionMethods
           player_data[skill] += 1
           player_data.update(skill => player_data[skill])
           Message.create(action_id:, week:, club_id:,
-                         var1: "Training #{player} in #{skill} suceeded! His new value is #{player_data[skill]}")
+                         var1: "Training #{player_data.name} in #{skill} suceeded! His new value is #{player_data[skill]}")
         else
           Message.create(action_id:, week:, club_id:,
-                         var1: "Training #{player} in #{skill} failed - this coach isn't good enough to train #{skill} for #{player}")  
+                         var1: "Training #{player_data.name} in #{skill} failed - this coach isn't good enough to train #{skill} for #{player_data.name}")  
         end
       else
         player_data["potential_#{skill}_coached"] = true
         player_data.save
-        Message.create(action_id:, week:, club_id:, var1: "Training #{player} in #{skill} failed due to reaching potential")
+        Message.create(action_id:, week:, club_id:, var1: "Training #{player_data.name}in #{skill} failed due to reaching potential")
       end
     end
   end
