@@ -1,56 +1,83 @@
 <h3 style="text-align: center">Club Upgrades</h3>
+
 <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
-  <table class="table table-hover align-middle table-bordered">
-    <tr>
-      <th scope="col">Type</th>
-      <th scope="col">Area</th>
-      <th scope="col">Amount</th>
-      <th scope="col">Cost</th>
-    <tr scope="row">
-      <td>Stand</td>
-      <td>
-        <%= form.select :stadium_upgrade, options_for_select({ "North Stand" => "stand_n_capacity", "South Stand" => "stand_s_capacity", "East Stand" => "stand_e_capacity", "West Stand" => "stand_w_capacity" }), prompt: "Select a stand" %>
-      </td>
-      <td>
-        <%= form.select :stadium_amount, options_for_select([2000, 4000, 6000, 8000, 10000]), prompt: "How many seats?" %>
-      </td>
-      <td>
-        <p>£1000 per seat</p>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td>Stand Condition</td>
-      <td>
-        <%= form.select :stadium_condition_upgrade, options_for_select({ "North Stand" => "stand_n_condition", "South Stand" => "stand_s_condition", "East Stand" => "stand_e_condition", "West Stand" => "stand_w_condition" }), prompt: "Select a stand" %>
-      </td>
-      <td>
-        <p></p>
-      </td> 
-      <td>
-        <p>£100,000</p>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td>Coach</td>
-      <td>
-        <%= form.select :coach_upgrade, options_for_select({ "Fitness" => "staff_fitness", "Scout" => "staff_scouts", "Goalkeeper" => "staff_gkp", "Defence" => "staff_dfc", "Midfield" => "staff_mid", "Attack" => "staff_att" }), prompt: 'Select a coach' %>
-      </td>  
-      <td>
-        <p></p>
-      </td> 
-      <td>
-        <p>£500,000</p>
-      </td>
-    <tr scope="row">
-      <td>Property</td>
-      <td>
-        <%= form.select :property_upgrade, options_for_select({ "Pitch" => "pitch", "Hospitality" => "hospitality", "Facilities" => "facilities" }), prompt: 'Select a property' %>
-      </td>  
-      <td>
-        <p></p>
-      </td>    
-      <td>
-        <p>£250,000</p>
-      </td>
-  </table>
+  <%= image_tag "club.jpg", alt: "club stadium", class: "club-stadium m-2" %> 
 </div>
+
+<hr>
+<h5 style="text-align: center"><%= @club.ground_name %></h5>
+<div id="stand_navigation" class="col-md-12 align-top d-flex align-items-center justify-content-center">
+  <button id="n" class="btn btn-sm btn-success">North</button>
+  <button id="s" class="btn btn-sm btn-outline-primary">South</button>
+  <button id="e" class="btn btn-sm btn-outline-primary">East</button>
+  <button id="w" class="btn btn-sm btn-outline-primary">West</button>
+</div>
+
+<div>
+  <h6 class="d-flex align-items-center justify-content-center mt-3"><span id="name"><%= @club.stand_n_name %></span></h6>
+  
+  <h6 class="col-md-12 align-top d-flex align-items-center justify-content-center">Capacity: <span id="capacity"><%= @club.stand_n_capacity %></span></h6>
+  <div id="stand_capacity" class="col-md-12 align-top d-flex align-items-center justify-content-center">  
+    <button id="2000" class="btn btn-sm btn-outline-primary">add 2000 seats</button>
+    <button id="4000" class="btn btn-sm btn-outline-primary">add 4000 seats</button>
+    <button id="6000" class="btn btn-sm btn-outline-primary">add 6000 seats</button>
+    <button id="8000" class="btn btn-sm btn-outline-primary">add 8000 seats</button>
+  </div>
+
+  <h6 class="col-md-12 align-top d-flex align-items-center justify-content-center mt-3">Condition: <span id="condition"><%= @club.stand_n_condition %><span></h4>
+  <div id="stand_condition" class="col-md-12 align-top d-flex align-items-center justify-content-center">
+    <button id="condition" class="btn btn-sm btn-outline-primary">Upgrade stand condition</button>
+  </div>
+</div>
+
+<hr>
+<h5 style="text-align: center">Coaches</h5>
+<div id="coach_selection" class="col-md-12 align-top d-flex align-items-center justify-content-center">
+  <button id="staff_gkp" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+    <span>Goalkeeping</span>
+    <span>Current rating:<%= @club.staff_gkp %></span>
+  </button>
+  <button id="staff_dfc" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+    <span>Defense</span>
+    <span>Current rating:<%= @club.staff_dfc %></span>
+  </button>
+  <button id="staff_mid" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+    <span>Midfield</span>
+    <span>Current rating:<%= @club.staff_mid %></span>
+  </button>
+  <button id="staff_att" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+    <span>Attack</span>
+    <span>Current rating:<%= @club.staff_att %></span>
+  </button>
+  <button id="staff_fitness" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+    <span>Fitness</span>
+    <span>Current rating:<%= @club.staff_fitness %></span>
+  </button>
+  <button id="staff_scouts" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+    <span>Scouts</span>
+    <span>Current rating:<%= @club.staff_scouts %></span>
+  </button>
+</div>
+
+<hr>
+<h5 style="text-align: center">Property</h5>
+<div id="property_selection" class="col-md-12 align-top d-flex align-items-center justify-content-center">
+  <button id="pitch" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+    <span>Pitch</span>
+    <span>Current rating:<%= @club.pitch %></span>
+  </button>
+  <button id="hospitality" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+    <span>Hospitality</span>
+    <span>Current rating:<%= @club.hospitality %></span>
+  </button>
+  <button id="facilities" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+    <span>Facilities</span>
+    <span>Current rating:<%= @club.facilities %></span>
+  </button>
+</div>
+
+<%= form.text_field :stadium_upgrade, id: "stadium_upgrade", hidden: true %>
+<%= form.text_field :stadium_amount, id: "stadium_amount", hidden: true  %>
+<%= form.text_field :stadium_condition_upgrade, id: "stadium_condition_upgrade", hidden: true  %>
+<%= form.text_field :coach_upgrade, id: "coach_upgrade", hidden: true  %>
+<%= form.text_field :property_upgrade, id: "property_upgrade", hidden: true %>

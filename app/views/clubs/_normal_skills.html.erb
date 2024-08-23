@@ -1,7 +1,7 @@
 <h3 class="text-center">Skills</h3>
 <table class="table table-hover align-middle align-middle">
   <thead class="table-header">
-    <tr style="border: 2px <%= @primary %> solid;">
+    <tr style="border: 1px <%= @primary %> solid;">
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Age</th>
@@ -25,13 +25,13 @@
   <tbody class="table-detail">
     <% @players.each do |player| %>
       <% if player.position == 'gkp' %>
-        <tr scope="row" style="border-bottom: 2px <%= @secondary %> solid;"  class="table-secondary">
+        <tr scope="row" style="border-bottom: 1px <%= @secondary %> solid;"  class="table-secondary">
       <% elsif player.position == 'dfc' %>
-        <tr scope="row" style="border-bottom: 2px <%= @secondary %> solid;"  class="table-success">
+        <tr scope="row" style="border-bottom: 1px <%= @secondary %> solid;"  class="table-success">
       <% elsif player.position == 'mid' %>
-        <tr scope="row" style="border-bottom: 2px <%= @secondary %> solid;"  class="table-warning">
+        <tr scope="row" style="border-bottom: 1px <%= @secondary %> solid;"  class="table-warning">
       <% else %>
-        <tr scope="row" style="border-bottom: 2px <%= @secondary %> solid;"  class="table-danger">
+        <tr scope="row" style="border-bottom: 1px <%= @secondary %> solid;"  class="table-danger">
       <% end %>
         <td><%= player.id %></td>
         <td><%= player.name %></td>

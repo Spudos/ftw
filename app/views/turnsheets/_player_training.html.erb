@@ -1,55 +1,48 @@
-<h3 style="text-align: center">Players</h3>
 <h4 style="text-align: center">Training</h4>
-<div class="col-md-12 align-top d-flex justify-content-center">  
-  <table class="table table-hover align-middle table-bordered">
-    <tr>
-      <th scope="col">Position</th>
-      <th scope="col">Player</th>
-      <th scope="col">skill</th>
-    </tr>
-    <tr scope="row">
-      <td>Goalkeeper</td>
-      <td>
-        <%= form.label :train_goalkeeper, style: "display: none" %>
-        <%= form.select :train_goalkeeper, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
-      </td>
-      <td>
-        <%= form.label :train_goalkeeper_skill, style: "display: none" %>
-        <%= form.select :train_goalkeeper_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td>Defender</td>
-      <td>
-        <%= form.label :train_defender, style: "display: none" %>
-        <%= form.select :train_defender, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
-      </td>
-      <td>
-        <%= form.label :train_defender_skill, style: "display: none" %>
-        <%= form.select :train_defender_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td>Midfield</td>
-      <td>
-        <%= form.label :train_midfielder, style: "display: none" %>
-        <%= form.select :train_midfielder, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
-      </td>
-      <td>
-        <%= form.label :train_midfielder_skill, style: "display: none" %>
-        <%= form.select :train_midfielder_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
-        </td>
-    </tr>
-    <tr scope="row">
-      <td>Attack</td>
-      <td>
-        <%= form.label :train_attacker, style: "display: none" %>
-        <%= form.select :train_attacker, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:name]] }, prompt: "Select a player" %>
-      </td>
-      <td>
-        <%= form.label :train_attacker_skill, style: "display: none" %>
-        <%= form.select :train_attacker_skill, options_for_select(['passing', 'control', 'tackling', 'running', 'shooting', 'dribbling', 'defensive_heading', 'offensive_heading', 'flair', 'strength', 'creativity']), prompt: "Which Skill?" %>
-      </td>
-    </tr>
-  </table>
+
+<div class="col-md-12 align-top d-flex align-items-center justify-content-center">
+  <%= image_tag "training.jpg", alt: "club stadium", class: "club-stadium m-2" %> 
 </div>
+
+<% @positions.each do |position| %>
+  <div class="col-md-12 align-top d-flex justify-content-center">
+    <table>
+      <thead class="turnsheet-table-header">
+        <%= render 'player_table_header' %>
+      </thead>
+      <tbody class="turnsheet-table-detail">
+        <% @selection.each do |player| %>
+          <% if player.position == position %>
+          <tr class="<%= position %>">
+          <td style="width: 50px !important" class="player_id"><%= player.id %></td>
+          <td style="width: 150px !important"><%= player.name %></td>
+          <td style="width: 50px !important"><%= player.age %></td>
+          <td style="width: 50px !important"><%= (player.position + player.player_position_detail).upcase %></td>
+          <td id="passing" class="skill"><%= player.passing %></td>
+          <td id="control" class="skill"><%= player.control %></td>
+          <td id="tackling" class="skill"><%= player.tackling %></td>
+          <td id="running" class="skill"><%= player.running %></td>
+          <td id="shooting" class="skill"><%= player.shooting %></td>
+          <td id="dribbling" class="skill"><%= player.dribbling %></td>
+          <td id="defensive_heading" class="skill"><%= player.defensive_heading %></td>
+          <td id="offensive_heading" class="skill"><%= player.offensive_heading %></td>
+          <td id="flair" class="skill"><%= player.flair %></td>
+          <td id="strength" class="skill"><%= player.strength %></td>
+          <td id="creativity" class="skill"><%= player.creativity %></td>
+          <td><%= player.total_skill %></td>
+        </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<%= form.text_field :train_goalkeeper, id: "train_goalkeeper", hidden: true %>
+<%= form.text_field :train_goalkeeper_skill, id: "train_goalkeeper_skill", hidden: true %>
+<%= form.text_field :train_defender, id: "train_defender", hidden: true %>
+<%= form.text_field :train_defender_skill, id: "train_defender_skill", hidden: true %>
+<%= form.text_field :train_midfielder, id: "train_midfielder", hidden: true %>
+<%= form.text_field :train_midfielder_skill, id: "train_midfielder_skill", hidden: true %>
+<%= form.text_field :train_attacker, id: "train_attacker", hidden: true %>
+<%= form.text_field :train_attacker_skill, id: "train_attacker_skill", hidden: true %>

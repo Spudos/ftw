@@ -27,27 +27,3 @@
     </tr>
   </table>
 </div>
-
-<script defer>
-  const clubMessageInput = document.getElementById('club_message');
-  const messageInput = document.getElementById('message_text');
-
-  clubMessageInput.addEventListener('input', function() {
-    
-    if (!isNaN(clubMessageInput.value.trim()) && clubMessageInput.value.trim() !== "") {
-      messageInput.removeAttribute('disabled');
-      messageInput.setAttribute('required', 'required');
-      clubMessageInput.style.border = '1px solid #66FF00';
-      messageInput.style.border = '1px solid #d42321';
-    } else {
-      messageInput.setAttribute('disabled', 'disabled');
-      messageInput.removeAttribute('required');
-      clubMessageInput.style.border = '1px solid #d42321';
-    }
-  });
-
-  messageInput.addEventListener('input', function() {
-      messageInput.style.border = '1px solid #66FF00';
-    });
-</script>
-

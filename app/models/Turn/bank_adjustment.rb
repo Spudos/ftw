@@ -83,13 +83,13 @@ class Turn::BankAdjustment
                      week:,
                      club_id:,
                      var1: "Your bank account was charged with #{amount} due a player purchase (#{dept})",
-                     var2: 'dec-transfers_in', var3: amount.to_i)
+                     var2: 'dec-transfer_in', var3: amount.to_i)
     elsif reason == 'deal_purchase'
       Message.create(action_id:,
                      week:,
                      club_id:,
                      var1: "Your bank account was charged with #{amount} due a player purchase (#{dept})",
-                     var2: 'dec-transfers_in', var3: amount.to_i)
+                     var2: 'dec-transfer_in', var3: amount.to_i)
     else
       Message.create(action_id:,
                      week:,

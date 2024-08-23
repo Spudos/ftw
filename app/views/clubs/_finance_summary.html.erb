@@ -1,21 +1,21 @@
 <table class="table table-hover align-middle">
-  <tr style="border: 2px <%= @primary %> solid;">
+  <tr style="border: 1px <%= @primary %> solid;">
     <td scope="col">Item</td>
     <td scope="col">Amount</td>
   </tr>
-  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
     <td><strong>Opening Balance</strong></td>
     <td><strong><%= @club.bank_bal + @finance_items[:total_expenditure] - @finance_items[:total_income] %></strong></td>   
   </tr>
-  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
     <td>Total Income</td>
     <td><%= @finance_items[:total_income] %></td>   
   </tr>
-  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
     <td>Total Expenditure</td>
     <td><%= @finance_items[:total_expenditure] %></td>   
   </tr>
-  <tr style="border-bottom: 2px <%= @secondary %> solid;" scope="row">
+  <tr style="border-bottom: 1px <%= @secondary %> solid;" scope="row">
     <td><strong>Closing Balance</strong></td>
     <td><strong><%= @club.bank_bal %></strong></td>   
   </tr>

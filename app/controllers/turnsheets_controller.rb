@@ -16,11 +16,11 @@ class TurnsheetsController < ApplicationController
   def new
     @turnsheet = Turnsheet.new
     authorize @turnsheet
+
     @club = Club.find_by(id: current_user.club)
-
+    @positions = %w(gkp dfc mid att)
     @selection = player_position_sort
-
-    @next_turn_week = Turnsheet.where(club_id: current_user.club).maximum(:week).to_i + 1
+    @next_turn_week = Turn.maximum(:week).to_i + 1
   end
 
   # GET /turnsheets/1/edit
@@ -31,6 +31,10 @@ class TurnsheetsController < ApplicationController
   def create
     @turnsheet = Turnsheet.new(turnsheet_params)
     authorize @turnsheet
+
+    existing_turnsheet = Turnsheet.where(week: @turnsheet.week, club_id: @turnsheet.club_id)
+binding.pry
+    existing_turnsheet.destroy_all if existing_turnsheet.exists?
 
     respond_to do |format|
       if @turnsheet.save

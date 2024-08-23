@@ -65,7 +65,7 @@ class Club < ApplicationRecord
       other: messages.where(var2: 'inc-other').sum(:var3),
       player_wages: messages.where(var2: 'dec-player_wages').sum(:var3),
       staff_wages: messages.where(var2: 'dec-staff_wages').sum(:var3),
-      transfers_in: messages.where(var2: 'dec-transfers_in').sum(:var3),
+      transfer_in: messages.where(var2: 'dec-transfer_in').sum(:var3),
       stadium_upkeep: messages.where(var2: 'dec-stadium_upkeep').sum(:var3),
       policing: messages.where(var2: 'dec-policing').sum(:var3),
       stewards: messages.where(var2: 'dec-stewards').sum(:var3),
