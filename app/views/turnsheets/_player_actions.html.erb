@@ -1,73 +1,61 @@
-<h4 style="text-align: center">Actions</h4>
-<div class="col-md-12 align-top d-flex justify-content-center">   
-  <table class="table table-hover align-middle table-bordered">
-    <tr scope="row">
-      <td>Type</td>
-      <td>
-        <%= form.label :player_action_1, style: "display: none" %>
-        <%= form.select :player_action_1, options_for_select('Contract renewal' => 'contract', 'Pay bonus' => 'loyalty', 'Transfer list player' => 'list', 'Unlist player' => 'unlist'), prompt: "Select a player action?" %>
-      </td>
-      <td>Player ID</td>
-      <td>
-        <%= form.label :player_action_1_player_id, style: "display: none" %>
-        <%= form.select :player_action_1_player_id, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-      </td>
-      <td>Amount</td>
-      <td>
-        <%= form.label :player_action_1_var, style: "display: none" %>
-        <%= form.text_field :player_action_1_var %>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td>Type</td>
-      <td>
-        <%= form.label :player_action_2, style: "display: none" %>
-        <%= form.select :player_action_2, options_for_select('Contract renewal' => 'contract', 'Pay bonus' => 'loyalty', 'Transfer list player' => 'list', 'Unlist player' => 'unlist'), prompt: "Select a player action?" %>
-      </td>
-      <td>Player ID</td>
-      <td>
-        <%= form.label :player_action_2_player_id, style: "display: none" %>
-        <%= form.select :player_action_2_player_id, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-      </td>
-      <td>Amount</td>
-      <td>
-        <%= form.label :player_action_2_var, style: "display: none" %>
-        <%= form.text_field :player_action_2_var %>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td>Type</td>
-      <td>
-        <%= form.label :player_action_3, style: "display: none" %>
-        <%= form.select :player_action_3, options_for_select('Contract renewal' => 'contract', 'Pay bonus' => 'loyalty', 'Transfer list player' => 'list', 'Unlist player' => 'unlist'), prompt: "Select a player action?" %>
-      </td>
-      <td>Player ID</td>
-      <td>
-        <%= form.label :player_action_3_player_id, style: "display: none" %>
-        <%= form.select :player_action_3_player_id, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-      </td>
-      <td>Amount</td>
-      <td>
-        <%= form.label :player_action_3_var, style: "display: none" %>
-        <%= form.text_field :player_action_3_var %>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td>Type</td>
-      <td>
-        <%= form.label :player_action_4, style: "display: none" %>
-        <%= form.select :player_action_4, options_for_select('Contract renewal' => 'contract', 'Pay bonus' => 'loyalty', 'Transfer list player' => 'list', 'Unlist player' => 'unlist'), prompt: "Select a player action?" %>
-      </td>
-      <td>Player ID</td>
-      <td>
-        <%= form.label :player_action_4_player_id, style: "display: none" %>
-        <%= form.select :player_action_4_player_id, @selection.map { |record| ["#{record[:name]} - #{record[:position]}", record[:id]] }, prompt: "Select a player" %>
-      </td>
-      <td>Amount</td>
-      <td>
-        <%= form.label :player_action_4_var, style: "display: none" %>
-        <%= form.text_field :player_action_4_var %>
-      </td>
-    </tr>
-  </table>
+<h4 style="text-align: center">Player Actions</h4>
+<div class="container">
+  <div class="row justify-content-center">
+    <% @all_players.each do |player| %>
+      <div class="col-md-4 mb-4"> <!-- Use col-md-3 for 4 cards per row -->
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-center dark-blue-header-background"><%= player[:name] %></h5>
+            <p class="card-text text-center dark-blue-header-background"><%= (player[:position] + player[:player_position_detail]).upcase %></p>
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                <p class="card-text">Age: <%= player[:age] %></p>
+                <p class="card-text">TS: <%= player[:total_skill] %></p>
+                <p class="card-text">Fitness: <%= player[:fitness] %></p>
+                <p class="card-text">Listed? <%= player[:listed] ? 'Yes' : 'No' %></p>
+              </div>
+              <div class="col-md-6">
+                <p class="card-text">Contract: <%= player[:contract] %></p>
+                <p class="card-text">Loyalty: <%= player[:loyalty] %></p>
+                <p class="card-text">Performance: <%= player[:average_performance] %></p>
+                <p class="card-text">Value: <%= player[:value] %></p>
+              </div>
+              <hr>
+              <div class="d-flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center"><span>Improve</span><span>Fitness</span></button>
+                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center"><span>Renew</span><span>Contract</span></button>
+                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center"><span>Pay</span><span>Bonus</span></button>
+                <% if player[:listed] %>
+                  <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center"><span>Unlist</span><span>Player</span></button>
+                <% else %>
+                  <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center"><span>List</span><span>Player</span></button>
+                <% end %>
+              </div>
+              <div class="d-flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">100k</button>
+                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">250k</button>
+                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">500k</button>
+                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">750k</button>
+                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">1M</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
+
+<%= form.text_field :player_action_1, id: "player_action_1", hidden: true %>
+<%= form.text_field :player_action_1_player_id, id: "player_action_1_player_id", hidden: true %>
+<%= form.text_field :player_action_1_var, id: "player_action_1_var", hidden: true %>
+<%= form.text_field :player_action_2, id: "player_action_2", hidden: true %>
+<%= form.text_field :player_action_2_player_id, id: "player_action_2_player_id", hidden: true %>
+<%= form.text_field :player_action_2_var, id: "player_action_2_var", hidden: true %>
+<%= form.text_field :player_action_3, id: "player_action_3", hidden: true %>
+<%= form.text_field :player_action_3_player_id, id: "player_action_3_player_id", hidden: true %>
+<%= form.text_field :player_action_3_var, id: "player_action_3_var", hidden: true %>
+<%= form.text_field :player_action_4, id: "player_action_4", hidden: true %>
+<%= form.text_field :player_action_4_player_id, id: "player_action_4_player_id", hidden: true %>
+<%= form.text_field :player_action_4_var, id: "player_action_4_var", hidden: true %>
+<%= form.text_field :fitness_coaching, id: "fitness-coaching", hidden: true %>

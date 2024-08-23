@@ -19,7 +19,8 @@ class TurnsheetsController < ApplicationController
 
     @club = Club.find_by(id: current_user.club)
     @positions = %w(gkp dfc mid att)
-    @selection = player_position_sort
+    @selection = player_position_sort.select { |player| player.available.zero? }
+    @all_players = player_position_sort
     @next_turn_week = Turn.maximum(:week).to_i + 1
   end
 
@@ -95,8 +96,7 @@ class TurnsheetsController < ApplicationController
   end
 
   def player_position_sort
-    players = Player.where(club_id: @club.id,
-                           available: 0).order(Arel.sql(
+    players = Player.where(club_id: @club.id).order(Arel.sql(
                                                  "CASE
                                                         WHEN position = 'gkp' AND player_position_detail = 'p' THEN 1
                                                         WHEN position = 'dfc' AND player_position_detail = 'l' THEN 2

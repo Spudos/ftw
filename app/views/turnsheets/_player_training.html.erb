@@ -1,7 +1,7 @@
 <h4 style="text-align: center">Training</h4>
 
 <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
-  <%= image_tag "training.jpg", alt: "club stadium", class: "club-stadium m-2" %> 
+  <%= image_tag "training.jpg", alt: "club stadium", class: "club-stadium m-2" %>
 </div>
 
 <% @positions.each do |position| %>
@@ -29,7 +29,7 @@
           <td id="flair" class="skill"><%= player.flair %></td>
           <td id="strength" class="skill"><%= player.strength %></td>
           <td id="creativity" class="skill"><%= player.creativity %></td>
-          <td><%= player.total_skill %></td>
+          <td class="training-header"><%= player.total_skill %></td>
         </tr>
           <% end %>
         <% end %>
