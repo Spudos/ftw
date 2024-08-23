@@ -179,7 +179,7 @@ class Transfer::TransferActions
         club = Club.find_by(id: value[:club_id].to_i)
 
         if player.club.id == value[:club_id].to_i
-          proceeds = (player.value * -0.75).to_i
+          proceeds = (player.value * -0.35).to_i
           proceeds_positive = (proceeds * -1).to_i
 
           player[:club_id] = 242

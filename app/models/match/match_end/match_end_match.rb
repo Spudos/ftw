@@ -16,8 +16,10 @@ class Match::MatchEnd::MatchEndMatch
     match_upload = []
 
     fixture_attendance.each do |match|
+      home_tactic = tactic.find { |hash| hash[:club_id] == match[:club_home] }
+      away_tactic = tactic.find { |hash| hash[:club_id] == match[:club_away] }
       summary = match_summaries.find { |hash| hash[:home_club] == match[:club_home] }
-      match_upload << save_match(match, summary)
+      match_upload << save_match(match, summary, home_tactic, away_tactic)
     end
 
     match_attributes = match_upload.to_a.map(&:as_json)
@@ -26,29 +28,29 @@ class Match::MatchEnd::MatchEndMatch
 
   private
 
-  def save_match(match, summary)
+  def save_match(match, summary, home_tactic, away_tactic)
     {
       match_id: match[:id].to_i,
       week_number: match[:week_number].to_i,
       competition: match[:competition],
       home_team: match[:club_home],
-      tactic_home: tactic[0][:tactic],
+      tactic_home: home_tactic[:tactic],
       dfc_blend_home: summary[:dfc_blend_home],
       mid_blend_home: summary[:mid_blend_home],
       att_blend_home: summary[:att_blend_home],
-      dfc_aggression_home: tactic[0][:dfc_aggression],
-      mid_aggression_home: tactic[0][:mid_aggression],
-      att_aggression_home: tactic[0][:att_aggression],
-      home_press: tactic[0][:press],
+      dfc_aggression_home: home_tactic[:dfc_aggression],
+      mid_aggression_home: home_tactic[:mid_aggression],
+      att_aggression_home: home_tactic[:att_aggression],
+      home_press: home_tactic[:press],
       away_team: match[:club_away],
-      tactic_away: tactic[1][:tactic],
+      tactic_away: away_tactic[:tactic],
       dfc_blend_away: summary[:dfc_blend_away],
       mid_blend_away: summary[:mid_blend_away],
       att_blend_away: summary[:att_blend_away],
-      dfc_aggression_away: tactic[1][:dfc_aggression],
-      mid_aggression_away: tactic[1][:mid_aggression],
-      att_aggression_away: tactic[1][:att_aggression],
-      away_press: tactic[1][:press],
+      dfc_aggression_away: away_tactic[:dfc_aggression],
+      mid_aggression_away: away_tactic[:mid_aggression],
+      att_aggression_away: away_tactic[:att_aggression],
+      away_press: away_tactic[:press],
       home_possession: summary[:home_possession],
       away_possession: summary[:away_possession],
       home_chance: summary[:home_chance],

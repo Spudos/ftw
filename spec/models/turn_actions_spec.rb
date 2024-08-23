@@ -3,16 +3,30 @@ require 'pry'
 
 RSpec.describe TurnActions, type: :model do
   describe 'call: player_upgrade' do
-    it 'upgrades tackling by 1 point' do
+    it 'upgrades tackling by 1 point with a sucessful random roll' do
       week = 1
       create(:turn_actions, club_id: 1, var1: 'train', var2: 402, var3: 'tackling', date_completed: nil)
       create(:club, id: 1, staff_dfc: 10)
       create(:player,  id: 402, position: 'dfc')
       turn = Turn.new(week: 1)
 
+      allow_any_instance_of(Kernel).to receive(:rand).with(0..100).and_return(75)
       TurnActions::TurnActionMethods.new(week).call
 
       expect(Player.first.tackling).to eq(6)
+    end
+
+    it 'no upgrade due to the random roll' do
+      week = 1
+      create(:turn_actions, club_id: 1, var1: 'train', var2: 402, var3: 'tackling', date_completed: nil)
+      create(:club, id: 1, staff_dfc: 10)
+      create(:player, id: 402, position: 'dfc')
+      turn = Turn.new(week: 1)
+
+      allow_any_instance_of(Kernel).to receive(:rand).with(0..100).and_return(25)
+      TurnActions::TurnActionMethods.new(week).call
+
+      expect(Player.first.tackling).to eq(5)
     end
 
     it 'does not upgrade tackling by 1 point due to the coach being too low' do

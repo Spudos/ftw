@@ -47,10 +47,15 @@ class TurnActions::TurnActionMethods
 
       if player_data[skill] < player_data.send("potential_#{skill}")
         if player_data[skill] < coach
-          player_data[skill] += 1
-          player_data.update(skill => player_data[skill])
-          Message.create(action_id:, week:, club_id:,
-                         var1: "Training #{player_data.name} in #{skill} suceeded! His new value is #{player_data[skill]}")
+          if rand(0..100) > 40
+            player_data[skill] += 1
+            player_data.update(skill => player_data[skill])
+            Message.create(action_id:, week:, club_id:,
+                           var1: "Training #{player_data.name} in #{skill} suceeded! His new value is #{player_data[skill]}")
+          else
+            Message.create(action_id:, week:, club_id:,
+                           var1: "Training #{player_data.name} in #{skill} failed! Better luck next time")
+          end
         else
           Message.create(action_id:, week:, club_id:,
                          var1: "Training #{player_data.name} in #{skill} failed - this coach isn't good enough to train #{skill} for #{player_data.name}")  
