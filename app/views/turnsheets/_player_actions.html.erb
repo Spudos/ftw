@@ -1,8 +1,8 @@
 <h4 style="text-align: center">Player Actions</h4>
 <div class="container">
   <div class="row justify-content-center">
-    <% @all_players.each do |player| %>
-      <div class="col-md-4 mb-4"> <!-- Use col-md-3 for 4 cards per row -->
+    <% @all_players.each_with_index do |player, index| %>
+      <div class="col-md-4 mb-4">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title text-center dark-blue-header-background"><%= player[:name] %></h5>
@@ -21,17 +21,17 @@
                 <p class="card-text">Value: <%= player[:value] %></p>
               </div>
               <hr>
-              <div class="d-flex justify-content-center align-items-center">
-                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center"><span>Improve</span><span>Fitness</span></button>
-                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center"><span>Renew</span><span>Contract</span></button>
-                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center"><span>Pay</span><span>Bonus</span></button>
+              <div id="player-action-buttons-<%= index %>" class="d-flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">Fitness</button>
+                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">Contract</button>
+                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">Bonus</button>
                 <% if player[:listed] %>
-                  <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center"><span>Unlist</span><span>Player</span></button>
+                  <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">Unlist</button>
                 <% else %>
-                  <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center"><span>List</span><span>Player</span></button>
+                  <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">List</button>
                 <% end %>
               </div>
-              <div class="d-flex justify-content-center align-items-center">
+              <div id="player-action-amounts-<%= index %>" class="d-flex justify-content-center align-items-center">
                 <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">100k</button>
                 <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">250k</button>
                 <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">500k</button>
@@ -45,6 +45,7 @@
     <% end %>
   </div>
 </div>
+
 
 <%= form.text_field :player_action_1, id: "player_action_1", hidden: true %>
 <%= form.text_field :player_action_1_player_id, id: "player_action_1_player_id", hidden: true %>

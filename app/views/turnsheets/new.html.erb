@@ -377,6 +377,39 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
 
+//-------------------------------------------------------------- Player Actions
+const playerActionButtons = document.querySelectorAll('[id^="player-action-buttons-"]');
+const playerActionAmounts = document.querySelectorAll('[id^="player-action-amounts-"]');
+
+playerActionButtons.forEach(buttonGroup => {
+  buttonGroup.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', function(event) {
+      const clickedButton = event.target;
+      handleButtonClick(clickedButton, Array.from(buttonGroup.children));
+    });
+  });
+});
+
+playerActionAmounts.forEach(amountGroup => {
+  amountGroup.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', function(event) {
+      const clickedButton = event.target;
+      handleButtonClick(clickedButton, Array.from(amountGroup.children));
+    });
+  });
+});
+
+function handleButtonClick(button, buttonGroup) {
+  buttonGroup.forEach(btn => {
+    btn.classList.add('btn-outline-primary');
+    btn.classList.remove('btn-success');
+  });
+
+  button.classList.remove('btn-outline-primary');
+  button.classList.add('btn-success');
+}
+
+
 //-------------------------------------------------------------- Team Selection
   const playerRows = document.querySelectorAll('.player-row');
   const playerInputs = document.querySelectorAll('.player-input');
