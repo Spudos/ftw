@@ -1,49 +1,64 @@
 <h4 class="text-center">Team Selection</h4>
-<div class="row d-flex justify-content-center">
-  <div class="col-md-6">
-    <h6 class="text-center">Available Players</h6>  
-    <h6 class="text-center">Click on a player to add them to the team list</h6> 
-    <table class="table table-hover align-middle">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Pos</th>
-        <th>Fit</th>
-        <th>Asts</th>
-        <th>Gls</th>
-        <th>TS</th>
-        <th>Perf</th>
-      </tr>
-      <% @selection.each do |player| %>
-        <tr class="player-row" data-player-id="<%= player[:id]%>", data-player-position="<%= player[:position]%>">
-          <td><%= player[:id] %></td>
-          <td><%= player[:name] %></td>
-          <td><%= (player[:position]+player[:player_position_detail]).upcase %></td>
-          <td><%= player[:fitness] %></td>
-          <td><%= player[:total_assists] %></td>
-          <td><%= player[:total_goals] %></td>
-          <td><%= player[:total_skill] %></td>
-          <td><%= player[:average_performance] %></td>
-        </tr>
-      <% end %>
-    </table>  
-  </div>
-  <div class="container half-height d-flex bg-dark text-white rounded justify-content-center align-items-center">
-    <div class="row w-50 text-center">
-      <div class="col">
-          GKP: <span id="gkpCount">0</span>
-      </div>
-      <div class="col">
-          DFC: <span id="dfcCount">0</span>
-      </div>
-      <div class="col">
-          MID: <span id="midCount">0</span>
-      </div>
-      <div class="col">
-          ATT: <span id="attCount">0</span>
-      </div>
+<div class="col-md-12 align-top d-flex align-items-center justify-content-center">
+  <%= image_tag "tactics.jpg", alt: "club stadium", class: "club-stadium m-2" %>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 m-auto">
+            <h6 class="text-center">Available Players</h6>  
+            <h6 class="text-center">Click on a player to add them to the team list</h6> 
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Pos</th>
+                        <th>Fit</th>
+                        <th>Asts</th>
+                        <th>Gls</th>
+                        <th>TS</th>
+                        <th>Perf</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @selection.each do |player| %>
+                        <tr class="player-row" data-player-id="<%= player[:id]%>" data-player-position="<%= player[:position]%>">
+                            <td><%= player[:id] %></td>
+                            <td><%= player[:name] %></td>
+                            <td><%= (player[:position]+player[:player_position_detail]).upcase %></td>
+                            <td><%= player[:fitness] %></td>
+                            <td><%= player[:total_assists] %></td>
+                            <td><%= player[:total_goals] %></td>
+                            <td><%= player[:total_skill] %></td>
+                            <td><%= player[:average_performance] %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container half-height d-flex justify-content-center align-items-center">
+  <div class="row w-50 text-center bg-dark rounded p-3 text-white">
+    <div class="col">
+        GKP: <span id="gkpCount">0</span>
+    </div>
+    <div class="col">
+        DFC: <span id="dfcCount">0</span>
+    </div>
+    <div class="col">
+        MID: <span id="midCount">0</span>
+    </div>
+    <div class="col">
+        ATT: <span id="attCount">0</span>
     </div>
   </div>
-<div class="row d-flex justify-content-center bg-danger text-white rounded p-3 mt-3 mb-3 invalid_team d-none">
-  <h6 class="text-center">Please select 11 players with only 1 goalkeeper and at least 1 defender, midfielder, and attacker</h6>
 </div>
+
+<div class="container half-height d-flex justify-content-center align-items-center">
+  <div class="row w-50 text-center bg-danger rounded p-3 mt-3 text-white d-none invalid_team">
+    <h6 class="text-center">Please select 11 players with only 1 goalkeeper and at least 1 defender, midfielder, and attacker</h6>
+  </div>
+</div>
+

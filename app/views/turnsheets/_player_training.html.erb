@@ -1,5 +1,4 @@
-<h4 style="text-align: center">Training</h4>
-
+<h4 style="text-align: center">Player Training</h4>
 <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
   <%= image_tag "training.jpg", alt: "club stadium", class: "club-stadium m-2" %>
 </div>
@@ -13,7 +12,7 @@
       <tbody class="turnsheet-table-detail">
         <% @selection.each do |player| %>
           <% if player.position == position %>
-          <tr class="<%= position %>">
+          <tr id="trainingRows" class="<%= position %>">
           <td id="player_id" style="width: 50px !important"><%= player.id %></td>
           <td style="width: 150px !important"><%= player.name %></td>
           <td style="width: 50px !important"><%= player.age %></td>
@@ -37,3 +36,4 @@
     </table>
   </div>
 <% end %>
+

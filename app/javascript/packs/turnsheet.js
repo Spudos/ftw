@@ -1,7 +1,6 @@
 import { setTacticValue, setPressValue, setDefenceAggression, setMidfieldAggression, setAttackAggression } from './turnsheet-elements/tactics.js';
-import { setPlayerAction, setPlayerAmount } from './turnsheet-elements/player-actions.js';
 import { resetUpgradeValues, setStaffValues, setPropertyValues, setConditionValues, setCapacityValues } from './turnsheet-elements/club.js';
-import { handlePlayerClick } from './turnsheet-elements/team.js';
+import { handlePlayerClick, formationUpdate } from './turnsheet-elements/team.js';
 import { handleSkillClick } from './turnsheet-elements/training.js';
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -21,6 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const midfieldAggressionButtons = document.querySelectorAll('#midfield_aggression button');
   const attackAggressionButtons = document.querySelectorAll('#attack_aggression button');
 
+  decoratePlayerActions();
+  decoratePlayerAmounts();
+  readSessionStorage();
+
+
   //------ Add Event Listeners
   function addEventListeners(buttons) {
     buttons.forEach(button => {
@@ -35,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     buttonGroup.querySelectorAll('button').forEach(button => {
       button.addEventListener('click', function(event) {
         const clickedButton = event.target;
-        setPlayerAction(clickedButton, Array.from(buttonGroup.children));
+        setPlayerAction(clickedButton);
       });
     });
   });
@@ -44,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     amountGroup.querySelectorAll('button').forEach(button => {
       button.addEventListener('click', function(event) {
         const clickedButton = event.target;
-        setPlayerAmount(clickedButton, Array.from(amountGroup.children));
+        setPlayerAmount(clickedButton);
       });
     });
   });
@@ -64,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
   addEventListeners(attackAggressionButtons);
 
   //------ Handle Button Clicks
-  function handleButtonClick(button, buttons) {
+  function handleButtonClick(button) {
     const capacityValues = ['2000', '4000', '6000', '8000'];
     const stadiumValues = ['n', 'e', 's', 'w'];
     const propertyValues = ['pitch', 'hospitality', 'facilities'];
@@ -95,8 +99,42 @@ document.addEventListener('DOMContentLoaded', function() {
       setAttackAggression(button);
     };
 
-    resetButtonClasses()
+    resetButtonClasses();
     readSessionStorage();
+    decoratePlayerAmounts();
+    decoratePlayerActions();
+  };
+
+  function setPlayerAction(clickedButton) {
+    const playerId = clickedButton.dataset.playerId;
+    const currentAction = sessionStorage.getItem('ftw-player-action-' + playerId);
+    const newAmount = clickedButton.id;
+  
+    if (currentAction === newAmount) {
+      sessionStorage.removeItem('ftw-player-action-' + playerId);
+    } else {
+      sessionStorage.setItem('ftw-player-action-' + playerId, newAmount);
+    };
+  
+    resetPlayerActions()
+    decoratePlayerAmounts();
+    decoratePlayerActions();
+  };
+  
+  function setPlayerAmount(clickedButton) {
+    const playerId = clickedButton.dataset.playerId;
+    const currentAmount = sessionStorage.getItem('ftw-player-action-amount-' + playerId);
+    const newAmount = clickedButton.id;
+  
+    if (currentAmount === newAmount) {
+      sessionStorage.removeItem('ftw-player-action-amount-' + playerId);
+    } else {
+      sessionStorage.setItem('ftw-player-action-amount-' + playerId, newAmount);
+    };
+
+    resetPlayerActions()
+    decoratePlayerAmounts();
+    decoratePlayerActions();
   };
 
 //-------------------------------------------------------------- Decorate Buttons
@@ -117,6 +155,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     playerRows.forEach(row => {
       row.classList.remove('table-success');
+    });
+
+    skillCells.forEach(cell => {
+      cell.classList.remove('coached');
+    });
+  };
+
+  function resetPlayerActions() {
+    playerActionButtons.forEach(buttonGroup => {
+      buttonGroup.querySelectorAll('button').forEach(button => {
+        button.classList.remove('btn-success');
+        button.classList.add('btn-outline-primary');
+      });
+    });
+
+    playerActionAmounts.forEach(amountGroup => {
+      amountGroup.querySelectorAll('button').forEach(button => {
+        button.classList.remove('btn-success');
+        button.classList.add('btn-outline-primary');
+      });
     });
   };
 
@@ -147,12 +205,14 @@ document.addEventListener('DOMContentLoaded', function() {
       decorateButtons(pressingButtons, value);
     } else if (key === 'ftw-tactic') {
       decorateButtons(tacticButtons, value);
-    } else if (key.startsWith('ftw-coach')) {
+    } else if (key === 'ftw-coach') {
       decorateButtons(coachButtons, value);
+    } else if (key.startsWith('ftw-coach-')) {
+      decorateTraining(key, value);
     } else if (key.startsWith('ftw-property')) {
       decorateButtons(propertyButtons, value);
     } else if (key.startsWith('ftw-selection')) {
-      decorateSelection(key, value);
+      decorateSelection(key);
     };
   };
 
@@ -165,13 +225,62 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   };
 
-  function decorateSelection(key, value) {
+  function decorateSelection(key) {
     const playerId = key.replace('ftw-selection-', '');
     
     playerRows.forEach(row => {
       if (row.dataset.playerId === playerId) {
           row.classList.add('table-success');
       };
+    });
+  };
+
+  function decorateTraining(key, value) {
+    const playerIDFromStorage = key.split('-').pop();
+
+    skillCells.forEach(cell => {
+      const row = cell.parentNode;
+      const playerId = row.querySelector('#player_id').innerHTML;
+
+      if (playerId === playerIDFromStorage) {
+        if (cell.id === value) {
+          cell.classList.add('coached');
+        };
+      };
+    });
+  };
+
+  function decoratePlayerActions() {
+    playerActionButtons.forEach(buttonGroup => {
+      buttonGroup.querySelectorAll('button').forEach(button => {
+        const playerId = button.dataset.playerId;
+        const currentAction = sessionStorage.getItem('ftw-player-action-' + playerId);
+        const currentAmount = sessionStorage.getItem('ftw-player-action-amount-' + playerId);
+  
+        if (currentAction === button.id) {
+          button.classList.add('btn-success');
+          button.classList.remove('btn-outline-primary');
+        };
+  
+        if (currentAmount === button.id) {
+          button.classList.add('btn-success');
+          button.classList.remove('btn-outline-primary');
+        };
+      });
+    });
+  };
+
+  function decoratePlayerAmounts() {
+    playerActionAmounts.forEach(amountGroup => {
+      amountGroup.querySelectorAll('button').forEach(button => {
+        const playerId = button.dataset.playerId;
+        const currentAmount = sessionStorage.getItem('ftw-player-action-amount-' + playerId);
+  
+        if (currentAmount === button.id) {
+          button.classList.add('btn-success');
+          button.classList.remove('btn-outline-primary');
+        };
+      });
     });
   };
 });

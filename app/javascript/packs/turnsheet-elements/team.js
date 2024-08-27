@@ -27,7 +27,7 @@ function handlePlayerClick(button) {
   };
 
   teamValidations();
-  formationupdate();
+  formationUpdate();
 };
 
 function teamValidations() {
@@ -64,7 +64,7 @@ function teamValidations() {
   };
 };
 
-function formationupdate() {
+function formationUpdate() {
   const gkpSelected = document.querySelector('#gkpCount');
   const dfcSelected = document.querySelector('#dfcCount');
   const midSelected = document.querySelector('#midCount');
@@ -76,4 +76,4 @@ function formationupdate() {
   attSelected.innerText = attCount;
 }
 
-export { handlePlayerClick };
+export { handlePlayerClick, formationUpdate };
