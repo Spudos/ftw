@@ -14,10 +14,10 @@
         <% @selection.each do |player| %>
           <% if player.position == position %>
           <tr class="<%= position %>">
-          <td style="width: 50px !important" class="player_id"><%= player.id %></td>
+          <td id="player_id" style="width: 50px !important"><%= player.id %></td>
           <td style="width: 150px !important"><%= player.name %></td>
           <td style="width: 50px !important"><%= player.age %></td>
-          <td style="width: 50px !important"><%= (player.position + player.player_position_detail).upcase %></td>
+          <td id="position" style="width: 50px !important"><%= (player.position + player.player_position_detail).upcase %></td>
           <td id="passing" class="skill"><%= player.passing %></td>
           <td id="control" class="skill"><%= player.control %></td>
           <td id="tackling" class="skill"><%= player.tackling %></td>
@@ -37,12 +37,3 @@
     </table>
   </div>
 <% end %>
-
-<%= form.text_field :train_goalkeeper, id: "train_goalkeeper", hidden: true %>
-<%= form.text_field :train_goalkeeper_skill, id: "train_goalkeeper_skill", hidden: true %>
-<%= form.text_field :train_defender, id: "train_defender", hidden: true %>
-<%= form.text_field :train_defender_skill, id: "train_defender_skill", hidden: true %>
-<%= form.text_field :train_midfielder, id: "train_midfielder", hidden: true %>
-<%= form.text_field :train_midfielder_skill, id: "train_midfielder_skill", hidden: true %>
-<%= form.text_field :train_attacker, id: "train_attacker", hidden: true %>
-<%= form.text_field :train_attacker_skill, id: "train_attacker_skill", hidden: true %>

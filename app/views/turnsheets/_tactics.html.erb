@@ -1,40 +1,99 @@
-<h4 style="text-align: center">Tactics</h4>
+<h4 class="text-center mt-3">Tactics</h4>
 <div class="col-md-12 align-top d-flex justify-content-center">
-  <table class="table table-hover align-middle table-bordered">
-    <tr scope="row">
-      <td scope="col">Tactic:</td>
-      <td>
-        <%= form.label :tactic, style: "display: none" %>
-        <%= form.select :tactic, options_for_select({ "Normal" => 1, "Passing" => 1, "Defensive" => 2, "Attacking" => 3, "Wide" => 4, "Narrow" => 5, "Direct" => 6 }), prompt: "Select a tactic" %>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td scope="col">Pressing style:</td>
-      <td>
-        <%= form.label :press, style: "display: none"  %>
-        <%= form.select :press, options_for_select({"Select a pressing style" => 0, "Heavy Metal Football" => 10, "Strong Press" => 6, "Normal Press" => 3, "No Press" => 0, "Late Press" => -5, "Late Heavy Metal Footy" => -8 }) %>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td scope="col">Defence aggression:</td>
-      <td>
-        <%= form.label :dfc_aggression, style: "display: none" %>
-        <%= form.select :dfc_aggression, options_for_select( 1..10 ), prompt: "Select agression" %>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td scope="col">Midfield aggression:</td>
-      <td>
-        <%= form.label :mid_aggression, style: "display: none" %>
-        <%= form.select :mid_aggression, options_for_select( 1..10 ), prompt: "Select agression" %>
-      </td>
-    </tr>
-    <tr scope="row">
-      <td scope="col">Attack aggression:</td>
-      <td>
-        <%= form.label :att_aggression, style: "display: none" %>
-        <%= form.select :att_aggression, options_for_select( 1..10 ), prompt: "Select agression" %>
-      </td>
-    </tr>
-  </table>
+  <div id="tactic_selection" class="col-md-12 align-top d-flex align-items-center justify-content-center">
+    <button id="1" class="tactic btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span>Normal</span>
+    </button>
+    <button id="2" class="tactic btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span>Passing</span>
+    </button>
+    <button id="3" class="tactic btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span>Defesive</span>
+    </button>
+    <button id="4" class="tactic btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span>Attacking</span>
+    </button>
+    <button id="5" class="tactic btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span>Wide</span>
+    </button>
+    <button id="6" class="tactic btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span>Direct</span>
+    </button>
+  </div>
 </div>
+
+<h4 class="text-center mt-3">Pressing</h4>
+<div class="col-md-12 align-top d-flex justify-content-center">
+  <div id="pressing_selection" class="col-md-12 align-top d-flex align-items-center justify-content-center">
+    <button id="1" class="press btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span>Heavy Metal Football</span>
+    </button>
+    <button id="2" class="press btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span>Strong Press</span>
+    </button>
+    <button id="3" class="press btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span>Normal Press</span>
+    </button>
+    <button id="4" class="press btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span>No Press</span>
+    </button>
+    <button id="5" class="press btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span>Late Press</span>
+    </button>
+    <button id="6" class="press btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span>Late Heavy Metal Football</span>
+    </button>
+  </div>
+</div>
+
+<h4 class="text-center mt-3">Aggression</h4>
+<div class="container">
+  <div class="row justify-content-center">
+    <div id="defence_aggression" class="col-md-4 d-flex flex-column align-items-center">
+      <h6>Defence Aggression</h6>
+      <div class="d-flex flex-wrap justify-content-center">
+        <button id="1" class="dfcAgg btn btn-sm btn-outline-primary m-1">1</button>
+        <button id="2" class="dfcAgg btn btn-sm btn-outline-primary m-1">2</button>
+        <button id="3" class="dfcAgg btn btn-sm btn-outline-primary m-1">3</button>
+        <button id="4" class="dfcAgg btn btn-sm btn-outline-primary m-1">4</button>
+      </div>
+      <div class="d-flex flex-wrap justify-content-center">
+        <button id="5" class="dfcAgg btn btn-sm btn-outline-primary m-1">5</button>
+        <button id="6" class="dfcAgg btn btn-sm btn-outline-primary m-1">6</button>
+        <button id="7" class="dfcAgg btn btn-sm btn-outline-primary m-1">7</button>
+        <button id="8" class="dfcAgg btn btn-sm btn-outline-primary m-1">8</button>
+      </div>
+    </div>
+    <div id="midfield_aggression" class="col-md-4 d-flex flex-column align-items-center">
+      <h6>Midfield Aggression</h6>
+      <div class="d-flex flex-wrap justify-content-center">
+      <button id="1" class="midAgg btn btn-sm btn-outline-primary m-1">1</button>
+      <button id="2" class="midAgg btn btn-sm btn-outline-primary m-1">2</button>
+      <button id="3" class="midAgg btn btn-sm btn-outline-primary m-1">3</button>
+      <button id="4" class="midAgg btn btn-sm btn-outline-primary m-1">4</button>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+      <button id="5" class="midAgg btn btn-sm btn-outline-primary m-1">5</button>
+      <button id="6" class="midAgg btn btn-sm btn-outline-primary m-1">6</button>
+      <button id="7" class="midAgg btn btn-sm btn-outline-primary m-1">7</button>
+      <button id="8" class="midAgg btn btn-sm btn-outline-primary m-1">8</button>
+      </div>
+    </div>
+    <div id="attack_aggression" class="col-md-4 d-flex flex-column align-items-center">
+      <h6>Attack Aggression</h6>
+      <div class="d-flex flex-wrap justify-content-center">
+      <button id="1" class="attAgg btn btn-sm btn-outline-primary m-1">1</button>
+      <button id="2" class="attAgg btn btn-sm btn-outline-primary m-1">2</button>
+      <button id="3" class="attAgg btn btn-sm btn-outline-primary m-1">3</button>
+      <button id="4" class="attAgg btn btn-sm btn-outline-primary m-1">4</button>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+      <button id="5" class="attAgg btn btn-sm btn-outline-primary m-1">5</button>
+      <button id="6" class="attAgg btn btn-sm btn-outline-primary m-1">6</button>
+      <button id="7" class="attAgg btn btn-sm btn-outline-primary m-1">7</button>
+      <button id="8" class="attAgg btn btn-sm btn-outline-primary m-1">8</button>
+      </div>
+    </div>
+  </div>
+</div>
+

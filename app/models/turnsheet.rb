@@ -1,4 +1,7 @@
 class Turnsheet < ApplicationRecord
+  has_many :player_actions, dependent: :destroy
+  accepts_nested_attributes_for :player_actions, allow_destroy: true
+
   def process_turnsheet(params)
     Turnsheet.find_each do |turnsheet|
       next if turnsheet.processed.present?
@@ -13,9 +16,7 @@ class Turnsheet < ApplicationRecord
 
       tactic_record = Tactic.find_by(club_id: turnsheet.club_id)
 
-      if tactic_record
-        tactic_record.destroy
-      end
+      tactic_record&.destroy
 
       if turnsheet.tactic.nil?
         Tactic.create(club_id: turnsheet.club_id, tactics: 0)
@@ -49,95 +50,77 @@ class Turnsheet < ApplicationRecord
 
       if turnsheet.coach_upgrade.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: 'coach', var2: turnsheet.coach_upgrade, var3: 500_000 })
+                             var1: 'coach', var2: turnsheet.coach_upgrade, var3: 500_000 })
       end
 
       if turnsheet.property_upgrade.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: 'property', var2: turnsheet.property_upgrade, var3: 250_000 })
+                             var1: 'property', var2: turnsheet.property_upgrade, var3: 250_000 })
       end
 
       if turnsheet.train_goalkeeper.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: 'train', var2: turnsheet.train_goalkeeper, var3: turnsheet.train_goalkeeper_skill })
+                             var1: 'train', var2: turnsheet.train_goalkeeper, var3: turnsheet.train_goalkeeper_skill })
       end
 
       if turnsheet.train_defender.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: 'train', var2: turnsheet.train_defender, var3: turnsheet.train_defender_skill })
+                             var1: 'train', var2: turnsheet.train_defender, var3: turnsheet.train_defender_skill })
       end
 
       if turnsheet.train_midfielder.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: 'train', var2: turnsheet.train_midfielder, var3: turnsheet.train_midfielder_skill })
+                             var1: 'train', var2: turnsheet.train_midfielder, var3: turnsheet.train_midfielder_skill })
       end
 
       if turnsheet.train_attacker.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: 'train', var2: turnsheet.train_attacker, var3: turnsheet.train_attacker_skill })
+                             var1: 'train', var2: turnsheet.train_attacker, var3: turnsheet.train_attacker_skill })
       end
 
       if turnsheet.fitness_coaching.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: 'fitness', var2: turnsheet.fitness_coaching })
+                             var1: 'fitness', var2: turnsheet.fitness_coaching })
       end
 
       if turnsheet.stadium_upgrade.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: turnsheet.stadium_upgrade, var2: turnsheet.stadium_amount, var3: turnsheet.val })
+                             var1: turnsheet.stadium_upgrade, var2: turnsheet.stadium_amount, var3: turnsheet.val })
       end
 
       if turnsheet.stadium_condition_upgrade.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: turnsheet.stadium_condition_upgrade, var3: 100_000 })
+                             var1: turnsheet.stadium_condition_upgrade, var3: 100_000 })
       end
 
       if turnsheet.transfer_type.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: turnsheet.transfer_type, var2: turnsheet.transfer_player_id,
-                      var3: turnsheet.transfer_amount, var4: turnsheet.transfer_club })
+                             var1: turnsheet.transfer_type, var2: turnsheet.transfer_player_id,
+                             var3: turnsheet.transfer_amount, var4: turnsheet.transfer_club })
       end
 
       if turnsheet.transfer1_type.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: turnsheet.transfer1_type, var2: turnsheet.transfer1_player_id,
-                      var3: turnsheet.transfer1_amount, var4: turnsheet.transfer1_club })
+                             var1: turnsheet.transfer1_type, var2: turnsheet.transfer1_player_id,
+                             var3: turnsheet.transfer1_amount, var4: turnsheet.transfer1_club })
       end
 
       if turnsheet.transfer2_type.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: turnsheet.transfer2_type, var2: turnsheet.transfer2_player_id,
-                      var3: turnsheet.transfer2_amount, var4: turnsheet.transfer2_club })
+                             var1: turnsheet.transfer2_type, var2: turnsheet.transfer2_player_id,
+                             var3: turnsheet.transfer2_amount, var4: turnsheet.transfer2_club })
       end
 
       if turnsheet.transfer3_type.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: turnsheet.transfer3_type, var2: turnsheet.transfer3_player_id,
-                      var3: turnsheet.transfer3_amount, var4: turnsheet.transfer3_club })
+                             var1: turnsheet.transfer3_type, var2: turnsheet.transfer3_player_id,
+                             var3: turnsheet.transfer3_amount, var4: turnsheet.transfer3_club })
       end
 
-      if turnsheet.player_action_1.present?
+      turnsheet.player_actions.each do |action|
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: turnsheet.player_action_1, var2: turnsheet.player_action_1_player_id,
-                      var3: turnsheet.player_action_1_var })
-      end
-
-      if turnsheet.player_action_2.present?
-        TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: turnsheet.player_action_2, var2: turnsheet.player_action_2_player_id,
-                      var3: turnsheet.player_action_2_var })
-      end
-
-      if turnsheet.player_action_3.present?
-        TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: turnsheet.player_action_3, var2: turnsheet.player_action_3_player_id,
-                      var3: turnsheet.player_action_3_var })
-      end
-
-      if turnsheet.player_action_4.present?
-        TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                      var1: turnsheet.player_action_4, var2: turnsheet.player_action_4_player_id,
-                      var3: turnsheet.player_action_4_var })
+                             var1: action.type, var2: action.player_id,
+                             var3: action.amount })
       end
 
       if turnsheet.article_headline.present?

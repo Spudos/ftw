@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_31_093047) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_24_211136) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -197,6 +197,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_31_093047) do
     t.integer "time"
   end
 
+  create_table "player_actions", force: :cascade do |t|
+    t.integer "turnsheet_id", null: false
+    t.string "action"
+    t.string "player_id"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["turnsheet_id"], name: "index_player_actions_on_turnsheet_id"
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.integer "age"
@@ -374,18 +384,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_31_093047) do
     t.string "transfer3_type"
     t.integer "transfer3_player_id"
     t.integer "transfer3_amount"
-    t.string "player_action_1"
-    t.integer "player_action_1_player_id"
-    t.string "player_action_1_var"
-    t.string "player_action_2"
-    t.integer "player_action_2_player_id"
-    t.string "player_action_2_var"
-    t.string "player_action_3"
-    t.integer "player_action_3_player_id"
-    t.string "player_action_3_var"
-    t.string "player_action_4"
-    t.integer "player_action_4_player_id"
-    t.string "player_action_4_var"
     t.string "transfer_club"
     t.string "transfer1_club"
     t.string "transfer2_club"
@@ -428,4 +426,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_31_093047) do
   end
 
   add_foreign_key "pl_statistics", "players"
+  add_foreign_key "player_actions", "turnsheets"
 end

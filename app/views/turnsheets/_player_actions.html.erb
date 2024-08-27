@@ -22,21 +22,21 @@
               </div>
               <hr>
               <div id="player-action-buttons-<%= index %>" class="d-flex justify-content-center align-items-center">
-                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">Fitness</button>
-                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">Contract</button>
-                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">Bonus</button>
+                <button id="fitness" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Fitness</button>
+                <button id="contract" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Contract</button>
+                <button id="loyalty" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Bonus</button>
                 <% if player[:listed] %>
-                  <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">Unlist</button>
+                  <button id="unlist" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Unlist</button>
                 <% else %>
-                  <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">List</button>
+                  <button id="list" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">List</button>
                 <% end %>
               </div>
               <div id="player-action-amounts-<%= index %>" class="d-flex justify-content-center align-items-center">
-                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">100k</button>
-                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">250k</button>
-                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">500k</button>
-                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">750k</button>
-                <button type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">1M</button>
+                <button id="100000" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">100k</button>
+                <button id="250000" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">250k</button>
+                <button id="500000" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">500k</button>
+                <button id="750000" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">750k</button>
+                <button id="1000000" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">1M</button>
               </div>
             </div>
           </div>
@@ -45,18 +45,3 @@
     <% end %>
   </div>
 </div>
-
-
-<%= form.text_field :player_action_1, id: "player_action_1", hidden: true %>
-<%= form.text_field :player_action_1_player_id, id: "player_action_1_player_id", hidden: true %>
-<%= form.text_field :player_action_1_var, id: "player_action_1_var", hidden: true %>
-<%= form.text_field :player_action_2, id: "player_action_2", hidden: true %>
-<%= form.text_field :player_action_2_player_id, id: "player_action_2_player_id", hidden: true %>
-<%= form.text_field :player_action_2_var, id: "player_action_2_var", hidden: true %>
-<%= form.text_field :player_action_3, id: "player_action_3", hidden: true %>
-<%= form.text_field :player_action_3_player_id, id: "player_action_3_player_id", hidden: true %>
-<%= form.text_field :player_action_3_var, id: "player_action_3_var", hidden: true %>
-<%= form.text_field :player_action_4, id: "player_action_4", hidden: true %>
-<%= form.text_field :player_action_4_player_id, id: "player_action_4_player_id", hidden: true %>
-<%= form.text_field :player_action_4_var, id: "player_action_4_var", hidden: true %>
-<%= form.text_field :fitness_coaching, id: "fitness-coaching", hidden: true %>
