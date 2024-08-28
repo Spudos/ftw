@@ -1,7 +1,8 @@
 import { setTacticValue, setPressValue, setDefenceAggression, setMidfieldAggression, setAttackAggression } from './turnsheet-elements/tactics.js';
-import { resetUpgradeValues, setStaffValues, setPropertyValues, setConditionValues, setCapacityValues } from './turnsheet-elements/club.js';
-import { handlePlayerClick, formationUpdate } from './turnsheet-elements/team.js';
+import { resetUpgradeValues, setStaffValues, setPropertyValues, setCapacityValues, setConditionValues } from './turnsheet-elements/club.js';
+import { handlePlayerClick } from './turnsheet-elements/team.js';
 import { handleSkillClick } from './turnsheet-elements/training.js';
+import { resetButtonClasses, resetPlayerActions, readSessionStorage, decoratePlayerActions, decoratePlayerAmounts } from './turnsheet-elements/decorate_buttons.js';
 
 document.addEventListener('DOMContentLoaded', function() {
   const stadiumButtons = document.querySelectorAll('#stand_navigation button');
@@ -23,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
   decoratePlayerActions();
   decoratePlayerAmounts();
   readSessionStorage();
-
 
   //------ Add Event Listeners
   function addEventListeners(buttons) {
@@ -74,15 +74,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const propertyValues = ['pitch', 'hospitality', 'facilities'];
 
     if (stadiumValues.includes(button.id)){
-      resetUpgradeValues(button);
+      resetUpgradeValues(button, stadiumButtons);
     } else if (button.id.startsWith("staff")) {
       setStaffValues(button);
     } else if (propertyValues.includes(button.id)) {
       setPropertyValues(button);
     } else if (button.id.startsWith("condition")) {
-      setConditionValues(button);
+      setConditionValues(button, stadiumButtons);
     } else if (capacityValues.includes(button.id)){
-      setCapacityValues(button);
+      setCapacityValues(button, stadiumButtons);
     } else if (button.classList.contains('skill')) {
       handleSkillClick(button);
     } else if (button.classList.contains('player-row')) {
@@ -213,7 +213,13 @@ document.addEventListener('DOMContentLoaded', function() {
       decorateButtons(propertyButtons, value);
     } else if (key.startsWith('ftw-selection')) {
       decorateSelection(key);
-    };
+    } else if (key === ('ftw-stand')) {
+      decorateButtons(stadiumButtons, value);
+    } else if (key === ('ftw-condition')) {
+      decorateCondition();
+    } else if (key === ('ftw-stadium-amount')) {
+      decorateButtons(capacityButtons, value);
+    }
   };
 
   function decorateButtons(buttons, value) {
@@ -222,6 +228,13 @@ document.addEventListener('DOMContentLoaded', function() {
         button.classList.add('btn-success');
         button.classList.remove('btn-outline-primary');
       };
+    });
+  };
+
+  function decorateCondition() {
+    conditionButtons.forEach(button => {
+      button.classList.add('btn-success');
+      button.classList.remove('btn-outline-primary');
     });
   };
 

@@ -5,17 +5,29 @@
 </div>
 
 <h5 style="text-align: center"><%= @club.ground_name %></h5>
-<div id="stand_navigation" class="col-md-12 align-top d-flex align-items-center justify-content-center">
-  <button id="n" class="btn btn-sm btn-success">North</button>
-  <button id="s" class="btn btn-sm btn-outline-primary">South</button>
-  <button id="e" class="btn btn-sm btn-outline-primary">East</button>
-  <button id="w" class="btn btn-sm btn-outline-primary">West</button>
-</div>
+  <div id="stand_navigation" class="col-md-12 align-top d-flex align-items-center justify-content-center">
+    <button id="n" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span><%= @club.stand_n_name %></span>
+      <span>Capacity: <%= @club.stand_n_capacity %></span>
+      <span>Condition: <%= @club.stand_n_condition %></span>
+    </button>
+    <button id="s" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span><%= @club.stand_s_name %></span>
+      <span>Capacity: <%= @club.stand_s_capacity %></span>
+      <span>Condition: <%= @club.stand_s_condition %></span>
+    </button>
+    <button id="e" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span><%= @club.stand_e_name %></span>
+      <span>Capacity: <%= @club.stand_e_capacity %></span>
+      <span>Condition: <%= @club.stand_e_condition %></span>
+    </button>
+    <button id="w" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center">
+      <span><%= @club.stand_w_name %></span>
+      <span>Capacity: <%= @club.stand_w_capacity %></span>
+      <span>Condition: <%= @club.stand_w_condition %></span>
+    </button>
+  </div>
 
-<div>
-  <h6 class="d-flex align-items-center justify-content-center mt-3"><span id="standName"><%= @club.stand_n_name %></span></h6>
-  
-  <h6 class="col-md-12 align-top d-flex align-items-center justify-content-center">Capacity: <span id="standCapacity"><%= @club.stand_n_capacity %></span></h6>
   <div id="stand_capacity" class="col-md-12 align-top d-flex align-items-center justify-content-center">  
     <button id="2000" class="btn btn-sm btn-outline-primary">add 2000 seats</button>
     <button id="4000" class="btn btn-sm btn-outline-primary">add 4000 seats</button>
@@ -23,7 +35,6 @@
     <button id="8000" class="btn btn-sm btn-outline-primary">add 8000 seats</button>
   </div>
 
-  <h6 class="col-md-12 align-top d-flex align-items-center justify-content-center mt-3">Condition: <span id="standCondition"><%= @club.stand_n_condition %><span></h4>
   <div id="stand_condition" class="col-md-12 align-top d-flex align-items-center justify-content-center">
     <button id="condition" class="btn btn-sm btn-outline-primary">Upgrade stand condition</button>
   </div>
