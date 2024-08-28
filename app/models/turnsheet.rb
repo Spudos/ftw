@@ -119,7 +119,7 @@ class Turnsheet < ApplicationRecord
 
       turnsheet.player_actions.each do |action|
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                             var1: action.type, var2: action.player_id,
+                             var1: action.action, var2: action.player_id,
                              var3: action.amount })
       end
 

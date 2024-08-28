@@ -131,13 +131,13 @@ document.addEventListener('DOMContentLoaded', function() {
   
   function setPlayerAmount(clickedButton) {
     const playerId = clickedButton.dataset.playerId;
-    const currentAmount = sessionStorage.getItem('ftw-player-action-amount-' + playerId);
+    const currentAmount = sessionStorage.getItem('ftw-player-amount-' + playerId);
     const newAmount = clickedButton.id;
   
     if (currentAmount === newAmount) {
-      sessionStorage.removeItem('ftw-player-action-amount-' + playerId);
+      sessionStorage.removeItem('ftw-player-amount-' + playerId);
     } else {
-      sessionStorage.setItem('ftw-player-action-amount-' + playerId, newAmount);
+      sessionStorage.setItem('ftw-player-amount-' + playerId, newAmount);
     };
 
     resetPlayerActions()
@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
       buttonGroup.querySelectorAll('button').forEach(button => {
         const playerId = button.dataset.playerId;
         const currentAction = sessionStorage.getItem('ftw-player-action-' + playerId);
-        const currentAmount = sessionStorage.getItem('ftw-player-action-amount-' + playerId);
+        const currentAmount = sessionStorage.getItem('ftw-player-amount-' + playerId);
   
         if (currentAction === button.id) {
           button.classList.add('btn-success');
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
     playerActionAmounts.forEach(amountGroup => {
       amountGroup.querySelectorAll('button').forEach(button => {
         const playerId = button.dataset.playerId;
-        const currentAmount = sessionStorage.getItem('ftw-player-action-amount-' + playerId);
+        const currentAmount = sessionStorage.getItem('ftw-player-amount-' + playerId);
   
         if (currentAmount === button.id) {
           button.classList.add('btn-success');

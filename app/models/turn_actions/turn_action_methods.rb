@@ -91,7 +91,7 @@ class TurnActions::TurnActionMethods
 
   def player_fitness(action_id, week, club_id, player)
     if Message.find_by(action_id:).nil?
-      player_data = Player.find_by(name: player)
+      player_data = Player.find_by(id: player)
       coach = Club.find_by(id: club_id)&.staff_fitness
 
       increased_fitness = player_data.fitness + coach
@@ -100,7 +100,7 @@ class TurnActions::TurnActionMethods
       player_data.update(fitness: final_fitness)
 
       Message.create(action_id:, week:, club_id:,
-                     var1: "Fitness training for #{player} was completed! His new value is #{final_fitness}")
+                     var1: "Fitness training for #{player_data.name} was completed! His new value is #{final_fitness}")
     end
   end
 

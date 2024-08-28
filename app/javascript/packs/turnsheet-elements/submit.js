@@ -10,6 +10,7 @@ function buildInputFields(inputDiv) {
   };
 
   let i = 1;
+  let index = 0;
 
   Object.entries(items).forEach(([key, value]) => {
     if (key === 'ftw-defence-aggression') {
@@ -55,7 +56,17 @@ function buildInputFields(inputDiv) {
       const playerId = key.replace('ftw-selection-', '');
       inputBuilder(inputDiv, `player_${i}`, playerId);
       i++;
-    } 
+    } else if (key.startsWith('ftw-player-action-')) {
+      const playerId = key.replace('ftw-player-action-', '');
+      let amount = 0;
+
+      if (value === 'loyalty' || value === 'contract') {
+        amount = playerActionAmountGetter(playerId);
+      };
+      
+      playerActionInputBuilder(inputDiv, value, playerId, amount, index);
+      index++
+    };
   });
 
   submitForm();
@@ -69,6 +80,35 @@ function inputBuilder(inputDiv, key, value) {
   inputField.value = value;
 
   inputDiv.appendChild(inputField);
+}
+
+function playerActionAmountGetter(playerId) {
+  const key = `ftw-player-amount-${playerId}`;
+  const amount = sessionStorage.getItem(key);
+
+  return amount;
+}
+
+function playerActionInputBuilder(inputDiv, value, player_id, amount, index) {
+  const inputField = document.createElement('input');
+  const inputField1 = document.createElement('input');
+  const inputField2 = document.createElement('input');
+
+  inputField.name = `turnsheet[player_actions_attributes][${index}][action]`;
+  inputField.type = 'hidden';
+  inputField.value = value;
+
+  inputField1.name = `turnsheet[player_actions_attributes][${index}][player_id]`;
+  inputField1.type = 'hidden';
+  inputField1.value = player_id;
+
+  inputField2.name = `turnsheet[player_actions_attributes][${index}][amount]`;
+  inputField2.type = 'hidden';
+  inputField2.value = amount;
+
+  inputDiv.appendChild(inputField);
+  inputDiv.appendChild(inputField1);
+  inputDiv.appendChild(inputField2);
 }
 
 function submitForm() {
