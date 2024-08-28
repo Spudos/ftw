@@ -2,6 +2,7 @@ import { setTacticValue, setPressValue, setDefenceAggression, setMidfieldAggress
 import { resetUpgradeValues, setStaffValues, setPropertyValues, setCapacityValues, setConditionValues } from './turnsheet-elements/club.js';
 import { handlePlayerClick, teamValidations, formationUpdate } from './turnsheet-elements/team.js';
 import { handleSkillClick } from './turnsheet-elements/training.js';
+import { buildInputFields } from './turnsheet-elements/submit.js';
 
 document.addEventListener('DOMContentLoaded', function() {
   const stadiumButtons = document.querySelectorAll('#stand_navigation button');
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const defenceAggressionButtons = document.querySelectorAll('#defence_aggression button');
   const midfieldAggressionButtons = document.querySelectorAll('#midfield_aggression button');
   const attackAggressionButtons = document.querySelectorAll('#attack_aggression button');
+  const inputDiv = document.getElementById('hidden_inputs');
 
   teamValidations();
   formationUpdate();
@@ -54,6 +56,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  submitButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    buildInputFields(inputDiv);
+  });
+
   //------ Run Button Listeners
   addEventListeners(stadiumButtons);
   addEventListeners(capacityButtons);
@@ -68,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
   addEventListeners(midfieldAggressionButtons);
   addEventListeners(attackAggressionButtons);
 
-  //------ Handle Button Clicks
+  //------ Handle Button Clickss
   function handleButtonClick(button) {
     const capacityValues = ['2000', '4000', '6000', '8000'];
     const stadiumValues = ['n', 'e', 's', 'w'];

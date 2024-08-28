@@ -1,19 +1,17 @@
 <h4 class="text-center">News Article</h4>
 <div class="col-md-8 mb-5 align-top d-flex flex-column align-items-center m-auto"> 
-  <form>
-    <div class="mb-3 col-md-8 m-auto">
-      <%= form.label :article_headline, class: "form-label" %>
-      <%= form.text_field :article_headline, id: "article_headline", class: "form-control" %>
-    </div>
-    <div class="mb-3 col-md-8 m-aut">
-      <%= form.label :article_sub_headline, class: "form-label" %>
-      <%= form.text_field :article_sub_headline, id: "article_sub_headline", disabled: true, class: "form-control" %>
-    </div>
-    <div class="mb-3 col-md-8 m-aut">
-      <%= form.label :article, class: "form-label" %>
-      <%= form.text_area :article, id: "article", disabled: true, class: "form-control", rows: 5, cols: 50 %>
-    </div>
-  </form>
+  <div class="mb-3 col-md-8 m-auto">
+    <%= form.label :article_headline, class: "form-label" %>
+    <%= form.text_field :article_headline, id: "article_headline", class: "form-control" %>
+  </div>
+  <div class="mb-3 col-md-8 m-auto">
+    <%= form.label :article_sub_headline, class: "form-label" %>
+    <%= form.text_field :article_sub_headline, id: "article_sub_headline", disabled: true, class: "form-control" %>
+  </div>
+  <div class="mb-3 col-md-8 m-auto">
+    <%= form.label :article, class: "form-label" %>
+    <%= form.text_area :article, id: "article", disabled: true, class: "form-control", rows: 5, cols: 50 %>
+  </div>
 </div>
 
 <h4 class="text-center">Club Message</h4>
@@ -31,8 +29,7 @@
 <h4 class="text-center">Public Message</h4>
 <div class="col-md-12 align-top d-flex flex-column align-items-center"> 
   <div class="mb-3 col-md-8">
-    <%= form.label :public_message, class: "form-label d-none" %>
-    <%= form.text_field :public_message, id: "message_text", class: "form-control"  %>
+    <%= form.text_field :public_message, id: "public_message", class: "form-control"  %>
   </div>
 </div>
 

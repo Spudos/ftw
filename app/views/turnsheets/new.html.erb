@@ -1,5 +1,5 @@
 <div id="form-body">
-  <%= form_with(model: @turnsheet) do |form| %>
+  <%= form_with(model: @turnsheet, id: 'turnsheetForm') do |form| %>
     <div id="header-form" class="shown start">
       <%= render "header", turnsheet: @turnsheet, form: form %>
     </div>
@@ -28,8 +28,11 @@
     <div id="messages-form">
       <%= render "messaging", turnsheet: @turnsheet, form: form %>
     </div>
+
+    <div id="hidden_inputs"><div>
+
     <div>
-      <%= form.submit 'Save Turnsheet', id: 'submitButton', class: 'btn btn-danger disabled' %>
+      <%= form.submit 'Save Turnsheet', id: 'submitButton', class: 'btn btn-lg btn-danger disabled d-flex justify-content-center m-auto mt-5' %>
     </div>
   <% end %>
 </div>
