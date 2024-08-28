@@ -56,9 +56,9 @@ RSpec.describe TurnActions, type: :model do
   describe 'call: fitness_upgrade' do
     it 'upgrades fitness by 10 points' do
       week = 1
-      create(:turn_actions, club_id: 1, var1: 'fitness', var2: 'Woolley', var3: 'tackling', date_completed: nil)
+      create(:turn_actions, club_id: 1, var1: 'fitness', var2: '1', var3: 'tackling', date_completed: nil)
       create(:club, id: 1, staff_fitness: 10)
-      create(:player, name: 'Woolley', position: 'dfc', fitness: 50)
+      create(:player, id: 1, name: 'Woolley', position: 'dfc', fitness: 50)
 
       TurnActions::TurnActionMethods.new(week).call
 
@@ -67,9 +67,9 @@ RSpec.describe TurnActions, type: :model do
 
     it 'upgrades fitness to 100 even though the coach is 10' do
       week = 1
-      create(:turn_actions, club_id: 1, var1: 'fitness', var2: 'Woolley', var3: 'tackling', date_completed: nil)
+      create(:turn_actions, club_id: 1, var1: 'fitness', var2: '1', var3: 'tackling', date_completed: nil)
       create(:club, id: 1, staff_fitness: 10)
-      create(:player, name: 'Woolley', position: 'dfc', fitness: 95)
+      create(:player, id: 1, name: 'Woolley', position: 'dfc', fitness: 95)
 
       TurnActions::TurnActionMethods.new(week).call
 
@@ -78,9 +78,9 @@ RSpec.describe TurnActions, type: :model do
 
     it 'sets fitness at 100' do
       week = 1
-      create(:turn_actions, club_id: 1, var1: 'fitness', var2: 'Woolley', var3: 'tackling', date_completed: nil)
+      create(:turn_actions, club_id: 1, var1: 'fitness', var2: '1', var3: 'tackling', date_completed: nil)
       create(:club, id: 1, staff_fitness: 10)
-      create(:player, name: 'Woolley', position: 'dfc', fitness: 120)
+      create(:player, id: 1, name: 'Woolley', position: 'dfc', fitness: 120)
 
       TurnActions::TurnActionMethods.new(week).call
 

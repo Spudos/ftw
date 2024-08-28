@@ -14,11 +14,23 @@
               <div class="col-md-6">
                 <p class="card-text">Age: <%= player[:age] %></p>
                 <p class="card-text">TS: <%= player[:total_skill] %></p>
-                <p class="card-text">Fitness: <%= player[:fitness] %></p>
+                <% if player[:fitness] < 60 %>
+                  <p class="card-text fw-bold text-danger">Fitness: <%= player[:fitness] %></p>
+                <% elsif player[:fitness] < 80 %>
+                  <p class="card-text fw-bold text-warning">Fitness: <%= player[:fitness] %></p>
+                <% else %>
+                  <p class="card-text">Fitness: <%= player[:fitness] %></p>
+                <% end %>
                 <p class="card-text">Listed? <%= player[:listed] ? 'Yes' : 'No' %></p>
               </div>
               <div class="col-md-6">
-                <p class="card-text">Contract: <%= player[:contract] %></p>
+                <% if player[:contract] < 6 %>
+                  <p class="card-text fw-bold text-danger">Contract: <%= player[:contract] %></p>
+                <% elsif player[:contract] < 11 %>
+                  <p class="card-text fw-bold text-warning">Contract: <%= player[:contract] %></p>
+                <% else %>
+                  <p class="card-text">Contract: <%= player[:contract] %></p>
+                <% end %>
                 <p class="card-text">Loyalty: <%= player[:loyalty] %></p>
                 <p class="card-text">Performance: <%= player[:average_performance] %></p>
                 <p class="card-text">Value: <%= player[:value] %></p>

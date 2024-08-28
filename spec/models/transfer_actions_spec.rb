@@ -69,17 +69,17 @@ RSpec.describe Transfer, type: :model do
   end
 
   describe 'call: circuit_sale' do
-    it 'move the player to club 242 and adds 75% value to the selling club' do
+    it 'move the player to club 242 and adds 35% value to the selling club' do
       week = 1
       create(:turn_actions, week: 1, club_id: 1, var1: 'circuit', var2: 1, date_completed: nil)
       create(:club, id: 1, bank_bal: 0)
       create(:club, id: 242, bank_bal: 0)
-      create(:player, id: 1, club_id: 1, value: 1000000)
+      create(:player, id: 1, club_id: 1, value: 1_000_000)
 
       Transfer::TransferActions.new(week).call
 
       expect(Player.first.club_id).to eq(242)
-      expect(Club.first.bank_bal).to eq(750000)
+      expect(Club.first.bank_bal).to eq(350_000)
     end
 
     it 'no change to player club or club funds as he doesnt belong to the selling club' do
@@ -87,7 +87,7 @@ RSpec.describe Transfer, type: :model do
       create(:turn_actions, week: 1, club_id: 1, var1: 'circuit', var2: 1, date_completed: nil)
       create(:club, id: 1, bank_bal: 0)
       create(:club, id: 2, bank_bal: 0)
-      create(:player, id: 1, club_id: 2, value: 1000000)
+      create(:player, id: 1, club_id: 2, value: 1_000_000)
 
       Transfer::TransferActions.new(week).call
 

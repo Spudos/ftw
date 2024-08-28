@@ -123,6 +123,7 @@ function submitForm() {
   });
 
   form.submit();
+  sessionStorage.clear();
 }
 
 export { buildInputFields };
