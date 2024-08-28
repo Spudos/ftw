@@ -1,8 +1,7 @@
 import { setTacticValue, setPressValue, setDefenceAggression, setMidfieldAggression, setAttackAggression } from './turnsheet-elements/tactics.js';
 import { resetUpgradeValues, setStaffValues, setPropertyValues, setCapacityValues, setConditionValues } from './turnsheet-elements/club.js';
-import { handlePlayerClick } from './turnsheet-elements/team.js';
+import { handlePlayerClick, teamValidations, formationUpdate } from './turnsheet-elements/team.js';
 import { handleSkillClick } from './turnsheet-elements/training.js';
-import { resetButtonClasses, resetPlayerActions, readSessionStorage, decoratePlayerActions, decoratePlayerAmounts } from './turnsheet-elements/decorate_buttons.js';
 
 document.addEventListener('DOMContentLoaded', function() {
   const stadiumButtons = document.querySelectorAll('#stand_navigation button');
@@ -21,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const midfieldAggressionButtons = document.querySelectorAll('#midfield_aggression button');
   const attackAggressionButtons = document.querySelectorAll('#attack_aggression button');
 
+  teamValidations();
+  formationUpdate();
   decoratePlayerActions();
   decoratePlayerAmounts();
   readSessionStorage();
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (button.classList.contains('midAgg')) {
       setMidfieldAggression(button);
     } else if (button.classList.contains('attAgg')) {
-      setAttackAggression(button);
+      setAttackAggression(button); 
     };
 
     resetButtonClasses();

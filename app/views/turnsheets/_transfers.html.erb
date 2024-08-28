@@ -2,92 +2,111 @@
 <div class="col-md-12 align-top d-flex align-items-center justify-content-center">
   <%= image_tag "transfers.jpg", alt: "club stadium", class: "club-stadium m-2" %>
 </div>
-<div class="col-md-12 align-top d-flex justify-content-center"> 
-  <table class="table table-hover align-middle table-bordered">
-    <tr scope="row">
-      <td>Type</td>
-      <td>
-        <%= form.label :transfer_type, style: "display: none" %>
-        <%= form.select :transfer_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), {prompt: "Select a transfer type?"}, { id: "transfer_type" }  %>
-      </td>
-      <td>Player ID</td>
-      <td>
-        <%= form.label :transfer_player_id, style: "display: none" %>
-        <%= form.text_field :transfer_player_id, disabled: true, id: 'transfer_player_id' %>
-      </td>
-      <td>Amount</td>
-      <td>
-        <%= form.label :transfer_amount, style: "display: none" %>
-        <%= form.text_field :transfer_amount, disabled: true, id: 'transfer_amount' %>
-      </td>
-      <td>Other club</td>
-      <td>
-        <%= form.label :transfer_club, style: "display: none" %>
-        <%= form.text_field :transfer_club, disabled: true, id: 'transfer_club' %>
-    </tr>
-    <tr scope="row">
-      <td>Type</td>
-      <td>
-        <%= form.label :transfer1_type, style: "display: none" %>
-        <%= form.select :transfer1_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), {prompt: "Select a transfer type?"}, { id: "transfer1_type" }  %>
-      </td>
-      <td>Player ID</td>
-      <td>
-        <%= form.label :transfer1_player_id, style: "display: none" %>
-        <%= form.text_field :transfer1_player_id, disabled: true, id: 'transfer1_player_id' %>
-      </td>
-      <td>Amount</td>
-      <td>
-        <%= form.label :transfer1_amount, style: "display: none" %>
-        <%= form.text_field :transfer1_amount, disabled: true, id: 'transfer1_amount' %>
-      </td>
-      <td>Other club</td>
-      <td>
-        <%= form.label :transfer1_club, style: "display: none" %>
-        <%= form.text_field :transfer1_club, disabled: true, id: 'transfer1_club' %>
-    </tr>
-    <tr scope="row">
-      <td>Type</td>
-      <td>
-        <%= form.label :transfer2_type, style: "display: none" %>
-        <%= form.select :transfer2_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), {prompt: "Select a transfer type?"}, { id: "transfer2_type" }  %>
-      </td>
-      <td>Player ID</td>
-      <td>
-        <%= form.label :transfer2_player_id, style: "display: none" %>
-        <%= form.text_field :transfer2_player_id, disabled: true, id: 'transfer2_player_id' %>
-      </td>
-      <td>Amount</td>
-      <td>
-        <%= form.label :transfer2_amount, style: "display: none" %>
-        <%= form.text_field :transfer2_amount, disabled: true, id: 'transfer2_amount' %>
-      </td>
-      <td>Other club</td>
-      <td>
-        <%= form.label :transfer2_club, style: "display: none" %>
-        <%= form.text_field :transfer2_club, disabled: true, id: 'transfer2_club' %>
-    </tr>
-    <tr scope="row">
-      <td>Type</td>
-      <td>
-        <%= form.label :transfer3_type, style: "display: none" %>
-        <%= form.select :transfer3_type, options_for_select('Unmanaged Bid' => 'unmanaged_bid', 'Circuit Sale' => 'circuit', 'Bid for Listed Player' => 'listed_bid', 'Deal agreed with another club' => 'deal'), {prompt: "Select a transfer type?"}, { id: "transfer3_type" } %>
-      </td>
-      <td>Player ID</td>
-      <td>
-        <%= form.label :transfer3_player_id, style: "display: none" %>
-        <%= form.text_field :transfer3_player_id, disabled: true, id: "transfer3_player_id" %>
-      </td>
-      <td>Amount</td>
-      <td>
-        <%= form.label :transfer3_amount, style: "display: none" %>
-        <%= form.text_field :transfer3_amount, disabled: true, id: "transfer3_amount" %>
-      </td>
-      <td>Other club</td>
-      <td>
-        <%= form.label :transfer3_club, style: "display: none" %>
-        <%= form.text_field :transfer3_club, disabled: true, id: "transfer3_club" %>
-      </td>
-    </tr>
-  </table>
+
+<div>
+  <h6 class="text-center mt-5">Transfer 1</h6>
+  <div id="transfer" class="col-md-12 align-top d-flex align-items-center justify-content-center">
+    <div class="btn-group" role="group" aria-label="Transfer type">
+      <%= form.radio_button :transfer_type, 'listed', id: 'transfer_listed', class: 'btn-check' %>
+      <%= form.label :transfer_type, 'Listed Bid', value: 'listed', class: 'btn btn-outline-success', for: 'transfer_listed' %>
+
+      <%= form.radio_button :transfer_type, 'unmanaged', id: 'transfer_unmanaged', class: 'btn-check' %>
+      <%= form.label :transfer_type, 'Unmanaged Bid', value: 'unmanaged', class: 'btn btn-outline-success', for: 'transfer_unmanaged' %>
+
+      <%= form.radio_button :transfer_type, 'circuit', id: 'transfer_circuit', class: 'btn-check' %>
+      <%= form.label :transfer_type, 'Circuit Sale', value: 'circuit', class: 'btn btn-outline-success', for: 'transfer_circuit' %>
+
+      <%= form.radio_button :transfer_type, 'deal', id: 'transfer_deal', class: 'btn-check' %>
+      <%= form.label :transfer_type, 'Agreed Deal', value: 'deal', class: 'btn btn-outline-success', for: 'transfer_deal' %>
+    </div>
+  </div>
+  <div id="transfer-detail" class="col-md-12 align-top d-flex align-items-center justify-content-center">  
+      <span class="m-3"><%= form.label :transfer_player_id, "Player Id" %></span>
+      <%= form.text_field :transfer_player_id %>
+      <span class="m-3"><%= form.label :transfer_amount, "Bid Amount" %></span>
+      <%= form.text_field :transfer_amount %>
+      <span class="m-3"><%= form.label :transfer_club, "Other Club Id" %></span>
+      <%= form.text_field :transfer_club %>
+  </div>
+</div>
+
+<div>
+  <h6 class="text-center mt-5">Transfer 2</h6>
+  <div id="transfer1" class="col-md-12 align-top d-flex align-items-center justify-content-center">
+    <div class="btn-group" role="group" aria-label="Transfer type">
+      <%= form.radio_button :transfer1_type, 'listed', id: 'transfer1_listed', class: 'btn-check' %>
+      <%= form.label :transfer1_type, 'Listed Bid', value: 'listed', class: 'btn btn-outline-success', for: 'transfer1_listed' %>
+
+      <%= form.radio_button :transfer1_type, 'unmanaged', id: 'transfer1_unmanaged', class: 'btn-check' %>
+      <%= form.label :transfer1_type, 'Unmanaged Bid', value: 'unmanaged', class: 'btn btn-outline-success', for: 'transfer1_unmanaged' %>
+
+      <%= form.radio_button :transfer1_type, 'circuit', id: 'transfer1_circuit', class: 'btn-check' %>
+      <%= form.label :transfer1_type, 'Circuit Sale', value: 'circuit', class: 'btn btn-outline-success', for: 'transfer1_circuit' %>
+
+      <%= form.radio_button :transfer1_type, 'deal', id: 'transfer1_deal', class: 'btn-check' %>
+      <%= form.label :transfer1_type, 'Agreed Deal', value: 'deal', class: 'btn btn-outline-success', for: 'transfer1_deal' %>
+    </div>
+  </div>
+  <div id="transfer1-detail" class="col-md-12 align-top d-flex align-items-center justify-content-center">  
+      <span class="m-3"><%= form.label :transfer1_player_id, "Player Id" %></span>
+      <%= form.text_field :transfer1_player_id %>
+      <span class="m-3"><%= form.label :transfer1_amount, "Bid Amount" %></span>
+      <%= form.text_field :transfer1_amount %>
+      <span class="m-3"><%= form.label :transfer1_club, "Other Club Id" %></span>
+      <%= form.text_field :transfer1_club %>
+  </div>
+</div>
+
+<div>
+  <h6 class="text-center mt-5">Transfer 3</h6>
+  <div id="transfer2" class="col-md-12 align-top d-flex align-items-center justify-content-center">
+    <div class="btn-group" role="group" aria-label="Transfer type">
+      <%= form.radio_button :transfer2_type, 'listed', id: 'transfer2_listed', class: 'btn-check' %>
+      <%= form.label :transfer2_type, 'Listed Bid', value: 'listed', class: 'btn btn-outline-success', for: 'transfer2_listed' %>
+
+      <%= form.radio_button :transfer2_type, 'unmanaged', id: 'transfer2_unmanaged', class: 'btn-check' %>
+      <%= form.label :transfer2_type, 'Unmanaged Bid', value: 'unmanaged', class: 'btn btn-outline-success', for: 'transfer2_unmanaged' %>
+
+      <%= form.radio_button :transfer2_type, 'circuit', id: 'transfer2_circuit', class: 'btn-check' %>
+      <%= form.label :transfer2_type, 'Circuit Sale', value: 'circuit', class: 'btn btn-outline-success', for: 'transfer2_circuit' %>
+
+      <%= form.radio_button :transfer2_type, 'deal', id: 'transfer2_deal', class: 'btn-check' %>
+      <%= form.label :transfer2_type, 'Agreed Deal', value: 'deal', class: 'btn btn-outline-success', for: 'transfer2_deal' %>
+    </div>
+  </div>
+  <div id="transfer2-detail" class="col-md-12 align-top d-flex align-items-center justify-content-center">  
+      <span class="m-3"><%= form.label :transfer2_player_id, "Player Id" %></span>
+      <%= form.text_field :transfer2_player_id %>
+      <span class="m-3"><%= form.label :transfer2_amount, "Bid Amount" %></span>
+      <%= form.text_field :transfer2_amount %>
+      <span class="m-3"><%= form.label :transfer2_club, "Other Club Id" %></span>
+      <%= form.text_field :transfer2_club %>
+  </div>
+</div>
+
+<div>
+  <h6 class="text-center mt-5">Transfer 4</h6>
+  <div id="transfer3" class="col-md-12 align-top d-flex align-items-center justify-content-center">
+    <div class="btn-group" role="group" aria-label="Transfer type">
+      <%= form.radio_button :transfer3_type, 'listed', id: 'transfer3_listed', class: 'btn-check' %>
+      <%= form.label :transfer3_type, 'Listed Bid', value: 'listed', class: 'btn btn-outline-success', for: 'transfer3_listed' %>
+
+      <%= form.radio_button :transfer3_type, 'unmanaged', id: 'transfer3_unmanaged', class: 'btn-check' %>
+      <%= form.label :transfer3_type, 'Unmanaged Bid', value: 'unmanaged', class: 'btn btn-outline-success', for: 'transfer3_unmanaged' %>
+
+      <%= form.radio_button :transfer3_type, 'circuit', id: 'transfer3_circuit', class: 'btn-check' %>
+      <%= form.label :transfer3_type, 'Circuit Sale', value: 'circuit', class: 'btn btn-outline-success', for: 'transfer3_circuit' %>
+
+      <%= form.radio_button :transfer3_type, 'deal', id: 'transfer3_deal', class: 'btn-check' %>
+      <%= form.label :transfer3_type, 'Agreed Deal', value: 'deal', class: 'btn btn-outline-success', for: 'transfer3_deal' %>
+    </div>
+  </div>
+  <div id="transfer3-detail" class="col-md-12 align-top mb-5 d-flex align-items-center justify-content-center">  
+      <span class="m-3"><%= form.label :transfer3_player_id, "Player Id" %></span>
+      <%= form.text_field :transfer3_player_id %>
+      <span class="m-3"><%= form.label :transfer3_amount, "Bid Amount" %></span>
+      <%= form.text_field :transfer3_amount %>
+      <span class="m-3"><%= form.label :transfer3_club, "Other Club Id" %></span>
+      <%= form.text_field :transfer3_club %>
+  </div>
 </div>

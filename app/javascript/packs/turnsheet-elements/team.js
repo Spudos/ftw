@@ -76,4 +76,4 @@ function formationUpdate() {
   attSelected.innerText = attCount;
 }
 
-export { handlePlayerClick, formationUpdate };
+export { handlePlayerClick, teamValidations, formationUpdate };
