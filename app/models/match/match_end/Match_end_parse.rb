@@ -32,7 +32,7 @@ class Match::MatchEnd::MatchEndParse
       home_chance, away_chance = chance_count(record)
       home_target, away_target = target_count(record)
       home_goals, away_goals = goal_count(record)
-      home_possession, away_possession = possession_count(home_chance, away_chance)
+      home_possession, away_possession = possession_count(home_chance, away_chance, home_club, away_club)
 
       match_summaries << { home_club:,
                            away_club:,
@@ -123,14 +123,39 @@ class Match::MatchEnd::MatchEndParse
     return home_goals, away_goals
   end
 
-  def possession_count(home_chance, away_chance)
-    initial_home_possession = (home_chance.to_f / (home_chance + away_chance) * 100).round(0)
+  def possession_count(home_chance, away_chance, home_club, away_club)
+    initial_home_possession = if home_chance.zero?
+                                0
+                              elsif away_chance.zero?
+                                100
+                              elsif home_chance == away_chance
+                                rand(40..60)
+                              else
+                                (home_chance.to_f / (home_chance + away_chance) * 100).round(0)
+                              end
 
-    home_possession = rand(20..30) if initial_home_possession < 20
-    home_possession = rand(70..80) if initial_home_possession > 80
+    if initial_home_possession < 20
+      home_possession = rand(20..30)
+    elsif initial_home_possession > 80
+      home_possession = rand(70..80)
+    else
+      home_possession = initial_home_possession
+    end
 
     away_possession = 100 - home_possession
 
+    write_to_file(home_chance, away_chance, home_club, away_club, home_possession, away_possession)
+
     return home_possession, away_possession
+  end
+
+  def write_to_file(home_chance, away_chance, home_club, away_club, home_possession, away_possession)
+    data_to_write = "#{home_club} vs #{away_club} - " \
+                    "Home Chance: #{home_chance}, Away Chance: #{away_chance} - " \
+                    "Home Possession: #{home_possession}, Away_Possession: #{away_possession}\n"
+
+    File.open('matches.txt', 'a') do |file|
+      file.write(data_to_write)
+    end
   end
 end
