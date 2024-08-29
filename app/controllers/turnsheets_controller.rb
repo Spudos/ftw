@@ -4,12 +4,13 @@ class TurnsheetsController < ApplicationController
 
   # GET /turnsheets or /turnsheets.json
   def index
-    @turnsheets = Turnsheet.all
+    @turnsheets = Turnsheet.where(club_id: current_user.club).order(week: :desc)
   end
 
   # GET /turnsheets/1 or /turnsheets/1.json
   def show
     authorize @turnsheet
+    @submitted_turnsheet = Turnsheet.find_by(id: params[:id])
   end
 
   # GET /turnsheets/new

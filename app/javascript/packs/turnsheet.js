@@ -4,7 +4,7 @@ import { handlePlayerClick, teamValidations, formationUpdate } from './turnsheet
 import { handleSkillClick } from './turnsheet-elements/training.js';
 import { buildInputFields } from './turnsheet-elements/submit.js';
 
-document.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('load', function() {
   const stadiumButtons = document.querySelectorAll('#stand_navigation button');
   const capacityButtons = document.querySelectorAll('#stand_capacity button');
   const conditionButtons = document.querySelectorAll('#stand_condition button');
@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const midfieldAggressionButtons = document.querySelectorAll('#midfield_aggression button');
   const attackAggressionButtons = document.querySelectorAll('#attack_aggression button');
   const inputDiv = document.getElementById('hidden_inputs');
+  
+  console.log('Turnsheet JS loaded');
 
   teamValidations();
   formationUpdate();
