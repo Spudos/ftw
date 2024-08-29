@@ -13,6 +13,7 @@ RSpec.describe Player::PlayerUpdates, type: :model do
              club_id: 1,
              fitness: 50,
              contract: 24,
+             recovery: 5,
              available: 0)
       create(:performance, player_id: 1)
       create(:goal, scorer_id: 1)
@@ -28,7 +29,7 @@ RSpec.describe Player::PlayerUpdates, type: :model do
 
       Player::PlayerUpdates.new(week).call
 
-      expect(Player.first.fitness).to eq(53)
+      expect(Player.first.fitness).to eq(58)
       expect(Player.first.available).to eq(3)
       expect(Player.first.contract).to eq(23)
       expect(Player.first.value).to eq(42_929_250)
@@ -63,6 +64,7 @@ RSpec.describe Player::PlayerUpdates, type: :model do
       create(:player,
               club_id: 1,
               fitness: 99,
+              recovery: 5,
               contract: 24,
               available: 0
               )
@@ -82,6 +84,7 @@ RSpec.describe Player::PlayerUpdates, type: :model do
               club_id: 1,
               fitness: 200,
               contract: 24,
+              recovery: 5,
               available: 0
               )
 
@@ -100,8 +103,8 @@ RSpec.describe Player::PlayerUpdates, type: :model do
              club_id: 1,
              fitness: 90,
              contract: 24,
-             available: 0
-            )
+             recovery: 0,
+             available: 0)
 
       allow_any_instance_of(Kernel).to receive(:rand).with(0..5).and_return(3)
       allow_any_instance_of(Kernel).to receive(:rand).with(1..100).and_return(1)

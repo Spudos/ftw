@@ -28,6 +28,7 @@ class Player::Engines::Fitness
   def fitness_increase(player)
     if player.club.managed?
       player.fitness += rand(0..5)
+      player.fitness += player.recovery
       player.fitness = 100 if player.fitness > 100
     else
       player.fitness = 100

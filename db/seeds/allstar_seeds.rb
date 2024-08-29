@@ -87,7 +87,8 @@ Club.create(
     potential_flair_coached: false,
     potential_strength_coached: false,
     potential_creativity_coached: false,
-    available: 0
+    available: 0,
+    recovery: random_number(0, 15)
   )
 end
 
@@ -139,7 +140,8 @@ end
     potential_flair_coached: false,
     potential_strength_coached: false,
     potential_creativity_coached: false,
-    available: 0
+    available: 0,
+    recovery: random_number(0, 15)
   )
 end
 
@@ -191,7 +193,8 @@ end
     potential_flair_coached: false,
     potential_strength_coached: false,
     potential_creativity_coached: false,
-    available: 0
+    available: 0,
+    recovery: random_number(0, 15)
   )
 end
 
@@ -243,6 +246,7 @@ end
     potential_flair_coached: false,
     potential_strength_coached: false,
     potential_creativity_coached: false,
-    available: 0
+    available: 0,
+    recovery: random_number(0, 15)
   )
 end

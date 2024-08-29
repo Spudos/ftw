@@ -269,7 +269,8 @@ class Club::ClubCreation
         potential_flair: rand(8..18),
         potential_strength: rand(11..20),
         potential_creativity: rand(8..18),
-        available: 0
+        available: 0,
+        recovery: rand(0..15)
       )
     end
 
@@ -309,7 +310,8 @@ class Club::ClubCreation
         potential_flair: rand(8..18),
         potential_strength: rand(11..20),
         potential_creativity: rand(11..20),
-        available: 0
+        available: 0,
+        recovery: rand(0..15)
       )
     end
 
@@ -349,7 +351,8 @@ class Club::ClubCreation
         potential_flair: rand(11..20),
         potential_strength: rand(8..18),
         potential_creativity: rand(11..20),
-        available: 0
+        available: 0,
+        recovery: rand(0..15)
       )
     end
 
@@ -389,7 +392,8 @@ class Club::ClubCreation
         potential_flair: rand(11..20),
         potential_strength: rand(8..18),
         potential_creativity: rand(8..18),
-        available: 0
+        available: 0,
+        recovery: rand(0..15)
       )
     end
   end

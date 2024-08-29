@@ -91,7 +91,8 @@ class Club::SquadCorrections
             potential_flair: rand(6..20),
             potential_strength: rand(6..20),
             potential_creativity: rand(6..20),
-            available: 0
+            available: 0,
+            recovery: rand(0..15)
           )
         player_total_skill_and_wages
       end
