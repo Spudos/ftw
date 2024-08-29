@@ -117,6 +117,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const playerId = clickedButton.dataset.playerId;
     const currentAction = sessionStorage.getItem('ftw-player-action-' + playerId);
     const newAmount = clickedButton.id;
+
+    if (newAmount === 'fitness') {
+      removeFitness();
+    };
   
     if (currentAction === newAmount) {
       sessionStorage.removeItem('ftw-player-action-' + playerId);
@@ -143,6 +147,17 @@ document.addEventListener('DOMContentLoaded', function() {
     resetPlayerActions()
     decoratePlayerAmounts();
     decoratePlayerActions();
+  };
+
+  function removeFitness() {
+    for (let i = 0; i < sessionStorage.length; i++) {
+      const key = sessionStorage.key(i);
+      const value = sessionStorage.getItem(key);
+  
+      if (value === "fitness") {
+          sessionStorage.removeItem(key);
+      };
+    };
   };
 
 //-------------------------------------------------------------- Decorate Buttons
