@@ -124,10 +124,10 @@ class Match::MatchEnd::MatchEndParse
   end
 
   def possession_count(home_chance, away_chance)
-    home_possession = (home_chance / (home_chance + away_chance) * 100).round(0)
+    initial_home_possession = (home_chance.to_f / (home_chance + away_chance) * 100).round(0)
 
-    home_possession = rand(20..30) if home_possession < 20
-    home_possession = rand(70..80) if home_possession > 80
+    home_possession = rand(20..30) if initial_home_possession < 20
+    home_possession = rand(70..80) if initial_home_possession > 80
 
     away_possession = 100 - home_possession
 
