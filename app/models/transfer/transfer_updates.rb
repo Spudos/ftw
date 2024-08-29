@@ -35,6 +35,7 @@ class Transfer::TransferUpdates
           player.club_id = record[:buy_club]
           player.listed = false
           player.contract = 24
+          player.tl = 6
           player.save
 
           Message.create(action_id:, week: record[:week], club_id: record[:buy_club],
@@ -93,6 +94,7 @@ class Transfer::TransferUpdates
       if player.value < bid
         player.club_id = buy_club_id
         player.contract = 24
+        player.tl = 6
         player.save
 
         Turn::BankAdjustment.new(action_id, week, sell_club_id.to_i, 'deal_sale', player.name, bid * -1).call

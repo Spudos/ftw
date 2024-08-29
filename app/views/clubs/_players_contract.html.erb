@@ -6,6 +6,7 @@
       <th scope="col">Age</th>
       <th scope="col">Position</th>
       <th scope="col">Con</th>
+      <th scope="col">TL</th>
       <th scope="col">Wages</th>
       <th scope="col">Valuation</th>
       <th scope="col">Action</th>
@@ -26,6 +27,7 @@
         <td><%= player.age %></td>
         <td><%= (player.position + player.player_position_detail).upcase %></td>
         <td><%= player.contract %></td>
+        <td><%= player.tl %></td>
         <td><%= player.wages %></td>
         <td><%= player.value %></td>
         <td><%= link_to "Show", player_path(player[:id]), class: "btn btn-sm btn-primary" %></td>

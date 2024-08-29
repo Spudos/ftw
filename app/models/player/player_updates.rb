@@ -16,6 +16,7 @@ class Player::PlayerUpdates
   def process
     objects = [Player::Engines::Fitness,
                Player::Engines::Contract,
+               Player::Engines::Tl,
                Player::Engines::ValueWages,
                Player::Engines::PlayerTotals]
 

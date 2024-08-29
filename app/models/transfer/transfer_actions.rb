@@ -33,7 +33,7 @@ class Transfer::TransferActions
 
     hash.each do |key, value|
       player = Player.find_by(id: value[:var2])
-      if player.club_id == value[:club_id].to_i
+      if player.club_id == value[:club_id].to_i && player.tl.zero?
         player.listed = true
         player.save
         Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id],
@@ -41,6 +41,9 @@ class Transfer::TransferActions
 
         turn = TurnActions.find(key)
         turn.update(date_completed: DateTime.now)
+      elsif player.tl.positive?
+        Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id],
+                       var1: "Player #{player.name} could not be listed as he has a transfer ban (tl not 0)")
       else
         Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id],
                        var1: "Player #{player.name} could not be listed due to not being at your club")
@@ -109,10 +112,11 @@ class Transfer::TransferActions
                          var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player being at a managed club")
           transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'player_managed')
 
-        elsif bid_decision(value, player)
+        elsif bid_decision(value, player) && player.tl.zero?
           if rand(0..100) > player.loyalty
             player.club = Club.find_by(id: value[:club_id].to_i)
             player[:contract] = 24
+            player[:tl] = 6
             player.save
 
             Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
@@ -135,6 +139,10 @@ class Transfer::TransferActions
             transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'player_refusal')
           end
 
+        elsif player.tl.positive?
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id],
+                         var1: "Player #{player.name} could bought as he has a transfer ban (tl not 0)")
+          transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'tl_not_0')
         else
           Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
                          var1: "Your #{value[:var3]} bid for #{player.name} failed due to not meeting an acceptable valuation for the player")
@@ -147,15 +155,15 @@ class Transfer::TransferActions
   end
 
   def bid_decision(value, player)
-    if player.total_skill < 77
-      value[:var3].to_i > player.value * 1
-    elsif player.total_skill < 99
-      value[:var3].to_i > player.value * 1.234
-    elsif player.total_skill < 110
-      value[:var3].to_i > player.value * 1.498
-    else
-      value[:var3].to_i > player.value * 1.723
-    end
+    value[:var3].to_i > if player.total_skill < 77
+                          player.value * 1
+                        elsif player.total_skill < 99
+                          player.value * 1.234
+                        elsif player.total_skill < 110
+                          player.value * 1.498
+                        else
+                          player.value * 1.723
+                        end
   end
 
   def circuit_sale
@@ -178,18 +186,19 @@ class Transfer::TransferActions
         player = Player.find_by(id: value[:var2].to_i)
         club = Club.find_by(id: value[:club_id].to_i)
 
-        if player.club.id == value[:club_id].to_i
-          if player.total_skill < 61
-            proceeds = 0
-          elsif player.total_skill < 71
-            proceeds = (player.value * -0.25).to_i
-          else
-            proceeds = (player.value * -0.5).to_i
-          end
+        if player.club.id == value[:club_id].to_i && player.tl.zero?
+          proceeds = if player.total_skill < 61
+                       0
+                     elsif player.total_skill < 71
+                       (player.value * -0.25).to_i
+                     else
+                       (player.value * -0.5).to_i
+                     end
 
           proceeds_positive = (proceeds * -1).to_i
 
           player[:club_id] = 242
+          player[:tl] = 6
           player.save
 
           Turn::BankAdjustment.new(value[:action_id],
@@ -200,8 +209,12 @@ class Transfer::TransferActions
                                    proceeds).call
 
           transfer_save(value[:week], 242, club.id, value[:var2], proceeds_positive, 'completed')
+        elsif player.tl.positive?
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id],
+                         var1: "Player #{player.name} could not be sold to the free agent circuit as he has a transfer ban (tl not 0)")
+          transfer_save(value[:week], 242, player.club_id, value[:var2], proceeds, 'tl_not_0')
         else
-          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id, 
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
                          var1: "#{player.name} could not be sold to the free agent circuit due to not being at your club")
 
           transfer_save(value[:week], 242, player.club_id, value[:var2], proceeds, 'sale_failed')
@@ -231,11 +244,17 @@ class Transfer::TransferActions
     hash.each do |key, value|
       player = Player.find_by(id: value[:var2].to_i)
 
-      if player.club_id == value[:club_id].to_i
-        transfer_save(value[:week], value[:var4], value[:club_id], value[:var2], value[:var3], 'deal')
+      if player.tl.zero?
+        if player.club_id == value[:club_id].to_i
+          transfer_save(value[:week], value[:var4], value[:club_id], value[:var2], value[:var3], 'deal')
+        else
+          transfer_save(value[:week], value[:club_id], value[:var4], value[:var2], value[:var3], 'deal')
+        end
       else
-        transfer_save(value[:week], value[:club_id], value[:var4], value[:var2], value[:var3], 'deal')
+        Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id],
+                       var1: "Deal for #{player.name} could not be completed as he has a transfer ban (tl not 0)")
       end
+
       turn = TurnActions.find(key)
       turn.update(date_completed: DateTime.now)
     end
@@ -264,9 +283,9 @@ class Transfer::TransferActions
 
         if player.listed == true
           if value[:var3].to_i > player.value
-          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
-                         var1: "Your bid of #{player.name} for #{player.name} was logged")
-          transfer_save(value[:week], value[:club_id], player.club_id, value[:var2], value[:var3], 'bid')
+            Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
+                           var1: "Your bid of #{player.name} for #{player.name} was logged")
+            transfer_save(value[:week], value[:club_id], player.club_id, value[:var2], value[:var3], 'bid')
           else
             Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
                            var1: "Your bid for #{player.name} failed due to not meeting an acceptable valuation for the player")

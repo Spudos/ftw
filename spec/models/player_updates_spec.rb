@@ -14,6 +14,7 @@ RSpec.describe Player::PlayerUpdates, type: :model do
              fitness: 50,
              contract: 24,
              recovery: 5,
+             tl: 6,
              available: 0)
       create(:performance, player_id: 1)
       create(:goal, scorer_id: 1)
@@ -39,6 +40,7 @@ RSpec.describe Player::PlayerUpdates, type: :model do
       expect(Player.first.average_performance).to eq(50)
       expect(Player.first.total_goals).to eq(2)
       expect(Player.first.total_assists).to eq(3)
+      expect(Player.first.tl).to eq(5)
       expect(Selection.exists?(player_id: 1)).to eq(false)
     end
 
