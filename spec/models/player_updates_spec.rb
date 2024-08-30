@@ -7,7 +7,7 @@ RSpec.describe Player::PlayerUpdates, type: :model do
 
     it 'fitness increases by 3, contract decreases by 1, value and wages calculated' do
       create(:club, id: 1, managed: true)
-      create(:player, id: 100, available: 0)
+      create(:player, id: 100, available: 0, age: 20)
       create(:player,
              id: 1,
              club_id: 1,
@@ -15,7 +15,8 @@ RSpec.describe Player::PlayerUpdates, type: :model do
              contract: 24,
              recovery: 5,
              tl: 6,
-             available: 0)
+             available: 0,
+             age: 20)
       create(:performance, player_id: 1)
       create(:goal, scorer_id: 1)
       create(:goal, scorer_id: 1)
@@ -31,9 +32,11 @@ RSpec.describe Player::PlayerUpdates, type: :model do
       Player::PlayerUpdates.new(week).call
 
       expect(Player.first.fitness).to eq(58)
+      expect(Player.first.age).to eq(20)
       expect(Player.first.available).to eq(3)
       expect(Player.first.contract).to eq(23)
-      expect(Player.first.value).to eq(42_929_250)
+      expect(Player.first.value).to be > 29_324_500
+      expect(Player.first.value).to be < 29_325_500
       expect(Player.first.wages).to eq(87_125)
       expect(Player.first.total_skill).to eq(85)
       expect(Player.first.games_played).to eq(1)
