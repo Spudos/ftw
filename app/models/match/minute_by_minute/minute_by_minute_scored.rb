@@ -1,26 +1,27 @@
 class Match::MinuteByMinute::MinuteByMinuteScored
-  attr_reader :minute_by_minute_target, :match_team
+  attr_reader :minute_by_minute_target, :minute_by_minute_press, :goal_factor
 
-  def initialize(minute_by_minute_target, match_team)
+  def initialize(minute_by_minute_target, minute_by_minute_press, goal_factor)
     @minute_by_minute_target = minute_by_minute_target
-    @match_team = match_team
+    @minute_by_minute_press = minute_by_minute_press
+    @goal_factor = goal_factor
   end
 
   def call
-    if @minute_by_minute_target.nil? || @match_team.nil?
+    if @minute_by_minute_target.nil? || @minute_by_minute_press.nil?
       raise StandardError, "There was an error in the #{self.class.name} class"
     end
 
-    home_attack = match_team.first[:attack]
-    home_defense = match_team.first[:defense]
-    away_attack = match_team.last[:attack]
-    away_defense = match_team.last[:defense]
+    home_attack = minute_by_minute_press.first[:attack_press]
+    home_defense = minute_by_minute_press.first[:defense_press]
+    away_attack = minute_by_minute_press.last[:attack_press]
+    away_defense = minute_by_minute_press.last[:defense_press]
 
-    goal_home = ((home_attack.to_f / away_defense) * 40).to_i
-    goal_home = goal_home.clamp(0, 40)
+    goal_home = ((home_attack.to_f / away_defense) * goal_factor).to_i
+    goal_home = goal_home.clamp(0, goal_factor)
 
-    goal_away = ((away_attack.to_f / home_defense) * 40).to_i
-    goal_away = goal_away.clamp(0, 40)
+    goal_away = ((away_attack.to_f / home_defense) * goal_factor).to_i
+    goal_away = goal_away.clamp(0, goal_factor)
 
     goal_roll = rand(0..100)
     goal_scored = ''

@@ -43,6 +43,10 @@ class Match < ApplicationRecord
 
   def minute_by_minute(fixture_attendance, selection_complete, tactic)
     summary = []
+    chance_factor = GameParam.first.chance_factor
+    midfield_on_attack = GameParam.first.midfield_on_attack
+    target_factor = GameParam.first.target_factor
+    goal_factor = GameParam.first.goal_factor
 
     rand(90..98).times do |i|
       selection_match, minute_by_minute_blend = Match::MinuteByMinute::MinuteByMinuteBlend.new(selection_complete).call
@@ -53,11 +57,11 @@ class Match < ApplicationRecord
         minute_by_minute_press = \
           Match::MinuteByMinute::MinuteByMinutePress.new(match_team, tactic, i).call
         minute_by_minute_chance = \
-          Match::MinuteByMinute::MinuteByMinuteChance.new(minute_by_minute_press, i).call
+          Match::MinuteByMinute::MinuteByMinuteChance.new(minute_by_minute_press, i, chance_factor).call
         minute_by_minute_target = \
-          Match::MinuteByMinute::MinuteByMinuteTarget.new(minute_by_minute_chance, match_team).call
+          Match::MinuteByMinute::MinuteByMinuteTarget.new(minute_by_minute_chance, minute_by_minute_press, midfield_on_attack, target_factor).call
         minute_by_minute_scored = \
-          Match::MinuteByMinute::MinuteByMinuteScored.new(minute_by_minute_target, match_team).call
+          Match::MinuteByMinute::MinuteByMinuteScored.new(minute_by_minute_target, minute_by_minute_press, goal_factor).call
         minute_by_minute_names = \
           Match::MinuteByMinute::MinuteByMinuteNames.new(minute_by_minute_scored, selection_complete, match_team).call
         minute = [i,

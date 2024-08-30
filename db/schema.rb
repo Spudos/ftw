@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_29_124156) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_30_083336) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -96,6 +96,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_29_124156) do
     t.string "comp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "game_params", force: :cascade do |t|
+    t.float "chance_factor"
+    t.float "midfield_on_attack"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "target_factor"
+    t.integer "goal_factor"
   end
 
   create_table "goals", force: :cascade do |t|

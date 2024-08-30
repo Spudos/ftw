@@ -1,0 +1,27 @@
+<%= form_with(model: game_param) do |form| %>
+  <% if game_param.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(game_param.errors.count, "error") %> prohibited this game_param from being saved:</h2>
+
+      <ul>
+        <% game_param.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :chance_factor, style: "display: block" %>
+    <%= form.number_field :chance_factor %>
+  </div>
+
+  <div>
+    <%= form.label :midfield_on_attack, style: "display: block" %>
+    <%= form.number_field :midfield_on_attack %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

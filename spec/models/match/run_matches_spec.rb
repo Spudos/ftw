@@ -110,6 +110,8 @@ RSpec.describe Match, type: :model do
 
       turn = Turn.create(week: selected_week)
 
+      GameParam.create(chance_factor: 3, midfield_on_attack: 0.5, target_factor: 60, goal_factor: 40)
+
       Match.new.run_matches(selected_week, competition, turn)
     end
   end

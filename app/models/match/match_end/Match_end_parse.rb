@@ -143,9 +143,7 @@ class Match::MatchEnd::MatchEndParse
     end
 
     away_possession = 100 - home_possession
-
     write_to_file(home_chance, away_chance, home_club, away_club, home_possession, away_possession)
-
     return home_possession, away_possession
   end
 
