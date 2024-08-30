@@ -105,9 +105,13 @@ class Transfer::TransferActions
 
         player = Player.find_by(id: value[:var2].to_i)
         club = Club.find_by(id: value[:club_id].to_i)
-        player_original_club = player.club
 
-        if player_original_club.managed?
+        player_original_club = player.club if player
+
+        if !player
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
+                         var1: "Your bid for a player that does not exist failed")
+        elsif player_original_club.managed?
           Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
                          var1: "Your #{value[:var3]} bid for #{player.name} failed due to the player being at a managed club")
           transfer_save(value[:week], club.id, player_original_club[:id], value[:var2], value[:var3], 'player_managed')
@@ -186,7 +190,10 @@ class Transfer::TransferActions
         player = Player.find_by(id: value[:var2].to_i)
         club = Club.find_by(id: value[:club_id].to_i)
 
-        if player.club.id == value[:club_id].to_i && player.tl.zero?
+        if !player
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
+                         var1: "Your player sale failed as the player does not exist")
+        elsif player.club.id == value[:club_id].to_i && player.tl.zero?
           proceeds = if player.total_skill < 61
                        0
                      elsif player.total_skill < 71
@@ -244,7 +251,10 @@ class Transfer::TransferActions
     hash.each do |key, value|
       player = Player.find_by(id: value[:var2].to_i)
 
-      if player.tl.zero?
+      if !player
+        Message.create(action_id: value[:action_id], week: value[:week], club_id: value[:club_id],
+                       var1: 'Your deal for a player that does not exist failed')
+      elsif player.tl.zero?
         if player.club_id == value[:club_id].to_i
           transfer_save(value[:week], value[:var4], value[:club_id], value[:var2], value[:var3], 'deal')
         else
@@ -281,7 +291,10 @@ class Transfer::TransferActions
         player = Player.find_by(id: value[:var2].to_i)
         club = Club.find_by(id: value[:club_id].to_i)
 
-        if player.listed == true
+        if !player
+          Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
+                         var1: "Your bid for a player that does not exist failed")
+        elsif player.listed == true
           if value[:var3].to_i > player.value
             Message.create(action_id: value[:action_id], week: value[:week], club_id: club.id,
                            var1: "Your bid of #{player.name} for #{player.name} was logged")
