@@ -40,6 +40,8 @@ class TurnsheetsController < ApplicationController
 
     respond_to do |format|
       if @turnsheet.save
+        EmailTurnsheetJob.perform_later(current_user, @turnsheet)
+
         format.html { redirect_to request.referrer, notice: 'Turnsheet was successfully created.' }
         format.json { render :show, status: :created, location: @turnsheet }
       else

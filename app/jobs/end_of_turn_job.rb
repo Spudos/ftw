@@ -21,6 +21,8 @@ class EndOfTurnJob < ApplicationJob
 
       article = Article.new
       article.process_article_updates(params, turn)
+
+      UserMailer.turn_completed_email(params).deliver_now
     rescue StandardError => e
       Error.create(
         error_type: 'EndOfTurnJob',

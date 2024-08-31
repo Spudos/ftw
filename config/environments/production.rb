@@ -91,4 +91,14 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.eu.mailgun.org',
+    port:                 587,
+    user_name:            'postmaster@ftwpbem.com',
+    password:             '97854779756bae6f59ead5a7b89a73d5-777a617d-9090cc2b',
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
 end
