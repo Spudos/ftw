@@ -32,23 +32,3 @@
     <%= form.text_field :public_message, id: "public_message", class: "form-control"  %>
   </div>
 </div>
-
-<script>
-  const headlineInput = document.getElementById('article_headline');
-  const subHeadlineInput = document.getElementById('article_sub_headline');
-  const articleInput = document.getElementById('article');
-  const messageInput = document.getElementById('club_message');
-  const messageText = document.getElementById('message_text');
-  
-  headlineInput.addEventListener('input', function() {
-      subHeadlineInput.disabled = headlineInput.value.trim() === '';
-  });
-
-  subHeadlineInput.addEventListener('input', function() {
-      articleInput.disabled = subHeadlineInput.value.trim() === '';
-  });
-
-  messageInput.addEventListener('input', function() {
-      messageText.disabled = messageInput.value.trim() === '';
-  });
-</script>

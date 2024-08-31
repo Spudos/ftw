@@ -7,32 +7,193 @@
   <div class="col-md-12 align-top d-flex justify-content-center">
     <table>
       <thead class="turnsheet-table-header">
-        <%= render 'player_table_header' %>
-      </thead>
+        <tr class="dark-blue-header-background">
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Pos</th>
+        <th scope="col" class="training-header">PA</th>
+        <th scope="col" class="training-header">CO</th>
+        <th scope="col" class="training-header">TA</th>
+        <th scope="col" class="training-header">RU</th>
+        <th scope="col" class="training-header">SH</th>
+        <th scope="col" class="training-header">DR</th>
+        <th scope="col" class="training-header">DF</th>
+        <th scope="col" class="training-header">OF</th>
+        <th scope="col" class="training-header">FL</th>
+        <th scope="col" class="training-header">ST</th>
+        <th scope="col" class="training-header">CR</th>
+        <th scope="col" class="training-header">TS</th>
+      </tr>
+    </thead>
       <tbody class="turnsheet-table-detail">
         <% @selection.each do |player| %>
           <% if player.position == position %>
-          <tr id="trainingRows" class="<%= position %>">
-          <td id="player_id" style="width: 50px !important"><%= player.id %></td>
-          <td style="width: 150px !important"><%= player.name %></td>
-          <td style="width: 50px !important"><%= player.age %></td>
-          <td id="position" style="width: 50px !important"><%= (player.position + player.player_position_detail).upcase %></td>
-          <td id="passing" class="skill"><%= player.passing %></td>
-          <td id="control" class="skill"><%= player.control %></td>
-          <td id="tackling" class="skill"><%= player.tackling %></td>
-          <td id="running" class="skill"><%= player.running %></td>
-          <td id="shooting" class="skill"><%= player.shooting %></td>
-          <td id="dribbling" class="skill"><%= player.dribbling %></td>
-          <td id="defensive_heading" class="skill"><%= player.defensive_heading %></td>
-          <td id="offensive_heading" class="skill"><%= player.offensive_heading %></td>
-          <td id="flair" class="skill"><%= player.flair %></td>
-          <td id="strength" class="skill"><%= player.strength %></td>
-          <td id="creativity" class="skill"><%= player.creativity %></td>
-          <td class="training-header"><%= player.total_skill %></td>
-        </tr>
-          <% end %>
+            <tr id="trainingRows" class="<%= position %>">
+            <td id="player_id" style="width: 50px !important"><%= player.id %></td>
+            <td style="width: 150px !important"><%= player.name %></td>
+            <td style="width: 50px !important"><%= player.age %></td>
+            <td id="position" style="width: 50px !important"><%= (player.position + player.player_position_detail).upcase %></td>
+
+            <% if player.potential_passing_coached? %>
+              <td id="passing" class="skill potential"><%= player.passing %></td>
+            <% elsif player.position == 'gkp' && player.passing >= @club.staff_gkp %>
+              <td id="passing" class="skill inferior"><%= player.passing %></td>
+            <% elsif player.position == 'dfc' && player.passing >= @club.staff_dfc %>
+              <td id="passing" class="skill inferior"><%= player.passing %></td>
+            <% elsif player.position == 'mid' && player.passing >= @club.staff_mid %>
+              <td id="passing" class="skill inferior"><%= player.passing %></td>
+            <% elsif player.position == 'att' && player.passing >= @club.staff_att %>
+              <td id="passing" class="skill inferior"><%= player.passing %></td>
+            <% else %>
+              <td id="passing" class="skill"><%= player.passing %></td>
+            <% end %>
+
+            <% if player.potential_control_coached? %>
+              <td id="control" class="skill potential"><%= player.control %></td>
+            <% elsif player.position == 'gkp' && player.control >= @club.staff_gkp %>
+              <td id="control" class="skill inferior"><%= player.control %></td>
+            <% elsif player.position == 'dfc' && player.control >= @club.staff_dfc %>
+              <td id="control" class="skill inferior"><%= player.control %></td>
+            <% elsif player.position == 'mid' && player.control >= @club.staff_mid %>
+              <td id="control" class="skill inferior"><%= player.control %></td>
+            <% elsif player.position == 'att' && player.control >= @club.staff_att %>
+              <td id="control" class="skill inferior"><%= player.control %></td>
+            <% else %>
+              <td id="control" class="skill"><%= player.control %></td>
+            <% end %>
+
+            <% if player.potential_tackling_coached? %>
+              <td id="tackling" class="skill potential"><%= player.tackling %></td>
+            <% elsif player.position == 'gkp' && player.tackling >= @club.staff_gkp %>
+              <td id="tackling" class="skill inferior"><%= player.tackling %></td>
+            <% elsif player.position == 'dfc' && player.tackling >= @club.staff_dfc %>
+              <td id="tackling" class="skill inferior"><%= player.tackling %></td>
+            <% elsif player.position == 'mid' && player.tackling >= @club.staff_mid %>
+              <td id="tackling" class="skill inferior"><%= player.tackling %></td>
+            <% elsif player.position == 'att' && player.tackling >= @club.staff_att %>
+              <td id="tackling" class="skill inferior"><%= player.tackling %></td>
+            <% else %>
+              <td id="tackling" class="skill"><%= player.tackling %></td>
+            <% end %>
+
+            <% if player.potential_running_coached? %>
+              <td id="running" class="skill potential"><%= player.running %></td>
+            <% elsif player.position == 'gkp' && player.running >= @club.staff_gkp %>
+              <td id="running" class="skill inferior"><%= player.running %></td>
+            <% elsif player.position == 'dfc' && player.running >= @club.staff_dfc %>
+              <td id="running" class="skill inferior"><%= player.running %></td>
+            <% elsif player.position == 'mid' && player.running >= @club.staff_mid %>
+              <td id="running" class="skill inferior"><%= player.running %></td>
+            <% elsif player.position == 'att' && player.running >= @club.staff_att %>
+              <td id="running" class="skill inferior"><%= player.running %></td>
+            <% else %>
+              <td id="running" class="skill"><%= player.running %></td>
+            <% end %>
+
+            <% if player.potential_shooting_coached? %>
+              <td id="shooting" class="skill potential"><%= player.shooting %></td>
+            <% elsif player.position == 'gkp' && player.shooting >= @club.staff_gkp %>
+              <td id="shooting" class="skill inferior"><%= player.shooting %></td>
+            <% elsif player.position == 'dfc' && player.shooting >= @club.staff_dfc %>
+              <td id="shooting" class="skill inferior"><%= player.shooting %></td>
+            <% elsif player.position == 'mid' && player.shooting >= @club.staff_mid %>
+              <td id="shooting" class="skill inferior"><%= player.shooting %></td>
+            <% elsif player.position == 'att' && player.shooting >= @club.staff_att %>
+              <td id="shooting" class="skill inferior"><%= player.shooting %></td>
+            <% else %>
+              <td id="shooting" class="skill"><%= player.shooting %></td>
+            <% end %>
+
+            <% if player.potential_dribbling_coached? %>
+              <td id="dribbling" class="skill potential"><%= player.dribbling %></td> 
+            <% elsif player.position == 'gkp' && player.dribbling >= @club.staff_gkp %>
+              <td id="dribbling" class="skill inferior"><%= player.dribbling %></td>
+            <% elsif player.position == 'dfc' && player.dribbling >= @club.staff_dfc %>
+              <td id="dribbling" class="skill inferior"><%= player.dribbling %></td>
+            <% elsif player.position == 'mid' && player.dribbling >= @club.staff_mid %>
+              <td id="dribbling" class="skill inferior"><%= player.dribbling %></td>
+            <% elsif player.position == 'att' && player.dribbling >= @club.staff_att %>
+              <td id="dribbling" class="skill inferior"><%= player.dribbling %></td>
+            <% else %>
+              <td id="dribbling" class="skill"><%= player.dribbling %></td>
+            <% end %>
+
+            <% if player.potential_defensive_heading_coached? %>
+              <td id="defensive_heading" class="skill potential"><%= player.defensive_heading %></td>
+            <% elsif player.position == 'gkp' && player.defensive_heading >= @club.staff_gkp %>
+              <td id="defensive_heading" class="skill inferior"><%= player.defensive_heading %></td>
+            <% elsif player.position == 'dfc' && player.defensive_heading >= @club.staff_dfc %>
+              <td id="defensive_heading" class="skill inferior"><%= player.defensive_heading %></td>
+            <% elsif player.position == 'mid' && player.defensive_heading >= @club.staff_mid %>
+              <td id="defensive_heading" class="skill inferior"><%= player.defensive_heading %></td>
+            <% elsif player.position == 'att' && player.defensive_heading >= @club.staff_att %>
+              <td id="defensive_heading" class="skill inferior"><%= player.defensive_heading %></td>
+            <% else %>
+              <td id="defensive_heading" class="skill"><%= player.defensive_heading %></td>
+            <% end %>
+            
+            <% if player.potential_offensive_heading_coached? %>
+              <td id="offensive_heading" class="skill potential"><%= player.offensive_heading %></td> 
+            <% elsif player.position == 'gkp' && player.offensive_heading >= @club.staff_gkp %>
+              <td id="offensive_heading" class="skill inferior"><%= player.offensive_heading %></td>
+            <% elsif player.position == 'dfc' && player.offensive_heading >= @club.staff_dfc %>
+              <td id="offensive_heading" class="skill inferior"><%= player.offensive_heading %></td>
+            <% elsif player.position == 'mid' && player.offensive_heading >= @club.staff_mid %>
+              <td id="offensive_heading" class="skill inferior"><%= player.offensive_heading %></td>
+            <% elsif player.position == 'att' && player.offensive_heading >= @club.staff_att %>
+              <td id="offensive_heading" class="skill inferior"><%= player.offensive_heading %></td>
+            <% else %>
+              <td id="offensive_heading" class="skill"><%= player.offensive_heading %></td>
+            <% end %>
+
+            <% if player.potential_flair_coached? %>
+              <td id="flair" class="skill potential"><%= player.flair %></td>
+            <% elsif player.position == 'gkp' && player.flair >= @club.staff_gkp %>
+              <td id="flair" class="skill inferior"><%= player.flair %></td>
+            <% elsif player.position == 'dfc' && player.flair >= @club.staff_dfc %>
+              <td id="flair" class="skill inferior"><%= player.flair %></td>
+            <% elsif player.position == 'mid' && player.flair >= @club.staff_mid %>
+              <td id="flair" class="skill inferior"><%= player.flair %></td>
+            <% elsif player.position == 'att' && player.flair >= @club.staff_att %>
+              <td id="flair" class="skill inferior"><%= player.flair %></td>
+            <% else %>
+              <td id="flair" class="skill"><%= player.flair %></td>
+            <% end %>
+
+            <% if player.potential_strength_coached? %>
+              <td id="strength" class="skill potential"><%= player.strength %></td>
+            <% elsif player.position == 'gkp' && player.strength >= @club.staff_gkp %>
+              <td id="strength" class="skill inferior"><%= player.strength %></td>
+            <% elsif player.position == 'dfc' && player.strength >= @club.staff_dfc %>
+              <td id="strength" class="skill inferior"><%= player.strength %></td>
+            <% elsif player.position == 'mid' && player.strength >= @club.staff_mid %>
+              <td id="strength" class="skill inferior"><%= player.strength %></td>
+            <% elsif player.position == 'att' && player.strength >= @club.staff_att %>
+              <td id="strength" class="skill inferior"><%= player.strength %></td>
+            <% else %>
+              <td id="strength" class="skill"><%= player.strength %></td>
+            <% end %>
+
+            <% if player.potential_creativity_coached? %>
+              <td id="creativity" class="skill potential"><%= player.creativity %></td>
+            <% elsif player.position == 'gkp' && player.creativity >= @club.staff_gkp %>
+              <td id="creativity" class="skill inferior"><%= player.creativity %></td>
+            <% elsif player.position == 'dfc' && player.creativity >= @club.staff_dfc %>
+              <td id="creativity" class="skill inferior"><%= player.creativity %></td>
+            <% elsif player.position == 'mid' && player.creativity >= @club.staff_mid %>
+              <td id="creativity" class="skill inferior"><%= player.creativity %></td>
+            <% elsif player.position == 'att' && player.creativity >= @club.staff_att %>
+              <td id="creativity" class="skill inferior"><%= player.creativity %></td>
+            <% else %>
+              <td id="creativity" class="skill"><%= player.creativity %></td>
+            <% end %>
+            
+            <td class="training-header"><%= player.total_skill %></td>
+          </tr>
         <% end %>
-      </tbody>
+      <% end %>
+    </tbody>
     </table>
   </div>
 <% end %>

@@ -111,7 +111,6 @@ class TurnsheetsController < ApplicationController
                                                         ELSE 10
                                                         END"
                                                ))
-
     return players
   end
 end
