@@ -5,7 +5,7 @@ class EmailTurnsheetJob < ApplicationJob
     UserMailer.turn_submitted_email(user, turnsheet).deliver_now
   rescue StandardError => e
     Error.create(
-      error_type: 'EndOfTurnJob',
+      error_type: 'EmailTurnsheetJob',
       message: e.message
     )
   end

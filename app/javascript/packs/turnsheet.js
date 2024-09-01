@@ -3,6 +3,7 @@ import { resetUpgradeValues, setStaffValues, setPropertyValues, setCapacityValue
 import { handlePlayerClick, teamValidations, formationUpdate } from './turnsheet-elements/team.js';
 import { handleSkillClick } from './turnsheet-elements/training.js';
 import { buildInputFields } from './turnsheet-elements/submit.js';
+import { addTransferListener } from './turnsheet-elements/transfers.js';
 
   const stadiumButtons = document.querySelectorAll('#stand_navigation button');
   const capacityButtons = document.querySelectorAll('#stand_capacity button');
@@ -10,8 +11,7 @@ import { buildInputFields } from './turnsheet-elements/submit.js';
   const coachButtons = document.querySelectorAll('#coach_selection button');
   const propertyButtons = document.querySelectorAll('#property_selection button');
   const skillCells = document.querySelectorAll('td.skill');
-  const playerActionButtons = document.querySelectorAll('[id^="player-action-buttons-"]');
-  const playerActionAmounts = document.querySelectorAll('[id^="player-action-amounts-"]');
+  
   const playerRows = document.querySelectorAll('.player-row');
   const submitButton = document.getElementById('submitButton');
   const tacticButtons = document.querySelectorAll('#tactic_selection button');
@@ -20,12 +20,10 @@ import { buildInputFields } from './turnsheet-elements/submit.js';
   const midfieldAggressionButtons = document.querySelectorAll('#midfield_aggression button');
   const attackAggressionButtons = document.querySelectorAll('#attack_aggression button');
   const inputDiv = document.getElementById('hidden_inputs');
-  const headlineInput = document.getElementById('article_headline');
-  const subHeadlineInput = document.getElementById('article_sub_headline');
-  const articleInput = document.getElementById('article');
-  const messageInput = document.getElementById('club_message');
-  const messageText = document.getElementById('message_text');
   
+  const playerActionButtons = document.querySelectorAll('[id^="player-action-buttons-"]');
+  const playerActionAmounts = document.querySelectorAll('[id^="player-action-amounts-"]');
+
   console.log('Turnsheet JS loaded');
 
   teamValidations();
@@ -33,6 +31,7 @@ import { buildInputFields } from './turnsheet-elements/submit.js';
   decoratePlayerActions();
   decoratePlayerAmounts();
   readSessionStorage();
+  addTransferListener();
 
   //------ Add Event Listeners
   function addEventListeners(buttons) {
@@ -44,6 +43,7 @@ import { buildInputFields } from './turnsheet-elements/submit.js';
     });
   };
 
+  
   playerActionButtons.forEach(buttonGroup => {
     buttonGroup.querySelectorAll('button').forEach(button => {
       button.addEventListener('click', function(event) {
@@ -61,12 +61,19 @@ import { buildInputFields } from './turnsheet-elements/submit.js';
       });
     });
   });
-
+  
+  
   submitButton.addEventListener('click', function(event) {
     event.preventDefault();
     buildInputFields(inputDiv);
   });
 
+
+  const headlineInput = document.getElementById('article_headline');
+  const subHeadlineInput = document.getElementById('article_sub_headline');
+  const articleInput = document.getElementById('article');
+  const messageInput = document.getElementById('club_message');
+  const messageText = document.getElementById('message_text');
   headlineInput.addEventListener('input', function() {
     subHeadlineInput.disabled = headlineInput.value.trim() === '';
   });
@@ -221,6 +228,8 @@ function directSessionStorage(key, value) {
     decorateCondition();
   } else if (key === ('ftw-stadium-amount')) {
     decorateButtons(capacityButtons, value);
+  } else if (key.startsWith('ftw-transfer')) {
+    decorateTransfers(key, value);
   }
 };
 
@@ -340,4 +349,31 @@ function decoratePlayerAmounts() {
     });
   });
 };
+
+function decorateTransfers(key, value) {
+  const inputId0 = key.replace('ftw-transfer_', '');
+  const inputId = inputId0.slice(0, 4);
+  const trimmedKey = key.replace('ftw-', '');
+
+  if (inputId === 'type') {
+    const radioButtons = document.querySelectorAll(`input[name=${trimmedKey}]`);
+    radioButtons.forEach(radio => {
+      if (radio.value === value) {
+        radio.checked = true;
+      }
+    });
+  }
+  else if (inputId === 'play') {
+    const transferPlayerId = document.getElementById(trimmedKey);
+    transferPlayerId.value = value;
+  }
+  else if (inputId === 'bid_') {
+    const transferBidAmount = document.getElementById(trimmedKey);
+    transferBidAmount.value = value;
+  }
+  else if (inputId === 'club') {
+    const TransferOtherClub = document.getElementById(trimmedKey);
+    TransferOtherClub.value = value;
+  }
+}
 
