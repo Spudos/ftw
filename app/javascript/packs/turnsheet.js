@@ -24,6 +24,13 @@ const inputDiv = document.getElementById('hidden_inputs');
 const playerActionButtons = document.querySelectorAll('[id^="player-action-buttons-"]');
 const playerActionAmounts = document.querySelectorAll('[id^="player-action-amounts-"]');
 
+const headlineInput = document.getElementById('article_headline');
+const subHeadlineInput = document.getElementById('article_sub_headline');
+const articleInput = document.getElementById('article');
+const messageInput = document.getElementById('club_message');
+const messageText = document.getElementById('message_text');
+const publicMessage = document.getElementById('public_message');
+
 console.log('Turnsheet JS loaded');
 
 teamValidations();
@@ -68,22 +75,31 @@ submitButton.addEventListener('click', function(event) {
   buildInputFields(inputDiv);
 });
 
-
-const headlineInput = document.getElementById('article_headline');
-const subHeadlineInput = document.getElementById('article_sub_headline');
-const articleInput = document.getElementById('article');
-const messageInput = document.getElementById('club_message');
-const messageText = document.getElementById('message_text');
 headlineInput.addEventListener('input', function() {
+  sessionStorage.setItem('ftw-article_headline', headlineInput.value);
   subHeadlineInput.disabled = headlineInput.value.trim() === '';
 });
 
 subHeadlineInput.addEventListener('input', function() {
-    articleInput.disabled = subHeadlineInput.value.trim() === '';
+  sessionStorage.setItem('ftw-article_sub_headline', subHeadlineInput.value);
+  articleInput.disabled = subHeadlineInput.value.trim() === '';
+});
+
+articleInput.addEventListener('input', function() {
+  sessionStorage.setItem('ftw-article', articleInput.value);
 });
 
 messageInput.addEventListener('input', function() {
-    messageText.disabled = messageInput.value.trim() === '';
+  sessionStorage.setItem('ftw-club_message', messageInput.value);
+  messageText.disabled = messageInput.value.trim() === '';
+});
+
+messageText.addEventListener('input', function() {
+  sessionStorage.setItem('ftw-message_text', messageText.value);
+});
+
+publicMessage.addEventListener('input', function() {
+  sessionStorage.setItem('ftw-public_message', publicMessage.value);
 });
 
 //------ Run Button Listeners
@@ -230,7 +246,9 @@ function directSessionStorage(key, value) {
     decorateButtons(capacityButtons, value);
   } else if (key.startsWith('ftw-transfer')) {
     decorateTransfers(key, value);
-  }
+  } else if (key.startsWith('ftw-article') || key.startsWith('ftw-club_message') || key.startsWith('ftw-message_text') || key.startsWith('ftw-public_message')) {
+    decorateMessages(key, value);
+  };
 };
 
 function resetButtonClasses() {
@@ -374,6 +392,27 @@ function decorateTransfers(key, value) {
   else if (inputId === 'club') {
     const TransferOtherClub = document.getElementById(trimmedKey);
     TransferOtherClub.value = value;
-  }
-}
+  };
+};
+
+function decorateMessages (key, value) {
+  const shortKey = key.replace('ftw-', '');
+
+  if (shortKey === 'article_headline') {
+    headlineInput.value = value;
+  } else if (shortKey === 'article_sub_headline') {
+    subHeadlineInput.disabled = headlineInput.value.trim() === '';
+    subHeadlineInput.value = value;
+  } else if (shortKey === 'article') {
+    articleInput.disabled = subHeadlineInput.value.trim() === '';
+    articleInput.value = value;
+  } else if (shortKey === 'club_message') {
+    messageInput.value = value;
+  } else if (shortKey === 'message_text') {
+    messageText.disabled = messageInput.value.trim() === '';
+    messageText.value = value;
+  } else if (shortKey === 'public_message') {
+    publicMessage.value = value;
+  };
+};
 

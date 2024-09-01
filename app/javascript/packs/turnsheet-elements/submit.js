@@ -58,6 +58,9 @@ function buildInputFields(inputDiv) {
       const playerId = key.replace('ftw-selection-', '');
       inputBuilder(inputDiv, `player_${i}`, playerId);
       i++;
+    } else if (key.startsWith('ftw-article') || key.startsWith('ftw-club_message') || key.startsWith('ftw-message_text') || key.startsWith('ftw-public_message')) {
+      const messageKey = key.replace('ftw-', '');
+      inputBuilder(inputDiv, messageKey, value);
     } else if (key.startsWith('ftw-player-action-')) {
       const playerId = key.replace('ftw-player-action-', '');
       let amount = 0;
