@@ -49,6 +49,8 @@ function buildInputFields(inputDiv) {
       const playerId = key.replace('ftw-coach-att-', '');
       inputBuilder(inputDiv, 'train_attacker', playerId);
       inputBuilder(inputDiv, 'train_attacker_skill', value);
+    } else if (key.startsWith('ftw-transfer')) {
+      transferInputBuilder(inputDiv, key, value);
     } else if (value === 'fitness') {
       const playerId = key.replace('ftw-player-action-', '');
       inputBuilder(inputDiv, 'fitness_coaching', playerId);
@@ -80,6 +82,78 @@ function inputBuilder(inputDiv, key, value) {
   inputField.value = value;
 
   inputDiv.appendChild(inputField);
+}
+
+function transferInputBuilder(inputDiv, key, value) {
+  const transferField = document.createElement('input');
+
+  if (key === 'ftw-transfer_type') {
+    transferField.name = `turnsheet[transfer_type]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_type_1') {
+    transferField.name = `turnsheet[transfer1_type]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_type_2') {
+    transferField.name = `turnsheet[transfer2_type]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_type_3') {
+    transferField.name = `turnsheet[transfer3_type]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_club') {
+    transferField.name = `turnsheet[transfer_club]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_club_1') {
+    transferField.name = `turnsheet[transfer1_club]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_club_2') {
+    transferField.name = `turnsheet[transfer2_club]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_club_3') {
+    transferField.name = `turnsheet[transfer3_club]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_player_id') {
+    transferField.name = `turnsheet[transfer_player_id]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_player_id_1') {
+    transferField.name = `turnsheet[transfer1_player_id]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_player_id_2') {
+    transferField.name = `turnsheet[transfer2_player_id]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_player_id_3') {
+    transferField.name = `turnsheet[transfer3_player_id]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_amount') {
+    transferField.name = `turnsheet[transfer_amount]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_amount_1') {
+    transferField.name = `turnsheet[transfer1_amount]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_amount_2') {
+    transferField.name = `turnsheet[transfer2_amount]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  } else if (key === 'ftw-transfer_amount_3') {
+    transferField.name = `turnsheet[transfer3_amount]`;
+    transferField.type = 'hidden';
+    transferField.value = value;
+  };
+
+  inputDiv.appendChild(transferField);
 }
 
 function playerActionAmountGetter(playerId) {

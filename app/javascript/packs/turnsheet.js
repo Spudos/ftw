@@ -5,202 +5,202 @@ import { handleSkillClick } from './turnsheet-elements/training.js';
 import { buildInputFields } from './turnsheet-elements/submit.js';
 import { addTransferListener } from './turnsheet-elements/transfers.js';
 
-  const stadiumButtons = document.querySelectorAll('#stand_navigation button');
-  const capacityButtons = document.querySelectorAll('#stand_capacity button');
-  const conditionButtons = document.querySelectorAll('#stand_condition button');
-  const coachButtons = document.querySelectorAll('#coach_selection button');
-  const propertyButtons = document.querySelectorAll('#property_selection button');
-  const skillCells = document.querySelectorAll('td.skill');
-  
-  const playerRows = document.querySelectorAll('.player-row');
-  const submitButton = document.getElementById('submitButton');
-  const tacticButtons = document.querySelectorAll('#tactic_selection button');
-  const pressingButtons = document.querySelectorAll('#pressing_selection button');
-  const defenceAggressionButtons = document.querySelectorAll('#defence_aggression button');
-  const midfieldAggressionButtons = document.querySelectorAll('#midfield_aggression button');
-  const attackAggressionButtons = document.querySelectorAll('#attack_aggression button');
-  const inputDiv = document.getElementById('hidden_inputs');
-  
-  const playerActionButtons = document.querySelectorAll('[id^="player-action-buttons-"]');
-  const playerActionAmounts = document.querySelectorAll('[id^="player-action-amounts-"]');
+const stadiumButtons = document.querySelectorAll('#stand_navigation button');
+const capacityButtons = document.querySelectorAll('#stand_capacity button');
+const conditionButtons = document.querySelectorAll('#stand_condition button');
+const coachButtons = document.querySelectorAll('#coach_selection button');
+const propertyButtons = document.querySelectorAll('#property_selection button');
+const skillCells = document.querySelectorAll('td.skill');
 
-  console.log('Turnsheet JS loaded');
+const playerRows = document.querySelectorAll('.player-row');
+const submitButton = document.getElementById('submitButton');
+const tacticButtons = document.querySelectorAll('#tactic_selection button');
+const pressingButtons = document.querySelectorAll('#pressing_selection button');
+const defenceAggressionButtons = document.querySelectorAll('#defence_aggression button');
+const midfieldAggressionButtons = document.querySelectorAll('#midfield_aggression button');
+const attackAggressionButtons = document.querySelectorAll('#attack_aggression button');
+const inputDiv = document.getElementById('hidden_inputs');
 
-  teamValidations();
-  formationUpdate();
-  decoratePlayerActions();
-  decoratePlayerAmounts();
+const playerActionButtons = document.querySelectorAll('[id^="player-action-buttons-"]');
+const playerActionAmounts = document.querySelectorAll('[id^="player-action-amounts-"]');
+
+console.log('Turnsheet JS loaded');
+
+teamValidations();
+formationUpdate();
+decoratePlayerActions();
+decoratePlayerAmounts();
+readSessionStorage();
+addTransferListener();
+
+//------ Add Event Listeners
+function addEventListeners(buttons) {
+  buttons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
+      handleButtonClick(button, buttons);
+    });
+  });
+};
+
+
+playerActionButtons.forEach(buttonGroup => {
+  buttonGroup.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', function(event) {
+      const clickedButton = event.target;
+      setPlayerAction(clickedButton);
+    });
+  });
+});
+
+playerActionAmounts.forEach(amountGroup => {
+  amountGroup.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', function(event) {
+      const clickedButton = event.target;
+      setPlayerAmount(clickedButton);
+    });
+  });
+});
+
+
+submitButton.addEventListener('click', function(event) {
+  event.preventDefault();
+  buildInputFields(inputDiv);
+});
+
+
+const headlineInput = document.getElementById('article_headline');
+const subHeadlineInput = document.getElementById('article_sub_headline');
+const articleInput = document.getElementById('article');
+const messageInput = document.getElementById('club_message');
+const messageText = document.getElementById('message_text');
+headlineInput.addEventListener('input', function() {
+  subHeadlineInput.disabled = headlineInput.value.trim() === '';
+});
+
+subHeadlineInput.addEventListener('input', function() {
+    articleInput.disabled = subHeadlineInput.value.trim() === '';
+});
+
+messageInput.addEventListener('input', function() {
+    messageText.disabled = messageInput.value.trim() === '';
+});
+
+//------ Run Button Listeners
+addEventListeners(stadiumButtons);
+addEventListeners(capacityButtons);
+addEventListeners(conditionButtons);
+addEventListeners(coachButtons);
+addEventListeners(propertyButtons);
+addEventListeners(skillCells);
+addEventListeners(playerRows);
+addEventListeners(tacticButtons);
+addEventListeners(pressingButtons);
+addEventListeners(defenceAggressionButtons);
+addEventListeners(midfieldAggressionButtons);
+addEventListeners(attackAggressionButtons);
+
+//------ Handle Button Clicks
+function handleButtonClick(button) {
+  const capacityValues = ['2000', '4000', '6000', '8000'];
+  const stadiumValues = ['n', 'e', 's', 'w'];
+  const propertyValues = ['pitch', 'hospitality', 'facilities'];
+
+  if (stadiumValues.includes(button.id)){
+    resetUpgradeValues(button, stadiumButtons);
+  } else if (button.id.startsWith("staff")) {
+    setStaffValues(button);
+  } else if (propertyValues.includes(button.id)) {
+    setPropertyValues(button);
+  } else if (button.id.startsWith("condition")) {
+    setConditionValues(button, stadiumButtons);
+  } else if (capacityValues.includes(button.id)){
+    setCapacityValues(button, stadiumButtons);
+  } else if (button.classList.contains('skill')) {
+    handleSkillClick(button);
+  } else if (button.classList.contains('player-row')) {
+    handlePlayerClick(button);
+  } else if (button.classList.contains('tactic')) {
+    setTacticValue(button);
+  } else if (button.classList.contains('press')) {
+    setPressValue(button);
+  } else if (button.classList.contains('dfcAgg')) {
+    setDefenceAggression(button);
+  } else if (button.classList.contains('midAgg')) {
+    setMidfieldAggression(button);
+  } else if (button.classList.contains('attAgg')) {
+    setAttackAggression(button); 
+  };
+
+  resetButtonClasses();
   readSessionStorage();
-  addTransferListener();
+  decoratePlayerAmounts();
+  decoratePlayerActions();
+};
 
-  //------ Add Event Listeners
-  function addEventListeners(buttons) {
-    buttons.forEach(button => {
-      button.addEventListener('click', function(event) {
-        event.preventDefault();
-        handleButtonClick(button, buttons);
-      });
-    });
+function setPlayerAction(clickedButton) {
+  const playerId = clickedButton.dataset.playerId;
+  const currentAction = sessionStorage.getItem('ftw-player-action-' + playerId);
+  const newAmount = clickedButton.id;
+
+  if (newAmount === 'fitness') {
+    removeFitness();
   };
 
-  
-  playerActionButtons.forEach(buttonGroup => {
-    buttonGroup.querySelectorAll('button').forEach(button => {
-      button.addEventListener('click', function(event) {
-        const clickedButton = event.target;
-        setPlayerAction(clickedButton);
-      });
-    });
-  });
-
-  playerActionAmounts.forEach(amountGroup => {
-    amountGroup.querySelectorAll('button').forEach(button => {
-      button.addEventListener('click', function(event) {
-        const clickedButton = event.target;
-        setPlayerAmount(clickedButton);
-      });
-    });
-  });
-  
-  
-  submitButton.addEventListener('click', function(event) {
-    event.preventDefault();
-    buildInputFields(inputDiv);
-  });
-
-
-  const headlineInput = document.getElementById('article_headline');
-  const subHeadlineInput = document.getElementById('article_sub_headline');
-  const articleInput = document.getElementById('article');
-  const messageInput = document.getElementById('club_message');
-  const messageText = document.getElementById('message_text');
-  headlineInput.addEventListener('input', function() {
-    subHeadlineInput.disabled = headlineInput.value.trim() === '';
-  });
-
-  subHeadlineInput.addEventListener('input', function() {
-      articleInput.disabled = subHeadlineInput.value.trim() === '';
-  });
-
-  messageInput.addEventListener('input', function() {
-      messageText.disabled = messageInput.value.trim() === '';
-  });
-
-  //------ Run Button Listeners
-  addEventListeners(stadiumButtons);
-  addEventListeners(capacityButtons);
-  addEventListeners(conditionButtons);
-  addEventListeners(coachButtons);
-  addEventListeners(propertyButtons);
-  addEventListeners(skillCells);
-  addEventListeners(playerRows);
-  addEventListeners(tacticButtons);
-  addEventListeners(pressingButtons);
-  addEventListeners(defenceAggressionButtons);
-  addEventListeners(midfieldAggressionButtons);
-  addEventListeners(attackAggressionButtons);
-
-  //------ Handle Button Clicks
-  function handleButtonClick(button) {
-    const capacityValues = ['2000', '4000', '6000', '8000'];
-    const stadiumValues = ['n', 'e', 's', 'w'];
-    const propertyValues = ['pitch', 'hospitality', 'facilities'];
-
-    if (stadiumValues.includes(button.id)){
-      resetUpgradeValues(button, stadiumButtons);
-    } else if (button.id.startsWith("staff")) {
-      setStaffValues(button);
-    } else if (propertyValues.includes(button.id)) {
-      setPropertyValues(button);
-    } else if (button.id.startsWith("condition")) {
-      setConditionValues(button, stadiumButtons);
-    } else if (capacityValues.includes(button.id)){
-      setCapacityValues(button, stadiumButtons);
-    } else if (button.classList.contains('skill')) {
-      handleSkillClick(button);
-    } else if (button.classList.contains('player-row')) {
-      handlePlayerClick(button);
-    } else if (button.classList.contains('tactic')) {
-      setTacticValue(button);
-    } else if (button.classList.contains('press')) {
-      setPressValue(button);
-    } else if (button.classList.contains('dfcAgg')) {
-      setDefenceAggression(button);
-    } else if (button.classList.contains('midAgg')) {
-      setMidfieldAggression(button);
-    } else if (button.classList.contains('attAgg')) {
-      setAttackAggression(button); 
-    };
-
-    resetButtonClasses();
-    readSessionStorage();
-    decoratePlayerAmounts();
-    decoratePlayerActions();
+  if (currentAction === newAmount) {
+    sessionStorage.removeItem('ftw-player-action-' + playerId);
+  } else {
+    sessionStorage.setItem('ftw-player-action-' + playerId, newAmount);
   };
 
-  function setPlayerAction(clickedButton) {
-    const playerId = clickedButton.dataset.playerId;
-    const currentAction = sessionStorage.getItem('ftw-player-action-' + playerId);
-    const newAmount = clickedButton.id;
+  resetPlayerActions()
+  decoratePlayerAmounts();
+  decoratePlayerActions();
+};
 
-    if (newAmount === 'fitness') {
-      removeFitness();
-    };
-  
-    if (currentAction === newAmount) {
-      sessionStorage.removeItem('ftw-player-action-' + playerId);
-    } else {
-      sessionStorage.setItem('ftw-player-action-' + playerId, newAmount);
-    };
-  
-    resetPlayerActions()
-    decoratePlayerAmounts();
-    decoratePlayerActions();
-  };
-  
-  function setPlayerAmount(clickedButton) {
-    const playerId = clickedButton.dataset.playerId;
-    const currentAmount = sessionStorage.getItem('ftw-player-amount-' + playerId);
-    const newAmount = clickedButton.id;
-  
-    if (currentAmount === newAmount) {
-      sessionStorage.removeItem('ftw-player-amount-' + playerId);
-    } else {
-      sessionStorage.setItem('ftw-player-amount-' + playerId, newAmount);
-    };
+function setPlayerAmount(clickedButton) {
+  const playerId = clickedButton.dataset.playerId;
+  const currentAmount = sessionStorage.getItem('ftw-player-amount-' + playerId);
+  const newAmount = clickedButton.id;
 
-    resetPlayerActions()
-    decoratePlayerAmounts();
-    decoratePlayerActions();
+  if (currentAmount === newAmount) {
+    sessionStorage.removeItem('ftw-player-amount-' + playerId);
+  } else {
+    sessionStorage.setItem('ftw-player-amount-' + playerId, newAmount);
   };
 
-  function removeFitness() {
-    for (let i = 0; i < sessionStorage.length; i++) {
-      const key = sessionStorage.key(i);
-      const value = sessionStorage.getItem(key);
-  
-      if (value === "fitness") {
-          sessionStorage.removeItem(key);
-      };
+  resetPlayerActions()
+  decoratePlayerAmounts();
+  decoratePlayerActions();
+};
+
+function removeFitness() {
+  for (let i = 0; i < sessionStorage.length; i++) {
+    const key = sessionStorage.key(i);
+    const value = sessionStorage.getItem(key);
+
+    if (value === "fitness") {
+        sessionStorage.removeItem(key);
     };
   };
+};
 //-------------------------------------------------------------- Decorate Buttons
-  //------ Read Session Storage
-  function readSessionStorage() {
-    const items = {};
+//------ Read Session Storage
+function readSessionStorage() {
+  const items = {};
 
-    for (let i = 0; i < sessionStorage.length; i++) {
-      const key = sessionStorage.key(i);
-        
-      if (key && key.startsWith('ftw-')) {
-        items[key] = sessionStorage.getItem(key);
-      };
+  for (let i = 0; i < sessionStorage.length; i++) {
+    const key = sessionStorage.key(i);
+      
+    if (key && key.startsWith('ftw-')) {
+      items[key] = sessionStorage.getItem(key);
     };
+  };
 
-    Object.entries(items).forEach(([key, value]) => {
-      directSessionStorage(key, value);
-    });
-  };  
+  Object.entries(items).forEach(([key, value]) => {
+    directSessionStorage(key, value);
+  });
+};  
 
 //------ Direct Session Storage to correct decorators
 function directSessionStorage(key, value) {
@@ -367,9 +367,9 @@ function decorateTransfers(key, value) {
     const transferPlayerId = document.getElementById(trimmedKey);
     transferPlayerId.value = value;
   }
-  else if (inputId === 'bid_') {
-    const transferBidAmount = document.getElementById(trimmedKey);
-    transferBidAmount.value = value;
+  else if (inputId === 'amou') {
+    const transferAmount = document.getElementById(trimmedKey);
+    transferAmount.value = value;
   }
   else if (inputId === 'club') {
     const TransferOtherClub = document.getElementById(trimmedKey);

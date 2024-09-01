@@ -43,48 +43,48 @@ function addTransferListener() {
 function handleTransferChange() {
   const transferType = document.querySelector('input[name="transfer_type"]:checked');
   const transferPlayerId = document.getElementById('transfer_player_id').value;
-  const transferBidAmount = document.getElementById('transfer_bid_amount').value;
+  const transferBidAmount = document.getElementById('transfer_amount').value;
   const TransferOtherClubId = document.getElementById('transfer_club').value;
 
   sessionStorage.setItem('ftw-transfer_type', transferType.value);
   sessionStorage.setItem('ftw-transfer_player_id', transferPlayerId);
-  sessionStorage.setItem('ftw-transfer_bid_amount', transferBidAmount);
+  sessionStorage.setItem('ftw-transfer_amount', transferBidAmount);
   sessionStorage.setItem('ftw-transfer_club', TransferOtherClubId);
 }
 
 function handleTransfer1Change() {
   const transfer1Type = document.querySelector('input[name="transfer_type_1"]:checked');
   const transfer1PlayerId = document.getElementById('transfer_player_id_1').value;
-  const transfer1BidAmount = document.getElementById('transfer_bid_amount_1').value;
+  const transfer1BidAmount = document.getElementById('transfer_amount_1').value;
   const Transfer1OtherClubId = document.getElementById('transfer_club_1').value;
 
   sessionStorage.setItem('ftw-transfer_type_1', transfer1Type.value);
   sessionStorage.setItem('ftw-transfer_player_id_1', transfer1PlayerId);
-  sessionStorage.setItem('ftw-transfer_bid_amount_1', transfer1BidAmount);
+  sessionStorage.setItem('ftw-transfer_amount_1', transfer1BidAmount);
   sessionStorage.setItem('ftw-transfer_club_1', Transfer1OtherClubId);
 }
 
 function handleTransfer2Change() {
   const transfer2Type = document.querySelector('input[name="transfer_type_2"]:checked');
   const transfer2PlayerId = document.getElementById('transfer_player_id_2').value;
-  const transfer2BidAmount = document.getElementById('transfer_bid_amount_2').value;
+  const transfer2BidAmount = document.getElementById('transfer_amount_2').value;
   const Transfer2OtherClubId = document.getElementById('transfer_club_2').value;
 
   sessionStorage.setItem('ftw-transfer_type_2', transfer2Type.value);
   sessionStorage.setItem('ftw-transfer_player_id_2', transfer2PlayerId);
-  sessionStorage.setItem('ftw-transfer_bid_amount_2', transfer2BidAmount);
+  sessionStorage.setItem('ftw-transfer_amount_2', transfer2BidAmount);
   sessionStorage.setItem('ftw-transfer_club_2', Transfer2OtherClubId);
 }
 
 function handleTransfer3Change() {
   const transfer3Type = document.querySelector('input[name="transfer_type_3"]:checked');
   const transfer3PlayerId = document.getElementById('transfer_player_id_3').value;
-  const transfer3BidAmount = document.getElementById('transfer_bid_amount_3').value;
+  const transfer3BidAmount = document.getElementById('transfer_amount_3').value;
   const Transfer3OtherClubId = document.getElementById('transfer_club_3').value;
 
   sessionStorage.setItem('ftw-transfer_type_3', transfer3Type.value);
   sessionStorage.setItem('ftw-transfer_player_id_3', transfer3PlayerId);
-  sessionStorage.setItem('ftw-transfer_bid_amount_3', transfer3BidAmount);
+  sessionStorage.setItem('ftw-transfer_amount_3', transfer3BidAmount);
   sessionStorage.setItem('ftw-transfer_club_3', Transfer3OtherClubId);
 }
 

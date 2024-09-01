@@ -50,12 +50,12 @@ class Turnsheet < ApplicationRecord
 
       if turnsheet.coach_upgrade.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                             var1: 'coach', var2: turnsheet.coach_upgrade, var3: 500_000 })
+                             var1: 'coach', var2: turnsheet.coach_upgrade, var3: 2_000_000 })
       end
 
       if turnsheet.property_upgrade.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                             var1: 'property', var2: turnsheet.property_upgrade, var3: 250_000 })
+                             var1: 'property', var2: turnsheet.property_upgrade, var3: 500_000 })
       end
 
       if turnsheet.train_goalkeeper.present?
@@ -90,7 +90,7 @@ class Turnsheet < ApplicationRecord
 
       if turnsheet.stadium_condition_upgrade.present?
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
-                             var1: turnsheet.stadium_condition_upgrade, var3: 100_000 })
+                             var1: turnsheet.stadium_condition_upgrade, var3: 300_000 })
       end
 
       if turnsheet.transfer_type.present?

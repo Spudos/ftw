@@ -58,6 +58,9 @@ class League < ApplicationRecord
           if m.away_goals > m.home_goals
             record[:won] += 1
             record[:points] += 3
+          elsif m.away_goals == m.home_goals
+            record[:drawn] += 1
+            record[:points] += 1
           else
             record[:lost] += 1
           end
