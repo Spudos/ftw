@@ -27,6 +27,8 @@ function buildInputFields(inputDiv) {
       inputBuilder(inputDiv, 'press', value);
     } else if (key === 'ftw-property') {
       inputBuilder(inputDiv, 'property_upgrade', value);
+    } else if (key === 'ftw-blend') {
+      squadActionBuilder(inputDiv, 'ftw-blend', value);
     } else if (key === 'ftw-tactic') {
       inputBuilder(inputDiv, 'tactic', value);
     } else if (key === 'ftw-stadium') {
@@ -164,6 +166,23 @@ function playerActionAmountGetter(playerId) {
   const amount = sessionStorage.getItem(key);
 
   return amount;
+}
+
+function squadActionBuilder(inputDiv, key, value) {
+  const inputField = document.createElement('input');
+  const inputField1 = document.createElement('input');
+  const squadActionKey = key.replace('ftw-', '');
+  
+  inputField.name = `turnsheet[squad_actions_attributes][0][action]`;
+  inputField.type = 'hidden';
+  inputField.value = squadActionKey;
+
+  inputField1.name = `turnsheet[squad_actions_attributes][0][position]`;
+  inputField1.type = 'hidden';
+  inputField1.value = value;
+
+  inputDiv.appendChild(inputField);
+  inputDiv.appendChild(inputField1);
 }
 
 function playerActionInputBuilder(inputDiv, value, player_id, amount, index) {

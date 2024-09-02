@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+<form method="post">
+  <input type="text" name="name" id="name">
+
+  <input type="radio" name="radio1" value="radio1option1" id="radio1option1">
+  <input type="radio" name="radio1" value="radio1option2" id="radio1option2">
+  <input type="radio" name="radio1" value="radio1option3" id="radio1option3">
+
+  <input type="checkbox" name="checkbox1[]" value="checkbox1option1" id="checkbox1option1">
+  <input type="checkbox" name="checkbox1[]" value="checkbox1option2" id="checkbox1option2">
+  <input type="checkbox" name="checkbox1[]" value="checkbox1option3" id="checkbox1option3">
+
+  <input type="submit" value="Submit">
+</form>
+
+<!-- <script>
+  const form = document.querySelector('form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const values = Object.fromEntries(data.entries());
+
+    console.log(values);
+    console.log(data.getAll('checkbox1[]'));
+
+  });
+</script> -->
+
+</body>
+
+
+
+</html>
