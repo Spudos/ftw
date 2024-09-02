@@ -22,10 +22,6 @@ class TurnActions::Engines::Blend
 
   private
 
-  def adjust_bank
-    Turn::BankAdjustment.new(action_id, week, club_id, 'blend', position, amount).call
-  end
-
   def blend_players
     players, highest_blend_player = filter_players
 
@@ -45,6 +41,10 @@ class TurnActions::Engines::Blend
 
   def new_blend(highest_blend, average_blend)
     highest_blend - (highest_blend - average_blend) / 2
+  end
+
+  def adjust_bank
+    Turn::BankAdjustment.new(action_id, week, club_id, 'blend', position, amount).call
   end
 
   def failure_message
