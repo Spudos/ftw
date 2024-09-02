@@ -168,6 +168,8 @@ function setPlayerAction(clickedButton) {
 
   if (newAmount === 'fitness') {
     removeFitness();
+  } else if (newAmount === 'blend') {
+    removeBlend();
   };
 
   if (currentAction === newAmount) {
@@ -203,6 +205,17 @@ function removeFitness() {
     const value = sessionStorage.getItem(key);
 
     if (value === "fitness") {
+        sessionStorage.removeItem(key);
+    };
+  };
+};
+
+function removeBlend() {
+  for (let i = 0; i < sessionStorage.length; i++) {
+    const key = sessionStorage.key(i);
+    const value = sessionStorage.getItem(key);
+
+    if (value === "blend") {
         sessionStorage.removeItem(key);
     };
   };

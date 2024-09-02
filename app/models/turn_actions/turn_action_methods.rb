@@ -27,8 +27,8 @@ class TurnActions::TurnActionMethods
         week: turn.week,
         club_id: turn.club_id,
         var1: turn.var1, # blend
-        var2: turn.var2, # department
-        var3: turn.var3, # amount
+        var2: turn.var2, # player_id
+        var3: 2_500_000, # amount
         date_completed: turn.date_completed
       }
     end
