@@ -8,6 +8,10 @@
       <%= render "club", turnsheet: @turnsheet, form: form %>
     </div>
     <hr>
+    <div id="squad-actions-form">
+      <%= render "squad_actions", turnsheet: @turnsheet, form: form %>
+    </div>
+    <hr>
     <div id="coaching-form">
     <%= render "player_training", turnsheet: @turnsheet, form: form %>
     </div>
@@ -32,9 +36,7 @@
     <div id="hidden_inputs"><div>
 
     <%= form.fields_for :player_actions do |action_form| %>
-      <div id="player_inputs">
-      
-      </div>
+      <div id="player_inputs"></div>
     <% end %>
 
     <div>

@@ -23,12 +23,13 @@ class UserMailer < ApplicationMailer
   end
 
   def gm_public_email(message_params)
-    @message = message_params
-    @user = User.all
+    @message = message_params[:var1]
+    @users = User.all
 
-    users.each do |user|
+    @users.each do |user|
       mail(to: user.email,
            subject: "FTW message from the GM",
            bcc: ['andyp@stinkyink.com'])
     end
+  end
 end

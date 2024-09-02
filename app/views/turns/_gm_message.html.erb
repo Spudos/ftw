@@ -50,19 +50,18 @@
   </div>
 <% end %>
 
-<%= form_with(model: @message, url: messages_path ) do |form| %>
+<%= form_with(model: @message, url: messages_path, local: true) do |form| %>
   <div class="row d-flex justify-content-center">
-    <div  class="col-md-2">
     <div class="col-md-8">
       <%= form.label :var1, class: "form-label" %>
-      <%= form.text_area :var1, class: "form-control", rows: 3 %>
+      <%= form.text_area :var1, class: "form-control", rows: 10, cols: 50 %>
       <%= form.hidden_field :var2, value: "gm_email" %>
       <%= form.hidden_field :action_id, value: "email_gm_message" %>
     </div>
   </div>
   <div class="row d-flex justify-content-center mb-5">
     <div class="text-center col-md-2">
-        <%= form.submit 'Submit email GM Message', class: "btn btn-danger" %>
+      <%= form.submit 'Submit email GM Message', class: "btn btn-danger" %>
     </div>
   </div>
 <% end %>

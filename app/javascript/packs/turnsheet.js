@@ -4,6 +4,7 @@ import { handlePlayerClick, teamValidations, formationUpdate } from './turnsheet
 import { handleSkillClick } from './turnsheet-elements/training.js';
 import { buildInputFields } from './turnsheet-elements/submit.js';
 import { addTransferListener } from './turnsheet-elements/transfers.js';
+import { setBlendValues } from './turnsheet-elements/blend.js';
 
 const stadiumButtons = document.querySelectorAll('#stand_navigation button');
 const capacityButtons = document.querySelectorAll('#stand_capacity button');
@@ -11,6 +12,8 @@ const conditionButtons = document.querySelectorAll('#stand_condition button');
 const coachButtons = document.querySelectorAll('#coach_selection button');
 const propertyButtons = document.querySelectorAll('#property_selection button');
 const skillCells = document.querySelectorAll('td.skill');
+
+const blendButtons = document.querySelectorAll('#blend_selection button');
 
 const playerRows = document.querySelectorAll('.player-row');
 const submitButton = document.getElementById('submitButton');
@@ -108,6 +111,7 @@ addEventListeners(capacityButtons);
 addEventListeners(conditionButtons);
 addEventListeners(coachButtons);
 addEventListeners(propertyButtons);
+addEventListeners(blendButtons);
 addEventListeners(skillCells);
 addEventListeners(playerRows);
 addEventListeners(tacticButtons);
@@ -121,6 +125,7 @@ function handleButtonClick(button) {
   const capacityValues = ['2000', '4000', '6000', '8000'];
   const stadiumValues = ['n', 'e', 's', 'w'];
   const propertyValues = ['pitch', 'hospitality', 'facilities'];
+  const blendValues = ['dfc', 'mid', 'att'];
 
   if (stadiumValues.includes(button.id)){
     resetUpgradeValues(button, stadiumButtons);
@@ -128,6 +133,8 @@ function handleButtonClick(button) {
     setStaffValues(button);
   } else if (propertyValues.includes(button.id)) {
     setPropertyValues(button);
+  } else if (blendValues.includes(button.id)) {
+    setBlendValues(button, blendButtons);
   } else if (button.id.startsWith("condition")) {
     setConditionValues(button, stadiumButtons);
   } else if (capacityValues.includes(button.id)){
@@ -236,6 +243,8 @@ function directSessionStorage(key, value) {
     decorateTraining(key, value);
   } else if (key.startsWith('ftw-property')) {
     decorateButtons(propertyButtons, value);
+  } else if (key.startsWith('ftw-blend')) {
+    decorateButtons(blendButtons, value);
   } else if (key.startsWith('ftw-selection')) {
     decorateSelection(key);
   } else if (key === ('ftw-stand')) {
