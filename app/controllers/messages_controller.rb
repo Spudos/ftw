@@ -9,6 +9,9 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     if @message.save
       redirect_to request.referrer, notice: 'Message sent successfully.'
+      if @message.var2 == 'email'
+        UserMailer.gm_public_email(message_params).deliver_now
+      end
     else
       flash.now[:alert] = 'Error sending message. Please check the form.'
       redirect_to request.referrer

@@ -1,11 +1,6 @@
 class UserMailer < ApplicationMailer
   default from: 'gm@ftwpbem.com'
 
-  def welcome_email(user)
-    @user = user
-    mail(to: @user.email, subject: 'Welcome to FTW!')
-  end
-
   def turn_submitted_email(user, turnsheet)
     @user = user
     @submitted_turnsheet = turnsheet
@@ -18,10 +13,22 @@ class UserMailer < ApplicationMailer
   def turn_completed_email(week)
     users = User.all
 
+    @week = week
+
     users.each do |user|
       mail(to: user.email,
            subject: "FTW week #{week} turn completed",
            bcc: ['andyp@stinkyink.com'])
     end
   end
+
+  def gm_public_email(message_params)
+    @message = message_params
+    @user = User.all
+
+    users.each do |user|
+      mail(to: user.email,
+           subject: "FTW message from the GM",
+           bcc: ['andyp@stinkyink.com'])
+    end
 end
