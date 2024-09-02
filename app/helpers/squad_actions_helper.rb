@@ -1,0 +1,2 @@
+module SquadActionsHelper
+end

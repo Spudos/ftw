@@ -6,6 +6,7 @@ class TurnActions::TurnActionMethods
   end
 
   def call
+    blend
     player_upgrade
     fitness_upgrade
     stadium_upgrade
@@ -16,6 +17,34 @@ class TurnActions::TurnActionMethods
   end
 
   private
+
+  def blend
+    hash = {}
+
+    TurnActions.where('var1 LIKE ?', 'blend%').where(week:).each do |turn|
+      hash[turn.id] = {
+        action_id: turn.week.to_s + turn.club_id + turn.id.to_s,
+        week: turn.week,
+        club_id: turn.club_id,
+        var1: turn.var1, # blend
+        var2: turn.var2, # department
+        var3: turn.var3, # amount
+        date_completed: turn.date_completed
+      }
+    end
+
+    hash.each do |key, value|
+      TurnActions::Engines::Blend.new(value[:action_id],
+                                      value[:week],
+                                      'turn',
+                                      value[:club_id].to_i,
+                                      value[:var2],
+                                      value[:var3]).call
+
+      turn = TurnActions.find(key)
+      turn.update(date_completed: DateTime.now)
+    end
+  end
 
   def player_upgrade
     hash = {}

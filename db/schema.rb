@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_30_083336) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_02_135550) do
   create_table "articles", force: :cascade do |t|
     t.integer "week"
     t.integer "club_id"
@@ -285,6 +285,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_30_083336) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "squad_actions", force: :cascade do |t|
+    t.integer "club_id"
+    t.string "action"
+    t.string "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "turnsheet_id"
+    t.index ["turnsheet_id"], name: "index_squad_actions_on_turnsheet_id"
+  end
+
   create_table "tactics", force: :cascade do |t|
     t.string "club_id"
     t.integer "tactics", default: 0, null: false
@@ -342,6 +352,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_30_083336) do
     t.boolean "club_update", default: false
     t.boolean "article_update", default: false
     t.boolean "squad_correction", default: false
+    t.boolean "squad_actions"
   end
 
   create_table "turnsheets", force: :cascade do |t|
@@ -438,4 +449,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_30_083336) do
 
   add_foreign_key "pl_statistics", "players"
   add_foreign_key "player_actions", "turnsheets"
+  add_foreign_key "squad_actions", "turnsheets"
 end

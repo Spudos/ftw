@@ -1,6 +1,8 @@
 class Turnsheet < ApplicationRecord
   has_many :player_actions, dependent: :destroy
   accepts_nested_attributes_for :player_actions, allow_destroy: true
+  has_many :squad_actions, dependent: :destroy
+  accepts_nested_attributes_for :squad_actions, allow_destroy: true
 
   def process_turnsheet(params)
     Turnsheet.find_each do |turnsheet|
@@ -121,6 +123,12 @@ class Turnsheet < ApplicationRecord
         TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
                              var1: action.action, var2: action.player_id,
                              var3: action.amount })
+      end
+
+      turnsheet.squad_actions.each do |action|
+        TurnActions.create({ week: turnsheet.week, club_id: turnsheet.club_id,
+                             var1: action.action, var2: action.position,
+                             var3: 2_500_000 })
       end
 
       if turnsheet.article_headline.present?

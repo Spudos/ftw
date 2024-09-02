@@ -58,6 +58,12 @@ class Turn::BankAdjustment
                      club_id:,
                      var1: "Your bank account was charged with #{amount} due to a 24 week contract renewal for #{dept}",
                      var2: 'dec-contracts', var3: amount.to_i)
+    elsif reason == 'blend'
+      Message.create(action_id:,
+                     week:,
+                     club_id:,
+                     var1: "Your bank account was charged with #{amount} due to activities relating to blending players",
+                     var2: 'dec-staff_wages', var3: amount.to_i)
     elsif reason == 'loyalty'
       Message.create(action_id:,
                      week:,
