@@ -81,11 +81,11 @@ class Match::MatchEnd::MatchEndCommentary
       commentary = goal_commentary.gsub('{team}', away_name)
                                   .gsub('{assister}', assister)
                                   .gsub('{scorer}', scorer)
-    elsif commentary_data[:chance_on_target] == 'home'
+    elsif commentary_data[:chance_target] == 'home'
       event = 'Good chance'
       commentary = chance_tar_commentary.gsub('{team}', home_name)
                                         .gsub('{player}', commentary_data[:home_name])
-    elsif commentary_data[:chance_on_target] == 'away'
+    elsif commentary_data[:chance_target] == 'away'
       event = 'Good chance'
       commentary = chance_tar_commentary.gsub('{team}', away_name)
                                         .gsub('{player}', commentary_data[:away_name])
