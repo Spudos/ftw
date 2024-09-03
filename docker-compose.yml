@@ -1,0 +1,32 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    ports:
+      - "8000:3000"
+    networks:
+      - my_network  # Specify the network for the app service
+
+  redis:
+    build:
+      context: .
+      dockerfile: docker/redis/Dockerfile
+    networks:
+      - my_network  # Specify the network for the redis service
+
+  sidekiq:
+    build:
+      context: .
+      dockerfile: docker/sidekiq/Dockerfile
+    depends_on:
+      - redis
+    ports:
+      - "6379:6379"
+    networks:
+      - my_network  # Specify the network for the sidekiq service
+
+networks:
+  my_network:  # Define the network
+
+
