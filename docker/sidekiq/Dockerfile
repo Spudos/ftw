@@ -1,28 +1,28 @@
-<<<<<<< HEAD
-FROM ruby:3.1.6
+FROM ruby:3.1.2
 
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get install -y nodejs \
+    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    && apt-get update && apt-get install -y yarn
+
+# Set the working directory
 WORKDIR /app
 
-EXPOSE 6379
-
-CMD ["sh", "-c", "RAILS_ENV=production bundle exec sidekiq"]
-=======
-FROM ruby:3.1
-
-RUN apt-get install git
-
-WORKDIR /usr/src/app
-
+# Copy the app
 COPY ../../. .
 
-# RUN git clone git@github.com:Spudos/ftw.git && cd ftw && bundle install
+# Install the specific version of Bundler
+RUN gem install bundler -v '2.3.19'
 
-EXPOSE 6379
+# Install dependencies
+RUN bundle install
 
-# COPY Gemfile Gemfile.lock ./
-# RUN bundle install
+# Install Yarn dependencies
+RUN yarn install
 
-# COPY . .
-
-CMD ["RAILS_ENV=production bundle exec sidekiq"]
->>>>>>> 32f04c17ea59cd8bbc27e811544da70778cdb8c8
+CMD ["sh", "-c", "RAILS_ENV=production bundle exec sidekiq"]
