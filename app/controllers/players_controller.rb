@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
   before_action :set_player
 
   def index
-    @clubs = Player.distinct.pluck(:club)
+    @clubs = Player.distinct.pluck(:club_id)
     @players = Player.all
   end
 

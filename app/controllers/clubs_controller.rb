@@ -10,7 +10,7 @@ class ClubsController < ApplicationController
     @club = Club.find_by(id: params[:id])
     @selection = Selection.where(club_id: params[:id])
     @players = Player.where(club: params[:id])
-    @club_matches = Match.where('home_team = ? OR away_team = ?', params[:id], params[:id])
+    @club_matches = Match.where('home_team = ? OR away_team = ?', params[:id].to_s, params[:id].to_s)
     @message = Message.where(club: params[:id])
     @tactic = Tactic.find_by(club_id: params[:id])
   end
@@ -112,8 +112,8 @@ class ClubsController < ApplicationController
   def set_club
     highest_week = Message.maximum(:week)
     @club = Club.find_by(id: current_user[:club])
-    @club_matches = Match.where('home_team = ? OR away_team = ?', @club.id, @club.id)
-    @club_fixtures = Fixture.where('home= ? OR away = ?', @club.id, @club.id)
+    @club_matches = Match.where('home_team = ? OR away_team = ?', @club.id.to_s, @club.id.to_s)
+    @club_fixtures = Fixture.where('home= ? OR away = ?', @club.id.to_s, @club.id.to_s)
     @messages = Message.where(club_id: Club.find_by(id: current_user[:club])&.id)
     @messages_new = Message.where(club_id: Club.find_by(id: current_user[:club])&.id)
                            .where(week: highest_week)
