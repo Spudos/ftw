@@ -1,21 +1,43 @@
 services:
+  db:
+    build:
+      context: .
+      dockerfile: docker/postgres/Dockerfile
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - ftw_postgres_data:/var/lib/postgresql/data
+    networks:
+      - my_network
+    ports:
+      - "5433:5432"
+
   app:
     build:
       context: .
       dockerfile: docker/app/Dockerfile
+    volumes:
+      - .:/app
     ports:
-      - "8000:3000"
-    networks:
-      - my_network  # Specify the network for the app service
+      - "3000:3000"
     environment:
-      REDIS_URL: redis://redis:6379
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_HOST=db
+      - REDIS_URL=redis://redis:6379
+      - DOCKER_LOGS=true
+    depends_on:
+      - db
+    networks:
+      - my_network
 
   redis:
     build:
       context: .
       dockerfile: docker/redis/Dockerfile
     networks:
-      - my_network  # Specify the network for the redis service
+      - my_network
 
   sidekiq:
     build:
@@ -26,11 +48,12 @@ services:
     ports:
       - "6379:6379"
     networks:
-      - my_network  # Specify the network for the sidekiq service
+      - my_network
     environment:
       REDIS_URL: redis://redis:6379
 
 networks:
-  my_network:  # Define the network
+  my_network:
 
-
+volumes:
+  ftw_postgres_data:

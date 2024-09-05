@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
     && apt-get install -y nodejs \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-    && apt-get update && apt-get install -y yarn
+    && apt-get update && apt-get install -y yarn \
+    && apt-get install -y postgresql-client
 
 # Set the working directory
 WORKDIR /app
@@ -25,13 +26,8 @@ RUN bundle install
 # Install Yarn dependencies
 RUN yarn install
 
-RUN RAILS_ENV=production bundle exec rails db:create && RAILS_ENV=production bundle exec rails db:schema:load
-
 # Precompile assets
 RUN RAILS_ENV=production bundle exec rails assets:precompile
-
-# Run database migrations (if applicable)
-RUN RAILS_ENV=production bundle exec rails db:migrate
 
 # Start the app
 CMD ["sh", "-c", "RAILS_ENV=production bundle exec rails s"]
