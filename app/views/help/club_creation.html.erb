@@ -6,7 +6,7 @@
 <% elsif current_user && current_user.club_count >= 3 %>
   <h5 class="text-center">You have tried to manage too many clubs with this account</h5>
   <h6 class="text-center">If you want to take on another club please contact the GM by raising an issue</h6>  
-<% elsif current_user.club == 0 %>
+<% elsif current_user && current_user.club == 0 %>
   <h6 class="text-center">In the first section you decide what you want to call your club and the stadium</h6>
   <p class="text-center">You can use any names you want, we just ask that you avoid anything rude and offensive.</p>
     <%= form_with(model: @club_creation, url: help_club_submission_path) do |form| %>
