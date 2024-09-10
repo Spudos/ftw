@@ -30,7 +30,7 @@ RUN yarn install
 RUN RAILS_ENV=production bundle exec rails assets:precompile
 
 # Start the app
-CMD ["sh", "-c", "RAILS_ENV=production bundle exec rails s"]
+CMD ["sh", "-c", "start.sh"]
 
 # Expose the port
 EXPOSE 3000
