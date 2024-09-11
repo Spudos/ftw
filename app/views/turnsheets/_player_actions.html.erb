@@ -36,17 +36,21 @@
                 <p class="card-text">Value: <%= player[:value] %></p>
               </div>
               <hr>
-              <div id="player-action-buttons-<%= index %>" class="d-flex justify-content-center align-items-center">
-                <button id="blend" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Blend</button>
-                <button id="fitness" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Fitness</button>
-                <% if player[:listed] %>
-                  <button id="unlist" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Unlist</button>
-                <% else %>
-                  <button id="list" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">List</button>
-                <% end %>
-                <br>
-                <button id="contract" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Contract</button>
-                <button id="loyalty" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Bonus</button>
+              <div id="player-action-buttons-<%= index %>">
+                <div class="d-flex justify-content-center align-items-center">
+                  <button id="blend" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Blend</button>
+                  <button id="fitness" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Fitness</button>
+                  <% if player[:listed] %>
+                    <button id="unlist" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Unlist</button>
+                  <% else %>
+                    <button id="list" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">List</button>
+                  <% end %>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-center align-items-center">
+                  <button id="contract" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Contract</button>
+                  <button id="loyalty" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">Bonus</button>
+                </div>
               </div>
               <div id="player-action-amounts-<%= index %>" class="d-flex justify-content-center align-items-center">
                 <button id="100000" type="button" class="btn btn-sm btn-outline-primary d-flex flex-column align-items-center" data-player-id="<%= player[:id] %>">100k</button>
