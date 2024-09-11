@@ -1,6 +1,5 @@
 #!/bin/bash
 
-puts "Starting the app container..."
 gem install bundler -v '2.3.19'
 bundle install
 yarn install

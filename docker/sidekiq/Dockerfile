@@ -16,4 +16,4 @@ WORKDIR /app
 # Copy the app
 COPY ../../. .
 
-CMD ["sh", "-c", "/start.sh"]
+CMD ["sh", "-c", "./start_sidekiq.sh"]

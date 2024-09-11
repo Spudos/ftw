@@ -18,7 +18,7 @@ WORKDIR /app
 COPY ../../. .
 
 # Start the app script
-CMD ["sh", "-c", "/start.sh"]
+CMD ["sh", "-c", "./start_app.sh"]
 
 # Expose the port
 EXPOSE 3000
