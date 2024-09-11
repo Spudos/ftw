@@ -16,13 +16,4 @@ WORKDIR /app
 # Copy the app
 COPY ../../. .
 
-# Install the specific version of Bundler
-RUN gem install bundler -v '2.3.19'
-
-# Install dependencies
-RUN bundle install
-
-# Install Yarn dependencies
-RUN yarn install
-
-CMD ["sh", "-c", "RAILS_ENV=production bundle exec sidekiq"]
+CMD ["sh", "-c", "/start.sh"]

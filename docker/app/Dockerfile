@@ -17,20 +17,8 @@ WORKDIR /app
 # Copy the app
 COPY ../../. .
 
-# Install the specific version of Bundler
-RUN gem install bundler -v '2.3.19'
-
-# Install dependencies
-RUN bundle install
-
-# Install Yarn dependencies
-RUN yarn install
-
-# Precompile assets
-RUN RAILS_ENV=production bundle exec rails assets:precompile
-
-# Start the app
-CMD ["sh", "-c", "RAILS_ENV=production bundle exec rails s"]
+# Start the app script
+CMD ["sh", "-c", "/start.sh"]
 
 # Expose the port
 EXPOSE 3000

@@ -57,8 +57,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_02_135550) do
     t.integer "bank_bal"
     t.boolean "managed"
     t.string "league"
-    t.integer "fan_happiness", default: 78
-    t.integer "fanbase", default: 73823
+    t.integer "fan_happiness", default: 62
+    t.integer "fanbase", default: 83949
     t.integer "ticket_price"
     t.integer "overdrawn", default: 0
   end

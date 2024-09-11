@@ -8,6 +8,7 @@ services:
       - POSTGRES_PASSWORD=password
     volumes:
       - ftw_postgres_data:/var/lib/postgresql/data
+    restart: always
     networks:
       - my_network
     ports:
@@ -19,6 +20,7 @@ services:
       dockerfile: docker/app/Dockerfile
     volumes:
       - .:/app
+    restart: always
     ports:
       - "3000:3000"
     environment:
@@ -36,6 +38,7 @@ services:
     build:
       context: .
       dockerfile: docker/redis/Dockerfile
+    restart: always
     networks:
       - my_network
 
@@ -43,6 +46,7 @@ services:
     build:
       context: .
       dockerfile: docker/sidekiq/Dockerfile
+    restart: always
     depends_on:
       - redis
     ports:
