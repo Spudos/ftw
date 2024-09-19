@@ -19,6 +19,6 @@ test:
 production:
   <<: *default
   database: ftw_production
-  username: <%= ENV.fetch("POSTGRES_USER") { "postgres" } %>
-  password: <%= ENV.fetch("POSTGRES_PASSWORD") { "password" } %>
+  username: <%= Rails.application.credentials.database[:username] %>
+  password: <%= Rails.application.credentials.database[:password] %>
   host: <%= ENV.fetch("POSTGRES_HOST") { "db" } %>
