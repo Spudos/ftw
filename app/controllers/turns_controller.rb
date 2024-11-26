@@ -79,6 +79,7 @@ class TurnsController < ApplicationController
 
   def gm_admin
     @feedback = Feedback.where(outstanding: true)
+    @game_params = GameParam.first
   end
 
   def process_pre_turn_admin

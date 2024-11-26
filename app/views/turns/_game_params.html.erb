@@ -1,0 +1,41 @@
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Value</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Waiting List</td>
+      <td><%= @game_params.waiting_list %></td>
+      <td>
+      <%= button_to @game_params.waiting_list ? 'Deactivate' : 'Activate', 
+                    toggle_waiting_list_game_param_path(@game_params), 
+                    method: :patch, 
+                    class: 'btn btn-' + (@game_params.waiting_list ? 'danger' : 'success') %>
+      </td>
+    </tr>
+    <tr>
+      <td>Chance Factor</td>
+      <td><%= @game_params.chance_factor %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Midfield On Attack</td>
+      <td><%= @game_params.midfield_on_attack %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Target Factor</td>
+      <td><%= @game_params.target_factor %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Goal Factor</td>
+      <td><%= @game_params.goal_factor %></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

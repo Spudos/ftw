@@ -109,6 +109,12 @@ Rails.application.routes.draw do
 
   get '/turn_report', to: 'turn_report#index'
 
+  resources :game_params do
+    member do
+      patch 'toggle_waiting_list'
+    end
+  end
+
   require 'sidekiq/web'
   authenticate :user, lambda { |u| u.gm? } do
     mount Sidekiq::Web => '/sidekiq'

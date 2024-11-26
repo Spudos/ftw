@@ -28,6 +28,10 @@ class HelpController < ApplicationController
   end
 
   def manager_list
-    @managers = User.where.not(club: 0)
+    @managers = if @waiting_list
+                  User.all
+                else
+                  User.where.not(club: 0)
+                end
   end
 end

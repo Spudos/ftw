@@ -1,5 +1,5 @@
 class GameParamsController < ApplicationController
-  before_action :set_game_param, only: %i[ show edit update destroy ]
+  before_action :set_game_param, only: %i[show edit update destroy]
 
   # GET /game_params or /game_params.json
   def index
@@ -7,8 +7,7 @@ class GameParamsController < ApplicationController
   end
 
   # GET /game_params/1 or /game_params/1.json
-  def show
-  end
+  def show; end
 
   # GET /game_params/new
   def new
@@ -16,8 +15,7 @@ class GameParamsController < ApplicationController
   end
 
   # GET /game_params/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /game_params or /game_params.json
   def create
@@ -57,14 +55,22 @@ class GameParamsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game_param
-      @game_param = GameParam.find(params[:id])
-    end
+  def toggle_waiting_list
+    @game_param = GameParam.first
+    @game_param.waiting_list = !@game_param.waiting_list
+    @game_param.save
+    redirect_to turns_gm_admin_path
+  end
 
-    # Only allow a list of trusted parameters through.
-    def game_param_params
-      params.require(:game_param).permit(:chance_factor, :midfield_on_attack)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game_param
+    @game_param = GameParam.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def game_param_params
+    params.require(:game_param).permit(:chance_factor, :midfield_on_attack)
+  end
 end
