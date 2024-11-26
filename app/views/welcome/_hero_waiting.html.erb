@@ -1,0 +1,13 @@
+<div class='container col-md-10 mb-5 yellow border border-5 shadow' style="height: 375px;">
+  <div class="row">
+    <div class="col-md-8 p-0">
+    <%= image_tag("winners-small.jpg", style: "max-height: 100%; max-width: 100%; object-fit: cover;") %>
+    </div>
+    <div class="col-md-4 p-0" id="breaking">
+      <h3 class="lead-text">Sign up now to join our waiting list.  Managers will be notified when it is time to create your club.</h3>
+      <div class="d-flex justify-content-center">
+        <%= link_to "Sign up Now", new_user_registration_path, class: "col-md-5 btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>

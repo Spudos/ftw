@@ -1,6 +1,10 @@
 <div id="home-container" class='container flex align-items-center col-md-12 shadow'>
 
-<%= render 'hero' %>
+<% if @waiting_list %>
+  <%= render 'hero_waiting' %>
+<% else %>
+  <%= render 'hero_live' %>
+<% end %>
 
 <h3 class="text-left">Latest Articles</h3>
 <%= render 'articles' %>
