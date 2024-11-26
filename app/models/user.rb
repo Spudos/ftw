@@ -5,10 +5,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum role: [:user, :gm]
-  after_initialize :set_default_role, :if => :new_record?
+  after_initialize :set_default_role, if: :new_record?
+  before_create :set_example_club
 
   def set_default_role
     self.role ||= :gm
+  end
+
+  def set_example_club
+    self.club = 243
   end
 end
 

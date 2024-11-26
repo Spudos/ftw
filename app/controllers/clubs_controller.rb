@@ -28,7 +28,7 @@ class ClubsController < ApplicationController
 
     respond_to do |format|
       if @club.save
-        format.html { redirect_to clubs_path, notice: "Club was successfully created." }
+        format.html { redirect_to clubs_path, notice: 'Club was successfully created.' }
         format.json { render :show, status: :created, location: @club }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class ClubsController < ApplicationController
     @club = Club.find_by(id: params[:id])
     respond_to do |format|
       if @club.update(club_params)
-        format.html { redirect_to clubs_path, notice: "Club was successfully updated." }
+        format.html { redirect_to clubs_path, notice: 'Club was successfully updated.' }
         format.json { render :show, status: :ok, location: @club }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class ClubsController < ApplicationController
     @club.destroy
 
     respond_to do |format|
-      format.html { redirect_to clubs_url, notice: "Club was successfully destroyed." }
+      format.html { redirect_to clubs_url, notice: 'Club was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -68,11 +68,11 @@ class ClubsController < ApplicationController
   end
 
   def messages
-    render 'clubs/manager/mesages_new'
+    render 'clubs/manager/messages_new'
   end
 
   def messages_finance
-    render 'clubs/manager/mesages_finance'
+    render 'clubs/manager/messages_finance'
   end
 
   def first_team
@@ -137,7 +137,7 @@ class ClubsController < ApplicationController
 
   def player_position_sort
     players = Player.where(club_id: @club.id).order(Arel.sql(
-                                                      "CASE 
+                                                      "CASE
                                                         WHEN position = 'gkp' AND player_position_detail = 'p' THEN 1
                                                         WHEN position = 'dfc' AND player_position_detail = 'l' THEN 2
                                                         WHEN position = 'dfc' AND player_position_detail = 'r' THEN 3
