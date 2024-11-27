@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def waiting_list
-    @waiting_list = GameParam.first[:waiting_list]
+    game_param = GameParam.first
+    @waiting_list = game_param[:waiting_list] if game_param
   end
 end
