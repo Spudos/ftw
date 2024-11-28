@@ -15,8 +15,8 @@ RSpec.describe Club::UpgradeAdmin, type: :model do
 
   describe 'perform_completed_upgrades' do
     it 'performs the upgrade increase for staff' do
-      create(:club, id: 1, staff_dfc: 1)
-      create(:upgrade, week: 1, club_id: 1, var1: 'staff_dfc', action_id: '10011', var3: 5)
+      create(:club, staff_dfc: 1)
+      create(:upgrade, week: 1, club_id: Club.first.id, var1: 'staff_dfc', action_id: '10011', var3: 5)
 
       Club::UpgradeAdmin.new(week).call
 
@@ -25,7 +25,7 @@ RSpec.describe Club::UpgradeAdmin, type: :model do
 
     it 'performs the upgrade increase for facilities' do
       create(:club, facilities: 1)
-      create(:upgrade, week: 1, club_id: 1, var1: 'facilities', action_id: '10011', var3: 5)
+      create(:upgrade, week: 1, club_id: Club.first.id, var1: 'facilities', action_id: '10011', var3: 5)
 
       Club::UpgradeAdmin.new(week).call
 
@@ -34,7 +34,7 @@ RSpec.describe Club::UpgradeAdmin, type: :model do
 
     it 'performs the upgrade increase for hospitality' do
       create(:club, hospitality: 1)
-      create(:upgrade, week: 1, club_id: 1, var1: 'hospitality', action_id: '10011', var3: 5)
+      create(:upgrade, week: 1, club_id: Club.first.id, var1: 'hospitality', action_id: '10011', var3: 5)
 
       Club::UpgradeAdmin.new(week).call
 
@@ -43,7 +43,7 @@ RSpec.describe Club::UpgradeAdmin, type: :model do
 
     it 'performs the upgrade increase for pitch' do
       create(:club, pitch: 1)
-      create(:upgrade, week: 1, club_id: 1, var1: 'pitch', action_id: '10011', var3: 5)
+      create(:upgrade, week: 1, club_id: Club.first.id, var1: 'pitch', action_id: '10011', var3: 5)
 
       Club::UpgradeAdmin.new(week).call
 
@@ -52,7 +52,7 @@ RSpec.describe Club::UpgradeAdmin, type: :model do
 
     it 'performs the upgrade increase for stand condition' do
       create(:club, stand_n_condition: 1)
-      create(:upgrade, week: 1, club_id: 1, var1: 'stand_n_condition', action_id: '10011', var3: 5)
+      create(:upgrade, week: 1, club_id: Club.first.id, var1: 'stand_n_condition', action_id: '10011', var3: 5)
 
       Club::UpgradeAdmin.new(week).call
 
@@ -61,7 +61,7 @@ RSpec.describe Club::UpgradeAdmin, type: :model do
 
     it 'performs the upgrade increase for stand condition' do
       create(:club, stand_n_capacity: 5000, stand_n_name: 'north stand')
-      create(:upgrade, week: 1, club_id: 1, var1: 'stand_n_capacity', var2: 5000, action_id: '10011', var3: 5)
+      create(:upgrade, week: 1, club_id: Club.first.id, var1: 'stand_n_capacity', var2: 5000, action_id: '10011', var3: 5)
 
       Club::UpgradeAdmin.new(week).call
 

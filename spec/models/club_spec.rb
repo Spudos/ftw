@@ -6,6 +6,7 @@ RSpec.describe Player, type: :model do
     context 'with valid club data' do
       it 'update an existing club to show the new values' do
         create(:club,
+               id: 1,
                managed: false,
                league: 'Premier League',
                name: 'Test Club000',
@@ -18,8 +19,8 @@ RSpec.describe Player, type: :model do
                color_secondary: 'Test Color Secondary000')
 
         create(:club, id: 242)
-        create(:player)
-        create(:player)
+        create(:player, club_id: 1)
+        create(:player, club_id: 1)
         create(:user)
 
         params = { club: { managed: false,
@@ -67,12 +68,11 @@ RSpec.describe Player, type: :model do
         expect(Club.first.staff_scouts).to be_between(5, 8)
         expect(Club.first.bank_bal).to eq(500_000_000)
         expect(Club.first.fanbase).to eq(70_000)
-        expect(Player.first.club_id).to eq(242)
-        expect(Player.second.club_id).to eq(242)
+        expect(Player.where(club_id: 242).count).to eq(2)
         expect(Player.where(club_id: 1).count).to eq(21)
-        expect(Player.last.total_skill).to_not be(0)
-        expect(Player.last.wages).to_not be(0)
-        expect(Player.last.value).to_not be(0)
+        expect(Player.where(club_id: 1).last.total_skill).to_not be(0)
+        expect(Player.where(club_id: 1).last.wages).to_not be(0)
+        expect(Player.where(club_id: 1).last.value).to_not be(0)
       end
     end
   end

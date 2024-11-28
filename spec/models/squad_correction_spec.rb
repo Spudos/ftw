@@ -17,17 +17,17 @@ RSpec.describe Club, type: :model do
                color_primary: 'Test Color Primary000',
                color_secondary: 'Test Color Secondary000')
 
-        2.times { create(:player) }
-        6.times { create(:player, club_id: 1, position: 'dfc', player_position_detail: 'c') }
-        5.times { create(:player, club_id: 1, position: 'mid', player_position_detail: 'c') }
-        4.times { create(:player, club_id: 1, position: 'att', player_position_detail: 'c') }
+        2.times { create(:player, club_id: Club.first.id) }
+        6.times { create(:player, club_id: Club.first.id, position: 'dfc', player_position_detail: 'c') }
+        5.times { create(:player, club_id: Club.first.id, position: 'mid', player_position_detail: 'c') }
+        4.times { create(:player, club_id: Club.first.id, position: 'att', player_position_detail: 'c') }
         create(:user)
         turn = Turn.new(week: 1)
         params = 1
 
         Club.new.process_squad_corrections(params, turn)
 
-        expect(Player.where(club_id: 1).count).to eq(17)
+        expect(Player.where(club_id: Club.first.id).count).to eq(17)
       end
     end
 
@@ -45,23 +45,23 @@ RSpec.describe Club, type: :model do
                color_primary: 'Test Color Primary000',
                color_secondary: 'Test Color Secondary000')
 
-        2.times { create(:player, club_id: 1, position: 'dfc', player_position_detail: 'c') }
-        create(:player, club_id: 1, position: 'mid', player_position_detail: 'c')
-        3.times { create(:player, club_id: 1, position: 'att', player_position_detail: 'c') }
+        2.times { create(:player, club_id: Club.first.id, position: 'dfc', player_position_detail: 'c') }
+        create(:player, club_id: Club.first.id, position: 'mid', player_position_detail: 'c')
+        3.times { create(:player, club_id: Club.first.id, position: 'att', player_position_detail: 'c') }
         create(:user)
         turn = Turn.new(week: 1)
         params = 1
 
         Club.new.process_squad_corrections(params, turn)
 
-        expect(Player.where(club_id: 1, position: 'gkp', player_position_detail: 'p').count).to eq(1)
-        expect(Player.where(club_id: 1, position: 'dfc').count).to eq(5)
-        expect(Player.where(club_id: 1, position: 'mid').count).to eq(4)
-        expect(Player.where(club_id: 1, position: 'att').count).to eq(3)
+        expect(Player.where(club_id: Club.first.id, position: 'gkp', player_position_detail: 'p').count).to eq(1)
+        expect(Player.where(club_id: Club.first.id, position: 'dfc').count).to eq(5)
+        expect(Player.where(club_id: Club.first.id, position: 'mid').count).to eq(4)
+        expect(Player.where(club_id: Club.first.id, position: 'att').count).to eq(3)
         expect(Player.last.value).to_not eq(0)
         expect(Player.last.wages).to_not eq(0)
         expect(Player.last.total_skill).to_not eq(0)
-        expect(Message.first.club_id).to eq('1')
+        expect(Message.first.club_id.to_i).to eq(Club.first.id)
       end
     end
   end

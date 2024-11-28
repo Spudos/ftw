@@ -19,7 +19,7 @@ class Club::UpgradeAdmin
   private
 
   def perform_completed_upgrades(item, week)
-    club_full = Club.find_by(id: item.club_id)
+    club_full = Club.find_by(id: item.club_id.to_i)
     if item.var1.start_with?('staff')
       new_coach = club_full[item.var1] += 1
       club_full.update(item.var1 => new_coach)
@@ -28,6 +28,7 @@ class Club::UpgradeAdmin
                      var1: "Your upgrade to the #{item.var1} was completed, the new value is #{club_full[item.var1]}")
 
     elsif item.var1 == 'facilities' || item.var1 == 'hospitality' || item.var1 == 'pitch'
+
       new_coach = club_full[item.var1] += 1
       club_full.update(item.var1 => new_coach)
 

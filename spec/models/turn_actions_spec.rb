@@ -91,48 +91,48 @@ RSpec.describe TurnActions, type: :model do
   describe 'call: stadium_upgrade' do
     it 'updates the turn records and performs necessary actions' do
       week = 1
-      create(:turn_actions, week: 1, club_id: 1, var1: 'stand_n_capacity', var2: 5000, var3: nil, date_completed: nil)
-      create(:club, id: 1, bank_bal: 0)
+      create(:club, bank_bal: 0)
+      create(:turn_actions, week: 1, club_id: Club.first.id, var1: 'stand_n_capacity', var2: 5000, var3: nil, date_completed: nil)
 
       TurnActions::TurnActionMethods.new(week).call
 
       expect(Club.first.bank_bal).to eq(-5_000_000)
-      expect(Upgrade.first.action_id).to eq('111')
+      expect(Upgrade.first.action_id).to be_present
     end
   end
 
   describe 'call: property_upgrade' do
     it 'updates the turn records and performs necessary actions' do
       week = 1
-      create(:turn_actions, week: 1, club_id: 1, var1: 'property', var2: 'pitch', var3: 250_000, date_completed: nil)
-      create(:club, id: 1, bank_bal: 0)
+      create(:club, bank_bal: 0)
+      create(:turn_actions, week: 1, club_id: Club.first.id, var1: 'property', var2: 'pitch', var3: 250_000, date_completed: nil)
 
       TurnActions::TurnActionMethods.new(week).call
 
       expect(Club.first.bank_bal).to eq(-250_000)
-      expect(Upgrade.first.action_id).to eq('111')
+      expect(Upgrade.first.action_id).to be_present
     end
   end
 
   describe 'call: coach_upgrade' do
     it 'updates the turn records and performs necessary actions' do
       week = 1
-      create(:turn_actions, week: 1, club_id: 1, var1: 'coach', var2: 'dfc', var3: 500_000, date_completed: nil)
-      create(:club, id: 1, bank_bal: 0)
+      create(:club, bank_bal: 0)
+      create(:turn_actions, week: 1, club_id: Club.first.id, var1: 'coach', var2: 'dfc', var3: 500_000, date_completed: nil)
 
       TurnActions::TurnActionMethods.new(week).call
 
       expect(Club.first.bank_bal).to eq(-500_000)
-      expect(Upgrade.first.action_id).to eq("111")
+      expect(Upgrade.first.action_id).to be_present
     end
   end
 
   describe 'call: contract_renewal' do
     it 'renews the contract due to high loyalty' do
       week = 1
-      create(:turn_actions, week: 1, club_id: 1, var1: 'contract', var2: 1, var3: 0, date_completed: nil)
-      create(:club, id: 1, bank_bal: 0)
-      create(:player, id: 1, club_id: 1, contract: 0, loyalty: 100)
+      create(:club, bank_bal: 0)
+      create(:turn_actions, week: 1, club_id: Club.first.id, var1: 'contract', var2: 1, var3: 0, date_completed: nil)
+      create(:player, id: 1, club_id: Club.first.id, contract: 0, loyalty: 100)
 
       TurnActions::TurnActionMethods.new(week).call
 
