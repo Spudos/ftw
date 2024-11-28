@@ -1,6 +1,7 @@
 <div id="home-container" class='container flex align-items-center col-md-12 shadow'>
 
 <% if @waiting_list %>
+  <%= render 'text_waiting' %>
   <%= render 'hero_waiting' %>
 <% else %>
   <%= render 'hero_live' %>
