@@ -15,6 +15,10 @@ class ArticlesController < ApplicationController
 
   def new
     @articles = Article.new
+
+    @image_names = Dir.entries(Rails.root.join('app', 'assets', 'images')).select do |filename|
+      filename =~ /\.(jpg|jpeg|png|gif|svg)$/i
+    end
   end
 
   def edit; end
