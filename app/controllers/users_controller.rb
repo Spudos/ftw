@@ -3,6 +3,18 @@ class UsersController < ApplicationController
     @clubs = Club.where(id: current_user.club)
   end
 
+  def user_admin
+    @inactive_users = User.where(soft_delete: true).order(:id)
+    @active_users = User.where(soft_delete: false).order(:id)
+  end
+
+  def soft_delete
+    user = User.find_by(id: params[:user_id])
+    user.soft_delete = !user.soft_delete
+    user.save
+    redirect_to users_user_admin_path
+  end
+
   def resign
     club = Club.find_by(id: params[:club_id])
     club.managed = false

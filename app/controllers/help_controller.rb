@@ -29,7 +29,7 @@ class HelpController < ApplicationController
 
   def manager_list
     @managers = if @waiting_list
-                  User.all
+                  User.where(soft_delete: false)
                 else
                   User.where.not(club: 0)
                 end

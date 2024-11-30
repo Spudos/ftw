@@ -44,6 +44,8 @@ Rails.application.routes.draw do
   get '/users', to: 'users#index'
   get '/users/resign', to: 'users#resign'
   get '/users/new_manager', to: 'users#new_manager'
+  get '/users/user_admin', to: 'users#user_admin'
+  patch '/users/soft_delete', to: 'users#soft_delete'
 
   get '/leagues/league_cup/league', to: 'leagues#league_cup'
   get '/leagues/wcc/league', to: 'leagues#wcc'
@@ -63,6 +65,7 @@ Rails.application.routes.draw do
   post '/turns/process_article_updates', to: 'turns#process_article_updates'
 
   get '/turns/gm_admin', to: 'turns#gm_admin'
+
   get '/turns', to: 'turns#index'
   post '/turns', to: 'turns#create'
   get 'new_turn', to: 'turns#new'

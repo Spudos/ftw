@@ -1,0 +1,34 @@
+<h4>Inactive Users</h4>
+<% if @inactive_users.empty? %>
+  <p>No inactive users found.</p>
+<% else %>
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Delete Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @inactive_users.each do |user| %>
+        <tr>
+          <td><%= user.fname %></td>
+          <td><%= user.lname %></td>
+          <td><%= user.email %></td>
+          <td><%= user.role %></td>
+          <td><%= user.soft_delete %></td>
+          <td>
+            <%= button_to user.soft_delete ? 'Undelete' : 'Delete', 
+                      users_soft_delete_path(user_id: user.id), 
+                      method: :patch, 
+                      class: 'btn btn-' + (user.soft_delete ? 'success' : 'danger') %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
