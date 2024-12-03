@@ -21,7 +21,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0' # Replace with your Ruby version
+          ruby-version: '3.1.2'
           bundler-cache: true  # Cache bundler dependencies
 
       # Step 3: Install dependencies
