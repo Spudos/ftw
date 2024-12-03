@@ -21,17 +21,16 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2'
-          bundler-cache: true  # Cache bundler dependencies
+          ruby-version: '3.1.2'  # Match your Ruby version
+          bundler-cache: true
 
       # Step 3: Install dependencies
       - name: Install dependencies
         run: |
-          gem install bundler
-          bundle install
+          gem install bundler --version 2.3.0 # Ensuring the correct Bundler version
+          bundle install --verbose  # Run bundle with verbose output to get more details on failures
 
       # Step 4: Run RSpec tests
       - name: Run RSpec tests
         run: |
-          bundle exec rspec
-
+          bundle exec rspec --verbose
