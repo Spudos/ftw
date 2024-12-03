@@ -28,6 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           gem install bundler --version 2.3.0 # Ensuring the correct Bundler version
+          bundle lock --add-platform x86_64-linux  # Add x86_64-linux platform to the lockfile
           bundle install --verbose  # Run bundle with verbose output to get more details on failures
 
       # Step 4: Run RSpec tests
