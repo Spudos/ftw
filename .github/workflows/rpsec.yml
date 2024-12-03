@@ -1,0 +1,37 @@
+name: Run RSpec Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Ruby
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0' # Replace with your Ruby version
+          bundler-cache: true  # Cache bundler dependencies
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+
+      # Step 4: Run RSpec tests
+      - name: Run RSpec tests
+        run: |
+          bundle exec rspec
+
