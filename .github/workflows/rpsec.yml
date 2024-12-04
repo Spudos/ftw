@@ -38,6 +38,11 @@ jobs:
             sleep 3
           done
 
+      - name: Check PostgreSQL status
+        run: |
+          pg_isready -h localhost -p 5432 -U postgres
+          psql -h localhost -U postgres -c '\l'  # List databases
+
       - name: Create and setup database
         env:
           RAILS_ENV: test
