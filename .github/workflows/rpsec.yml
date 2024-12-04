@@ -22,6 +22,4 @@ jobs:
         run: bundle install
 
       - name: Run tests
-        env:
-          RAILS_ENV: test
         run: bundle exec rspec
