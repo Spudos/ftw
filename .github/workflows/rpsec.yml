@@ -1,58 +1,51 @@
-name: Rails Tests
+name: CI
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     services:
       postgres:
-        image: postgres:13
-        ports:
-          - 5432:5432
+        image: postgres:latest
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: ftw-test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1.2
+          ruby-version: '3.0' # Specify your Ruby version here
 
       - name: Install dependencies
-        run: bundle install --jobs 4 --retry 3
-
-      - name: Wait for PostgreSQL to be ready
         run: |
-          until pg_isready -h localhost -p 5432 -U postgres; do
-            echo "Waiting for PostgreSQL to be ready..."
-            sleep 3
-          done
+          gem install bundler
+          bundle install
 
-      - name: Setup database
-        env:
-          RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-          POSTGRES_HOST: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
-          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+      - name: Create database
         run: |
-          bundle exec rails db:create
-          bundle exec rails db:schema:load
+          cp config/database.yml.github-actions config/database.yml
+          RAILS_ENV=test rails db:create
 
-      - name: Run tests
-        env:
-          RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        run: bundle exec rspec
+      - name: Run RSpec tests
+        run: |
+          RAILS_ENV=test bundle exec rspec
