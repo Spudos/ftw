@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     services:
@@ -52,3 +52,6 @@ jobs:
       - name: Run RSpec tests
         run: |
           RAILS_ENV=test bundle exec rspec
+
+  deploy:
+    runs-on: ubuntu-latest
