@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          gem install bundler --version 2.3.0 e
+          gem install bundler
           bundle install
 
       - name: Run RSpec tests
