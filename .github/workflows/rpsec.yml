@@ -71,7 +71,7 @@ jobs:
           host: ${{ secrets.RACKNERD_HOST }}
           username: ${{ secrets.RACKNERD_USERNAME }}
           port: ${{ secrets.RACKNERD_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo "Logging into RackNerd server..."
-            # Add your commands here
             uptime
