@@ -44,6 +44,9 @@ jobs:
 
       - name: Set up database
         run: |
+          sudo service postgresql start
+          sudo -u postgres createuser --superuser --pwprompt $USER
+          sudo -u postgres createdb ftw_test
           RAILS_ENV=test bundle exec rails db:create
           RAILS_ENV=test bundle exec rails db:migrate
 
