@@ -23,10 +23,16 @@ jobs:
         run: |
           gem install bundler
           bundle install
+
+      - name: Set up database
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:schema:load RAILS_ENV=test
+    
       - name: Precompile Rails application
         run: |
           RAILS_ENV=test bundle exec rails assets:precompile
 
       - name: Run RSpec tests
         run: |
-          bundle exec rspec
+          RAILS_ENV=test bundle exec rspec
