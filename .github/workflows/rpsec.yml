@@ -9,6 +9,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: spudos
+          POSTGRES_PASSWORD: Sworkz25!
+          POSTGRES_DB: ftw_test
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -20,6 +30,20 @@ jobs:
 
       - name: Install dependencies
         run: bundle install
+
+      - name: Wait for PostgreSQL
+        run: |
+          until pg_isready -h localhost -p 5432 -U postgres; do
+            echo "Waiting for PostgreSQL to be ready..."
+            sleep 3
+          done
+
+      - name: Create and setup database
+        env:
+          RAILS_ENV: test
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:schema:load 
 
       - name: Run tests
         run: bundle exec rspec
