@@ -74,4 +74,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo "Logging into RackNerd server..."
-            uptime
+            cd ftw
+            docker compose down
+            git pull
+            docker compose up -d
