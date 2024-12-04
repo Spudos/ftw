@@ -19,6 +19,9 @@ jobs:
           ruby-version: '3.1.2'
           bundler-cache: true
 
+      - name: Set Rails master key
+        run: echo "${{ secrets.RAILS_MASTER_KEY }}" > config/master.key
+
       - name: Install dependencies
         run: |
           gem install bundler
