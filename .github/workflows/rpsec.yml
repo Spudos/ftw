@@ -38,13 +38,6 @@ jobs:
             sleep 3
           done
 
-      - name: Create and setup database
-        env:
-          RAILS_ENV: test
-        run: |
-          bundle exec rails db:create
-          bundle exec rails db:schema:load
-
       - name: Run tests
         env:
           RAILS_ENV: test
