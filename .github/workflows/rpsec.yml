@@ -28,7 +28,7 @@ jobs:
         run: |
           bundle exec rails db:create
           bundle exec rails db:schema:load RAILS_ENV=test
-    
+
       - name: Precompile Rails application
         run: |
           RAILS_ENV=test bundle exec rails assets:precompile
@@ -36,3 +36,10 @@ jobs:
       - name: Run RSpec tests
         run: |
           RAILS_ENV=test bundle exec rspec
+
+      - name: Upload RSpec results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: rspec-results
+          path: spec/reports/
