@@ -9,16 +9,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:13
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -30,13 +20,6 @@ jobs:
 
       - name: Install dependencies
         run: bundle install
-
-      - name: Wait for PostgreSQL
-        run: |
-          until pg_isready -h localhost -p 5432 -U postgres; do
-            echo "Waiting for PostgreSQL to be ready..."
-            sleep 3
-          done
 
       - name: Run tests
         env:
