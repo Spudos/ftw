@@ -23,6 +23,9 @@ jobs:
         run: |
           gem install bundler
           bundle install
+      - name: Precompile Rails application
+        run: |
+          RAILS_ENV=test bundle exec rails assets:precompile
 
       - name: Run RSpec tests
         run: |
