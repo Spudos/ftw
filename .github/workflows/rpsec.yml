@@ -38,10 +38,15 @@ jobs:
             sleep 3
           done
 
-      - name: Create and setup database
+      - name: Setup database
         env:
           RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}  # Add this line
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          POSTGRES_HOST: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
         run: |
           bundle exec rails db:create
           bundle exec rails db:schema:load
@@ -49,5 +54,5 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}  # Add this line
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: bundle exec rspec
