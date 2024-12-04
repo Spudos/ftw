@@ -19,15 +19,20 @@ jobs:
           ruby-version: '3.1.2'
           bundler-cache: true
 
-      - name: Set Rails master key
-        run: echo "${{ secrets.RAILS_MASTER_KEY }}" > config/master.key
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Specify the Node.js version compatible with your project
 
-      - name: Install dependencies
+      - name: Install JavaScript dependencies
+        run: npm install
+
+      - name: Install Ruby dependencies
         run: |
           gem install bundler
           bundle install
 
-      - name: Precompile Rails application
+      - name: Precompile Rails assets
         run: |
           RAILS_ENV=test bundle exec rails assets:precompile
 
