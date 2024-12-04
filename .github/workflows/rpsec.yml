@@ -9,6 +9,20 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: ftw_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-timeout=30s
+          --health-retries=5
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -19,10 +33,13 @@ jobs:
           ruby-version: '3.1.2'
           bundler-cache: true
 
-      - name: Set up PostgreSQL
-        uses: docker://postgres:latest
-        with:
-          entrypoint: "/bin/bash -c 'apt-get update && apt-get install -y postgresql postgresql-contrib'"
+      - name: Set up environment variables for PostgreSQL
+        run: |
+          echo "DB_USERNAME=postgres" >> $GITHUB_ENV
+          echo "DB_PASSWORD=password" >> $GITHUB_ENV
+          echo "DB_HOST=localhost" >> $GITHUB_ENV
+          echo "DB_PORT=5432" >> $GITHUB_ENV
+          echo "DB_NAME=ftw_test" >> $GITHUB_ENV
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -44,9 +61,6 @@ jobs:
 
       - name: Set up database
         run: |
-          sudo service postgresql start
-          sudo -u postgres createuser --superuser --pwprompt $USER
-          sudo -u postgres createdb ftw_test
           RAILS_ENV=test bundle exec rails db:create
           RAILS_ENV=test bundle exec rails db:migrate
 
