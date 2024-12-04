@@ -46,6 +46,9 @@ jobs:
           cp config/database.yml.github-actions config/database.yml
           RAILS_ENV=test rails db:create
 
+      - name: Create match logging directory
+        run: mkdir -p match_logging
+
       - name: Run RSpec tests
         run: |
           RAILS_ENV=test bundle exec rspec
