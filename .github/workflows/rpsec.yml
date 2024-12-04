@@ -76,5 +76,6 @@ jobs:
             echo "Logging into RackNerd server..."
             cd ftw
             docker compose down
-            git pull
+            git fetch
+            git reset --hard origin/main
             docker compose up -d
