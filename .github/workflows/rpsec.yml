@@ -42,8 +42,8 @@ jobs:
       - name: Create and setup database
         env:
           RAILS_ENV: test
-          DB_USERNAME: ${{ secrets.DB_USERNAME }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          USERNAME: ${{ secrets.DB_USERNAME }}
+          PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
           bundle exec rails db:create
           bundle exec rails db:schema:load
