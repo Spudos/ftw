@@ -1,4 +1,4 @@
-name: Run RSpec Tests
+name: Rails Tests
 
 on:
   push:
@@ -15,14 +15,9 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_DB: ftw_test
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-        options: >-
-          --health-cmd="pg_isready -U postgres" 
-          --health-interval=10s 
-          --health-timeout=5s 
-          --health-retries=5
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
 
     steps:
       - name: Checkout code
@@ -31,49 +26,26 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2'
-          bundler-cache: true
+          ruby-version: 3.1
 
-      - name: Set up environment variables for PostgreSQL and Rails credentials
-        run: |
-          echo "DB_USERNAME=postgres" >> $GITHUB_ENV
-          echo "DB_PASSWORD=password" >> $GITHUB_ENV
-          echo "DB_HOST=localhost" >> $GITHUB_ENV
-          echo "DB_PORT=5432" >> $GITHUB_ENV
-          echo "DB_NAME=ftw_test" >> $GITHUB_ENV
-          echo "RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}" >> $GITHUB_ENV
-          echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> $GITHUB_ENV
-          echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
+      - name: Install dependencies
+        run: bundle install
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - name: Install JavaScript dependencies
-        run: npm install
-
-      - name: Install Ruby dependencies
-        run: |
-          gem install bundler
-          bundle install
-
-      - name: Wait for PostgreSQL to be ready
+      - name: Wait for PostgreSQL
         run: |
           until pg_isready -h localhost -p 5432 -U postgres; do
             echo "Waiting for PostgreSQL to be ready..."
-            sleep 5
+            sleep 3
           done
 
-      - name: Set up database
+      - name: Create and setup database
+        env:
+          RAILS_ENV: test
         run: |
-          RAILS_ENV=test bundle exec rails db:create
-          RAILS_ENV=test bundle exec rails db:migrate
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
 
-      - name: Precompile Rails assets
-        run: |
-          RAILS_ENV=test bundle exec rails assets:precompile
-
-      - name: Run RSpec tests
-        run: |
-          bundle exec rspec
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+        run: bundle exec rails test
