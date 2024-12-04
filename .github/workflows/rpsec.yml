@@ -15,9 +15,9 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_USER: spudos
-          POSTGRES_PASSWORD: Sworkz25!
-          POSTGRES_DB: ftw_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
 
     steps:
       - name: Checkout code
@@ -38,12 +38,13 @@ jobs:
             sleep 3
           done
 
-      - name: Create and setup database
+      - name: Set up database credentials
         env:
-          RAILS_ENV: test
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
         run: |
-          bundle exec rails db:create
-          bundle exec rails db:schema:load 
+          echo "DATABASE_USERNAME=${DB_USERNAME}" >> $GITHUB_ENV
+          echo "DATABASE_PASSWORD=${DB_PASSWORD}" >> $GITHUB_ENV
 
       - name: Run tests
         run: bundle exec rspec
