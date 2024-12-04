@@ -17,7 +17,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+          POSTGRES_DB: ftw_test
 
     steps:
       - name: Checkout code
@@ -29,22 +29,26 @@ jobs:
           ruby-version: 3.1.2
 
       - name: Install dependencies
-        run: bundle install
-
-      - name: Wait for PostgreSQL
-        run: |
-          until pg_isready -h localhost -p 5432 -U postgres; do
-            echo "Waiting for PostgreSQL to be ready..."
-            sleep 3
-          done
+        run: bundle install --jobs 4 --retry 3
 
       - name: Set up database credentials
         env:
-          DB_USERNAME: postgres
-          DB_PASSWORD: postgres
+          DB_USERNAME: your_db_username
+          DB_PASSWORD: your_db_password
         run: |
           echo "DATABASE_USERNAME=${DB_USERNAME}" >> $GITHUB_ENV
           echo "DATABASE_PASSWORD=${DB_PASSWORD}" >> $GITHUB_ENV
 
+      - name: Create and setup database
+        env:
+          RAILS_ENV: test
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
+
       - name: Run tests
+        env:
+          RAILS_ENV: test
         run: bundle exec rspec
