@@ -33,18 +33,21 @@ jobs:
           ruby-version: '3.1.2'
           bundler-cache: true
 
-      - name: Set up environment variables for PostgreSQL
+      - name: Set up environment variables for PostgreSQL and Rails credentials
         run: |
           echo "DB_USERNAME=postgres" >> $GITHUB_ENV
           echo "DB_PASSWORD=password" >> $GITHUB_ENV
           echo "DB_HOST=localhost" >> $GITHUB_ENV
           echo "DB_PORT=5432" >> $GITHUB_ENV
           echo "DB_NAME=ftw_test" >> $GITHUB_ENV
+          echo "RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}" >> $GITHUB_ENV
+          echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> $GITHUB_ENV
+          echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # Specify the Node.js version compatible with your project
+          node-version: '16'
 
       - name: Install JavaScript dependencies
         run: npm install
@@ -54,10 +57,12 @@ jobs:
           gem install bundler
           bundle install
 
-      - name: Set Rails Master Key
-        env:
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        run: echo "RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}" >> $GITHUB_ENV
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          until pg_isready -h localhost -p 5432 -U postgres; do
+            echo "Waiting for PostgreSQL to be ready..."
+            sleep 5
+          done
 
       - name: Set up database
         run: |
