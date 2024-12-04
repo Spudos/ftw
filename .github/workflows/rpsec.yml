@@ -55,3 +55,23 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Execute SSH command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.RACKNERD_HOST }}
+          username: ${{ secrets.RACKNERD_USERNAME }}
+          port: ${{ secrets.RACKNERD_PORT }}
+          script: |
+            echo "Logging into RackNerd server..."
+            # Add your commands here
+            uptime
