@@ -4,6 +4,9 @@
     <a href="/" class="btn btn-outline-dark">Home</a>
   </li>
   <li class="nav-item">
+    <a href="<%= roadmaps_path %>" class="btn btn-outline-dark">Roadmap</a>
+  </li>
+  <li class="nav-item">
     <a href="<%= articles_path %>" class="btn btn-outline-dark">Articles</a>
   </li>
   <% if current_user && current_user.club >= 1 %> 
