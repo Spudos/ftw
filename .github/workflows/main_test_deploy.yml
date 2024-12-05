@@ -1,4 +1,4 @@
-name: CI
+name: main_test_deploy
 
 on:
   push:
