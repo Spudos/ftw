@@ -38,5 +38,4 @@ class Scouting::Engines::ReportSearchResult
     end
     [var1, var2, var3]
   end
-
 end
