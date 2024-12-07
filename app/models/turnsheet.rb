@@ -131,6 +131,23 @@ class Turnsheet < ApplicationRecord
                              var3: 2_500_000 })
       end
 
+      if turnsheet.scouting.present?
+        scout_info = {week: turnsheet.week,
+                      club_id: turnsheet.club_id,
+                      position: turnsheet.scout_position,
+                      total_skill: turnsheet.scout_total_skill,
+                      age: turnsheet.scout_age,
+                      skills: turnsheet.scout_skills,
+                      loyalty: turnsheet.scout_loyalty,
+                      potential_skill: turnsheet.scout_potential_skill,
+                      consistency: turnsheet.scout_consistency,
+                      recovery: turnsheet.scout_recovery,
+                      star: turnsheet.scout_star,
+                      blend: turnsheet.scout_blend_player}
+
+        TurnActions::Engines::Scouting.new(scout_info).call
+      end
+
       if turnsheet.article_headline.present?
         create_article(turnsheet.week, turnsheet.club_id, turnsheet.article_headline,
                        turnsheet.article_sub_headline, turnsheet.article)
