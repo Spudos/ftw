@@ -130,7 +130,7 @@ RSpec.describe TurnActions, type: :model do
                        star: false,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(['Star GK', 'Normal GKP']).to include(Message.last&.var2)
       end
@@ -149,7 +149,7 @@ RSpec.describe TurnActions, type: :model do
                        star: false,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(['Star DFC', 'Normal DFC']).to include(Message.last&.var2)
       end
@@ -168,7 +168,7 @@ RSpec.describe TurnActions, type: :model do
                        star: false,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(['Star MID', 'Normal MID']).to include(Message.last&.var2)
       end
@@ -187,7 +187,7 @@ RSpec.describe TurnActions, type: :model do
                        star: false,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(['Star ATT', 'Normal ATT']).to include(Message.last&.var2)
       end
@@ -206,7 +206,7 @@ RSpec.describe TurnActions, type: :model do
                        star: false,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star GK')
       end
@@ -225,7 +225,7 @@ RSpec.describe TurnActions, type: :model do
                        star: false,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star GK')
       end
@@ -244,7 +244,7 @@ RSpec.describe TurnActions, type: :model do
                        star: false,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star GK')
       end
@@ -263,7 +263,7 @@ RSpec.describe TurnActions, type: :model do
                        star: false,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star GK')
       end
@@ -282,7 +282,7 @@ RSpec.describe TurnActions, type: :model do
                        star: false,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star GK')
       end
@@ -301,7 +301,7 @@ RSpec.describe TurnActions, type: :model do
                        star: false,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star GK')
       end
@@ -320,7 +320,7 @@ RSpec.describe TurnActions, type: :model do
                        star: false,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star GK')
       end
@@ -339,7 +339,7 @@ RSpec.describe TurnActions, type: :model do
                        star: true,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star GK')
       end
@@ -358,7 +358,7 @@ RSpec.describe TurnActions, type: :model do
                        star: true,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star DFC')
       end
@@ -377,7 +377,7 @@ RSpec.describe TurnActions, type: :model do
                        star: true,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star MID')
       end
@@ -396,7 +396,7 @@ RSpec.describe TurnActions, type: :model do
                        star: true,
                        blend_player: 0 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star ATT')
       end
@@ -415,10 +415,68 @@ RSpec.describe TurnActions, type: :model do
                        star: true,
                        blend_player: 66 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star ATT')
         expect(Message.last&.var3).to eq(10)
+      end
+
+      it 'based on TS/age/skills/loyalty/consistency/recovery/star/blend should return the Star ATT with a blend of 5' do
+        scout_info = { week: 1,
+                       club_id: 1,
+                       position: 'att',
+                       total_skill: 90,
+                       age: 26,
+                       skills: true,
+                       loyalty: true,
+                       potential_skill: false,
+                       consistency: true,
+                       recovery: true,
+                       star: true,
+                       blend_player: 66 }
+
+        Scouting::Scouting.new(scout_info).call
+
+        expect(Message.last&.var2).to eq('Star ATT')
+        expect(Message.last&.var3).to eq(10)
+      end
+
+      it 'based on TS/age/loyalty/consistency/recovery/star should return the Star ATT with a blend of 5' do
+        scout_info = { week: 1,
+                       club_id: 1,
+                       position: 'att',
+                       total_skill: 90,
+                       age: 26,
+                       skills: false,
+                       loyalty: true,
+                       potential_skill: false,
+                       consistency: true,
+                       recovery: true,
+                       star: true,
+                       blend_player: 0 }
+
+        Scouting::Scouting.new(scout_info).call
+
+        expect(Message.last&.var2).to eq('Star ATT')
+      end
+
+      it 'based on TS/age/loyalty/consistency/star should return the Star ATT with a blend of 5' do
+        scout_info = { week: 1,
+                       club_id: 1,
+                       position: 'att',
+                       total_skill: 90,
+                       age: 26,
+                       skills: false,
+                       loyalty: true,
+                       potential_skill: false,
+                       consistency: true,
+                       recovery: false,
+                       star: true,
+                       blend_player: 0 }
+
+        Scouting::Scouting.new(scout_info).call
+
+        expect(Message.last&.var2).to eq('Star ATT')
       end
 
       it 'no player found' do
@@ -435,7 +493,7 @@ RSpec.describe TurnActions, type: :model do
                        star: true,
                        blend_player: 66 }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
 
         expect(Message.last&.var1).to eq('Despite their best efforts, the scouts could not find a suitable player for you to consider signing.')
       end
