@@ -19,10 +19,20 @@ FactoryBot.define do
     consistency { 10 }
     player_position_detail { 'p' }
     star { 5 }
-    potential_tackling { 10 }
     wages { 100 }
     total_skill { 85 }
     blend { 5 }
     available { 0 }
+    potential_passing { 8 }
+    potential_control { 8 }
+    potential_tackling { 8 }
+    potential_running { 8 }
+    potential_shooting { 8 }
+    potential_dribbling { 8 }
+    potential_defensive_heading { 8 }
+    potential_offensive_heading { 8 }
+    potential_flair { 8 }
+    potential_strength { 8 }
+    potential_creativity { 8 }
   end
 end

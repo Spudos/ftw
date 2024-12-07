@@ -71,51 +71,62 @@ class TurnActions::Engines::Scouting
   end
 
   def secondary_filters(players)
-    skill_search(players, 7)
+    players = skill_search(players, 'normal', 7) if @skills == true
+
+    players = skill_search(players, 'potential', 11) if @potential_skill == true
+
+    return players
   end
 
-  def skill_search(players, min)
+  def skill_search(players, skill_type, min)
     players_with_skills = []
 
     players.each do |player|
-      key_skills = positional_skills(player.position)
+      key_skills = send("#{skill_type}_positional_skills", player.position)
 
-      if player.key_skills[0] >= min &&
-          player.key_skills[1] >= min &&
-          player.key_skills[2] >= min &&
-          player.key_skills[3] >= min
+      next unless player[key_skills[0]] >= min &&
+                  player[key_skills[1]] >= min &&
+                  player[key_skills[2]] >= min &&
+                  player[key_skills[3]] >= min
 
-        players_with_skills << player
-      end
+      players_with_skills << player
     end
+
+    players_with_skills
   end
 
-  def positional_skills(pos)
-    case pos
-    when 'gkp'
-      ['control', 'tackling',
-       'shooting', 'offensive_heading']
-    when 'def'
-      ['tackling', 'running',
-       'defensive_heading', 'strength']
-    when 'mid'
-      ['passing', 'control',
-       'dribbling', 'creativity']
-    when 'att'
-      ['running', 'shooting',
-       'offensive_heading', 'flair']
-    end
+  def normal_positional_skills(pos)
+    skills = {
+      'gkp' => %w[control tackling shooting offensive_heading],
+      'dfc' => %w[tackling running defensive_heading strength],
+      'mid' => %w[passing control dribbling creativity],
+      'att' => %w[running shooting offensive_heading flair]
+    }
+    skills[pos]
   end
 
-  def potential_skill
-    @potential_skill
-  end
-
-  def blend_player
-    @blend_player
+  def potential_positional_skills(pos)
+    skills = {
+      'gkp' => %w[potential_control potential_tackling potential_shooting potential_offensive_heading],
+      'dfc' => %w[potential_tackling potential_running potential_defensive_heading potential_strength],
+      'mid' => %w[potential_passing potential_control potential_dribbling potential_creativity],
+      'att' => %w[potential_running potential_shooting potential_offensive_heading potential_flair]
+    }
+    skills[pos]
   end
 
   def report_search_result(player)
-    binding.pry
+
+    if player.nil?
+      Message.create(week: @week,
+                     club_id: @club_id,
+                     var1: 0)
+    else
+      Message.create(week: @week,
+                     club_id: @club_id,
+                     var1: player.id,
+                     var2: player.name,
+                     var3: player.position)
+    end
   end
 end
