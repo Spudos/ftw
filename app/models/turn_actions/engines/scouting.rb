@@ -19,6 +19,8 @@ class TurnActions::Engines::Scouting
   def call
     players = search_for_players
 
+    players = secondary_filters(players)
+
     report_search_result(players.sample)
   end
 
@@ -36,20 +38,12 @@ class TurnActions::Engines::Scouting
                  star)
   end
 
-  def skills
-    @skills
-  end
-
   def loyalty
     if @loyalty == true
       20
     else
       100
     end
-  end
-
-  def potential_skill
-    @potential_skill
   end
 
   def consistency
@@ -74,6 +68,47 @@ class TurnActions::Engines::Scouting
     else
       0
     end
+  end
+
+  def secondary_filters(players)
+    skill_search(players, 7)
+  end
+
+  def skill_search(players, min)
+    players_with_skills = []
+
+    players.each do |player|
+      key_skills = positional_skills(player.position)
+
+      if player.key_skills[0] >= min &&
+          player.key_skills[1] >= min &&
+          player.key_skills[2] >= min &&
+          player.key_skills[3] >= min
+
+        players_with_skills << player
+      end
+    end
+  end
+
+  def positional_skills(pos)
+    case pos
+    when 'gkp'
+      ['control', 'tackling',
+       'shooting', 'offensive_heading']
+    when 'def'
+      ['tackling', 'running',
+       'defensive_heading', 'strength']
+    when 'mid'
+      ['passing', 'control',
+       'dribbling', 'creativity']
+    when 'att'
+      ['running', 'shooting',
+       'offensive_heading', 'flair']
+    end
+  end
+
+  def potential_skill
+    @potential_skill
   end
 
   def blend_player
