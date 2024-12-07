@@ -67,7 +67,53 @@ RSpec.describe TurnActions, type: :model do
                         total_skill: 100,
                         consistency: 3,
                         recovery: 10,
-                        star: 25)
+                        star: 25,
+                        blend: 1)
+        create(:player, position: 'att', club_id: 2, age: 25, loyalty: 10,
+                        name: 'Star ATT',
+                        running: 8,
+                        shooting: 8,
+                        offensive_heading: 8,
+                        flair: 8,
+                        potential_running: 12,
+                        potential_shooting: 12,
+                        potential_offensive_heading: 12,
+                        potential_flair: 12,
+                        total_skill: 100,
+                        consistency: 3,
+                        recovery: 10,
+                        star: 25,
+                        blend: 5)
+        create(:player, position: 'att', club_id: 2, age: 25, loyalty: 10,
+                        name: 'Star ATT',
+                        running: 8,
+                        shooting: 8,
+                        offensive_heading: 8,
+                        flair: 8,
+                        potential_running: 12,
+                        potential_shooting: 12,
+                        potential_offensive_heading: 12,
+                        potential_flair: 12,
+                        total_skill: 100,
+                        consistency: 3,
+                        recovery: 10,
+                        star: 25,
+                        blend: 10)
+        create(:player, id: 66, position: 'att', club_id: 1, age: 25, loyalty: 10,
+                        name: 'Club ATT',
+                        running: 8,
+                        shooting: 8,
+                        offensive_heading: 8,
+                        flair: 8,
+                        potential_running: 12,
+                        potential_shooting: 12,
+                        potential_offensive_heading: 12,
+                        potential_flair: 12,
+                        total_skill: 100,
+                        consistency: 3,
+                        recovery: 10,
+                        star: 25,
+                        blend: 10)
       end
 
       it 'should return either gkp' do
@@ -82,7 +128,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: false,
                        recovery: false,
                        star: false,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -101,7 +147,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: false,
                        recovery: false,
                        star: false,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -120,7 +166,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: false,
                        recovery: false,
                        star: false,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -139,7 +185,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: false,
                        recovery: false,
                        star: false,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -158,7 +204,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: false,
                        recovery: false,
                        star: false,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -177,7 +223,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: false,
                        recovery: false,
                        star: false,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -196,7 +242,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: false,
                        recovery: false,
                        star: false,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -215,7 +261,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: false,
                        recovery: false,
                        star: false,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -234,7 +280,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: false,
                        recovery: false,
                        star: false,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -253,7 +299,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: true,
                        recovery: false,
                        star: false,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -272,7 +318,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: true,
                        recovery: true,
                        star: false,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -291,7 +337,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: true,
                        recovery: true,
                        star: true,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -310,7 +356,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: true,
                        recovery: true,
                        star: true,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -329,7 +375,7 @@ RSpec.describe TurnActions, type: :model do
                        consistency: true,
                        recovery: true,
                        star: true,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
@@ -348,11 +394,31 @@ RSpec.describe TurnActions, type: :model do
                        consistency: true,
                        recovery: true,
                        star: true,
-                       blend: 'woolley' }
+                       blend_player: 0 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
         expect(Message.last&.var2).to eq('Star ATT')
+      end
+
+      it 'based on TS/age/skills/loyalty/potential_skill/consistency/recovery/star/blend should return the Star ATT with a blend of 5' do
+        scout_info = { week: 1,
+                       club_id: 1,
+                       position: 'att',
+                       total_skill: 90,
+                       age: 26,
+                       skills: true,
+                       loyalty: true,
+                       potential_skill: true,
+                       consistency: true,
+                       recovery: true,
+                       star: true,
+                       blend_player: 66 }
+
+        TurnActions::Engines::Scouting.new(scout_info).call
+
+        expect(Message.last&.var2).to eq('Star ATT')
+        expect(Message.last&.var3).to eq(10)
       end
 
       it 'no player found' do
@@ -367,11 +433,11 @@ RSpec.describe TurnActions, type: :model do
                        consistency: true,
                        recovery: true,
                        star: true,
-                       blend: 'woolley' }
+                       blend_player: 66 }
 
         TurnActions::Engines::Scouting.new(scout_info).call
 
-        expect(Message.last&.var1).to eq('0')
+        expect(Message.last&.var1).to eq('Despite their best efforts, the scouts could not find a suitable player for you to consider signing.')
       end
     end
   end

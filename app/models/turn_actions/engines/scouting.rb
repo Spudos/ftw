@@ -13,7 +13,7 @@ class TurnActions::Engines::Scouting
     @consistency = scout_info[:consistency]
     @recovery = scout_info[:recovery]
     @star = scout_info[:star]
-    @blend_player = scout_info[:blend]
+    @blend_player = scout_info[:blend_player]
   end
 
   def call
@@ -27,9 +27,10 @@ class TurnActions::Engines::Scouting
   private
 
   def search_for_players
-    Player.where('position = ? AND total_skill >= ? AND age <= ? AND loyalty <= ?
+    Player.where('position = ? AND club_id != ? AND total_skill >= ? AND age <= ? AND loyalty <= ?
                  AND consistency <= ? AND recovery >= ? AND star >= ? ',
                  @position,
+                 @club_id,
                  @total_skill,
                  @age,
                  loyalty,
@@ -71,9 +72,11 @@ class TurnActions::Engines::Scouting
   end
 
   def secondary_filters(players)
-    players = skill_search(players, 'normal', 7) if @skills == true
+    players = skill_search(players, 'normal', 6) if @skills == true
 
-    players = skill_search(players, 'potential', 11) if @potential_skill == true
+    players = skill_search(players, 'potential', 9) if @potential_skill == true
+
+    players = blend_matching(players) if @blend_player != 0
 
     return players
   end
@@ -115,18 +118,32 @@ class TurnActions::Engines::Scouting
     skills[pos]
   end
 
-  def report_search_result(player)
+  def blend_matching(players)
+    players_with_blend = []
+    blend_to_match = Player.find_by(id: @blend_player).blend
 
+    players.each do |player|
+      next unless player.blend == blend_to_match
+
+      players_with_blend << player
+    end
+
+    players_with_blend
+  end
+
+  def report_search_result(player)
     if player.nil?
       Message.create(week: @week,
                      club_id: @club_id,
-                     var1: 0)
+                     var1: 'Despite their best efforts, the scouts could not find a suitable player for you to consider signing.',
+                     action_id: "scouting#{@week}#{@club_id}")
     else
       Message.create(week: @week,
                      club_id: @club_id,
-                     var1: player.id,
+                     var1: "The scouts have found a player for you to consider signing. His name is #{player.name}, his player id is #{player.id}.  He currently plays for #{Club.find_by(id: player.club_id).name}.",
                      var2: player.name,
-                     var3: player.position)
+                     var3: player.blend,
+                     action_id: "scouting#{@week}#{@club_id}")
     end
   end
 end

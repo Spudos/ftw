@@ -3,6 +3,8 @@ class Turnsheet < ApplicationRecord
   accepts_nested_attributes_for :player_actions, allow_destroy: true
   has_many :squad_actions, dependent: :destroy
   accepts_nested_attributes_for :squad_actions, allow_destroy: true
+  has_many :scoutings, dependent: :destroy
+  accepts_nested_attributes_for :scoutings, allow_destroy: true
 
   def process_turnsheet(params)
     Turnsheet.find_each do |turnsheet|
@@ -131,19 +133,19 @@ class Turnsheet < ApplicationRecord
                              var3: 2_500_000 })
       end
 
-      if turnsheet.scouting.present?
-        scout_info = {week: turnsheet.week,
-                      club_id: turnsheet.club_id,
-                      position: turnsheet.scout_position,
-                      total_skill: turnsheet.scout_total_skill,
-                      age: turnsheet.scout_age,
-                      skills: turnsheet.scout_skills,
-                      loyalty: turnsheet.scout_loyalty,
-                      potential_skill: turnsheet.scout_potential_skill,
-                      consistency: turnsheet.scout_consistency,
-                      recovery: turnsheet.scout_recovery,
-                      star: turnsheet.scout_star,
-                      blend: turnsheet.scout_blend_player}
+      if turnsheet.scoutings.present?
+        scout_info = { week: turnsheet.week,
+                       club_id: turnsheet.club_id,
+                       position: turnsheet.scoutings[0][:position],
+                       total_skill: turnsheet.scoutings[0][:total_skill],
+                       age: turnsheet.scoutings[0][:age],
+                       skills: turnsheet.scoutings[0][:skills],
+                       loyalty: turnsheet.scoutings[0][:loyalty],
+                       potential_skill: turnsheet.scoutings[0][:potential_skill],
+                       consistency: turnsheet.scoutings[0][:consistency],
+                       recovery: turnsheet.scoutings[0][:recovery],
+                       star: turnsheet.scoutings[0][:star],
+                       blend_player: turnsheet.scoutings[0][:blend_player] }
 
         TurnActions::Engines::Scouting.new(scout_info).call
       end
