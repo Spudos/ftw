@@ -127,4 +127,15 @@
     </div>
     <% end %>
   </div>
+
+  <div id="scouting-4" class="col-md-12 align-top d-flex align-items-center justify-content-center mb-5">
+  <% if @scout >= 9 %>
+    <div>
+      <h6 class="text-center mt-5">Blend With Player</h6>
+      <div class="btn-group" role="group" aria-label="blend_player">
+        <%= select_tag 'blend_player', options_from_collection_for_select(@all_players, 'id', 'name'), class: 'btn btn-outline-success form-select' %>
+      </div>
+    </div>
+    <% end %>
+  </div>
 </div>

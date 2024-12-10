@@ -43,6 +43,11 @@ function addScoutingListener() {
   radioButtons8.forEach(radio => {
     radio.addEventListener('change', handleScoutingChange);
   });
+
+  const radioButtons9 = document.querySelectorAll('select[name="blend_player"]');
+  radioButtons9.forEach(radio => {
+    radio.addEventListener('change', handleScoutingChange);
+  });
 };
 
 function handleScoutingChange(event) {
