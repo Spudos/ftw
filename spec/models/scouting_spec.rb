@@ -132,7 +132,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(['Star GK', 'Normal GKP']).to include(Message.last&.var2)
+        possible_messages = ['Normal GKP']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'should return either dfc' do
@@ -151,7 +152,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(['Star DFC', 'Normal DFC']).to include(Message.last&.var2)
+        possible_messages = ['Star DFC', 'Normal DFC']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'should return either mid' do
@@ -170,7 +172,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(['Star MID', 'Normal MID']).to include(Message.last&.var2)
+        possible_messages = ['Star MID', 'Normal MID']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'should return either att' do
@@ -189,7 +192,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(['Star ATT', 'Normal ATT']).to include(Message.last&.var2)
+        possible_messages = ['Star ATT', 'Normal ATT']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS should return the Star GKP' do
@@ -208,7 +212,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star GK')
+        possible_messages = ['Star GK']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS/age should return the Star GKP' do
@@ -227,7 +232,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star GK')
+        possible_messages = ['Star GK']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS/age/skills should return the Star GKP' do
@@ -246,7 +252,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star GK')
+        possible_messages = ['Star GK']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS/age/skills/loyalty should return the Star GKP' do
@@ -265,7 +272,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star GK')
+        possible_messages = ['Star GK']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS/age/skills/loyalty/potential_skill should return the Star GKP' do
@@ -284,7 +292,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star GK')
+        possible_messages = ['Star GK']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS/age/skills/loyalty/potential_skill/consistency should return the Star GKP' do
@@ -303,7 +312,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star GK')
+        possible_messages = ['Star GK']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS/age/skills/loyalty/potential_skill/consistency/recovery should return the Star GKP' do
@@ -322,7 +332,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star GK')
+        possible_messages = ['Star GK']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS/age/skills/loyalty/potential_skill/consistency/recovery/star should return the Star GKP' do
@@ -341,7 +352,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star GK')
+        possible_messages = ['Star GK']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS/age/skills/loyalty/potential_skill/consistency/recovery/star should return the Star DFC' do
@@ -360,7 +372,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star DFC')
+        possible_messages = ['Star DFC']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS/age/skills/loyalty/potential_skill/consistency/recovery/star should return the Star MID' do
@@ -379,7 +392,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star MID')
+        possible_messages = ['Star MID']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS/age/skills/loyalty/potential_skill/consistency/recovery/star should return the Star ATT' do
@@ -398,7 +412,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star ATT')
+        possible_messages = ['Star ATT']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS/age/skills/loyalty/potential_skill/consistency/recovery/star/blend should return the Star ATT with a blend of 5' do
@@ -417,7 +432,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star ATT')
+        possible_messages = ['Star ATT']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
         expect(Message.last&.var3).to eq(10)
       end
 
@@ -437,7 +453,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star ATT')
+        possible_messages = ['Star ATT']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
         expect(Message.last&.var3).to eq(10)
       end
 
@@ -457,7 +474,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star ATT')
+        possible_messages = ['Star ATT']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'based on TS/age/loyalty/consistency/star should return the Star ATT with a blend of 5' do
@@ -476,7 +494,8 @@ RSpec.describe TurnActions, type: :model do
 
         Scouting::Scouting.new(scout_info).call
 
-        expect(Message.last&.var2).to eq('Star ATT')
+        possible_messages = ['Star ATT']
+        expect(possible_messages.any? { |msg| Message.last&.var1.include?(msg) }).to be true
       end
 
       it 'no player found' do

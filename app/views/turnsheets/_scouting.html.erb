@@ -2,7 +2,8 @@
   <h3 class="text-center mt-5">Scouting</h3>
   <div id="scouting-1" class="col-md-12 align-top d-flex align-items-center justify-content-center">
     <% if @scout >= 1 %>
-      <p class="text-center mt-5">Position</p>
+    <div>
+      <h6 class="text-center mt-5">Position</h6>
       <div class="btn-group" role="group" aria-label="position">
         <input type="radio" name="position" id="scout-gkp" value="gkp" class="btn-check">
         <label for="scout-gkp" class="btn btn-outline-success">Gkp</label>
@@ -12,11 +13,15 @@
         <label for="scout-mid" class="btn btn-outline-success">Mid</label>
         <input type="radio" name="position" id="scout-att" value="att" class="btn-check">
         <label for="scout-att" class="btn btn-outline-success">Att</label>
+      </div>
     </div>
     <% end %>
+  </div>
 
+  <div id="scouting-1" class="col-md-12 align-top d-flex align-items-center justify-content-center">
     <% if @scout >= 2 %>
-      <p class="text-center mt-5">Total Skill</p>
+    <div>
+      <h6 class="text-center mt-5">Total Skill</h6>
       <div class="btn-group" role="group" aria-label="total_skill">
         <input type="radio" name="total_skill" id="70" value="70" class="btn-check">
         <label for="70" class="btn btn-outline-success">> 70</label>
@@ -27,10 +32,12 @@
         <input type="radio" name="total_skill" id="100" value="100" class="btn-check">
         <label for="100" class="btn btn-outline-success">> 100</label>
       </div>
+    </div>
     <% end %>
 
     <% if @scout >= 3 %>
-      <p class="text-center mt-5">Age</p>
+    <div>
+      <h6 class="text-center mt-5">Age</h6>
       <div class="btn-group" role="group" aria-label="age">
         <input type="radio" name="age" id="20" value="20" class="btn-check">
         <label for="20" class="btn btn-outline-success">< 20</label>
@@ -41,70 +48,83 @@
         <input type="radio" name="age" id="35" value="35" class="btn-check">
         <label for="35" class="btn btn-outline-success">< 35</label>
       </div>
+    </div>
     <% end %>
   </div>
 
   <div id="scouting-2" class="col-md-12 align-top d-flex align-items-center justify-content-center">
     <% if @scout >= 4 %>
-      <p class="text-center mt-5">Skills</p>
+    <div>
+      <h6 class="text-center mt-5">Skills</h6>
       <div class="btn-group" role="group" aria-label="skills">
         <input type="radio" name="skills" id="skills-true" value="true" class="btn-check">
         <label for="skills-true" class="btn btn-outline-success">Yes</label>
         <input type="radio" name="skills" id="skills-false" value="false" class="btn-check">
         <label for="skills-false" class="btn btn-outline-success">No</label>
       </div>
+    </div>
     <% end %>
 
     <% if @scout >= 5 %>
-      <p class="text-center mt-5">Loyalty</p>
+    <div>
+      <h6 class="text-center mt-5">Loyalty</h6>
       <div class="btn-group" role="group" aria-label="loyalty">
         <input type="radio" name="loyalty" id="loyalty-true" value="true" class="btn-check">
         <label for="loyalty-true" class="btn btn-outline-success">Yes</label>
         <input type="radio" name="loyalty" id="loyalty-false" value="false" class="btn-check">
         <label for="loyalty-false" class="btn btn-outline-success">No</label>
       </div>
+    </div>
     <% end %>
 
     <% if @scout >= 6 %>
-      <p class="text-center mt-5">Potential Skill</p>
+    <div>
+      <h6 class="text-center mt-5">Potential Skill</h6>
       <div class="btn-group" role="group" aria-label="potential_skill">
         <input type="radio" name="potential_skill" id="potential-skill-true" value="true" class="btn-check">
         <label for="potential-skill-true" class="btn btn-outline-success">Yes</label>
         <input type="radio" name="potential_skill" id="potential-skill-false" value="false" class="btn-check">
         <label for="potential-skill-false" class="btn btn-outline-success">No</label>
       </div>
+    </div>
     <% end %>
   </div>
 
   <div id="scouting-3" class="col-md-12 align-top d-flex align-items-center justify-content-center">
     <% if @scout >= 7 %>
-      <p class="text-center mt-5">Consistency</p>
+    <div>
+      <h6 class="text-center mt-5">Consistency</h6>
       <div class="btn-group" role="group" aria-label="consistency">
         <input type="radio" name="consistency" id="consistency-true" value="true" class="btn-check">
         <label for="consistency-true" class="btn btn-outline-success">Yes</label>
         <input type="radio" name="consistency" id="consistency-false" value="false" class="btn-check">
         <label for="consistency-false" class="btn btn-outline-success">No</label>
       </div>
+    </div>
     <% end %>
 
     <% if @scout >= 8 %>
-      <p class="text-center mt-5">Recovery</p>
+    <div>
+      <h6 class="text-center mt-5">Recovery</h6>
       <div class="btn-group" role="group" aria-label="recovery">
         <input type="radio" name="recovery" id="recovery-true" value="true" class="btn-check">
         <label for="recovery-true" class="btn btn-outline-success">Yes</label>
         <input type="radio" name="recovery" id="recovery-false" value="false" class="btn-check">
         <label for="recovery-false" class="btn btn-outline-success">No</label>
       </div>
+    </div>
     <% end %>
 
     <% if @scout >= 9 %>
-      <p class="text-center mt-5">Star</p>
+    <div>
+      <h6 class="text-center mt-5">Star</h6>
       <div class="btn-group" role="group" aria-label="star">
         <input type="radio" name="star" id="star-true" value="true" class="btn-check">
         <label for="star-true" class="btn btn-outline-success">Yes</label>
         <input type="radio" name="star" id="star-false" value="false" class="btn-check">
         <label for="star-false" class="btn btn-outline-success">No</label>
       </div>
+    </div>
     <% end %>
   </div>
 </div>

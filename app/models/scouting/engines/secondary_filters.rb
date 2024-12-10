@@ -14,9 +14,9 @@ class Scouting::Engines::SecondaryFilters
   private
 
   def secondary_filters(players)
-    players = skill_search(players, 'normal', 6) if @skills == true
+    players = skill_search(players, 'normal', 7) if @skills == true
 
-    players = skill_search(players, 'potential', 9) if @potential_skill == true
+    players = skill_search(players, 'potential', 10) if @potential_skill == true
 
     return players
   end

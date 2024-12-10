@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_12_07_192311) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_10_142505) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -283,20 +283,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_07_192311) do
   end
 
   create_table "scoutings", force: :cascade do |t|
-    t.integer "week"
-    t.integer "club_id"
-    t.string "position"
-    t.integer "total_skill"
-    t.integer "age"
-    t.boolean "skills"
-    t.integer "skills_value"
-    t.boolean "loyalty"
-    t.boolean "potential_skill"
-    t.integer "potential_skill_value"
-    t.boolean "consistency"
-    t.boolean "recovery"
-    t.boolean "star"
-    t.integer "blend_player"
+    t.string "position", default: "gkp"
+    t.integer "total_skill", default: 0
+    t.integer "age", default: 50
+    t.boolean "skills", default: false
+    t.integer "skills_value", default: 6
+    t.boolean "loyalty", default: false
+    t.boolean "potential_skill", default: false
+    t.integer "potential_skill_value", default: 9
+    t.boolean "consistency", default: false
+    t.boolean "recovery", default: false
+    t.boolean "star", default: false
+    t.integer "blend_player", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "turnsheet_id"

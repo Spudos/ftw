@@ -33,7 +33,7 @@ class Scouting::Engines::ReportSearchResult
       club_name = Club.find_by(id: player.club_id).name
       var1 = "The scouts have found a player for you to consider signing. His name is #{player.name}, " \
              "his player id is #{player.id}. He currently plays for #{club_name}."
-      var2 = player.name
+      var2 = nil
       var3 = player.blend
     end
     [var1, var2, var3]
