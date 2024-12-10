@@ -1,5 +1,6 @@
 import { setTacticValue, setPressValue, setDefenceAggression, setMidfieldAggression, setAttackAggression } from './turnsheet-elements/tactics.js';
 import { resetUpgradeValues, setStaffValues, setPropertyValues, setCapacityValues, setConditionValues } from './turnsheet-elements/club.js';
+import { addScoutingListener } from './turnsheet-elements/scouting.js';
 import { handlePlayerClick, teamValidations, formationUpdate } from './turnsheet-elements/team.js';
 import { handleSkillClick } from './turnsheet-elements/training.js';
 import { buildInputFields } from './turnsheet-elements/submit.js';
@@ -42,6 +43,7 @@ decoratePlayerActions();
 decoratePlayerAmounts();
 readSessionStorage();
 addTransferListener();
+addScoutingListener();
 
 //------ Add Event Listeners
 function addEventListeners(buttons) {
@@ -270,7 +272,10 @@ function directSessionStorage(key, value) {
     decorateTransfers(key, value);
   } else if (key.startsWith('ftw-article') || key.startsWith('ftw-club_message') || key.startsWith('ftw-message_text') || key.startsWith('ftw-public_message')) {
     decorateMessages(key, value);
-  };
+  } else if (key.startsWith('ftw-scouting-position') || key.startsWith('ftw-scouting-total_skill') || key.startsWith('ftw-scouting-age') || key.startsWith('ftw-scouting-skills') || key.startsWith('ftw-scouting-loyalty') || key.startsWith('ftw-scouting-potential_skill') || key.startsWith('ftw-scouting-consistency') || key.startsWith('ftw-scouting-recovery') || key.startsWith('ftw-scouting-star')) {
+    decorateScouting(key, value);
+  }
+
 };
 
 function resetButtonClasses() {
@@ -389,6 +394,83 @@ function decoratePlayerAmounts() {
     });
   });
 };
+
+function decorateScouting(key, value) {
+  const inputId = key.replace('ftw-scouting-', '');
+
+  if (inputId === 'position') {
+    const radioButtons = document.querySelectorAll('input[name="position"]');
+    radioButtons.forEach(radio => {
+      if (radio.value === value) {
+        radio.checked = true;
+      }
+    });
+  }
+  else if (inputId === 'total_skill') {
+    const radioButtons = document.querySelectorAll('input[name="total_skill"]');
+    radioButtons.forEach(radio => {
+      if (radio.value === value) {
+        radio.checked = true;
+      }
+    });
+  }
+  else if (inputId === 'age') {
+    const radioButtons = document.querySelectorAll('input[name="age"]');
+    radioButtons.forEach(radio => {
+      if (radio.value === value) {
+        radio.checked = true;
+      }
+    });
+  }
+  else if (inputId === 'skills') {
+    const radioButtons = document.querySelectorAll('input[name="skills"]');
+    radioButtons.forEach(radio => {
+      if (radio.value === value) {
+        radio.checked = true;
+      }
+    });
+  }
+  else if (inputId === 'loyalty') {
+    const radioButtons = document.querySelectorAll('input[name="loyalty"]');
+    radioButtons.forEach(radio => {
+      if (radio.value === value) {
+        radio.checked = true;
+      }
+    });
+  }
+  else if (inputId === 'potential_skill') {
+    const radioButtons = document.querySelectorAll('input[name="potential_skill"]');
+    radioButtons.forEach(radio => {
+      if (radio.value === value) {
+        radio.checked = true;
+      }
+    });
+  }
+  else if (inputId === 'consistency') {
+    const radioButtons = document.querySelectorAll('input[name="consistency"]');
+    radioButtons.forEach(radio => {
+      if (radio.value === value) {
+        radio.checked = true;
+      }
+    });
+  }
+  else if (inputId === 'recovery') {
+    const radioButtons = document.querySelectorAll('input[name="recovery"]');
+    radioButtons.forEach(radio => {
+      if (radio.value === value) {
+        radio.checked = true;
+      }
+    });
+  }
+  else if (inputId === 'star') {
+    const radioButtons = document.querySelectorAll('input[name="star"]');
+    radioButtons.forEach(radio => {
+      if (radio.value === value) {
+        radio.checked = true;
+      }
+    });
+  };
+}
 
 function decorateTransfers(key, value) {
   const inputId0 = key.replace('ftw-transfer_', '');

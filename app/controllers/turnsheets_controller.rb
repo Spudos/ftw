@@ -23,6 +23,7 @@ class TurnsheetsController < ApplicationController
     @selection = player_position_sort.select { |player| player.available.zero? }
     @all_players = player_position_sort
     @next_turn_week = Turn.maximum(:week).to_i + 1
+    @scout = @club.staff_scouts
   end
 
   # GET /turnsheets/1/edit
@@ -31,6 +32,7 @@ class TurnsheetsController < ApplicationController
 
   # POST /turnsheets or /turnsheets.json
   def create
+    binding.pry
     @turnsheet = Turnsheet.new(turnsheet_params)
     authorize @turnsheet
 

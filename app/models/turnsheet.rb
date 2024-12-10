@@ -147,7 +147,7 @@ class Turnsheet < ApplicationRecord
                        star: turnsheet.scoutings[0][:star],
                        blend_player: turnsheet.scoutings[0][:blend_player] }
 
-        TurnActions::Engines::Scouting.new(scout_info).call
+        Scouting::Scouting.new(scout_info).call
       end
 
       if turnsheet.article_headline.present?

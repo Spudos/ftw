@@ -51,6 +51,8 @@ function buildInputFields(inputDiv) {
       const playerId = key.replace('ftw-coach-att-', '');
       inputBuilder(inputDiv, 'train_attacker', playerId);
       inputBuilder(inputDiv, 'train_attacker_skill', value);
+    } else if (key.startsWith('ftw-scouting')) {
+      scoutActionBuilder(inputDiv, key, value);
     } else if (key.startsWith('ftw-transfer')) {
       transferInputBuilder(inputDiv, key, value);
     } else if (value === 'fitness') {
@@ -183,6 +185,17 @@ function squadActionBuilder(inputDiv, key, value) {
 
   inputDiv.appendChild(inputField);
   inputDiv.appendChild(inputField1);
+}
+
+function scoutActionBuilder(inputDiv, key, value) {
+  const inputField = document.createElement('input');
+  const scoutingsKey = key.replace('ftw-scouting-', '');
+
+  inputField.name = `turnsheet[scoutings_attributes][0][${scoutingsKey}]`;
+  inputField.type = 'hidden';
+  inputField.value = value;
+
+  inputDiv.appendChild(inputField);
 }
 
 function playerActionInputBuilder(inputDiv, value, player_id, amount, index) {
